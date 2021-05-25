@@ -1,0 +1,157 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://main/game/game.gd" type="Script" id=1]
+[ext_resource path="res://entities/paddle/paddle.tscn" type="PackedScene" id=2]
+[ext_resource path="res://entities/ball/ball.tscn" type="PackedScene" id=3]
+[ext_resource path="res://entities/goal/goal.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/main-font-64.tres" type="DynamicFont" id=5]
+[ext_resource path="res://main/game/paddles.gd" type="Script" id=6]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://assets/bit5x3.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+font_data = SubResource( 1 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 400, 20 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 66, 300 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 61.9999, 300 )
+
+[node name="Game" type="Node2D"]
+pause_mode = 1
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="root" type="Control" parent="HUD"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="points1" type="Label" parent="HUD/root"]
+margin_left = 440.0
+margin_top = 32.0
+margin_right = 504.0
+margin_bottom = 96.0
+custom_fonts/font = ExtResource( 5 )
+text = "0"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="points2" type="Label" parent="HUD/root"]
+margin_left = 296.0
+margin_top = 32.0
+margin_right = 360.0
+margin_bottom = 96.0
+custom_fonts/font = ExtResource( 5 )
+text = "0"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="win_label" type="Label" parent="HUD/root"]
+visible = false
+margin_left = 312.0
+margin_top = 152.0
+margin_right = 480.0
+margin_bottom = 179.0
+custom_fonts/font = SubResource( 2 )
+text = "Player %s wins!
+Press R to play again"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="Polygon2D" parent="."]
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( 0, 0, 800, 0, 800, 600, 0, 600 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Terrain" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 12
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="1" type="CollisionShape2D" parent="Terrain"]
+position = Vector2( 400, -20 )
+shape = SubResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="2" type="CollisionShape2D" parent="Terrain"]
+position = Vector2( 400, 620 )
+shape = SubResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Paddles" type="Node2D" parent="."]
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="2" parent="Paddles" instance=ExtResource( 2 )]
+position = Vector2( 50, 300 )
+paddle_id = 2
+is_human = false
+
+[node name="1" parent="Paddles" instance=ExtResource( 2 )]
+position = Vector2( 750, 300 )
+rotation = 3.14159
+
+[node name="Goals" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="2" parent="Goals" instance=ExtResource( 4 )]
+position = Vector2( -50, 300 )
+paddle_id = 1
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Goals/2"]
+shape = SubResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="1" parent="Goals" instance=ExtResource( 4 )]
+position = Vector2( 850, 300 )
+paddle_id = 2
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Goals/1"]
+shape = SubResource( 5 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Ball" parent="." instance=ExtResource( 3 )]
+position = Vector2( 400, 300 )
+[connection signal="goal" from="Goals/2" to="." method="goal_made"]
+[connection signal="goal" from="Goals/1" to="." method="goal_made"]
