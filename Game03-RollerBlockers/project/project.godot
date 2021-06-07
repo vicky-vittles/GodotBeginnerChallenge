@@ -10,6 +10,16 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node",
+"class": "InputController",
+"language": "GDScript",
+"path": "res://libs/input_controller/input_controller.gd"
+}, {
+"base": "Node",
+"class": "ScreenTransition",
+"language": "GDScript",
+"path": "res://main/menus/transitions/_transition.gd"
+}, {
+"base": "Node",
 "class": "State",
 "language": "GDScript",
 "path": "res://libs/state_machine/state.gd"
@@ -20,6 +30,8 @@ _global_script_classes=[ {
 "path": "res://libs/state_machine/state_machine.gd"
 } ]
 _global_script_class_icons={
+"InputController": "",
+"ScreenTransition": "",
 "State": "",
 "StateMachine": ""
 }
@@ -33,6 +45,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Globals="*res://globals/globals.gd"
+Settings="*res://globals/settings.gd"
 
 [debug]
 
@@ -89,6 +102,12 @@ down={
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
  ]
 }
+
+[layer_names]
+
+3d_physics/layer_2="terrain"
+3d_physics/layer_3="entities"
+3d_physics/layer_4="triggers"
 
 [physics]
 

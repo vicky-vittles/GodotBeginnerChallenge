@@ -1,0 +1,100 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://main/menus/screens/_simple_screen.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/fonts/thaleah-fat-48.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/fonts/matchup-pro-80.tres" type="DynamicFont" id=3]
+[ext_resource path="res://main/menus/screens/title_screen/title_screen.gd" type="Script" id=4]
+
+[node name="TitleScreen" instance=ExtResource( 1 )]
+margin_right = -0.00012207
+script = ExtResource( 4 )
+
+[node name="vbox" parent="." index="0"]
+margin_left = -225.0
+margin_top = -238.0
+margin_right = 225.0
+margin_bottom = 238.0
+
+[node name="hbox" parent="vbox" index="0"]
+margin_right = 450.0
+margin_bottom = 476.0
+
+[node name="vbox" parent="vbox/hbox" index="0"]
+margin_right = 450.0
+margin_bottom = 476.0
+custom_constants/separation = 150
+alignment = 1
+
+[node name="title" type="Label" parent="vbox/hbox/vbox" index="0"]
+margin_top = 25.0
+margin_right = 450.0
+margin_bottom = 89.0
+custom_fonts/font = ExtResource( 3 )
+text = "Roller Blockers"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="buttons" type="VBoxContainer" parent="vbox/hbox/vbox" index="1"]
+margin_top = 239.0
+margin_right = 450.0
+margin_bottom = 451.0
+alignment = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="continue" type="Button" parent="vbox/hbox/vbox/buttons" index="0"]
+margin_right = 450.0
+margin_bottom = 50.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_hover = Color( 1, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 1, 0.196078, 0.196078, 1 )
+text = "Continue"
+flat = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="select_level" type="Button" parent="vbox/hbox/vbox/buttons" index="1"]
+margin_top = 54.0
+margin_right = 450.0
+margin_bottom = 104.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_hover = Color( 1, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 1, 0.196078, 0.196078, 1 )
+text = "Select Level"
+flat = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="settings" type="Button" parent="vbox/hbox/vbox/buttons" index="2"]
+margin_top = 108.0
+margin_right = 450.0
+margin_bottom = 158.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_hover = Color( 1, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 1, 0.196078, 0.196078, 1 )
+text = "Settings"
+flat = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="quit" type="Button" parent="vbox/hbox/vbox/buttons" index="3"]
+margin_top = 162.0
+margin_right = 450.0
+margin_bottom = 212.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_hover = Color( 1, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 1, 0.196078, 0.196078, 1 )
+text = "Quit"
+flat = true
+__meta__ = {
+"_edit_lock_": true
+}
+[connection signal="pressed" from="vbox/hbox/vbox/buttons/continue" to="." method="emit_signal" binds= [ "button_continue" ]]
+[connection signal="pressed" from="vbox/hbox/vbox/buttons/select_level" to="." method="emit_signal" binds= [ "button_select_level" ]]
+[connection signal="pressed" from="vbox/hbox/vbox/buttons/settings" to="." method="emit_signal" binds= [ "button_settings" ]]
+[connection signal="pressed" from="vbox/hbox/vbox/buttons/quit" to="." method="emit_signal" binds= [ "button_quit" ]]

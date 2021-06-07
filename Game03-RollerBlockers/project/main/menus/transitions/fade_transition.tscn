@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://main/menus/transitions/_transition.tscn" type="PackedScene" id=1]
+[ext_resource path="res://main/menus/transitions/fade_transition.gd" type="Script" id=2]
+
+[node name="FadeTransition" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+anim_time = 0.5

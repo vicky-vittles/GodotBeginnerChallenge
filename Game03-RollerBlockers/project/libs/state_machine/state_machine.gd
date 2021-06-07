@@ -19,6 +19,7 @@ func _on_Actor_ready() -> void:
 	if is_active:
 		current_state = get_child(0)
 		current_state.enter({})
+		current_state.emit_signal("state_entered")
 
 
 func change_state(new_state, info = {}) -> void:
@@ -28,6 +29,10 @@ func change_state(new_state, info = {}) -> void:
 		current_state = new_state
 		current_state.enter(info)
 		current_state.emit_signal("state_entered")
+
+
+func change_state_path(new_state_path, info = {}) -> void:
+	change_state(get_node(new_state_path), info)
 
 
 func _input(event):
@@ -41,7 +46,7 @@ func _process(delta):
 
 
 func _physics_process(delta):
-	#print(current_state.name)
+#	print(current_state.name)
 	if is_active and current_state.has_method("physics_process"):
 		current_state.physics_process(delta)
 

@@ -1,16 +1,22 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://main/game/game.gd" type="Script" id=1]
-[ext_resource path="res://entities/player/player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://levels/L03.tscn" type="PackedScene" id=2]
 
-[sub_resource type="BoxShape" id=1]
-extents = Vector3( 50, 0.5, 50 )
+[sub_resource type="ProceduralSky" id=1]
+sky_top_color = Color( 0.360784, 0.0117647, 0.737255, 1 )
+sky_horizon_color = Color( 0.207843, 0.0196078, 0.443137, 1 )
+ground_bottom_color = Color( 0.054902, 0.027451, 0.145098, 1 )
+ground_horizon_color = Color( 0.207843, 0.0196078, 0.443137, 1 )
+sun_latitude = -180.0
 
-[sub_resource type="PlaneMesh" id=2]
-size = Vector2( 100, 100 )
-
-[sub_resource type="SpatialMaterial" id=3]
-albedo_color = Color( 1, 0.866667, 0, 1 )
+[sub_resource type="Environment" id=2]
+background_mode = 2
+background_sky = SubResource( 1 )
+background_color = Color( 0.513726, 0.678431, 1, 1 )
+ambient_light_color = Color( 1, 1, 1, 1 )
+ambient_light_energy = 0.1
+ambient_light_sky_contribution = 0.0
 
 [node name="Game" type="Spatial"]
 script = ExtResource( 1 )
@@ -18,23 +24,8 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
+[node name="Level" parent="." instance=ExtResource( 2 )]
+script = null
 
-[node name="StaticBody" type="StaticBody" parent="."]
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0 )
-shape = SubResource( 1 )
-
-[node name="MeshInstance" type="MeshInstance" parent="StaticBody"]
-mesh = SubResource( 2 )
-material/0 = SubResource( 3 )
-
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( 0.965926, 0.118868, -0.229908, 0, 0.888297, 0.45927, 0.258819, -0.443621, 0.858029, -4.93474, 11.0241, 10.3269 )
-current = true
-fov = 90.0
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 2 )

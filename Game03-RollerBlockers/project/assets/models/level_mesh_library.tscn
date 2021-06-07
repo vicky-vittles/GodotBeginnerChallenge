@@ -1,0 +1,249 @@
+[gd_scene load_steps=23 format=2]
+
+[ext_resource path="res://assets/textures/BIGBRICKS.png" type="Texture" id=1]
+[ext_resource path="res://assets/textures/CASTLEBRICKS.png" type="Texture" id=2]
+[ext_resource path="res://assets/textures/GOOBRICKS.png" type="Texture" id=3]
+[ext_resource path="res://assets/textures/BRICKS.png" type="Texture" id=4]
+[ext_resource path="res://assets/textures/BRICKSBOTMID.png" type="Texture" id=5]
+[ext_resource path="res://assets/textures/BRICKSBOTLEFT.png" type="Texture" id=6]
+[ext_resource path="res://assets/textures/BRICKSBOTRIGHT.png" type="Texture" id=7]
+[ext_resource path="res://assets/textures/CLAYBRICKS.png" type="Texture" id=8]
+[ext_resource path="res://assets/textures/BRICKSTOPLEFT.png" type="Texture" id=9]
+[ext_resource path="res://assets/textures/BRICKSTOPRIGHT.png" type="Texture" id=10]
+
+[sub_resource type="CubeMesh" id=1]
+size = Vector3( 1, 0.25, 1 )
+
+[sub_resource type="SpatialMaterial" id=14]
+albedo_texture = ExtResource( 1 )
+uv1_scale = Vector3( 2, 2, 1 )
+
+[sub_resource type="BoxShape" id=18]
+extents = Vector3( 0.5, 0.125, 0.5 )
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_texture = ExtResource( 2 )
+uv1_scale = Vector3( 2, 2, 1 )
+
+[sub_resource type="SpatialMaterial" id=25]
+albedo_texture = ExtResource( 3 )
+uv1_scale = Vector3( 2, 2, 1 )
+
+[sub_resource type="SpatialMaterial" id=6]
+albedo_texture = ExtResource( 4 )
+uv1_scale = Vector3( 2, 2, 1 )
+
+[sub_resource type="SpatialMaterial" id=7]
+albedo_texture = ExtResource( 5 )
+uv1_scale = Vector3( 2, 2, 1 )
+
+[sub_resource type="SpatialMaterial" id=8]
+albedo_texture = ExtResource( 6 )
+uv1_scale = Vector3( 2, 2, 1 )
+
+[sub_resource type="SpatialMaterial" id=9]
+albedo_texture = ExtResource( 7 )
+uv1_scale = Vector3( 2, 2, 1 )
+
+[sub_resource type="SpatialMaterial" id=10]
+albedo_texture = ExtResource( 9 )
+uv1_scale = Vector3( 2, 2, 1 )
+
+[sub_resource type="SpatialMaterial" id=11]
+albedo_texture = ExtResource( 10 )
+uv1_scale = Vector3( 2, 2, 1 )
+
+[sub_resource type="SpatialMaterial" id=12]
+albedo_texture = ExtResource( 8 )
+uv1_scale = Vector3( 2, 2, 1 )
+
+[node name="LevelMeshLibrary" type="Spatial"]
+
+[node name="BigBrick" type="MeshInstance" parent="."]
+mesh = SubResource( 1 )
+material/0 = SubResource( 14 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="body" type="StaticBody" parent="BigBrick"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape" type="CollisionShape" parent="BigBrick/body"]
+shape = SubResource( 18 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CastleBrick" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="body" type="StaticBody" parent="CastleBrick"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape" type="CollisionShape" parent="CastleBrick/body"]
+shape = SubResource( 18 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="GooBrick" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 25 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="body" type="StaticBody" parent="GooBrick"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape" type="CollisionShape" parent="GooBrick/body"]
+shape = SubResource( 18 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Brick" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="body" type="StaticBody" parent="Brick"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape" type="CollisionShape" parent="Brick/body"]
+shape = SubResource( 18 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BrickBotMid" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="body" type="StaticBody" parent="BrickBotMid"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickBotMid/body"]
+shape = SubResource( 18 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BrickBotLeft" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -1 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 8 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="body" type="StaticBody" parent="BrickBotLeft"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickBotLeft/body"]
+shape = SubResource( 18 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BrickBotRight" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="body" type="StaticBody" parent="BrickBotRight"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickBotRight/body"]
+shape = SubResource( 18 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BrickTopLeft" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 10 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="body" type="StaticBody" parent="BrickTopLeft"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickTopLeft/body"]
+shape = SubResource( 18 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BrickTopRight" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -2 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 11 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="body" type="StaticBody" parent="BrickTopRight"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape" type="CollisionShape" parent="BrickTopRight/body"]
+shape = SubResource( 18 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ClayBrick" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 12 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="body" type="StaticBody" parent="ClayBrick"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape" type="CollisionShape" parent="ClayBrick/body"]
+shape = SubResource( 18 )
+__meta__ = {
+"_edit_lock_": true
+}
