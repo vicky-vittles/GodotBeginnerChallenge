@@ -1,8 +1,9 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://assets/models/level_mesh_library.tres" type="MeshLibrary" id=1]
+[ext_resource path="res://levels/assets/models/level_mesh_library.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://entities/player/player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://levels/_level.gd" type="Script" id=3]
+
 
 [node name="Level" type="Spatial"]
 script = ExtResource( 3 )

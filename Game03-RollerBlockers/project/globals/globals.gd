@@ -3,10 +3,10 @@ extends Node
 const DATA_FILE_PATH = "user://data.save"
 const NUMBER_OF_LEVELS = 4
 const LEVELS = {
-	1: preload("res://levels/L01.tscn"),
-	2: preload("res://levels/L02.tscn"),
-	3: preload("res://levels/L03.tscn"),
-	4: preload("res://levels/L04.tscn")}
+	1: preload("res://levels/levels/L01.tscn"),
+	2: preload("res://levels/levels/L02.tscn"),
+	3: preload("res://levels/levels/L03.tscn"),
+	4: preload("res://levels/levels/L04.tscn")}
 
 var current_level : int = 1
 var max_level_reached : int = 1

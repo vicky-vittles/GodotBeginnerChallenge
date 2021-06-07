@@ -1,0 +1,113 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://libs/menus/screens/_simple_screen.tscn" type="PackedScene" id=1]
+[ext_resource path="res://menus/assets/fonts/matchup-pro-80.tres" type="DynamicFont" id=2]
+[ext_resource path="res://menus/assets/fonts/thaleah-fat-64.tres" type="DynamicFont" id=3]
+[ext_resource path="res://menus/screens/level_select_screen/level_buttons.gd" type="Script" id=4]
+[ext_resource path="res://menus/screens/level_select_screen/level_select_screen.gd" type="Script" id=5]
+[ext_resource path="res://menus/assets/fonts/thaleah-fat-48.tres" type="DynamicFont" id=6]
+[ext_resource path="res://menus/assets/sfx/menus_sfx.tscn" type="PackedScene" id=7]
+
+[node name="LevelSelectScreen" instance=ExtResource( 1 )]
+script = ExtResource( 5 )
+
+[node name="vbox" parent="." index="0"]
+margin_left = -207.5
+margin_top = -166.5
+margin_right = 207.5
+margin_bottom = 166.5
+
+[node name="hbox" parent="vbox" index="0"]
+margin_right = 415.0
+margin_bottom = 333.0
+
+[node name="vbox" parent="vbox/hbox" index="0"]
+margin_right = 415.0
+margin_bottom = 333.0
+custom_constants/separation = 150
+
+[node name="title" type="Label" parent="vbox/hbox/vbox" index="0"]
+margin_right = 415.0
+margin_bottom = 64.0
+custom_fonts/font = ExtResource( 2 )
+text = "Select a Level"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="buttons" type="VBoxContainer" parent="vbox/hbox/vbox" index="1"]
+margin_top = 214.0
+margin_right = 415.0
+margin_bottom = 333.0
+
+[node name="level_buttons" type="HBoxContainer" parent="vbox/hbox/vbox/buttons" index="0"]
+margin_right = 415.0
+margin_bottom = 65.0
+custom_constants/separation = 75
+alignment = 1
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="1" type="Button" parent="vbox/hbox/vbox/buttons/level_buttons" index="0"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 65.0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color_hover = Color( 1, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 1, 0.196078, 0.196078, 1 )
+text = "1"
+flat = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="2" type="Button" parent="vbox/hbox/vbox/buttons/level_buttons" index="1"]
+margin_left = 179.0
+margin_right = 223.0
+margin_bottom = 65.0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color_hover = Color( 1, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 1, 0.196078, 0.196078, 1 )
+text = "2"
+flat = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="3" type="Button" parent="vbox/hbox/vbox/buttons/level_buttons" index="2"]
+margin_left = 298.0
+margin_right = 342.0
+margin_bottom = 65.0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color_hover = Color( 1, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 1, 0.196078, 0.196078, 1 )
+text = "3"
+flat = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="return" type="Button" parent="vbox/hbox/vbox/buttons" index="1"]
+margin_top = 69.0
+margin_right = 415.0
+margin_bottom = 119.0
+custom_fonts/font = ExtResource( 6 )
+custom_colors/font_color_hover = Color( 1, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 1, 0.196078, 0.196078, 1 )
+text = "Return"
+flat = true
+
+[node name="SFX" parent="." index="1" instance=ExtResource( 7 )]
+[connection signal="button_level" from="vbox/hbox/vbox/buttons/level_buttons" to="." method="_on_LevelButtons_pressed"]
+[connection signal="mouse_entered" from="vbox/hbox/vbox/buttons/level_buttons/1" to="SFX" method="emit_signal" binds= [ "menu_hover" ]]
+[connection signal="pressed" from="vbox/hbox/vbox/buttons/level_buttons/1" to="vbox/hbox/vbox/buttons/level_buttons" method="_on_LevelButton_pressed" binds= [ 1 ]]
+[connection signal="mouse_entered" from="vbox/hbox/vbox/buttons/level_buttons/2" to="SFX" method="emit_signal" binds= [ "menu_hover" ]]
+[connection signal="pressed" from="vbox/hbox/vbox/buttons/level_buttons/2" to="vbox/hbox/vbox/buttons/level_buttons" method="_on_LevelButton_pressed" binds= [ 2 ]]
+[connection signal="mouse_entered" from="vbox/hbox/vbox/buttons/level_buttons/3" to="SFX" method="emit_signal" binds= [ "menu_hover" ]]
+[connection signal="pressed" from="vbox/hbox/vbox/buttons/level_buttons/3" to="vbox/hbox/vbox/buttons/level_buttons" method="_on_LevelButton_pressed" binds= [ 3 ]]
+[connection signal="mouse_entered" from="vbox/hbox/vbox/buttons/return" to="SFX" method="emit_signal" binds= [ "menu_hover" ]]
+[connection signal="pressed" from="vbox/hbox/vbox/buttons/return" to="." method="emit_signal" binds= [ "button_return" ]]

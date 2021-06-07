@@ -1,4 +1,5 @@
 extends RigidBody
+signal movement_finished()
 
 enum Direction { UP, DOWN, RIGHT, LEFT }
 enum Orientation { PARALLEL, ORTHOGONAL }
@@ -50,6 +51,7 @@ func move(delta):
 				transform = transform.rotated(Vector3(-1, 0, 0), angle)
 		interpolation += step
 		if interpolation > 1:
+			emit_signal("movement_finished")
 			is_turning = false
 			interpolation = 0
 			update_shifts()

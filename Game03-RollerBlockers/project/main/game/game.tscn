@@ -1,7 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://main/game/game.gd" type="Script" id=1]
-[ext_resource path="res://levels/L03.tscn" type="PackedScene" id=2]
+[ext_resource path="res://levels/levels/L03.tscn" type="PackedScene" id=2]
+[ext_resource path="res://main/game/assets/sfx/level-cleared.wav" type="AudioStream" id=3]
+[ext_resource path="res://main/game/assets/sfx/level-restart.wav" type="AudioStream" id=4]
+[ext_resource path="res://menus/assets/fonts/thaleah-fat-48.tres" type="DynamicFont" id=5]
+[ext_resource path="res://main/game/hud.gd" type="Script" id=6]
 
 [sub_resource type="ProceduralSky" id=1]
 sky_top_color = Color( 0.360784, 0.0117647, 0.737255, 1 )
@@ -24,8 +28,45 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource( 6 )
+
+[node name="root" type="Control" parent="HUD"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="level_label" type="Label" parent="HUD/root"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 40.0
+margin_bottom = 14.0
+custom_fonts/font = ExtResource( 5 )
+text = "Level %s"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="level_cleared" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 3 )
+bus = "Sound"
+
+[node name="level_restart" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 4 )
+volume_db = 6.0
+bus = "Sound"
+
 [node name="Level" parent="." instance=ExtResource( 2 )]
 script = null
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 2 )
+[connection signal="level_cleared" from="." to="SFX/level_cleared" method="play"]
+[connection signal="level_restart" from="." to="SFX/level_restart" method="play"]
+[connection signal="update_level" from="." to="HUD" method="update_level_label"]

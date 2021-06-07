@@ -1,11 +1,13 @@
 extends Spatial
+signal update_level(level_id)
+signal level_cleared()
+signal level_restart()
 
 func _ready():
+	emit_signal("level_restart")
 	load_level(Globals.current_level)
 
 func _process(delta):
-	if Input.is_action_just_pressed("exit"):
-		get_tree().quit()
 	if Input.is_action_just_pressed("reload"):
 		get_tree().reload_current_scene()
 
@@ -19,10 +21,14 @@ func load_level(id: int):
 	add_child(new_level)
 	new_level.connect("player_won", self, "_on_Player_victory")
 	new_level.connect("player_restart", self, "_on_Player_restart")
+	emit_signal("update_level", id)
 
 func _on_Player_victory():
 	Globals.current_level = clamp(Globals.current_level + 1, 0, Globals.NUMBER_OF_LEVELS)
+	Globals.max_level_reached = Globals.current_level
+	Globals.save_data()
 	load_level(Globals.current_level)
+	emit_signal("level_cleared")
 
 func _on_Player_restart():
 	get_tree().reload_current_scene()
