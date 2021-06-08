@@ -9,7 +9,7 @@ const CREATE_SESSION_DATA = "session_data/create"
 const GAME_ID = "8721e12d-5f8b-4a4e-b9d7-8cad2d0855f6"
 const DEFAULT_NAME = "default"
 
-var debug_mode : bool = false
+var debug_mode : bool = true
 var sending_analytics : bool = false
 var app_timer : float = 0.0
 var data = {

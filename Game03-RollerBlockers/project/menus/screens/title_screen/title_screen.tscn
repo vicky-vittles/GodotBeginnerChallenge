@@ -31,7 +31,8 @@ margin_top = 25.0
 margin_right = 450.0
 margin_bottom = 89.0
 custom_fonts/font = ExtResource( 3 )
-text = "Roller Blockers"
+text = "Rolling Blocks"
+align = 1
 __meta__ = {
 "_edit_lock_": true
 }
