@@ -58,6 +58,7 @@ config/icon="res://icon.png"
 
 Globals="*res://globals/globals.gd"
 Settings="*res://globals/settings.gd"
+Analytics="*res://globals/analytics.gd"
 
 [debug]
 
