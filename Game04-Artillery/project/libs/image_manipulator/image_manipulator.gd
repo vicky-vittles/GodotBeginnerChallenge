@@ -16,6 +16,20 @@ func set_texture():
 	texture.create_from_image(image)
 
 
+func get_pixels() -> Array:
+	if not image:
+		return []
+		
+	image.lock()
+	var pixels = []
+	for y in image.get_size().y:
+		for x in image.get_size().x:
+			var pixel_pos = Vector2(x,y)
+			pixels.append(image.get_pixelv(pixel_pos))
+	
+	return pixels
+
+
 func draw_circle(c_pos: Vector2, c_radius: int, color: Color):
 	if not image:
 		return
