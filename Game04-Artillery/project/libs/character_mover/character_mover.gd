@@ -1,5 +1,5 @@
 extends Node
-class_name CharacterMover
+class_name CharacterMover, "res://libs/character_mover/character_mover.svg"
 
 export (int) var MOVE_SPEED = 100
 export (int) var JUMP_HEIGHT = 160

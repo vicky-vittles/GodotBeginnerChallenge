@@ -1,5 +1,4 @@
 extends Node
-
 class_name StateMachine
 
 export (NodePath) var actor_path

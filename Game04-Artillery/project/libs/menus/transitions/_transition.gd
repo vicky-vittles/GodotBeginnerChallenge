@@ -1,5 +1,5 @@
 extends Node
-class_name ScreenTransition
+class_name ScreenTransition, "res://libs/menus/transitions/transition.svg"
 
 onready var screen = get_parent()
 onready var tween = $Tween

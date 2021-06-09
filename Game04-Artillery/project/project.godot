@@ -15,9 +15,24 @@ _global_script_classes=[ {
 "path": "res://libs/character_mover/character_mover.gd"
 }, {
 "base": "Node",
+"class": "ImageManipulator",
+"language": "GDScript",
+"path": "res://libs/image_manipulator/image_manipulator.gd"
+}, {
+"base": "Node",
 "class": "InputController",
 "language": "GDScript",
 "path": "res://libs/input_controller/input_controller.gd"
+}, {
+"base": "StaticBody2D",
+"class": "QuadTreeNode",
+"language": "GDScript",
+"path": "res://levels/terrain/quad_tree_node.gd"
+}, {
+"base": "Node2D",
+"class": "QuadTreeRoot",
+"language": "GDScript",
+"path": "res://levels/terrain/quad_tree_root.gd"
 }, {
 "base": "Node",
 "class": "ScreenTransition",
@@ -35,9 +50,12 @@ _global_script_classes=[ {
 "path": "res://libs/state_machine/state_machine.gd"
 } ]
 _global_script_class_icons={
-"CharacterMover": "",
-"InputController": "",
-"ScreenTransition": "",
+"CharacterMover": "res://libs/character_mover/character_mover.svg",
+"ImageManipulator": "",
+"InputController": "res://libs/input_controller/vanilla-controller.svg",
+"QuadTreeNode": "res://levels/terrain/quad-tree-node.svg",
+"QuadTreeRoot": "res://levels/terrain/quad-tree-root.svg",
+"ScreenTransition": "res://libs/menus/transitions/transition.svg",
 "State": "",
 "StateMachine": ""
 }

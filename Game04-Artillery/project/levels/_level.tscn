@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://levels/terrain/quad_tree_root.gd" type="Script" id=1]
+[ext_resource path="res://libs/image_manipulator/image_manipulator.gd" type="Script" id=2]
+[ext_resource path="res://levels/_level.gd" type="Script" id=3]
+[ext_resource path="res://levels/map.png" type="Texture" id=4]
+[ext_resource path="res://levels/terrain.png" type="Texture" id=5]
+[ext_resource path="res://levels/terrain-map.shader" type="Shader" id=6]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 6 )
+shader_param/destruction_map = ExtResource( 4 )
+
+[node name="Level" type="Node2D"]
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+destruction_map = ExtResource( 4 )
+
+[node name="Terrain" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Graphics" type="Node2D" parent="Terrain"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="background" type="Sprite" parent="Terrain/Graphics"]
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="terrain" type="Sprite" parent="Terrain/Graphics"]
+material = SubResource( 1 )
+texture = ExtResource( 5 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="QuadTreeRoot" type="Node2D" parent="Terrain"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+boundary = Rect2( 0, 0, 512, 512 )
+
+[node name="ImageManipulator" type="Node" parent="Terrain"]
+script = ExtResource( 2 )

@@ -8,7 +8,7 @@
 [ext_resource path="res://icon.png" type="Texture" id=6]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 32.0
+radius = 8.0
 
 [node name="Soldier" type="KinematicBody2D" groups=[
 "entity",
@@ -40,6 +40,7 @@ __meta__ = {
 }
 
 [node name="main" type="Sprite" parent="Graphics"]
+scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 6 )
 __meta__ = {
 "_edit_lock_": true

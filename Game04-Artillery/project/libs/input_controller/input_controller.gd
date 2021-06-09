@@ -1,5 +1,5 @@
 extends Node
-class_name InputController
+class_name InputController, "res://libs/input_controller/vanilla-controller.svg"
 
 var move_direction : Vector2
 
