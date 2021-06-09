@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://libs/menus/screens/_screen.gd" type="Script" id=1]
+[ext_resource path="res://libs/menus/main-theme.tres" type="Theme" id=2]
+
+
+[node name="Screen" type="Control"]
+theme = ExtResource( 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
