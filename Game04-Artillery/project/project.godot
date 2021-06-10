@@ -10,9 +10,19 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node",
+"class": "BitEntityMover",
+"language": "GDScript",
+"path": "res://libs/bit_entity_mover/bit_entity_mover.gd"
+}, {
+"base": "Node",
 "class": "CharacterMover",
 "language": "GDScript",
 "path": "res://libs/character_mover/character_mover.gd"
+}, {
+"base": "Node",
+"class": "ImageCache",
+"language": "GDScript",
+"path": "res://libs/image_cache/image_cache.gd"
 }, {
 "base": "Node",
 "class": "ImageManipulator",
@@ -23,16 +33,6 @@ _global_script_classes=[ {
 "class": "InputController",
 "language": "GDScript",
 "path": "res://libs/input_controller/input_controller.gd"
-}, {
-"base": "StaticBody2D",
-"class": "QuadTreeNode",
-"language": "GDScript",
-"path": "res://levels/terrain/quad_tree_node.gd"
-}, {
-"base": "Node2D",
-"class": "QuadTreeRoot",
-"language": "GDScript",
-"path": "res://levels/terrain/quad_tree_root.gd"
 }, {
 "base": "Node",
 "class": "ScreenTransition",
@@ -50,11 +50,11 @@ _global_script_classes=[ {
 "path": "res://libs/state_machine/state_machine.gd"
 } ]
 _global_script_class_icons={
+"BitEntityMover": "",
 "CharacterMover": "res://libs/character_mover/character_mover.svg",
+"ImageCache": "",
 "ImageManipulator": "",
 "InputController": "res://libs/input_controller/vanilla-controller.svg",
-"QuadTreeNode": "res://levels/terrain/quad-tree-node.svg",
-"QuadTreeRoot": "res://levels/terrain/quad-tree-root.svg",
 "ScreenTransition": "res://libs/menus/transitions/transition.svg",
 "State": "",
 "StateMachine": ""
@@ -121,5 +121,6 @@ move_right={
 
 [rendering]
 
+quality/2d/use_pixel_snap=true
 environment/default_clear_color=Color( 0.196078, 0.196078, 0.196078, 1 )
 environment/default_environment="res://default_env.tres"

@@ -1,26 +1,91 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://entities/soldier/soldier.gd" type="Script" id=1]
 [ext_resource path="res://libs/input_controller/input_controller.gd" type="Script" id=2]
 [ext_resource path="res://libs/state_machine/state_machine.gd" type="Script" id=3]
-[ext_resource path="res://entities/soldier/states/soldier_move.gd" type="Script" id=4]
-[ext_resource path="res://libs/character_mover/character_mover.gd" type="Script" id=5]
-[ext_resource path="res://icon.png" type="Texture" id=6]
+[ext_resource path="res://entities/soldier/assets/default-soldier.png" type="Texture" id=4]
+[ext_resource path="res://libs/bit_entity_mover/bit_entity_mover.gd" type="Script" id=5]
+[ext_resource path="res://entities/soldier/states/soldier_move.gd" type="Script" id=6]
+[ext_resource path="res://entities/soldier/scripts/graphics.gd" type="Script" id=7]
+[ext_resource path="res://entities/soldier/states/soldier_idle.gd" type="Script" id=8]
 
-[sub_resource type="CircleShape2D" id=1]
-radius = 8.0
+[sub_resource type="Animation" id=2]
+resource_name = "idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot_rot:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("pivot_rot/pivot_pos:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
 
-[node name="Soldier" type="KinematicBody2D" groups=[
+[sub_resource type="Animation" id=1]
+resource_name = "move"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot_rot/pivot_pos/main:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 2 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("pivot_rot:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("pivot_rot/pivot_pos:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -6 ) ]
+}
+
+[node name="Soldier" type="Node2D" groups=[
 "entity",
 "soldier",
 ]]
-collision_layer = 4
-collision_mask = 10
 script = ExtResource( 1 )
 
-[node name="CharacterMover" type="Node" parent="."]
+[node name="BitEntityMover" type="Node" parent="."]
 script = ExtResource( 5 )
-MOVE_SPEED = 200
 body_path = NodePath("..")
 
 [node name="InputController" type="Node" parent="."]
@@ -28,23 +93,32 @@ script = ExtResource( 2 )
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 3 )
-actor_path = NodePath("../../Soldier")
+actor_path = NodePath("..")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource( 8 )
+fsm_path = NodePath("..")
 
 [node name="Move" type="Node" parent="StateMachine"]
-script = ExtResource( 4 )
+script = ExtResource( 6 )
 fsm_path = NodePath("..")
 
 [node name="Graphics" type="Node2D" parent="."]
-__meta__ = {
-"_edit_lock_": true
-}
+script = ExtResource( 7 )
 
-[node name="main" type="Sprite" parent="Graphics"]
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 6 )
-__meta__ = {
-"_edit_lock_": true
-}
+[node name="pivot_rot" type="Node2D" parent="Graphics"]
+scale = Vector2( 1, 1 )
 
-[node name="CollisionShape" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+[node name="pivot_pos" type="Node2D" parent="Graphics/pivot_rot"]
+scale = Vector2( 1, 1 )
+
+[node name="main" type="Sprite" parent="Graphics/pivot_rot/pivot_pos"]
+position = Vector2( 0, -6 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
+hframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Graphics"]
+autoplay = "idle"
+anims/idle = SubResource( 2 )
+anims/move = SubResource( 1 )

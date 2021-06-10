@@ -1,4 +1,7 @@
-extends KinematicBody2D
+extends Node2D
 
-onready var character_mover = $CharacterMover
+onready var bit_entity_mover = $BitEntityMover
 onready var input_controller = $InputController
+onready var graphics = $Graphics
+
+var collision_map = []

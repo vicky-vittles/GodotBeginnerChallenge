@@ -1,13 +1,17 @@
 extends Node2D
+signal terrain_updated(map)
 
-export (Texture) var destruction_map
+export (Image) var destruction_map
 
-onready var terrain_sprite = $Terrain/Graphics/terrain
-onready var quad_tree_root = $Terrain/QuadTreeRoot
-onready var image_manipulator = $Terrain/ImageManipulator
+onready var map_generator = $MapGenerator
+onready var image_manipulator = $ImageManipulator
+onready var image_cache = $ImageCache
+onready var terrain = $Graphics/terrain
 
 func _ready():
-	image_manipulator.set_image(destruction_map.get_data())
-	image_manipulator.draw_circle(Vector2(240, 400), 100, Color.white)
-	quad_tree_root.create_tree(image_manipulator.get_pixels())
-	terrain_sprite.get_material().set_shader_param("destruction_map", image_manipulator.texture)
+	var map = map_generator.generate_random_map(destruction_map)
+	image_manipulator.set_image(map)
+	terrain.get_material().set_shader_param("destruction_map", image_manipulator.texture)
+
+func _on_cache_updated():
+	emit_signal("terrain_updated", image_cache.transparency_cache)

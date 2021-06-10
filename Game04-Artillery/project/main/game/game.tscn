@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://main/game/game.gd" type="Script" id=1]
 [ext_resource path="res://entities/soldier/soldier.tscn" type="PackedScene" id=2]
 [ext_resource path="res://levels/_level.tscn" type="PackedScene" id=3]
+[ext_resource path="res://main/game/scripts/players.gd" type="Script" id=4]
 
 [node name="game" type="Node2D"]
 script = ExtResource( 1 )
@@ -12,5 +13,12 @@ __meta__ = {
 
 [node name="Level" parent="." instance=ExtResource( 3 )]
 
-[node name="Soldier" parent="." instance=ExtResource( 2 )]
-position = Vector2( 225.265, 156.5 )
+[node name="Players" type="Node2D" parent="."]
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="1" parent="Players" instance=ExtResource( 2 )]
+position = Vector2( 60.2655, 96.1718 )
+[connection signal="terrain_updated" from="Level" to="Players" method="_on_Level_terrain_updated"]

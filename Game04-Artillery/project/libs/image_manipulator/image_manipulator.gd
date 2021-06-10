@@ -1,20 +1,23 @@
 extends Node
 class_name ImageManipulator
 
+signal image_updated(image)
+
 var image
 var texture
 
 func set_image(img):
 	image = Image.new()
-	image.lock()
+	if image.get_size() != Vector2.ZERO:
+		image.lock()
 	image.copy_from(img)
 	image.unlock()
 	texture = ImageTexture.new()
-
+	set_texture()
+	emit_signal("image_updated", image)
 
 func set_texture():
 	texture.create_from_image(image)
-
 
 func get_pixels() -> Array:
 	if not image:
@@ -54,3 +57,4 @@ func draw_circle(c_pos: Vector2, c_radius: int, color: Color):
 	# Finish up by unlocking image
 	image.unlock()
 	set_texture()
+	emit_signal("image_updated", image)
