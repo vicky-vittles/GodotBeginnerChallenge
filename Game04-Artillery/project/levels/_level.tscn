@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://libs/image_manipulator/image_manipulator.gd" type="Script" id=1]
-[ext_resource path="res://levels/assets/black-512.png" type="Image" id=2]
+[ext_resource path="res://levels/assets/black-1024.png" type="Image" id=2]
 [ext_resource path="res://levels/_level.gd" type="Script" id=3]
 [ext_resource path="res://libs/image_cache/image_cache.gd" type="Script" id=4]
 [ext_resource path="res://levels/map_generator.gd" type="Script" id=5]
@@ -20,7 +20,7 @@ destruction_map = ExtResource( 2 )
 
 [node name="MapGenerator" type="Node" parent="."]
 script = ExtResource( 5 )
-map_period = 180.0
+map_period = 270.0
 
 [node name="ImageManipulator" type="Node" parent="."]
 script = ExtResource( 1 )

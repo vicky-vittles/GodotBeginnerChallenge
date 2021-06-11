@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://entities/soldier/soldier.gd" type="Script" id=1]
 [ext_resource path="res://libs/input_controller/input_controller.gd" type="Script" id=2]
@@ -8,12 +8,16 @@
 [ext_resource path="res://entities/soldier/states/soldier_move.gd" type="Script" id=6]
 [ext_resource path="res://entities/soldier/scripts/graphics.gd" type="Script" id=7]
 [ext_resource path="res://entities/soldier/states/soldier_idle.gd" type="Script" id=8]
+[ext_resource path="res://entities/soldier/assets/widget-axis.png" type="Texture" id=9]
+[ext_resource path="res://entities/soldier/assets/widget-arrow.png" type="Texture" id=10]
+[ext_resource path="res://entities/projectile_spawner/projectile_spawner.tscn" type="PackedScene" id=11]
+[ext_resource path="res://entities/projectile/_projectile.tscn" type="PackedScene" id=12]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 resource_name = "idle"
 length = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("pivot_rot:rotation_degrees")
+tracks/0/path = NodePath("character:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -25,7 +29,7 @@ tracks/0/keys = {
 "values": [ 0.0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("pivot_rot/pivot_pos:position")
+tracks/1/path = NodePath("character/pivot_pos:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -37,12 +41,11 @@ tracks/1/keys = {
 "values": [ Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "move"
+[sub_resource type="Animation" id=2]
 length = 0.4
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("pivot_rot/pivot_pos/main:frame")
+tracks/0/path = NodePath("character/pivot_pos/main:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -54,7 +57,7 @@ tracks/0/keys = {
 "values": [ 0, 2 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("pivot_rot:rotation_degrees")
+tracks/1/path = NodePath("character:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -66,7 +69,7 @@ tracks/1/keys = {
 "values": [ 0.0 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("pivot_rot/pivot_pos:position")
+tracks/2/path = NodePath("character/pivot_pos:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -83,6 +86,7 @@ tracks/2/keys = {
 "soldier",
 ]]
 script = ExtResource( 1 )
+CHARGE_TIME = 3.0
 
 [node name="BitEntityMover" type="Node" parent="."]
 script = ExtResource( 5 )
@@ -105,20 +109,65 @@ fsm_path = NodePath("..")
 
 [node name="Graphics" type="Node2D" parent="."]
 script = ExtResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="pivot_rot" type="Node2D" parent="Graphics"]
-scale = Vector2( 1, 1 )
+[node name="aim" type="Node2D" parent="Graphics"]
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="pivot_pos" type="Node2D" parent="Graphics/pivot_rot"]
-scale = Vector2( 1, 1 )
-
-[node name="main" type="Sprite" parent="Graphics/pivot_rot/pivot_pos"]
-position = Vector2( 0, -6 )
+[node name="axis" type="Sprite" parent="Graphics/aim"]
+position = Vector2( 12, -40 )
 scale = Vector2( 2, 2 )
+texture = ExtResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ArrowWidget" type="Node2D" parent="Graphics/aim"]
+position = Vector2( 0, -28 )
+
+[node name="rot" type="Node2D" parent="Graphics/aim/ArrowWidget"]
+rotation = 0.785398
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="arrow" type="Sprite" parent="Graphics/aim/ArrowWidget/rot"]
+position = Vector2( 16, -16 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 10 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="character" type="Node2D" parent="Graphics"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="pivot_pos" type="Node2D" parent="Graphics/character"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="main" type="Sprite" parent="Graphics/character/pivot_pos"]
+position = Vector2( 0, -16 )
+scale = Vector2( 4, 4 )
 texture = ExtResource( 4 )
 hframes = 3
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Graphics"]
 autoplay = "idle"
-anims/idle = SubResource( 2 )
-anims/move = SubResource( 1 )
+anims/idle = SubResource( 1 )
+anims/move = SubResource( 2 )
+
+[node name="ProjectileSpawner" parent="." instance=ExtResource( 11 )]
+position = Vector2( 0, -12 )
+PROJECTILE = ExtResource( 12 )
+[connection signal="weapon_shoot" from="." to="ProjectileSpawner" method="spawn"]

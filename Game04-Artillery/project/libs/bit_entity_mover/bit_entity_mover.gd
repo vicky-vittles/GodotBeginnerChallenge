@@ -8,15 +8,10 @@ export (float) var MOVE_SPEED = 30.0
 export (bool) var stay_parallel_to_floor
 
 var move_direction : Vector2
-var look_direction : int
 
 
 func set_move_direction(dir):
 	move_direction = dir
-	if sign(move_direction.x) == 1:
-		look_direction = 1
-	elif sign(move_direction.x) == -1:
-		look_direction = -1
 
 func move(delta):
 	body.global_position.x += move_direction.x * MOVE_SPEED * delta

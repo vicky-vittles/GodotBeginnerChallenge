@@ -13,6 +13,8 @@ func process(_delta):
 
 func physics_process(delta):
 	var dir = soldier.input_controller.move_direction
+	var aim = soldier.input_controller.aim_direction
+	
 	if dir == Vector2.ZERO:
 		fsm.change_state(IDLE)
 	
@@ -20,3 +22,5 @@ func physics_process(delta):
 	soldier.bit_entity_mover.set_move_direction(dir)
 	soldier.bit_entity_mover.move(delta)
 	soldier.bit_entity_mover.fall()
+	soldier.change_aim(aim, delta)
+	soldier.charge_power(soldier.input_controller.charge_hold, soldier.input_controller.charge_released, delta)

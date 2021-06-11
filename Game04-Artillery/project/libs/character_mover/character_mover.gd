@@ -4,8 +4,9 @@ class_name CharacterMover, "res://libs/character_mover/character_mover.svg"
 export (int) var MOVE_SPEED = 100
 export (int) var JUMP_HEIGHT = 160
 export (float) var JUMP_TIME = 1.0
-onready var gravity = 2*JUMP_HEIGHT/(JUMP_TIME*JUMP_TIME)
-onready var jump_speed = -2*JUMP_HEIGHT/JUMP_TIME
+onready var formulas = CharacterMoverFormulas.new()
+onready var gravity = formulas.set_gravity_by_height_and_time(JUMP_HEIGHT, JUMP_TIME)
+onready var jump_speed = formulas.set_y_speed_by_height_and_time(JUMP_HEIGHT, JUMP_TIME)
 
 export (bool) var pixel_snap_movement = false
 export (int) var pixel_snap_amount = 1

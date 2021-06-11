@@ -1,12 +1,45 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://main/game/game.gd" type="Script" id=1]
 [ext_resource path="res://entities/soldier/soldier.tscn" type="PackedScene" id=2]
 [ext_resource path="res://levels/_level.tscn" type="PackedScene" id=3]
 [ext_resource path="res://main/game/scripts/players.gd" type="Script" id=4]
+[ext_resource path="res://main/game/hud.gd" type="Script" id=5]
+[ext_resource path="res://entities/soldier/assets/bar-bg.png" type="Texture" id=6]
+[ext_resource path="res://entities/soldier/assets/bar-fill.png" type="Texture" id=7]
+[ext_resource path="res://main/game/projectiles.gd" type="Script" id=8]
 
 [node name="game" type="Node2D"]
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource( 5 )
+
+[node name="root" type="Control" parent="HUD"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="bottom" type="Control" parent="HUD/root"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -50.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="charge_bar" type="TextureProgress" parent="HUD/root/bottom"]
+margin_right = 40.0
+margin_bottom = 14.0
+texture_over = ExtResource( 6 )
+texture_progress = ExtResource( 7 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -21,4 +54,13 @@ __meta__ = {
 
 [node name="1" parent="Players" instance=ExtResource( 2 )]
 position = Vector2( 60.2655, 96.1718 )
+
+[node name="Projectiles" type="Node2D" parent="."]
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_lock_": true
+}
 [connection signal="terrain_updated" from="Level" to="Players" method="_on_Level_terrain_updated"]
+[connection signal="terrain_updated" from="Level" to="." method="_on_Level_terrain_updated"]
+[connection signal="charge_updated" from="Players/1" to="HUD" method="_on_Player_charge_updated"]
+[connection signal="projectile_exploded" from="Projectiles" to="Level" method="_on_Projectile_exploded"]

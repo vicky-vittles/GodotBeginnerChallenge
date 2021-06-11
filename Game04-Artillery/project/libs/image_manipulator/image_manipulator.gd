@@ -46,7 +46,7 @@ func draw_circle(c_pos: Vector2, c_radius: int, color: Color):
 		for x in image.get_size().x:
 			var pixel_pos = Vector2(x,y)
 			var dist_squared = pixel_pos.distance_squared_to(c_pos)
-			if dist_squared <= c_radius:
+			if dist_squared <= c_radius*c_radius:
 				pixels_to_color.append(pixel_pos)
 	
 	# Color those pixels
