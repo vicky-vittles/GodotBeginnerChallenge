@@ -2,7 +2,7 @@
 
 [ext_resource path="res://libs/image_manipulator/image_manipulator.gd" type="Script" id=1]
 [ext_resource path="res://levels/assets/black-1024.png" type="Image" id=2]
-[ext_resource path="res://levels/_level.gd" type="Script" id=3]
+[ext_resource path="res://levels/terrain.gd" type="Script" id=3]
 [ext_resource path="res://libs/image_cache/image_cache.gd" type="Script" id=4]
 [ext_resource path="res://levels/map_generator.gd" type="Script" id=5]
 [ext_resource path="res://levels/terrain.png" type="Texture" id=6]
@@ -11,7 +11,7 @@
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 7 )
 
-[node name="Level" type="Node2D"]
+[node name="Terrain" type="Node2D"]
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true

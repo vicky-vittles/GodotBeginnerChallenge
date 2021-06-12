@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var level = $Level
+onready var level = $Terrain
 onready var projectiles = $Projectiles
 
 var collision_map = []

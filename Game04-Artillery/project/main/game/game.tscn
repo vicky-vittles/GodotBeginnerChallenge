@@ -2,7 +2,7 @@
 
 [ext_resource path="res://main/game/game.gd" type="Script" id=1]
 [ext_resource path="res://entities/soldier/soldier.tscn" type="PackedScene" id=2]
-[ext_resource path="res://levels/_level.tscn" type="PackedScene" id=3]
+[ext_resource path="res://levels/terrain.tscn" type="PackedScene" id=3]
 [ext_resource path="res://main/game/scripts/players.gd" type="Script" id=4]
 [ext_resource path="res://main/game/hud.gd" type="Script" id=5]
 [ext_resource path="res://entities/soldier/assets/bar-bg.png" type="Texture" id=6]
@@ -44,7 +44,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Level" parent="." instance=ExtResource( 3 )]
+[node name="Terrain" parent="." instance=ExtResource( 3 )]
 
 [node name="Players" type="Node2D" parent="."]
 script = ExtResource( 4 )
@@ -60,7 +60,7 @@ script = ExtResource( 8 )
 __meta__ = {
 "_edit_lock_": true
 }
-[connection signal="terrain_updated" from="Level" to="Players" method="_on_Level_terrain_updated"]
-[connection signal="terrain_updated" from="Level" to="." method="_on_Level_terrain_updated"]
+[connection signal="terrain_updated" from="Terrain" to="." method="_on_Level_terrain_updated"]
+[connection signal="terrain_updated" from="Terrain" to="Players" method="_on_Level_terrain_updated"]
 [connection signal="charge_updated" from="Players/1" to="HUD" method="_on_Player_charge_updated"]
-[connection signal="projectile_exploded" from="Projectiles" to="Level" method="_on_Projectile_exploded"]
+[connection signal="projectile_exploded" from="Projectiles" to="Terrain" method="_on_Projectile_exploded"]
