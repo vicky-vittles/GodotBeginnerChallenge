@@ -22,7 +22,7 @@ func set_texture():
 func get_pixels() -> Array:
 	if not image:
 		return []
-		
+	
 	image.lock()
 	var pixels = []
 	for y in image.get_size().y:
