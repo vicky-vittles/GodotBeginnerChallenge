@@ -18,6 +18,6 @@ func physics_process(delta):
 	if dir != Vector2.ZERO:
 		fsm.change_state(MOVE)
 	
-	soldier.bit_entity_mover.fall()
+	soldier.bit_entity_mover.fall(delta)
 	soldier.change_aim(aim, delta)
 	soldier.charge_power(soldier.input_controller.charge_hold, soldier.input_controller.charge_released, delta)

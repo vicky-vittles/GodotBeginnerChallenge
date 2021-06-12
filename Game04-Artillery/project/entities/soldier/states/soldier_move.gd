@@ -21,6 +21,6 @@ func physics_process(delta):
 	soldier.graphics.orient(dir.x)
 	soldier.bit_entity_mover.set_move_direction(dir)
 	soldier.bit_entity_mover.move(delta)
-	soldier.bit_entity_mover.fall()
+	soldier.bit_entity_mover.fall(delta)
 	soldier.change_aim(aim, delta)
 	soldier.charge_power(soldier.input_controller.charge_hold, soldier.input_controller.charge_released, delta)
