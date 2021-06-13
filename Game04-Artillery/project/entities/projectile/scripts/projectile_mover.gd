@@ -33,8 +33,8 @@ func move(delta):
 func is_colliding() -> bool:
 	var candidates = []
 	var pos = Vector2(int(body.global_position.x), int(body.global_position.y))
-	for y in range(pos.y - body.PIXEL_RADIUS, pos.y + body.PIXEL_RADIUS+1):
-		for x in range(pos.x - body.PIXEL_RADIUS, pos.x + body.PIXEL_RADIUS+1):
+	for y in range(pos.y - body.PIXEL_COLLISION_RADIUS, pos.y + body.PIXEL_COLLISION_RADIUS+1):
+		for x in range(pos.x - body.PIXEL_COLLISION_RADIUS, pos.x + body.PIXEL_COLLISION_RADIUS+1):
 			if get_map(x, y, body.collision_map):
 				return true
 	return false

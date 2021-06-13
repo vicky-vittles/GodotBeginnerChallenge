@@ -1,16 +1,14 @@
 extends Node
 
-export (int) var map_octaves = 2
-export (float) var map_period = 180.0
-export (float) var map_persistence = 0.8
+export (Resource) var terrain_definition
 
 func generate_random_map(map: Image) -> Image:
 	randomize()
 	var noise = OpenSimplexNoise.new()
 	noise.seed = randi()
-	noise.octaves = map_octaves
-	noise.period = map_period
-	noise.persistence = map_persistence
+	noise.octaves = terrain_definition.map_octaves
+	noise.period = terrain_definition.map_period
+	noise.persistence = terrain_definition.map_persistence
 	
 	map.lock()
 	for x in map.get_size().x:

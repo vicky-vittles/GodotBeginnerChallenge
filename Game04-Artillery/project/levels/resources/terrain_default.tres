@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://levels/resources/terrain_definition.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+map_octaves = 2
+map_period = 180.0
+map_persistence = 0.8

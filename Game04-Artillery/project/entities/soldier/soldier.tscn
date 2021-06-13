@@ -1,17 +1,16 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://entities/soldier/soldier.gd" type="Script" id=1]
 [ext_resource path="res://libs/input_controller/input_controller.gd" type="Script" id=2]
 [ext_resource path="res://libs/state_machine/state_machine.gd" type="Script" id=3]
 [ext_resource path="res://entities/soldier/assets/default-soldier.png" type="Texture" id=4]
 [ext_resource path="res://libs/bit_entity_mover/bit_entity_mover.gd" type="Script" id=5]
-[ext_resource path="res://entities/soldier/states/soldier_move.gd" type="Script" id=6]
 [ext_resource path="res://entities/soldier/scripts/graphics.gd" type="Script" id=7]
 [ext_resource path="res://entities/soldier/states/soldier_idle.gd" type="Script" id=8]
 [ext_resource path="res://entities/soldier/assets/widget-axis.png" type="Texture" id=9]
 [ext_resource path="res://entities/soldier/assets/widget-arrow.png" type="Texture" id=10]
 [ext_resource path="res://entities/projectile_spawner/projectile_spawner.tscn" type="PackedScene" id=11]
-[ext_resource path="res://entities/projectile/_projectile.tscn" type="PackedScene" id=12]
+[ext_resource path="res://entities/soldier/weapon_selector.gd" type="Script" id=13]
 
 [sub_resource type="Animation" id=1]
 resource_name = "idle"
@@ -95,16 +94,15 @@ body_path = NodePath("..")
 [node name="InputController" type="Node" parent="."]
 script = ExtResource( 2 )
 
+[node name="WeaponSelector" type="Node" parent="."]
+script = ExtResource( 13 )
+
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 3 )
 actor_path = NodePath("..")
 
 [node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource( 8 )
-fsm_path = NodePath("..")
-
-[node name="Move" type="Node" parent="StateMachine"]
-script = ExtResource( 6 )
 fsm_path = NodePath("..")
 
 [node name="Graphics" type="Node2D" parent="."]
@@ -119,7 +117,7 @@ __meta__ = {
 }
 
 [node name="axis" type="Sprite" parent="Graphics/aim"]
-position = Vector2( 12, -40 )
+position = Vector2( 12, -32 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 9 )
 __meta__ = {
@@ -127,7 +125,7 @@ __meta__ = {
 }
 
 [node name="ArrowWidget" type="Node2D" parent="Graphics/aim"]
-position = Vector2( 0, -28 )
+position = Vector2( 0, -20 )
 
 [node name="rot" type="Node2D" parent="Graphics/aim/ArrowWidget"]
 rotation = 0.785398
@@ -154,8 +152,8 @@ __meta__ = {
 }
 
 [node name="main" type="Sprite" parent="Graphics/character/pivot_pos"]
-position = Vector2( 0, -16 )
-scale = Vector2( 4, 4 )
+position = Vector2( 0, -8 )
+scale = Vector2( 2, 2 )
 texture = ExtResource( 4 )
 hframes = 3
 __meta__ = {
@@ -169,5 +167,6 @@ anims/move = SubResource( 2 )
 
 [node name="ProjectileSpawner" parent="." instance=ExtResource( 11 )]
 position = Vector2( 0, -12 )
-PROJECTILE = ExtResource( 12 )
+soldier_owner_path = NodePath("..")
 [connection signal="weapon_shoot" from="." to="ProjectileSpawner" method="spawn"]
+[connection signal="switch_weapon" from="WeaponSelector" to="ProjectileSpawner" method="switch_weapon"]

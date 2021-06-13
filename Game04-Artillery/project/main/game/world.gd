@@ -1,6 +1,7 @@
 extends Node2D
 
 onready var level = $Terrain
+onready var players = $Players
 onready var projectiles = $Projectiles
 
 var collision_map = []

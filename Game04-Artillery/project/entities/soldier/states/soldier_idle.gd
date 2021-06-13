@@ -1,6 +1,5 @@
 extends State
 
-onready var MOVE = $"../Move"
 var soldier
 
 func enter(_info):
@@ -14,11 +13,10 @@ func process(_delta):
 func physics_process(delta):
 	var dir = soldier.input_controller.move_direction
 	var aim = soldier.input_controller.aim_direction
+	var weapon = soldier.input_controller.weapon_selected
 	
-	if dir != Vector2.ZERO:
-		fsm.change_state(MOVE)
-	
-	soldier.bit_entity_mover.set_move_direction(Vector2.ZERO)
-	soldier.bit_entity_mover.move(delta)
+	soldier.graphics.orient(dir.x)
+	soldier.bit_entity_mover.fall()
+	soldier.weapon_selector.switch_weapon(weapon)
 	soldier.change_aim(aim, delta)
 	soldier.charge_power(soldier.input_controller.charge_hold, soldier.input_controller.charge_released, delta)
