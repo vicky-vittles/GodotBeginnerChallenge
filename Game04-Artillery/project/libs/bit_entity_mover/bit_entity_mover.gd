@@ -4,51 +4,48 @@ class_name BitEntityMover
 export (NodePath) var body_path
 onready var body = get_node(body_path)
 
-export (float) var MOVE_SPEED = 30.0
-export (int) var GROUND_REACH = 25.0
+export (float) var move_speed = 30.0
+export (int) var pixel_gravity = 4
+export (int) var ground_reach = 20
+export (float) var linear_gravity = 200.0
+
 export (bool) var stay_parallel_to_floor = false
 
 var move_direction : Vector2
-var linear_gravity : float = 200.0
-var is_grounded : bool = true
-var can_move : bool = true
+var is_grounded : bool = false
+var is_blocked : bool = false
 
 func set_move_direction(dir):
 	move_direction = dir
 
 func move(delta):
-	if is_grounded and can_move:
-		body.global_position.x += move_direction.x * MOVE_SPEED * delta
-		if stay_parallel_to_floor:
-			var angle = get_local_floor_slope(int(body.global_position.x), body.collision_map)
-			body.rotation = -angle
-
-func fall(delta):
-	var curr_pos = Vector2(int(body.global_position.x), int(body.global_position.y))
-	var ground_height = find_ground(curr_pos.x, body.collision_map)
-	var ground_local = find_ground_local(curr_pos.x, body.collision_map)
-	var d = ground_height - curr_pos.y
+	var curr_pos = Vector2(body.global_position.x, body.global_position.y)
+	var pixel_pos = Vector2(int(curr_pos.x), int(curr_pos.y))
+	var walk_x = curr_pos.x + move_direction.x * move_speed * delta
+	var fall_y = curr_pos.y
+	is_grounded = false
+	is_blocked = false
 	
-	if sign(d) >= 0 and d > GROUND_REACH:
+	for y in range(-ground_reach, ground_reach+1):
+		var dy = fall_y + y
+		var above_pos = get_map(int(walk_x), int(dy-1), body.collision_map)
+		var ground_pos = get_map(int(walk_x), int(dy), body.collision_map)
+		if (not above_pos and ground_pos):
+			fall_y = dy
+			is_grounded = true
+		if (above_pos and ground_pos):
+			is_blocked = true
+	
+	if is_blocked:
+		walk_x = curr_pos.x
+		fall_y = curr_pos.y
+	
+	if not is_grounded:
 		# Falling
-		is_grounded = false
-		can_move = false
-		body.global_position.y += linear_gravity * delta
-	elif sign(d) >= 0:
-		# Snap to ground
-		is_grounded = true
-		can_move = true
-		body.global_position.y = ground_height
-	elif sign(d) < 0 and abs(d) <= GROUND_REACH:
-		# Snap above
-		is_grounded = true
-		can_move = true
-		body.global_position.y = ground_height
-	elif sign(d) < 0 and abs(d) > GROUND_REACH:
-		# Snap to nearest pixel
-		if ground_local != -1:
-			can_move = true
-			body.global_position.y = ground_local
+		walk_x = curr_pos.x
+		fall_y += pixel_gravity
+	
+	body.global_position = Vector2(walk_x, fall_y)
 
 
 func get_map(x, y, map):
@@ -64,15 +61,6 @@ func get_local_floor_slope(x, map) -> float:
 
 func find_ground(x: int, map: Array):
 	for y in map.size():
-		if get_map(x, y, map):
-			return y
-	return -1
-
-func find_ground_local(x: int, map: Array):
-	var candidates = []
-	for i in range(1,GROUND_REACH*2+1):
-		candidates.append(int(pow(-1,i%2) * (ceil(float(i)/2))))
-	for y in candidates:
 		if get_map(x, y, map):
 			return y
 	return -1
