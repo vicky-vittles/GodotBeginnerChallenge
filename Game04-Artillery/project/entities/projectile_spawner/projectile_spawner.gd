@@ -7,7 +7,7 @@ var selected_weapon
 
 func spawn(angle, charge, dir):
 	var projectile = selected_weapon.instance()
-	get_tree().root.get_node("Game").add_projectile(projectile)
+	Globals.get_game().add_projectile(projectile)
 	projectile.global_position = global_position
 	var dir_angle = Vector2(dir,0).rotated(dir*angle).angle()
 	projectile.init(dir_angle, charge, soldier_owner)

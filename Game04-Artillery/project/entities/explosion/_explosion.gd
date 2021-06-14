@@ -17,3 +17,6 @@ func init(circle: Array):
 	collision_shape.shape = circle_shape
 	
 	fade_timer.start()
+
+func _on_FadeTimer_timeout():
+	emit_signal("faded", self)

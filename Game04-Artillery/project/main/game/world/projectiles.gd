@@ -1,5 +1,5 @@
 extends Node2D
-signal projectile_exploded(explosions)
+signal projectile_exploded(projectile, explosions)
 
 func add_projectile(proj, map: Array):
 	add_child(proj)
@@ -13,5 +13,4 @@ func _on_Projectile_exploded(proj):
 		explosion_node.global_position = explosion[0]
 		explosion_node.init(explosion)
 		proj.explosion_nodes.append(explosion_node)
-	emit_signal("projectile_exploded", proj.explosions)
-	proj.queue_free()
+	emit_signal("projectile_exploded", proj, proj.explosions)

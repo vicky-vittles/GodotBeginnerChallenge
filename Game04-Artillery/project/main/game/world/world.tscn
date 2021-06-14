@@ -63,4 +63,5 @@ __meta__ = {
 [connection signal="terrain_updated" from="Terrain" to="Players" method="_on_Level_terrain_updated"]
 [connection signal="terrain_updated" from="Terrain" to="." method="_on_Level_terrain_updated"]
 [connection signal="charge_updated" from="Players/1" to="HUD" method="_on_Player_charge_updated"]
-[connection signal="projectile_exploded" from="Projectiles" to="Terrain" method="_on_Projectile_exploded"]
+[connection signal="projectile_exploded" from="Projectiles" to="Terrain" method="_on_Projectiles_projectile_exploded"]
+[connection signal="projectile_exploded" from="Projectiles" to="." method="_on_Projectiles_projectile_exploded"]

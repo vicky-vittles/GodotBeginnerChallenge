@@ -33,4 +33,4 @@ one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 [connection signal="ready" from="." to="AnimationPlayer" method="play" binds= [ "explode" ]]
-[connection signal="timeout" from="FadeTimer" to="." method="emit_signal" binds= [ "faded" ]]
+[connection signal="timeout" from="FadeTimer" to="." method="_on_FadeTimer_timeout"]

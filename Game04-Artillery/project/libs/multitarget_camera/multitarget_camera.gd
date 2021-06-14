@@ -15,6 +15,8 @@ func _process(delta):
 	if !targets:
 		return
 	
+	print(targets.size())
+	
 	var p = Vector2.ZERO
 	for target in targets:
 		p += target.position

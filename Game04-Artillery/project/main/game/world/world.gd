@@ -1,4 +1,5 @@
 extends Node2D
+signal projectile_exploded(projectile, explosions)
 
 onready var level = $Terrain
 onready var players = $Players
@@ -17,3 +18,6 @@ func add_projectile(proj):
 
 func _on_Level_terrain_updated(map):
 	collision_map = map
+
+func _on_Projectiles_projectile_exploded(projectile, explosions):
+	emit_signal("projectile_exploded", projectile, explosions)

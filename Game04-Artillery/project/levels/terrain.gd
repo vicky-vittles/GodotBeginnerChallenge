@@ -13,7 +13,7 @@ func _ready():
 	image_manipulator.set_image(map)
 	terrain.get_material().set_shader_param("destruction_map", image_manipulator.texture)
 
-func _on_Projectile_exploded(explosions):
+func _on_Projectiles_projectile_exploded(projectile, explosions):
 	if explosions and explosions.size() > 0:
 		image_manipulator.draw_circles(explosions, Color.transparent)
 

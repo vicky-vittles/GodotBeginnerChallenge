@@ -95,5 +95,6 @@ limit_left = 100
 limit_top = -200
 limit_right = 1024
 limit_bottom = 1024
+[connection signal="projectile_exploded" from="root/MainViewport/MainViewport/World" to="." method="_on_World_projectile_exploded"]
 [connection signal="look_around_camera" from="root/MinimapViewport/Minimap" to="root/MainViewport/MainViewport" method="_on_Minimap_look_around_camera"]
 [connection signal="multitarget_camera" from="root/MinimapViewport/Minimap" to="root/MainViewport/MainViewport" method="_on_Minimap_multitarget_camera"]

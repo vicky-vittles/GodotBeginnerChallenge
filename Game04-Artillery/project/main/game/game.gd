@@ -10,14 +10,15 @@ func _ready():
 	targetted_camera.add_target(world.players.get_main_player())
 
 func add_projectile(proj):
-	proj.connect("exploded", self, "_on_Projectile_exploded")
+	#proj.connect("exploded", self, "_on_Projectile_exploded")
 	targetted_camera.add_target(proj)
-	for explosion_node in proj.explosion_nodes:
-		explosion_node.connect("faded", self, "_on_Explosion_faded")
-		targetted_camera.add_target(explosion_node)
 	world.add_projectile(proj)
 
-func _on_Projectile_exploded(proj):
+func _on_World_projectile_exploded(proj, explosions):
+	if proj.explosion_nodes.size() > 0:
+		var explosion_node = proj.explosion_nodes[0]
+		explosion_node.connect("faded", self, "_on_Explosion_faded")
+		targetted_camera.add_target(explosion_node)
 	targetted_camera.remove_target(proj)
 	proj.call_deferred("queue_free")
 
