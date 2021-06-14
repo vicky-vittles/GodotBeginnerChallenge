@@ -1,6 +1,8 @@
 extends Node2D
 signal exploded(proj)
 
+export (PackedScene) var EXPLOSION
+
 export (int) var PIXEL_COLLISION_RADIUS = 2
 export (int) var MAX_EXPLOSIONS = 1
 export (int) var EXPLOSION_RADIUS = 50
@@ -13,6 +15,7 @@ export (int) var TRAIL_SIZE = 2
 export (Color) var TRAIL_COLOR
 
 var explosions = []
+var explosion_nodes = []
 
 onready var projectile_mover = $ProjectileMover
 onready var trail = $Node/trail
@@ -44,9 +47,9 @@ func generate_explosions():
 
 func exploded():
 	generate_explosions()
-	emit_signal("exploded", self)
 	effect()
 	soldier_owner.restore_ammo()
+	emit_signal("exploded", self)
 
 func effect():
 	pass

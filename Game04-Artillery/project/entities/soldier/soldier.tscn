@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://entities/soldier/soldier.gd" type="Script" id=1]
 [ext_resource path="res://libs/input_controller/input_controller.gd" type="Script" id=2]
@@ -11,7 +11,8 @@
 [ext_resource path="res://entities/soldier/assets/widget-axis.png" type="Texture" id=9]
 [ext_resource path="res://entities/soldier/assets/widget-arrow.png" type="Texture" id=10]
 [ext_resource path="res://entities/projectile_spawner/projectile_spawner.tscn" type="PackedScene" id=11]
-[ext_resource path="res://entities/soldier/weapon_selector.gd" type="Script" id=13]
+[ext_resource path="res://entities/soldier/scripts/damage_hurtbox.gd" type="Script" id=12]
+[ext_resource path="res://entities/soldier/scripts/weapon_selector.gd" type="Script" id=13]
 
 [sub_resource type="Animation" id=1]
 resource_name = "idle"
@@ -81,6 +82,9 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 0, -6 ) ]
 }
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 4, 7 )
 
 [node name="Soldier" type="Node2D" groups=[
 "entity",
@@ -152,7 +156,6 @@ __meta__ = {
 }
 
 [node name="pivot_pos" type="Node2D" parent="Graphics/character"]
-position = Vector2( 0, -2.58021 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -172,8 +175,26 @@ autoplay = "idle"
 anims/idle = SubResource( 1 )
 anims/move = SubResource( 2 )
 
+[node name="DamageHurtbox" type="Area2D" parent="." groups=[
+"entity",
+"soldier",
+]]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource( 12 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageHurtbox"]
+visible = false
+position = Vector2( 0, -7 )
+shape = SubResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="ProjectileSpawner" parent="." instance=ExtResource( 11 )]
 position = Vector2( 0, -12 )
 soldier_owner_path = NodePath("..")
 [connection signal="weapon_shoot" from="." to="ProjectileSpawner" method="spawn"]
 [connection signal="switch_weapon" from="WeaponSelector" to="ProjectileSpawner" method="switch_weapon"]
+[connection signal="area_entered" from="DamageHurtbox" to="DamageHurtbox" method="_on_area_entered"]
+[connection signal="entered_explosion" from="DamageHurtbox" to="Health" method="lose_health"]
