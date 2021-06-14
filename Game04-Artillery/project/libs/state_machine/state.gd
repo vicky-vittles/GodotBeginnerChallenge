@@ -7,6 +7,10 @@ signal state_exited()
 export (NodePath) var fsm_path
 onready var fsm = get_node(fsm_path)
 
+export (bool) var do_input = true
+export (bool) var do_process = true
+export (bool) var do_physics_process = true
+
 
 func enter(info):
 	pass

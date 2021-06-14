@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/virtual-controller.svg-b902b8a972bb5011e569f34b5829beb9.stex"
+path="res://.import/device-controller.svg-e683ffe00625d163ceed854b0238a762.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://libs/input_controller/virtual-controller.svg"
-dest_files=[ "res://.import/virtual-controller.svg-b902b8a972bb5011e569f34b5829beb9.stex" ]
+source_file="res://libs/input_controller/icons/device-controller.svg"
+dest_files=[ "res://.import/device-controller.svg-e683ffe00625d163ceed854b0238a762.stex" ]
 
 [params]
 

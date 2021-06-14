@@ -5,6 +5,7 @@
 
 [sub_resource type="Animation" id=1]
 resource_name = "explode"
+length = 1.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Graphics/main:frame")
 tracks/0/interp = 1
@@ -12,7 +13,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
+"times": PoolRealArray( 0, 1.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 0, 7 ]
@@ -26,7 +27,6 @@ MAX_DAMAGE = 2000
 scale = Vector2( 1.875, 1.875 )
 texture = ExtResource( 2 )
 hframes = 8
-frame = 7
 
 [node name="AnimationPlayer" parent="." index="3"]
 anims/explode = SubResource( 1 )

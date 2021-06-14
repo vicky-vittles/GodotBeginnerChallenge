@@ -1,21 +1,20 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=19 format=2]
 
-[ext_resource path="res://entities/soldier/soldier.gd" type="Script" id=1]
-[ext_resource path="res://libs/input_controller/input_controller.gd" type="Script" id=2]
+[ext_resource path="res://entities/projectile_spawner/projectile_spawner.tscn" type="PackedScene" id=1]
+[ext_resource path="res://entities/soldier/scripts/healthbar.gd" type="Script" id=2]
 [ext_resource path="res://libs/state_machine/state_machine.gd" type="Script" id=3]
-[ext_resource path="res://entities/soldier/assets/default-soldier.png" type="Texture" id=4]
-[ext_resource path="res://libs/bit_entity_mover/bit_entity_mover.gd" type="Script" id=5]
-[ext_resource path="res://libs/health/health.gd" type="Script" id=6]
-[ext_resource path="res://entities/soldier/scripts/graphics.gd" type="Script" id=7]
-[ext_resource path="res://entities/soldier/states/soldier_idle.gd" type="Script" id=8]
-[ext_resource path="res://entities/soldier/assets/widget-axis.png" type="Texture" id=9]
-[ext_resource path="res://entities/soldier/assets/widget-arrow.png" type="Texture" id=10]
-[ext_resource path="res://entities/projectile_spawner/projectile_spawner.tscn" type="PackedScene" id=11]
+[ext_resource path="res://entities/soldier/_soldier.gd" type="Script" id=4]
+[ext_resource path="res://entities/soldier/assets/default-soldier.png" type="Texture" id=5]
+[ext_resource path="res://entities/soldier/assets/widget-axis.png" type="Texture" id=6]
+[ext_resource path="res://entities/soldier/assets/widget-arrow.png" type="Texture" id=7]
+[ext_resource path="res://entities/soldier/scripts/graphics.gd" type="Script" id=8]
+[ext_resource path="res://entities/soldier/states/soldier_idle.gd" type="Script" id=9]
+[ext_resource path="res://libs/bit_entity_mover/bit_entity_mover.gd" type="Script" id=10]
+[ext_resource path="res://libs/health/health.gd" type="Script" id=11]
 [ext_resource path="res://entities/soldier/scripts/damage_hurtbox.gd" type="Script" id=12]
 [ext_resource path="res://entities/soldier/scripts/weapon_selector.gd" type="Script" id=13]
-[ext_resource path="res://entities/soldier/assets/health-bar-bg.png" type="Texture" id=14]
-[ext_resource path="res://entities/soldier/assets/health-bar-fill.png" type="Texture" id=15]
-[ext_resource path="res://entities/soldier/scripts/healthbar.gd" type="Script" id=16]
+[ext_resource path="res://entities/soldier/assets/health-bar-fill.png" type="Texture" id=14]
+[ext_resource path="res://entities/soldier/assets/health-bar-bg.png" type="Texture" id=15]
 
 [sub_resource type="Animation" id=1]
 resource_name = "idle"
@@ -93,28 +92,25 @@ extents = Vector2( 4, 7 )
 "entity",
 "soldier",
 ]]
-script = ExtResource( 1 )
+script = ExtResource( 4 )
 CHARGE_TIME = 3.0
 
 [node name="BitEntityMover" type="Node" parent="."]
-script = ExtResource( 5 )
+script = ExtResource( 10 )
 body_path = NodePath("..")
-
-[node name="InputController" type="Node" parent="."]
-script = ExtResource( 2 )
 
 [node name="WeaponSelector" type="Node" parent="."]
 script = ExtResource( 13 )
 
 [node name="Health" type="Node" parent="."]
-script = ExtResource( 6 )
+script = ExtResource( 11 )
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 3 )
 actor_path = NodePath("..")
 
 [node name="Idle" type="Node" parent="StateMachine"]
-script = ExtResource( 8 )
+script = ExtResource( 9 )
 fsm_path = NodePath("..")
 
 [node name="UI" type="Control" parent="."]
@@ -138,9 +134,9 @@ margin_right = 15.0
 margin_bottom = 2.5
 max_value = 10000.0
 value = 10000.0
-texture_under = ExtResource( 14 )
-texture_progress = ExtResource( 15 )
-script = ExtResource( 16 )
+texture_under = ExtResource( 15 )
+texture_progress = ExtResource( 14 )
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
@@ -149,7 +145,7 @@ __meta__ = {
 [node name="Tween" type="Tween" parent="UI/HealthBar"]
 
 [node name="Graphics" type="Node2D" parent="."]
-script = ExtResource( 7 )
+script = ExtResource( 8 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -162,7 +158,7 @@ __meta__ = {
 [node name="axis" type="Sprite" parent="Graphics/aim"]
 position = Vector2( 12, -32 )
 scale = Vector2( 2, 2 )
-texture = ExtResource( 9 )
+texture = ExtResource( 6 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -179,7 +175,7 @@ __meta__ = {
 [node name="arrow" type="Sprite" parent="Graphics/aim/ArrowWidget/rot"]
 position = Vector2( 16, -16 )
 scale = Vector2( 2, 2 )
-texture = ExtResource( 10 )
+texture = ExtResource( 7 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -197,7 +193,7 @@ __meta__ = {
 [node name="main" type="Sprite" parent="Graphics/character/pivot_pos"]
 position = Vector2( 0, -8 )
 scale = Vector2( 2, 2 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 hframes = 3
 frame = 2
 __meta__ = {
@@ -225,7 +221,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="ProjectileSpawner" parent="." instance=ExtResource( 11 )]
+[node name="ProjectileSpawner" parent="." instance=ExtResource( 1 )]
 position = Vector2( 0, -12 )
 soldier_owner_path = NodePath("..")
 [connection signal="weapon_shoot" from="." to="ProjectileSpawner" method="spawn"]

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/programmed-controller.svg-ef4d1a2581a6e824759bb1e0775aac68.stex"
+path="res://.import/vanilla-controller.svg-ef788389c098b97e8ce200284b83fe77.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://libs/input_controller/programmed-controller.svg"
-dest_files=[ "res://.import/programmed-controller.svg-ef4d1a2581a6e824759bb1e0775aac68.stex" ]
+source_file="res://libs/input_controller/icons/vanilla-controller.svg"
+dest_files=[ "res://.import/vanilla-controller.svg-ef788389c098b97e8ce200284b83fe77.stex" ]
 
 [params]
 

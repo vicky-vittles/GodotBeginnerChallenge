@@ -2,10 +2,9 @@ extends Node
 class_name StateMachine
 
 export (NodePath) var actor_path
+export (bool) var is_active : bool = true
 var actor
 var current_state
-
-var is_active : bool = true
 
 
 func _ready():
@@ -35,18 +34,18 @@ func change_state_path(new_state_path, info = {}) -> void:
 
 
 func _input(event):
-	if is_active and current_state.has_method("input"):
+	if is_active and current_state.has_method("input") and current_state.do_input:
 		current_state.input(event)
 
 
 func _process(delta):
-	if is_active and current_state.has_method("process"):
+	if is_active and current_state.has_method("process") and current_state.do_process:
 		current_state.process(delta)
 
 
 func _physics_process(delta):
 #	print(current_state.name)
-	if is_active and current_state.has_method("physics_process"):
+	if is_active and current_state.has_method("physics_process") and current_state.do_physics_process:
 		current_state.physics_process(delta)
 
 

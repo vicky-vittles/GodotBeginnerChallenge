@@ -10,7 +10,7 @@ export (float) var ANGLE_CHANGE_SPEED = 50.0
 export (float) var CHARGE_TIME = 5.0
 
 onready var bit_entity_mover = $BitEntityMover
-onready var input_controller = $InputController
+onready var input_controller = $Controller
 onready var weapon_selector = $WeaponSelector
 onready var graphics = $Graphics
 onready var arrow_widget = $Graphics/aim/ArrowWidget
@@ -20,6 +20,9 @@ var can_shoot : bool = true
 
 var collision_map = []
 
+
+func get_angle_amount():
+	return arrow_widget.rotation
 
 func change_aim(aim_direction, delta):
 	arrow_widget.rotate(-aim_direction * deg2rad(ANGLE_CHANGE_SPEED) * delta)
