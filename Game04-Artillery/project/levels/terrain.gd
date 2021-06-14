@@ -14,8 +14,8 @@ func _ready():
 	terrain.get_material().set_shader_param("destruction_map", image_manipulator.texture)
 
 func _on_Projectile_exploded(explosions):
-	for explosion in explosions:
-		image_manipulator.draw_circle(explosion[0], explosion[1], Color.transparent)
+	if explosions and explosions.size() > 0:
+		image_manipulator.draw_circles(explosions, Color.transparent)
 
 func _on_cache_updated():
 	emit_signal("terrain_updated", image_cache.transparency_cache)

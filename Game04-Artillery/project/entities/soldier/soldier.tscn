@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://entities/soldier/soldier.gd" type="Script" id=1]
 [ext_resource path="res://libs/input_controller/input_controller.gd" type="Script" id=2]
 [ext_resource path="res://libs/state_machine/state_machine.gd" type="Script" id=3]
 [ext_resource path="res://entities/soldier/assets/default-soldier.png" type="Texture" id=4]
 [ext_resource path="res://libs/bit_entity_mover/bit_entity_mover.gd" type="Script" id=5]
+[ext_resource path="res://libs/health/health.gd" type="Script" id=6]
 [ext_resource path="res://entities/soldier/scripts/graphics.gd" type="Script" id=7]
 [ext_resource path="res://entities/soldier/states/soldier_idle.gd" type="Script" id=8]
 [ext_resource path="res://entities/soldier/assets/widget-axis.png" type="Texture" id=9]
@@ -14,7 +15,8 @@
 
 [sub_resource type="Animation" id=1]
 resource_name = "idle"
-length = 0.1
+loop = true
+step = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("character:rotation_degrees")
 tracks/0/interp = 1
@@ -34,10 +36,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 0, -3 ), Vector2( 0, 0 ) ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -97,6 +99,9 @@ script = ExtResource( 2 )
 [node name="WeaponSelector" type="Node" parent="."]
 script = ExtResource( 13 )
 
+[node name="Health" type="Node" parent="."]
+script = ExtResource( 6 )
+
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 3 )
 actor_path = NodePath("..")
@@ -147,6 +152,7 @@ __meta__ = {
 }
 
 [node name="pivot_pos" type="Node2D" parent="Graphics/character"]
+position = Vector2( 0, -2.58021 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -156,6 +162,7 @@ position = Vector2( 0, -8 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 4 )
 hframes = 3
+frame = 2
 __meta__ = {
 "_edit_lock_": true
 }

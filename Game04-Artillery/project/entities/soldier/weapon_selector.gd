@@ -1,10 +1,11 @@
 extends Node
 signal switch_weapon(weapon)
 
-const MAX_WEAPONS = 2
+const MAX_WEAPONS = 3
 const WEAPONS = {
 	1: preload("res://entities/projectile/teleport_projectile.tscn"),
-	2: preload("res://entities/projectile/grenade_projectile.tscn")}
+	2: preload("res://entities/projectile/grenade_projectile.tscn"),
+	3: preload("res://entities/projectile/digger_projectile.tscn")}
 
 var current_selection : int
 

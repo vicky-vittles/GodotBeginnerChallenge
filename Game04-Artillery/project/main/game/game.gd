@@ -1,9 +1,9 @@
 extends Node2D
 
-onready var main_viewport = $root/MainViewport/Viewport
-onready var minimap_viewport = $root/MinimapViewport/Viewport
-onready var world = $root/MainViewport/Viewport/World
-onready var targetted_camera = $root/MainViewport/Viewport/MultitargetCamera
+onready var main_viewport = $root/MainViewport/MainViewport
+onready var minimap_viewport = $root/MinimapViewport/Minimap
+onready var world = $root/MainViewport/MainViewport/World
+onready var targetted_camera = $root/MainViewport/MainViewport/MultitargetCamera
 
 func _ready():
 	minimap_viewport.world_2d = main_viewport.world_2d

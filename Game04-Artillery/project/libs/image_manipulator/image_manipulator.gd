@@ -5,6 +5,7 @@ signal image_updated(image)
 
 var image
 var texture
+var thread
 
 func set_image(img):
 	image = Image.new()
@@ -33,28 +34,51 @@ func get_pixels() -> Array:
 	return pixels
 
 
-func draw_circle(c_pos: Vector2, c_radius: int, color: Color):
+func draw_circles(circles: Array, color: Color):
 	if not image:
 		return
 	
-	# First, lock image to access pixels
-	image.lock()
+	var dup_image = image.duplicate()
 	
 	# Put all pixels to color in a list
+	var info = {
+		"circles": circles,
+		"color": color,
+		"image_to_draw": dup_image}
+	thread = Thread.new()
+	thread.start(self, "draw_circles_job", info)
+
+func draw_circles_job(info):
+	var circles = info["circles"]
+	var color = info["color"]
+	var image_to_draw = info["image_to_draw"]
+	
+	# First, lock image to access pixels
+	image_to_draw.lock()
+	
 	var pixels_to_color = []
-	for y in image.get_size().y:
-		for x in image.get_size().x:
+	for y in image_to_draw.get_size().y:
+		for x in image_to_draw.get_size().x:
 			var pixel_pos = Vector2(x,y)
-			var dist_squared = pixel_pos.distance_squared_to(c_pos)
-			if dist_squared <= c_radius*c_radius:
-				pixels_to_color.append(pixel_pos)
+			for circle in circles:
+				var c_pos = circle[0]
+				var c_radius = circle[1]
+				var dist_squared = pixel_pos.distance_squared_to(c_pos)
+				if dist_squared <= c_radius*c_radius:
+					pixels_to_color.append(pixel_pos)
+					break
 	
 	# Color those pixels
 	for i in pixels_to_color.size():
 		var pixel_pos = Vector2(pixels_to_color[i].x, pixels_to_color[i].y)
-		image.set_pixelv(pixel_pos, color)
+		image_to_draw.set_pixelv(pixel_pos, color)
 	
 	# Finish up by unlocking image
-	image.unlock()
+	image_to_draw.unlock()
+	call_deferred("draw_circles_done")
+	return image_to_draw
+
+func draw_circles_done():
+	image.copy_from(thread.wait_to_finish())
 	set_texture()
 	emit_signal("image_updated", image)

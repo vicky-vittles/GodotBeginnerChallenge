@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://entities/projectile/_projectile.tscn" type="PackedScene" id=1]
+
+[node name="DiggerProjectile" instance=ExtResource( 1 )]
+MAX_EXPLOSIONS = 5
+EXPLOSION_RADIUS_GROWTH = -10
+EXPLOSION_SPACING = 27
+EXPLOSION_SPACING_DIR = Vector2( 0, 1 )
+TRAIL_SIZE = 4
+TRAIL_COLOR = Color( 0.756863, 0, 1, 1 )

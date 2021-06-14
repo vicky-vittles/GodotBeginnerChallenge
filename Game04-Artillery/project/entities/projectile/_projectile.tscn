@@ -9,6 +9,7 @@
 "soldier",
 ]]
 script = ExtResource( 3 )
+TRAIL_COLOR = Color( 1, 1, 1, 0 )
 
 [node name="ProjectileMover" type="Node" parent="."]
 script = ExtResource( 1 )
@@ -16,9 +17,23 @@ body_path = NodePath("..")
 MAX_SPEED = 1000
 GRAVITY = 351.56
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Graphics" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="main" type="Sprite" parent="Graphics"]
 scale = Vector2( 0.125, 0.125 )
 texture = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Node" type="Node" parent="."]
+
+[node name="trail" type="Line2D" parent="Node"]
+width = 2.0
+default_color = Color( 1, 1, 1, 1 )
 __meta__ = {
 "_edit_lock_": true
 }

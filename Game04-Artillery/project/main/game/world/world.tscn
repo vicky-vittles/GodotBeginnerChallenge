@@ -1,13 +1,16 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://main/game/projectiles.gd" type="Script" id=1]
+[ext_resource path="res://main/game/world/projectiles.gd" type="Script" id=1]
 [ext_resource path="res://main/game/scripts/players.gd" type="Script" id=2]
-[ext_resource path="res://main/game/world.gd" type="Script" id=3]
+[ext_resource path="res://main/game/world/world.gd" type="Script" id=3]
 [ext_resource path="res://entities/soldier/assets/bar-bg.png" type="Texture" id=4]
 [ext_resource path="res://entities/soldier/assets/bar-fill.png" type="Texture" id=5]
 [ext_resource path="res://levels/terrain.tscn" type="PackedScene" id=6]
 [ext_resource path="res://entities/soldier/soldier.tscn" type="PackedScene" id=7]
-[ext_resource path="res://main/game/hud.gd" type="Script" id=8]
+[ext_resource path="res://main/game/world/hud.gd" type="Script" id=8]
+
+
+
 
 [node name="World" type="Node2D"]
 script = ExtResource( 3 )
