@@ -5,7 +5,7 @@
 
 [node name="GrenadeProjectile" instance=ExtResource( 1 )]
 EXPLOSION = ExtResource( 2 )
-EXPLOSION_RADIUS = 20
+EXPLOSION_RADIUS = 30
 EXPLOSION_RADIUS_GROWTH = 0
 EXPLOSION_SPACING = 0
 TRAIL_POINTS = 3

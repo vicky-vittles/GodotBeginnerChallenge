@@ -146,6 +146,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Tween" type="Tween" parent="UI/HealthBar"]
+
 [node name="Graphics" type="Node2D" parent="."]
 script = ExtResource( 7 )
 __meta__ = {
