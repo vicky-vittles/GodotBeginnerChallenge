@@ -1,16 +1,18 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://libs/image_manipulator/image_manipulator.gd" type="Script" id=1]
-[ext_resource path="res://levels/assets/black-1024.png" type="Image" id=2]
+[ext_resource path="res://levels/assets/destruction_maps/black-1024.png" type="Image" id=2]
 [ext_resource path="res://levels/terrain.gd" type="Script" id=3]
 [ext_resource path="res://libs/image_cache/image_cache.gd" type="Script" id=4]
 [ext_resource path="res://levels/map_generator.gd" type="Script" id=5]
-[ext_resource path="res://levels/terrain.png" type="Texture" id=6]
+[ext_resource path="res://levels/assets/destructible_textures/ROCK-1.png" type="Texture" id=6]
 [ext_resource path="res://levels/terrain-map.shader" type="Shader" id=7]
 [ext_resource path="res://levels/resources/terrain_default.tres" type="Resource" id=8]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 7 )
+shader_param/outline_width = 2.0
+shader_param/outline_color = null
 
 [node name="Terrain" type="Node2D"]
 script = ExtResource( 3 )
@@ -35,6 +37,7 @@ __meta__ = {
 }
 
 [node name="background" type="Sprite" parent="Graphics"]
+centered = false
 __meta__ = {
 "_edit_lock_": true
 }
@@ -43,6 +46,7 @@ __meta__ = {
 material = SubResource( 1 )
 texture = ExtResource( 6 )
 centered = false
+region_rect = Rect2( 0, 0, 1024, 1024 )
 __meta__ = {
 "_edit_lock_": true
 }

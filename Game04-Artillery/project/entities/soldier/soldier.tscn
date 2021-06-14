@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://entities/soldier/soldier.gd" type="Script" id=1]
 [ext_resource path="res://libs/input_controller/input_controller.gd" type="Script" id=2]
@@ -13,6 +13,9 @@
 [ext_resource path="res://entities/projectile_spawner/projectile_spawner.tscn" type="PackedScene" id=11]
 [ext_resource path="res://entities/soldier/scripts/damage_hurtbox.gd" type="Script" id=12]
 [ext_resource path="res://entities/soldier/scripts/weapon_selector.gd" type="Script" id=13]
+[ext_resource path="res://entities/soldier/assets/health-bar-bg.png" type="Texture" id=14]
+[ext_resource path="res://entities/soldier/assets/health-bar-fill.png" type="Texture" id=15]
+[ext_resource path="res://entities/soldier/scripts/healthbar.gd" type="Script" id=16]
 
 [sub_resource type="Animation" id=1]
 resource_name = "idle"
@@ -114,6 +117,35 @@ actor_path = NodePath("..")
 script = ExtResource( 8 )
 fsm_path = NodePath("..")
 
+[node name="UI" type="Control" parent="."]
+margin_left = -40.0
+margin_top = -40.0
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="HealthBar" type="TextureProgress" parent="UI"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -15.0
+margin_top = 2.0
+margin_right = 15.0
+margin_bottom = 2.5
+max_value = 10000.0
+value = 10000.0
+texture_under = ExtResource( 14 )
+texture_progress = ExtResource( 15 )
+script = ExtResource( 16 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
 [node name="Graphics" type="Node2D" parent="."]
 script = ExtResource( 7 )
 __meta__ = {
@@ -196,5 +228,6 @@ position = Vector2( 0, -12 )
 soldier_owner_path = NodePath("..")
 [connection signal="weapon_shoot" from="." to="ProjectileSpawner" method="spawn"]
 [connection signal="switch_weapon" from="WeaponSelector" to="ProjectileSpawner" method="switch_weapon"]
+[connection signal="health_updated" from="Health" to="UI/HealthBar" method="_on_Health_health_updated"]
 [connection signal="area_entered" from="DamageHurtbox" to="DamageHurtbox" method="_on_area_entered"]
 [connection signal="entered_explosion" from="DamageHurtbox" to="Health" method="lose_health"]
