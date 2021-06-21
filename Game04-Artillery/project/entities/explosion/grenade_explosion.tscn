@@ -24,9 +24,10 @@ MIN_DAMAGE = 1000
 MAX_DAMAGE = 2000
 
 [node name="main" parent="Graphics" index="0"]
-scale = Vector2( 1.875, 1.875 )
+scale = Vector2( 2.5, 2.5 )
 texture = ExtResource( 2 )
 hframes = 8
+frame = 2
 
 [node name="AnimationPlayer" parent="." index="3"]
 anims/explode = SubResource( 1 )

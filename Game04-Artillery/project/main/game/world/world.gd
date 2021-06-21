@@ -1,5 +1,7 @@
 extends Node2D
+signal camera_focus_on_player(player)
 signal projectile_exploded(projectile, explosions)
+signal explosion_faded()
 
 onready var level = $Terrain
 onready var players = $Players
@@ -17,10 +19,16 @@ func _process(_delta):
 func get_total_players():
 	return players.get_child_count()
 
+func get_main_player():
+	return players.get_main_player()
+
 func get_player(id: int):
 	if id >= 0 and id < get_total_players():
 		return players.get_child(id)
 	return null
+
+func get_current_player():
+	return get_player(current_player_turn)
 
 
 func add_projectile(proj):

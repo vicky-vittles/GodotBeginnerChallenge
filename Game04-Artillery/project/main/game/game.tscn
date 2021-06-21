@@ -38,8 +38,6 @@ handle_input_locally = false
 render_target_update_mode = 3
 script = ExtResource( 6 )
 
-[node name="World" parent="root/MainViewport/MainViewport" instance=ExtResource( 2 )]
-
 [node name="MultitargetCamera" type="Camera2D" parent="root/MainViewport/MainViewport"]
 position = Vector2( 512, 512 )
 zoom = Vector2( 0.5, 0.5 )
@@ -51,7 +49,7 @@ limit_smoothed = true
 editor_draw_limits = true
 script = ExtResource( 3 )
 zoom_speed = 0.2
-min_zoom = 0.5
+min_zoom = 1.0
 max_zoom = 1.0
 
 [node name="LookAroundCamera" type="Camera2D" parent="root/MainViewport/MainViewport"]
@@ -62,6 +60,8 @@ limit_top = 0
 limit_right = 1024
 limit_bottom = 1024
 editor_draw_limits = true
+
+[node name="World" parent="root/MainViewport/MainViewport" instance=ExtResource( 2 )]
 
 [node name="MinimapViewport" type="ViewportContainer" parent="root"]
 anchor_left = 1.0
@@ -95,6 +95,7 @@ limit_left = 100
 limit_top = -200
 limit_right = 1024
 limit_bottom = 1024
+[connection signal="camera_focus_on_player" from="root/MainViewport/MainViewport/World" to="." method="_on_World_camera_focus_on_player"]
 [connection signal="projectile_exploded" from="root/MainViewport/MainViewport/World" to="." method="_on_World_projectile_exploded"]
 [connection signal="look_around_camera" from="root/MinimapViewport/Minimap" to="root/MainViewport/MainViewport" method="_on_Minimap_look_around_camera"]
 [connection signal="multitarget_camera" from="root/MinimapViewport/Minimap" to="root/MainViewport/MainViewport" method="_on_Minimap_multitarget_camera"]

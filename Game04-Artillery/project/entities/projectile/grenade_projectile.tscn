@@ -1,15 +1,20 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://entities/projectile/_projectile.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/explosion/grenade_explosion.tscn" type="PackedScene" id=2]
+[ext_resource path="res://entities/projectile/assets/grenade.png" type="Texture" id=3]
 
 [node name="GrenadeProjectile" instance=ExtResource( 1 )]
 EXPLOSION = ExtResource( 2 )
-EXPLOSION_RADIUS = 30
+EXPLOSION_RADIUS = 40
 EXPLOSION_RADIUS_GROWTH = 0
 EXPLOSION_SPACING = 0
-TRAIL_POINTS = 3
+TRAIL_SIZE = 4
 TRAIL_COLOR = Color( 1, 0, 0, 1 )
 
 [node name="ProjectileMover" parent="." index="0"]
 body_path = NodePath("../../GrenadeProjectile")
+
+[node name="main" parent="Graphics" index="0"]
+scale = Vector2( 1, 1 )
+texture = ExtResource( 3 )

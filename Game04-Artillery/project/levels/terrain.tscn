@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://libs/image_manipulator/image_manipulator.gd" type="Script" id=1]
 [ext_resource path="res://levels/assets/destruction_maps/black-1024.png" type="Image" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://levels/assets/destructible_textures/ROCK-1.png" type="Texture" id=6]
 [ext_resource path="res://levels/terrain-map.shader" type="Shader" id=7]
 [ext_resource path="res://levels/resources/terrain_default.tres" type="Resource" id=8]
+[ext_resource path="res://levels/assets/backgrounds/BG1-layer2.png" type="Texture" id=9]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 7 )
@@ -36,11 +37,16 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="background" type="Sprite" parent="Graphics"]
+[node name="background" type="ParallaxBackground" parent="Graphics"]
+
+[node name="0" type="ParallaxLayer" parent="Graphics/background"]
+visible = false
+
+[node name="Sprite" type="Sprite" parent="Graphics/background/0"]
+modulate = Color( 1, 1, 1, 0.756863 )
+scale = Vector2( 4, 5.5 )
+texture = ExtResource( 9 )
 centered = false
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="terrain" type="Sprite" parent="Graphics"]
 material = SubResource( 1 )

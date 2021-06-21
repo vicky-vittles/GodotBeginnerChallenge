@@ -1,10 +1,10 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://entities/projectile_spawner/projectile_spawner.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/soldier/scripts/healthbar.gd" type="Script" id=2]
 [ext_resource path="res://libs/state_machine/state_machine.gd" type="Script" id=3]
 [ext_resource path="res://entities/soldier/_soldier.gd" type="Script" id=4]
-[ext_resource path="res://entities/soldier/assets/default-soldier.png" type="Texture" id=5]
+[ext_resource path="res://entities/soldier/assets/soldier.png" type="Texture" id=5]
 [ext_resource path="res://entities/soldier/assets/widget-axis.png" type="Texture" id=6]
 [ext_resource path="res://entities/soldier/assets/widget-arrow.png" type="Texture" id=7]
 [ext_resource path="res://entities/soldier/scripts/graphics.gd" type="Script" id=8]
@@ -42,50 +42,10 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.5, 1 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0, -3 ), Vector2( 0, 0 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 0, -8 ), Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=2]
-length = 0.4
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("character/pivot_pos/main:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 0, 2 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("character:rotation_degrees")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("character/pivot_pos:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0, -6 ) ]
-}
-
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 4, 7 )
 
 [node name="Soldier" type="Node2D" groups=[
@@ -93,7 +53,6 @@ extents = Vector2( 4, 7 )
 "soldier",
 ]]
 script = ExtResource( 4 )
-CHARGE_TIME = 3.0
 
 [node name="BitEntityMover" type="Node" parent="."]
 script = ExtResource( 10 )
@@ -114,6 +73,7 @@ script = ExtResource( 9 )
 fsm_path = NodePath("..")
 
 [node name="UI" type="Control" parent="."]
+visible = false
 margin_left = -40.0
 margin_top = -40.0
 margin_right = 40.0
@@ -124,6 +84,7 @@ __meta__ = {
 }
 
 [node name="HealthBar" type="TextureProgress" parent="UI"]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -156,15 +117,15 @@ __meta__ = {
 }
 
 [node name="axis" type="Sprite" parent="Graphics/aim"]
-position = Vector2( 12, -32 )
-scale = Vector2( 2, 2 )
+position = Vector2( 24, -70 )
+scale = Vector2( 4, 4 )
 texture = ExtResource( 6 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="ArrowWidget" type="Node2D" parent="Graphics/aim"]
-position = Vector2( 0, -20 )
+position = Vector2( 0, -46 )
 
 [node name="rot" type="Node2D" parent="Graphics/aim/ArrowWidget"]
 rotation = 0.785398
@@ -173,8 +134,8 @@ __meta__ = {
 }
 
 [node name="arrow" type="Sprite" parent="Graphics/aim/ArrowWidget/rot"]
-position = Vector2( 16, -16 )
-scale = Vector2( 2, 2 )
+position = Vector2( 24, -24 )
+scale = Vector2( 3, 3 )
 texture = ExtResource( 7 )
 __meta__ = {
 "_edit_lock_": true
@@ -191,11 +152,9 @@ __meta__ = {
 }
 
 [node name="main" type="Sprite" parent="Graphics/character/pivot_pos"]
-position = Vector2( 0, -8 )
+position = Vector2( 0, -16 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 5 )
-hframes = 3
-frame = 2
 __meta__ = {
 "_edit_lock_": true
 }
@@ -203,7 +162,6 @@ __meta__ = {
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Graphics"]
 autoplay = "idle"
 anims/idle = SubResource( 1 )
-anims/move = SubResource( 2 )
 
 [node name="DamageHurtbox" type="Area2D" parent="." groups=[
 "entity",
@@ -216,7 +174,7 @@ script = ExtResource( 12 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageHurtbox"]
 visible = false
 position = Vector2( 0, -7 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }

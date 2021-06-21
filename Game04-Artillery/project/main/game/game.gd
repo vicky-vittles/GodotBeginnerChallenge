@@ -10,7 +10,6 @@ func _ready():
 	targetted_camera.add_target(world.players.get_main_player())
 
 func add_projectile(proj):
-	#proj.connect("exploded", self, "_on_Projectile_exploded")
 	targetted_camera.add_target(proj)
 	world.add_projectile(proj)
 
@@ -23,5 +22,10 @@ func _on_World_projectile_exploded(proj, explosions):
 	proj.call_deferred("queue_free")
 
 func _on_Explosion_faded(explosion):
+	world.emit_signal("explosion_faded")
 	targetted_camera.remove_target(explosion)
 	explosion.call_deferred("queue_free")
+
+func _on_World_camera_focus_on_player(player):
+	targetted_camera.targets = []
+	targetted_camera.add_target(player)

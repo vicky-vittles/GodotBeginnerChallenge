@@ -14,8 +14,6 @@ TRAIL_COLOR = Color( 1, 1, 1, 0 )
 [node name="ProjectileMover" type="Node" parent="."]
 script = ExtResource( 1 )
 body_path = NodePath("..")
-MAX_SPEED = 1000
-GRAVITY = 351.56
 
 [node name="Graphics" type="Node2D" parent="."]
 __meta__ = {

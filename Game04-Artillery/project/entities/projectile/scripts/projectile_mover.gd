@@ -5,8 +5,8 @@ signal has_collided()
 export (NodePath) var body_path
 onready var body = get_node(body_path)
 
-export (int) var MAX_SPEED = 100
-export (float) var GRAVITY = 3.125
+export (int) var MAX_SPEED = Formulas.PROJECTILE_MAX_SPEED
+export (float) var GRAVITY = Formulas.PROJECTILE_GRAVITY
 
 export (Vector2) var gravity_direction = Vector2(0, 1)
 export (Vector2) var movement_mask = Vector2(1, 1)
@@ -53,7 +53,7 @@ func fire(_angle, charge):
 	velocity = speed
 
 func set_speed_for_projectile(charge):
-	return MAX_SPEED * charge
+	return Formulas.calculate_speed(charge)
 
-func set_gravity_for_projectile(_speed, _angle, max_distance):
-	return (_speed * _speed * sin(2*_angle)*sin(2*_angle)) / max_distance
+#func set_gravity_for_projectile(_speed, _angle, max_distance):
+#	return Formulas.calculate_gravity(_speed, _angle, max_distance)

@@ -18,6 +18,7 @@ var explosions = []
 var explosion_nodes = []
 
 onready var projectile_mover = $ProjectileMover
+onready var graphics = $Graphics
 onready var trail = $Node/trail
 
 var soldier_owner
@@ -34,6 +35,7 @@ func init(angle, charge, _soldier_owner):
 	projectile_mover.fire(angle, charge)
 
 func _physics_process(delta):
+	graphics.rotate(3*PI*delta)
 	var pos = global_position
 	trail.add_point(pos)
 	if trail.get_point_count() > TRAIL_POINTS:

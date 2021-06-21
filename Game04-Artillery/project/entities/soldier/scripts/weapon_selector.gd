@@ -1,19 +1,25 @@
 extends Node
 signal switch_weapon(weapon)
 
-const MAX_WEAPONS = 3
+const MAX_WEAPONS = 1
+const WEAPON_GRENADE = 1
+const WEAPON_TELEPORTER = 2
+const WEAPON_DIGGER = 3
 const WEAPONS = {
-	1: preload("res://entities/projectile/teleport_projectile.tscn"),
-	2: preload("res://entities/projectile/grenade_projectile.tscn"),
-	3: preload("res://entities/projectile/digger_projectile.tscn")}
+	WEAPON_GRENADE: preload("res://entities/projectile/grenade_projectile.tscn")}
 
 var current_selection : int
+var prototype
 
 func _ready():
 	switch_weapon(1)
 
 func switch_weapon(selection: int):
-	if selection < 1 or selection > MAX_WEAPONS:
+	if selection < 1 or selection > MAX_WEAPONS or selection == current_selection:
 		return
 	current_selection = selection
-	emit_signal("switch_weapon", WEAPONS[selection])
+	prototype = get_weapon().instance()
+	emit_signal("switch_weapon", get_weapon())
+
+func get_weapon():
+	return WEAPONS[current_selection]
