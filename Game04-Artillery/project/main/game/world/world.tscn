@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://main/game/world/scripts/projectiles.gd" type="Script" id=1]
 [ext_resource path="res://main/game/scripts/players.gd" type="Script" id=2]
@@ -11,7 +11,6 @@
 [ext_resource path="res://entities/soldier/player/soldier_player.tscn" type="PackedScene" id=9]
 [ext_resource path="res://main/game/world/enemies.gd" type="Script" id=10]
 [ext_resource path="res://assets/m5x7-16-outline2.tres" type="DynamicFont" id=11]
-[ext_resource path="res://entities/soldier/assets/angle-wheel.png" type="Texture" id=12]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 3 )
@@ -51,18 +50,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="angle_wheel" type="TextureRect" parent="HUD/root/bottom/row"]
-margin_left = 19.0
-margin_right = 147.0
-margin_bottom = 128.0
-texture = ExtResource( 12 )
-__meta__ = {
-"_edit_lock_": true
-}
-
 [node name="vbox" type="VBoxContainer" parent="HUD/root/bottom/row"]
-margin_left = 151.0
-margin_right = 211.0
+margin_left = 85.0
+margin_right = 145.0
 margin_bottom = 128.0
 alignment = 2
 __meta__ = {
@@ -84,8 +74,8 @@ __meta__ = {
 }
 
 [node name="vbox2" type="VBoxContainer" parent="HUD/root/bottom/row"]
-margin_left = 215.0
-margin_right = 985.0
+margin_left = 149.0
+margin_right = 919.0
 margin_bottom = 128.0
 alignment = 2
 __meta__ = {
@@ -134,5 +124,5 @@ __meta__ = {
 [connection signal="angle_updated" from="Players/1" to="HUD" method="_on_Player_angle_updated"]
 [connection signal="charge_updated" from="Players/1" to="HUD" method="_on_Player_charge_updated"]
 [connection signal="weapon_shoot" from="Players/1" to="HUD" method="_on_Player_weapon_shoot"]
-[connection signal="projectile_exploded" from="Projectiles" to="." method="_on_Projectiles_projectile_exploded"]
 [connection signal="projectile_exploded" from="Projectiles" to="Terrain" method="_on_Projectiles_projectile_exploded"]
+[connection signal="projectile_exploded" from="Projectiles" to="." method="_on_Projectiles_projectile_exploded"]
