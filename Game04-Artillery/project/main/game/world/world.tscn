@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://main/game/world/scripts/projectiles.gd" type="Script" id=1]
 [ext_resource path="res://main/game/scripts/players.gd" type="Script" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://entities/soldier/assets/bar-bg.png" type="Texture" id=4]
 [ext_resource path="res://entities/soldier/assets/bar-fill.png" type="Texture" id=5]
 [ext_resource path="res://levels/terrain.tscn" type="PackedScene" id=6]
-[ext_resource path="res://entities/enemies/dummy_enemy/dummy_enemy.tscn" type="PackedScene" id=7]
 [ext_resource path="res://main/game/world/scripts/hud.gd" type="Script" id=8]
 [ext_resource path="res://entities/soldier/player/soldier_player.tscn" type="PackedScene" id=9]
 [ext_resource path="res://main/game/world/enemies.gd" type="Script" id=10]
@@ -95,7 +94,14 @@ __meta__ = {
 
 [node name="Terrain" parent="." instance=ExtResource( 6 )]
 
+[node name="Projectiles" type="Node2D" parent="."]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="Players" type="Node2D" parent="."]
+z_index = 1
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
@@ -109,20 +115,11 @@ script = ExtResource( 10 )
 __meta__ = {
 "_edit_lock_": true
 }
-
-[node name="Enemy" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 244.997, 110.471 )
-
-[node name="Projectiles" type="Node2D" parent="."]
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_lock_": true
-}
-[connection signal="terrain_updated" from="Terrain" to="." method="_on_Level_terrain_updated"]
-[connection signal="terrain_updated" from="Terrain" to="Players" method="_on_Level_terrain_updated"]
 [connection signal="terrain_updated" from="Terrain" to="Enemies" method="_on_Level_terrain_updated"]
+[connection signal="terrain_updated" from="Terrain" to="Players" method="_on_Level_terrain_updated"]
+[connection signal="terrain_updated" from="Terrain" to="." method="_on_Level_terrain_updated"]
+[connection signal="projectile_exploded" from="Projectiles" to="Terrain" method="_on_Projectiles_projectile_exploded"]
+[connection signal="projectile_exploded" from="Projectiles" to="." method="_on_Projectiles_projectile_exploded"]
 [connection signal="angle_updated" from="Players/1" to="HUD" method="_on_Player_angle_updated"]
 [connection signal="charge_updated" from="Players/1" to="HUD" method="_on_Player_charge_updated"]
 [connection signal="weapon_shoot" from="Players/1" to="HUD" method="_on_Player_weapon_shoot"]
-[connection signal="projectile_exploded" from="Projectiles" to="Terrain" method="_on_Projectiles_projectile_exploded"]
-[connection signal="projectile_exploded" from="Projectiles" to="." method="_on_Projectiles_projectile_exploded"]

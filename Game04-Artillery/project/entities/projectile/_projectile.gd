@@ -21,6 +21,7 @@ onready var projectile_mover = $ProjectileMover
 onready var graphics = $Graphics
 onready var trail = $Node/trail
 
+var rotation_dir
 var soldier_owner
 var map_limit
 var collision_map
@@ -33,9 +34,10 @@ func init(angle, charge, _soldier_owner):
 	soldier_owner = _soldier_owner
 	map_limit = soldier_owner.collision_map[0].size()
 	projectile_mover.fire(angle, charge)
+	#rotation_dir = 1 if (angle >= -90 and angle <= 90) else -1
 
 func _physics_process(delta):
-	graphics.rotate(3*PI*delta)
+	graphics.rotate(2*PI*delta)
 	var pos = global_position
 	trail.add_point(pos)
 	if trail.get_point_count() > TRAIL_POINTS:

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/wheel.png-6e6ea9516203b52febfcf55553d03aa9.stex"
+path="res://.import/soldier_arm_2.png-069016f1fd524b76332d942dd90e63e3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/soldier/assets/wheel.png"
-dest_files=[ "res://.import/wheel.png-6e6ea9516203b52febfcf55553d03aa9.stex" ]
+source_file="res://entities/soldier/assets/soldier_arm_2.png"
+dest_files=[ "res://.import/soldier_arm_2.png-069016f1fd524b76332d942dd90e63e3.stex" ]
 
 [params]
 

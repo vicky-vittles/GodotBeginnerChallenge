@@ -13,9 +13,10 @@ export (float) var CHARGE_TIME = 3.5
 onready var bit_entity_mover = $BitEntityMover
 onready var input_controller = $Controller
 onready var weapon_selector = $WeaponSelector
-onready var graphics = $Graphics
-onready var arrow_widget = $Graphics/aim/ArrowWidget
-onready var projectile_spawner = $ProjectileSpawner
+onready var base = $Base
+onready var graphics = $Base/Graphics
+onready var arrow_widget = $Base/Graphics/aim/ArrowWidget
+onready var projectile_spawner = $Base/ProjectileSpawner
 
 var charge_amount : float = 0.0
 var can_shoot : bool = true
@@ -43,7 +44,12 @@ func charge_power(is_hold, is_released, delta):
 		charge_amount = clamp(charge_amount + delta*(1.0/CHARGE_TIME), 0.0, 1.0)
 	if charge_amount > 0.0 and (is_released or charge_amount == 1.0):
 		can_shoot = false
-		emit_signal("weapon_shoot", arrow_widget.rotation, charge_amount, input_controller.last_move_direction)
+		var dir = Vector2(sign(input_controller.last_move_direction), 0)
+		dir = dir.rotated(base.rotation)
+		dir = dir.rotated(sign(input_controller.last_move_direction)*arrow_widget.rotation)
+		var angle_to_shoot = dir.angle()
+		#print(rad2deg(angle_to_shoot))
+		emit_signal("weapon_shoot", angle_to_shoot, charge_amount, 1)
 		charge_amount = 0.0
 	emit_signal("charge_updated", charge_amount)
 

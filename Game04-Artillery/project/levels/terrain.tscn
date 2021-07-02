@@ -5,10 +5,10 @@
 [ext_resource path="res://levels/terrain.gd" type="Script" id=3]
 [ext_resource path="res://libs/image_cache/image_cache.gd" type="Script" id=4]
 [ext_resource path="res://levels/map_generator.gd" type="Script" id=5]
-[ext_resource path="res://levels/assets/destructible_textures/ROCK-1.png" type="Texture" id=6]
+[ext_resource path="res://assets/paper-texture-repeated.png" type="Texture" id=6]
 [ext_resource path="res://levels/terrain-map.shader" type="Shader" id=7]
 [ext_resource path="res://levels/resources/terrain_default.tres" type="Resource" id=8]
-[ext_resource path="res://levels/assets/backgrounds/BG1-layer2.png" type="Texture" id=9]
+[ext_resource path="res://levels/assets/destructible_textures/ROCK-1.png" type="Texture" id=9]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 7 )
@@ -37,20 +37,18 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="background" type="ParallaxBackground" parent="Graphics"]
-
-[node name="0" type="ParallaxLayer" parent="Graphics/background"]
-visible = false
-
-[node name="Sprite" type="Sprite" parent="Graphics/background/0"]
-modulate = Color( 1, 1, 1, 0.756863 )
-scale = Vector2( 4, 5.5 )
-texture = ExtResource( 9 )
+[node name="background" type="Sprite" parent="Graphics"]
+texture = ExtResource( 6 )
 centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 1024, 1024 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="terrain" type="Sprite" parent="Graphics"]
 material = SubResource( 1 )
-texture = ExtResource( 6 )
+texture = ExtResource( 9 )
 centered = false
 region_rect = Rect2( 0, 0, 1024, 1024 )
 __meta__ = {

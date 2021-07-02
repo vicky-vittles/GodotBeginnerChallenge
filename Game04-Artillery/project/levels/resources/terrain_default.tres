@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource( 1 )
 map_octaves = 2
-map_period = 180.0
+map_period = 225.0
 map_persistence = 0.8
