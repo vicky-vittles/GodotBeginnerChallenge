@@ -8,7 +8,7 @@
 [ext_resource path="res://assets/paper-texture-repeated.png" type="Texture" id=6]
 [ext_resource path="res://levels/terrain-map.shader" type="Shader" id=7]
 [ext_resource path="res://levels/resources/terrain_default.tres" type="Resource" id=8]
-[ext_resource path="res://levels/assets/destructible_textures/ROCK-1.png" type="Texture" id=9]
+[ext_resource path="res://levels/assets/destructible_textures/paper-terrain.png" type="Texture" id=9]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 7 )
