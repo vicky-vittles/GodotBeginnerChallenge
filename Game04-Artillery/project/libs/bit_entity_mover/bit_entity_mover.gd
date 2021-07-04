@@ -13,8 +13,10 @@ func fall():
 	var next_ground = find_next_ground(pixel_pos.x, pixel_pos.y, body.collision_map)
 	
 	body.global_position.y = clamp(curr_pos.y + pixel_gravity, 0, next_ground)
-	var floor_angle = get_local_floor_slope(pixel_pos.x, pixel_pos.y, body.collision_map)
-	body.base.rotation_degrees = -floor_angle
+	
+	if stay_parallel_to_floor:
+		var floor_angle = get_local_floor_slope(pixel_pos.x, pixel_pos.y, body.collision_map)
+		body.base.rotation_degrees = -floor_angle
 
 func get_map(x, y, map):
 	x = clamp(x, 0, map[0].size()-1)

@@ -7,3 +7,9 @@
 
 [node name="Controller" type="Node" parent="." index="0"]
 script = ExtResource( 2 )
+
+[node name="Hurtbox" parent="." index="7" groups=[
+"hurtbox",
+]]
+[connection signal="hurt" from="." to="StateMachine/Idle" method="_on_Soldier_hurt"]
+[connection signal="switch_weapon" from="WeaponSelector" to="Base/ProjectileSpawner" method="switch_weapon"]

@@ -1,5 +1,6 @@
 extends State
 
+onready var DEAD = $"../Dead"
 var soldier
 
 func enter(_info):
@@ -20,3 +21,8 @@ func physics_process(delta):
 	soldier.weapon_selector.switch_weapon(weapon)
 	soldier.change_aim(aim, delta)
 	soldier.charge_power(soldier.input_controller.charge_hold, soldier.input_controller.charge_released, delta)
+
+
+func _on_Soldier_hurt():
+	if fsm.current_state == self:
+		fsm.change_state(DEAD)

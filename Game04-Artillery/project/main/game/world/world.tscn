@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://main/game/world/scripts/projectiles.gd" type="Script" id=1]
 [ext_resource path="res://main/game/scripts/players.gd" type="Script" id=2]
@@ -6,10 +6,17 @@
 [ext_resource path="res://entities/soldier/assets/bar-bg.png" type="Texture" id=4]
 [ext_resource path="res://entities/soldier/assets/bar-fill.png" type="Texture" id=5]
 [ext_resource path="res://levels/terrain.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/m5x7-48-outline-4.tres" type="DynamicFont" id=7]
 [ext_resource path="res://main/game/world/scripts/hud.gd" type="Script" id=8]
 [ext_resource path="res://entities/soldier/player/soldier_player.tscn" type="PackedScene" id=9]
 [ext_resource path="res://main/game/world/enemies.gd" type="Script" id=10]
 [ext_resource path="res://assets/m5x7-16-outline2.tres" type="DynamicFont" id=11]
+[ext_resource path="res://libs/gt_replace_label/gt_replace_label.gd" type="Script" id=12]
+[ext_resource path="res://main/game/world/enemy_spawn_manager.gd" type="Script" id=17]
+[ext_resource path="res://libs/gt_random_point_area_2d/gt_random_point_area_2d.gd" type="Script" id=18]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 256, 50 )
 
 [node name="World" type="Node2D"]
 script = ExtResource( 3 )
@@ -27,6 +34,51 @@ __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
+
+[node name="top" type="Control" parent="HUD/root"]
+anchor_right = 1.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="row" type="HBoxContainer" parent="HUD/root/top"]
+anchor_right = 1.0
+margin_left = 10.0
+margin_top = 10.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="vbox" type="VBoxContainer" parent="HUD/root/top/row"]
+margin_right = 108.0
+margin_bottom = 80.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="enemies_label" type="Label" parent="HUD/root/top/row/vbox"]
+margin_right = 108.0
+margin_bottom = 38.0
+custom_fonts/font = ExtResource( 7 )
+text = "Kills: 0"
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_lock_": true
+}
+original_text = "Kills: %s"
+
+[node name="time_label" type="Label" parent="HUD/root/top/row/vbox"]
+margin_top = 42.0
+margin_right = 108.0
+margin_bottom = 80.0
+custom_fonts/font = ExtResource( 7 )
+text = "Time: 0"
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_lock_": true
+}
+original_text = "Time: %s"
 
 [node name="bottom" type="Control" parent="HUD/root"]
 anchor_top = 1.0
@@ -92,6 +144,32 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="EnemySpawnManager" type="Node2D" parent="."]
+script = ExtResource( 17 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="SpawnTimer" type="Timer" parent="EnemySpawnManager"]
+wait_time = 5.0
+
+[node name="Timer" type="Timer" parent="EnemySpawnManager"]
+wait_time = 100.0
+one_shot = true
+
+[node name="RandomSpawnArea" type="Area2D" parent="EnemySpawnManager"]
+position = Vector2( 736, 82 )
+script = ExtResource( 18 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="1" type="CollisionShape2D" parent="EnemySpawnManager/RandomSpawnArea"]
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="Terrain" parent="." instance=ExtResource( 6 )]
 
 [node name="Projectiles" type="Node2D" parent="."]
@@ -115,11 +193,21 @@ script = ExtResource( 10 )
 __meta__ = {
 "_edit_lock_": true
 }
+[connection signal="player_died" from="." to="EnemySpawnManager/SpawnTimer" method="stop"]
+[connection signal="player_died" from="." to="Enemies" method="_on_World_player_died"]
+[connection signal="ready" from="." to="EnemySpawnManager" method="initial_spawn"]
+[connection signal="update_kills" from="." to="HUD" method="_on_World_update_kills"]
+[connection signal="update_time" from="." to="HUD" method="_on_World_update_time"]
+[connection signal="update_kills_label" from="HUD" to="HUD/root/top/row/vbox/enemies_label" method="apply_text"]
+[connection signal="update_time_label" from="HUD" to="HUD/root/top/row/vbox/time_label" method="apply_text"]
+[connection signal="enemy_died" from="EnemySpawnManager" to="." method="_on_EnemySpawnManager_enemy_died"]
+[connection signal="timeout" from="EnemySpawnManager/SpawnTimer" to="EnemySpawnManager" method="spawn_enemy"]
 [connection signal="terrain_updated" from="Terrain" to="Enemies" method="_on_Level_terrain_updated"]
-[connection signal="terrain_updated" from="Terrain" to="Players" method="_on_Level_terrain_updated"]
 [connection signal="terrain_updated" from="Terrain" to="." method="_on_Level_terrain_updated"]
-[connection signal="projectile_exploded" from="Projectiles" to="Terrain" method="_on_Projectiles_projectile_exploded"]
+[connection signal="terrain_updated" from="Terrain" to="Players" method="_on_Level_terrain_updated"]
 [connection signal="projectile_exploded" from="Projectiles" to="." method="_on_Projectiles_projectile_exploded"]
+[connection signal="projectile_exploded" from="Projectiles" to="Terrain" method="_on_Projectiles_projectile_exploded"]
 [connection signal="angle_updated" from="Players/1" to="HUD" method="_on_Player_angle_updated"]
 [connection signal="charge_updated" from="Players/1" to="HUD" method="_on_Player_charge_updated"]
+[connection signal="hurt" from="Players/1" to="." method="_on_Player_died"]
 [connection signal="weapon_shoot" from="Players/1" to="HUD" method="_on_Player_weapon_shoot"]

@@ -3,6 +3,7 @@ extends Node2D
 signal angle_updated(degrees)
 signal charge_updated(amount)
 signal weapon_shoot(angle, charge, direction)
+signal hurt()
 
 export (float) var ANGLE_INTERVAL_MIN = -90.0
 export (float) var ANGLE_INTERVAL_MAX = 0.0
@@ -56,3 +57,7 @@ func charge_power(is_hold, is_released, delta):
 
 func restore_ammo():
 	can_shoot = true
+
+func _on_Hurtbox_area_entered(area):
+	if area.is_in_group("enemy") and area.is_in_group("hitbox"):
+		emit_signal("hurt")

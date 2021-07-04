@@ -1,20 +1,36 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://entities/projectile_spawner/projectile_spawner.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/soldier/scripts/healthbar.gd" type="Script" id=2]
 [ext_resource path="res://libs/state_machine/state_machine.gd" type="Script" id=3]
 [ext_resource path="res://entities/soldier/_soldier.gd" type="Script" id=4]
-[ext_resource path="res://entities/soldier/shaders/paper-material.tres" type="Material" id=5]
+[ext_resource path="res://assets/shaders/paper-material.tres" type="Material" id=5]
 [ext_resource path="res://entities/soldier/assets/soldier_body.png" type="Texture" id=6]
 [ext_resource path="res://entities/soldier/assets/soldier_arm.png" type="Texture" id=7]
 [ext_resource path="res://entities/soldier/scripts/graphics.gd" type="Script" id=8]
 [ext_resource path="res://entities/soldier/states/soldier_idle.gd" type="Script" id=9]
 [ext_resource path="res://libs/bit_entity_mover/bit_entity_mover.gd" type="Script" id=10]
 [ext_resource path="res://libs/health/health.gd" type="Script" id=11]
-[ext_resource path="res://entities/soldier/scripts/damage_hurtbox.gd" type="Script" id=12]
+[ext_resource path="res://entities/soldier/states/soldier_dead.gd" type="Script" id=12]
 [ext_resource path="res://entities/soldier/scripts/weapon_selector.gd" type="Script" id=13]
 [ext_resource path="res://entities/soldier/assets/health-bar-fill.png" type="Texture" id=14]
 [ext_resource path="res://entities/soldier/assets/health-bar-bg.png" type="Texture" id=15]
+
+[sub_resource type="Animation" id=3]
+resource_name = "die"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
 
 [sub_resource type="Animation" id=1]
 resource_name = "idle"
@@ -44,10 +60,21 @@ tracks/1/keys = {
 "update": 1,
 "values": [ 0, 1 ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
 
-[sub_resource type="CapsuleShape2D" id=2]
-radius = 21.0
-height = 22.0
+[sub_resource type="CircleShape2D" id=2]
+radius = 27.3609
 
 [node name="Soldier" type="Node2D" groups=[
 "entity",
@@ -58,6 +85,7 @@ script = ExtResource( 4 )
 [node name="BitEntityMover" type="Node" parent="."]
 script = ExtResource( 10 )
 body_path = NodePath("..")
+stay_parallel_to_floor = true
 
 [node name="WeaponSelector" type="Node" parent="."]
 script = ExtResource( 13 )
@@ -71,6 +99,10 @@ actor_path = NodePath("..")
 
 [node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource( 9 )
+fsm_path = NodePath("..")
+
+[node name="Dead" type="Node" parent="StateMachine"]
+script = ExtResource( 12 )
 fsm_path = NodePath("..")
 
 [node name="UI" type="Control" parent="."]
@@ -153,29 +185,31 @@ hframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Base/Graphics"]
 autoplay = "idle"
+anims/die = SubResource( 3 )
 anims/idle = SubResource( 1 )
 
 [node name="ProjectileSpawner" parent="Base" instance=ExtResource( 1 )]
 position = Vector2( 0, -21 )
 soldier_owner_path = NodePath("../..")
 
-[node name="DamageHurtbox" type="Area2D" parent="." groups=[
-"entity",
+[node name="Hurtbox" type="Area2D" parent="." groups=[
 "soldier",
+"trigger",
 ]]
 collision_layer = 8
-collision_mask = 8
-script = ExtResource( 12 )
+collision_mask = 2147483656
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageHurtbox"]
+[node name="1" type="CollisionShape2D" parent="Hurtbox"]
 visible = false
-position = Vector2( 10, -19 )
+position = Vector2( 4, -24 )
 shape = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
 [connection signal="weapon_shoot" from="." to="Base/ProjectileSpawner" method="spawn"]
 [connection signal="switch_weapon" from="WeaponSelector" to="Base/ProjectileSpawner" method="switch_weapon"]
 [connection signal="health_updated" from="Health" to="UI/HealthBar" method="_on_Health_health_updated"]
-[connection signal="area_entered" from="DamageHurtbox" to="DamageHurtbox" method="_on_area_entered"]
-[connection signal="entered_explosion" from="DamageHurtbox" to="Health" method="lose_health"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]

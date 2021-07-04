@@ -8,6 +8,7 @@ onready var map_generator = $MapGenerator
 onready var image_manipulator = $ImageManipulator
 onready var image_cache = $ImageCache
 onready var terrain = $Graphics/terrain
+onready var terrain_outline = $Graphics/terrain_outline
 
 func _ready():
 	var map = destruction_map
@@ -15,6 +16,7 @@ func _ready():
 		map = map_generator.generate_random_map(destruction_map)
 	image_manipulator.set_image(map)
 	terrain.get_material().set_shader_param("destruction_map", image_manipulator.texture)
+	terrain_outline.texture = image_manipulator.texture
 
 func _on_Projectiles_projectile_exploded(projectile, explosions):
 	if not explosions or explosions.size() == 0:

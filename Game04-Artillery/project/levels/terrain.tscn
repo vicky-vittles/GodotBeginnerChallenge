@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://libs/image_manipulator/image_manipulator.gd" type="Script" id=1]
 [ext_resource path="res://levels/assets/destruction_maps/black-1024.png" type="Image" id=2]
@@ -9,11 +9,15 @@
 [ext_resource path="res://levels/terrain-map.shader" type="Shader" id=7]
 [ext_resource path="res://levels/resources/terrain_default.tres" type="Resource" id=8]
 [ext_resource path="res://levels/assets/destructible_textures/paper-terrain.png" type="Texture" id=9]
+[ext_resource path="res://levels/outline.shader" type="Shader" id=10]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 7 )
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 10 )
 shader_param/outline_width = 2.0
-shader_param/outline_color = null
+shader_param/outline_color = Color( 0.188235, 0.188235, 0.188235, 1 )
 
 [node name="Terrain" type="Node2D"]
 script = ExtResource( 3 )
@@ -51,6 +55,13 @@ material = SubResource( 1 )
 texture = ExtResource( 9 )
 centered = false
 region_rect = Rect2( 0, 0, 1024, 1024 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="terrain_outline" type="Sprite" parent="Graphics"]
+material = SubResource( 3 )
+centered = false
 __meta__ = {
 "_edit_lock_": true
 }

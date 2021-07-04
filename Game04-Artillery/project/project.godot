@@ -29,10 +29,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://libs/input_controller/controllers/device_controller.gd"
 }, {
-"base": "Node2D",
-"class": "Enemy",
+"base": "Area2D",
+"class": "GTRandomPointArea2D",
 "language": "GDScript",
-"path": "res://entities/enemies/_enemy.gd"
+"path": "res://libs/gt_random_point_area_2d/gt_random_point_area_2d.gd"
+}, {
+"base": "Label",
+"class": "GTReplaceLabel",
+"language": "GDScript",
+"path": "res://libs/gt_replace_label/gt_replace_label.gd"
 }, {
 "base": "Node",
 "class": "Health",
@@ -84,7 +89,8 @@ _global_script_class_icons={
 "CharacterMover": "res://libs/character_mover/character_mover.svg",
 "CharacterMoverFormulas": "",
 "DeviceController": "res://libs/input_controller/icons/device-controller.svg",
-"Enemy": "",
+"GTRandomPointArea2D": "",
+"GTReplaceLabel": "",
 "Health": "",
 "ImageCache": "",
 "ImageManipulator": "",
@@ -107,6 +113,7 @@ config/icon="res://icon.png"
 Globals="*res://globals/globals.tscn"
 Settings="*res://globals/settings.gd"
 Formulas="*res://globals/formulas.gd"
+Utils="*res://globals/utils.gd"
 
 [debug]
 

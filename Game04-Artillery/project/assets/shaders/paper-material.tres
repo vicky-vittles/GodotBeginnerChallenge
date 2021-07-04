@@ -1,13 +1,13 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=2]
 
-[ext_resource path="res://entities/soldier/shaders/paper.shader" type="Shader" id=1]
-[ext_resource path="res://assets/paper-texture-small.png" type="Texture" id=2]
+[ext_resource path="res://assets/paper-texture-small.png" type="Texture" id=1]
+[ext_resource path="res://assets/shaders/paper.shader" type="Shader" id=2]
 
 [resource]
-shader = ExtResource( 1 )
+shader = ExtResource( 2 )
 shader_param/paperColor = Color( 1, 1, 1, 1 )
 shader_param/paperEffect = true
 shader_param/shadowOffset = Vector2( 16, 16 )
 shader_param/shadowColor = Color( 0.317647, 0.317647, 0.317647, 1 )
 shader_param/shadowEffect = true
-shader_param/paperTexture = ExtResource( 2 )
+shader_param/paperTexture = ExtResource( 1 )
