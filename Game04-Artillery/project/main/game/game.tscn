@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://main/game/game.gd" type="Script" id=1]
 [ext_resource path="res://main/game/world/world.tscn" type="PackedScene" id=2]
@@ -6,6 +6,35 @@
 [ext_resource path="res://main/game/scripts/minimap.gd" type="Script" id=4]
 [ext_resource path="res://assets/minimap-camera.png" type="Texture" id=5]
 [ext_resource path="res://main/game/scripts/main_viewport.gd" type="Script" id=6]
+
+[sub_resource type="Animation" id=1]
+resource_name = "default"
+tracks/0/type = "value"
+tracks/0/path = NodePath("root/MinimapViewport:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=2]
+tracks/0/type = "value"
+tracks/0/path = NodePath("root/MinimapViewport:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -66,6 +95,7 @@ editor_draw_limits = true
 [node name="World" parent="root/MainViewport/MainViewport" instance=ExtResource( 2 )]
 
 [node name="MinimapViewport" type="ViewportContainer" parent="root"]
+visible = false
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -340.0
@@ -78,7 +108,7 @@ __meta__ = {
 size = Vector2( 200, 200 )
 transparent_bg = true
 handle_input_locally = false
-render_target_update_mode = 3
+render_target_update_mode = 0
 script = ExtResource( 4 )
 
 [node name="Minimap" type="Node2D" parent="root/MinimapViewport/Minimap"]
@@ -97,7 +127,13 @@ limit_left = 100
 limit_top = -200
 limit_right = 1024
 limit_bottom = 1024
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "default"
+anims/default = SubResource( 1 )
+anims/hide = SubResource( 2 )
 [connection signal="camera_focus_on_player" from="root/MainViewport/MainViewport/World" to="." method="_on_World_camera_focus_on_player"]
+[connection signal="player_died" from="root/MainViewport/MainViewport/World" to="AnimationPlayer" method="play" binds= [ "hide" ]]
 [connection signal="projectile_exploded" from="root/MainViewport/MainViewport/World" to="." method="_on_World_projectile_exploded"]
 [connection signal="look_around_camera" from="root/MinimapViewport/Minimap" to="root/MainViewport/MainViewport" method="_on_Minimap_look_around_camera"]
 [connection signal="multitarget_camera" from="root/MinimapViewport/Minimap" to="root/MainViewport/MainViewport" method="_on_Minimap_multitarget_camera"]

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/transition.svg-3b750115e4902c5160433ebbc2eaa5c4.stex"
+path="res://.import/gt_transition.svg-bdb6bdec87dfd160c849e145c9009a82.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://libs/menus/transitions/transition.svg"
-dest_files=[ "res://.import/transition.svg-3b750115e4902c5160433ebbc2eaa5c4.stex" ]
+source_file="res://libs/gt_menus/transitions/gt_transition.svg"
+dest_files=[ "res://.import/gt_transition.svg-bdb6bdec87dfd160c849e145c9009a82.stex" ]
 
 [params]
 

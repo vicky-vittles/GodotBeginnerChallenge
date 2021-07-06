@@ -1,5 +1,8 @@
 extends Node
 
+func get_int_pos(pos: Vector2):
+	return Vector2(int(pos.x), int(pos.y))
+
 func get_timer_formatted(timer: float) -> String:
 	var time = int(timer)
 	var seconds = int(time % 60)

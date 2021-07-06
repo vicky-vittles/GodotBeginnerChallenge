@@ -5,7 +5,9 @@ signal update_kills(kills)
 signal camera_focus_on_player(player)
 signal projectile_exploded(projectile, explosions)
 signal explosion_faded()
+
 signal player_died()
+signal update_game_over_info(kills, time)
 
 onready var enemy_spawn_manager = $EnemySpawnManager
 onready var random_spawn_area = $EnemySpawnManager/RandomSpawnArea
@@ -61,5 +63,7 @@ func _on_EnemySpawnManager_enemy_died():
 	emit_signal("update_kills", kills)
 
 func _on_Player_died():
+	if not player_dead:
+		emit_signal("player_died")
+		emit_signal("update_game_over_info", kills, timer)
 	player_dead = true
-	emit_signal("player_died")

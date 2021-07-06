@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://main/game/world/scripts/projectiles.gd" type="Script" id=1]
 [ext_resource path="res://main/game/scripts/players.gd" type="Script" id=2]
@@ -12,10 +12,91 @@
 [ext_resource path="res://main/game/world/enemies.gd" type="Script" id=10]
 [ext_resource path="res://assets/m5x7-16-outline2.tres" type="DynamicFont" id=11]
 [ext_resource path="res://libs/gt_replace_label/gt_replace_label.gd" type="Script" id=12]
+[ext_resource path="res://menus/menus/overlay_menu/overlay_menu.tscn" type="PackedScene" id=13]
 [ext_resource path="res://main/game/world/enemy_spawn_manager.gd" type="Script" id=17]
 [ext_resource path="res://libs/gt_random_point_area_2d/gt_random_point_area_2d.gd" type="Script" id=18]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="Animation" id=1]
+resource_name = "darken"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("dark_overlay:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.784314 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("top:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("bottom:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "default"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("dark_overlay:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("top:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("bottom:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 256, 50 )
 
 [node name="World" type="Node2D"]
@@ -24,12 +105,26 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="OverlayMenu" parent="." instance=ExtResource( 13 )]
+
 [node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource( 8 )
 
 [node name="root" type="Control" parent="HUD"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="dark_overlay" type="ColorRect" parent="HUD/root"]
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 1024, 1024 )
+rect_scale = Vector2( 1.00427, 1.02486 )
+color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
@@ -144,6 +239,11 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/root"]
+autoplay = "default"
+anims/darken = SubResource( 1 )
+anims/default = SubResource( 2 )
+
 [node name="EnemySpawnManager" type="Node2D" parent="."]
 script = ExtResource( 17 )
 __meta__ = {
@@ -165,7 +265,7 @@ __meta__ = {
 }
 
 [node name="1" type="CollisionShape2D" parent="EnemySpawnManager/RandomSpawnArea"]
-shape = SubResource( 1 )
+shape = SubResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -194,8 +294,11 @@ __meta__ = {
 "_edit_lock_": true
 }
 [connection signal="player_died" from="." to="EnemySpawnManager/SpawnTimer" method="stop"]
+[connection signal="player_died" from="." to="OverlayMenu" method="emit_signal" binds= [ "player_died" ]]
 [connection signal="player_died" from="." to="Enemies" method="_on_World_player_died"]
+[connection signal="player_died" from="." to="HUD/root/AnimationPlayer" method="play" binds= [ "darken" ]]
 [connection signal="ready" from="." to="EnemySpawnManager" method="initial_spawn"]
+[connection signal="update_game_over_info" from="." to="OverlayMenu" method="update_info"]
 [connection signal="update_kills" from="." to="HUD" method="_on_World_update_kills"]
 [connection signal="update_time" from="." to="HUD" method="_on_World_update_time"]
 [connection signal="update_kills_label" from="HUD" to="HUD/root/top/row/vbox/enemies_label" method="apply_text"]
@@ -205,8 +308,8 @@ __meta__ = {
 [connection signal="terrain_updated" from="Terrain" to="Enemies" method="_on_Level_terrain_updated"]
 [connection signal="terrain_updated" from="Terrain" to="." method="_on_Level_terrain_updated"]
 [connection signal="terrain_updated" from="Terrain" to="Players" method="_on_Level_terrain_updated"]
-[connection signal="projectile_exploded" from="Projectiles" to="." method="_on_Projectiles_projectile_exploded"]
 [connection signal="projectile_exploded" from="Projectiles" to="Terrain" method="_on_Projectiles_projectile_exploded"]
+[connection signal="projectile_exploded" from="Projectiles" to="." method="_on_Projectiles_projectile_exploded"]
 [connection signal="angle_updated" from="Players/1" to="HUD" method="_on_Player_angle_updated"]
 [connection signal="charge_updated" from="Players/1" to="HUD" method="_on_Player_charge_updated"]
 [connection signal="hurt" from="Players/1" to="." method="_on_Player_died"]

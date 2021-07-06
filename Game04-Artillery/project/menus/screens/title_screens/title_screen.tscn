@@ -1,0 +1,89 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://libs/gt_menus/screens/__gt_simple_screen.tscn" type="PackedScene" id=1]
+[ext_resource path="res://menus/screens/title_screens/title_screen.gd" type="Script" id=2]
+[ext_resource path="res://menus/assets/fonts/matchup-pro-80.tres" type="DynamicFont" id=3]
+[ext_resource path="res://menus/assets/fonts/thaleah-fat-48.tres" type="DynamicFont" id=4]
+[ext_resource path="res://menus/assets/sfx/menus_sfx.tscn" type="PackedScene" id=5]
+
+[node name="title_screen" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="vbox" parent="." index="0"]
+margin_left = -130.0
+margin_top = -186.0
+margin_right = 130.0
+margin_bottom = 186.0
+
+[node name="hbox" parent="vbox" index="0"]
+margin_right = 260.0
+margin_bottom = 372.0
+
+[node name="vbox" parent="vbox/hbox" index="0"]
+margin_right = 260.0
+margin_bottom = 372.0
+custom_constants/separation = 150
+alignment = 1
+
+[node name="title" type="Label" parent="vbox/hbox/vbox" index="0"]
+margin_right = 260.0
+margin_bottom = 64.0
+custom_fonts/font = ExtResource( 3 )
+text = "Artillery"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="buttons" type="VBoxContainer" parent="vbox/hbox/vbox" index="1"]
+margin_top = 214.0
+margin_right = 260.0
+margin_bottom = 372.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="play" type="Button" parent="vbox/hbox/vbox/buttons" index="0"]
+margin_right = 260.0
+margin_bottom = 50.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color_hover = Color( 1, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 1, 0.2, 0.2, 1 )
+text = "Play"
+flat = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="settings" type="Button" parent="vbox/hbox/vbox/buttons" index="1"]
+margin_top = 54.0
+margin_right = 260.0
+margin_bottom = 104.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color_hover = Color( 1, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 1, 0.2, 0.2, 1 )
+text = "Settings"
+flat = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="quit" type="Button" parent="vbox/hbox/vbox/buttons" index="2"]
+margin_top = 108.0
+margin_right = 260.0
+margin_bottom = 158.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color_hover = Color( 1, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 1, 0.2, 0.2, 1 )
+text = "Quit"
+flat = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="SFX" parent="." index="1" instance=ExtResource( 5 )]
+[connection signal="mouse_entered" from="vbox/hbox/vbox/buttons/play" to="SFX" method="emit_signal" binds= [ "menu_hover" ]]
+[connection signal="pressed" from="vbox/hbox/vbox/buttons/play" to="." method="emit_signal" binds= [ "button_play" ]]
+[connection signal="mouse_entered" from="vbox/hbox/vbox/buttons/settings" to="SFX" method="emit_signal" binds= [ "menu_hover" ]]
+[connection signal="pressed" from="vbox/hbox/vbox/buttons/settings" to="." method="emit_signal" binds= [ "button_settings" ]]
+[connection signal="mouse_entered" from="vbox/hbox/vbox/buttons/quit" to="SFX" method="emit_signal" binds= [ "menu_hover" ]]
+[connection signal="pressed" from="vbox/hbox/vbox/buttons/quit" to="." method="emit_signal" binds= [ "button_quit" ]]

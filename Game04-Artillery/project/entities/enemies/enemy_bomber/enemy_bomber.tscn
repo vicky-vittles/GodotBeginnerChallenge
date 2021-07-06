@@ -6,13 +6,13 @@
 [ext_resource path="res://entities/enemies/enemy_bomber/bomber_bit_entity_mover.gd" type="Script" id=4]
 [ext_resource path="res://entities/enemies/enemy_bomber/enemy_bomber.gd" type="Script" id=5]
 
-[sub_resource type="CircleShape2D" id=7]
+[sub_resource type="CircleShape2D" id=1]
 radius = 28.5
 
-[sub_resource type="CircleShape2D" id=5]
+[sub_resource type="CircleShape2D" id=2]
 radius = 28.2511
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=3]
 resource_name = "die"
 length = 0.5
 tracks/0/type = "value"
@@ -28,7 +28,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=4]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Base/Graphics/main:position")
 tracks/0/interp = 1
@@ -54,7 +54,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=5]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -72,7 +72,7 @@ tracks/0/keys = {
 
 [node name="EnemyBomber" instance=ExtResource( 1 )]
 script = ExtResource( 5 )
-MOVE_SPEED = 2.0
+MOVE_SPEED = 0.5
 
 [node name="BitEntityMover" type="Node" parent="." index="0"]
 script = ExtResource( 4 )
@@ -97,7 +97,7 @@ texture = ExtResource( 2 )
 [node name="1" type="CollisionShape2D" parent="Hitbox" index="0"]
 visible = false
 position = Vector2( 0, -28 )
-shape = SubResource( 7 )
+shape = SubResource( 1 )
 
 [node name="Hurtbox" parent="." index="4" groups=[
 "hurtbox",
@@ -106,16 +106,16 @@ shape = SubResource( 7 )
 [node name="1" type="CollisionShape2D" parent="Hurtbox" index="0"]
 visible = false
 position = Vector2( 0, -24 )
-shape = SubResource( 5 )
+shape = SubResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="AnimationPlayer" parent="." index="5"]
 autoplay = "idle"
-anims/die = SubResource( 6 )
-anims/idle = SubResource( 3 )
-anims/walk = SubResource( 4 )
+anims/die = SubResource( 3 )
+anims/idle = SubResource( 4 )
+anims/walk = SubResource( 5 )
 [connection signal="timeout" from="GraceTimer" to="." method="_on_GraceTimer_timeout"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

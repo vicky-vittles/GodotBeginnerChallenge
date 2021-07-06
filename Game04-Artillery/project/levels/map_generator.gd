@@ -2,8 +2,10 @@ extends Node
 
 export (Resource) var terrain_definition
 
-func generate_random_map(map: Image) -> Image:
+func _ready():
 	randomize()
+
+func generate_random_map(map: Image) -> Image:
 	var noise = OpenSimplexNoise.new()
 	noise.seed = randi()
 	noise.octaves = terrain_definition.map_octaves

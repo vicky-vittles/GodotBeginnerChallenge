@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://main/main.gd" type="Script" id=1]
+[ext_resource path="res://menus/menus/main_menu/main_menu.tscn" type="PackedScene" id=2]
+[ext_resource path="res://main/game_loader.gd" type="Script" id=3]
+
+[node name="Main" type="Node"]
+script = ExtResource( 1 )
+
+[node name="MainMenu" parent="." instance=ExtResource( 2 )]
+
+[node name="GameLoader" type="Node" parent="."]
+script = ExtResource( 3 )
+[connection signal="sys_immediate_start" from="." to="GameLoader" method="load_game"]

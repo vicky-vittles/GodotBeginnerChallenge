@@ -1,7 +1,9 @@
 extends Node
 
-func get_int_pos(pos: Vector2):
-	return Vector2(int(pos.x), int(pos.y))
+var sys_immediate_start : bool
+
+func _ready():
+	sys_immediate_start = false
 
 func get_game():
 	return get_node("../Game")

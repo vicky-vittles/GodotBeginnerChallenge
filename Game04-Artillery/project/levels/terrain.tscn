@@ -14,7 +14,7 @@
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 7 )
 
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 10 )
 shader_param/outline_width = 2.0
 shader_param/outline_color = Color( 0.188235, 0.188235, 0.188235, 1 )
@@ -60,7 +60,7 @@ __meta__ = {
 }
 
 [node name="terrain_outline" type="Sprite" parent="Graphics"]
-material = SubResource( 3 )
+material = SubResource( 2 )
 centered = false
 __meta__ = {
 "_edit_lock_": true
