@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://entities/sound_emitter/sound_emitter.gd" type="Script" id=1]
+[ext_resource path="res://entities/sound_emitter/assets/echo_1.wav" type="AudioStream" id=2]
+[ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource path="res://entities/sound_emitter/assets/bell_arpeggio.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/light_circle.png" type="Texture" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16, 16 )
+
+[node name="SoundEmitter" type="Node2D"]
+script = ExtResource( 1 )
+max_distance = 768
+min_volume_db = -36
+
+[node name="Light2D" type="Light2D" parent="."]
+texture = ExtResource( 5 )
+texture_scale = 2.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PickableArea" type="Area2D" parent="." groups=[
+"sound_emitter",
+]]
+collision_layer = 8
+collision_mask = 8
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickableArea"]
+visible = false
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="MainSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+
+[node name="CollectedSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -6.0
+[connection signal="finished" from="CollectedSound" to="." method="_on_CollectedSound_finished"]

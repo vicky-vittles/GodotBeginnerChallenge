@@ -1,0 +1,341 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://entities/player/player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://main/game/world/world.gd" type="Script" id=2]
+[ext_resource path="res://libs/gt_multitarget_camera_2d/gt_multitarget_camera_2d.gd" type="Script" id=3]
+[ext_resource path="res://assets/background.png" type="Texture" id=4]
+[ext_resource path="res://assets/m5x7-32-outline-2.tres" type="DynamicFont" id=5]
+[ext_resource path="res://libs/gt_random_point_area_2d/gt_random_point_area_2d.gd" type="Script" id=6]
+[ext_resource path="res://libs/gt_replace_label/gt_replace_label.gd" type="Script" id=7]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 50, 865.384 )
+
+[sub_resource type="OccluderPolygon2D" id=2]
+polygon = PoolVector2Array( -608, -608, 1120, -608, 1120, -512, -608, -512 )
+
+[sub_resource type="OccluderPolygon2D" id=3]
+polygon = PoolVector2Array( -608, -520, -512, -520, -512, 1032, -608, 1032 )
+
+[sub_resource type="OccluderPolygon2D" id=4]
+polygon = PoolVector2Array( -608, 1024, 1120, 1024, 1120, 1120, -608, 1120 )
+
+[sub_resource type="OccluderPolygon2D" id=5]
+polygon = PoolVector2Array( 1024, -520, 1120, -520, 1120, 1032, 1024, 1032 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 32, 32 )
+
+[sub_resource type="OccluderPolygon2D" id=7]
+polygon = PoolVector2Array( -32, -32, 32, -32, 32, 32, -32, 32 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 768, 768 )
+
+[node name="world" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="collected_label" type="Label" parent="HUD"]
+visible = false
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 40.0
+margin_bottom = 14.0
+custom_fonts/font = ExtResource( 5 )
+text = "Collected: 0"
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+original_text = "Collected: %s"
+
+[node name="root" type="MarginContainer" parent="HUD"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="you_win" type="Label" parent="HUD/root"]
+visible = false
+margin_top = 228.0
+margin_right = 512.0
+margin_bottom = 283.0
+custom_fonts/font = ExtResource( 5 )
+text = "You win!
+Press R to play again"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 0.180392, 0.180392, 0.180392, 1 )
+
+[node name="terrain" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="walls" type="StaticBody2D" parent="terrain"]
+collision_layer = 2
+collision_mask = 4
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="left" type="CollisionShape2D" parent="terrain/walls"]
+position = Vector2( -562, 256 )
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="right" type="CollisionShape2D" parent="terrain/walls"]
+position = Vector2( 1074, 256 )
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="down" type="CollisionShape2D" parent="terrain/walls"]
+position = Vector2( 256, 1074 )
+rotation = 1.5708
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="up" type="CollisionShape2D" parent="terrain/walls"]
+position = Vector2( 256, -562 )
+rotation = 1.5708
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="1" type="LightOccluder2D" parent="terrain/walls"]
+occluder = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="2" type="LightOccluder2D" parent="terrain/walls"]
+occluder = SubResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="3" type="LightOccluder2D" parent="terrain/walls"]
+occluder = SubResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="4" type="LightOccluder2D" parent="terrain/walls"]
+occluder = SubResource( 5 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="background" type="Sprite" parent="terrain"]
+position = Vector2( 256, 256 )
+scale = Vector2( 12, 12 )
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="obstacles" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="1" type="StaticBody2D" parent="obstacles"]
+position = Vector2( 192.262, 121.272 )
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="obstacles/1"]
+shape = SubResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="obstacles/1"]
+occluder = SubResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="2" type="StaticBody2D" parent="obstacles"]
+position = Vector2( 551.472, 241.48 )
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="obstacles/2"]
+shape = SubResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="obstacles/2"]
+occluder = SubResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="3" type="StaticBody2D" parent="obstacles"]
+position = Vector2( 443.992, -52.6765 )
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="obstacles/3"]
+shape = SubResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="obstacles/3"]
+occluder = SubResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="4" type="StaticBody2D" parent="obstacles"]
+position = Vector2( -194.143, -176.494 )
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="obstacles/4"]
+shape = SubResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="obstacles/4"]
+occluder = SubResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="5" type="StaticBody2D" parent="obstacles"]
+position = Vector2( -292.562, 607.682 )
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="obstacles/5"]
+shape = SubResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="obstacles/5"]
+occluder = SubResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="6" type="StaticBody2D" parent="obstacles"]
+position = Vector2( 323.349, 836.268 )
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="obstacles/6"]
+shape = SubResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="obstacles/6"]
+occluder = SubResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="7" type="StaticBody2D" parent="obstacles"]
+position = Vector2( -203.668, 233.056 )
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="obstacles/7"]
+shape = SubResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="obstacles/7"]
+occluder = SubResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="8" type="StaticBody2D" parent="obstacles"]
+position = Vector2( 761.472, 750.548 )
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="obstacles/8"]
+shape = SubResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="obstacles/8"]
+occluder = SubResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="9" type="StaticBody2D" parent="obstacles"]
+position = Vector2( 761.472, -265.388 )
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="obstacles/9"]
+shape = SubResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="obstacles/9"]
+occluder = SubResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2( 256, 256 )
+current = true
+limit_left = -512
+limit_top = -512
+limit_right = 1024
+limit_bottom = 1024
+editor_draw_limits = true
+script = ExtResource( 3 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 248, 288 )
+
+[node name="RandomSpawnArea" type="Area2D" parent="."]
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RandomSpawnArea"]
+visible = false
+position = Vector2( 256, 256 )
+shape = SubResource( 8 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CooldownSpawnTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true

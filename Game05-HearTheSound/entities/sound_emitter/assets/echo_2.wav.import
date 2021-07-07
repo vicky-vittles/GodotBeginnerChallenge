@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/echo_2.wav-f90fc1981ddc4020d8c1e0a39fa71579.sample"
+
+[deps]
+
+source_file="res://entities/sound_emitter/assets/echo_2.wav"
+dest_files=[ "res://.import/echo_2.wav-f90fc1981ddc4020d8c1e0a39fa71579.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

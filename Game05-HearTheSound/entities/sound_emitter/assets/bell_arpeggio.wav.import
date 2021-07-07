@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/bell_arpeggio.wav-278ad3a378e1addd1af5b831c97ffe04.sample"
+
+[deps]
+
+source_file="res://entities/sound_emitter/assets/bell_arpeggio.wav"
+dest_files=[ "res://.import/bell_arpeggio.wav-278ad3a378e1addd1af5b831c97ffe04.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
