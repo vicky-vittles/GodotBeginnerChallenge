@@ -10,6 +10,7 @@ export (float) var JUMP_TIME = 0.5
 
 export (Vector2) var movement_mask = Vector2(1, 1)
 export (Vector2) var floor_normal = Vector2.UP
+export (bool) var frozen = false
 
 onready var JUMP_SPEED = Utils.jump_speed_formula(JUMP_HEIGHT, JUMP_TIME)
 onready var GRAVITY = Utils.gravity_formula(JUMP_HEIGHT, JUMP_TIME)
@@ -26,6 +27,8 @@ func set_move_direction(_dir: int):
 	move_direction = _dir
 
 func move(delta):
+	if frozen:
+		return
 	velocity.x = RUN_SPEED * move_direction * movement_mask.x
 	velocity.y += acceleration.y * delta
 	velocity.y *= movement_mask.y
@@ -36,3 +39,11 @@ func jump() -> void:
 
 func is_grounded() -> bool:
 	return body.is_on_floor()
+
+func freeze(preserve_momentum):
+	if not preserve_momentum:
+		velocity = Vector2.ZERO
+	frozen = true
+
+func unfreeze():
+	frozen = false

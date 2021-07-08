@@ -44,3 +44,7 @@ func add_target(t):
 func remove_target(t):
 	if t in targets:
 		targets.remove(targets.find(t))
+
+func clear_targets():
+	for t in targets:
+		targets.remove(targets.find(t))
