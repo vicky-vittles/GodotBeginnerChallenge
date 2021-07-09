@@ -1,7 +1,7 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://entities/player/player.gd" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://entities/player/assets/player.png" type="Texture" id=2]
 [ext_resource path="res://libs/gt_gravity_character_mover_2d/gt_gravity_character_mover_2d.gd" type="Script" id=3]
 [ext_resource path="res://libs/gt_state_machine/gt_state_machine.gd" type="Script" id=4]
 [ext_resource path="res://entities/player/states/player_walk.gd" type="Script" id=5]
@@ -9,9 +9,78 @@
 [ext_resource path="res://entities/player/scripts/player_controller.gd" type="Script" id=7]
 [ext_resource path="res://entities/player/states/player_jump.gd" type="Script" id=8]
 [ext_resource path="res://entities/player/states/player_fall.gd" type="Script" id=9]
+[ext_resource path="res://entities/player/scripts/player_graphics.gd" type="Script" id=10]
 
-[sub_resource type="CircleShape2D" id=1]
-radius = 16.0
+[sub_resource type="Animation" id=6]
+resource_name = "fall"
+length = 0.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("main:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 16 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("main:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 15 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "jump"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("main:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 8, 9, 11, 12, 13, 14 ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "run"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("main:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 0 ]
+}
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 9.57379
+height = 48.0
 
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
@@ -27,6 +96,7 @@ actions = [ "act_move_right", "act_move_left", "act_jump" ]
 [node name="CharacterMover" type="Node" parent="."]
 script = ExtResource( 3 )
 body_path = NodePath("..")
+JUMP_TIME = 0.6
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 4 )
@@ -49,19 +119,32 @@ script = ExtResource( 9 )
 fsm_path = NodePath("..")
 
 [node name="Graphics" type="Node2D" parent="."]
+script = ExtResource( 10 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="main" type="Sprite" parent="Graphics"]
-scale = Vector2( 0.5, 0.5 )
+position = Vector2( 0, -4 )
+scale = Vector2( 0.15, 0.15 )
 texture = ExtResource( 2 )
+vframes = 3
+hframes = 8
+frame = 8
 __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Graphics"]
+autoplay = "idle"
+anims/fall = SubResource( 6 )
+anims/idle = SubResource( 5 )
+anims/jump = SubResource( 3 )
+anims/run = SubResource( 1 )
+
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+position = Vector2( 0, -4 )
+shape = SubResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }

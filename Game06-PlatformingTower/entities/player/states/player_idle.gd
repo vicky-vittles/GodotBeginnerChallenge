@@ -7,6 +7,7 @@ var player
 
 func enter(_info):
 	player = fsm.actor
+	player.graphics.play("idle")
 
 func process(_delta):
 	player.input_controller.poll_input()
