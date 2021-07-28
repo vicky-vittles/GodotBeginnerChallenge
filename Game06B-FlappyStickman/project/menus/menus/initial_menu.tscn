@@ -48,6 +48,8 @@ fsm_path = NodePath("..")
 [node name="AppManager" type="Node" parent="." index="2"]
 script = ExtResource( 6 )
 [connection signal="player_died" from="." to="StateMachine" method="change_state_path" binds= [ "GameOverScreen" ]]
+[connection signal="set_scores" from="." to="Screens/GameOverScreen" method="_on_InitialMenu_set_scores"]
+[connection signal="button_play" from="Screens/TitleScreen" to="." method="emit_signal" binds= [ "game_started" ]]
 [connection signal="button_play" from="Screens/TitleScreen" to="StateMachine" method="change_state_path" binds= [ "EmptyScreen" ]]
 [connection signal="button_play_again" from="Screens/GameOverScreen" to="AppManager" method="reload"]
 [connection signal="state_entered" from="StateMachine/TitleScreen" to="Screens/TitleScreen" method="enter"]

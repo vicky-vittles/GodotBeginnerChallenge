@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://libs/gt_menus/screens/__gt_simple_screen.tscn" type="PackedScene" id=1]
-[ext_resource path="res://assets/m6x11-s48-o6.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/fonts/m6x11-s64-o8.tres" type="DynamicFont" id=2]
 [ext_resource path="res://libs/gt_pattern_label/gt_pattern_label.gd" type="Script" id=3]
 [ext_resource path="res://menus/screens/game_over_screen.gd" type="Script" id=4]
 
@@ -9,31 +9,31 @@
 script = ExtResource( 4 )
 
 [node name="vbox" parent="." index="0"]
-margin_left = -183.0
-margin_top = -129.0
-margin_right = 183.0
-margin_bottom = 129.0
+margin_left = -244.0
+margin_top = -153.0
+margin_right = 244.0
+margin_bottom = 153.0
 
 [node name="hbox" parent="vbox" index="0"]
-margin_right = 366.0
-margin_bottom = 264.0
+margin_right = 488.0
+margin_bottom = 306.0
 
 [node name="vbox" parent="vbox/hbox" index="0"]
-margin_right = 366.0
-margin_bottom = 264.0
+margin_right = 488.0
+margin_bottom = 306.0
 custom_constants/separation = 128
 
 [node name="scores" type="VBoxContainer" parent="vbox/hbox/vbox" index="0"]
-margin_right = 366.0
-margin_bottom = 94.0
+margin_right = 488.0
+margin_bottom = 122.0
 custom_constants/separation = 10
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="score_label" type="Label" parent="vbox/hbox/vbox/scores" index="0"]
-margin_right = 366.0
-margin_bottom = 42.0
+margin_right = 488.0
+margin_bottom = 56.0
 custom_fonts/font = ExtResource( 2 )
 text = "Score: 0"
 align = 1
@@ -45,9 +45,9 @@ __meta__ = {
 pattern_text = "Score: %s"
 
 [node name="highscore_label" type="Label" parent="vbox/hbox/vbox/scores" index="1"]
-margin_top = 52.0
-margin_right = 366.0
-margin_bottom = 94.0
+margin_top = 66.0
+margin_right = 488.0
+margin_bottom = 122.0
 custom_fonts/font = ExtResource( 2 )
 text = "Highscore: 0"
 align = 1
@@ -59,9 +59,9 @@ __meta__ = {
 pattern_text = "Highscore: %s"
 
 [node name="play_again_label" type="Label" parent="vbox/hbox/vbox" index="1"]
-margin_top = 222.0
-margin_right = 366.0
-margin_bottom = 264.0
+margin_top = 250.0
+margin_right = 488.0
+margin_bottom = 306.0
 custom_fonts/font = ExtResource( 2 )
 text = "Press to play again!"
 align = 1
@@ -78,4 +78,5 @@ __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
+[connection signal="set_scores" from="." to="." method="_on_GameOverScreen_set_scores"]
 [connection signal="pressed" from="play_again" to="." method="emit_signal" binds= [ "button_play_again" ]]

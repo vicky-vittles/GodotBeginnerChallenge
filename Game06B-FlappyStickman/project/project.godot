@@ -124,6 +124,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://libs/gt_input_controller/__gt_input_controller.gd"
 }, {
+"base": "Node2D",
+"class": "GTJuice2D",
+"language": "GDScript",
+"path": "res://libs/gt_juice_2d/gt_juice_2d.gd"
+}, {
 "base": "Node",
 "class": "GTMenu",
 "language": "GDScript",
@@ -133,6 +138,11 @@ _global_script_classes=[ {
 "class": "GTMultitargetCamera2D",
 "language": "GDScript",
 "path": "res://libs/gt_multitarget_camera_2d/gt_multitarget_camera_2d.gd"
+}, {
+"base": "CPUParticles2D",
+"class": "GTParticles2D",
+"language": "GDScript",
+"path": "res://libs/gt_particles_2d/gt_particles_2d.gd"
 }, {
 "base": "Label",
 "class": "GTPatternLabel",
@@ -218,8 +228,10 @@ _global_script_class_icons={
 "GTHealth": "",
 "GTInputAction": "",
 "GTInputController": "res://libs/gt_input_controller/icons/gt_default_controller.svg",
+"GTJuice2D": "",
 "GTMenu": "",
 "GTMultitargetCamera2D": "",
+"GTParticles2D": "",
 "GTPatternLabel": "",
 "GTPoints": "",
 "GTPollableArea2D": "",
