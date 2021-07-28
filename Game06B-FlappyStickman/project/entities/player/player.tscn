@@ -1,0 +1,292 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://entities/player/assets/frame.png" type="Texture" id=1]
+[ext_resource path="res://entities/player/player.gd" type="Script" id=2]
+[ext_resource path="res://libs/gt_input_controller/controllers/gt_device_controller.gd" type="Script" id=3]
+[ext_resource path="res://libs/gt_input_controller/actions/__gt_input_action.gd" type="Script" id=4]
+[ext_resource path="res://libs/gt_state_machine/gt_state_machine.gd" type="Script" id=5]
+[ext_resource path="res://entities/player/states/player_run.gd" type="Script" id=6]
+[ext_resource path="res://entities/player/states/player_jump.gd" type="Script" id=7]
+[ext_resource path="res://entities/player/states/player_fall.gd" type="Script" id=8]
+[ext_resource path="res://libs/gt_gravity_character_mover_2d/gt_gravity_character_mover_2d.gd" type="Script" id=9]
+[ext_resource path="res://libs/gt_area_2d/gt_trigger_area_2d/gt_trigger_area_2d.gd" type="Script" id=10]
+[ext_resource path="res://entities/player/states/player_died.gd" type="Script" id=11]
+[ext_resource path="res://entities/player/scripts/player_graphics.gd" type="Script" id=12]
+
+[sub_resource type="CapsuleShape2D" id=1]
+height = 60.0
+
+[sub_resource type="Animation" id=2]
+resource_name = "default"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../Areas/DamageHurtbox:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../Areas/PointHurtbox:monitoring")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../Areas/GroundRaycast:enabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("../CollisionShape:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "die"
+length = 1.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Areas/DamageHurtbox:monitoring")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Areas/PointHurtbox:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../Areas/GroundRaycast:enabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../CollisionShape:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.3
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("main:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 3 ]
+}
+
+[node name="player" type="KinematicBody2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource( 2 )
+
+[node name="InputController" type="Node" parent="."]
+script = ExtResource( 3 )
+
+[node name="jump" type="Node" parent="InputController"]
+script = ExtResource( 4 )
+action = "act_jump"
+
+[node name="CharacterMover" type="Node" parent="."]
+script = ExtResource( 9 )
+body_path = NodePath("..")
+JUMP_HEIGHT = 432
+JUMP_TIME = 0.35
+JUMP_DAMPING = 0.5
+
+[node name="JumpCooldown" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="Areas" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="DamageHurtbox" type="Area2D" parent="Areas" groups=[
+"player",
+]]
+monitoring = false
+collision_layer = 8
+collision_mask = 8
+script = ExtResource( 10 )
+collidable_groups = [ "pipe_hitbox" ]
+excluded_groups = [ "pipe_point", "player" ]
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Areas/DamageHurtbox"]
+position = Vector2( 0, 8 )
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PointHurtbox" type="Area2D" parent="Areas" groups=[
+"player",
+]]
+monitoring = false
+collision_layer = 8
+collision_mask = 8
+script = ExtResource( 10 )
+collidable_groups = [ "pipe_point" ]
+excluded_groups = [ "pipe_hurtbox", "player" ]
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Areas/PointHurtbox"]
+position = Vector2( 0, 8 )
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="GroundRaycast" type="RayCast2D" parent="Areas"]
+cast_to = Vector2( 0, 115 )
+collision_mask = 2
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Graphics" type="Node2D" parent="."]
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="main" type="Sprite" parent="Graphics"]
+position = Vector2( 0, -8 )
+texture = ExtResource( 1 )
+hframes = 4
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Graphics"]
+autoplay = "default"
+anims/default = SubResource( 2 )
+anims/die = SubResource( 3 )
+anims/run = SubResource( 4 )
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 8 )
+shape = SubResource( 1 )
+disabled = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 5 )
+actor_path = NodePath("..")
+
+[node name="Run" type="Node" parent="StateMachine"]
+script = ExtResource( 6 )
+fsm_path = NodePath("..")
+
+[node name="Jump" type="Node" parent="StateMachine"]
+script = ExtResource( 7 )
+fsm_path = NodePath("..")
+
+[node name="Fall" type="Node" parent="StateMachine"]
+script = ExtResource( 8 )
+fsm_path = NodePath("..")
+
+[node name="Died" type="Node" parent="StateMachine"]
+script = ExtResource( 11 )
+fsm_path = NodePath("..")
+[connection signal="die" from="." to="StateMachine/Jump" method="_on_player_die"]
+[connection signal="die" from="." to="StateMachine/Fall" method="_on_player_die"]
+[connection signal="die" from="." to="StateMachine/Run" method="_on_player_die"]
+[connection signal="just_pressed" from="InputController/jump" to="StateMachine/Jump" method="_on_jump_just_pressed"]
+[connection signal="just_pressed" from="InputController/jump" to="StateMachine/Fall" method="_on_jump_just_pressed"]
+[connection signal="just_pressed" from="InputController/jump" to="StateMachine/Run" method="_on_jump_just_pressed"]
+[connection signal="just_released" from="InputController/jump" to="StateMachine/Jump" method="_on_jump_just_released"]
+[connection signal="jumped" from="CharacterMover" to="JumpCooldown" method="start"]
+[connection signal="jumped" from="CharacterMover" to="." method="decrease_jump"]
+[connection signal="effect" from="Areas/DamageHurtbox" to="." method="die"]
+[connection signal="effect" from="Areas/PointHurtbox" to="." method="emit_signal" binds= [ "gained_point" ]]
+[connection signal="state_entered" from="StateMachine/Run" to="." method="restore_jumps"]
+[connection signal="state_entered" from="StateMachine/Run" to="Graphics/AnimationPlayer" method="play" binds= [ "run" ]]

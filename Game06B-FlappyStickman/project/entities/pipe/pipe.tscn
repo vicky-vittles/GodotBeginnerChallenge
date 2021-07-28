@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://entities/pipe/pipe.gd" type="Script" id=1]
+[ext_resource path="res://libs/gt_gravity_character_mover_2d/gt_gravity_character_mover_2d.gd" type="Script" id=2]
+[ext_resource path="res://assets/brick.png" type="Texture" id=3]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 20.0
+height = 460.0
+
+[node name="Pipe" type="Area2D" groups=[
+"pipe_hitbox",
+]]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource( 1 )
+collidable_groups = [ "pipe_kill" ]
+
+[node name="EntityMover" type="Node" parent="."]
+script = ExtResource( 2 )
+body_path = NodePath("..")
+RUN_SPEED = 640
+JUMP_HEIGHT = 0
+JUMP_DAMPING = 1.0
+apply_gravity = false
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 128, 1000 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+[connection signal="grouped_area_entered" from="." to="." method="destroy"]

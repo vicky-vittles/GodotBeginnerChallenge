@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://entities/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://libs/gt_multitarget_camera_2d/gt_multitarget_camera_2d.gd" type="Script" id=2]
@@ -9,9 +9,20 @@
 [ext_resource path="res://levels/floors/floor_05.tscn" type="PackedScene" id=7]
 [ext_resource path="res://main/game/world/scripts/world_tower.gd" type="Script" id=8]
 [ext_resource path="res://main/game/world/world.gd" type="Script" id=9]
+[ext_resource path="res://levels/assets/paper-texture-repeated.png" type="Texture" id=10]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 0, -4000 )
+texture = ExtResource( 10 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 1420, 4800 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -38,7 +49,7 @@ position = Vector2( 512, -2688 )
 position = Vector2( 512, -3456 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 351.249, -646.146 )
+position = Vector2( 154.479, -409.013 )
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2( 512, -384 )
@@ -61,4 +72,5 @@ allow_zoom = false
 [node name="FloorTransitionTimer" type="Timer" parent="."]
 one_shot = true
 [connection signal="update_current_floor" from="Tower" to="." method="_on_Tower_update_current_floor"]
+[connection signal="update_player_pos" from="Tower" to="." method="_on_Tower_update_player_pos"]
 [connection signal="timeout" from="FloorTransitionTimer" to="." method="_on_FloorTransitionTimer_timeout"]

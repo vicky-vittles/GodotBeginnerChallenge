@@ -1,0 +1,81 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://libs/gt_menus/screens/__gt_simple_screen.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/m6x11-s48-o6.tres" type="DynamicFont" id=2]
+[ext_resource path="res://libs/gt_pattern_label/gt_pattern_label.gd" type="Script" id=3]
+[ext_resource path="res://menus/screens/game_over_screen.gd" type="Script" id=4]
+
+[node name="GameOverScreen" instance=ExtResource( 1 )]
+script = ExtResource( 4 )
+
+[node name="vbox" parent="." index="0"]
+margin_left = -183.0
+margin_top = -129.0
+margin_right = 183.0
+margin_bottom = 129.0
+
+[node name="hbox" parent="vbox" index="0"]
+margin_right = 366.0
+margin_bottom = 264.0
+
+[node name="vbox" parent="vbox/hbox" index="0"]
+margin_right = 366.0
+margin_bottom = 264.0
+custom_constants/separation = 128
+
+[node name="scores" type="VBoxContainer" parent="vbox/hbox/vbox" index="0"]
+margin_right = 366.0
+margin_bottom = 94.0
+custom_constants/separation = 10
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="score_label" type="Label" parent="vbox/hbox/vbox/scores" index="0"]
+margin_right = 366.0
+margin_bottom = 42.0
+custom_fonts/font = ExtResource( 2 )
+text = "Score: 0"
+align = 1
+valign = 1
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+pattern_text = "Score: %s"
+
+[node name="highscore_label" type="Label" parent="vbox/hbox/vbox/scores" index="1"]
+margin_top = 52.0
+margin_right = 366.0
+margin_bottom = 94.0
+custom_fonts/font = ExtResource( 2 )
+text = "Highscore: 0"
+align = 1
+valign = 1
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+pattern_text = "Highscore: %s"
+
+[node name="play_again_label" type="Label" parent="vbox/hbox/vbox" index="1"]
+margin_top = 222.0
+margin_right = 366.0
+margin_bottom = 264.0
+custom_fonts/font = ExtResource( 2 )
+text = "Press to play again!"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="play_again" type="Button" parent="." index="1"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+flat = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="play_again" to="." method="emit_signal" binds= [ "button_play_again" ]]

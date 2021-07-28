@@ -2,7 +2,7 @@
 
 [ext_resource path="res://entities/player/player.gd" type="Script" id=1]
 [ext_resource path="res://entities/player/assets/player.png" type="Texture" id=2]
-[ext_resource path="res://libs/gt_gravity_character_mover_2d/gt_gravity_character_mover_2d.gd" type="Script" id=3]
+[ext_resource path="res://entities/player/scripts/player_character_mover.tscn" type="PackedScene" id=3]
 [ext_resource path="res://libs/gt_state_machine/gt_state_machine.gd" type="Script" id=4]
 [ext_resource path="res://entities/player/states/player_walk.gd" type="Script" id=5]
 [ext_resource path="res://entities/player/states/player_idle.gd" type="Script" id=6]
@@ -11,7 +11,7 @@
 [ext_resource path="res://entities/player/states/player_fall.gd" type="Script" id=9]
 [ext_resource path="res://entities/player/scripts/player_graphics.gd" type="Script" id=10]
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=1]
 resource_name = "fall"
 length = 0.1
 loop = true
@@ -28,7 +28,7 @@ tracks/0/keys = {
 "values": [ 16 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=2]
 resource_name = "idle"
 length = 0.1
 tracks/0/type = "value"
@@ -61,8 +61,7 @@ tracks/0/keys = {
 "values": [ 8, 9, 11, 12, 13, 14 ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "run"
+[sub_resource type="Animation" id=4]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -78,9 +77,8 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7, 0 ]
 }
 
-[sub_resource type="CapsuleShape2D" id=2]
-radius = 9.57379
-height = 48.0
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 9, 10 )
 
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
@@ -93,14 +91,16 @@ script = ExtResource( 1 )
 script = ExtResource( 7 )
 actions = [ "act_move_right", "act_move_left", "act_jump" ]
 
-[node name="CharacterMover" type="Node" parent="."]
-script = ExtResource( 3 )
+[node name="CharacterMover" parent="." instance=ExtResource( 3 )]
 body_path = NodePath("..")
-JUMP_TIME = 0.6
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 4 )
 actor_path = NodePath("..")
+
+[node name="Fall" type="Node" parent="StateMachine"]
+script = ExtResource( 9 )
+fsm_path = NodePath("..")
 
 [node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource( 6 )
@@ -114,10 +114,6 @@ fsm_path = NodePath("..")
 script = ExtResource( 8 )
 fsm_path = NodePath("..")
 
-[node name="Fall" type="Node" parent="StateMachine"]
-script = ExtResource( 9 )
-fsm_path = NodePath("..")
-
 [node name="Graphics" type="Node2D" parent="."]
 script = ExtResource( 10 )
 __meta__ = {
@@ -125,8 +121,8 @@ __meta__ = {
 }
 
 [node name="main" type="Sprite" parent="Graphics"]
-position = Vector2( 0, -4 )
-scale = Vector2( 0.15, 0.15 )
+position = Vector2( 0, -7 )
+scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 2 )
 vframes = 3
 hframes = 8
@@ -137,14 +133,14 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Graphics"]
 autoplay = "idle"
-anims/fall = SubResource( 6 )
-anims/idle = SubResource( 5 )
+anims/fall = SubResource( 1 )
+anims/idle = SubResource( 2 )
 anims/jump = SubResource( 3 )
-anims/run = SubResource( 1 )
+anims/run = SubResource( 4 )
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -4 )
-shape = SubResource( 2 )
+position = Vector2( 2, 7 )
+shape = SubResource( 5 )
 __meta__ = {
 "_edit_lock_": true
 }

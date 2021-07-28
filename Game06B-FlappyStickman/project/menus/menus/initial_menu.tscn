@@ -1,0 +1,58 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://libs/gt_menus/menus/__gt_menu.tscn" type="PackedScene" id=1]
+[ext_resource path="res://menus/screens/title_screen.tscn" type="PackedScene" id=2]
+[ext_resource path="res://menus/screens/empty_screen.tscn" type="PackedScene" id=3]
+[ext_resource path="res://menus/screens/game_over_screen.tscn" type="PackedScene" id=4]
+[ext_resource path="res://libs/gt_state_machine/__gt_state.gd" type="Script" id=5]
+[ext_resource path="res://main/application_manager.gd" type="Script" id=6]
+[ext_resource path="res://menus/transitions/fade_transition.tscn" type="PackedScene" id=7]
+[ext_resource path="res://menus/menus/initial_menu.gd" type="Script" id=8]
+
+[node name="InitialMenu" instance=ExtResource( 1 )]
+script = ExtResource( 8 )
+
+[node name="TitleScreen" parent="Screens" index="0" instance=ExtResource( 2 )]
+
+[node name="FadeTransition" parent="Screens/TitleScreen" index="2" instance=ExtResource( 7 )]
+screen_path = NodePath("..")
+anim_time = 0.25
+
+[node name="EmptyScreen" parent="Screens" index="1" instance=ExtResource( 3 )]
+
+[node name="FadeTransition" parent="Screens/EmptyScreen" index="0" instance=ExtResource( 7 )]
+screen_path = NodePath("..")
+anim_time = 0.25
+
+[node name="GameOverScreen" parent="Screens" index="2" instance=ExtResource( 4 )]
+
+[node name="FadeTransition" parent="Screens/GameOverScreen" index="2" instance=ExtResource( 7 )]
+screen_path = NodePath("..")
+anim_time = 0.25
+
+[node name="StateMachine" parent="." index="1"]
+actor_path = NodePath("../../InitialMenu")
+
+[node name="TitleScreen" type="Node" parent="StateMachine" index="0"]
+script = ExtResource( 5 )
+fsm_path = NodePath("..")
+
+[node name="EmptyScreen" type="Node" parent="StateMachine" index="1"]
+script = ExtResource( 5 )
+fsm_path = NodePath("..")
+
+[node name="GameOverScreen" type="Node" parent="StateMachine" index="2"]
+script = ExtResource( 5 )
+fsm_path = NodePath("..")
+
+[node name="AppManager" type="Node" parent="." index="2"]
+script = ExtResource( 6 )
+[connection signal="player_died" from="." to="StateMachine" method="change_state_path" binds= [ "GameOverScreen" ]]
+[connection signal="button_play" from="Screens/TitleScreen" to="StateMachine" method="change_state_path" binds= [ "EmptyScreen" ]]
+[connection signal="button_play_again" from="Screens/GameOverScreen" to="AppManager" method="reload"]
+[connection signal="state_entered" from="StateMachine/TitleScreen" to="Screens/TitleScreen" method="enter"]
+[connection signal="state_exited" from="StateMachine/TitleScreen" to="Screens/TitleScreen" method="exit"]
+[connection signal="state_entered" from="StateMachine/EmptyScreen" to="Screens/EmptyScreen" method="enter"]
+[connection signal="state_exited" from="StateMachine/EmptyScreen" to="Screens/EmptyScreen" method="exit"]
+[connection signal="state_entered" from="StateMachine/GameOverScreen" to="Screens/GameOverScreen" method="enter"]
+[connection signal="state_exited" from="StateMachine/GameOverScreen" to="Screens/GameOverScreen" method="exit"]

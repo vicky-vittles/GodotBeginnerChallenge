@@ -14,3 +14,6 @@ func _on_Tower_update_current_floor(floor_node):
 
 func _on_FloorTransitionTimer_timeout():
 	player.character_mover.unfreeze()
+
+func _on_Tower_update_player_pos(new_pos):
+	player.global_position = new_pos

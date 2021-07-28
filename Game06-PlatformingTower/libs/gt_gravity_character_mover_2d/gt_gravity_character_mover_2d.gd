@@ -10,6 +10,7 @@ export (float) var JUMP_TIME = 0.5
 
 export (Vector2) var movement_mask = Vector2(1, 1)
 export (Vector2) var floor_normal = Vector2.UP
+export (bool) var apply_gravity = true
 export (bool) var frozen = false
 
 onready var JUMP_SPEED = Utils.jump_speed_formula(JUMP_HEIGHT, JUMP_TIME)
@@ -21,7 +22,8 @@ var acceleration : Vector2
 
 func _ready():
 	assert(body != null, "%s has no body set" % [self.name])
-	acceleration.y = GRAVITY
+	if apply_gravity:
+		acceleration.y = GRAVITY
 
 func set_move_direction(_dir: int):
 	move_direction = _dir
@@ -32,7 +34,10 @@ func move(delta):
 	velocity.x = RUN_SPEED * move_direction * movement_mask.x
 	velocity.y += acceleration.y * delta
 	velocity.y *= movement_mask.y
-	velocity = body.move_and_slide(velocity, floor_normal)
+	move_body(delta)
+
+func move_body(delta):
+	pass
 
 func jump() -> void:
 	velocity.y = JUMP_SPEED * movement_mask.y

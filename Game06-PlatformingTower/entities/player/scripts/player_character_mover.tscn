@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://entities/player/scripts/player_character_mover.gd" type="Script" id=1]
+
+[node name="CharacterMover" type="Node"]
+script = ExtResource( 1 )
+JUMP_HEIGHT = 220
+JUMP_TIME = 0.6
