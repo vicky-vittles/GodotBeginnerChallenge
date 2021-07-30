@@ -1,0 +1,89 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://levels/__level.tscn" type="PackedScene" id=1]
+[ext_resource path="res://libs/gt_teleporter_2d/gt_teleporter_2d.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 640, 120 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 320, 120 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 80, 10 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 40, 40 )
+
+[sub_resource type="Animation" id=5]
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("platform:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 406.375, 534.954 ), Vector2( 693.694, 534.954 ), Vector2( 406.375, 534.954 ) ]
+}
+
+[node name="Level" instance=ExtResource( 1 )]
+
+[node name="Sprite" parent="root" index="0"]
+modulate = Color( 1, 0, 0, 0.156863 )
+
+[node name="terrain" type="StaticBody2D" parent="root" index="1"]
+position = Vector2( 640, 840 )
+collision_layer = 2
+collision_mask = 4
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="root/terrain" index="0"]
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="root/terrain" index="1"]
+position = Vector2( 320, -120 )
+shape = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="platform" type="KinematicBody2D" parent="root" index="2"]
+position = Vector2( 406.375, 534.954 )
+collision_layer = 2
+collision_mask = 4
+motion/sync_to_physics = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="root/platform" index="0"]
+shape = SubResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="enter" type="Area2D" parent="root" index="3"]
+position = Vector2( 1069.91, 466.696 )
+collision_layer = 8
+collision_mask = 8
+script = ExtResource( 2 )
+collidable_groups = [ "player" ]
+tag = "1"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="root/enter" index="0"]
+shape = SubResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="root" index="4"]
+autoplay = "moving_platforms"
+playback_process_mode = 0
+anims/moving_platforms = SubResource( 5 )

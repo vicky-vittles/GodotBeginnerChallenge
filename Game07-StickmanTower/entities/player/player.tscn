@@ -1,0 +1,118 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://libs/gt_input_controller/controllers/gt_device_controller.gd" type="Script" id=1]
+[ext_resource path="res://libs/gt_input_controller/actions/__gt_input_action.gd" type="Script" id=2]
+[ext_resource path="res://libs/gt_gravity_entity_mover_2d/gt_gravity_entity_mover_2d.gd" type="Script" id=3]
+[ext_resource path="res://libs/gt_state_machine/gt_state_machine.gd" type="Script" id=4]
+[ext_resource path="res://entities/player/states/player_fall.gd" type="Script" id=5]
+[ext_resource path="res://entities/player/states/player_idle.gd" type="Script" id=6]
+[ext_resource path="res://entities/player/states/player_run.gd" type="Script" id=7]
+[ext_resource path="res://entities/player/states/player_jump.gd" type="Script" id=8]
+[ext_resource path="res://entities/player/player.gd" type="Script" id=9]
+[ext_resource path="res://libs/gt_juice_2d/gt_juice_2d.gd" type="Script" id=10]
+[ext_resource path="res://assets/player.png" type="Texture" id=11]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 5.0
+
+[node name="Player" type="KinematicBody2D" groups=[
+"player",
+]]
+collision_layer = 12
+collision_mask = 10
+script = ExtResource( 9 )
+
+[node name="InputController" type="Node" parent="."]
+script = ExtResource( 1 )
+
+[node name="MoveLeft" type="Node" parent="InputController"]
+script = ExtResource( 2 )
+action = "act_move_left"
+
+[node name="MoveRight" type="Node" parent="InputController"]
+script = ExtResource( 2 )
+action = "act_move_right"
+
+[node name="Jump" type="Node" parent="InputController"]
+script = ExtResource( 2 )
+action = "act_jump"
+
+[node name="EntityMover" type="Node" parent="."]
+script = ExtResource( 3 )
+body_path = NodePath("..")
+RUN_SPEED = 224
+JUMP_HEIGHT = 128
+JUMP_TIME = 0.4
+
+[node name="Triggers" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="GroundRaycast" type="RayCast2D" parent="Triggers"]
+enabled = true
+cast_to = Vector2( 0, 48 )
+collision_mask = 2
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Graphics" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="main" type="Node2D" parent="Graphics"]
+position = Vector2( 0, 12 )
+script = ExtResource( 10 )
+
+[node name="main" type="Sprite" parent="Graphics/main"]
+position = Vector2( 0, -12 )
+texture = ExtResource( 11 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 4 )
+actor_path = NodePath("..")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource( 6 )
+fsm_path = NodePath("..")
+
+[node name="Run" type="Node" parent="StateMachine"]
+script = ExtResource( 7 )
+fsm_path = NodePath("..")
+
+[node name="Jump" type="Node" parent="StateMachine"]
+script = ExtResource( 8 )
+fsm_path = NodePath("..")
+
+[node name="Fall" type="Node" parent="StateMachine"]
+script = ExtResource( 5 )
+fsm_path = NodePath("..")
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="JumpCooldown" type="Timer" parent="Timers"]
+wait_time = 0.1
+one_shot = true
+[connection signal="just_pressed" from="InputController/Jump" to="StateMachine/Idle" method="_on_Jump_just_pressed"]
+[connection signal="just_pressed" from="InputController/Jump" to="StateMachine/Run" method="_on_Jump_just_pressed"]
+[connection signal="just_pressed" from="InputController/Jump" to="StateMachine/Jump" method="_on_Jump_just_pressed"]
+[connection signal="just_pressed" from="InputController/Jump" to="StateMachine/Fall" method="_on_Jump_just_pressed"]
+[connection signal="just_released" from="InputController/Jump" to="StateMachine/Jump" method="_on_Jump_just_released"]
+[connection signal="jumped" from="EntityMover" to="Timers/JumpCooldown" method="start"]
+[connection signal="jumped" from="EntityMover" to="." method="decrease_jump"]
+[connection signal="jumped" from="EntityMover" to="Graphics/main" method="jump" binds= [ 0.5, 0.15 ]]
+[connection signal="state_entered" from="StateMachine/Idle" to="." method="restore_jumps"]
+[connection signal="state_entered" from="StateMachine/Run" to="." method="restore_jumps"]
+[connection signal="landed" from="StateMachine/Fall" to="Graphics/main" method="jump" binds= [ 0.3, 0.1 ]]
