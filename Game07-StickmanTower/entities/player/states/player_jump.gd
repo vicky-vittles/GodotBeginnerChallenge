@@ -3,6 +3,10 @@ extends GTState
 onready var FALL = $"../Fall"
 
 func enter(_info = null):
+	if actor.available_jumps == (actor.max_jumps):
+		actor.graphics.play_anim("ground_jump")
+	else:
+		actor.graphics.play_anim("air_jump")
 	actor.entity_mover.jump()
 	actor.entity_mover.snap = Vector2.ZERO
 
@@ -10,6 +14,7 @@ func process(_delta):
 	actor.input_controller.poll_input()
 
 func physics_process(delta):
+	actor.graphics.orient(actor.move_direction)
 	actor.entity_mover.set_move_direction(actor.move_direction)
 	actor.entity_mover.move(delta)
 	

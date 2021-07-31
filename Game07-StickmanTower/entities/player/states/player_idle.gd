@@ -4,10 +4,12 @@ onready var RUN = $"../Run"
 onready var JUMP = $"../Jump"
 
 func process(_delta):
+	#actor.graphics.play_anim("idle")
 	actor.input_controller.poll_input()
 
 func physics_process(delta):
 	var move_direction = actor.move_direction
+	actor.graphics.orient(move_direction)
 	actor.entity_mover.move(delta)
 	
 	if move_direction != 0:

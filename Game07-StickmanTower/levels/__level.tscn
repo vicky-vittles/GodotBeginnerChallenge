@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://levels/__level.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://libs/gt_teleporter_2d/gt_teleporter_2d.gd" type="Script" id=3]
+[ext_resource path="res://assets/test_tileset.tres" type="TileSet" id=4]
+[ext_resource path="res://libs/gt_area_2d/gt_trigger_area_2d/gt_trigger_area_2d.gd" type="Script" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 1024, 40 )
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 1 )
@@ -17,6 +23,52 @@ __meta__ = {
 
 [node name="Sprite" type="Sprite" parent="root"]
 modulate = Color( 1, 1, 1, 0.054902 )
+position = Vector2( 1.8877, -1.88773 )
 scale = Vector2( 20, 15 )
 texture = ExtResource( 2 )
 centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="root"]
+margin_right = 1280.0
+margin_bottom = 960.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="scenario" type="TileMap" parent="root"]
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 32, 32 )
+collision_layer = 2
+collision_mask = 4
+format = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="enter" type="Area2D" parent="root"]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource( 3 )
+collidable_groups = [ "player" ]
+
+[node name="exit" type="Area2D" parent="root"]
+script = ExtResource( 3 )
+is_cause = false
+
+[node name="falling_trigger" type="Area2D" parent="root"]
+position = Vector2( 640, 900 )
+collision_layer = 8
+collision_mask = 8
+script = ExtResource( 5 )
+collidable_groups = [ "player" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="root/falling_trigger"]
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+[connection signal="effect" from="root/exit" to="." method="_on_exit_effect"]
+[connection signal="effect" from="root/falling_trigger" to="." method="_on_falling_trigger_effect"]

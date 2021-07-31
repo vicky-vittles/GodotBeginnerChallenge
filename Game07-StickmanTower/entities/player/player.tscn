@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://libs/gt_input_controller/controllers/gt_device_controller.gd" type="Script" id=1]
 [ext_resource path="res://libs/gt_input_controller/actions/__gt_input_action.gd" type="Script" id=2]
@@ -10,10 +10,94 @@
 [ext_resource path="res://entities/player/states/player_jump.gd" type="Script" id=8]
 [ext_resource path="res://entities/player/player.gd" type="Script" id=9]
 [ext_resource path="res://libs/gt_juice_2d/gt_juice_2d.gd" type="Script" id=10]
-[ext_resource path="res://assets/player.png" type="Texture" id=11]
+[ext_resource path="res://entities/player/assets/player-sheet.png" type="Texture" id=11]
+[ext_resource path="res://entities/player/scripts/player_graphics.gd" type="Script" id=12]
 
-[sub_resource type="CapsuleShape2D" id=1]
+[sub_resource type="Animation" id=1]
+resource_name = "air_jump"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("main/main:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 9, 12 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "fall_idle"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("main/main:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 15, 19 ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("main/main:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 7, 12 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("main/main:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 20 ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.65
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("main/main:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.65 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 6 ]
+}
+
+[sub_resource type="CapsuleShape2D" id=6]
 radius = 5.0
+height = 35.0
 
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
@@ -41,7 +125,7 @@ action = "act_jump"
 script = ExtResource( 3 )
 body_path = NodePath("..")
 RUN_SPEED = 224
-JUMP_HEIGHT = 128
+JUMP_HEIGHT = 95
 JUMP_TIME = 0.4
 
 [node name="Triggers" type="Node2D" parent="."]
@@ -58,24 +142,36 @@ __meta__ = {
 }
 
 [node name="Graphics" type="Node2D" parent="."]
+script = ExtResource( 12 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="main" type="Node2D" parent="Graphics"]
-position = Vector2( 0, 12 )
+position = Vector2( 0, 10 )
 script = ExtResource( 10 )
 
 [node name="main" type="Sprite" parent="Graphics/main"]
-position = Vector2( 0, -12 )
+position = Vector2( 0, -10 )
+scale = Vector2( 0.15, 0.15 )
 texture = ExtResource( 11 )
+vframes = 3
+hframes = 7
+frame = 15
 __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Graphics"]
+anims/air_jump = SubResource( 1 )
+anims/fall_idle = SubResource( 2 )
+anims/ground_jump = SubResource( 3 )
+anims/idle = SubResource( 4 )
+anims/run = SubResource( 5 )
+
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
-visible = false
-shape = SubResource( 1 )
+position = Vector2( 0, 5 )
+shape = SubResource( 6 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -105,14 +201,14 @@ fsm_path = NodePath("..")
 [node name="JumpCooldown" type="Timer" parent="Timers"]
 wait_time = 0.1
 one_shot = true
+[connection signal="just_pressed" from="InputController/Jump" to="StateMachine/Fall" method="_on_Jump_just_pressed"]
 [connection signal="just_pressed" from="InputController/Jump" to="StateMachine/Idle" method="_on_Jump_just_pressed"]
 [connection signal="just_pressed" from="InputController/Jump" to="StateMachine/Run" method="_on_Jump_just_pressed"]
 [connection signal="just_pressed" from="InputController/Jump" to="StateMachine/Jump" method="_on_Jump_just_pressed"]
-[connection signal="just_pressed" from="InputController/Jump" to="StateMachine/Fall" method="_on_Jump_just_pressed"]
 [connection signal="just_released" from="InputController/Jump" to="StateMachine/Jump" method="_on_Jump_just_released"]
 [connection signal="jumped" from="EntityMover" to="Timers/JumpCooldown" method="start"]
 [connection signal="jumped" from="EntityMover" to="." method="decrease_jump"]
-[connection signal="jumped" from="EntityMover" to="Graphics/main" method="jump" binds= [ 0.5, 0.15 ]]
+[connection signal="jumped" from="EntityMover" to="Graphics/main" method="jump" binds= [ 0.3, 0.15 ]]
 [connection signal="state_entered" from="StateMachine/Idle" to="." method="restore_jumps"]
 [connection signal="state_entered" from="StateMachine/Run" to="." method="restore_jumps"]
 [connection signal="landed" from="StateMachine/Fall" to="Graphics/main" method="jump" binds= [ 0.3, 0.1 ]]

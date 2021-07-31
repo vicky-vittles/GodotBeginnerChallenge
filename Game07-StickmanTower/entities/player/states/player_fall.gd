@@ -12,11 +12,13 @@ func process(_delta):
 	actor.input_controller.poll_input()
 
 func physics_process(delta):
+	actor.graphics.orient(actor.move_direction)
 	actor.entity_mover.set_move_direction(actor.move_direction)
 	actor.entity_mover.move(delta)
 	
 	if actor.is_grounded():
 		emit_signal("landed")
+		actor.graphics.play_anim("fall_idle")
 		fsm.change_state(IDLE)
 
 func _on_Jump_just_pressed():

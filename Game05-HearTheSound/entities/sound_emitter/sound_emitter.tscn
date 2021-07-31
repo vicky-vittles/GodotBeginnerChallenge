@@ -49,5 +49,5 @@ stream = ExtResource( 2 )
 
 [node name="CollectedSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
-volume_db = -6.0
+volume_db = -18.0
 [connection signal="finished" from="CollectedSound" to="." method="_on_CollectedSound_finished"]
