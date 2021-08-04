@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://entities/weapon/__weapon.tscn" type="PackedScene" id=1]
+[ext_resource path="res://entities/weapon/assets/weapon.png" type="Texture" id=2]
+[ext_resource path="res://entities/weapon/assets/circle_crosshair.png" type="Texture" id=3]
+[ext_resource path="res://entities/weapon/weapon_rifle.gd" type="Script" id=4]
+
+[sub_resource type="Animation" id=1]
+resource_name = "ready"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("hud/root/bottom/weapon:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("hud/root/bottom/weapon:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 0 ]
+}
+
+[node name="weapon" instance=ExtResource( 1 )]
+script = ExtResource( 4 )
+collidable_group = [ "enemy_hurtbox" ]
+
+[node name="weapon" parent="hud/root/bottom" index="0"]
+position = Vector2( 276, -150 )
+texture = ExtResource( 2 )
+hframes = 4
+
+[node name="crosshair" parent="hud/root" index="1"]
+texture = ExtResource( 3 )
+
+[node name="AnimationPlayer" parent="." index="3"]
+autoplay = "ready"
+anims/ready = SubResource( 1 )
+anims/shoot = SubResource( 2 )

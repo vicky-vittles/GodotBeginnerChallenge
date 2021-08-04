@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/player_controller/player_controller.gd" type="Script" id=1]
+[ext_resource path="res://libs/gt_input_controller/actions/__gt_input_action.gd" type="Script" id=2]
+
+[node name="PlayerController" type="Node"]
+script = ExtResource( 1 )
+
+[node name="move_left" type="Node" parent="."]
+script = ExtResource( 2 )
+action = "act_move_left"
+
+[node name="move_right" type="Node" parent="."]
+script = ExtResource( 2 )
+action = "act_move_right"
+
+[node name="move_forwards" type="Node" parent="."]
+script = ExtResource( 2 )
+action = "act_move_forwards"
+
+[node name="move_backwards" type="Node" parent="."]
+script = ExtResource( 2 )
+action = "act_move_backwards"
+
+[node name="jump" type="Node" parent="."]
+script = ExtResource( 2 )
+action = "act_jump"
+
+[node name="shoot" type="Node" parent="."]
+script = ExtResource( 2 )
+action = "act_shoot"
+[connection signal="just_released" from="move_left" to="." method="update_move_direction"]
+[connection signal="pressed" from="move_left" to="." method="update_move_direction"]
+[connection signal="just_released" from="move_right" to="." method="update_move_direction"]
+[connection signal="pressed" from="move_right" to="." method="update_move_direction"]
+[connection signal="just_released" from="move_forwards" to="." method="update_move_direction"]
+[connection signal="pressed" from="move_forwards" to="." method="update_move_direction"]
+[connection signal="just_released" from="move_backwards" to="." method="update_move_direction"]
+[connection signal="pressed" from="move_backwards" to="." method="update_move_direction"]
