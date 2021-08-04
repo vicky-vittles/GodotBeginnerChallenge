@@ -14,7 +14,7 @@ func physics_process(delta):
 	actor.entity_mover.set_move_direction(move_direction)
 	actor.entity_mover.move(delta)
 	
-	if not actor.is_grounded():
+	if not actor.entity_mover.is_grounded():
 		fsm.change_state(FALL)
 	elif move_direction == 0:
 		fsm.change_state(IDLE)

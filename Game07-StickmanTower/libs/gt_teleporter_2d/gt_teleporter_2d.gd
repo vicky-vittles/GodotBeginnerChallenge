@@ -1,16 +1,31 @@
-extends GTConnectedPair2D
+extends GTArea2D
 class_name GTTeleporter2D
 
+signal teleported_entity(entity)
+
+var CONNECTOR_GROUP : String = "gt_teleporter_2d"
+
+export (bool) var is_cause = true
 export (bool) var is_indirect = false
+export (String) var tag = "default"
 
 func _ready():
-	remove_from_group(CONNECTOR_GROUP)
-	CONNECTOR_GROUP = "gt_teleporter_2d"
 	add_to_group(CONNECTOR_GROUP)
-	connect("effect", self, "_on_effect")
+	connect("grouped_area_entered", self, "_on_grouped_area_entered")
+	connect("grouped_body_entered", self, "_on_grouped_body_entered")
 
-func _on_effect(cause, effect, entity):
-	if not is_indirect:
-		entity.global_position = effect.global_position
-	else:
-		entity.actor.global_position = effect.global_position
+func _on_grouped_area_entered(area):
+	if is_cause:
+		get_tree().call_group(CONNECTOR_GROUP, "teleport", self, area)
+
+func _on_grouped_body_entered(body):
+	if is_cause:
+		get_tree().call_group(CONNECTOR_GROUP, "teleport", self, body)
+
+func teleport(cause, entity):
+	if tag == cause.tag and not is_cause:
+		if not is_indirect:
+			entity.global_position = global_position
+		else:
+			entity.actor.global_position = global_position
+		emit_signal("teleported_entity", entity)

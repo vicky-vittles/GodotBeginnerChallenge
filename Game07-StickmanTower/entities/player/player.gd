@@ -2,9 +2,9 @@ extends KinematicBody2D
 
 onready var input_controller = $InputController
 onready var entity_mover = $EntityMover
-onready var ground_raycast = $Triggers/GroundRaycast
 onready var graphics = $Graphics
 onready var jump_cooldown = $Timers/JumpCooldown
+onready var freeze_timer = $Timers/FreezeTimer
 
 var move_direction : int setget ,get_move_direction
 var max_jumps : int = 3
@@ -24,5 +24,6 @@ func restore_jumps():
 func can_jump() -> bool:
 	return (available_jumps > 0 and jump_cooldown.is_stopped())
 
-func is_grounded() -> bool:
-	return ground_raycast.is_colliding()
+func _on_game_floor_updated(new_floor):
+	freeze_timer.start()
+	entity_mover.freeze(false)

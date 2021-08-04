@@ -19,11 +19,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://libs/gt_area_2d/gt_area_2d.gd"
 }, {
-"base": "GTArea2D",
-"class": "GTConnectedPair2D",
-"language": "GDScript",
-"path": "res://libs/gt_connected_pair_2d/gt_connected_pair_2d.gd"
-}, {
 "base": "GTInputController",
 "class": "GTDeviceController",
 "language": "GDScript",
@@ -84,7 +79,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://libs/gt_state_machine/gt_state_machine.gd"
 }, {
-"base": "GTConnectedPair2D",
+"base": "GTArea2D",
 "class": "GTTeleporter2D",
 "language": "GDScript",
 "path": "res://libs/gt_teleporter_2d/gt_teleporter_2d.gd"
@@ -102,7 +97,6 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "ApplicationManager": "",
 "GTArea2D": "",
-"GTConnectedPair2D": "",
 "GTDeviceController": "res://libs/gt_input_controller/icons/gt_device_controller.svg",
 "GTGravityEntityMover2D": "",
 "GTHealth": "",
@@ -148,6 +142,7 @@ window/size/width=1280
 window/size/height=960
 window/size/test_width=640
 window/size/test_height=480
+window/dpi/allow_hidpi=true
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
@@ -191,5 +186,6 @@ act_jump={
 
 [rendering]
 
+quality/2d/use_pixel_snap=true
 environment/default_clear_color=Color( 0.196078, 0.196078, 0.196078, 1 )
 environment/default_environment="res://default_env.tres"

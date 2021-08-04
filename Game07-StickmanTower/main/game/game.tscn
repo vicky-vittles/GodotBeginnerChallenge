@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://entities/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://main/game/game.gd" type="Script" id=2]
@@ -6,6 +6,13 @@
 [ext_resource path="res://levels/floors/L02.tscn" type="PackedScene" id=4]
 [ext_resource path="res://levels/floors/L03.tscn" type="PackedScene" id=5]
 [ext_resource path="res://libs/multitarget_camera_2d/multitarget_camera_2d.gd" type="Script" id=6]
+[ext_resource path="res://levels/floors/L04.tscn" type="PackedScene" id=7]
+[ext_resource path="res://levels/floors/L05.tscn" type="PackedScene" id=8]
+[ext_resource path="res://levels/floors/L06.tscn" type="PackedScene" id=9]
+[ext_resource path="res://levels/floors/L07.tscn" type="PackedScene" id=10]
+[ext_resource path="res://levels/floors/L08.tscn" type="PackedScene" id=11]
+[ext_resource path="res://levels/floors/L09.tscn" type="PackedScene" id=12]
+[ext_resource path="res://levels/floors/L10.tscn" type="PackedScene" id=13]
 
 [node name="game" type="Node2D"]
 script = ExtResource( 2 )
@@ -24,8 +31,29 @@ position = Vector2( 640, -480 )
 [node name="3" parent="Floors" instance=ExtResource( 5 )]
 position = Vector2( 640, -1440 )
 
+[node name="4" parent="Floors" instance=ExtResource( 7 )]
+position = Vector2( 640, -2400 )
+
+[node name="5" parent="Floors" instance=ExtResource( 8 )]
+position = Vector2( 640, -3340 )
+
+[node name="6" parent="Floors" instance=ExtResource( 9 )]
+position = Vector2( 640, -4280 )
+
+[node name="7" parent="Floors" instance=ExtResource( 10 )]
+position = Vector2( 640, -5240 )
+
+[node name="8" parent="Floors" instance=ExtResource( 11 )]
+position = Vector2( 640, -6200 )
+
+[node name="9" parent="Floors" instance=ExtResource( 12 )]
+position = Vector2( 640, -7160 )
+
+[node name="10" parent="Floors" instance=ExtResource( 13 )]
+position = Vector2( 640, -8120 )
+
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 748.876, 403.487 )
+position = Vector2( 116.83, 587.803 )
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2( 640, 480 )
@@ -36,3 +64,4 @@ min_zoom = 1.0
 max_zoom = 1.0
 allow_zoom = false
 margin = Vector2( 0, 0 )
+[connection signal="floor_updated" from="." to="Player" method="_on_game_floor_updated"]

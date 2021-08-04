@@ -4,7 +4,7 @@ onready var RUN = $"../Run"
 onready var JUMP = $"../Jump"
 
 func process(_delta):
-	#actor.graphics.play_anim("idle")
+	actor.graphics.play_anim("idle")
 	actor.input_controller.poll_input()
 
 func physics_process(delta):
