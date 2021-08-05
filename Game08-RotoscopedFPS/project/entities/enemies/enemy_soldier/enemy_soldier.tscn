@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://entities/enemies/__enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/enemies/weapons/enemy_weapon_sub.tscn" type="PackedScene" id=2]
@@ -19,12 +19,18 @@ albedo_color = Color( 0.992157, 1, 0, 1 )
 material = SubResource( 3 )
 size = Vector3( 0.5, 0.5, 0.5 )
 
-[sub_resource type="BoxShape" id=5]
+[sub_resource type="SpatialMaterial" id=5]
+flags_unshaded = true
+
+[sub_resource type="CapsuleMesh" id=6]
+material = SubResource( 5 )
+
+[sub_resource type="BoxShape" id=7]
 extents = Vector3( 2, 2, 2 )
 
-[sub_resource type="CapsuleShape" id=6]
+[sub_resource type="CapsuleShape" id=8]
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=9]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Graphics:rotation_degrees")
@@ -62,8 +68,32 @@ tracks/2/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("Graphics/damaged:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Graphics/main:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=10]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Graphics:rotation_degrees")
@@ -101,6 +131,57 @@ tracks/2/keys = {
 "update": 1,
 "values": [ true ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("Graphics/damaged:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Graphics/main:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=11]
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Graphics/main:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Graphics/damaged:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
 
 [node name="Enemy" instance=ExtResource( 1 )]
 collision_layer = 4
@@ -108,6 +189,7 @@ collision_mask = 2
 script = ExtResource( 4 )
 
 [node name="Weapon" parent="." index="0" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
 actor_path = NodePath("..")
 
 [node name="main" parent="Graphics" index="0"]
@@ -119,13 +201,19 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -1 )
 mesh = SubResource( 4 )
 material/0 = null
 
+[node name="damaged" parent="Graphics" index="2"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 1.5, 0 )
+visible = false
+mesh = SubResource( 6 )
+material/0 = null
+
 [node name="CollisionShape" parent="Hitboxes/DamageHurtbox" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
-shape = SubResource( 5 )
+shape = SubResource( 7 )
 
 [node name="CollisionShape" parent="." index="3"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 1.5, 0 )
-shape = SubResource( 6 )
+shape = SubResource( 8 )
 
 [node name="RandomDirectionTimer" type="Timer" parent="." index="4"]
 autostart = true
@@ -149,10 +237,12 @@ fsm_path = NodePath("..")
 
 [node name="AnimationPlayer" parent="." index="9"]
 autoplay = "default"
-anims/default = SubResource( 7 )
-anims/die = SubResource( 8 )
+anims/default = SubResource( 9 )
+anims/die = SubResource( 10 )
+anims/hurt = SubResource( 11 )
 [connection signal="timeout" from="RandomDirectionTimer" to="." method="generate_random_direction"]
 [connection signal="timeout" from="ShootTimer" to="." method="shoot"]
 [connection signal="died" from="Health" to="StateMachine/Run" method="_on_Health_died"]
+[connection signal="health_lost" from="Health" to="StateMachine/Run" method="_on_Health_health_lost"]
 [connection signal="state_entered" from="StateMachine/Dead" to="RandomDirectionTimer" method="stop"]
 [connection signal="state_entered" from="StateMachine/Dead" to="AnimationPlayer" method="play" binds= [ "die" ]]

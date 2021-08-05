@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://libs/gt_entity_mover_3d/gt_entity_mover_3d.gd" type="Script" id=1]
 [ext_resource path="res://entities/projectile/__projectile.gd" type="Script" id=2]
+[ext_resource path="res://libs/gt_area_3d/gt_area_3d.gd" type="Script" id=3]
 
 [node name="Projectile" type="KinematicBody"]
 script = ExtResource( 2 )
@@ -19,6 +20,7 @@ __meta__ = {
 [node name="DamageHitbox" type="Area" parent="."]
 collision_layer = 8
 collision_mask = 8
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -31,3 +33,4 @@ __meta__ = {
 [node name="EntityMover" type="Node" parent="."]
 script = ExtResource( 1 )
 body_path = NodePath("..")
+[connection signal="grouped_area_entered" from="DamageHitbox" to="." method="_on_DamageHitbox_grouped_area_entered"]

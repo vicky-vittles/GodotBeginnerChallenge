@@ -6,6 +6,6 @@ func generate_random_direction():
 	rotation.y = -rand_angle-PI/2
 
 func shoot():
-	if has_node("Weapon"):
+	if has_node("Weapon") and can_shoot:
 		var weapon = get_node("Weapon")
 		weapon.shoot(-transform.basis.z, Vector3.ZERO)

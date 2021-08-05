@@ -3,7 +3,11 @@ extends Spatial
 signal pressed_shoot()
 
 export (NodePath) var actor_path
-export (Array, String) var collidable_group
+export (Array, String) var bullet_groups
+export (Array, String) var bullet_collidable_groups
+export (Array, String) var bullet_excluded_groups
+export (Array, String) var weapon_collidable_groups
+export (Array, String) var weapon_excluded_groups
 export (bool) var player_use = false
 export (float) var MAX_DAMAGE = 50
 

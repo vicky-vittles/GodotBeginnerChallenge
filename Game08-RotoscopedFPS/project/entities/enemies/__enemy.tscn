@@ -26,6 +26,11 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="damaged" type="MeshInstance" parent="Graphics"]
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="Hitboxes" type="Spatial" parent="."]
 __meta__ = {
 "_edit_lock_": true

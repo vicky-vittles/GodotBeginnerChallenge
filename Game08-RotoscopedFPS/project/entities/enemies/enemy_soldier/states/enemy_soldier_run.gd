@@ -9,3 +9,7 @@ func physics_process(delta):
 func _on_Health_died(current):
 	if fsm.current_state == self:
 		fsm.change_state(DEAD)
+
+func _on_Health_health_lost(current, lost):
+	if fsm.current_state == self:
+		actor.animation_player.play("hurt")

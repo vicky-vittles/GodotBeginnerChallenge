@@ -16,7 +16,7 @@ func fire():
 	
 	if result:
 		var collider = result.collider
-		for group in collidable_group:
+		for group in weapon_collidable_groups:
 			if collider.is_in_group(group) and collider.has_method("hurt"):
 				collider.hurt(MAX_DAMAGE)
 				break
