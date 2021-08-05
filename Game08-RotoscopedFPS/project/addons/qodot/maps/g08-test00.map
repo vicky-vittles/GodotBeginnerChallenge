@@ -1,0 +1,39 @@
+// Game: RotoscopeCloneGodot
+// Format: Standard
+// entity 0
+{
+"classname" "worldspawn"
+"_tb_textures" "textures/qodot"
+// brush 0
+{
+( -1712 -64 -16 ) ( -1712 -63 -16 ) ( -1712 -64 -15 ) qodot/BIGBRICKS 0 0 0 1 1
+( -64 -1216 -16 ) ( -64 -1216 -15 ) ( -63 -1216 -16 ) qodot/BIGBRICKS 0 0 0 1 1
+( -64 -64 -16 ) ( -63 -64 -16 ) ( -64 -63 -16 ) qodot/BIGBRICKS 0 0 0 1 1
+( 64 64 0 ) ( 64 65 0 ) ( 65 64 0 ) qodot/BIGBRICKS 0 0 0 1 1
+( 64 368 16 ) ( 65 368 16 ) ( 64 368 17 ) qodot/BIGBRICKS 0 0 0 1 1
+( 560 64 16 ) ( 560 64 17 ) ( 560 65 16 ) qodot/BIGBRICKS 0 0 0 1 1
+}
+// brush 1
+{
+( -624 -224 144 ) ( -624 -223 144 ) ( -624 -224 145 ) qodot/BIGSQUARES 0 0 0 1 1
+( -624 -224 144 ) ( -624 -224 145 ) ( -623 -224 144 ) qodot/BIGSQUARES 0 0 0 1 1
+( -624 -224 144 ) ( -623 -224 144 ) ( -624 -223 144 ) qodot/BIGSQUARES 0 0 0 1 1
+( -528 -144 160 ) ( -528 -143 160 ) ( -527 -144 160 ) qodot/BIGSQUARES 0 0 0 1 1
+( -528 -144 160 ) ( -527 -144 160 ) ( -528 -144 161 ) qodot/BIGSQUARES 0 0 0 1 1
+( -528 -144 160 ) ( -528 -144 161 ) ( -528 -143 160 ) qodot/BIGSQUARES 0 0 0 1 1
+}
+// brush 2
+{
+( -16 0 -32 ) ( -16 1 -32 ) ( -16 0 -31 ) qodot/BIGSQUARES 0 0 0 1 1
+( -16 0 -32 ) ( -16 0 -31 ) ( -15 0 -32 ) qodot/BIGSQUARES 0 0 0 1 1
+( -16 0 -32 ) ( -15 0 -32 ) ( -16 1 -32 ) qodot/BIGSQUARES 0 0 0 1 1
+( 16 96 -16 ) ( 16 97 -16 ) ( 17 96 -16 ) qodot/BIGSQUARES 0 0 0 1 1
+( 16 96 -16 ) ( 17 96 -16 ) ( 16 96 -15 ) qodot/BIGSQUARES 0 0 0 1 1
+( 16 96 -16 ) ( 16 96 -15 ) ( 16 97 -16 ) qodot/BIGSQUARES 0 0 0 1 1
+}
+}
+// entity 1
+{
+"classname" "light"
+"origin" "-8 8 168"
+}

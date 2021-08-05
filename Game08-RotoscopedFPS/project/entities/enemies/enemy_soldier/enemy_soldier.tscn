@@ -261,12 +261,12 @@ autoplay = "default"
 anims/default = SubResource( 9 )
 anims/die = SubResource( 10 )
 anims/hurt = SubResource( 11 )
+[connection signal="died" from="Health" to="StateMachine/Missile" method="_on_Health_died"]
 [connection signal="died" from="Health" to="StateMachine/Chase" method="_on_Health_died"]
 [connection signal="died" from="Health" to="StateMachine/Standing" method="_on_Health_died"]
-[connection signal="died" from="Health" to="StateMachine/Missile" method="_on_Health_died"]
+[connection signal="health_lost" from="Health" to="StateMachine/Missile" method="_on_Health_health_lost"]
 [connection signal="health_lost" from="Health" to="StateMachine/Chase" method="_on_Health_health_lost"]
 [connection signal="health_lost" from="Health" to="StateMachine/Standing" method="_on_Health_health_lost"]
-[connection signal="health_lost" from="Health" to="StateMachine/Missile" method="_on_Health_health_lost"]
 [connection signal="state_entered" from="StateMachine/Chase" to="StateMachine/Chase/ShootTimer" method="start"]
 [connection signal="state_entered" from="StateMachine/Chase" to="StateMachine/Chase/ReadjustDirectionTimer" method="start"]
 [connection signal="state_exited" from="StateMachine/Chase" to="StateMachine/Chase/ShootTimer" method="stop"]
