@@ -3,7 +3,7 @@
 [ext_resource path="res://entities/weapon/__weapon.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/weapon/assets/weapon.png" type="Texture" id=2]
 [ext_resource path="res://entities/weapon/assets/circle_crosshair.png" type="Texture" id=3]
-[ext_resource path="res://entities/weapon/weapon_rifle.gd" type="Script" id=4]
+[ext_resource path="res://entities/weapon/weapon_rifle/weapon_rifle.gd" type="Script" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "ready"
@@ -38,7 +38,6 @@ tracks/0/keys = {
 
 [node name="weapon" instance=ExtResource( 1 )]
 script = ExtResource( 4 )
-collidable_group = [ "enemy_hurtbox" ]
 
 [node name="weapon" parent="hud/root/bottom" index="0"]
 position = Vector2( 276, -150 )

@@ -22,9 +22,9 @@ func random_point() -> Vector3:
 func random_point_box(shape: CollisionShape) -> Vector3:
 	var size = 2*shape.shape.extents
 	
-	var rand_pos_x = posmod(randi(),size.x) - (size.x/2) + shape.global_position.x
-	var rand_pos_y = posmod(randi(),size.y) - (size.y/2) + shape.global_position.y
-	var rand_pos_z = posmod(randi(),size.z) - (size.z/2) + shape.global_position.z
+	var rand_pos_x = posmod(randi(),size.x) - (size.x/2) + shape.global_transform.origin.x
+	var rand_pos_y = posmod(randi(),size.y) - (size.y/2) + shape.global_transform.origin.y
+	var rand_pos_z = posmod(randi(),size.z) - (size.z/2) + shape.global_transform.origin.z
 	var rand_pos = Vector3(rand_pos_x, rand_pos_y, rand_pos_z)
 	return rand_pos
 

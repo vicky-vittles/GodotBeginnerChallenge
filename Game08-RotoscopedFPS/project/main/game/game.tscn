@@ -1,9 +1,11 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://main/game/game.gd" type="Script" id=1]
 [ext_resource path="res://entities/player/player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://icon-repeated.png" type="Texture" id=3]
-[ext_resource path="res://main/game/test_Area.gd" type="Script" id=4]
+[ext_resource path="res://main/game/enemies.gd" type="Script" id=4]
+[ext_resource path="res://libs/gt_random_point_zone_3d/gt_random_point_zone_3d.gd" type="Script" id=5]
+[ext_resource path="res://entities/projectile/projectile_bullet/projectile_bullet.tscn" type="PackedScene" id=6]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_texture = ExtResource( 3 )
@@ -23,10 +25,7 @@ size = Vector3( 44, 14, 2 )
 extents = Vector3( 22, 7, 1 )
 
 [sub_resource type="BoxShape" id=6]
-extents = Vector3( 17, 8, 1 )
-
-[sub_resource type="CubeMesh" id=7]
-size = Vector3( 34, 16, 2 )
+extents = Vector3( 20, 2, 20 )
 
 [node name="game" type="Spatial"]
 script = ExtResource( 1 )
@@ -34,48 +33,61 @@ script = ExtResource( 1 )
 [node name="player" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
 
-[node name="ground" type="StaticBody" parent="."]
+[node name="Terrain" type="Spatial" parent="."]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="ground" type="StaticBody" parent="Terrain"]
 collision_layer = 2
 collision_mask = 4
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="MeshInstance" type="MeshInstance" parent="ground"]
+[node name="MeshInstance" type="MeshInstance" parent="Terrain/ground"]
 mesh = SubResource( 2 )
 material/0 = null
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="CollisionShape" type="CollisionShape" parent="ground"]
+[node name="CollisionShape" type="CollisionShape" parent="Terrain/ground"]
 shape = SubResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="slope1" type="StaticBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.642788, -0.766044, 0, 0.766044, 0.642788, -1, 3, 12 )
-collision_layer = 2
-collision_mask = 4
+[node name="CollisionShape2" type="CollisionShape" parent="Terrain/ground"]
+transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, -50, 0, 0 )
+shape = SubResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="MeshInstance" type="MeshInstance" parent="slope1"]
-mesh = SubResource( 4 )
-material/0 = null
+[node name="CollisionShape3" type="CollisionShape" parent="Terrain/ground"]
+transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, 50, 0, 0 )
+shape = SubResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="CollisionShape" type="CollisionShape" parent="slope1"]
-shape = SubResource( 5 )
+[node name="CollisionShape4" type="CollisionShape" parent="Terrain/ground"]
+transform = Transform( 2.65431e-14, 1.62921e-07, 1, 1, -1.62921e-07, 0, 1.62921e-07, 1, -1.62921e-07, 0, 0, 50 )
+shape = SubResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="slope2" type="StaticBody" parent="."]
+[node name="CollisionShape5" type="CollisionShape" parent="Terrain/ground"]
+transform = Transform( 2.65431e-14, 1.62921e-07, 1, 1, -1.62921e-07, 0, 1.62921e-07, 1, -1.62921e-07, 0, 0, -50 )
+shape = SubResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="slope2" type="StaticBody" parent="Terrain"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, -5, 0.5, -18 )
 collision_layer = 2
 collision_mask = 4
@@ -83,20 +95,20 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="MeshInstance" type="MeshInstance" parent="slope2"]
+[node name="MeshInstance" type="MeshInstance" parent="Terrain/slope2"]
 mesh = SubResource( 4 )
 material/0 = null
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="CollisionShape" type="CollisionShape" parent="slope2"]
+[node name="CollisionShape" type="CollisionShape" parent="Terrain/slope2"]
 shape = SubResource( 5 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="slope3" type="StaticBody" parent="."]
+[node name="slope3" type="StaticBody" parent="Terrain"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 5, 1, -27 )
 collision_layer = 2
 collision_mask = 4
@@ -104,36 +116,37 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="MeshInstance" type="MeshInstance" parent="slope3"]
+[node name="MeshInstance" type="MeshInstance" parent="Terrain/slope3"]
 mesh = SubResource( 4 )
 material/0 = null
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="CollisionShape" type="CollisionShape" parent="slope3"]
+[node name="CollisionShape" type="CollisionShape" parent="Terrain/slope3"]
 shape = SubResource( 5 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Area" type="Area" parent="." groups=[
-"enemy_hurtbox",
-]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 4, -17 )
-collision_layer = 8
-collision_mask = 8
+[node name="Enemies" type="Spatial" parent="."]
 script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="CollisionShape" type="CollisionShape" parent="Area"]
+[node name="EnemySpawnZone" type="Spatial" parent="Enemies"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 40, 0 )
+script = ExtResource( 5 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Enemies/EnemySpawnZone"]
 shape = SubResource( 6 )
-__meta__ = {
-"_edit_lock_": true
-}
 
-[node name="MeshInstance" type="MeshInstance" parent="Area"]
-mesh = SubResource( 7 )
-material/0 = null
-__meta__ = {
-"_edit_lock_": true
-}
+[node name="SpawnTimer" type="Timer" parent="Enemies"]
+wait_time = 2.0
+autostart = true
+
+[node name="projectile_bullet" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 6, -12 )
+move_direction = Vector2( 1, 0 )
+[connection signal="timeout" from="Enemies/SpawnTimer" to="Enemies" method="spawn_enemy"]

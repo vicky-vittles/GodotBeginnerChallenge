@@ -16,6 +16,7 @@ export (float, 0.0, 1.0) var JUMP_DAMPING = 0.3
 
 export (Vector3) var movement_mask = Vector3(1, 1, 1)
 export (Vector3) var floor_normal = Vector3.UP
+export (bool) var apply_gravity = true
 export (bool) var frozen = false
 export (bool) var is_relative = true
 export (bool) var stop_on_slopes = false
@@ -51,7 +52,8 @@ func move(delta):
 	
 	velocity.x = ground_velocity.x
 	velocity.z = ground_velocity.z
-	velocity.y += -GRAVITY * delta
+	if apply_gravity:
+		velocity.y += -GRAVITY * delta
 	velocity *= movement_mask
 	velocity = body.move_and_slide_with_snap(velocity, snap, floor_normal, stop_on_slopes, 4, deg2rad(floor_max_angle))
 	emit_signal("movement_info", velocity, is_grounded())

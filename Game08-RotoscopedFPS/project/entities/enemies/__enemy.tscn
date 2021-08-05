@@ -1,0 +1,79 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://libs/gt_entity_mover_3d/gt_entity_mover_3d.gd" type="Script" id=1]
+[ext_resource path="res://entities/enemies/__enemy.gd" type="Script" id=2]
+[ext_resource path="res://libs/gt_state_machine/gt_state_machine.gd" type="Script" id=3]
+[ext_resource path="res://libs/gt_state_machine/__gt_state.gd" type="Script" id=4]
+[ext_resource path="res://entities/enemies/scripts/enemy_damage_hurtbox.gd" type="Script" id=5]
+[ext_resource path="res://libs/gt_health/gt_health.gd" type="Script" id=6]
+
+[node name="Enemy" type="KinematicBody"]
+script = ExtResource( 2 )
+
+[node name="Graphics" type="Spatial" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="main" type="MeshInstance" parent="Graphics"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 1.5, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="head" type="MeshInstance" parent="Graphics"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Hitboxes" type="Spatial" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="DamageHurtbox" type="Area" parent="Hitboxes" groups=[
+"enemy_hurtbox",
+]]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape" type="CollisionShape" parent="Hitboxes/DamageHurtbox"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource( 6 )
+
+[node name="EntityMover" type="Node" parent="."]
+script = ExtResource( 1 )
+body_path = NodePath("..")
+MAX_RUN_SPEED = 10.0
+RUN_ACCELERATION = 100.0
+RUN_DECELERATION = 100.0
+JUMP_HEIGHT = 0.0
+JUMP_TIME = 1.0
+JUMP_DAMPING = 1.0
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 3 )
+actor_path = NodePath("..")
+
+[node name="Run" type="Node" parent="StateMachine"]
+script = ExtResource( 4 )
+fsm_path = NodePath("..")
+
+[node name="Dead" type="Node" parent="StateMachine"]
+script = ExtResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[connection signal="take_damage" from="Hitboxes/DamageHurtbox" to="Health" method="lose_health"]

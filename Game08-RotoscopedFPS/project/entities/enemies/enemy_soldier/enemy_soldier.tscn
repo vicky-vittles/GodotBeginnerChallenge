@@ -1,0 +1,158 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://entities/enemies/__enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://entities/enemies/weapons/enemy_weapon_sub.tscn" type="PackedScene" id=2]
+[ext_resource path="res://entities/enemies/enemy_soldier/states/enemy_soldier_run.gd" type="Script" id=3]
+[ext_resource path="res://entities/enemies/enemy_soldier/enemy_soldier.gd" type="Script" id=4]
+[ext_resource path="res://entities/enemies/enemy_soldier/states/enemy_soldier_dead.gd" type="Script" id=5]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 1, 0.2, 0.2, 1 )
+
+[sub_resource type="CapsuleMesh" id=2]
+material = SubResource( 1 )
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 0.992157, 1, 0, 1 )
+
+[sub_resource type="CubeMesh" id=4]
+material = SubResource( 3 )
+size = Vector3( 0.5, 0.5, 0.5 )
+
+[sub_resource type="BoxShape" id=5]
+extents = Vector3( 2, 2, 2 )
+
+[sub_resource type="CapsuleShape" id=6]
+
+[sub_resource type="Animation" id=7]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Graphics:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Graphics:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Hitboxes/DamageHurtbox/CollisionShape:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=8]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Graphics:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 90, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Graphics:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 1, -1.5 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Hitboxes/DamageHurtbox/CollisionShape:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[node name="Enemy" instance=ExtResource( 1 )]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource( 4 )
+
+[node name="Weapon" parent="." index="0" instance=ExtResource( 2 )]
+actor_path = NodePath("..")
+
+[node name="main" parent="Graphics" index="0"]
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="head" parent="Graphics" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -1 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="CollisionShape" parent="Hitboxes/DamageHurtbox" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape" parent="." index="3"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 1.5, 0 )
+shape = SubResource( 6 )
+
+[node name="RandomDirectionTimer" type="Timer" parent="." index="4"]
+autostart = true
+
+[node name="ShootTimer" type="Timer" parent="." index="5"]
+autostart = true
+
+[node name="EntityMover" parent="." index="7"]
+MAX_RUN_SPEED = 8.0
+RUN_DECELERATION = 50.0
+JUMP_HEIGHT = 4.0
+JUMP_TIME = 0.35
+is_relative = false
+
+[node name="Run" parent="StateMachine" index="0"]
+script = ExtResource( 3 )
+
+[node name="Dead" parent="StateMachine" index="1"]
+script = ExtResource( 5 )
+fsm_path = NodePath("..")
+
+[node name="AnimationPlayer" parent="." index="9"]
+autoplay = "default"
+anims/default = SubResource( 7 )
+anims/die = SubResource( 8 )
+[connection signal="timeout" from="RandomDirectionTimer" to="." method="generate_random_direction"]
+[connection signal="timeout" from="ShootTimer" to="." method="shoot"]
+[connection signal="died" from="Health" to="StateMachine/Run" method="_on_Health_died"]
+[connection signal="state_entered" from="StateMachine/Dead" to="RandomDirectionTimer" method="stop"]
+[connection signal="state_entered" from="StateMachine/Dead" to="AnimationPlayer" method="play" binds= [ "die" ]]

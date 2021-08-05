@@ -1,0 +1,21 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://entities/weapon/__weapon.tscn" type="PackedScene" id=1]
+[ext_resource path="res://entities/weapon/weapon_sub/weapon_sub.gd" type="Script" id=2]
+[ext_resource path="res://entities/projectile/projectile_bullet/projectile_bullet.tscn" type="PackedScene" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "ready"
+length = 0.1
+
+[sub_resource type="Animation" id=2]
+resource_name = "shoot"
+
+[node name="weapon" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+MAX_DAMAGE = 10.0
+BULLET = ExtResource( 3 )
+
+[node name="AnimationPlayer" parent="." index="3"]
+anims/ready = SubResource( 1 )
+anims/shoot = SubResource( 2 )
