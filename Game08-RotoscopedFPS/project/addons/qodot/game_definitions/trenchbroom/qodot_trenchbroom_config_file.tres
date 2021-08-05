@@ -9,7 +9,7 @@
 [resource]
 script = ExtResource( 1 )
 export_file = false
-target_file = "C:/Users/VitorDavi/Desktop/GameDev Tools/TrenchBroom-Win64-v2021.1-Release/games/RotoscopeCloneGodot/GameConfig.cfg"
+target_file = "C:/Users/VitorDavi/Desktop/GameDev Tools/TrenchBroom-Win64-v2021.1-Release/games/Game08-RotoscopeClone/GameConfig.cfg"
 game_name = "Qodot"
 brush_tags = [ ExtResource( 2 ), ExtResource( 5 ) ]
 face_tags = [ ExtResource( 4 ), ExtResource( 3 ) ]

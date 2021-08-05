@@ -14,9 +14,6 @@ __meta__ = {
 
 [node name="root" type="Spatial" parent="."]
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_lock_": true
-}
 map_file = ""
 inverse_scale_factor = 16.0
 entity_fgd = ExtResource( 2 )

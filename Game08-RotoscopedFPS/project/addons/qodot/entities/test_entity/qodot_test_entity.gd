@@ -1,2 +1,0 @@
-extends QodotFGDBaseClass
-class_name QodotTestEntity
