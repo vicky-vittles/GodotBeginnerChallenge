@@ -1,5 +1,7 @@
 extends KinematicBody
 
+signal died()
+
 export (float, 0.0, 1.0) var mouse_sensitivity = 0.15
 export (bool) var allow_vertical_looking = true
 
@@ -24,3 +26,6 @@ func jump():
 
 func shoot():
 	weapon.shoot(-transform.basis.z, -camera.global_transform.basis.z)
+
+func _on_Health_died(current):
+	emit_signal("died")

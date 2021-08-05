@@ -3,7 +3,7 @@ extends "res://entities/weapon/__weapon.gd"
 export (bool) var shoot_using_look_direction = false
 export (float) var MAX_RANGE = 100
 
-const COLLISION_MASK : int = 8
+const COLLISION_MASK : int = 64
 
 func fire():
 	var space_rid = get_world().space
@@ -16,6 +16,10 @@ func fire():
 	
 	if result:
 		var collider = result.collider
+		for group in weapon_excluded_groups:
+			if collider.is_in_group(group):
+				print(collider.name)
+				return
 		for group in weapon_collidable_groups:
 			if collider.is_in_group(group) and collider.has_method("hurt"):
 				collider.hurt(MAX_DAMAGE)

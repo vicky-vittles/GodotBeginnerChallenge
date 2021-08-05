@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://entities/player/player.gd" type="Script" id=1]
 [ext_resource path="res://libs/gt_entity_mover_3d/gt_entity_mover_3d.gd" type="Script" id=2]
@@ -11,17 +11,21 @@
 [ext_resource path="res://entities/player/weapons/player_weapon_rifle.tscn" type="PackedScene" id=9]
 [ext_resource path="res://entities/player/scripts/player_damage_hurtbox.gd" type="Script" id=10]
 [ext_resource path="res://libs/gt_health/gt_health.gd" type="Script" id=11]
+[ext_resource path="res://entities/player/scripts/presence_hurtbox.gd" type="Script" id=12]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 1, 1.5, 1 )
 
-[sub_resource type="SpatialMaterial" id=2]
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 1, 1.5, 1 )
+
+[sub_resource type="SpatialMaterial" id=3]
 albedo_color = Color( 0.2, 0.513726, 1, 1 )
 
-[sub_resource type="CapsuleMesh" id=3]
-material = SubResource( 2 )
+[sub_resource type="CapsuleMesh" id=4]
+material = SubResource( 3 )
 
-[sub_resource type="CapsuleShape" id=4]
+[sub_resource type="CapsuleShape" id=5]
 
 [node name="player" type="KinematicBody"]
 collision_layer = 4
@@ -41,20 +45,45 @@ JUMP_DAMPING = 0.5
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource( 11 )
+deactivate_upon_death = true
 
-[node name="DamageHurtbox" type="Area" parent="." groups=[
+[node name="Hitboxes" type="Spatial" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="DamageHurtbox" type="Area" parent="Hitboxes" groups=[
 "player_hurtbox",
 ]]
-collision_layer = 8
-collision_mask = 8
+collision_layer = 64
+collision_mask = 32
 script = ExtResource( 10 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="CollisionShape" type="CollisionShape" parent="DamageHurtbox"]
+[node name="CollisionShape" type="CollisionShape" parent="Hitboxes/DamageHurtbox"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
 shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PresenceHurtbox" type="Area" parent="Hitboxes" groups=[
+"entity_presence",
+"player_presence",
+]]
+collision_layer = 16
+collision_mask = 16
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_lock_": true
+}
+actor_path = NodePath("../..")
+
+[node name="CollisionShape" type="CollisionShape" parent="Hitboxes/PresenceHurtbox"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
+shape = SubResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -76,7 +105,7 @@ __meta__ = {
 
 [node name="main" type="MeshInstance" parent="Graphics"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 1.5, 0 )
-mesh = SubResource( 3 )
+mesh = SubResource( 4 )
 material/0 = null
 __meta__ = {
 "_edit_lock_": true
@@ -84,7 +113,7 @@ __meta__ = {
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 1.5, 0 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -108,9 +137,10 @@ fsm_path = NodePath("..")
 [node name="Fall" type="Node" parent="StateMachine"]
 script = ExtResource( 5 )
 fsm_path = NodePath("..")
-[connection signal="take_damage" from="DamageHurtbox" to="Health" method="lose_health"]
-[connection signal="just_pressed" from="PlayerController/jump" to="StateMachine/Idle" method="_on_jump_just_pressed"]
+[connection signal="died" from="Health" to="." method="_on_Health_died"]
+[connection signal="take_damage" from="Hitboxes/DamageHurtbox" to="Health" method="lose_health"]
 [connection signal="just_pressed" from="PlayerController/jump" to="StateMachine/Run" method="_on_jump_just_pressed"]
+[connection signal="just_pressed" from="PlayerController/jump" to="StateMachine/Idle" method="_on_jump_just_pressed"]
 [connection signal="just_released" from="PlayerController/jump" to="StateMachine/Jump" method="_on_jump_just_released"]
 [connection signal="pressed" from="PlayerController/shoot" to="." method="shoot"]
 

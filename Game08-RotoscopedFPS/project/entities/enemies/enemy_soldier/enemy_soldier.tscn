@@ -1,10 +1,13 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://entities/enemies/__enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/enemies/weapons/enemy_weapon_sub.tscn" type="PackedScene" id=2]
-[ext_resource path="res://entities/enemies/enemy_soldier/states/enemy_soldier_run.gd" type="Script" id=3]
+[ext_resource path="res://entities/enemies/enemy_soldier/states/enemy_soldier_standing.gd" type="Script" id=3]
 [ext_resource path="res://entities/enemies/enemy_soldier/enemy_soldier.gd" type="Script" id=4]
 [ext_resource path="res://entities/enemies/enemy_soldier/states/enemy_soldier_dead.gd" type="Script" id=5]
+[ext_resource path="res://entities/enemies/enemy_soldier/states/enemy_soldier_pain.gd" type="Script" id=6]
+[ext_resource path="res://entities/enemies/enemy_soldier/states/enemy_soldier_chase.gd" type="Script" id=7]
+[ext_resource path="res://entities/enemies/enemy_soldier/states/enemy_soldier_missile.gd" type="Script" id=8]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 1, 0.2, 0.2, 1 )
@@ -26,7 +29,7 @@ flags_unshaded = true
 material = SubResource( 5 )
 
 [sub_resource type="BoxShape" id=7]
-extents = Vector3( 2, 2, 2 )
+extents = Vector3( 2.5, 2.5, 2.5 )
 
 [sub_resource type="CapsuleShape" id=8]
 
@@ -211,38 +214,67 @@ material/0 = null
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 shape = SubResource( 7 )
 
+[node name="PlayerDetector" parent="Hitboxes" index="1"]
+collision_layer = 16
+collision_mask = 16
+collidable_groups = [ "player_presence", "entity_presence", "enemy_presence" ]
+
 [node name="CollisionShape" parent="." index="3"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 1.5, 0 )
 shape = SubResource( 8 )
 
-[node name="RandomDirectionTimer" type="Timer" parent="." index="4"]
-autostart = true
-
-[node name="ShootTimer" type="Timer" parent="." index="5"]
-autostart = true
-
-[node name="EntityMover" parent="." index="7"]
-MAX_RUN_SPEED = 8.0
+[node name="EntityMover" parent="." index="5"]
 RUN_DECELERATION = 50.0
 JUMP_HEIGHT = 4.0
 JUMP_TIME = 0.35
 is_relative = false
 
-[node name="Run" parent="StateMachine" index="0"]
+[node name="StateMachine" parent="." index="6"]
+debug_mode = false
+
+[node name="Standing" parent="StateMachine" index="0"]
 script = ExtResource( 3 )
 
-[node name="Dead" parent="StateMachine" index="1"]
-script = ExtResource( 5 )
-fsm_path = NodePath("..")
+[node name="Chase" parent="StateMachine" index="1"]
+script = ExtResource( 7 )
 
-[node name="AnimationPlayer" parent="." index="9"]
+[node name="ShootTimer" type="Timer" parent="StateMachine/Chase" index="0"]
+wait_time = 1.25
+
+[node name="ReadjustDirectionTimer" type="Timer" parent="StateMachine/Chase" index="1"]
+wait_time = 0.25
+
+[node name="Missile" parent="StateMachine" index="2"]
+script = ExtResource( 8 )
+
+[node name="CooldownTimer" type="Timer" parent="StateMachine/Missile" index="0"]
+wait_time = 0.5
+
+[node name="Pain" parent="StateMachine" index="3"]
+script = ExtResource( 6 )
+
+[node name="Dead" parent="StateMachine" index="4"]
+script = ExtResource( 5 )
+
+[node name="AnimationPlayer" parent="." index="7"]
 autoplay = "default"
 anims/default = SubResource( 9 )
 anims/die = SubResource( 10 )
 anims/hurt = SubResource( 11 )
-[connection signal="timeout" from="RandomDirectionTimer" to="." method="generate_random_direction"]
-[connection signal="timeout" from="ShootTimer" to="." method="shoot"]
-[connection signal="died" from="Health" to="StateMachine/Run" method="_on_Health_died"]
-[connection signal="health_lost" from="Health" to="StateMachine/Run" method="_on_Health_health_lost"]
-[connection signal="state_entered" from="StateMachine/Dead" to="RandomDirectionTimer" method="stop"]
+[connection signal="died" from="Health" to="StateMachine/Chase" method="_on_Health_died"]
+[connection signal="died" from="Health" to="StateMachine/Standing" method="_on_Health_died"]
+[connection signal="died" from="Health" to="StateMachine/Missile" method="_on_Health_died"]
+[connection signal="health_lost" from="Health" to="StateMachine/Chase" method="_on_Health_health_lost"]
+[connection signal="health_lost" from="Health" to="StateMachine/Standing" method="_on_Health_health_lost"]
+[connection signal="health_lost" from="Health" to="StateMachine/Missile" method="_on_Health_health_lost"]
+[connection signal="state_entered" from="StateMachine/Chase" to="StateMachine/Chase/ShootTimer" method="start"]
+[connection signal="state_entered" from="StateMachine/Chase" to="StateMachine/Chase/ReadjustDirectionTimer" method="start"]
+[connection signal="state_exited" from="StateMachine/Chase" to="StateMachine/Chase/ShootTimer" method="stop"]
+[connection signal="state_exited" from="StateMachine/Chase" to="StateMachine/Chase/ReadjustDirectionTimer" method="stop"]
+[connection signal="timeout" from="StateMachine/Chase/ShootTimer" to="StateMachine/Chase" method="_on_ShootTimer_timeout"]
+[connection signal="timeout" from="StateMachine/Chase/ReadjustDirectionTimer" to="StateMachine/Chase" method="_on_ReadjustDirectionTimer_timeout"]
+[connection signal="state_entered" from="StateMachine/Missile" to="StateMachine/Missile/CooldownTimer" method="start"]
+[connection signal="state_exited" from="StateMachine/Missile" to="StateMachine/Missile/CooldownTimer" method="stop"]
+[connection signal="timeout" from="StateMachine/Missile/CooldownTimer" to="StateMachine/Missile" method="_on_CooldownTimer_timeout"]
 [connection signal="state_entered" from="StateMachine/Dead" to="AnimationPlayer" method="play" binds= [ "die" ]]
+[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Pain" method="_on_AnimationPlayer_animation_finished"]

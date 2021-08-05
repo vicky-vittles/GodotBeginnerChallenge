@@ -4,6 +4,6 @@
 
 [node name="weapon" instance=ExtResource( 1 )]
 weapon_collidable_groups = [ "enemy_hurtbox" ]
+weapon_excluded_groups = [ "projectile", "projectile_bullet" ]
 player_use = true
-shoot_using_look_direction = true
 MAX_RANGE = 200.0
