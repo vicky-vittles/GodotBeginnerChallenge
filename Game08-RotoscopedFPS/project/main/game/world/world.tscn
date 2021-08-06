@@ -2,10 +2,10 @@
 
 [ext_resource path="res://main/game/world/world.gd" type="Script" id=1]
 [ext_resource path="res://entities/player/player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://levels/L00-Test.tscn" type="PackedScene" id=3]
-[ext_resource path="res://main/game/world/scripts/enemies.gd" type="Script" id=4]
+[ext_resource path="res://levels/L00_Test.tscn" type="PackedScene" id=3]
+[ext_resource path="res://libs/gt_currency/gt_currency.gd" type="Script" id=4]
 
-[node name="world" type="Spatial"]
+[node name="World" type="Spatial"]
 script = ExtResource( 1 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
@@ -13,14 +13,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
 
 [node name="Level" parent="." instance=ExtResource( 3 )]
 
-[node name="Enemies" type="Spatial" parent="."]
+[node name="CheckpointManager" type="Node" parent="."]
 script = ExtResource( 4 )
-__meta__ = {
-"_edit_lock_": true
-}
 
-[node name="Projectiles" type="Spatial" parent="."]
-__meta__ = {
-"_edit_lock_": true
-}
 [connection signal="died" from="Player" to="." method="_on_Player_died"]
+[connection signal="checkpoint_reached" from="Level" to="." method="checkpoint_reached"]

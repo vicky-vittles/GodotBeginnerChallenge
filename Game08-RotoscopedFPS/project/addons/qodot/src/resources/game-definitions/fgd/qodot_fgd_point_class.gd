@@ -1,5 +1,5 @@
-class_name QodotFGDPointClass
 extends QodotFGDClass
+class_name QodotFGDPointClass
 tool
 
 func _init() -> void:

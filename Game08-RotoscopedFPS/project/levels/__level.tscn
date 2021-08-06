@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://addons/qodot/src/nodes/qodot_map.gd" type="Script" id=1]
-[ext_resource path="res://addons/qodot/game_definitions/fgd/qodot_fgd.tres" type="Resource" id=2]
+[ext_resource path="res://scenes/file_manager/file_manager.gd" type="Script" id=2]
 [ext_resource path="res://levels/__level.gd" type="Script" id=3]
+[ext_resource path="res://levels/scripts/level_root.gd" type="Script" id=4]
+[ext_resource path="res://addons/qodot/game_definitions/fgd/qodot_fgd.tres" type="Resource" id=5]
 
 [sub_resource type="SpatialMaterial" id=1]
 
@@ -13,10 +15,19 @@ __meta__ = {
 }
 
 [node name="root" type="Spatial" parent="."]
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="map" type="Spatial" parent="root"]
 script = ExtResource( 1 )
-map_file = ""
+__meta__ = {
+"_edit_lock_": true
+}
+map_file = "E:/VitorDavi/Minhas Coisas/Game Design Journey/Godot/GameProjects/GodotBeginnerChallenge/Game08-RotoscopedFPS/project/addons/qodot/maps/g08-test00.map"
 inverse_scale_factor = 16.0
-entity_fgd = ExtResource( 2 )
+entity_fgd = ExtResource( 5 )
 base_texture_dir = "res://addons/qodot/textures"
 texture_file_extension = "png"
 worldspawn_layers = [  ]
@@ -30,3 +41,8 @@ print_profiling_data = false
 use_trenchbroom_group_hierarchy = false
 tree_attach_batch_size = 16
 set_owner_batch_size = 16
+
+[node name="FileManager" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[connection signal="checkpoint_reached" from="root" to="." method="_on_checkpoint_reached"]

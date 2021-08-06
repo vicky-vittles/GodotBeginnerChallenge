@@ -27,5 +27,11 @@ func jump():
 func shoot():
 	weapon.shoot(-transform.basis.z, -camera.global_transform.basis.z)
 
+func get_info():
+	return {
+		"position": global_transform.origin,
+		"rotation": rotation,
+		"type": Globals.ENTITIES.PLAYER}
+
 func _on_Health_died(current):
 	emit_signal("died")

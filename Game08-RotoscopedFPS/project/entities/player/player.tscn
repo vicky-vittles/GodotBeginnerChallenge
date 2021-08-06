@@ -137,10 +137,11 @@ fsm_path = NodePath("../../../Player/StateMachine")
 [node name="Fall" type="Node" parent="StateMachine"]
 script = ExtResource( 5 )
 fsm_path = NodePath("../../../Player/StateMachine")
+
 [connection signal="died" from="Health" to="." method="_on_Health_died"]
 [connection signal="take_damage" from="Hitboxes/DamageHurtbox" to="Health" method="lose_health"]
-[connection signal="just_pressed" from="PlayerController/jump" to="StateMachine/Idle" method="_on_jump_just_pressed"]
 [connection signal="just_pressed" from="PlayerController/jump" to="StateMachine/Run" method="_on_jump_just_pressed"]
+[connection signal="just_pressed" from="PlayerController/jump" to="StateMachine/Idle" method="_on_jump_just_pressed"]
 [connection signal="just_released" from="PlayerController/jump" to="StateMachine/Jump" method="_on_jump_just_released"]
 [connection signal="pressed" from="PlayerController/shoot" to="." method="shoot"]
 

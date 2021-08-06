@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://entities/enemies/assets/yellow_cube.tres" type="CubeMesh" id=1]
+[ext_resource path="res://entities/enemies/assets/red_capsule.tres" type="CapsuleMesh" id=2]
+[ext_resource path="res://entities/enemies/enemy_soldier_corpse/enemy_soldier_corpse.gd" type="Script" id=3]
+
+[node name="EnemySoldierCorpse" type="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+script = ExtResource( 3 )
+entity_type = 3
+
+[node name="Graphics" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1, -1.5 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="head" type="MeshInstance" parent="Graphics"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2, -1 )
+mesh = ExtResource( 1 )
+material/0 = null
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="body" type="MeshInstance" parent="Graphics"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.5, 0 )
+mesh = ExtResource( 2 )
+material/0 = null
+__meta__ = {
+"_edit_lock_": true
+}

@@ -10,7 +10,7 @@ func enter(info = null):
 	actor.animation_player.play("hurt")
 
 func _on_AnimationPlayer_animation_finished(anim_name):
-	if anim_name == "hurt":
+	if fsm.current_state == self and anim_name == "hurt":
 		if not actor.health.is_alive:
 			fsm.change_state(DEAD)
 		elif previous_state != MISSILE:

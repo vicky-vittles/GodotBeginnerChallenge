@@ -21,7 +21,9 @@ export(Array, Resource) var entity_definitions := [
 
 func set_export_file(new_export_file = true) -> void:
 	if new_export_file != export_file:
-		if Engine.is_editor_hint() and get_fgd_classes().size() > 0:
+#		if not Engine.is_editor_hint():
+#			return
+		if get_fgd_classes().size() > 0:
 			if not target_folder:
 				print("Skipping export: No target folder")
 				return
