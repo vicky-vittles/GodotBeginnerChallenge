@@ -20,7 +20,7 @@ flags_unshaded = true
 material = SubResource( 1 )
 
 [sub_resource type="BoxShape" id=3]
-extents = Vector3( 2.5, 2.5, 2.5 )
+extents = Vector3( 1.5, 2, 1.5 )
 
 [sub_resource type="CapsuleShape" id=4]
 
@@ -202,9 +202,6 @@ visible = false
 mesh = SubResource( 2 )
 material/0 = null
 
-[node name="DamageHurtbox" parent="Hitboxes" index="0"]
-visible = false
-
 [node name="CollisionShape" parent="Hitboxes/DamageHurtbox" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 shape = SubResource( 3 )
@@ -262,21 +259,21 @@ anims/default = SubResource( 5 )
 anims/die = SubResource( 6 )
 anims/hurt = SubResource( 7 )
 
-[connection signal="died" from="Health" to="StateMachine/Chase" method="_on_Health_died"]
 [connection signal="died" from="Health" to="StateMachine/Standing" method="_on_Health_died"]
+[connection signal="died" from="Health" to="StateMachine/Chase" method="_on_Health_died"]
 [connection signal="died" from="Health" to="StateMachine/Missile" method="_on_Health_died"]
-[connection signal="health_lost" from="Health" to="StateMachine/Chase" method="_on_Health_health_lost"]
 [connection signal="health_lost" from="Health" to="StateMachine/Standing" method="_on_Health_health_lost"]
+[connection signal="health_lost" from="Health" to="StateMachine/Chase" method="_on_Health_health_lost"]
 [connection signal="health_lost" from="Health" to="StateMachine/Missile" method="_on_Health_health_lost"]
-[connection signal="state_entered" from="StateMachine/Chase" to="StateMachine/Chase/ReadjustDirectionTimer" method="start"]
 [connection signal="state_entered" from="StateMachine/Chase" to="StateMachine/Chase/ShootTimer" method="start"]
-[connection signal="state_exited" from="StateMachine/Chase" to="StateMachine/Chase/ReadjustDirectionTimer" method="stop"]
+[connection signal="state_entered" from="StateMachine/Chase" to="StateMachine/Chase/ReadjustDirectionTimer" method="start"]
 [connection signal="state_exited" from="StateMachine/Chase" to="StateMachine/Chase/ShootTimer" method="stop"]
+[connection signal="state_exited" from="StateMachine/Chase" to="StateMachine/Chase/ReadjustDirectionTimer" method="stop"]
 [connection signal="timeout" from="StateMachine/Chase/ShootTimer" to="StateMachine/Chase" method="_on_ShootTimer_timeout"]
 [connection signal="timeout" from="StateMachine/Chase/ReadjustDirectionTimer" to="StateMachine/Chase" method="_on_ReadjustDirectionTimer_timeout"]
 [connection signal="state_entered" from="StateMachine/Missile" to="StateMachine/Missile/CooldownTimer" method="start"]
 [connection signal="state_exited" from="StateMachine/Missile" to="StateMachine/Missile/CooldownTimer" method="stop"]
 [connection signal="timeout" from="StateMachine/Missile/CooldownTimer" to="StateMachine/Missile" method="_on_CooldownTimer_timeout"]
 [connection signal="state_entered" from="StateMachine/Dead" to="AnimationPlayer" method="play" binds= [ "die" ]]
-[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Pain" method="_on_AnimationPlayer_animation_finished"]
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Dead" method="_on_AnimationPlayer_animation_finished"]
+[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Pain" method="_on_AnimationPlayer_animation_finished"]

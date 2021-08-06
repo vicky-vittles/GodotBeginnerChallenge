@@ -7,3 +7,6 @@ weapon_collidable_groups = [ "enemy_hurtbox" ]
 weapon_excluded_groups = [ "projectile", "projectile_bullet" ]
 player_use = true
 MAX_RANGE = 200.0
+
+[node name="weapon" parent="hud/root/bottom" index="0"]
+frame = 1

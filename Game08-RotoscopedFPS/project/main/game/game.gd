@@ -3,7 +3,7 @@ extends Spatial
 onready var world = $World
 
 #func _ready():
-#	get_node("World/Level/root/map").verify_and_build()
+##	get_node("World/Level/root/map").verify_and_build()
 ##	var qodot_fgd = load("res://addons/qodot/game_definitions/fgd/qodot_fgd.tres")
 ##	qodot_fgd.set_export_file(true)
 

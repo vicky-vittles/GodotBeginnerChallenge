@@ -18,7 +18,6 @@ func fire():
 		var collider = result.collider
 		for group in weapon_excluded_groups:
 			if collider.is_in_group(group):
-				print(collider.name)
 				return
 		for group in weapon_collidable_groups:
 			if collider.is_in_group(group) and collider.has_method("hurt"):

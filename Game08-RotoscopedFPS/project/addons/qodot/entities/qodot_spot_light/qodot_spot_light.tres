@@ -1,0 +1,29 @@
+[gd_resource type="Resource" load_steps=5 format=2]
+
+[ext_resource path="res://addons/qodot/entities/qodot_spot_light/qodot_spot_light.gd" type="Script" id=1]
+[ext_resource path="res://addons/qodot/game_definitions/fgd/base_classes/qodot_light_base_class.tres" type="Resource" id=2]
+[ext_resource path="res://entities/ext_spot_light/ext_spot_light.gd" type="Script" id=3]
+[ext_resource path="res://entities/ext_spot_light/ext_spot_light.tscn" type="PackedScene" id=4]
+
+[resource]
+script = ExtResource( 1 )
+class_options = "----------------------------------------------------------------"
+classname = "QodotSpotLight"
+description = "Godot's SpotLight node."
+qodot_internal = false
+base_classes = [ ExtResource( 2 ) ]
+class_properties = {
+}
+class_property_descriptions = {
+}
+meta_properties = {
+"color": Color( 0.8, 0.8, 0.8, 1 ),
+"size": AABB( -8, -8, -8, 8, 8, 8 )
+}
+node_options = "----------------------------------------------------------------"
+node_class = ""
+transient_node = false
+scene = "----------------------------------------------------------------"
+scene_file = ExtResource( 4 )
+scripting = "----------------------------------------------------------------"
+script_class = ExtResource( 3 )

@@ -11,14 +11,11 @@ const SAVEABLE_ENTITIES = {
 onready var map = $map
 
 func _ready():
-	var current_point = 0
 	for entity in map.get_children():
 		if entity is StaticBody:
 			entity.collision_layer = TERRAIN_COLLISION_LAYER
 			entity.collision_mask = TERRAIN_COLLISION_MASK
 		if entity is Checkpoint:
-			current_point += 1
-			entity.checkpoint_id = current_point
 			entity.connect("checkpoint_reached", self, "_on_Checkpoint_checkpoint_reached")
 
 func save_entities(file_name):
