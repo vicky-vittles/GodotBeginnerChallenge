@@ -14,4 +14,6 @@ func load_file(file_name):
 		file.open(file_name, File.READ)
 		object = file.get_var()
 		file.close()
+	else:
+		save_file(file_name, null)
 	return object

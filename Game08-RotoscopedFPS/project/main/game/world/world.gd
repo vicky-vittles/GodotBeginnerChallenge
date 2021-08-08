@@ -1,8 +1,27 @@
 extends Spatial
 
+enum LEVELS {
+	TEST_00 = 0,
+	FOREST_01 = 1}
+
+const LEVEL_SCENES = {
+	LEVELS.TEST_00: preload("res://levels/L00_Test.tscn"),
+	LEVELS.FOREST_01: preload("res://levels/L01_Forest.tscn")}
+
+export (LEVELS) var current_level = LEVELS.TEST_00
+
 onready var player = $Player
-onready var level = $Level
 onready var checkpoint_manager = $CheckpointManager
+var level
+
+func _ready():
+	load_level(current_level)
+
+func load_level(level_id):
+	var level_node = LEVEL_SCENES[level_id].instance()
+	add_child(level_node)
+	level_node.connect("checkpoint_reached", self, "checkpoint_reached")
+	level = level_node
 
 func checkpoint_reached(checkpoint):
 	var current_point = checkpoint_manager.current_amount

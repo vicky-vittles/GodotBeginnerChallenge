@@ -1,0 +1,2603 @@
+// Game: Game08-RotoscopeClone
+// Format: Standard
+// entity 0
+{
+"classname" "worldspawn"
+"_tb_textures" "textures/qodot"
+// brush 0
+{
+( 208 48 0 ) ( 192 0 2 ) ( 192 0 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 272 64 -64 ) ( 272 64 2 ) ( 208 48 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 208 48 0 ) ( 272 64 2 ) ( 192 0 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 192 0 2 ) ( 256 0 0 ) ( 256 0 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 256 0 -64 ) ( 272 64 -64 ) ( 208 48 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 192 0 2 ) ( 272 64 2 ) ( 256 0 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 256 0 0 ) ( 272 64 2 ) ( 272 64 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 1
+{
+( 144 0 -64 ) ( 128 64 -64 ) ( 128 64 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 144 0 2 ) ( 192 0 2 ) ( 192 0 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 128 64 4 ) ( 192 0 2 ) ( 144 0 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 192 0 -64 ) ( 208 48 -64 ) ( 128 64 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 128 64 4 ) ( 208 48 0 ) ( 192 0 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 208 48 -64 ) ( 208 48 0 ) ( 128 64 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 192 0 2 ) ( 208 48 0 ) ( 208 48 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 2
+{
+( 64 0 -64 ) ( 48 80 -64 ) ( 48 80 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 48 80 0 ) ( 128 64 4 ) ( 64 0 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 0 4 ) ( 144 0 2 ) ( 144 0 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 0 -64 ) ( 144 0 -64 ) ( 128 64 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 128 64 4 ) ( 144 0 2 ) ( 64 0 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 128 64 -64 ) ( 128 64 4 ) ( 48 80 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 144 0 -64 ) ( 144 0 2 ) ( 128 64 4 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 3
+{
+( 0 48 4 ) ( 0 0 4 ) ( 0 0 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 48 80 -64 ) ( 48 80 0 ) ( 0 48 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 0 4 ) ( 64 0 4 ) ( 64 0 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 0 -64 ) ( 64 0 -64 ) ( 48 80 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 48 4 ) ( 64 0 4 ) ( 0 0 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 48 80 0 ) ( 64 0 4 ) ( 0 48 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 0 -64 ) ( 64 0 4 ) ( 48 80 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 4
+{
+( 64 128 4 ) ( 48 80 0 ) ( 48 80 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 144 144 -64 ) ( 144 144 2 ) ( 64 128 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 48 80 0 ) ( 128 64 4 ) ( 128 64 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 128 4 ) ( 128 64 4 ) ( 48 80 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 128 64 -64 ) ( 144 144 -64 ) ( 64 128 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 128 4 ) ( 144 144 2 ) ( 128 64 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 128 64 4 ) ( 144 144 2 ) ( 144 144 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 5
+{
+( 144 144 2 ) ( 128 64 4 ) ( 128 64 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 128 64 4 ) ( 208 48 0 ) ( 208 48 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 128 64 -64 ) ( 208 48 -64 ) ( 192 128 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 144 144 2 ) ( 192 128 2 ) ( 128 64 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 192 128 2 ) ( 208 48 0 ) ( 128 64 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 192 128 -64 ) ( 192 128 2 ) ( 144 144 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 208 48 -64 ) ( 208 48 0 ) ( 192 128 2 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 6
+{
+( 208 48 -64 ) ( 192 128 -64 ) ( 192 128 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 192 128 2 ) ( 272 64 2 ) ( 208 48 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 208 48 -64 ) ( 272 64 -64 ) ( 240 128 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 240 128 -64 ) ( 240 128 0 ) ( 192 128 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 240 128 0 ) ( 272 64 2 ) ( 192 128 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 208 48 0 ) ( 272 64 2 ) ( 272 64 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 272 64 -64 ) ( 272 64 2 ) ( 240 128 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 7
+{
+( 144 144 -64 ) ( 112 224 -64 ) ( 112 224 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 144 144 2 ) ( 192 128 2 ) ( 192 128 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 112 224 0 ) ( 192 192 2 ) ( 144 144 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 192 128 -64 ) ( 192 192 -64 ) ( 112 224 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 144 144 2 ) ( 192 192 2 ) ( 192 128 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 192 192 -64 ) ( 192 192 2 ) ( 112 224 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 192 128 2 ) ( 192 192 2 ) ( 192 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 8
+{
+( 64 192 4 ) ( 64 128 4 ) ( 64 128 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 112 224 -64 ) ( 112 224 0 ) ( 64 192 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 128 -64 ) ( 144 144 -64 ) ( 112 224 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 192 4 ) ( 144 144 2 ) ( 64 128 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 112 224 0 ) ( 144 144 2 ) ( 64 192 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 128 4 ) ( 144 144 2 ) ( 144 144 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 144 144 -64 ) ( 144 144 2 ) ( 112 224 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 9
+{
+( 0 192 4 ) ( 0 144 4 ) ( 0 144 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 144 4 ) ( 64 128 4 ) ( 64 128 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 128 -64 ) ( 64 192 -64 ) ( 0 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 192 4 ) ( 64 192 4 ) ( 64 128 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 192 -64 ) ( 64 192 4 ) ( 0 192 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 128 4 ) ( 64 192 4 ) ( 64 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 10
+{
+( 0 272 4 ) ( 0 192 4 ) ( 0 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 192 4 ) ( 64 192 4 ) ( 64 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 192 -64 ) ( 80 272 -64 ) ( 0 272 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 272 4 ) ( 64 192 4 ) ( 0 192 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 80 272 -64 ) ( 80 272 0 ) ( 0 272 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 272 4 ) ( 80 272 0 ) ( 64 192 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 192 4 ) ( 80 272 0 ) ( 80 272 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 11
+{
+( 80 272 0 ) ( 64 192 4 ) ( 64 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 80 272 0 ) ( 144 256 2 ) ( 64 192 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 112 224 -64 ) ( 144 256 -64 ) ( 80 272 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 144 256 -64 ) ( 144 256 2 ) ( 80 272 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 192 4 ) ( 144 256 2 ) ( 112 224 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 192 4 ) ( 112 224 0 ) ( 112 224 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 112 224 0 ) ( 144 256 2 ) ( 144 256 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 12
+{
+( 144 256 2 ) ( 112 224 0 ) ( 112 224 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 112 224 0 ) ( 192 192 2 ) ( 192 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 144 256 2 ) ( 192 192 2 ) ( 112 224 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 192 192 -64 ) ( 208 240 -64 ) ( 144 256 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 144 256 2 ) ( 208 240 0 ) ( 192 192 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 208 240 -64 ) ( 208 240 0 ) ( 144 256 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 192 192 2 ) ( 208 240 0 ) ( 208 240 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 13
+{
+( 192 192 2 ) ( 192 128 2 ) ( 192 128 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 192 128 2 ) ( 240 128 0 ) ( 240 128 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 240 128 -64 ) ( 272 192 -64 ) ( 192 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 192 192 2 ) ( 272 192 2 ) ( 192 128 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 272 192 -64 ) ( 272 192 2 ) ( 192 192 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 192 128 2 ) ( 272 192 2 ) ( 240 128 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 240 128 0 ) ( 272 192 2 ) ( 272 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 14
+{
+( 208 240 0 ) ( 192 192 2 ) ( 192 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 256 256 -64 ) ( 256 256 0 ) ( 208 240 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 208 240 0 ) ( 256 256 0 ) ( 192 192 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 192 192 2 ) ( 272 192 2 ) ( 272 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 192 192 -64 ) ( 272 192 -64 ) ( 256 256 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 256 256 0 ) ( 272 192 2 ) ( 192 192 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 272 192 -64 ) ( 272 192 2 ) ( 256 256 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 15
+{
+( 0 144 4 ) ( 0 48 4 ) ( 0 48 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 48 80 -64 ) ( 64 128 -64 ) ( 0 144 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 144 4 ) ( 64 128 4 ) ( 0 48 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 48 4 ) ( 64 128 4 ) ( 48 80 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 128 -64 ) ( 64 128 4 ) ( 0 144 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 48 4 ) ( 48 80 0 ) ( 48 80 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 48 80 0 ) ( 64 128 4 ) ( 64 128 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 16
+{
+( 224 336 2 ) ( 208 240 0 ) ( 208 240 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 256 256 -64 ) ( 288 304 -64 ) ( 224 336 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 224 336 2 ) ( 256 256 0 ) ( 208 240 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 224 336 2 ) ( 288 304 0 ) ( 256 256 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 208 240 0 ) ( 256 256 0 ) ( 256 256 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 288 304 -64 ) ( 288 304 0 ) ( 224 336 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 256 256 0 ) ( 288 304 0 ) ( 288 304 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 17
+{
+( 160 336 4 ) ( 144 256 2 ) ( 144 256 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 144 256 2 ) ( 208 240 0 ) ( 208 240 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 208 240 -64 ) ( 224 336 -64 ) ( 160 336 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 224 336 -64 ) ( 224 336 2 ) ( 160 336 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 160 336 4 ) ( 208 240 0 ) ( 144 256 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 160 336 4 ) ( 224 336 2 ) ( 208 240 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 208 240 0 ) ( 224 336 2 ) ( 224 336 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 18
+{
+( 80 272 -64 ) ( 64 320 -64 ) ( 64 320 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 80 272 0 ) ( 144 256 2 ) ( 144 256 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 160 336 -64 ) ( 160 336 4 ) ( 64 320 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 320 4 ) ( 144 256 2 ) ( 80 272 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 144 256 -64 ) ( 160 336 -64 ) ( 64 320 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 320 4 ) ( 160 336 4 ) ( 144 256 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 144 256 2 ) ( 160 336 4 ) ( 160 336 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 19
+{
+( 0 320 4 ) ( 0 272 4 ) ( 0 272 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 272 4 ) ( 80 272 0 ) ( 80 272 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 272 -64 ) ( 80 272 -64 ) ( 64 320 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 320 4 ) ( 64 320 4 ) ( 0 272 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 320 -64 ) ( 64 320 4 ) ( 0 320 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 320 4 ) ( 80 272 0 ) ( 0 272 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 80 272 -64 ) ( 80 272 0 ) ( 64 320 4 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 20
+{
+( 0 384 4 ) ( 0 320 4 ) ( 0 320 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 320 4 ) ( 64 320 4 ) ( 64 320 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 320 -64 ) ( 80 368 -64 ) ( 0 384 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 384 4 ) ( 64 320 4 ) ( 0 320 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 384 4 ) ( 80 368 0 ) ( 64 320 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 80 368 -64 ) ( 80 368 0 ) ( 0 384 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 320 4 ) ( 80 368 0 ) ( 80 368 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 21
+{
+( 80 368 0 ) ( 64 320 4 ) ( 64 320 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 128 384 -64 ) ( 128 384 4 ) ( 80 368 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 80 368 0 ) ( 128 384 4 ) ( 64 320 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 320 -64 ) ( 160 336 -64 ) ( 128 384 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 128 384 4 ) ( 160 336 4 ) ( 64 320 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 320 4 ) ( 160 336 4 ) ( 160 336 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 160 336 -64 ) ( 160 336 4 ) ( 128 384 4 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 22
+{
+( 160 336 -64 ) ( 128 384 -64 ) ( 128 384 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 160 336 4 ) ( 224 336 2 ) ( 224 336 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 160 336 -64 ) ( 224 336 -64 ) ( 192 384 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 192 384 -64 ) ( 192 384 2 ) ( 128 384 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 160 336 4 ) ( 128 384 4 ) ( 192 384 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 224 336 -64 ) ( 224 336 2 ) ( 192 384 2 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 23
+{
+( 224 336 -64 ) ( 192 384 -64 ) ( 192 384 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 224 336 2 ) ( 288 304 0 ) ( 288 304 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 224 336 -64 ) ( 288 304 -64 ) ( 240 384 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 240 384 -64 ) ( 240 384 0 ) ( 192 384 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 192 384 2 ) ( 240 384 0 ) ( 224 336 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 240 384 0 ) ( 288 304 0 ) ( 224 336 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 288 304 -64 ) ( 288 304 0 ) ( 240 384 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 24
+{
+( 192 384 -64 ) ( 160 464 -64 ) ( 160 464 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 192 384 2 ) ( 240 384 0 ) ( 240 384 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 240 384 -64 ) ( 272 448 -64 ) ( 160 464 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 160 464 4 ) ( 272 448 2 ) ( 192 384 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 192 384 2 ) ( 272 448 2 ) ( 240 384 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 272 448 -64 ) ( 272 448 2 ) ( 160 464 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 240 384 0 ) ( 272 448 2 ) ( 272 448 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 25
+{
+( 128 384 -64 ) ( 96 448 -64 ) ( 96 448 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 160 464 -64 ) ( 160 464 4 ) ( 96 448 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 128 384 4 ) ( 192 384 2 ) ( 192 384 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 128 384 -64 ) ( 192 384 -64 ) ( 160 464 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 96 448 4 ) ( 160 464 4 ) ( 128 384 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 160 464 4 ) ( 192 384 2 ) ( 128 384 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 160 464 4 ) ( 160 464 -64 ) ( 192 384 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 26
+{
+( 80 368 -64 ) ( 48 464 -64 ) ( 48 464 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 48 464 0 ) ( 96 448 4 ) ( 80 368 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 96 448 4 ) ( 128 384 4 ) ( 80 368 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 80 368 -64 ) ( 128 384 -64 ) ( 96 448 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 80 368 0 ) ( 128 384 4 ) ( 128 384 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 96 448 -64 ) ( 96 448 4 ) ( 48 464 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 128 384 -64 ) ( 128 384 4 ) ( 96 448 4 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 27
+{
+( 0 448 4 ) ( 0 384 4 ) ( 0 384 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 48 464 -64 ) ( 48 464 0 ) ( 0 448 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 384 4 ) ( 80 368 0 ) ( 80 368 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 384 -64 ) ( 80 368 -64 ) ( 48 464 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 448 4 ) ( 80 368 0 ) ( 0 384 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 48 464 0 ) ( 80 368 0 ) ( 0 448 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 80 368 -64 ) ( 80 368 0 ) ( 48 464 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 28
+{
+( 0 512 4 ) ( 0 448 4 ) ( 0 448 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 512 4 ) ( 32 512 6 ) ( 0 448 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 448 -64 ) ( 48 464 -64 ) ( 32 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 32 512 -64 ) ( 32 512 6 ) ( 0 512 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 32 512 6 ) ( 48 464 0 ) ( 0 448 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 448 4 ) ( 48 464 0 ) ( 48 464 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 48 464 -64 ) ( 48 464 0 ) ( 32 512 6 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 29
+{
+( 48 464 -64 ) ( 32 512 -64 ) ( 32 512 6 ) qodot/TINYLEAVES 0 0 0 1 1
+( 48 464 0 ) ( 96 448 4 ) ( 96 448 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 32 512 6 ) ( 96 448 4 ) ( 48 464 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 96 448 -64 ) ( 112 512 -64 ) ( 32 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 112 512 -64 ) ( 112 512 0 ) ( 32 512 6 ) qodot/TINYLEAVES 0 0 0 1 1
+( 32 512 6 ) ( 112 512 0 ) ( 96 448 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 96 448 4 ) ( 112 512 0 ) ( 112 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 30
+{
+( 112 512 0 ) ( 96 448 4 ) ( 96 448 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 112 512 0 ) ( 160 464 4 ) ( 96 448 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 160 464 -64 ) ( 208 512 -64 ) ( 112 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 112 512 0 ) ( 208 512 0 ) ( 160 464 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 208 512 -64 ) ( 208 512 0 ) ( 112 512 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 96 448 4 ) ( 160 464 4 ) ( 160 464 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 160 464 4 ) ( 208 512 0 ) ( 208 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 31
+{
+( 208 512 0 ) ( 160 464 4 ) ( 160 464 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 160 464 4 ) ( 272 448 2 ) ( 272 448 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 160 464 -64 ) ( 272 448 -64 ) ( 256 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 208 512 0 ) ( 256 512 0 ) ( 160 464 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 256 512 -64 ) ( 256 512 0 ) ( 208 512 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 256 512 0 ) ( 272 448 2 ) ( 160 464 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 272 448 -64 ) ( 272 448 2 ) ( 256 512 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 32
+{
+( 464 256 -64 ) ( 448 320 -64 ) ( 448 320 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 464 256 0 ) ( 512 240 2 ) ( 512 240 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 336 -64 ) ( 512 336 2 ) ( 448 320 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 320 2 ) ( 512 240 2 ) ( 464 256 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 240 -64 ) ( 512 336 -64 ) ( 448 320 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 320 2 ) ( 512 336 2 ) ( 512 240 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 240 2 ) ( 512 336 2 ) ( 512 336 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 33
+{
+( 400 304 2 ) ( 400 240 2 ) ( 400 240 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 400 304 2 ) ( 400 304 -64 ) ( 448 320 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 400 240 -64 ) ( 464 256 -64 ) ( 448 320 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 400 304 2 ) ( 448 320 2 ) ( 400 240 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 320 2 ) ( 464 256 0 ) ( 400 240 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 400 240 2 ) ( 464 256 0 ) ( 464 256 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 464 256 -64 ) ( 464 256 0 ) ( 448 320 2 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 34
+{
+( 352 336 0 ) ( 320 256 4 ) ( 320 256 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 256 4 ) ( 400 240 2 ) ( 400 240 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 352 336 0 ) ( 400 304 2 ) ( 320 256 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 400 240 -64 ) ( 400 304 -64 ) ( 352 336 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 256 4 ) ( 400 304 2 ) ( 400 240 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 400 304 -64 ) ( 400 304 2 ) ( 352 336 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 400 240 2 ) ( 400 304 2 ) ( 400 304 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 35
+{
+( 288 304 0 ) ( 256 256 0 ) ( 256 256 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 352 336 -64 ) ( 352 336 0 ) ( 288 304 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 288 304 0 ) ( 320 256 4 ) ( 256 256 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 288 304 0 ) ( 352 336 0 ) ( 320 256 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 256 256 0 ) ( 320 256 4 ) ( 320 256 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 256 -64 ) ( 352 336 -64 ) ( 288 304 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 256 4 ) ( 352 336 0 ) ( 352 336 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 36
+{
+( 288 304 -64 ) ( 240 384 -64 ) ( 240 384 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 336 400 -64 ) ( 336 400 0 ) ( 240 384 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 288 304 -64 ) ( 352 336 -64 ) ( 336 400 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 336 400 0 ) ( 352 336 0 ) ( 288 304 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 288 304 0 ) ( 352 336 0 ) ( 352 336 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 352 336 -64 ) ( 352 336 0 ) ( 336 400 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 37
+{
+( 352 336 -64 ) ( 336 400 -64 ) ( 336 400 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 352 336 0 ) ( 400 304 2 ) ( 400 304 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 336 400 0 ) ( 400 304 2 ) ( 352 336 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 352 336 -64 ) ( 400 304 -64 ) ( 384 384 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 384 384 0 ) ( 400 304 2 ) ( 336 400 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 384 384 -64 ) ( 384 384 0 ) ( 336 400 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 400 304 -64 ) ( 400 304 2 ) ( 384 384 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 38
+{
+( 400 304 -64 ) ( 384 384 -64 ) ( 384 384 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 384 384 0 ) ( 432 384 4 ) ( 400 304 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 400 304 -64 ) ( 448 320 -64 ) ( 432 384 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 432 384 -64 ) ( 432 384 4 ) ( 384 384 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 432 384 4 ) ( 448 320 2 ) ( 400 304 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 400 304 2 ) ( 448 320 2 ) ( 448 320 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 320 -64 ) ( 448 320 2 ) ( 432 384 4 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 39
+{
+( 448 320 -64 ) ( 432 384 -64 ) ( 432 384 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 336 -64 ) ( 512 384 -64 ) ( 432 384 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 384 -64 ) ( 512 384 2 ) ( 432 384 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 432 384 4 ) ( 512 336 2 ) ( 448 320 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 432 384 4 ) ( 512 384 2 ) ( 512 336 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 320 2 ) ( 512 336 2 ) ( 512 336 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 336 2 ) ( 512 384 2 ) ( 512 384 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 40
+{
+( 448 448 2 ) ( 432 384 4 ) ( 432 384 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 432 384 4 ) ( 512 384 2 ) ( 512 384 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 384 -64 ) ( 512 416 -64 ) ( 448 448 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 448 2 ) ( 512 416 2 ) ( 432 384 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 432 384 4 ) ( 512 416 2 ) ( 512 384 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 416 -64 ) ( 512 416 2 ) ( 448 448 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 384 2 ) ( 512 416 2 ) ( 512 416 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 41
+{
+( 384 464 0 ) ( 384 384 0 ) ( 384 384 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 384 464 0 ) ( 432 384 4 ) ( 384 384 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 384 464 0 ) ( 448 448 2 ) ( 432 384 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 384 384 0 ) ( 432 384 4 ) ( 432 384 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 432 384 -64 ) ( 448 448 -64 ) ( 384 464 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 448 -64 ) ( 448 448 2 ) ( 384 464 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 432 384 4 ) ( 448 448 2 ) ( 448 448 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 42
+{
+( 336 400 -64 ) ( 320 448 -64 ) ( 320 448 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 336 400 0 ) ( 384 384 0 ) ( 384 384 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 384 464 -64 ) ( 384 464 0 ) ( 320 448 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 448 4 ) ( 384 384 0 ) ( 336 400 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 384 384 -64 ) ( 384 464 -64 ) ( 320 448 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 448 4 ) ( 384 464 0 ) ( 384 384 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 384 384 0 ) ( 384 464 0 ) ( 384 464 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 43
+{
+( 272 448 2 ) ( 240 384 0 ) ( 240 384 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 272 448 2 ) ( 320 448 4 ) ( 240 384 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 240 384 -64 ) ( 336 400 -64 ) ( 320 448 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 448 -64 ) ( 320 448 4 ) ( 272 448 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 448 4 ) ( 336 400 0 ) ( 240 384 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 240 384 0 ) ( 336 400 0 ) ( 336 400 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 336 400 -64 ) ( 336 400 0 ) ( 320 448 4 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 44
+{
+( 272 448 -64 ) ( 256 512 -64 ) ( 256 512 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 256 512 0 ) ( 320 448 4 ) ( 272 448 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 272 448 2 ) ( 320 448 4 ) ( 320 448 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 272 448 -64 ) ( 320 448 -64 ) ( 304 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 304 512 0 ) ( 320 448 4 ) ( 256 512 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 304 512 -64 ) ( 304 512 0 ) ( 256 512 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 448 -64 ) ( 320 448 4 ) ( 304 512 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 45
+{
+( 320 448 -64 ) ( 304 512 -64 ) ( 304 512 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 384 464 -64 ) ( 384 512 -64 ) ( 304 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 304 512 0 ) ( 384 512 0 ) ( 320 448 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 384 512 -64 ) ( 384 512 0 ) ( 304 512 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 448 4 ) ( 384 512 0 ) ( 384 464 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 448 4 ) ( 384 464 0 ) ( 384 464 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 384 464 0 ) ( 384 512 0 ) ( 384 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 46
+{
+( 384 512 0 ) ( 384 464 0 ) ( 384 464 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 384 464 0 ) ( 448 448 2 ) ( 448 448 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 384 512 0 ) ( 448 448 2 ) ( 384 464 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 448 -64 ) ( 464 512 -64 ) ( 384 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 384 512 0 ) ( 464 512 0 ) ( 448 448 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 464 512 -64 ) ( 464 512 0 ) ( 384 512 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 448 2 ) ( 464 512 0 ) ( 464 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 47
+{
+( 464 512 0 ) ( 448 448 2 ) ( 448 448 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 448 2 ) ( 512 416 2 ) ( 512 416 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 464 512 0 ) ( 512 512 2 ) ( 448 448 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 416 -64 ) ( 512 512 -64 ) ( 464 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 448 2 ) ( 512 512 2 ) ( 512 416 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 512 -64 ) ( 512 512 2 ) ( 464 512 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 416 2 ) ( 512 512 2 ) ( 512 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 48
+{
+( 448 64 2 ) ( 448 0 2 ) ( 448 0 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 0 2 ) ( 512 0 2 ) ( 512 0 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 0 -64 ) ( 512 64 -64 ) ( 448 64 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 64 2 ) ( 512 64 2 ) ( 512 0 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 64 -64 ) ( 512 64 2 ) ( 448 64 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 0 2 ) ( 512 64 2 ) ( 512 64 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 49
+{
+( 400 80 2 ) ( 368 0 0 ) ( 368 0 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 400 80 2 ) ( 448 0 2 ) ( 368 0 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 368 0 0 ) ( 448 0 2 ) ( 448 0 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 0 -64 ) ( 448 64 -64 ) ( 400 80 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 400 80 2 ) ( 448 64 2 ) ( 448 0 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 64 -64 ) ( 448 64 2 ) ( 400 80 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 0 2 ) ( 448 64 2 ) ( 448 64 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 50
+{
+( 336 64 0 ) ( 320 0 4 ) ( 320 0 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 400 80 -64 ) ( 400 80 2 ) ( 336 64 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 336 64 0 ) ( 400 80 2 ) ( 320 0 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 0 4 ) ( 368 0 0 ) ( 368 0 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 368 0 -64 ) ( 400 80 -64 ) ( 336 64 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 0 4 ) ( 400 80 2 ) ( 368 0 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 368 0 0 ) ( 400 80 2 ) ( 400 80 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 51
+{
+( 272 64 2 ) ( 256 0 0 ) ( 256 0 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 272 64 2 ) ( 320 0 4 ) ( 256 0 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 256 0 0 ) ( 320 0 4 ) ( 320 0 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 0 -64 ) ( 336 64 -64 ) ( 272 64 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 336 64 -64 ) ( 336 64 0 ) ( 272 64 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 272 64 2 ) ( 336 64 0 ) ( 320 0 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 0 4 ) ( 336 64 0 ) ( 336 64 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 52
+{
+( 272 64 -64 ) ( 240 128 -64 ) ( 240 128 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 240 128 0 ) ( 320 128 4 ) ( 272 64 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 272 64 2 ) ( 336 64 0 ) ( 336 64 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 272 64 -64 ) ( 336 64 -64 ) ( 320 128 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 128 -64 ) ( 320 128 4 ) ( 240 128 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 128 4 ) ( 336 64 0 ) ( 272 64 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 336 64 -64 ) ( 336 64 0 ) ( 320 128 4 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 53
+{
+( 336 64 -64 ) ( 320 128 -64 ) ( 320 128 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 128 4 ) ( 400 80 2 ) ( 336 64 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 336 64 -64 ) ( 400 80 -64 ) ( 384 128 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 384 128 -64 ) ( 384 128 0 ) ( 320 128 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 384 128 0 ) ( 400 80 2 ) ( 320 128 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 336 64 0 ) ( 400 80 2 ) ( 400 80 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 400 80 -64 ) ( 400 80 2 ) ( 384 128 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 54
+{
+( 400 80 -64 ) ( 384 128 -64 ) ( 384 128 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 400 80 2 ) ( 448 64 2 ) ( 448 64 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 64 -64 ) ( 464 112 -64 ) ( 384 128 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 384 128 0 ) ( 464 112 0 ) ( 400 80 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 400 80 2 ) ( 464 112 0 ) ( 448 64 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 464 112 -64 ) ( 464 112 0 ) ( 384 128 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 64 2 ) ( 464 112 0 ) ( 464 112 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 55
+{
+( 464 112 0 ) ( 448 64 2 ) ( 448 64 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 464 112 0 ) ( 464 112 -64 ) ( 512 128 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 464 112 0 ) ( 512 128 2 ) ( 448 64 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 64 2 ) ( 512 64 2 ) ( 512 64 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 64 -64 ) ( 512 128 -64 ) ( 464 112 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 64 2 ) ( 512 128 2 ) ( 512 64 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 64 2 ) ( 512 128 2 ) ( 512 128 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 56
+{
+( 464 112 -64 ) ( 448 192 -64 ) ( 448 192 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 192 2 ) ( 512 128 2 ) ( 464 112 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 128 -64 ) ( 512 192 -64 ) ( 448 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 192 2 ) ( 512 192 2 ) ( 512 128 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 192 -64 ) ( 512 192 2 ) ( 448 192 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 464 112 0 ) ( 512 128 2 ) ( 512 128 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 128 2 ) ( 512 192 2 ) ( 512 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 57
+{
+( 384 128 -64 ) ( 368 192 -64 ) ( 368 192 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 384 128 0 ) ( 464 112 0 ) ( 464 112 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 368 192 0 ) ( 448 192 2 ) ( 384 128 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 192 2 ) ( 464 112 0 ) ( 384 128 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 384 128 -64 ) ( 464 112 -64 ) ( 448 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 192 -64 ) ( 448 192 2 ) ( 368 192 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 464 112 -64 ) ( 464 112 0 ) ( 448 192 2 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 58
+{
+( 320 192 4 ) ( 320 128 4 ) ( 320 128 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 128 4 ) ( 384 128 0 ) ( 384 128 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 128 -64 ) ( 384 128 -64 ) ( 368 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 368 192 -64 ) ( 368 192 0 ) ( 320 192 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 192 4 ) ( 384 128 0 ) ( 320 128 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 368 192 0 ) ( 384 128 0 ) ( 320 192 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 384 128 -64 ) ( 384 128 0 ) ( 368 192 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 59
+{
+( 272 192 2 ) ( 240 128 0 ) ( 240 128 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 272 192 2 ) ( 320 128 4 ) ( 240 128 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 272 192 2 ) ( 320 192 4 ) ( 320 128 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 240 128 0 ) ( 320 128 4 ) ( 320 128 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 128 -64 ) ( 320 192 -64 ) ( 272 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 192 -64 ) ( 320 192 4 ) ( 272 192 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 128 4 ) ( 320 192 4 ) ( 320 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 60
+{
+( 272 192 -64 ) ( 256 256 -64 ) ( 256 256 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 256 256 0 ) ( 320 256 4 ) ( 272 192 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 272 192 2 ) ( 320 256 4 ) ( 320 192 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 272 192 2 ) ( 320 192 4 ) ( 320 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 192 -64 ) ( 320 256 -64 ) ( 256 256 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 256 -64 ) ( 320 256 4 ) ( 256 256 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 192 4 ) ( 320 256 4 ) ( 320 256 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 61
+{
+( 320 256 4 ) ( 320 192 4 ) ( 320 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 192 4 ) ( 368 192 0 ) ( 368 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 368 192 -64 ) ( 400 240 -64 ) ( 320 256 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 256 4 ) ( 400 240 2 ) ( 320 192 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 192 4 ) ( 400 240 2 ) ( 368 192 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 400 240 -64 ) ( 400 240 2 ) ( 320 256 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 368 192 0 ) ( 400 240 2 ) ( 400 240 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 62
+{
+( 400 240 2 ) ( 368 192 0 ) ( 368 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 400 240 2 ) ( 400 240 -64 ) ( 464 256 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 400 240 2 ) ( 448 192 2 ) ( 368 192 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 368 192 0 ) ( 448 192 2 ) ( 448 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 192 -64 ) ( 464 256 -64 ) ( 400 240 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 400 240 2 ) ( 464 256 0 ) ( 448 192 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 192 2 ) ( 464 256 0 ) ( 464 256 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 63
+{
+( 464 256 0 ) ( 448 192 2 ) ( 448 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 464 256 0 ) ( 512 240 2 ) ( 448 192 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 192 2 ) ( 512 192 2 ) ( 512 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 192 -64 ) ( 512 240 -64 ) ( 464 256 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 192 2 ) ( 512 240 2 ) ( 512 192 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 240 -64 ) ( 512 240 2 ) ( 464 256 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 192 2 ) ( 512 240 2 ) ( 512 240 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 64
+{
+( 0 560 4 ) ( 0 512 4 ) ( 0 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 48 592 -64 ) ( 48 592 0 ) ( 0 560 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 512 4 ) ( 64 512 4 ) ( 64 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 512 -64 ) ( 64 512 -64 ) ( 48 592 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 560 4 ) ( 64 512 4 ) ( 0 512 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 48 592 0 ) ( 64 512 4 ) ( 0 560 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 512 -64 ) ( 64 512 4 ) ( 48 592 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 65
+{
+( 64 512 -64 ) ( 48 592 -64 ) ( 48 592 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 48 592 0 ) ( 128 576 4 ) ( 64 512 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 512 4 ) ( 144 512 2 ) ( 144 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 512 -64 ) ( 144 512 -64 ) ( 128 576 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 128 576 4 ) ( 144 512 2 ) ( 64 512 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 128 576 -64 ) ( 128 576 4 ) ( 48 592 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 144 512 -64 ) ( 144 512 2 ) ( 128 576 4 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 66
+{
+( 208 560 0 ) ( 192 512 2 ) ( 192 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 272 576 -64 ) ( 272 576 2 ) ( 208 560 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 208 560 0 ) ( 272 576 2 ) ( 192 512 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 192 512 2 ) ( 256 512 0 ) ( 256 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 256 512 -64 ) ( 272 576 -64 ) ( 208 560 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 192 512 2 ) ( 272 576 2 ) ( 256 512 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 256 512 0 ) ( 272 576 2 ) ( 272 576 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 67
+{
+( 272 576 2 ) ( 256 512 0 ) ( 256 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 272 576 2 ) ( 320 512 4 ) ( 256 512 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 256 512 0 ) ( 320 512 4 ) ( 320 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 512 -64 ) ( 336 576 -64 ) ( 272 576 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 336 576 -64 ) ( 336 576 0 ) ( 272 576 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 272 576 2 ) ( 336 576 0 ) ( 320 512 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 512 4 ) ( 336 576 0 ) ( 336 576 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 68
+{
+( 336 576 0 ) ( 320 512 4 ) ( 320 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 400 592 -64 ) ( 400 592 2 ) ( 336 576 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 336 576 0 ) ( 400 592 2 ) ( 320 512 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 512 4 ) ( 368 512 0 ) ( 368 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 368 512 -64 ) ( 400 592 -64 ) ( 336 576 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 512 4 ) ( 400 592 2 ) ( 368 512 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 368 512 0 ) ( 400 592 2 ) ( 400 592 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 69
+{
+( 336 576 -64 ) ( 320 640 -64 ) ( 320 640 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 640 4 ) ( 400 592 2 ) ( 336 576 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 336 576 -64 ) ( 400 592 -64 ) ( 384 640 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 384 640 -64 ) ( 384 640 0 ) ( 320 640 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 384 640 0 ) ( 400 592 2 ) ( 320 640 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 336 576 0 ) ( 400 592 2 ) ( 400 592 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 400 592 -64 ) ( 400 592 2 ) ( 384 640 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 70
+{
+( 272 576 -64 ) ( 240 640 -64 ) ( 240 640 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 240 640 0 ) ( 320 640 4 ) ( 272 576 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 272 576 2 ) ( 336 576 0 ) ( 336 576 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 272 576 -64 ) ( 336 576 -64 ) ( 320 640 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 640 -64 ) ( 320 640 4 ) ( 240 640 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 640 4 ) ( 336 576 0 ) ( 272 576 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 336 576 -64 ) ( 336 576 0 ) ( 320 640 4 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 71
+{
+( 208 560 -64 ) ( 192 640 -64 ) ( 192 640 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 192 640 2 ) ( 272 576 2 ) ( 208 560 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 208 560 -64 ) ( 272 576 -64 ) ( 240 640 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 240 640 -64 ) ( 240 640 0 ) ( 192 640 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 240 640 0 ) ( 272 576 2 ) ( 192 640 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 208 560 0 ) ( 272 576 2 ) ( 272 576 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 272 576 -64 ) ( 272 576 2 ) ( 240 640 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 72
+{
+( 144 656 2 ) ( 128 576 4 ) ( 128 576 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 128 576 4 ) ( 208 560 0 ) ( 208 560 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 128 576 -64 ) ( 208 560 -64 ) ( 192 640 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 144 656 2 ) ( 192 640 2 ) ( 128 576 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 192 640 2 ) ( 208 560 0 ) ( 128 576 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 192 640 -64 ) ( 192 640 2 ) ( 144 656 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 208 560 -64 ) ( 208 560 0 ) ( 192 640 2 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 73
+{
+( 64 640 4 ) ( 48 592 0 ) ( 48 592 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 144 656 -64 ) ( 144 656 2 ) ( 64 640 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 48 592 0 ) ( 128 576 4 ) ( 128 576 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 640 4 ) ( 128 576 4 ) ( 48 592 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 128 576 -64 ) ( 144 656 -64 ) ( 64 640 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 640 4 ) ( 144 656 2 ) ( 128 576 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 128 576 4 ) ( 144 656 2 ) ( 144 656 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 74
+{
+( 0 656 4 ) ( 0 560 4 ) ( 0 560 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 48 592 -64 ) ( 64 640 -64 ) ( 0 656 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 656 4 ) ( 64 640 4 ) ( 0 560 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 560 4 ) ( 64 640 4 ) ( 48 592 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 640 -64 ) ( 64 640 4 ) ( 0 656 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 560 4 ) ( 48 592 0 ) ( 48 592 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 48 592 0 ) ( 64 640 4 ) ( 64 640 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 75
+{
+( 400 592 -64 ) ( 384 640 -64 ) ( 384 640 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 400 592 2 ) ( 448 576 2 ) ( 448 576 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 576 -64 ) ( 464 624 -64 ) ( 384 640 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 384 640 0 ) ( 464 624 0 ) ( 400 592 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 400 592 2 ) ( 464 624 0 ) ( 448 576 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 464 624 -64 ) ( 464 624 0 ) ( 384 640 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 576 2 ) ( 464 624 0 ) ( 464 624 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 76
+{
+( 464 624 0 ) ( 448 576 2 ) ( 448 576 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 464 624 0 ) ( 464 624 -64 ) ( 512 640 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 464 624 0 ) ( 512 640 2 ) ( 448 576 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 576 2 ) ( 512 576 2 ) ( 512 576 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 576 -64 ) ( 512 640 -64 ) ( 464 624 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 576 2 ) ( 512 640 2 ) ( 512 576 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 576 2 ) ( 512 640 2 ) ( 512 640 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 77
+{
+( 144 512 -64 ) ( 128 576 -64 ) ( 128 576 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 144 512 2 ) ( 192 512 2 ) ( 192 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 128 576 4 ) ( 192 512 2 ) ( 144 512 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 192 512 -64 ) ( 208 560 -64 ) ( 128 576 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 128 576 4 ) ( 208 560 0 ) ( 192 512 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 208 560 -64 ) ( 208 560 0 ) ( 128 576 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 192 512 2 ) ( 208 560 0 ) ( 208 560 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 78
+{
+( 400 592 2 ) ( 368 512 0 ) ( 368 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 400 592 2 ) ( 448 512 2 ) ( 368 512 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 368 512 0 ) ( 448 512 2 ) ( 448 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 512 -64 ) ( 448 576 -64 ) ( 400 592 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 400 592 2 ) ( 448 576 2 ) ( 448 512 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 576 -64 ) ( 448 576 2 ) ( 400 592 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 512 2 ) ( 448 576 2 ) ( 448 576 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 79
+{
+( 448 576 2 ) ( 448 512 2 ) ( 448 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 512 2 ) ( 512 512 2 ) ( 512 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 512 -64 ) ( 512 576 -64 ) ( 448 576 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 576 2 ) ( 512 576 2 ) ( 512 512 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 576 -64 ) ( 512 576 2 ) ( 448 576 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 512 2 ) ( 512 576 2 ) ( 512 576 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 80
+{
+( 384 640 -64 ) ( 368 704 -64 ) ( 368 704 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 384 640 0 ) ( 464 624 0 ) ( 464 624 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 368 704 0 ) ( 448 704 2 ) ( 384 640 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 704 2 ) ( 464 624 0 ) ( 384 640 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 384 640 -64 ) ( 464 624 -64 ) ( 448 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 704 -64 ) ( 448 704 2 ) ( 368 704 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 464 624 -64 ) ( 464 624 0 ) ( 448 704 2 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 81
+{
+( 400 752 2 ) ( 368 704 0 ) ( 368 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 400 752 2 ) ( 400 752 -64 ) ( 464 768 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 400 752 2 ) ( 448 704 2 ) ( 368 704 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 368 704 0 ) ( 448 704 2 ) ( 448 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 704 -64 ) ( 464 768 -64 ) ( 400 752 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 400 752 2 ) ( 464 768 0 ) ( 448 704 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 704 2 ) ( 464 768 0 ) ( 464 768 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 82
+{
+( 320 768 4 ) ( 320 704 4 ) ( 320 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 704 4 ) ( 368 704 0 ) ( 368 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 368 704 -64 ) ( 400 752 -64 ) ( 320 768 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 768 4 ) ( 400 752 2 ) ( 320 704 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 704 4 ) ( 400 752 2 ) ( 368 704 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 400 752 -64 ) ( 400 752 2 ) ( 320 768 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 368 704 0 ) ( 400 752 2 ) ( 400 752 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 83
+{
+( 464 768 0 ) ( 448 704 2 ) ( 448 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 464 768 0 ) ( 512 752 2 ) ( 448 704 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 704 2 ) ( 512 704 2 ) ( 512 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 704 -64 ) ( 512 752 -64 ) ( 464 768 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 704 2 ) ( 512 752 2 ) ( 512 704 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 752 -64 ) ( 512 752 2 ) ( 464 768 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 704 2 ) ( 512 752 2 ) ( 512 752 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 84
+{
+( 464 624 -64 ) ( 448 704 -64 ) ( 448 704 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 704 2 ) ( 512 640 2 ) ( 464 624 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 640 -64 ) ( 512 704 -64 ) ( 448 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 704 2 ) ( 512 704 2 ) ( 512 640 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 704 -64 ) ( 512 704 2 ) ( 448 704 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 464 624 0 ) ( 512 640 2 ) ( 512 640 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 640 2 ) ( 512 704 2 ) ( 512 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 85
+{
+( 320 704 4 ) ( 320 640 4 ) ( 320 640 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 640 4 ) ( 384 640 0 ) ( 384 640 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 640 -64 ) ( 384 640 -64 ) ( 368 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 368 704 -64 ) ( 368 704 0 ) ( 320 704 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 704 4 ) ( 384 640 0 ) ( 320 640 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 368 704 0 ) ( 384 640 0 ) ( 320 704 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 384 640 -64 ) ( 384 640 0 ) ( 368 704 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 86
+{
+( 352 848 0 ) ( 320 768 4 ) ( 320 768 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 768 4 ) ( 400 752 2 ) ( 400 752 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 352 848 0 ) ( 400 816 2 ) ( 320 768 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 400 752 -64 ) ( 400 816 -64 ) ( 352 848 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 768 4 ) ( 400 816 2 ) ( 400 752 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 400 816 -64 ) ( 400 816 2 ) ( 352 848 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 400 752 2 ) ( 400 816 2 ) ( 400 816 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 87
+{
+( 400 816 2 ) ( 400 752 2 ) ( 400 752 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 400 816 2 ) ( 400 816 -64 ) ( 448 832 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 400 752 -64 ) ( 464 768 -64 ) ( 448 832 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 400 816 2 ) ( 448 832 2 ) ( 400 752 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 832 2 ) ( 464 768 0 ) ( 400 752 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 400 752 2 ) ( 464 768 0 ) ( 464 768 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 464 768 -64 ) ( 464 768 0 ) ( 448 832 2 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 88
+{
+( 464 768 -64 ) ( 448 832 -64 ) ( 448 832 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 464 768 0 ) ( 512 752 2 ) ( 512 752 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 848 -64 ) ( 512 848 2 ) ( 448 832 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 832 2 ) ( 512 752 2 ) ( 464 768 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 752 -64 ) ( 512 848 -64 ) ( 448 832 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 832 2 ) ( 512 848 2 ) ( 512 752 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 752 2 ) ( 512 848 2 ) ( 512 848 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 89
+{
+( 272 704 2 ) ( 240 640 0 ) ( 240 640 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 272 704 2 ) ( 320 640 4 ) ( 240 640 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 272 704 2 ) ( 320 704 4 ) ( 320 640 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 240 640 0 ) ( 320 640 4 ) ( 320 640 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 640 -64 ) ( 320 704 -64 ) ( 272 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 704 -64 ) ( 320 704 4 ) ( 272 704 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 640 4 ) ( 320 704 4 ) ( 320 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 90
+{
+( 208 752 0 ) ( 192 704 2 ) ( 192 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 256 768 -64 ) ( 256 768 0 ) ( 208 752 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 208 752 0 ) ( 256 768 0 ) ( 192 704 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 192 704 2 ) ( 272 704 2 ) ( 272 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 192 704 -64 ) ( 272 704 -64 ) ( 256 768 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 256 768 0 ) ( 272 704 2 ) ( 192 704 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 272 704 -64 ) ( 272 704 2 ) ( 256 768 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 91
+{
+( 224 848 2 ) ( 208 752 0 ) ( 208 752 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 256 768 -64 ) ( 288 816 -64 ) ( 224 848 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 224 848 2 ) ( 256 768 0 ) ( 208 752 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 224 848 2 ) ( 288 816 0 ) ( 256 768 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 208 752 0 ) ( 256 768 0 ) ( 256 768 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 288 816 -64 ) ( 288 816 0 ) ( 224 848 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 256 768 0 ) ( 288 816 0 ) ( 288 816 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 92
+{
+( 160 848 4 ) ( 144 768 2 ) ( 144 768 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 144 768 2 ) ( 208 752 0 ) ( 208 752 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 208 752 -64 ) ( 224 848 -64 ) ( 160 848 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 224 848 -64 ) ( 224 848 2 ) ( 160 848 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 160 848 4 ) ( 208 752 0 ) ( 144 768 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 160 848 4 ) ( 224 848 2 ) ( 208 752 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 208 752 0 ) ( 224 848 2 ) ( 224 848 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 93
+{
+( 288 816 -64 ) ( 240 896 -64 ) ( 240 896 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 336 912 -64 ) ( 336 912 0 ) ( 240 896 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 288 816 -64 ) ( 352 848 -64 ) ( 336 912 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 336 912 0 ) ( 352 848 0 ) ( 288 816 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 288 816 0 ) ( 352 848 0 ) ( 352 848 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 352 848 -64 ) ( 352 848 0 ) ( 336 912 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 94
+{
+( 272 960 2 ) ( 240 896 0 ) ( 240 896 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 272 960 2 ) ( 320 960 4 ) ( 240 896 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 240 896 -64 ) ( 336 912 -64 ) ( 320 960 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 960 -64 ) ( 320 960 4 ) ( 272 960 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 960 4 ) ( 336 912 0 ) ( 240 896 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 240 896 0 ) ( 336 912 0 ) ( 336 912 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 336 912 -64 ) ( 336 912 0 ) ( 320 960 4 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 95
+{
+( 336 912 -64 ) ( 320 960 -64 ) ( 320 960 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 336 912 0 ) ( 384 896 0 ) ( 384 896 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 384 976 -64 ) ( 384 976 0 ) ( 320 960 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 960 4 ) ( 384 896 0 ) ( 336 912 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 384 896 -64 ) ( 384 976 -64 ) ( 320 960 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 960 4 ) ( 384 976 0 ) ( 384 896 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 384 896 0 ) ( 384 976 0 ) ( 384 976 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 96
+{
+( 400 816 -64 ) ( 384 896 -64 ) ( 384 896 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 384 896 0 ) ( 432 896 4 ) ( 400 816 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 400 816 -64 ) ( 448 832 -64 ) ( 432 896 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 432 896 -64 ) ( 432 896 4 ) ( 384 896 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 432 896 4 ) ( 448 832 2 ) ( 400 816 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 400 816 2 ) ( 448 832 2 ) ( 448 832 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 832 -64 ) ( 448 832 2 ) ( 432 896 4 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 97
+{
+( 224 848 -64 ) ( 192 896 -64 ) ( 192 896 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 224 848 2 ) ( 288 816 0 ) ( 288 816 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 224 848 -64 ) ( 288 816 -64 ) ( 240 896 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 240 896 -64 ) ( 240 896 0 ) ( 192 896 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 192 896 2 ) ( 240 896 0 ) ( 224 848 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 240 896 0 ) ( 288 816 0 ) ( 224 848 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 288 816 -64 ) ( 288 816 0 ) ( 240 896 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 98
+{
+( 384 976 0 ) ( 384 896 0 ) ( 384 896 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 384 976 0 ) ( 432 896 4 ) ( 384 896 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 384 976 0 ) ( 448 960 2 ) ( 432 896 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 384 896 0 ) ( 432 896 4 ) ( 432 896 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 432 896 -64 ) ( 448 960 -64 ) ( 384 976 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 960 -64 ) ( 448 960 2 ) ( 384 976 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 432 896 4 ) ( 448 960 2 ) ( 448 960 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 99
+{
+( 448 960 2 ) ( 432 896 4 ) ( 432 896 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 432 896 4 ) ( 512 896 2 ) ( 512 896 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 896 -64 ) ( 512 928 -64 ) ( 448 960 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 960 2 ) ( 512 928 2 ) ( 432 896 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 432 896 4 ) ( 512 928 2 ) ( 512 896 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 928 -64 ) ( 512 928 2 ) ( 448 960 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 896 2 ) ( 512 928 2 ) ( 512 928 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 100
+{
+( 448 832 -64 ) ( 432 896 -64 ) ( 432 896 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 848 -64 ) ( 512 896 -64 ) ( 432 896 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 896 -64 ) ( 512 896 2 ) ( 432 896 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 432 896 4 ) ( 512 848 2 ) ( 448 832 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 432 896 4 ) ( 512 896 2 ) ( 512 848 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 832 2 ) ( 512 848 2 ) ( 512 848 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 848 2 ) ( 512 896 2 ) ( 512 896 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 101
+{
+( 288 816 0 ) ( 256 768 0 ) ( 256 768 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 352 848 -64 ) ( 352 848 0 ) ( 288 816 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 288 816 0 ) ( 320 768 4 ) ( 256 768 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 288 816 0 ) ( 352 848 0 ) ( 320 768 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 256 768 0 ) ( 320 768 4 ) ( 320 768 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 768 -64 ) ( 352 848 -64 ) ( 288 816 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 768 4 ) ( 352 848 0 ) ( 352 848 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 102
+{
+( 352 848 -64 ) ( 336 912 -64 ) ( 336 912 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 352 848 0 ) ( 400 816 2 ) ( 400 816 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 336 912 0 ) ( 400 816 2 ) ( 352 848 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 352 848 -64 ) ( 400 816 -64 ) ( 384 896 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 384 896 0 ) ( 400 816 2 ) ( 336 912 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 384 896 -64 ) ( 384 896 0 ) ( 336 912 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 400 816 -64 ) ( 400 816 2 ) ( 384 896 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 103
+{
+( 272 704 -64 ) ( 256 768 -64 ) ( 256 768 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 256 768 0 ) ( 320 768 4 ) ( 272 704 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 272 704 2 ) ( 320 768 4 ) ( 320 704 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 272 704 2 ) ( 320 704 4 ) ( 320 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 704 -64 ) ( 320 768 -64 ) ( 256 768 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 768 -64 ) ( 320 768 4 ) ( 256 768 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 704 4 ) ( 320 768 4 ) ( 320 768 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 104
+{
+( 144 768 2 ) ( 112 736 0 ) ( 112 736 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 112 736 0 ) ( 192 704 2 ) ( 192 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 144 768 2 ) ( 192 704 2 ) ( 112 736 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 192 704 -64 ) ( 208 752 -64 ) ( 144 768 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 144 768 2 ) ( 208 752 0 ) ( 192 704 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 208 752 -64 ) ( 208 752 0 ) ( 144 768 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 192 704 2 ) ( 208 752 0 ) ( 208 752 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 105
+{
+( 144 656 -64 ) ( 112 736 -64 ) ( 112 736 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 144 656 2 ) ( 192 640 2 ) ( 192 640 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 112 736 0 ) ( 192 704 2 ) ( 144 656 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 192 640 -64 ) ( 192 704 -64 ) ( 112 736 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 144 656 2 ) ( 192 704 2 ) ( 192 640 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 192 704 -64 ) ( 192 704 2 ) ( 112 736 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 192 640 2 ) ( 192 704 2 ) ( 192 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 106
+{
+( 64 704 4 ) ( 64 640 4 ) ( 64 640 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 112 736 -64 ) ( 112 736 0 ) ( 64 704 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 640 -64 ) ( 144 656 -64 ) ( 112 736 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 704 4 ) ( 144 656 2 ) ( 64 640 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 112 736 0 ) ( 144 656 2 ) ( 64 704 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 640 4 ) ( 144 656 2 ) ( 144 656 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 144 656 -64 ) ( 144 656 2 ) ( 112 736 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 107
+{
+( 192 704 2 ) ( 192 640 2 ) ( 192 640 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 192 640 2 ) ( 240 640 0 ) ( 240 640 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 240 640 -64 ) ( 272 704 -64 ) ( 192 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 192 704 2 ) ( 272 704 2 ) ( 192 640 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 272 704 -64 ) ( 272 704 2 ) ( 192 704 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 192 640 2 ) ( 272 704 2 ) ( 240 640 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 240 640 0 ) ( 272 704 2 ) ( 272 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 108
+{
+( 80 784 0 ) ( 64 704 4 ) ( 64 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 80 784 0 ) ( 144 768 2 ) ( 64 704 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 112 736 -64 ) ( 144 768 -64 ) ( 80 784 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 144 768 -64 ) ( 144 768 2 ) ( 80 784 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 704 4 ) ( 144 768 2 ) ( 112 736 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 704 4 ) ( 112 736 0 ) ( 112 736 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 112 736 0 ) ( 144 768 2 ) ( 144 768 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 109
+{
+( 0 784 4 ) ( 0 704 4 ) ( 0 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 704 4 ) ( 64 704 4 ) ( 64 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 704 -64 ) ( 80 784 -64 ) ( 0 784 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 784 4 ) ( 64 704 4 ) ( 0 704 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 80 784 -64 ) ( 80 784 0 ) ( 0 784 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 784 4 ) ( 80 784 0 ) ( 64 704 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 704 4 ) ( 80 784 0 ) ( 80 784 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 110
+{
+( 0 704 4 ) ( 0 656 4 ) ( 0 656 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 656 4 ) ( 64 640 4 ) ( 64 640 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 640 -64 ) ( 64 704 -64 ) ( 0 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 704 4 ) ( 64 704 4 ) ( 64 640 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 704 -64 ) ( 64 704 4 ) ( 0 704 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 640 4 ) ( 64 704 4 ) ( 64 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 111
+{
+( 0 832 4 ) ( 0 784 4 ) ( 0 784 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 784 4 ) ( 80 784 0 ) ( 80 784 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 784 -64 ) ( 80 784 -64 ) ( 64 832 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 832 4 ) ( 64 832 4 ) ( 0 784 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 832 -64 ) ( 64 832 4 ) ( 0 832 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 832 4 ) ( 80 784 0 ) ( 0 784 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 80 784 -64 ) ( 80 784 0 ) ( 64 832 4 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 112
+{
+( 0 896 4 ) ( 0 832 4 ) ( 0 832 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 832 4 ) ( 64 832 4 ) ( 64 832 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 832 -64 ) ( 80 880 -64 ) ( 0 896 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 896 4 ) ( 64 832 4 ) ( 0 832 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 896 4 ) ( 80 880 0 ) ( 64 832 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 80 880 -64 ) ( 80 880 0 ) ( 0 896 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 832 4 ) ( 80 880 0 ) ( 80 880 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 113
+{
+( 0 960 4 ) ( 0 896 4 ) ( 0 896 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 48 976 -64 ) ( 48 976 0 ) ( 0 960 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 896 4 ) ( 80 880 0 ) ( 80 880 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 896 -64 ) ( 80 880 -64 ) ( 48 976 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 960 4 ) ( 80 880 0 ) ( 0 896 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 48 976 0 ) ( 80 880 0 ) ( 0 960 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 80 880 -64 ) ( 80 880 0 ) ( 48 976 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 114
+{
+( 80 880 -64 ) ( 48 976 -64 ) ( 48 976 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 48 976 0 ) ( 96 960 4 ) ( 80 880 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 96 960 4 ) ( 128 896 4 ) ( 80 880 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 80 880 -64 ) ( 128 896 -64 ) ( 96 960 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 80 880 0 ) ( 128 896 4 ) ( 128 896 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 96 960 -64 ) ( 96 960 4 ) ( 48 976 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 128 896 -64 ) ( 128 896 4 ) ( 96 960 4 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 115
+{
+( 128 896 -64 ) ( 96 960 -64 ) ( 96 960 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 160 976 -64 ) ( 160 976 4 ) ( 96 960 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 128 896 4 ) ( 192 896 2 ) ( 192 896 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 128 896 -64 ) ( 192 896 -64 ) ( 160 976 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 96 960 4 ) ( 160 976 4 ) ( 128 896 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 160 976 4 ) ( 192 896 2 ) ( 128 896 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 160 976 4 ) ( 160 976 -64 ) ( 192 896 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 116
+{
+( 160 848 -64 ) ( 128 896 -64 ) ( 128 896 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 160 848 4 ) ( 224 848 2 ) ( 224 848 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 160 848 -64 ) ( 224 848 -64 ) ( 192 896 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 192 896 -64 ) ( 192 896 2 ) ( 128 896 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 160 848 4 ) ( 128 896 4 ) ( 192 896 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 224 848 -64 ) ( 224 848 2 ) ( 192 896 2 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 117
+{
+( 80 784 -64 ) ( 64 832 -64 ) ( 64 832 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 80 784 0 ) ( 144 768 2 ) ( 144 768 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 160 848 -64 ) ( 160 848 4 ) ( 64 832 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 832 4 ) ( 144 768 2 ) ( 80 784 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 144 768 -64 ) ( 160 848 -64 ) ( 64 832 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 832 4 ) ( 160 848 4 ) ( 144 768 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 144 768 2 ) ( 160 848 4 ) ( 160 848 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 118
+{
+( 80 880 0 ) ( 64 832 4 ) ( 64 832 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 128 896 -64 ) ( 128 896 4 ) ( 80 880 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 80 880 0 ) ( 128 896 4 ) ( 64 832 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 832 -64 ) ( 160 848 -64 ) ( 128 896 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 128 896 4 ) ( 160 848 4 ) ( 64 832 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 64 832 4 ) ( 160 848 4 ) ( 160 848 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 160 848 -64 ) ( 160 848 4 ) ( 128 896 4 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 119
+{
+( 112 1024 0 ) ( 96 960 4 ) ( 96 960 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 112 1024 0 ) ( 160 976 4 ) ( 96 960 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 160 976 -64 ) ( 208 1024 -64 ) ( 112 1024 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 112 1024 0 ) ( 208 1024 0 ) ( 160 976 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 208 1024 -64 ) ( 208 1024 0 ) ( 112 1024 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 96 960 4 ) ( 160 976 4 ) ( 160 976 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 160 976 4 ) ( 208 1024 0 ) ( 208 1024 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 120
+{
+( 48 976 -64 ) ( 32 1024 -64 ) ( 32 1024 6 ) qodot/TINYLEAVES 0 0 0 1 1
+( 48 976 0 ) ( 96 960 4 ) ( 96 960 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 32 1024 6 ) ( 96 960 4 ) ( 48 976 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 96 960 -64 ) ( 112 1024 -64 ) ( 32 1024 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 112 1024 -64 ) ( 112 1024 0 ) ( 32 1024 6 ) qodot/TINYLEAVES 0 0 0 1 1
+( 32 1024 6 ) ( 112 1024 0 ) ( 96 960 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 96 960 4 ) ( 112 1024 0 ) ( 112 1024 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 121
+{
+( 0 1024 4 ) ( 0 960 4 ) ( 0 960 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 1024 4 ) ( 32 1024 6 ) ( 0 960 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 960 -64 ) ( 48 976 -64 ) ( 32 1024 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 32 1024 -64 ) ( 32 1024 6 ) ( 0 1024 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 32 1024 6 ) ( 48 976 0 ) ( 0 960 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 960 4 ) ( 48 976 0 ) ( 48 976 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 48 976 -64 ) ( 48 976 0 ) ( 32 1024 6 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 122
+{
+( 208 1024 0 ) ( 160 976 4 ) ( 160 976 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 160 976 4 ) ( 272 960 2 ) ( 272 960 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 160 976 -64 ) ( 272 960 -64 ) ( 256 1024 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 208 1024 0 ) ( 256 1024 0 ) ( 160 976 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 256 1024 -64 ) ( 256 1024 0 ) ( 208 1024 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 256 1024 0 ) ( 272 960 2 ) ( 160 976 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 272 960 -64 ) ( 272 960 2 ) ( 256 1024 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 123
+{
+( 192 896 -64 ) ( 160 976 -64 ) ( 160 976 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 192 896 2 ) ( 240 896 0 ) ( 240 896 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 240 896 -64 ) ( 272 960 -64 ) ( 160 976 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 160 976 4 ) ( 272 960 2 ) ( 192 896 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 192 896 2 ) ( 272 960 2 ) ( 240 896 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 272 960 -64 ) ( 272 960 2 ) ( 160 976 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 240 896 0 ) ( 272 960 2 ) ( 272 960 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 124
+{
+( 272 960 -64 ) ( 256 1024 -64 ) ( 256 1024 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 256 1024 0 ) ( 320 960 4 ) ( 272 960 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 272 960 2 ) ( 320 960 4 ) ( 320 960 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 272 960 -64 ) ( 320 960 -64 ) ( 304 1024 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 304 1024 0 ) ( 320 960 4 ) ( 256 1024 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 304 1024 -64 ) ( 304 1024 0 ) ( 256 1024 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 960 -64 ) ( 320 960 4 ) ( 304 1024 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 125
+{
+( 320 960 -64 ) ( 304 1024 -64 ) ( 304 1024 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 384 976 -64 ) ( 384 1024 -64 ) ( 304 1024 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 304 1024 0 ) ( 384 1024 0 ) ( 320 960 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 384 1024 -64 ) ( 384 1024 0 ) ( 304 1024 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 960 4 ) ( 384 1024 0 ) ( 384 976 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 320 960 4 ) ( 384 976 0 ) ( 384 976 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 384 976 0 ) ( 384 1024 0 ) ( 384 1024 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 126
+{
+( 384 1024 0 ) ( 384 976 0 ) ( 384 976 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 384 976 0 ) ( 448 960 2 ) ( 448 960 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 384 1024 0 ) ( 448 960 2 ) ( 384 976 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 960 -64 ) ( 464 1024 -64 ) ( 384 1024 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 384 1024 0 ) ( 464 1024 0 ) ( 448 960 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 464 1024 -64 ) ( 464 1024 0 ) ( 384 1024 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 960 2 ) ( 464 1024 0 ) ( 464 1024 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 127
+{
+( 464 1024 0 ) ( 448 960 2 ) ( 448 960 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 960 2 ) ( 512 928 2 ) ( 512 928 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 464 1024 0 ) ( 512 1024 2 ) ( 448 960 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 928 -64 ) ( 512 1024 -64 ) ( 464 1024 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 448 960 2 ) ( 512 1024 2 ) ( 512 928 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 1024 -64 ) ( 512 1024 2 ) ( 464 1024 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 928 2 ) ( 512 1024 2 ) ( 512 1024 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 128
+{
+( 512 560 4 ) ( 512 512 4 ) ( 512 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 560 592 -64 ) ( 560 592 0 ) ( 512 560 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 512 4 ) ( 576 512 4 ) ( 576 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 512 -64 ) ( 576 512 -64 ) ( 560 592 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 560 4 ) ( 576 512 4 ) ( 512 512 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 560 592 0 ) ( 576 512 4 ) ( 512 560 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 512 -64 ) ( 576 512 4 ) ( 560 592 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 129
+{
+( 576 512 -64 ) ( 560 592 -64 ) ( 560 592 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 560 592 0 ) ( 640 576 4 ) ( 576 512 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 512 4 ) ( 656 512 2 ) ( 656 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 512 -64 ) ( 656 512 -64 ) ( 640 576 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 640 576 4 ) ( 656 512 2 ) ( 576 512 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 640 576 -64 ) ( 640 576 4 ) ( 560 592 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 656 512 -64 ) ( 656 512 2 ) ( 640 576 4 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 130
+{
+( 720 560 0 ) ( 704 512 2 ) ( 704 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 784 576 -64 ) ( 784 576 2 ) ( 720 560 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 720 560 0 ) ( 784 576 2 ) ( 704 512 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 704 512 2 ) ( 768 512 0 ) ( 768 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 768 512 -64 ) ( 784 576 -64 ) ( 720 560 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 704 512 2 ) ( 784 576 2 ) ( 768 512 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 768 512 0 ) ( 784 576 2 ) ( 784 576 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 131
+{
+( 784 576 2 ) ( 768 512 0 ) ( 768 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 784 576 2 ) ( 832 512 4 ) ( 768 512 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 768 512 0 ) ( 832 512 4 ) ( 832 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 512 -64 ) ( 848 576 -64 ) ( 784 576 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 848 576 -64 ) ( 848 576 0 ) ( 784 576 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 784 576 2 ) ( 848 576 0 ) ( 832 512 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 512 4 ) ( 848 576 0 ) ( 848 576 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 132
+{
+( 848 576 0 ) ( 832 512 4 ) ( 832 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 912 592 -64 ) ( 912 592 2 ) ( 848 576 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 848 576 0 ) ( 912 592 2 ) ( 832 512 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 512 4 ) ( 880 512 0 ) ( 880 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 880 512 -64 ) ( 912 592 -64 ) ( 848 576 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 512 4 ) ( 912 592 2 ) ( 880 512 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 880 512 0 ) ( 912 592 2 ) ( 912 592 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 133
+{
+( 848 576 -64 ) ( 832 640 -64 ) ( 832 640 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 640 4 ) ( 912 592 2 ) ( 848 576 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 848 576 -64 ) ( 912 592 -64 ) ( 896 640 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 896 640 -64 ) ( 896 640 0 ) ( 832 640 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 896 640 0 ) ( 912 592 2 ) ( 832 640 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 848 576 0 ) ( 912 592 2 ) ( 912 592 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 912 592 -64 ) ( 912 592 2 ) ( 896 640 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 134
+{
+( 784 576 -64 ) ( 752 640 -64 ) ( 752 640 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 752 640 0 ) ( 832 640 4 ) ( 784 576 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 784 576 2 ) ( 848 576 0 ) ( 848 576 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 784 576 -64 ) ( 848 576 -64 ) ( 832 640 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 640 -64 ) ( 832 640 4 ) ( 752 640 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 640 4 ) ( 848 576 0 ) ( 784 576 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 848 576 -64 ) ( 848 576 0 ) ( 832 640 4 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 135
+{
+( 720 560 -64 ) ( 704 640 -64 ) ( 704 640 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 704 640 2 ) ( 784 576 2 ) ( 720 560 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 720 560 -64 ) ( 784 576 -64 ) ( 752 640 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 752 640 -64 ) ( 752 640 0 ) ( 704 640 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 752 640 0 ) ( 784 576 2 ) ( 704 640 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 720 560 0 ) ( 784 576 2 ) ( 784 576 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 784 576 -64 ) ( 784 576 2 ) ( 752 640 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 136
+{
+( 656 656 2 ) ( 640 576 4 ) ( 640 576 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 640 576 4 ) ( 720 560 0 ) ( 720 560 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 640 576 -64 ) ( 720 560 -64 ) ( 704 640 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 656 656 2 ) ( 704 640 2 ) ( 640 576 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 704 640 2 ) ( 720 560 0 ) ( 640 576 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 704 640 -64 ) ( 704 640 2 ) ( 656 656 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 720 560 -64 ) ( 720 560 0 ) ( 704 640 2 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 137
+{
+( 576 640 4 ) ( 560 592 0 ) ( 560 592 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 656 656 -64 ) ( 656 656 2 ) ( 576 640 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 560 592 0 ) ( 640 576 4 ) ( 640 576 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 640 4 ) ( 640 576 4 ) ( 560 592 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 640 576 -64 ) ( 656 656 -64 ) ( 576 640 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 640 4 ) ( 656 656 2 ) ( 640 576 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 640 576 4 ) ( 656 656 2 ) ( 656 656 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 138
+{
+( 512 656 4 ) ( 512 560 4 ) ( 512 560 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 560 592 -64 ) ( 576 640 -64 ) ( 512 656 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 656 4 ) ( 576 640 4 ) ( 512 560 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 560 4 ) ( 576 640 4 ) ( 560 592 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 640 -64 ) ( 576 640 4 ) ( 512 656 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 560 4 ) ( 560 592 0 ) ( 560 592 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 560 592 0 ) ( 576 640 4 ) ( 576 640 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 139
+{
+( 912 592 -64 ) ( 896 640 -64 ) ( 896 640 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 912 592 2 ) ( 960 576 2 ) ( 960 576 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 576 -64 ) ( 976 624 -64 ) ( 896 640 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 896 640 0 ) ( 976 624 0 ) ( 912 592 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 912 592 2 ) ( 976 624 0 ) ( 960 576 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 976 624 -64 ) ( 976 624 0 ) ( 896 640 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 576 2 ) ( 976 624 0 ) ( 976 624 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 140
+{
+( 976 624 0 ) ( 960 576 2 ) ( 960 576 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 976 624 0 ) ( 976 624 -64 ) ( 1024 640 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 976 624 0 ) ( 1024 640 2 ) ( 960 576 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 576 2 ) ( 1024 576 2 ) ( 1024 576 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 576 -64 ) ( 1024 640 -64 ) ( 976 624 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 576 2 ) ( 1024 640 2 ) ( 1024 576 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 576 2 ) ( 1024 640 2 ) ( 1024 640 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 141
+{
+( 656 512 -64 ) ( 640 576 -64 ) ( 640 576 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 656 512 2 ) ( 704 512 2 ) ( 704 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 640 576 4 ) ( 704 512 2 ) ( 656 512 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 704 512 -64 ) ( 720 560 -64 ) ( 640 576 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 640 576 4 ) ( 720 560 0 ) ( 704 512 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 720 560 -64 ) ( 720 560 0 ) ( 640 576 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 704 512 2 ) ( 720 560 0 ) ( 720 560 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 142
+{
+( 912 592 2 ) ( 880 512 0 ) ( 880 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 912 592 2 ) ( 960 512 2 ) ( 880 512 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 880 512 0 ) ( 960 512 2 ) ( 960 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 512 -64 ) ( 960 576 -64 ) ( 912 592 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 912 592 2 ) ( 960 576 2 ) ( 960 512 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 576 -64 ) ( 960 576 2 ) ( 912 592 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 512 2 ) ( 960 576 2 ) ( 960 576 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 143
+{
+( 960 576 2 ) ( 960 512 2 ) ( 960 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 512 2 ) ( 1024 512 2 ) ( 1024 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 512 -64 ) ( 1024 576 -64 ) ( 960 576 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 576 2 ) ( 1024 576 2 ) ( 1024 512 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 576 -64 ) ( 1024 576 2 ) ( 960 576 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 512 2 ) ( 1024 576 2 ) ( 1024 576 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 144
+{
+( 896 640 -64 ) ( 880 704 -64 ) ( 880 704 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 896 640 0 ) ( 976 624 0 ) ( 976 624 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 880 704 0 ) ( 960 704 2 ) ( 896 640 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 704 2 ) ( 976 624 0 ) ( 896 640 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 896 640 -64 ) ( 976 624 -64 ) ( 960 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 704 -64 ) ( 960 704 2 ) ( 880 704 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 976 624 -64 ) ( 976 624 0 ) ( 960 704 2 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 145
+{
+( 912 752 2 ) ( 880 704 0 ) ( 880 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 912 752 2 ) ( 912 752 -64 ) ( 976 768 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 912 752 2 ) ( 960 704 2 ) ( 880 704 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 880 704 0 ) ( 960 704 2 ) ( 960 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 704 -64 ) ( 976 768 -64 ) ( 912 752 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 912 752 2 ) ( 976 768 0 ) ( 960 704 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 704 2 ) ( 976 768 0 ) ( 976 768 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 146
+{
+( 832 768 4 ) ( 832 704 4 ) ( 832 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 704 4 ) ( 880 704 0 ) ( 880 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 880 704 -64 ) ( 912 752 -64 ) ( 832 768 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 768 4 ) ( 912 752 2 ) ( 832 704 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 704 4 ) ( 912 752 2 ) ( 880 704 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 912 752 -64 ) ( 912 752 2 ) ( 832 768 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 880 704 0 ) ( 912 752 2 ) ( 912 752 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 147
+{
+( 976 768 0 ) ( 960 704 2 ) ( 960 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 976 768 0 ) ( 1024 752 2 ) ( 960 704 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 704 2 ) ( 1024 704 2 ) ( 1024 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 704 -64 ) ( 1024 752 -64 ) ( 976 768 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 704 2 ) ( 1024 752 2 ) ( 1024 704 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 752 -64 ) ( 1024 752 2 ) ( 976 768 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 704 2 ) ( 1024 752 2 ) ( 1024 752 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 148
+{
+( 976 624 -64 ) ( 960 704 -64 ) ( 960 704 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 704 2 ) ( 1024 640 2 ) ( 976 624 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 640 -64 ) ( 1024 704 -64 ) ( 960 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 704 2 ) ( 1024 704 2 ) ( 1024 640 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 704 -64 ) ( 1024 704 2 ) ( 960 704 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 976 624 0 ) ( 1024 640 2 ) ( 1024 640 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 640 2 ) ( 1024 704 2 ) ( 1024 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 149
+{
+( 832 704 4 ) ( 832 640 4 ) ( 832 640 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 640 4 ) ( 896 640 0 ) ( 896 640 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 640 -64 ) ( 896 640 -64 ) ( 880 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 880 704 -64 ) ( 880 704 0 ) ( 832 704 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 704 4 ) ( 896 640 0 ) ( 832 640 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 880 704 0 ) ( 896 640 0 ) ( 832 704 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 896 640 -64 ) ( 896 640 0 ) ( 880 704 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 150
+{
+( 864 848 0 ) ( 832 768 4 ) ( 832 768 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 768 4 ) ( 912 752 2 ) ( 912 752 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 864 848 0 ) ( 912 816 2 ) ( 832 768 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 912 752 -64 ) ( 912 816 -64 ) ( 864 848 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 768 4 ) ( 912 816 2 ) ( 912 752 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 912 816 -64 ) ( 912 816 2 ) ( 864 848 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 912 752 2 ) ( 912 816 2 ) ( 912 816 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 151
+{
+( 912 816 2 ) ( 912 752 2 ) ( 912 752 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 912 816 2 ) ( 912 816 -64 ) ( 960 832 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 912 752 -64 ) ( 976 768 -64 ) ( 960 832 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 912 816 2 ) ( 960 832 2 ) ( 912 752 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 832 2 ) ( 976 768 0 ) ( 912 752 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 912 752 2 ) ( 976 768 0 ) ( 976 768 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 976 768 -64 ) ( 976 768 0 ) ( 960 832 2 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 152
+{
+( 976 768 -64 ) ( 960 832 -64 ) ( 960 832 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 976 768 0 ) ( 1024 752 2 ) ( 1024 752 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 848 -64 ) ( 1024 848 2 ) ( 960 832 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 832 2 ) ( 1024 752 2 ) ( 976 768 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 752 -64 ) ( 1024 848 -64 ) ( 960 832 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 832 2 ) ( 1024 848 2 ) ( 1024 752 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 752 2 ) ( 1024 848 2 ) ( 1024 848 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 153
+{
+( 784 704 2 ) ( 752 640 0 ) ( 752 640 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 784 704 2 ) ( 832 640 4 ) ( 752 640 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 784 704 2 ) ( 832 704 4 ) ( 832 640 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 752 640 0 ) ( 832 640 4 ) ( 832 640 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 640 -64 ) ( 832 704 -64 ) ( 784 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 704 -64 ) ( 832 704 4 ) ( 784 704 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 640 4 ) ( 832 704 4 ) ( 832 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 154
+{
+( 720 752 0 ) ( 704 704 2 ) ( 704 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 768 768 -64 ) ( 768 768 0 ) ( 720 752 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 720 752 0 ) ( 768 768 0 ) ( 704 704 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 704 704 2 ) ( 784 704 2 ) ( 784 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 704 704 -64 ) ( 784 704 -64 ) ( 768 768 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 768 768 0 ) ( 784 704 2 ) ( 704 704 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 784 704 -64 ) ( 784 704 2 ) ( 768 768 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 155
+{
+( 736 848 2 ) ( 720 752 0 ) ( 720 752 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 768 768 -64 ) ( 800 816 -64 ) ( 736 848 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 736 848 2 ) ( 768 768 0 ) ( 720 752 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 736 848 2 ) ( 800 816 0 ) ( 768 768 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 720 752 0 ) ( 768 768 0 ) ( 768 768 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 800 816 -64 ) ( 800 816 0 ) ( 736 848 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 768 768 0 ) ( 800 816 0 ) ( 800 816 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 156
+{
+( 672 848 4 ) ( 656 768 2 ) ( 656 768 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 656 768 2 ) ( 720 752 0 ) ( 720 752 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 720 752 -64 ) ( 736 848 -64 ) ( 672 848 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 736 848 -64 ) ( 736 848 2 ) ( 672 848 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 672 848 4 ) ( 720 752 0 ) ( 656 768 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 672 848 4 ) ( 736 848 2 ) ( 720 752 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 720 752 0 ) ( 736 848 2 ) ( 736 848 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 157
+{
+( 800 816 -64 ) ( 752 896 -64 ) ( 752 896 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 848 912 -64 ) ( 848 912 0 ) ( 752 896 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 800 816 -64 ) ( 864 848 -64 ) ( 848 912 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 848 912 0 ) ( 864 848 0 ) ( 800 816 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 800 816 0 ) ( 864 848 0 ) ( 864 848 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 864 848 -64 ) ( 864 848 0 ) ( 848 912 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 158
+{
+( 784 960 2 ) ( 752 896 0 ) ( 752 896 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 784 960 2 ) ( 832 960 4 ) ( 752 896 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 752 896 -64 ) ( 848 912 -64 ) ( 832 960 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 960 -64 ) ( 832 960 4 ) ( 784 960 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 960 4 ) ( 848 912 0 ) ( 752 896 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 752 896 0 ) ( 848 912 0 ) ( 848 912 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 848 912 -64 ) ( 848 912 0 ) ( 832 960 4 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 159
+{
+( 848 912 -64 ) ( 832 960 -64 ) ( 832 960 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 848 912 0 ) ( 896 896 0 ) ( 896 896 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 896 976 -64 ) ( 896 976 0 ) ( 832 960 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 960 4 ) ( 896 896 0 ) ( 848 912 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 896 896 -64 ) ( 896 976 -64 ) ( 832 960 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 960 4 ) ( 896 976 0 ) ( 896 896 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 896 896 0 ) ( 896 976 0 ) ( 896 976 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 160
+{
+( 912 816 -64 ) ( 896 896 -64 ) ( 896 896 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 896 896 0 ) ( 944 896 4 ) ( 912 816 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 912 816 -64 ) ( 960 832 -64 ) ( 944 896 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 944 896 -64 ) ( 944 896 4 ) ( 896 896 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 944 896 4 ) ( 960 832 2 ) ( 912 816 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 912 816 2 ) ( 960 832 2 ) ( 960 832 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 832 -64 ) ( 960 832 2 ) ( 944 896 4 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 161
+{
+( 736 848 -64 ) ( 704 896 -64 ) ( 704 896 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 736 848 2 ) ( 800 816 0 ) ( 800 816 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 736 848 -64 ) ( 800 816 -64 ) ( 752 896 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 752 896 -64 ) ( 752 896 0 ) ( 704 896 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 704 896 2 ) ( 752 896 0 ) ( 736 848 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 752 896 0 ) ( 800 816 0 ) ( 736 848 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 800 816 -64 ) ( 800 816 0 ) ( 752 896 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 162
+{
+( 896 976 0 ) ( 896 896 0 ) ( 896 896 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 896 976 0 ) ( 944 896 4 ) ( 896 896 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 896 976 0 ) ( 960 960 2 ) ( 944 896 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 896 896 0 ) ( 944 896 4 ) ( 944 896 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 944 896 -64 ) ( 960 960 -64 ) ( 896 976 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 960 -64 ) ( 960 960 2 ) ( 896 976 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 944 896 4 ) ( 960 960 2 ) ( 960 960 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 163
+{
+( 960 960 2 ) ( 944 896 4 ) ( 944 896 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 944 896 4 ) ( 1024 896 2 ) ( 1024 896 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 896 -64 ) ( 1024 928 -64 ) ( 960 960 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 960 2 ) ( 1024 928 2 ) ( 944 896 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 944 896 4 ) ( 1024 928 2 ) ( 1024 896 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 928 -64 ) ( 1024 928 2 ) ( 960 960 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 896 2 ) ( 1024 928 2 ) ( 1024 928 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 164
+{
+( 960 832 -64 ) ( 944 896 -64 ) ( 944 896 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 848 -64 ) ( 1024 896 -64 ) ( 944 896 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 896 -64 ) ( 1024 896 2 ) ( 944 896 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 944 896 4 ) ( 1024 848 2 ) ( 960 832 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 944 896 4 ) ( 1024 896 2 ) ( 1024 848 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 832 2 ) ( 1024 848 2 ) ( 1024 848 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 848 2 ) ( 1024 896 2 ) ( 1024 896 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 165
+{
+( 800 816 0 ) ( 768 768 0 ) ( 768 768 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 864 848 -64 ) ( 864 848 0 ) ( 800 816 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 800 816 0 ) ( 832 768 4 ) ( 768 768 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 800 816 0 ) ( 864 848 0 ) ( 832 768 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 768 768 0 ) ( 832 768 4 ) ( 832 768 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 768 -64 ) ( 864 848 -64 ) ( 800 816 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 768 4 ) ( 864 848 0 ) ( 864 848 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 166
+{
+( 864 848 -64 ) ( 848 912 -64 ) ( 848 912 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 864 848 0 ) ( 912 816 2 ) ( 912 816 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 848 912 0 ) ( 912 816 2 ) ( 864 848 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 864 848 -64 ) ( 912 816 -64 ) ( 896 896 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 896 896 0 ) ( 912 816 2 ) ( 848 912 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 896 896 -64 ) ( 896 896 0 ) ( 848 912 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 912 816 -64 ) ( 912 816 2 ) ( 896 896 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 167
+{
+( 784 704 -64 ) ( 768 768 -64 ) ( 768 768 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 768 768 0 ) ( 832 768 4 ) ( 784 704 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 784 704 2 ) ( 832 768 4 ) ( 832 704 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 784 704 2 ) ( 832 704 4 ) ( 832 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 704 -64 ) ( 832 768 -64 ) ( 768 768 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 768 -64 ) ( 832 768 4 ) ( 768 768 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 704 4 ) ( 832 768 4 ) ( 832 768 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 168
+{
+( 656 768 2 ) ( 624 736 0 ) ( 624 736 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 624 736 0 ) ( 704 704 2 ) ( 704 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 656 768 2 ) ( 704 704 2 ) ( 624 736 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 704 704 -64 ) ( 720 752 -64 ) ( 656 768 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 656 768 2 ) ( 720 752 0 ) ( 704 704 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 720 752 -64 ) ( 720 752 0 ) ( 656 768 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 704 704 2 ) ( 720 752 0 ) ( 720 752 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 169
+{
+( 656 656 -64 ) ( 624 736 -64 ) ( 624 736 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 656 656 2 ) ( 704 640 2 ) ( 704 640 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 624 736 0 ) ( 704 704 2 ) ( 656 656 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 704 640 -64 ) ( 704 704 -64 ) ( 624 736 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 656 656 2 ) ( 704 704 2 ) ( 704 640 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 704 704 -64 ) ( 704 704 2 ) ( 624 736 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 704 640 2 ) ( 704 704 2 ) ( 704 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 170
+{
+( 576 704 4 ) ( 576 640 4 ) ( 576 640 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 624 736 -64 ) ( 624 736 0 ) ( 576 704 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 640 -64 ) ( 656 656 -64 ) ( 624 736 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 704 4 ) ( 656 656 2 ) ( 576 640 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 624 736 0 ) ( 656 656 2 ) ( 576 704 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 640 4 ) ( 656 656 2 ) ( 656 656 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 656 656 -64 ) ( 656 656 2 ) ( 624 736 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 171
+{
+( 704 704 2 ) ( 704 640 2 ) ( 704 640 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 704 640 2 ) ( 752 640 0 ) ( 752 640 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 752 640 -64 ) ( 784 704 -64 ) ( 704 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 704 704 2 ) ( 784 704 2 ) ( 704 640 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 784 704 -64 ) ( 784 704 2 ) ( 704 704 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 704 640 2 ) ( 784 704 2 ) ( 752 640 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 752 640 0 ) ( 784 704 2 ) ( 784 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 172
+{
+( 592 784 0 ) ( 576 704 4 ) ( 576 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 592 784 0 ) ( 656 768 2 ) ( 576 704 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 624 736 -64 ) ( 656 768 -64 ) ( 592 784 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 656 768 -64 ) ( 656 768 2 ) ( 592 784 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 704 4 ) ( 656 768 2 ) ( 624 736 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 704 4 ) ( 624 736 0 ) ( 624 736 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 624 736 0 ) ( 656 768 2 ) ( 656 768 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 173
+{
+( 512 784 4 ) ( 512 704 4 ) ( 512 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 704 4 ) ( 576 704 4 ) ( 576 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 704 -64 ) ( 592 784 -64 ) ( 512 784 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 784 4 ) ( 576 704 4 ) ( 512 704 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 592 784 -64 ) ( 592 784 0 ) ( 512 784 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 784 4 ) ( 592 784 0 ) ( 576 704 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 704 4 ) ( 592 784 0 ) ( 592 784 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 174
+{
+( 512 704 4 ) ( 512 656 4 ) ( 512 656 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 656 4 ) ( 576 640 4 ) ( 576 640 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 640 -64 ) ( 576 704 -64 ) ( 512 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 704 4 ) ( 576 704 4 ) ( 576 640 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 704 -64 ) ( 576 704 4 ) ( 512 704 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 640 4 ) ( 576 704 4 ) ( 576 704 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 175
+{
+( 512 832 4 ) ( 512 784 4 ) ( 512 784 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 784 4 ) ( 592 784 0 ) ( 592 784 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 784 -64 ) ( 592 784 -64 ) ( 576 832 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 832 4 ) ( 576 832 4 ) ( 512 784 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 832 -64 ) ( 576 832 4 ) ( 512 832 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 832 4 ) ( 592 784 0 ) ( 512 784 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 592 784 -64 ) ( 592 784 0 ) ( 576 832 4 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 176
+{
+( 512 896 4 ) ( 512 832 4 ) ( 512 832 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 832 4 ) ( 576 832 4 ) ( 576 832 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 832 -64 ) ( 592 880 -64 ) ( 512 896 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 896 4 ) ( 576 832 4 ) ( 512 832 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 896 4 ) ( 592 880 0 ) ( 576 832 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 592 880 -64 ) ( 592 880 0 ) ( 512 896 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 832 4 ) ( 592 880 0 ) ( 592 880 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 177
+{
+( 512 960 4 ) ( 512 896 4 ) ( 512 896 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 560 976 -64 ) ( 560 976 0 ) ( 512 960 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 896 4 ) ( 592 880 0 ) ( 592 880 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 896 -64 ) ( 592 880 -64 ) ( 560 976 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 960 4 ) ( 592 880 0 ) ( 512 896 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 560 976 0 ) ( 592 880 0 ) ( 512 960 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 592 880 -64 ) ( 592 880 0 ) ( 560 976 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 178
+{
+( 592 880 -64 ) ( 560 976 -64 ) ( 560 976 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 560 976 0 ) ( 608 960 4 ) ( 592 880 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 608 960 4 ) ( 640 896 4 ) ( 592 880 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 592 880 -64 ) ( 640 896 -64 ) ( 608 960 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 592 880 0 ) ( 640 896 4 ) ( 640 896 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 608 960 -64 ) ( 608 960 4 ) ( 560 976 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 640 896 -64 ) ( 640 896 4 ) ( 608 960 4 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 179
+{
+( 640 896 -64 ) ( 608 960 -64 ) ( 608 960 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 672 976 -64 ) ( 672 976 4 ) ( 608 960 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 640 896 4 ) ( 704 896 2 ) ( 704 896 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 640 896 -64 ) ( 704 896 -64 ) ( 672 976 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 608 960 4 ) ( 672 976 4 ) ( 640 896 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 672 976 4 ) ( 704 896 2 ) ( 640 896 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 672 976 4 ) ( 672 976 -64 ) ( 704 896 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 180
+{
+( 672 848 -64 ) ( 640 896 -64 ) ( 640 896 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 672 848 4 ) ( 736 848 2 ) ( 736 848 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 672 848 -64 ) ( 736 848 -64 ) ( 704 896 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 704 896 -64 ) ( 704 896 2 ) ( 640 896 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 672 848 4 ) ( 640 896 4 ) ( 704 896 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 736 848 -64 ) ( 736 848 2 ) ( 704 896 2 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 181
+{
+( 592 784 -64 ) ( 576 832 -64 ) ( 576 832 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 592 784 0 ) ( 656 768 2 ) ( 656 768 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 672 848 -64 ) ( 672 848 4 ) ( 576 832 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 832 4 ) ( 656 768 2 ) ( 592 784 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 656 768 -64 ) ( 672 848 -64 ) ( 576 832 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 832 4 ) ( 672 848 4 ) ( 656 768 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 656 768 2 ) ( 672 848 4 ) ( 672 848 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 182
+{
+( 592 880 0 ) ( 576 832 4 ) ( 576 832 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 640 896 -64 ) ( 640 896 4 ) ( 592 880 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 592 880 0 ) ( 640 896 4 ) ( 576 832 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 832 -64 ) ( 672 848 -64 ) ( 640 896 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 640 896 4 ) ( 672 848 4 ) ( 576 832 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 832 4 ) ( 672 848 4 ) ( 672 848 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 672 848 -64 ) ( 672 848 4 ) ( 640 896 4 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 183
+{
+( 624 1024 0 ) ( 608 960 4 ) ( 608 960 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 624 1024 0 ) ( 672 976 4 ) ( 608 960 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 672 976 -64 ) ( 720 1024 -64 ) ( 624 1024 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 624 1024 0 ) ( 720 1024 0 ) ( 672 976 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 720 1024 -64 ) ( 720 1024 0 ) ( 624 1024 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 608 960 4 ) ( 672 976 4 ) ( 672 976 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 672 976 4 ) ( 720 1024 0 ) ( 720 1024 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 184
+{
+( 560 976 -64 ) ( 544 1024 -64 ) ( 544 1024 6 ) qodot/TINYLEAVES 0 0 0 1 1
+( 560 976 0 ) ( 608 960 4 ) ( 608 960 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 544 1024 6 ) ( 608 960 4 ) ( 560 976 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 608 960 -64 ) ( 624 1024 -64 ) ( 544 1024 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 624 1024 -64 ) ( 624 1024 0 ) ( 544 1024 6 ) qodot/TINYLEAVES 0 0 0 1 1
+( 544 1024 6 ) ( 624 1024 0 ) ( 608 960 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 608 960 4 ) ( 624 1024 0 ) ( 624 1024 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 185
+{
+( 512 1024 4 ) ( 512 960 4 ) ( 512 960 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 1024 4 ) ( 544 1024 6 ) ( 512 960 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 960 -64 ) ( 560 976 -64 ) ( 544 1024 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 544 1024 -64 ) ( 544 1024 6 ) ( 512 1024 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 544 1024 6 ) ( 560 976 0 ) ( 512 960 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 960 4 ) ( 560 976 0 ) ( 560 976 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 560 976 -64 ) ( 560 976 0 ) ( 544 1024 6 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 186
+{
+( 720 1024 0 ) ( 672 976 4 ) ( 672 976 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 672 976 4 ) ( 784 960 2 ) ( 784 960 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 672 976 -64 ) ( 784 960 -64 ) ( 768 1024 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 720 1024 0 ) ( 768 1024 0 ) ( 672 976 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 768 1024 -64 ) ( 768 1024 0 ) ( 720 1024 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 768 1024 0 ) ( 784 960 2 ) ( 672 976 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 784 960 -64 ) ( 784 960 2 ) ( 768 1024 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 187
+{
+( 704 896 -64 ) ( 672 976 -64 ) ( 672 976 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 704 896 2 ) ( 752 896 0 ) ( 752 896 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 752 896 -64 ) ( 784 960 -64 ) ( 672 976 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 672 976 4 ) ( 784 960 2 ) ( 704 896 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 704 896 2 ) ( 784 960 2 ) ( 752 896 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 784 960 -64 ) ( 784 960 2 ) ( 672 976 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 752 896 0 ) ( 784 960 2 ) ( 784 960 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 188
+{
+( 784 960 -64 ) ( 768 1024 -64 ) ( 768 1024 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 768 1024 0 ) ( 832 960 4 ) ( 784 960 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 784 960 2 ) ( 832 960 4 ) ( 832 960 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 784 960 -64 ) ( 832 960 -64 ) ( 816 1024 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 816 1024 0 ) ( 832 960 4 ) ( 768 1024 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 816 1024 -64 ) ( 816 1024 0 ) ( 768 1024 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 960 -64 ) ( 832 960 4 ) ( 816 1024 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 189
+{
+( 832 960 -64 ) ( 816 1024 -64 ) ( 816 1024 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 896 976 -64 ) ( 896 1024 -64 ) ( 816 1024 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 816 1024 0 ) ( 896 1024 0 ) ( 832 960 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 896 1024 -64 ) ( 896 1024 0 ) ( 816 1024 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 960 4 ) ( 896 1024 0 ) ( 896 976 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 960 4 ) ( 896 976 0 ) ( 896 976 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 896 976 0 ) ( 896 1024 0 ) ( 896 1024 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 190
+{
+( 896 1024 0 ) ( 896 976 0 ) ( 896 976 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 896 976 0 ) ( 960 960 2 ) ( 960 960 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 896 1024 0 ) ( 960 960 2 ) ( 896 976 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 960 -64 ) ( 976 1024 -64 ) ( 896 1024 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 896 1024 0 ) ( 976 1024 0 ) ( 960 960 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 976 1024 -64 ) ( 976 1024 0 ) ( 896 1024 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 960 2 ) ( 976 1024 0 ) ( 976 1024 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 191
+{
+( 976 1024 0 ) ( 960 960 2 ) ( 960 960 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 960 2 ) ( 1024 928 2 ) ( 1024 928 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 976 1024 0 ) ( 1024 1024 2 ) ( 960 960 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 928 -64 ) ( 1024 1024 -64 ) ( 976 1024 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 960 2 ) ( 1024 1024 2 ) ( 1024 928 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 1024 -64 ) ( 1024 1024 2 ) ( 976 1024 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 928 2 ) ( 1024 1024 2 ) ( 1024 1024 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 192
+{
+( 512 48 4 ) ( 512 0 4 ) ( 512 0 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 560 80 -64 ) ( 560 80 0 ) ( 512 48 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 0 4 ) ( 576 0 4 ) ( 576 0 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 0 -64 ) ( 576 0 -64 ) ( 560 80 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 48 4 ) ( 576 0 4 ) ( 512 0 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 560 80 0 ) ( 576 0 4 ) ( 512 48 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 0 -64 ) ( 576 0 4 ) ( 560 80 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 193
+{
+( 576 0 -64 ) ( 560 80 -64 ) ( 560 80 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 560 80 0 ) ( 640 64 4 ) ( 576 0 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 0 4 ) ( 656 0 2 ) ( 656 0 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 0 -64 ) ( 656 0 -64 ) ( 640 64 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 640 64 4 ) ( 656 0 2 ) ( 576 0 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 640 64 -64 ) ( 640 64 4 ) ( 560 80 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 656 0 -64 ) ( 656 0 2 ) ( 640 64 4 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 194
+{
+( 720 48 0 ) ( 704 0 2 ) ( 704 0 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 784 64 -64 ) ( 784 64 2 ) ( 720 48 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 720 48 0 ) ( 784 64 2 ) ( 704 0 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 704 0 2 ) ( 768 0 0 ) ( 768 0 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 768 0 -64 ) ( 784 64 -64 ) ( 720 48 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 704 0 2 ) ( 784 64 2 ) ( 768 0 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 768 0 0 ) ( 784 64 2 ) ( 784 64 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 195
+{
+( 784 64 2 ) ( 768 0 0 ) ( 768 0 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 784 64 2 ) ( 832 0 4 ) ( 768 0 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 768 0 0 ) ( 832 0 4 ) ( 832 0 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 0 -64 ) ( 848 64 -64 ) ( 784 64 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 848 64 -64 ) ( 848 64 0 ) ( 784 64 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 784 64 2 ) ( 848 64 0 ) ( 832 0 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 0 4 ) ( 848 64 0 ) ( 848 64 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 196
+{
+( 848 64 0 ) ( 832 0 4 ) ( 832 0 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 912 80 -64 ) ( 912 80 2 ) ( 848 64 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 848 64 0 ) ( 912 80 2 ) ( 832 0 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 0 4 ) ( 880 0 0 ) ( 880 0 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 880 0 -64 ) ( 912 80 -64 ) ( 848 64 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 0 4 ) ( 912 80 2 ) ( 880 0 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 880 0 0 ) ( 912 80 2 ) ( 912 80 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 197
+{
+( 848 64 -64 ) ( 832 128 -64 ) ( 832 128 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 128 4 ) ( 912 80 2 ) ( 848 64 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 848 64 -64 ) ( 912 80 -64 ) ( 896 128 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 896 128 -64 ) ( 896 128 0 ) ( 832 128 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 896 128 0 ) ( 912 80 2 ) ( 832 128 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 848 64 0 ) ( 912 80 2 ) ( 912 80 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 912 80 -64 ) ( 912 80 2 ) ( 896 128 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 198
+{
+( 784 64 -64 ) ( 752 128 -64 ) ( 752 128 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 752 128 0 ) ( 832 128 4 ) ( 784 64 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 784 64 2 ) ( 848 64 0 ) ( 848 64 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 784 64 -64 ) ( 848 64 -64 ) ( 832 128 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 128 -64 ) ( 832 128 4 ) ( 752 128 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 128 4 ) ( 848 64 0 ) ( 784 64 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 848 64 -64 ) ( 848 64 0 ) ( 832 128 4 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 199
+{
+( 720 48 -64 ) ( 704 128 -64 ) ( 704 128 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 704 128 2 ) ( 784 64 2 ) ( 720 48 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 720 48 -64 ) ( 784 64 -64 ) ( 752 128 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 752 128 -64 ) ( 752 128 0 ) ( 704 128 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 752 128 0 ) ( 784 64 2 ) ( 704 128 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 720 48 0 ) ( 784 64 2 ) ( 784 64 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 784 64 -64 ) ( 784 64 2 ) ( 752 128 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 200
+{
+( 656 144 2 ) ( 640 64 4 ) ( 640 64 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 640 64 4 ) ( 720 48 0 ) ( 720 48 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 640 64 -64 ) ( 720 48 -64 ) ( 704 128 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 656 144 2 ) ( 704 128 2 ) ( 640 64 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 704 128 2 ) ( 720 48 0 ) ( 640 64 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 704 128 -64 ) ( 704 128 2 ) ( 656 144 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 720 48 -64 ) ( 720 48 0 ) ( 704 128 2 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 201
+{
+( 576 128 4 ) ( 560 80 0 ) ( 560 80 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 656 144 -64 ) ( 656 144 2 ) ( 576 128 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 560 80 0 ) ( 640 64 4 ) ( 640 64 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 128 4 ) ( 640 64 4 ) ( 560 80 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 640 64 -64 ) ( 656 144 -64 ) ( 576 128 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 128 4 ) ( 656 144 2 ) ( 640 64 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 640 64 4 ) ( 656 144 2 ) ( 656 144 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 202
+{
+( 512 144 4 ) ( 512 48 4 ) ( 512 48 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 560 80 -64 ) ( 576 128 -64 ) ( 512 144 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 144 4 ) ( 576 128 4 ) ( 512 48 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 48 4 ) ( 576 128 4 ) ( 560 80 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 128 -64 ) ( 576 128 4 ) ( 512 144 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 48 4 ) ( 560 80 0 ) ( 560 80 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 560 80 0 ) ( 576 128 4 ) ( 576 128 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 203
+{
+( 912 80 -64 ) ( 896 128 -64 ) ( 896 128 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 912 80 2 ) ( 960 64 2 ) ( 960 64 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 64 -64 ) ( 976 112 -64 ) ( 896 128 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 896 128 0 ) ( 976 112 0 ) ( 912 80 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 912 80 2 ) ( 976 112 0 ) ( 960 64 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 976 112 -64 ) ( 976 112 0 ) ( 896 128 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 64 2 ) ( 976 112 0 ) ( 976 112 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 204
+{
+( 976 112 0 ) ( 960 64 2 ) ( 960 64 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 976 112 0 ) ( 976 112 -64 ) ( 1024 128 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 976 112 0 ) ( 1024 128 2 ) ( 960 64 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 64 2 ) ( 1024 64 2 ) ( 1024 64 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 64 -64 ) ( 1024 128 -64 ) ( 976 112 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 64 2 ) ( 1024 128 2 ) ( 1024 64 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 64 2 ) ( 1024 128 2 ) ( 1024 128 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 205
+{
+( 656 0 -64 ) ( 640 64 -64 ) ( 640 64 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 656 0 2 ) ( 704 0 2 ) ( 704 0 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 640 64 4 ) ( 704 0 2 ) ( 656 0 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 704 0 -64 ) ( 720 48 -64 ) ( 640 64 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 640 64 4 ) ( 720 48 0 ) ( 704 0 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 720 48 -64 ) ( 720 48 0 ) ( 640 64 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 704 0 2 ) ( 720 48 0 ) ( 720 48 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 206
+{
+( 912 80 2 ) ( 880 0 0 ) ( 880 0 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 912 80 2 ) ( 960 0 2 ) ( 880 0 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 880 0 0 ) ( 960 0 2 ) ( 960 0 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 0 -64 ) ( 960 64 -64 ) ( 912 80 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 912 80 2 ) ( 960 64 2 ) ( 960 0 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 64 -64 ) ( 960 64 2 ) ( 912 80 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 0 2 ) ( 960 64 2 ) ( 960 64 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 207
+{
+( 960 64 2 ) ( 960 0 2 ) ( 960 0 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 0 2 ) ( 1024 0 2 ) ( 1024 0 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 0 -64 ) ( 1024 64 -64 ) ( 960 64 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 64 2 ) ( 1024 64 2 ) ( 1024 0 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 64 -64 ) ( 1024 64 2 ) ( 960 64 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 0 2 ) ( 1024 64 2 ) ( 1024 64 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 208
+{
+( 896 128 -64 ) ( 880 192 -64 ) ( 880 192 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 896 128 0 ) ( 976 112 0 ) ( 976 112 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 880 192 0 ) ( 960 192 2 ) ( 896 128 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 192 2 ) ( 976 112 0 ) ( 896 128 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 896 128 -64 ) ( 976 112 -64 ) ( 960 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 192 -64 ) ( 960 192 2 ) ( 880 192 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 976 112 -64 ) ( 976 112 0 ) ( 960 192 2 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 209
+{
+( 912 240 2 ) ( 880 192 0 ) ( 880 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 912 240 2 ) ( 912 240 -64 ) ( 976 256 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 912 240 2 ) ( 960 192 2 ) ( 880 192 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 880 192 0 ) ( 960 192 2 ) ( 960 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 192 -64 ) ( 976 256 -64 ) ( 912 240 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 912 240 2 ) ( 976 256 0 ) ( 960 192 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 192 2 ) ( 976 256 0 ) ( 976 256 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 210
+{
+( 832 256 4 ) ( 832 192 4 ) ( 832 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 192 4 ) ( 880 192 0 ) ( 880 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 880 192 -64 ) ( 912 240 -64 ) ( 832 256 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 256 4 ) ( 912 240 2 ) ( 832 192 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 192 4 ) ( 912 240 2 ) ( 880 192 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 912 240 -64 ) ( 912 240 2 ) ( 832 256 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 880 192 0 ) ( 912 240 2 ) ( 912 240 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 211
+{
+( 976 256 0 ) ( 960 192 2 ) ( 960 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 976 256 0 ) ( 1024 240 2 ) ( 960 192 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 192 2 ) ( 1024 192 2 ) ( 1024 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 192 -64 ) ( 1024 240 -64 ) ( 976 256 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 192 2 ) ( 1024 240 2 ) ( 1024 192 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 240 -64 ) ( 1024 240 2 ) ( 976 256 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 192 2 ) ( 1024 240 2 ) ( 1024 240 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 212
+{
+( 976 112 -64 ) ( 960 192 -64 ) ( 960 192 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 192 2 ) ( 1024 128 2 ) ( 976 112 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 128 -64 ) ( 1024 192 -64 ) ( 960 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 192 2 ) ( 1024 192 2 ) ( 1024 128 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 192 -64 ) ( 1024 192 2 ) ( 960 192 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 976 112 0 ) ( 1024 128 2 ) ( 1024 128 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 128 2 ) ( 1024 192 2 ) ( 1024 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 213
+{
+( 832 192 4 ) ( 832 128 4 ) ( 832 128 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 128 4 ) ( 896 128 0 ) ( 896 128 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 128 -64 ) ( 896 128 -64 ) ( 880 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 880 192 -64 ) ( 880 192 0 ) ( 832 192 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 192 4 ) ( 896 128 0 ) ( 832 128 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 880 192 0 ) ( 896 128 0 ) ( 832 192 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 896 128 -64 ) ( 896 128 0 ) ( 880 192 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 214
+{
+( 864 336 0 ) ( 832 256 4 ) ( 832 256 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 256 4 ) ( 912 240 2 ) ( 912 240 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 864 336 0 ) ( 912 304 2 ) ( 832 256 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 912 240 -64 ) ( 912 304 -64 ) ( 864 336 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 256 4 ) ( 912 304 2 ) ( 912 240 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 912 304 -64 ) ( 912 304 2 ) ( 864 336 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 912 240 2 ) ( 912 304 2 ) ( 912 304 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 215
+{
+( 912 304 2 ) ( 912 240 2 ) ( 912 240 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 912 304 2 ) ( 912 304 -64 ) ( 960 320 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 912 240 -64 ) ( 976 256 -64 ) ( 960 320 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 912 304 2 ) ( 960 320 2 ) ( 912 240 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 320 2 ) ( 976 256 0 ) ( 912 240 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 912 240 2 ) ( 976 256 0 ) ( 976 256 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 976 256 -64 ) ( 976 256 0 ) ( 960 320 2 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 216
+{
+( 976 256 -64 ) ( 960 320 -64 ) ( 960 320 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 976 256 0 ) ( 1024 240 2 ) ( 1024 240 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 336 -64 ) ( 1024 336 2 ) ( 960 320 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 320 2 ) ( 1024 240 2 ) ( 976 256 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 240 -64 ) ( 1024 336 -64 ) ( 960 320 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 320 2 ) ( 1024 336 2 ) ( 1024 240 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 240 2 ) ( 1024 336 2 ) ( 1024 336 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 217
+{
+( 784 192 2 ) ( 752 128 0 ) ( 752 128 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 784 192 2 ) ( 832 128 4 ) ( 752 128 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 784 192 2 ) ( 832 192 4 ) ( 832 128 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 752 128 0 ) ( 832 128 4 ) ( 832 128 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 128 -64 ) ( 832 192 -64 ) ( 784 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 192 -64 ) ( 832 192 4 ) ( 784 192 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 128 4 ) ( 832 192 4 ) ( 832 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 218
+{
+( 720 240 0 ) ( 704 192 2 ) ( 704 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 768 256 -64 ) ( 768 256 0 ) ( 720 240 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 720 240 0 ) ( 768 256 0 ) ( 704 192 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 704 192 2 ) ( 784 192 2 ) ( 784 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 704 192 -64 ) ( 784 192 -64 ) ( 768 256 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 768 256 0 ) ( 784 192 2 ) ( 704 192 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 784 192 -64 ) ( 784 192 2 ) ( 768 256 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 219
+{
+( 736 336 2 ) ( 720 240 0 ) ( 720 240 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 768 256 -64 ) ( 800 304 -64 ) ( 736 336 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 736 336 2 ) ( 768 256 0 ) ( 720 240 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 736 336 2 ) ( 800 304 0 ) ( 768 256 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 720 240 0 ) ( 768 256 0 ) ( 768 256 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 800 304 -64 ) ( 800 304 0 ) ( 736 336 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 768 256 0 ) ( 800 304 0 ) ( 800 304 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 220
+{
+( 672 336 4 ) ( 656 256 2 ) ( 656 256 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 656 256 2 ) ( 720 240 0 ) ( 720 240 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 720 240 -64 ) ( 736 336 -64 ) ( 672 336 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 736 336 -64 ) ( 736 336 2 ) ( 672 336 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 672 336 4 ) ( 720 240 0 ) ( 656 256 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 672 336 4 ) ( 736 336 2 ) ( 720 240 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 720 240 0 ) ( 736 336 2 ) ( 736 336 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 221
+{
+( 800 304 -64 ) ( 752 384 -64 ) ( 752 384 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 848 400 -64 ) ( 848 400 0 ) ( 752 384 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 800 304 -64 ) ( 864 336 -64 ) ( 848 400 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 848 400 0 ) ( 864 336 0 ) ( 800 304 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 800 304 0 ) ( 864 336 0 ) ( 864 336 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 864 336 -64 ) ( 864 336 0 ) ( 848 400 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 222
+{
+( 784 448 2 ) ( 752 384 0 ) ( 752 384 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 784 448 2 ) ( 832 448 4 ) ( 752 384 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 752 384 -64 ) ( 848 400 -64 ) ( 832 448 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 448 -64 ) ( 832 448 4 ) ( 784 448 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 448 4 ) ( 848 400 0 ) ( 752 384 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 752 384 0 ) ( 848 400 0 ) ( 848 400 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 848 400 -64 ) ( 848 400 0 ) ( 832 448 4 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 223
+{
+( 848 400 -64 ) ( 832 448 -64 ) ( 832 448 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 848 400 0 ) ( 896 384 0 ) ( 896 384 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 896 464 -64 ) ( 896 464 0 ) ( 832 448 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 448 4 ) ( 896 384 0 ) ( 848 400 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 896 384 -64 ) ( 896 464 -64 ) ( 832 448 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 448 4 ) ( 896 464 0 ) ( 896 384 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 896 384 0 ) ( 896 464 0 ) ( 896 464 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 224
+{
+( 912 304 -64 ) ( 896 384 -64 ) ( 896 384 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 896 384 0 ) ( 944 384 4 ) ( 912 304 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 912 304 -64 ) ( 960 320 -64 ) ( 944 384 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 944 384 -64 ) ( 944 384 4 ) ( 896 384 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 944 384 4 ) ( 960 320 2 ) ( 912 304 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 912 304 2 ) ( 960 320 2 ) ( 960 320 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 320 -64 ) ( 960 320 2 ) ( 944 384 4 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 225
+{
+( 736 336 -64 ) ( 704 384 -64 ) ( 704 384 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 736 336 2 ) ( 800 304 0 ) ( 800 304 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 736 336 -64 ) ( 800 304 -64 ) ( 752 384 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 752 384 -64 ) ( 752 384 0 ) ( 704 384 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 704 384 2 ) ( 752 384 0 ) ( 736 336 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 752 384 0 ) ( 800 304 0 ) ( 736 336 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 800 304 -64 ) ( 800 304 0 ) ( 752 384 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 226
+{
+( 896 464 0 ) ( 896 384 0 ) ( 896 384 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 896 464 0 ) ( 944 384 4 ) ( 896 384 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 896 464 0 ) ( 960 448 2 ) ( 944 384 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 896 384 0 ) ( 944 384 4 ) ( 944 384 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 944 384 -64 ) ( 960 448 -64 ) ( 896 464 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 448 -64 ) ( 960 448 2 ) ( 896 464 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 944 384 4 ) ( 960 448 2 ) ( 960 448 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 227
+{
+( 960 448 2 ) ( 944 384 4 ) ( 944 384 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 944 384 4 ) ( 1024 384 2 ) ( 1024 384 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 384 -64 ) ( 1024 416 -64 ) ( 960 448 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 448 2 ) ( 1024 416 2 ) ( 944 384 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 944 384 4 ) ( 1024 416 2 ) ( 1024 384 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 416 -64 ) ( 1024 416 2 ) ( 960 448 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 384 2 ) ( 1024 416 2 ) ( 1024 416 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 228
+{
+( 960 320 -64 ) ( 944 384 -64 ) ( 944 384 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 336 -64 ) ( 1024 384 -64 ) ( 944 384 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 384 -64 ) ( 1024 384 2 ) ( 944 384 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 944 384 4 ) ( 1024 336 2 ) ( 960 320 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 944 384 4 ) ( 1024 384 2 ) ( 1024 336 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 320 2 ) ( 1024 336 2 ) ( 1024 336 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 336 2 ) ( 1024 384 2 ) ( 1024 384 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 229
+{
+( 800 304 0 ) ( 768 256 0 ) ( 768 256 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 864 336 -64 ) ( 864 336 0 ) ( 800 304 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 800 304 0 ) ( 832 256 4 ) ( 768 256 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 800 304 0 ) ( 864 336 0 ) ( 832 256 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 768 256 0 ) ( 832 256 4 ) ( 832 256 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 256 -64 ) ( 864 336 -64 ) ( 800 304 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 256 4 ) ( 864 336 0 ) ( 864 336 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 230
+{
+( 864 336 -64 ) ( 848 400 -64 ) ( 848 400 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 864 336 0 ) ( 912 304 2 ) ( 912 304 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 848 400 0 ) ( 912 304 2 ) ( 864 336 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 864 336 -64 ) ( 912 304 -64 ) ( 896 384 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 896 384 0 ) ( 912 304 2 ) ( 848 400 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 896 384 -64 ) ( 896 384 0 ) ( 848 400 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 912 304 -64 ) ( 912 304 2 ) ( 896 384 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 231
+{
+( 784 192 -64 ) ( 768 256 -64 ) ( 768 256 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 768 256 0 ) ( 832 256 4 ) ( 784 192 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 784 192 2 ) ( 832 256 4 ) ( 832 192 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 784 192 2 ) ( 832 192 4 ) ( 832 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 192 -64 ) ( 832 256 -64 ) ( 768 256 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 256 -64 ) ( 832 256 4 ) ( 768 256 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 192 4 ) ( 832 256 4 ) ( 832 256 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 232
+{
+( 656 256 2 ) ( 624 224 0 ) ( 624 224 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 624 224 0 ) ( 704 192 2 ) ( 704 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 656 256 2 ) ( 704 192 2 ) ( 624 224 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 704 192 -64 ) ( 720 240 -64 ) ( 656 256 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 656 256 2 ) ( 720 240 0 ) ( 704 192 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 720 240 -64 ) ( 720 240 0 ) ( 656 256 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 704 192 2 ) ( 720 240 0 ) ( 720 240 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 233
+{
+( 656 144 -64 ) ( 624 224 -64 ) ( 624 224 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 656 144 2 ) ( 704 128 2 ) ( 704 128 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 624 224 0 ) ( 704 192 2 ) ( 656 144 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 704 128 -64 ) ( 704 192 -64 ) ( 624 224 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 656 144 2 ) ( 704 192 2 ) ( 704 128 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 704 192 -64 ) ( 704 192 2 ) ( 624 224 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 704 128 2 ) ( 704 192 2 ) ( 704 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 234
+{
+( 576 192 4 ) ( 576 128 4 ) ( 576 128 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 624 224 -64 ) ( 624 224 0 ) ( 576 192 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 128 -64 ) ( 656 144 -64 ) ( 624 224 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 192 4 ) ( 656 144 2 ) ( 576 128 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 624 224 0 ) ( 656 144 2 ) ( 576 192 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 128 4 ) ( 656 144 2 ) ( 656 144 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 656 144 -64 ) ( 656 144 2 ) ( 624 224 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 235
+{
+( 704 192 2 ) ( 704 128 2 ) ( 704 128 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 704 128 2 ) ( 752 128 0 ) ( 752 128 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 752 128 -64 ) ( 784 192 -64 ) ( 704 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 704 192 2 ) ( 784 192 2 ) ( 704 128 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 784 192 -64 ) ( 784 192 2 ) ( 704 192 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 704 128 2 ) ( 784 192 2 ) ( 752 128 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 752 128 0 ) ( 784 192 2 ) ( 784 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 236
+{
+( 592 272 0 ) ( 576 192 4 ) ( 576 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 592 272 0 ) ( 656 256 2 ) ( 576 192 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 624 224 -64 ) ( 656 256 -64 ) ( 592 272 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 656 256 -64 ) ( 656 256 2 ) ( 592 272 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 192 4 ) ( 656 256 2 ) ( 624 224 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 192 4 ) ( 624 224 0 ) ( 624 224 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 624 224 0 ) ( 656 256 2 ) ( 656 256 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 237
+{
+( 512 272 4 ) ( 512 192 4 ) ( 512 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 192 4 ) ( 576 192 4 ) ( 576 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 192 -64 ) ( 592 272 -64 ) ( 512 272 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 272 4 ) ( 576 192 4 ) ( 512 192 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 592 272 -64 ) ( 592 272 0 ) ( 512 272 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 272 4 ) ( 592 272 0 ) ( 576 192 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 192 4 ) ( 592 272 0 ) ( 592 272 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 238
+{
+( 512 192 4 ) ( 512 144 4 ) ( 512 144 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 144 4 ) ( 576 128 4 ) ( 576 128 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 128 -64 ) ( 576 192 -64 ) ( 512 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 192 4 ) ( 576 192 4 ) ( 576 128 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 192 -64 ) ( 576 192 4 ) ( 512 192 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 128 4 ) ( 576 192 4 ) ( 576 192 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 239
+{
+( 512 320 4 ) ( 512 272 4 ) ( 512 272 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 272 4 ) ( 592 272 0 ) ( 592 272 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 272 -64 ) ( 592 272 -64 ) ( 576 320 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 320 4 ) ( 576 320 4 ) ( 512 272 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 320 -64 ) ( 576 320 4 ) ( 512 320 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 320 4 ) ( 592 272 0 ) ( 512 272 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 592 272 -64 ) ( 592 272 0 ) ( 576 320 4 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 240
+{
+( 512 384 4 ) ( 512 320 4 ) ( 512 320 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 320 4 ) ( 576 320 4 ) ( 576 320 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 320 -64 ) ( 592 368 -64 ) ( 512 384 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 384 4 ) ( 576 320 4 ) ( 512 320 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 384 4 ) ( 592 368 0 ) ( 576 320 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 592 368 -64 ) ( 592 368 0 ) ( 512 384 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 320 4 ) ( 592 368 0 ) ( 592 368 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 241
+{
+( 512 448 4 ) ( 512 384 4 ) ( 512 384 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 560 464 -64 ) ( 560 464 0 ) ( 512 448 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 384 4 ) ( 592 368 0 ) ( 592 368 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 384 -64 ) ( 592 368 -64 ) ( 560 464 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 448 4 ) ( 592 368 0 ) ( 512 384 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 560 464 0 ) ( 592 368 0 ) ( 512 448 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 592 368 -64 ) ( 592 368 0 ) ( 560 464 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 242
+{
+( 592 368 -64 ) ( 560 464 -64 ) ( 560 464 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 560 464 0 ) ( 608 448 4 ) ( 592 368 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 608 448 4 ) ( 640 384 4 ) ( 592 368 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 592 368 -64 ) ( 640 384 -64 ) ( 608 448 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 592 368 0 ) ( 640 384 4 ) ( 640 384 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 608 448 -64 ) ( 608 448 4 ) ( 560 464 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 640 384 -64 ) ( 640 384 4 ) ( 608 448 4 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 243
+{
+( 640 384 -64 ) ( 608 448 -64 ) ( 608 448 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 672 464 -64 ) ( 672 464 4 ) ( 608 448 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 640 384 4 ) ( 704 384 2 ) ( 704 384 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 640 384 -64 ) ( 704 384 -64 ) ( 672 464 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 608 448 4 ) ( 672 464 4 ) ( 640 384 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 672 464 4 ) ( 704 384 2 ) ( 640 384 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 672 464 4 ) ( 672 464 -64 ) ( 704 384 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 244
+{
+( 672 336 -64 ) ( 640 384 -64 ) ( 640 384 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 672 336 4 ) ( 736 336 2 ) ( 736 336 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 672 336 -64 ) ( 736 336 -64 ) ( 704 384 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 704 384 -64 ) ( 704 384 2 ) ( 640 384 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 672 336 4 ) ( 640 384 4 ) ( 704 384 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 736 336 -64 ) ( 736 336 2 ) ( 704 384 2 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 245
+{
+( 592 272 -64 ) ( 576 320 -64 ) ( 576 320 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 592 272 0 ) ( 656 256 2 ) ( 656 256 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 672 336 -64 ) ( 672 336 4 ) ( 576 320 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 320 4 ) ( 656 256 2 ) ( 592 272 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 656 256 -64 ) ( 672 336 -64 ) ( 576 320 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 320 4 ) ( 672 336 4 ) ( 656 256 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 656 256 2 ) ( 672 336 4 ) ( 672 336 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 246
+{
+( 592 368 0 ) ( 576 320 4 ) ( 576 320 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 640 384 -64 ) ( 640 384 4 ) ( 592 368 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 592 368 0 ) ( 640 384 4 ) ( 576 320 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 320 -64 ) ( 672 336 -64 ) ( 640 384 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 640 384 4 ) ( 672 336 4 ) ( 576 320 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 576 320 4 ) ( 672 336 4 ) ( 672 336 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 672 336 -64 ) ( 672 336 4 ) ( 640 384 4 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 247
+{
+( 624 512 0 ) ( 608 448 4 ) ( 608 448 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 624 512 0 ) ( 672 464 4 ) ( 608 448 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 672 464 -64 ) ( 720 512 -64 ) ( 624 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 624 512 0 ) ( 720 512 0 ) ( 672 464 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 720 512 -64 ) ( 720 512 0 ) ( 624 512 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 608 448 4 ) ( 672 464 4 ) ( 672 464 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 672 464 4 ) ( 720 512 0 ) ( 720 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 248
+{
+( 560 464 -64 ) ( 544 512 -64 ) ( 544 512 6 ) qodot/TINYLEAVES 0 0 0 1 1
+( 560 464 0 ) ( 608 448 4 ) ( 608 448 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 544 512 6 ) ( 608 448 4 ) ( 560 464 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 608 448 -64 ) ( 624 512 -64 ) ( 544 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 624 512 -64 ) ( 624 512 0 ) ( 544 512 6 ) qodot/TINYLEAVES 0 0 0 1 1
+( 544 512 6 ) ( 624 512 0 ) ( 608 448 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 608 448 4 ) ( 624 512 0 ) ( 624 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 249
+{
+( 512 512 4 ) ( 512 448 4 ) ( 512 448 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 512 4 ) ( 544 512 6 ) ( 512 448 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 448 -64 ) ( 560 464 -64 ) ( 544 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 544 512 -64 ) ( 544 512 6 ) ( 512 512 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 544 512 6 ) ( 560 464 0 ) ( 512 448 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 512 448 4 ) ( 560 464 0 ) ( 560 464 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 560 464 -64 ) ( 560 464 0 ) ( 544 512 6 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 250
+{
+( 720 512 0 ) ( 672 464 4 ) ( 672 464 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 672 464 4 ) ( 784 448 2 ) ( 784 448 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 672 464 -64 ) ( 784 448 -64 ) ( 768 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 720 512 0 ) ( 768 512 0 ) ( 672 464 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 768 512 -64 ) ( 768 512 0 ) ( 720 512 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 768 512 0 ) ( 784 448 2 ) ( 672 464 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 784 448 -64 ) ( 784 448 2 ) ( 768 512 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 251
+{
+( 704 384 -64 ) ( 672 464 -64 ) ( 672 464 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 704 384 2 ) ( 752 384 0 ) ( 752 384 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 752 384 -64 ) ( 784 448 -64 ) ( 672 464 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 672 464 4 ) ( 784 448 2 ) ( 704 384 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 704 384 2 ) ( 784 448 2 ) ( 752 384 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 784 448 -64 ) ( 784 448 2 ) ( 672 464 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 752 384 0 ) ( 784 448 2 ) ( 784 448 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 252
+{
+( 784 448 -64 ) ( 768 512 -64 ) ( 768 512 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 768 512 0 ) ( 832 448 4 ) ( 784 448 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 784 448 2 ) ( 832 448 4 ) ( 832 448 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 784 448 -64 ) ( 832 448 -64 ) ( 816 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 816 512 0 ) ( 832 448 4 ) ( 768 512 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 816 512 -64 ) ( 816 512 0 ) ( 768 512 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 448 -64 ) ( 832 448 4 ) ( 816 512 0 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 253
+{
+( 832 448 -64 ) ( 816 512 -64 ) ( 816 512 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 896 464 -64 ) ( 896 512 -64 ) ( 816 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 816 512 0 ) ( 896 512 0 ) ( 832 448 4 ) qodot/TINYLEAVES 0 0 0 1 1
+( 896 512 -64 ) ( 896 512 0 ) ( 816 512 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 448 4 ) ( 896 512 0 ) ( 896 464 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 832 448 4 ) ( 896 464 0 ) ( 896 464 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 896 464 0 ) ( 896 512 0 ) ( 896 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 254
+{
+( 896 512 0 ) ( 896 464 0 ) ( 896 464 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 896 464 0 ) ( 960 448 2 ) ( 960 448 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 896 512 0 ) ( 960 448 2 ) ( 896 464 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 448 -64 ) ( 976 512 -64 ) ( 896 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 896 512 0 ) ( 976 512 0 ) ( 960 448 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 976 512 -64 ) ( 976 512 0 ) ( 896 512 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 448 2 ) ( 976 512 0 ) ( 976 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 255
+{
+( 976 512 0 ) ( 960 448 2 ) ( 960 448 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 448 2 ) ( 1024 416 2 ) ( 1024 416 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 976 512 0 ) ( 1024 512 2 ) ( 960 448 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 416 -64 ) ( 1024 512 -64 ) ( 976 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 960 448 2 ) ( 1024 512 2 ) ( 1024 416 2 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 512 -64 ) ( 1024 512 2 ) ( 976 512 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 1024 416 2 ) ( 1024 512 2 ) ( 1024 512 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+// brush 256
+{
+( -544 32 160 ) ( -544 33 160 ) ( -544 32 161 ) qodot/BIGBRICKS 0 0 0 1 1
+( -176 -240 160 ) ( -176 -240 161 ) ( -175 -240 160 ) qodot/BIGBRICKS 0 0 0 1 1
+( -176 32 160 ) ( -175 32 160 ) ( -176 33 160 ) qodot/BIGBRICKS 0 0 0 1 1
+( -16 160 176 ) ( -16 161 176 ) ( -15 160 176 ) qodot/BIGBRICKS 0 0 0 1 1
+( -16 160 176 ) ( -15 160 176 ) ( -16 160 177 ) qodot/BIGBRICKS 0 0 0 1 1
+( -16 160 176 ) ( -16 160 177 ) ( -16 161 176 ) qodot/BIGBRICKS 0 0 0 1 1
+}
+// brush 257
+{
+( -384 -128 336 ) ( -384 0 176 ) ( -384 0 336 ) qodot/BIGBRICKS 0 0 0 1 1
+( -320 -192 336 ) ( -384 -128 176 ) ( -384 -128 336 ) qodot/BIGBRICKS 0 0 0 1 1
+( -320 64 336 ) ( -384 0 176 ) ( -320 64 176 ) qodot/BIGBRICKS 0 0 0 1 1
+( -192 -192 336 ) ( -320 -192 176 ) ( -320 -192 336 ) qodot/BIGBRICKS 0 0 0 1 1
+( -128 0 176 ) ( -192 -192 176 ) ( -128 -128 176 ) qodot/BIGBRICKS 0 0 0 1 1
+( -128 0 336 ) ( -320 64 336 ) ( -192 64 336 ) qodot/BIGBRICKS 0 0 0 1 1
+( -192 64 336 ) ( -320 64 176 ) ( -192 64 176 ) qodot/BIGBRICKS 0 0 0 1 1
+( -128 -128 336 ) ( -192 -192 176 ) ( -192 -192 336 ) qodot/BIGBRICKS 0 0 0 1 1
+( -128 0 336 ) ( -192 64 176 ) ( -128 0 176 ) qodot/BIGBRICKS 0 0 0 1 1
+( -128 0 336 ) ( -128 -128 176 ) ( -128 -128 336 ) qodot/BIGBRICKS 0 0 0 1 1
+}
+}
+// entity 1
+{
+"classname" "QodotEnemyZombie"
+"origin" "712 120 10"
+}
+// entity 2
+{
+"classname" "QodotEnemyZombie"
+"origin" "792 264 10"
+}
+// entity 3
+{
+"classname" "QodotEnemyZombie"
+"origin" "744 424 10"
+}
+// entity 4
+{
+"classname" "QodotEnemyZombie"
+"origin" "824 616 10"
+}
+// entity 5
+{
+"classname" "QodotEnemyZombie"
+"origin" "680 680 10"
+}
+// entity 6
+{
+"classname" "QodotEnemyZombie"
+"origin" "792 776 10"
+}

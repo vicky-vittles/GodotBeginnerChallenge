@@ -20,18 +20,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="main" type="MeshInstance" parent="Graphics"]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 1.5, 0 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="head" type="MeshInstance" parent="Graphics"]
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="damaged" type="MeshInstance" parent="Graphics"]
+[node name="main" type="Sprite3D" parent="Graphics"]
 __meta__ = {
 "_edit_lock_": true
 }
@@ -51,7 +40,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="CollisionShape" type="CollisionShape" parent="Hitboxes/DamageHurtbox"]
+[node name="body" type="CollisionShape" parent="Hitboxes/DamageHurtbox"]
 __meta__ = {
 "_edit_lock_": true
 }
@@ -101,6 +90,10 @@ fsm_path = NodePath("..")
 script = ExtResource( 4 )
 fsm_path = NodePath("..")
 
+[node name="Melee" type="Node" parent="StateMachine"]
+script = ExtResource( 4 )
+fsm_path = NodePath("..")
+
 [node name="Missile" type="Node" parent="StateMachine"]
 script = ExtResource( 4 )
 fsm_path = NodePath("..")
@@ -115,6 +108,6 @@ fsm_path = NodePath("..")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
-[connection signal="take_damage" from="Hitboxes/DamageHurtbox" to="Health" method="lose_health"]
+[connection signal="take_damage" from="Hitboxes/DamageHurtbox" to="." method="take_damage"]
 [connection signal="grouped_area_entered" from="Hitboxes/PlayerDetector" to="." method="_on_PlayerDetector_grouped_area_entered"]
 [connection signal="grouped_area_exited" from="Hitboxes/PlayerDetector" to="." method="_on_PlayerDetector_grouped_area_exited"]

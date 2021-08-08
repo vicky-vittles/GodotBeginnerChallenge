@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://entities/__entity/__entity.gd" type="Script" id=1]
+
+[node name="__entity" type="KinematicBody"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource( 1 )

@@ -1,6 +1,6 @@
 extends Area
 
-signal take_damage(damage)
+signal take_damage(damage, info)
 
-func hurt(damage):
-	emit_signal("take_damage", damage)
+func hurt(damage, info):
+	emit_signal("take_damage", damage, info)

@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/corpse_spawner/corpse_spawner.gd"
 }, {
+"base": "KinematicBody",
+"class": "Entity",
+"language": "GDScript",
+"path": "res://entities/__entity/__entity.gd"
+}, {
 "base": "Node",
 "class": "FileManager",
 "language": "GDScript",
@@ -145,19 +150,14 @@ _global_script_classes=[ {
 "path": "res://addons/qodot/src/util/qodot_dependencies.gd"
 }, {
 "base": "QodotFGDPointClass",
-"class": "QodotDirectionalLight",
-"language": "GDScript",
-"path": "res://addons/qodot/entities/qodot_directional_light/qodot_directional_light.gd"
-}, {
-"base": "QodotFGDPointClass",
 "class": "QodotEnemySoldier",
 "language": "GDScript",
-"path": "res://addons/qodot/entities/qodot_enemy_soldier/qodot_enemy_soldier.gd"
+"path": "res://addons/qodot/entities/qodot_enemy_zombie/qodot_enemy_zombie.gd"
 }, {
 "base": "QodotFGDPointClass",
 "class": "QodotEnemySoldierCorpse",
 "language": "GDScript",
-"path": "res://addons/qodot/entities/qodot_enemy_soldier_corpse/qodot_enemy_soldier_corpse.gd"
+"path": "res://addons/qodot/entities/qodot_enemy_zombie_corpse/qodot_enemy_zombie_corpse.gd"
 }, {
 "base": "QodotSpatial",
 "class": "QodotEntity",
@@ -199,11 +199,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/qodot/src/nodes/qodot_map.gd"
 }, {
-"base": "QodotFGDPointClass",
-"class": "QodotOmniLight",
-"language": "GDScript",
-"path": "res://addons/qodot/entities/qodot_omni_light/qodot_omni_light.gd"
-}, {
 "base": "EditorPlugin",
 "class": "QodotPlugin",
 "language": "GDScript",
@@ -218,11 +213,6 @@ _global_script_classes=[ {
 "class": "QodotSpatial",
 "language": "GDScript",
 "path": "res://addons/qodot/src/nodes/qodot_spatial.gd"
-}, {
-"base": "QodotFGDPointClass",
-"class": "QodotSpotLight",
-"language": "GDScript",
-"path": "res://addons/qodot/entities/qodot_spot_light/qodot_spot_light.gd"
 }, {
 "base": "Reference",
 "class": "QodotTextureLoader",
@@ -303,6 +293,7 @@ _global_script_class_icons={
 "ApplicationManager": "",
 "Checkpoint": "",
 "CorpseSpawner": "",
+"Entity": "",
 "FileManager": "",
 "GTArea2D": "",
 "GTArea3D": "",
@@ -327,7 +318,6 @@ _global_script_class_icons={
 "PlayerController": "",
 "QodotCheckpoint": "",
 "QodotDependencies": "",
-"QodotDirectionalLight": "",
 "QodotEnemySoldier": "",
 "QodotEnemySoldierCorpse": "",
 "QodotEntity": "",
@@ -338,11 +328,9 @@ _global_script_class_icons={
 "QodotFGDSolidClass": "",
 "QodotLight": "",
 "QodotMap": "",
-"QodotOmniLight": "",
 "QodotPlugin": "",
 "QodotRotateEntity": "",
 "QodotSpatial": "res://addons/qodot/icons/icon_qodot_spatial.svg",
-"QodotSpotLight": "",
 "QodotTextureLoader": "",
 "QodotUtil": "",
 "QodotWorldspawnLayer": "",
@@ -402,21 +390,25 @@ sys_reload={
 act_move_left={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777231,"unicode":0,"echo":false,"script":null)
  ]
 }
 act_move_right={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777233,"unicode":0,"echo":false,"script":null)
  ]
 }
 act_move_forwards={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777232,"unicode":0,"echo":false,"script":null)
  ]
 }
 act_move_backwards={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777234,"unicode":0,"echo":false,"script":null)
  ]
 }
 act_jump={

@@ -5,8 +5,8 @@ signal checkpoint_reached(point)
 const TERRAIN_COLLISION_LAYER = 2
 const TERRAIN_COLLISION_MASK = 4
 const SAVEABLE_ENTITIES = {
-	Globals.ENTITIES.ENEMY_SOLDIER: preload("res://entities/enemies/enemy_soldier/enemy_soldier.tscn"),
-	Globals.ENTITIES.ENEMY_SOLDIER_CORPSE: preload("res://entities/enemies/enemy_soldier_corpse/enemy_soldier_corpse.tscn")}
+	Globals.ENTITIES.ENEMY_ZOMBIE: preload("res://entities/enemies/enemy_zombie/enemy_zombie.tscn"),
+	Globals.ENTITIES.ENEMY_ZOMBIE_CORPSE: preload("res://entities/enemies/enemy_zombie_corpse/enemy_zombie_corpse.tscn")}
 
 onready var map = $map
 
@@ -30,6 +30,8 @@ func save_entities(file_name):
 	return entities
 
 func load_entities(level_info):
+	if not level_info:
+		return
 	for entity in map.get_children():
 		if "entity_type" in entity and SAVEABLE_ENTITIES.keys().has(entity.entity_type):
 			entity.queue_free()

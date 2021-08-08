@@ -17,5 +17,5 @@ func physics_process(delta):
 		fsm.change_state(FALL)
 
 func _on_jump_just_released():
-	if fsm.current_state == self:
+	if fsm.current_state == self and actor.can_jump:
 		actor.entity_mover.damp_jump()

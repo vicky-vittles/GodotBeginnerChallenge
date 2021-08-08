@@ -29,6 +29,7 @@ action = "act_jump"
 [node name="shoot" type="Node" parent="."]
 script = ExtResource( 2 )
 action = "act_shoot"
+
 [connection signal="just_released" from="move_left" to="." method="update_move_direction"]
 [connection signal="pressed" from="move_left" to="." method="update_move_direction"]
 [connection signal="just_released" from="move_right" to="." method="update_move_direction"]

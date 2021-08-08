@@ -1,9 +1,10 @@
 extends Node
 
 enum ENTITIES {
+	NULL = 0,
 	PLAYER = 1,
-	ENEMY_SOLDIER = 2,
-	ENEMY_SOLDIER_CORPSE = 3}
+	ENEMY_ZOMBIE = 2,
+	ENEMY_ZOMBIE_CORPSE = 3}
 
 func _process(delta):
 	if Input.is_action_just_pressed("sys_reload"):

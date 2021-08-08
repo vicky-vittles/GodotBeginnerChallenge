@@ -1,0 +1,60 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://entities/enemies/enemy_zombie/enemy_zombie.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/qodot/entities/qodot_enemy_zombie/qodot_enemy_zombie.gd" type="Script" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends \"res://entities/enemies/__enemy/__enemy.gd\"
+
+onready var corpse_spawner = $CorpseSpawner
+
+var target
+
+func generate_random_direction():
+	var rand_angle = rand_range(-PI, PI)
+	move_direction = Vector2(1,0).rotated(rand_angle)
+	rotation.y = -rand_angle-PI/2
+
+func update_move_direction_to_target():
+	if target:
+		var target_pos = target.global_transform.origin
+		var dir_to_target = global_transform.origin.direction_to(target_pos).normalized()
+		move_direction = Vector2(dir_to_target.x, dir_to_target.z)
+		rotation.y = -move_direction.angle()-PI/2
+
+func update_shoot_direction_to_target():
+	if target:
+		var target_pos = target.global_transform.origin
+		shoot_direction = global_transform.origin.direction_to(target_pos).normalized()
+
+func shoot():
+	if has_node(\"Weapon\") and can_shoot:
+		var weapon = get_node(\"Weapon\")
+		weapon.shoot(shoot_direction, Vector3.ZERO)
+
+func is_alive():
+	return health.is_alive
+"
+
+[resource]
+script = ExtResource( 2 )
+class_options = "----------------------------------------------------------------"
+classname = "QodotEnemyZombie"
+description = "Enemy zombie."
+qodot_internal = false
+base_classes = [  ]
+class_properties = {
+}
+class_property_descriptions = {
+}
+meta_properties = {
+"color": Color( 0.8, 0.8, 0.8, 1 ),
+"size": AABB( -8, -8, -8, 8, 8, 8 )
+}
+node_options = "----------------------------------------------------------------"
+node_class = ""
+transient_node = false
+scene = "----------------------------------------------------------------"
+scene_file = ExtResource( 1 )
+scripting = "----------------------------------------------------------------"
+script_class = SubResource( 1 )

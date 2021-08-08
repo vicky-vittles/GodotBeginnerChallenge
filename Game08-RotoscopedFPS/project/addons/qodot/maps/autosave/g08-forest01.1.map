@@ -1,0 +1,16 @@
+// Game: Game08-RotoscopeClone
+// Format: Standard
+// entity 0
+{
+"classname" "worldspawn"
+"_tb_textures" "textures/qodot"
+// brush 0
+{
+( -64 -64 -64 ) ( -64 -63 -64 ) ( -64 -64 -63 ) qodot/TINYLEAVES 0 0 0 1 1
+( -64 -64 -64 ) ( -64 -64 -63 ) ( -63 -64 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( -64 -64 -64 ) ( -63 -64 -64 ) ( -64 -63 -64 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 0 0 ) ( 0 1 0 ) ( 1 0 0 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 0 -48 ) ( 1 0 -48 ) ( 0 0 -47 ) qodot/TINYLEAVES 0 0 0 1 1
+( 0 0 -48 ) ( 0 0 -47 ) ( 0 1 -48 ) qodot/TINYLEAVES 0 0 0 1 1
+}
+}

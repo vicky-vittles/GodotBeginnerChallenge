@@ -1,14 +1,15 @@
-extends KinematicBody
+extends Entity
 
 signal died()
 
 export (float, 0.0, 1.0) var mouse_sensitivity = 0.15
+export (bool) var can_jump = true
 export (bool) var allow_vertical_looking = true
 
 onready var weapon = $Weapon
 onready var entity_mover = $EntityMover
 onready var input_controller = $PlayerController
-onready var camera = $Camera
+onready var camera = $Head/bobbing/tilt/Camera
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)

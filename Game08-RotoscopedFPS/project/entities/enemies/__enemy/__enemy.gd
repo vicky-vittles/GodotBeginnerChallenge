@@ -1,7 +1,7 @@
-extends KinematicBody
+extends Entity
 
 export (bool) var can_shoot = true
-export (Globals.ENTITIES) var entity_type
+export (float) var headshot_multiplier = 1.0
 
 enum { PLAYER, ENEMY }
 
@@ -35,3 +35,6 @@ func get_nearest_player():
 	for entity in near_entities.keys():
 		if near_entities[entity] == PLAYER:
 			return entity
+
+func take_damage(damage, info):
+	health.lose_health(damage)

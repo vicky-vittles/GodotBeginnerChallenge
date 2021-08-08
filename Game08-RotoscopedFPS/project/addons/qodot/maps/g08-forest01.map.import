@@ -1,0 +1,13 @@
+[remap]
+
+importer="qodot.map"
+type="Resource"
+path="res://.import/g08-forest01.map-a32b6b5809ba21cd90d42fd788f93308.tres"
+
+[deps]
+
+source_file="res://addons/qodot/maps/g08-forest01.map"
+dest_files=[ "res://.import/g08-forest01.map-a32b6b5809ba21cd90d42fd788f93308.tres" ]
+
+[params]
+

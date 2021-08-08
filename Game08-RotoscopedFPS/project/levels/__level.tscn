@@ -42,6 +42,16 @@ use_trenchbroom_group_hierarchy = false
 tree_attach_batch_size = 16
 set_owner_batch_size = 16
 
+[node name="objects" type="Spatial" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="lights" type="Spatial" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="FileManager" type="Node" parent="."]
 script = ExtResource( 2 )
 

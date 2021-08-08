@@ -15,5 +15,5 @@ func physics_process(delta):
 	actor.entity_mover.move(delta)
 
 func _on_jump_just_pressed():
-	if fsm.current_state == self:
+	if fsm.current_state == self and actor.can_jump:
 		fsm.change_state(JUMP)

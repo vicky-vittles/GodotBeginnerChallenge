@@ -2,7 +2,6 @@
 
 [ext_resource path="res://main/game/world/world.gd" type="Script" id=1]
 [ext_resource path="res://entities/player/player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://levels/L00_Test.tscn" type="PackedScene" id=3]
 [ext_resource path="res://libs/gt_currency/gt_currency.gd" type="Script" id=4]
 [ext_resource path="res://icon.png" type="Texture" id=5]
 [ext_resource path="res://assets/palettes/bluem0ld-8x.png" type="Texture" id=6]
@@ -13,15 +12,21 @@ shader = ExtResource( 7 )
 shader_param/flip = false
 shader_param/gradient = ExtResource( 6 )
 
-[sub_resource type="Environment" id=2]
+[sub_resource type="PanoramaSky" id=2]
+
+[sub_resource type="Environment" id=3]
 background_mode = 1
+background_sky = SubResource( 2 )
 ambient_light_color = Color( 1, 1, 1, 1 )
-ambient_light_energy = 0.15
+ambient_light_energy = 0.35
 ambient_light_sky_contribution = 0.0
-fog_sun_amount = 0.11
+fog_enabled = true
+fog_color = Color( 0.145098, 0.145098, 0.145098, 1 )
+fog_depth_end = 60.0
 
 [node name="World" type="Spatial"]
 script = ExtResource( 1 )
+current_level = 1
 
 [node name="color_gradient" type="Sprite" parent="."]
 material = SubResource( 1 )
@@ -36,23 +41,9 @@ __meta__ = {
 script = ExtResource( 4 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
-
-[node name="Level" parent="." instance=ExtResource( 3 )]
-load_on_start = false
-
-[node name="Lights" type="Spatial" parent="."]
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="SpotLight" type="SpotLight" parent="Lights"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -26, 10, 0 )
-shadow_enabled = true
-spot_range = 4096.0
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 13.9, 5.9 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 2 )
+environment = SubResource( 3 )
 
 [connection signal="died" from="Player" to="." method="_on_Player_died"]
-[connection signal="checkpoint_reached" from="Level" to="." method="checkpoint_reached"]
