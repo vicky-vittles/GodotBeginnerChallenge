@@ -6,6 +6,7 @@
 weapon_collidable_groups = [ "enemy_hurtbox" ]
 weapon_excluded_groups = [ "projectile", "projectile_bullet" ]
 player_use = true
+MAX_DAMAGE = 60.0
 shoot_using_look_direction = true
 MAX_RANGE = 200.0
 
@@ -17,6 +18,6 @@ is_active = true
 [node name="weapon" parent="hud/root/bottom/sway" index="0"]
 frame = 1
 
-[connection signal="state_entered" from="StateMachine/Shooting" to="." method="emit_signal" binds= [ "start_flash" ]]
 [connection signal="state_entered" from="StateMachine/Shooting" to="MuzzleFlashTimer" method="start"]
-[connection signal="timeout" from="MuzzleFlashTimer" to="." method="emit_signal" binds= [ "stop_flash" ]]
+[connection signal="state_entered" from="StateMachine/Shooting" to="." method="emit_signal" binds= [ "weapon_fired" ]]
+[connection signal="timeout" from="MuzzleFlashTimer" to="." method="emit_signal" binds= [ "weapon_reloading" ]]

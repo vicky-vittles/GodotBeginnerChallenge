@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://entities/player/player.gd" type="Script" id=1]
 [ext_resource path="res://libs/gt_entity_mover_3d/gt_entity_mover_3d.gd" type="Script" id=2]
@@ -15,6 +15,17 @@
 [ext_resource path="res://entities/player/scripts/player_muzzle_flash.gd" type="Script" id=13]
 [ext_resource path="res://entities/player/scripts/player_head_bobbing.gd" type="Script" id=14]
 [ext_resource path="res://entities/player/scripts/player_head_tilt.gd" type="Script" id=15]
+[ext_resource path="res://libs/gt_random_audio_player/gt_random_audio_player.gd" type="Script" id=16]
+[ext_resource path="res://entities/player/assets/pistol1.ogg" type="AudioStream" id=17]
+[ext_resource path="res://entities/player/assets/pistol2.ogg" type="AudioStream" id=18]
+[ext_resource path="res://entities/player/assets/pistol3.ogg" type="AudioStream" id=19]
+[ext_resource path="res://entities/player/assets/step_on_grass_L (3).ogg" type="AudioStream" id=20]
+[ext_resource path="res://entities/player/assets/step_on_grass_L (2).ogg" type="AudioStream" id=21]
+[ext_resource path="res://entities/player/assets/step_on_grass_L (1).ogg" type="AudioStream" id=22]
+[ext_resource path="res://entities/player/assets/step_on_grass_R (2).ogg" type="AudioStream" id=23]
+[ext_resource path="res://entities/player/assets/step_on_grass_R (3).ogg" type="AudioStream" id=24]
+[ext_resource path="res://entities/player/assets/step_on_grass_R (1).ogg" type="AudioStream" id=25]
+[ext_resource path="res://entities/player/scripts/footsteps_timer.gd" type="Script" id=26]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 1, 1.5, 1 )
@@ -30,11 +41,29 @@ collision_layer = 4
 collision_mask = 2
 script = ExtResource( 1 )
 entity_type = 1
-can_jump = false
 
 [node name="Weapon" parent="." instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
 actor_path = NodePath("../../Player")
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="pistol_shot" type="AudioStreamPlayer" parent="SFX"]
+bus = "Sound"
+script = ExtResource( 16 )
+samples = [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ) ]
+
+[node name="footsteps_left" type="AudioStreamPlayer" parent="SFX"]
+volume_db = -6.0
+bus = "Sound"
+script = ExtResource( 16 )
+samples = [ ExtResource( 22 ), ExtResource( 21 ), ExtResource( 20 ) ]
+
+[node name="footsteps_right" type="AudioStreamPlayer" parent="SFX"]
+volume_db = -6.0
+bus = "Sound"
+script = ExtResource( 16 )
+samples = [ ExtResource( 25 ), ExtResource( 23 ), ExtResource( 24 ) ]
 
 [node name="EntityMover" type="Node" parent="."]
 script = ExtResource( 2 )
@@ -43,6 +72,7 @@ MAX_RUN_SPEED = 20.0
 RUN_ACCELERATION = 15.0
 RUN_DECELERATION = 4.0
 JUMP_HEIGHT = 4.0
+JUMP_TIME = 0.3
 JUMP_DAMPING = 0.5
 stop_on_slopes = true
 
@@ -125,36 +155,24 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Graphics" type="Spatial" parent="."]
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="flash_light" type="SpotLight" parent="Graphics"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
-light_energy = 2.0
+[node name="muzzle_flash" type="SpotLight" parent="Head/bobbing/tilt/Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0 )
+light_energy = 0.0
 shadow_enabled = true
-spot_range = 6.0
-spot_attenuation = 0.164939
-spot_angle_attenuation = 3.73213
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="muzzle_flash" type="OmniLight" parent="Graphics"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
-visible = false
-light_energy = 2.0
-shadow_enabled = true
-omni_range = 7.0
-omni_attenuation = 0.757858
+spot_range = 10.0
+spot_attenuation = 0.574349
+spot_angle_attenuation = 0.420448
 script = ExtResource( 13 )
 __meta__ = {
 "_edit_lock_": true
 }
+max_light_energy = 3.0
+
+[node name="Tween" type="Tween" parent="Head/bobbing/tilt/Camera/muzzle_flash"]
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2, 0 )
+visible = false
 shape = SubResource( 3 )
 __meta__ = {
 "_edit_lock_": true
@@ -172,6 +190,10 @@ fsm_path = NodePath("../../../Player/StateMachine")
 script = ExtResource( 7 )
 fsm_path = NodePath("../../../Player/StateMachine")
 
+[node name="FootstepsTimer" type="Timer" parent="StateMachine/Run"]
+wait_time = 0.3
+script = ExtResource( 26 )
+
 [node name="Jump" type="Node" parent="StateMachine"]
 script = ExtResource( 8 )
 fsm_path = NodePath("../../../Player/StateMachine")
@@ -180,13 +202,19 @@ fsm_path = NodePath("../../../Player/StateMachine")
 script = ExtResource( 5 )
 fsm_path = NodePath("../../../Player/StateMachine")
 
-[connection signal="start_flash" from="Weapon" to="Graphics/muzzle_flash" method="start_flash"]
-[connection signal="stop_flash" from="Weapon" to="Graphics/muzzle_flash" method="stop_flash"]
+[connection signal="weapon_fired" from="Weapon" to="SFX/pistol_shot" method="play_random"]
+[connection signal="weapon_fired" from="Weapon" to="Head/bobbing/tilt/Camera/muzzle_flash" method="start_flash"]
+[connection signal="weapon_reloading" from="Weapon" to="Head/bobbing/tilt/Camera/muzzle_flash" method="stop_flash"]
 [connection signal="died" from="Health" to="." method="_on_Health_died"]
 [connection signal="take_damage" from="Hitboxes/DamageHurtbox" to="Health" method="lose_health"]
 [connection signal="just_pressed" from="PlayerController/jump" to="StateMachine/Idle" method="_on_jump_just_pressed"]
 [connection signal="just_pressed" from="PlayerController/jump" to="StateMachine/Run" method="_on_jump_just_pressed"]
 [connection signal="just_released" from="PlayerController/jump" to="StateMachine/Jump" method="_on_jump_just_released"]
 [connection signal="pressed" from="PlayerController/shoot" to="." method="shoot"]
+[connection signal="state_entered" from="StateMachine/Run" to="StateMachine/Run/FootstepsTimer" method="start"]
+[connection signal="state_exited" from="StateMachine/Run" to="StateMachine/Run/FootstepsTimer" method="stop"]
+[connection signal="left_foot" from="StateMachine/Run/FootstepsTimer" to="SFX/footsteps_left" method="play_random"]
+[connection signal="right_foot" from="StateMachine/Run/FootstepsTimer" to="SFX/footsteps_right" method="play_random"]
+[connection signal="timeout" from="StateMachine/Run/FootstepsTimer" to="StateMachine/Run/FootstepsTimer" method="_on_timeout"]
 
 [editable path="PlayerController"]

@@ -2,11 +2,13 @@ extends Spatial
 
 enum LEVELS {
 	TEST_00 = 0,
-	FOREST_01 = 1}
+	FOREST_01 = 1,
+	DUNGEON_02 = 2}
 
 const LEVEL_SCENES = {
 	LEVELS.TEST_00: preload("res://levels/L00_Test.tscn"),
-	LEVELS.FOREST_01: preload("res://levels/L01_Forest.tscn")}
+	LEVELS.FOREST_01: preload("res://levels/L01_Forest.tscn"),
+	LEVELS.DUNGEON_02: preload("res://levels/L02_Dungeon.tscn")}
 
 export (LEVELS) var current_level = LEVELS.TEST_00
 

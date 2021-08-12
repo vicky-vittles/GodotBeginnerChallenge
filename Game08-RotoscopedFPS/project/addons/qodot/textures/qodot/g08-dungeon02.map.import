@@ -1,0 +1,13 @@
+[remap]
+
+importer="qodot.map"
+type="Resource"
+path="res://.import/g08-dungeon02.map-584a362fcff1e151b853e6f7048c2151.tres"
+
+[deps]
+
+source_file="res://addons/qodot/textures/qodot/g08-dungeon02.map"
+dest_files=[ "res://.import/g08-dungeon02.map-584a362fcff1e151b853e6f7048c2151.tres" ]
+
+[params]
+

@@ -64,4 +64,5 @@ min_zoom = 1.0
 max_zoom = 1.0
 allow_zoom = false
 margin = Vector2( 0, 0 )
+
 [connection signal="floor_updated" from="." to="Player" method="_on_game_floor_updated"]

@@ -1,0 +1,1083 @@
+// Game: Game08-RotoscopeClone
+// Format: Standard
+// entity 0
+{
+"classname" "worldspawn"
+"_tb_textures" "textures/qodot/Bricks;textures/qodot/Doors;textures/qodot/Elements;textures/qodot/Industrial;textures/qodot/Wood"
+// brush 0
+{
+( 720 -64 -64 ) ( 720 -63 -64 ) ( 720 -64 -63 ) qodot/Bricks/BIGBRICKS 0 0 0 1 1
+( 976 -256 -64 ) ( 976 -256 -63 ) ( 977 -256 -64 ) qodot/Bricks/BIGBRICKS 0 0 0 1 1
+( 976 -64 -64 ) ( 977 -64 -64 ) ( 976 -63 -64 ) qodot/Bricks/BIGBRICKS 0 0 0 1 1
+( 1040 0 0 ) ( 1040 1 0 ) ( 1041 0 0 ) qodot/Bricks/BIGBRICKS 0 0 0 1 1
+( 1040 256 0 ) ( 1041 256 0 ) ( 1040 256 1 ) qodot/Bricks/BIGBRICKS 0 0 0 1 1
+( 3344 0 0 ) ( 3344 0 1 ) ( 3344 1 0 ) qodot/Bricks/BIGBRICKS 0 0 0 1 1
+}
+// brush 1
+{
+( 704 224 -32 ) ( 704 224 -33 ) ( 704 225 -32 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 704 56 -32 ) ( 705 56 -32 ) ( 704 56 -33 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 768 288 -64 ) ( 769 288 -64 ) ( 768 289 -64 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 704 224 288 ) ( 704 225 288 ) ( 705 224 288 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 768 256 -96 ) ( 768 256 -97 ) ( 769 256 -96 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 720 288 -96 ) ( 720 289 -96 ) ( 720 288 -97 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+}
+// brush 2
+{
+( 704 -64 -32 ) ( 704 -64 -33 ) ( 704 -63 -32 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 704 -256 -32 ) ( 705 -256 -32 ) ( 704 -256 -33 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 768 0 -64 ) ( 769 0 -64 ) ( 768 1 -64 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 704 -64 288 ) ( 704 -63 288 ) ( 705 -64 288 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 768 -56 -96 ) ( 768 -56 -97 ) ( 769 -56 -96 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 720 0 -96 ) ( 720 1 -96 ) ( 720 0 -97 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+}
+// brush 3
+{
+( 704 160 48 ) ( 704 160 47 ) ( 704 161 48 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 704 -56 48 ) ( 705 -56 48 ) ( 704 -56 47 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 768 224 96 ) ( 769 224 96 ) ( 768 225 96 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 704 160 288 ) ( 704 161 288 ) ( 705 160 288 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 768 56 -16 ) ( 768 56 -17 ) ( 769 56 -16 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 720 224 -16 ) ( 720 225 -16 ) ( 720 224 -17 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+}
+// brush 4
+{
+( 1552 272 -32 ) ( 1552 271 -32 ) ( 1552 272 -33 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1952 256 -96 ) ( 1953 256 -96 ) ( 1952 256 -97 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1952 208 0 ) ( 1952 207 0 ) ( 1953 208 0 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1888 272 288 ) ( 1889 272 288 ) ( 1888 271 288 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1888 272 -32 ) ( 1888 272 -33 ) ( 1889 272 -32 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1760 208 -96 ) ( 1760 208 -97 ) ( 1760 207 -96 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+}
+// brush 5
+{
+( 708 64 48 ) ( 708 65 48 ) ( 708 64 51 ) qodot/Doors/CREAKYDOOR 0 0 0 1 3
+( 775.2 52 0 ) ( 773.1 52 0 ) ( 775.2 52 3 ) qodot/Doors/CREAKYDOOR -14.857117 0 180 2.1 -3
+( 775.2 48 0 ) ( 775.2 49 0 ) ( 773.1 48 0 ) qodot/Doors/CREAKYDOOR 0 14.857117 90 1 2.1
+( 674.4 64 96 ) ( 672.3 64 96 ) ( 674.4 65 96 ) qodot/Doors/CREAKYDOOR 0 14.857117 90 1 2.1
+( 674.4 60 48 ) ( 674.4 60 51 ) ( 672.3 60 48 ) qodot/Doors/CREAKYDOOR -14.857117 0 180 2.1 -3
+( 775.2 48 0 ) ( 775.2 48 3 ) ( 775.2 49 0 ) qodot/Doors/CREAKYDOOR 0 0 0 1 3
+}
+// brush 6
+{
+( 708 -44 48 ) ( 708 -43 48 ) ( 708 -44 51 ) qodot/Doors/CREAKYDOOR 12 0 0 1 3
+( 775.2 -56 0 ) ( 773.1 -56 0 ) ( 775.2 -56 3 ) qodot/Doors/CREAKYDOOR -14.857117 0 180 2.1 -3
+( 775.2 -60 0 ) ( 775.2 -59 0 ) ( 773.1 -60 0 ) qodot/Doors/CREAKYDOOR 12 14.857117 90 1 2.1
+( 674.4 -44 96 ) ( 672.3 -44 96 ) ( 674.4 -43 96 ) qodot/Doors/CREAKYDOOR 12 14.857117 90 1 2.1
+( 674.4 -48 48 ) ( 674.4 -48 51 ) ( 672.3 -48 48 ) qodot/Doors/CREAKYDOOR -14.857117 0 180 2.1 -3
+( 775.2 -60 0 ) ( 775.2 -60 3 ) ( 775.2 -59 0 ) qodot/Doors/CREAKYDOOR 12 0 0 1 3
+}
+// brush 7
+{
+( 704 -256 -32 ) ( 704 -257 -32 ) ( 704 -256 -33 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 976 -272 -96 ) ( 977 -272 -96 ) ( 976 -272 -97 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 976 -320 -64 ) ( 976 -321 -64 ) ( 977 -320 -64 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 912 -256 288 ) ( 913 -256 288 ) ( 912 -257 288 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 912 -256 -32 ) ( 912 -256 -33 ) ( 913 -256 -32 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1472 -320 -96 ) ( 1472 -320 -97 ) ( 1472 -321 -96 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+}
+// brush 8
+{
+( 1552 -256 -32 ) ( 1552 -257 -32 ) ( 1552 -256 -33 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1952 -272 -96 ) ( 1953 -272 -96 ) ( 1952 -272 -97 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1952 -320 0 ) ( 1952 -321 0 ) ( 1953 -320 0 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1888 -256 288 ) ( 1889 -256 288 ) ( 1888 -257 288 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1888 -256 -32 ) ( 1888 -256 -33 ) ( 1889 -256 -32 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1760 -320 -96 ) ( 1760 -320 -97 ) ( 1760 -321 -96 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+}
+// brush 9
+{
+( -1088 -64 -64 ) ( -1088 -63 -64 ) ( -1088 -64 -63 ) qodot/Elements/TINYLEAVES 0 0 0 2 2
+( -512 -960 -64 ) ( -512 -960 -63 ) ( -511 -960 -64 ) qodot/Elements/TINYLEAVES 0 0 0 2 2
+( -512 -64 -192 ) ( -511 -64 -192 ) ( -512 -63 -192 ) qodot/Elements/TINYLEAVES 0 0 0 2 2
+( -448 0 -16 ) ( -448 1 -16 ) ( -447 0 -16 ) qodot/Elements/TINYLEAVES 0 0 0 2 2
+( -448 896 0 ) ( -447 896 0 ) ( -448 896 1 ) qodot/Elements/TINYLEAVES 0 0 0 2 2
+( 256 0 0 ) ( 256 0 1 ) ( 256 1 0 ) qodot/Elements/TINYLEAVES 0 0 0 2 2
+}
+// brush 10
+{
+( 256 -64 -192 ) ( 256 -63 -192 ) ( 256 -64 -191 ) qodot/Elements/WATER 0 0 0 2 2
+( -256 -960 -192 ) ( -256 -960 -191 ) ( -255 -960 -192 ) qodot/Elements/WATER 0 0 0 2 2
+( -256 -64 -192 ) ( -255 -64 -192 ) ( -256 -63 -192 ) qodot/Elements/WATER 0 0 0 2 2
+( -192 0 -64 ) ( -192 1 -64 ) ( -191 0 -64 ) qodot/Elements/WATER 0 0 0 2 2
+( -192 896 -128 ) ( -191 896 -128 ) ( -192 896 -127 ) qodot/Elements/WATER 0 0 0 2 2
+( 2160 0 -128 ) ( 2160 0 -127 ) ( 2160 1 -128 ) qodot/Elements/WATER 0 0 0 2 2
+}
+// brush 11
+{
+( -1024 832 0 ) ( -1024 833 0 ) ( -1024 832 1 ) qodot/Bricks/CLAYBRICKS 0 0 0 2 2
+( -1024 832 0 ) ( -1024 832 1 ) ( -1023 832 0 ) qodot/Bricks/CLAYBRICKS 0 0 0 2 2
+( -1024 832 -16 ) ( -1023 832 -16 ) ( -1024 833 -16 ) qodot/Bricks/CLAYBRICKS 0 0 0 2 2
+( -992 848 384 ) ( -992 849 384 ) ( -991 848 384 ) qodot/Bricks/CLAYBRICKS 0 0 0 2 2
+( -992 896 16 ) ( -991 896 16 ) ( -992 896 17 ) qodot/Bricks/CLAYBRICKS 0 0 0 2 2
+( 256 848 16 ) ( 256 848 17 ) ( 256 849 16 ) qodot/Bricks/CLAYBRICKS 0 0 0 2 2
+}
+// brush 12
+{
+( -1024 -960 0 ) ( -1024 -959 0 ) ( -1024 -960 1 ) qodot/Bricks/CLAYBRICKS 0 0 0 2 2
+( -1024 -960 0 ) ( -1024 -960 1 ) ( -1023 -960 0 ) qodot/Bricks/CLAYBRICKS 0 0 0 2 2
+( -1024 -960 -16 ) ( -1023 -960 -16 ) ( -1024 -959 -16 ) qodot/Bricks/CLAYBRICKS 0 0 0 2 2
+( -992 -944 384 ) ( -992 -943 384 ) ( -991 -944 384 ) qodot/Bricks/CLAYBRICKS 0 0 0 2 2
+( -992 -896 16 ) ( -991 -896 16 ) ( -992 -896 17 ) qodot/Bricks/CLAYBRICKS 0 0 0 2 2
+( 256 -944 16 ) ( 256 -944 17 ) ( 256 -943 16 ) qodot/Bricks/CLAYBRICKS 0 0 0 2 2
+}
+// brush 13
+{
+( -1088 672 0 ) ( -1088 672 1 ) ( -1088 671 0 ) qodot/Bricks/CLAYBRICKS 0 0 0 2 2
+( -1072 -960 16 ) ( -1072 -960 17 ) ( -1071 -960 16 ) qodot/Bricks/CLAYBRICKS 0 0 0 2 2
+( -1088 672 -16 ) ( -1088 671 -16 ) ( -1087 672 -16 ) qodot/Bricks/CLAYBRICKS 0 0 0 2 2
+( -1072 640 384 ) ( -1071 640 384 ) ( -1072 639 384 ) qodot/Bricks/CLAYBRICKS 0 0 0 2 2
+( -1088 896 0 ) ( -1087 896 0 ) ( -1088 896 1 ) qodot/Bricks/CLAYBRICKS 0 0 0 2 2
+( -1024 640 16 ) ( -1024 639 16 ) ( -1024 640 17 ) qodot/Bricks/CLAYBRICKS 0 0 0 2 2
+}
+// brush 14
+{
+( 224 -64 -64 ) ( 224 -63 -64 ) ( 224 -64 -63 ) qodot/Wood/CREAKYWOOD 0 0 0 1 1
+( 640 -64 -64 ) ( 640 -64 -63 ) ( 641 -64 -64 ) qodot/Wood/CREAKYWOOD 0 0 0 1 1
+( 640 -64 -16 ) ( 641 -64 -16 ) ( 640 -63 -16 ) qodot/Wood/CREAKYWOOD 0 0 0 1 1
+( 704 64 0 ) ( 704 65 0 ) ( 705 64 0 ) qodot/Wood/CREAKYWOOD 0 0 0 1 1
+( 704 64 0 ) ( 705 64 0 ) ( 704 64 1 ) qodot/Wood/CREAKYWOOD 0 0 0 1 1
+( 704 64 0 ) ( 704 64 1 ) ( 704 65 0 ) qodot/Wood/CREAKYWOOD 0 0 0 1 1
+}
+// brush 15
+{
+( 704 160 -192 ) ( 704 160 -193 ) ( 704 161 -192 ) qodot/Bricks/DUNGEONBRICKS 0 -16 0 1 1
+( 704 -56 -192 ) ( 705 -56 -192 ) ( 704 -56 -193 ) qodot/Bricks/DUNGEONBRICKS 0 -16 0 1 1
+( 768 224 -64 ) ( 769 224 -64 ) ( 768 225 -64 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+( 704 160 -16 ) ( 704 161 -16 ) ( 705 160 -16 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+( 768 56 -256 ) ( 768 56 -257 ) ( 769 56 -256 ) qodot/Bricks/DUNGEONBRICKS 0 -16 0 1 1
+( 720 224 -256 ) ( 720 225 -256 ) ( 720 224 -257 ) qodot/Bricks/DUNGEONBRICKS 0 -16 0 1 1
+}
+// brush 16
+{
+( 704 -48 -16 ) ( 704 -47 -16 ) ( 704 -48 -15 ) qodot/Bricks/BIGBRICKS 0 0 0 1 1
+( 704 -64 -16 ) ( 704 -64 -15 ) ( 705 -64 -16 ) qodot/Bricks/BIGBRICKS 0 0 0 1 1
+( 704 -48 -16 ) ( 705 -48 -16 ) ( 704 -47 -16 ) qodot/Bricks/BIGBRICKS 0 0 0 1 1
+( 720 -32 0 ) ( 720 -31 0 ) ( 721 -32 0 ) qodot/Bricks/BIGBRICKS 0 0 0 1 1
+( 720 64 0 ) ( 721 64 0 ) ( 720 64 1 ) qodot/Bricks/BIGBRICKS 0 0 0 1 1
+( 720 -32 0 ) ( 720 -32 1 ) ( 720 -31 0 ) qodot/Bricks/BIGBRICKS 0 0 0 1 1
+}
+// brush 17
+{
+( 1248 272 224 ) ( 1248 272 -64 ) ( 1248 400 -64 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 976 256 -96 ) ( 977 256 -96 ) ( 976 256 -97 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 976 208 0 ) ( 976 207 0 ) ( 977 208 0 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 912 272 288 ) ( 913 272 288 ) ( 912 271 288 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 912 272 -32 ) ( 912 272 -33 ) ( 913 272 -32 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1472 208 -96 ) ( 1472 208 -97 ) ( 1472 207 -96 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+}
+// brush 18
+{
+( 704 272 -32 ) ( 704 271 -32 ) ( 704 272 -33 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 976 256 -96 ) ( 977 256 -96 ) ( 976 256 -97 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 976 208 -64 ) ( 976 207 -64 ) ( 977 208 -64 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 912 272 288 ) ( 913 272 288 ) ( 912 271 288 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 912 272 -32 ) ( 912 272 -33 ) ( 913 272 -32 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1248 272 224 ) ( 1248 400 -64 ) ( 1248 272 -64 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+}
+// brush 19
+{
+( 704 272 224 ) ( 704 272 -64 ) ( 1248 544 -64 ) qodot/Bricks/DUNGEONBRICKS -20.705872 0 180 2 2
+( 1248 272 -64 ) ( 704 272 -64 ) ( 704 272 224 ) qodot/Bricks/DUNGEONBRICKS 11.294102 0 0 2 2
+( 1248 272 -64 ) ( 1248 544 -64 ) ( 704 272 -64 ) qodot/Bricks/DUNGEONBRICKS 0 -16 270 2 2
+( 704 272 288 ) ( 1248 544 288 ) ( 1248 272 288 ) qodot/Bricks/DUNGEONBRICKS 0 -16 270 2 2
+( 1248 272 224 ) ( 1248 544 224 ) ( 1248 544 -64 ) qodot/Bricks/DUNGEONBRICKS 0 0 180 2 2
+}
+// brush 20
+{
+( 1248 -544 -64 ) ( 704 -272 -64 ) ( 704 -272 224 ) qodot/Bricks/DUNGEONBRICKS -21.019606 0 180 2 2
+( 1248 -544 -64 ) ( 1248 -272 -64 ) ( 704 -272 -64 ) qodot/Bricks/DUNGEONBRICKS -24 0 90 2 2
+( 704 -272 288 ) ( 1248 -272 288 ) ( 1248 -544 288 ) qodot/Bricks/DUNGEONBRICKS -24 0 90 2 2
+( 1248 -272 -64 ) ( 1248 -272 224 ) ( 704 -272 224 ) qodot/Bricks/DUNGEONBRICKS -27.294113 0 180 2 2
+( 1248 -544 224 ) ( 1248 -272 224 ) ( 1248 -272 -64 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 2
+}
+// brush 21
+{
+( 1744 224 -32 ) ( 1744 224 -33 ) ( 1744 225 -32 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1744 -256 -32 ) ( 1745 -256 -32 ) ( 1744 -256 -33 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 2
+( 1808 288 -64 ) ( 1809 288 -64 ) ( 1808 289 -64 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 2
+( 1744 224 288 ) ( 1744 225 288 ) ( 1745 224 288 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 2
+( 1808 256 -96 ) ( 1808 256 -97 ) ( 1809 256 -96 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 2
+( 1760 288 -96 ) ( 1760 289 -96 ) ( 1760 288 -97 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+}
+// brush 22
+{
+( 1472 -256 -32 ) ( 1472 -257 -32 ) ( 1472 -256 -33 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1552 -272 80 ) ( 1512 -144 104 ) ( 1512 -272 104 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1776 -272 -96 ) ( 1777 -272 -96 ) ( 1776 -272 -97 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1712 -256 288 ) ( 1713 -256 288 ) ( 1712 -257 288 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1712 -256 -32 ) ( 1712 -256 -33 ) ( 1713 -256 -32 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1472 -272 80 ) ( 1512 -272 104 ) ( 1512 -144 104 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1552 -320 -96 ) ( 1552 -320 -97 ) ( 1552 -321 -96 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+}
+// brush 23
+{
+( 1552 -272 80 ) ( 1512 -144 104 ) ( 1512 -272 104 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1472 -272 80 ) ( 1512 -144 104 ) ( 1512 -272 104 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1776 -272 -96 ) ( 1777 -272 -96 ) ( 1776 -272 -97 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1712 -256 -32 ) ( 1712 -256 -33 ) ( 1713 -256 -32 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1552 -320 -96 ) ( 1552 -320 -97 ) ( 1552 -321 -96 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+}
+// brush 24
+{
+( 1472 -256 -32 ) ( 1472 -257 -32 ) ( 1472 -256 -33 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1776 -272 -96 ) ( 1777 -272 -96 ) ( 1776 -272 -97 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1712 -256 -32 ) ( 1712 -256 -33 ) ( 1713 -256 -32 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1472 -272 80 ) ( 1512 -272 104 ) ( 1512 -144 104 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1552 -272 80 ) ( 1512 -272 104 ) ( 1512 -144 104 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+}
+// brush 25
+{
+( 1472 272 -32 ) ( 1472 271 -32 ) ( 1472 272 -33 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 2
+( 1552 256 80 ) ( 1512 384 104 ) ( 1512 256 104 ) qodot/Bricks/DUNGEONBRICKS 0 16 0 2 2
+( 1776 256 -96 ) ( 1777 256 -96 ) ( 1776 256 -97 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1712 272 288 ) ( 1713 272 288 ) ( 1712 271 288 ) qodot/Bricks/DUNGEONBRICKS 0 16 0 2 2
+( 1712 272 -32 ) ( 1712 272 -33 ) ( 1713 272 -32 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1472 256 80 ) ( 1512 256 104 ) ( 1512 384 104 ) qodot/Bricks/DUNGEONBRICKS 0 16 0 2 2
+( 1552 208 -96 ) ( 1552 208 -97 ) ( 1552 207 -96 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 2
+}
+// brush 26
+{
+( 1472 272 -32 ) ( 1472 271 -32 ) ( 1472 272 -33 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 2
+( 1776 256 -96 ) ( 1777 256 -96 ) ( 1776 256 -97 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1712 272 -32 ) ( 1712 272 -33 ) ( 1713 272 -32 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1472 256 80 ) ( 1512 256 104 ) ( 1512 384 104 ) qodot/Bricks/DUNGEONBRICKS 0 16 0 2 2
+( 1552 256 80 ) ( 1512 256 104 ) ( 1512 384 104 ) qodot/Bricks/DUNGEONBRICKS 0 16 0 2 2
+}
+// brush 27
+{
+( 1552 256 80 ) ( 1512 384 104 ) ( 1512 256 104 ) qodot/Bricks/DUNGEONBRICKS 0 16 0 2 2
+( 1472 256 80 ) ( 1512 384 104 ) ( 1512 256 104 ) qodot/Bricks/DUNGEONBRICKS 0 16 0 2 2
+( 1776 256 -96 ) ( 1777 256 -96 ) ( 1776 256 -97 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1712 272 -32 ) ( 1712 272 -33 ) ( 1713 272 -32 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1552 208 -96 ) ( 1552 208 -97 ) ( 1552 207 -96 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 2
+}
+// brush 28
+{
+( 2160 -288 -32 ) ( 2160 -288 -33 ) ( 2160 -287 -32 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 -2
+( 2160 64 112 ) ( 2160 0 144 ) ( 2288 0 144 ) qodot/Bricks/DUNGEONBRICKS -16 16 0 2 2
+( 2160 -64 112 ) ( 2160 0 144 ) ( 2288 0 144 ) qodot/Bricks/DUNGEONBRICKS -16 16 0 2 2
+( 2224 64 -96 ) ( 2224 64 -97 ) ( 2225 64 -96 ) qodot/Bricks/DUNGEONBRICKS -16 0 180 2 2
+( 2176 -224 -96 ) ( 2176 -223 -96 ) ( 2176 -224 -97 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 -2
+}
+// brush 29
+{
+( 2160 -288 -32 ) ( 2160 -288 -33 ) ( 2160 -287 -32 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 -2
+( 2160 -64 96 ) ( 2160 -64 160 ) ( 2288 -64 160 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 2
+( 2160 64 112 ) ( 2160 0 144 ) ( 2288 0 144 ) qodot/Bricks/DUNGEONBRICKS -16 16 0 2 2
+( 2160 -288 288 ) ( 2160 -287 288 ) ( 2161 -288 288 ) qodot/Bricks/DUNGEONBRICKS -16 16 90 2 2
+( 2160 -64 112 ) ( 2288 0 144 ) ( 2160 0 144 ) qodot/Bricks/DUNGEONBRICKS -16 16 0 2 2
+( 2224 64 -96 ) ( 2224 64 -97 ) ( 2225 64 -96 ) qodot/Bricks/DUNGEONBRICKS -16 0 180 2 2
+( 2176 -224 -96 ) ( 2176 -223 -96 ) ( 2176 -224 -97 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 -2
+}
+// brush 30
+{
+( 2160 -288 -32 ) ( 2160 -288 -33 ) ( 2160 -287 -32 ) qodot/Bricks/DUNGEONBRICKS -16.000002 0 0 2 -2
+( 2160 -64 96 ) ( 2160 -64 160 ) ( 2288 -64 160 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 2
+( 2160 -64 112 ) ( 2288 0 144 ) ( 2160 0 144 ) qodot/Bricks/DUNGEONBRICKS -16 16 0 2 2
+( 2160 64 112 ) ( 2288 0 144 ) ( 2160 0 144 ) qodot/Bricks/DUNGEONBRICKS -16 16 0 2 2
+( 2176 -224 -96 ) ( 2176 -223 -96 ) ( 2176 -224 -97 ) qodot/Bricks/DUNGEONBRICKS -16.000002 0 0 2 -2
+}
+// brush 31
+{
+( 2160 -160 -32 ) ( 2160 -160 -33 ) ( 2160 -159 -32 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 -2
+( 2176 -320 112 ) ( 2176 -320 128 ) ( 2304 -320 128 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 2
+( 2224 -96 0 ) ( 2225 -96 0 ) ( 2224 -95 0 ) qodot/Bricks/DUNGEONBRICKS -16 16 90 2 2
+( 2160 -160 288 ) ( 2160 -159 288 ) ( 2161 -160 288 ) qodot/Bricks/DUNGEONBRICKS -16 16 90 2 2
+( 2160 -64 96 ) ( 2288 -64 160 ) ( 2160 -64 160 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 2
+( 2176 -96 -96 ) ( 2176 -95 -96 ) ( 2176 -96 -97 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 -2
+}
+// brush 32
+{
+( 2160 -160 -32 ) ( 2160 -160 -33 ) ( 2160 -159 -32 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 -2
+( 2160 -528 224 ) ( 2160 -528 -64 ) ( 2032 -528 -64 ) qodot/Bricks/DUNGEONBRICKS -16 0 180 2 2
+( 2224 -96 0 ) ( 2225 -96 0 ) ( 2224 -95 0 ) qodot/Bricks/DUNGEONBRICKS -16 16 90 2 2
+( 2160 -160 288 ) ( 2160 -159 288 ) ( 2161 -160 288 ) qodot/Bricks/DUNGEONBRICKS -16 16 90 2 2
+( 2176 -448 112 ) ( 2304 -448 128 ) ( 2176 -448 128 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 2
+( 2176 -96 -96 ) ( 2176 -95 -96 ) ( 2176 -96 -97 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 -2
+}
+// brush 33
+{
+( 2160 -672 -32 ) ( 2160 -672 -33 ) ( 2160 -671 -32 ) qodot/Bricks/DUNGEONBRICKS 16 0 0 2 -2
+( 2160 -448 96 ) ( 2160 -448 160 ) ( 2288 -448 160 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 2
+( 2160 -320 112 ) ( 2160 -384 144 ) ( 2288 -384 144 ) qodot/Bricks/DUNGEONBRICKS -16 -16 0 2 2
+( 2160 -672 288 ) ( 2160 -671 288 ) ( 2161 -672 288 ) qodot/Bricks/DUNGEONBRICKS 16 16 90 2 2
+( 2160 -448 112 ) ( 2288 -384 144 ) ( 2160 -384 144 ) qodot/Bricks/DUNGEONBRICKS -16 -16 0 2 2
+( 2224 -320 -96 ) ( 2224 -320 -97 ) ( 2225 -320 -96 ) qodot/Bricks/DUNGEONBRICKS -16 0 180 2 2
+( 2176 -608 -96 ) ( 2176 -607 -96 ) ( 2176 -608 -97 ) qodot/Bricks/DUNGEONBRICKS 16 0 0 2 -2
+}
+// brush 34
+{
+( 2160 -672 -32 ) ( 2160 -672 -33 ) ( 2160 -671 -32 ) qodot/Bricks/DUNGEONBRICKS 15.999985 0 0 2 -2
+( 2160 -448 96 ) ( 2160 -448 160 ) ( 2288 -448 160 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 2
+( 2160 -448 112 ) ( 2288 -384 144 ) ( 2160 -384 144 ) qodot/Bricks/DUNGEONBRICKS -16 -16 0 2 2
+( 2160 -320 112 ) ( 2288 -384 144 ) ( 2160 -384 144 ) qodot/Bricks/DUNGEONBRICKS -16 -16 0 2 2
+( 2176 -608 -96 ) ( 2176 -607 -96 ) ( 2176 -608 -97 ) qodot/Bricks/DUNGEONBRICKS 15.999985 0 0 2 -2
+}
+// brush 35
+{
+( 2160 -672 -32 ) ( 2160 -672 -33 ) ( 2160 -671 -32 ) qodot/Bricks/DUNGEONBRICKS 16 0 0 2 -2
+( 2160 -320 112 ) ( 2160 -384 144 ) ( 2288 -384 144 ) qodot/Bricks/DUNGEONBRICKS -16 -16 0 2 2
+( 2160 -448 112 ) ( 2160 -384 144 ) ( 2288 -384 144 ) qodot/Bricks/DUNGEONBRICKS -16 -16 0 2 2
+( 2224 -320 -96 ) ( 2224 -320 -97 ) ( 2225 -320 -96 ) qodot/Bricks/DUNGEONBRICKS -16 0 180 2 2
+( 2176 -608 -96 ) ( 2176 -607 -96 ) ( 2176 -608 -97 ) qodot/Bricks/DUNGEONBRICKS 16 0 0 2 -2
+}
+// brush 36
+{
+( 2160 -160 -32 ) ( 2160 -160 -33 ) ( 2160 -159 -32 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 -2
+( 2160 64 96 ) ( 2160 64 160 ) ( 2288 64 160 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 2
+( 2224 -96 0 ) ( 2225 -96 0 ) ( 2224 -95 0 ) qodot/Bricks/DUNGEONBRICKS -16 16 90 2 2
+( 2160 -160 288 ) ( 2160 -159 288 ) ( 2161 -160 288 ) qodot/Bricks/DUNGEONBRICKS -16 16 90 2 2
+( 2176 320 144 ) ( 2176 320 112 ) ( 2304 320 112 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 2
+( 2176 -96 -96 ) ( 2176 -95 -96 ) ( 2176 -96 -97 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 -2
+}
+// brush 37
+{
+( 2160 -160 -32 ) ( 2160 -160 -33 ) ( 2160 -159 -32 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 -2
+( 2176 448 144 ) ( 2304 448 112 ) ( 2176 448 112 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 2
+( 2224 -96 0 ) ( 2225 -96 0 ) ( 2224 -95 0 ) qodot/Bricks/DUNGEONBRICKS -16 16 90 2 2
+( 2160 -160 288 ) ( 2160 -159 288 ) ( 2161 -160 288 ) qodot/Bricks/DUNGEONBRICKS -16 16 90 2 2
+( 2224 528 -96 ) ( 2224 528 -97 ) ( 2225 528 -96 ) qodot/Bricks/DUNGEONBRICKS -16 0 180 2 2
+( 2176 -96 -96 ) ( 2176 -95 -96 ) ( 2176 -96 -97 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 -2
+}
+// brush 38
+{
+( 2160 96 -32 ) ( 2160 96 -33 ) ( 2160 97 -32 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 -2
+( 2160 320 96 ) ( 2160 320 160 ) ( 2288 320 160 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 2
+( 2160 448 112 ) ( 2160 384 144 ) ( 2288 384 144 ) qodot/Bricks/DUNGEONBRICKS -16 16 0 2 2
+( 2160 96 288 ) ( 2160 97 288 ) ( 2161 96 288 ) qodot/Bricks/DUNGEONBRICKS -16 16 90 2 2
+( 2160 320 112 ) ( 2288 384 144 ) ( 2160 384 144 ) qodot/Bricks/DUNGEONBRICKS -16 16 0 2 2
+( 2224 448 -96 ) ( 2224 448 -97 ) ( 2225 448 -96 ) qodot/Bricks/DUNGEONBRICKS -16 0 180 2 2
+( 2176 160 -96 ) ( 2176 161 -96 ) ( 2176 160 -97 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 -2
+}
+// brush 39
+{
+( 2160 96 -32 ) ( 2160 96 -33 ) ( 2160 97 -32 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 -2
+( 2160 320 96 ) ( 2160 320 160 ) ( 2288 320 160 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 2
+( 2160 320 112 ) ( 2288 384 144 ) ( 2160 384 144 ) qodot/Bricks/DUNGEONBRICKS -16 16 0 2 2
+( 2160 448 112 ) ( 2288 384 144 ) ( 2160 384 144 ) qodot/Bricks/DUNGEONBRICKS -16 16 0 2 2
+( 2176 160 -96 ) ( 2176 161 -96 ) ( 2176 160 -97 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 -2
+}
+// brush 40
+{
+( 2160 96 -32 ) ( 2160 96 -33 ) ( 2160 97 -32 ) qodot/Bricks/DUNGEONBRICKS -15.999985 0 0 2 -2
+( 2160 448 112 ) ( 2160 384 144 ) ( 2288 384 144 ) qodot/Bricks/DUNGEONBRICKS -16 16 0 2 2
+( 2160 320 112 ) ( 2160 384 144 ) ( 2288 384 144 ) qodot/Bricks/DUNGEONBRICKS -16 16 0 2 2
+( 2224 448 -96 ) ( 2224 448 -97 ) ( 2225 448 -96 ) qodot/Bricks/DUNGEONBRICKS -16 0 180 2 2
+( 2176 160 -96 ) ( 2176 161 -96 ) ( 2176 160 -97 ) qodot/Bricks/DUNGEONBRICKS -15.999985 0 0 2 -2
+}
+// brush 41
+{
+( 1248 480 -64 ) ( 1248 481 -64 ) ( 1248 480 -63 ) qodot/Bricks/BIGBRICKS 0 0 0 1 1
+( 960 256 -64 ) ( 960 256 -63 ) ( 961 256 -64 ) qodot/Bricks/BIGBRICKS 16 0 0 1 1
+( 960 480 -64 ) ( 961 480 -64 ) ( 960 481 -64 ) qodot/Bricks/BIGBRICKS 16 0 0 1 1
+( 1024 544 0 ) ( 1024 545 0 ) ( 1025 544 0 ) qodot/Bricks/BIGBRICKS 16 0 0 1 1
+( 1024 528 0 ) ( 1025 528 0 ) ( 1024 528 1 ) qodot/Bricks/BIGBRICKS 16 0 0 1 1
+( 2176 336 0 ) ( 2176 368 128 ) ( 2176 368 0 ) qodot/Bricks/BIGBRICKS 0 0 0 1 1
+}
+// brush 42
+{
+( 2176 -400 0 ) ( 2176 -288 0 ) ( 2176 -288 128 ) qodot/Bricks/BIGBRICKS 0 0 0 1 1
+( 960 -544 -64 ) ( 960 -544 -63 ) ( 961 -544 -64 ) qodot/Bricks/BIGBRICKS 16 0 0 1 1
+( 960 -576 -64 ) ( 961 -576 -64 ) ( 960 -575 -64 ) qodot/Bricks/BIGBRICKS 16 0 0 1 1
+( 1024 -512 0 ) ( 1024 -511 0 ) ( 1025 -512 0 ) qodot/Bricks/BIGBRICKS 16 0 0 1 1
+( 1024 -256 0 ) ( 1025 -256 0 ) ( 1024 -256 1 ) qodot/Bricks/BIGBRICKS 16 0 0 1 1
+( 3344 -512 0 ) ( 3344 -512 1 ) ( 3344 -511 0 ) qodot/Bricks/BIGBRICKS 0 0 0 1 1
+}
+// brush 43
+{
+( 1248 -576 -64 ) ( 1248 -575 -64 ) ( 1248 -576 -63 ) qodot/Bricks/BIGBRICKS 0 0 0 1 1
+( 960 -528 -64 ) ( 960 -528 -63 ) ( 961 -528 -64 ) qodot/Bricks/BIGBRICKS 16 0 0 1 1
+( 960 -576 -64 ) ( 961 -576 -64 ) ( 960 -575 -64 ) qodot/Bricks/BIGBRICKS 16 0 0 1 1
+( 1024 -512 0 ) ( 1024 -511 0 ) ( 1025 -512 0 ) qodot/Bricks/BIGBRICKS 16 0 0 1 1
+( 1024 -256 0 ) ( 1025 -256 0 ) ( 1024 -256 1 ) qodot/Bricks/BIGBRICKS 16 0 0 1 1
+( 2176 -400 0 ) ( 2176 -288 128 ) ( 2176 -288 0 ) qodot/Bricks/BIGBRICKS 0 0 0 1 1
+}
+// brush 44
+{
+( 2176 336 0 ) ( 2176 368 0 ) ( 2176 368 128 ) qodot/Bricks/BIGBRICKS 0 0 0 1 1
+( 2608 544 0 ) ( 2576 544 0 ) ( 2576 544 128 ) qodot/Bricks/BIGBRICKS 16 0 0 1 1
+( 960 480 -64 ) ( 961 480 -64 ) ( 960 481 -64 ) qodot/Bricks/BIGBRICKS 16 0 0 1 1
+( 1024 544 0 ) ( 1024 545 0 ) ( 1025 544 0 ) qodot/Bricks/BIGBRICKS 16 0 0 1 1
+( 1024 704 0 ) ( 1025 704 0 ) ( 1024 704 1 ) qodot/Bricks/BIGBRICKS 16 0 0 1 1
+( 3344 544 0 ) ( 3344 544 1 ) ( 3344 545 0 ) qodot/Bricks/BIGBRICKS 0 0 0 1 1
+}
+// brush 45
+{
+( 2176 336 0 ) ( 2176 368 0 ) ( 2176 368 128 ) qodot/Bricks/BIGBRICKS 0 0 0 1 1
+( 960 256 -64 ) ( 960 256 -63 ) ( 961 256 -64 ) qodot/Bricks/BIGBRICKS 16 0 0 1 1
+( 960 480 -64 ) ( 961 480 -64 ) ( 960 481 -64 ) qodot/Bricks/BIGBRICKS 16 0 0 1 1
+( 1024 544 0 ) ( 1024 545 0 ) ( 1025 544 0 ) qodot/Bricks/BIGBRICKS 16 0 0 1 1
+( 2608 544 0 ) ( 2576 544 128 ) ( 2576 544 0 ) qodot/Bricks/BIGBRICKS 16 0 0 1 1
+( 3344 544 0 ) ( 3344 544 1 ) ( 3344 545 0 ) qodot/Bricks/BIGBRICKS 0 0 0 1 1
+}
+// brush 46
+{
+( 2176 -912 0 ) ( 2176 -880 0 ) ( 2176 -880 128 ) qodot/Bricks/BIGBRICKS 0 0 0 1 1
+( 2608 -704 0 ) ( 2576 -704 0 ) ( 2576 -704 128 ) qodot/Bricks/BIGBRICKS 16 0 0 1 1
+( 960 -768 -64 ) ( 961 -768 -64 ) ( 960 -767 -64 ) qodot/Bricks/BIGBRICKS 16 0 0 1 1
+( 1024 -704 0 ) ( 1024 -703 0 ) ( 1025 -704 0 ) qodot/Bricks/BIGBRICKS 16 0 0 1 1
+( 1024 -544 0 ) ( 1025 -544 0 ) ( 1024 -544 1 ) qodot/Bricks/BIGBRICKS 16 0 0 1 1
+( 3344 -704 0 ) ( 3344 -704 1 ) ( 3344 -703 0 ) qodot/Bricks/BIGBRICKS 0 0 0 1 1
+}
+// brush 47
+{
+( 2160 -256 -32 ) ( 2160 -256 -33 ) ( 2160 -255 -32 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 -2
+( 2160 -720 224 ) ( 2160 -720 -64 ) ( 2032 -720 -64 ) qodot/Bricks/DUNGEONBRICKS -16 0 180 2 2
+( 2224 -192 -64 ) ( 2225 -192 -64 ) ( 2224 -191 -64 ) qodot/Bricks/DUNGEONBRICKS 0 16 90 2 2
+( 2160 -256 288 ) ( 2160 -255 288 ) ( 2161 -256 288 ) qodot/Bricks/DUNGEONBRICKS 0 16 90 2 2
+( 2176 -544 112 ) ( 2304 -544 128 ) ( 2176 -544 128 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 2
+( 2176 -192 -96 ) ( 2176 -191 -96 ) ( 2176 -192 -97 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 -2
+}
+// brush 48
+{
+( 2176 -704 224 ) ( 2176 -704 -64 ) ( 2176 -576 -64 ) qodot/Bricks/DUNGEONBRICKS -8 0 0 2 2
+( 1168 -720 -96 ) ( 1169 -720 -96 ) ( 1168 -720 -97 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1168 -768 -64 ) ( 1168 -769 -64 ) ( 1169 -768 -64 ) qodot/Bricks/DUNGEONBRICKS 0 8 0 2 2
+( 1104 -704 288 ) ( 1105 -704 288 ) ( 1104 -705 288 ) qodot/Bricks/DUNGEONBRICKS 0 8 0 2 2
+( 1104 -704 -32 ) ( 1104 -704 -33 ) ( 1105 -704 -32 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 3344 -768 -96 ) ( 3344 -768 -97 ) ( 3344 -769 -96 ) qodot/Bricks/DUNGEONBRICKS -8 0 0 2 2
+}
+// brush 49
+{
+( 2160 1008 -32 ) ( 2160 1008 -33 ) ( 2160 1009 -32 ) qodot/Bricks/DUNGEONBRICKS 8 0 0 2 -2
+( 2160 544 224 ) ( 2160 544 -64 ) ( 2032 544 -64 ) qodot/Bricks/DUNGEONBRICKS -16 0 180 2 2
+( 2224 1072 -64 ) ( 2225 1072 -64 ) ( 2224 1073 -64 ) qodot/Bricks/DUNGEONBRICKS 8 16 90 2 2
+( 2160 1008 288 ) ( 2160 1009 288 ) ( 2161 1008 288 ) qodot/Bricks/DUNGEONBRICKS 8 16 90 2 2
+( 2176 720 112 ) ( 2304 720 128 ) ( 2176 720 128 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 2
+( 2176 1072 -96 ) ( 2176 1073 -96 ) ( 2176 1072 -97 ) qodot/Bricks/DUNGEONBRICKS 8 0 0 2 -2
+}
+// brush 50
+{
+( 2176 720 224 ) ( 2176 720 -64 ) ( 2176 848 -64 ) qodot/Bricks/DUNGEONBRICKS 16 0 0 2 2
+( 1168 704 -96 ) ( 1169 704 -96 ) ( 1168 704 -97 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1168 656 -64 ) ( 1168 655 -64 ) ( 1169 656 -64 ) qodot/Bricks/DUNGEONBRICKS 0 -16 0 2 2
+( 1104 720 288 ) ( 1105 720 288 ) ( 1104 719 288 ) qodot/Bricks/DUNGEONBRICKS 0 -16 0 2 2
+( 1104 720 -32 ) ( 1104 720 -33 ) ( 1105 720 -32 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 3344 656 -96 ) ( 3344 656 -97 ) ( 3344 655 -96 ) qodot/Bricks/DUNGEONBRICKS 16 0 0 2 2
+}
+// brush 51
+{
+( 1248 -528 224 ) ( 1248 -528 -64 ) ( 1248 -400 -64 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1168 -544 -96 ) ( 1169 -544 -96 ) ( 1168 -544 -97 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1168 -592 -64 ) ( 1168 -593 -64 ) ( 1169 -592 -64 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1104 -528 288 ) ( 1105 -528 288 ) ( 1104 -529 288 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1104 -528 -32 ) ( 1104 -528 -33 ) ( 1105 -528 -32 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 2176 -544 208 ) ( 2176 -416 128 ) ( 2176 -544 128 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+}
+// brush 52
+{
+( 1248 592 -96 ) ( 1248 592 -97 ) ( 1248 593 -96 ) qodot/Bricks/DUNGEONBRICKS 0 0 180 2 2
+( 1888 528 -32 ) ( 1888 528 -33 ) ( 1887 528 -32 ) qodot/Bricks/DUNGEONBRICKS -16 0 180 2 2
+( 1824 592 -64 ) ( 1824 593 -64 ) ( 1823 592 -64 ) qodot/Bricks/DUNGEONBRICKS -16 0 180 2 2
+( 1888 528 288 ) ( 1887 528 288 ) ( 1888 529 288 ) qodot/Bricks/DUNGEONBRICKS -16 0 180 2 2
+( 1824 544 -96 ) ( 1823 544 -96 ) ( 1824 544 -97 ) qodot/Bricks/DUNGEONBRICKS -16 0 180 2 2
+( 2176 512 176 ) ( 2176 576 112 ) ( 2176 448 112 ) qodot/Bricks/DUNGEONBRICKS 0 0 180 2 2
+}
+// brush 53
+{
+( 2176 -544 208 ) ( 2176 -544 128 ) ( 2176 -416 128 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1168 -544 -96 ) ( 1169 -544 -96 ) ( 1168 -544 -97 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1168 -592 0 ) ( 1168 -593 0 ) ( 1169 -592 0 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1104 -528 288 ) ( 1105 -528 288 ) ( 1104 -529 288 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1104 -528 -32 ) ( 1104 -528 -33 ) ( 1105 -528 -32 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 2208 -528 48 ) ( 2208 -528 80 ) ( 2208 -400 80 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+}
+// brush 54
+{
+( 2400 -544 208 ) ( 2400 -544 128 ) ( 2400 -416 128 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1392 -544 -96 ) ( 1393 -544 -96 ) ( 1392 -544 -97 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 2
+( 1392 -592 0 ) ( 1392 -593 0 ) ( 1393 -592 0 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 2
+( 1328 -528 288 ) ( 1329 -528 288 ) ( 1328 -529 288 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 2
+( 1328 -528 -32 ) ( 1328 -528 -33 ) ( 1329 -528 -32 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 2
+( 2432 -528 48 ) ( 2432 -528 80 ) ( 2432 -400 80 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+}
+// brush 55
+{
+( 2208 -528 224 ) ( 2208 -400 256 ) ( 2208 -528 256 ) qodot/Bricks/DUNGEONBRICKS 0 24 0 2 2
+( 992 -544 80 ) ( 993 -544 80 ) ( 992 -544 79 ) qodot/Bricks/DUNGEONBRICKS 24 24 0 2 2
+( 928 -528 144 ) ( 928 -528 143 ) ( 929 -528 144 ) qodot/Bricks/DUNGEONBRICKS 24 24 0 2 2
+( 2208 -528 208 ) ( 2304 -528 240 ) ( 2304 -400 240 ) qodot/Bricks/DUNGEONBRICKS 24 0 0 2 2
+( 2400 -528 208 ) ( 2304 -528 240 ) ( 2304 -400 240 ) qodot/Bricks/DUNGEONBRICKS 24 0 0 2 2
+}
+// brush 56
+{
+( 2208 -528 224 ) ( 2208 -400 256 ) ( 2208 -528 256 ) qodot/Bricks/DUNGEONBRICKS 0 24 0 2 2
+( 2400 -528 208 ) ( 2304 -400 240 ) ( 2304 -528 240 ) qodot/Bricks/DUNGEONBRICKS 24 0 0 2 2
+( 992 -544 80 ) ( 993 -544 80 ) ( 992 -544 79 ) qodot/Bricks/DUNGEONBRICKS 24 24 0 2 2
+( 928 -528 288 ) ( 929 -528 288 ) ( 928 -529 288 ) qodot/Bricks/DUNGEONBRICKS 24 0 0 2 2
+( 928 -528 144 ) ( 928 -528 143 ) ( 929 -528 144 ) qodot/Bricks/DUNGEONBRICKS 24 24 0 2 2
+( 2208 -528 208 ) ( 2304 -528 240 ) ( 2304 -400 240 ) qodot/Bricks/DUNGEONBRICKS 24 0 0 2 2
+( 2400 -592 80 ) ( 2400 -592 79 ) ( 2400 -593 80 ) qodot/Bricks/DUNGEONBRICKS 0 24 0 2 2
+}
+// brush 57
+{
+( 2400 -528 208 ) ( 2304 -400 240 ) ( 2304 -528 240 ) qodot/Bricks/DUNGEONBRICKS 24 0 0 2 2
+( 2208 -528 208 ) ( 2304 -400 240 ) ( 2304 -528 240 ) qodot/Bricks/DUNGEONBRICKS 24 0 0 2 2
+( 992 -544 80 ) ( 993 -544 80 ) ( 992 -544 79 ) qodot/Bricks/DUNGEONBRICKS 24 24 0 2 2
+( 928 -528 144 ) ( 928 -528 143 ) ( 929 -528 144 ) qodot/Bricks/DUNGEONBRICKS 24 24 0 2 2
+( 2400 -592 80 ) ( 2400 -592 79 ) ( 2400 -593 80 ) qodot/Bricks/DUNGEONBRICKS 0 24 0 2 2
+}
+// brush 58
+{
+( 2432 -528 224 ) ( 2432 -400 256 ) ( 2432 -528 256 ) qodot/Bricks/DUNGEONBRICKS 0 24 0 2 2
+( 2624 -528 208 ) ( 2528 -400 240 ) ( 2528 -528 240 ) qodot/Bricks/DUNGEONBRICKS -24 0 0 2 2
+( 1216 -544 80 ) ( 1217 -544 80 ) ( 1216 -544 79 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 1152 -528 288 ) ( 1153 -528 288 ) ( 1152 -529 288 ) qodot/Bricks/DUNGEONBRICKS -24 0 0 2 2
+( 1152 -528 144 ) ( 1152 -528 143 ) ( 1153 -528 144 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 2432 -528 208 ) ( 2528 -528 240 ) ( 2528 -400 240 ) qodot/Bricks/DUNGEONBRICKS -24 0 0 2 2
+( 2624 -592 80 ) ( 2624 -592 79 ) ( 2624 -593 80 ) qodot/Bricks/DUNGEONBRICKS 0 24 0 2 2
+}
+// brush 59
+{
+( 2432 -528 224 ) ( 2432 -400 256 ) ( 2432 -528 256 ) qodot/Bricks/DUNGEONBRICKS 0 24 0 2 2
+( 1216 -544 80 ) ( 1217 -544 80 ) ( 1216 -544 79 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 1152 -528 144 ) ( 1152 -528 143 ) ( 1153 -528 144 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 2432 -528 208 ) ( 2528 -528 240 ) ( 2528 -400 240 ) qodot/Bricks/DUNGEONBRICKS -24 0 0 2 2
+( 2624 -528 208 ) ( 2528 -528 240 ) ( 2528 -400 240 ) qodot/Bricks/DUNGEONBRICKS -24 0 0 2 2
+}
+// brush 60
+{
+( 2624 -528 208 ) ( 2528 -400 240 ) ( 2528 -528 240 ) qodot/Bricks/DUNGEONBRICKS -24 0 0 2 2
+( 2432 -528 208 ) ( 2528 -400 240 ) ( 2528 -528 240 ) qodot/Bricks/DUNGEONBRICKS -24 0 0 2 2
+( 1216 -544 80 ) ( 1217 -544 80 ) ( 1216 -544 79 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 1152 -528 144 ) ( 1152 -528 143 ) ( 1153 -528 144 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 2624 -592 80 ) ( 2624 -592 79 ) ( 2624 -593 80 ) qodot/Bricks/DUNGEONBRICKS 0 24 0 2 2
+}
+// brush 61
+{
+( 2624 -544 208 ) ( 2624 -544 128 ) ( 2624 -416 128 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1616 -544 -96 ) ( 1617 -544 -96 ) ( 1616 -544 -97 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1616 -592 0 ) ( 1616 -593 0 ) ( 1617 -592 0 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1552 -528 288 ) ( 1553 -528 288 ) ( 1552 -529 288 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1552 -528 -32 ) ( 1552 -528 -33 ) ( 1553 -528 -32 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 2656 -528 48 ) ( 2656 -528 80 ) ( 2656 -400 80 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+}
+// brush 62
+{
+( 2656 -528 224 ) ( 2656 -400 256 ) ( 2656 -528 256 ) qodot/Bricks/DUNGEONBRICKS 0 24 0 2 2
+( 2848 -528 208 ) ( 2752 -400 240 ) ( 2752 -528 240 ) qodot/Bricks/DUNGEONBRICKS -8 0 0 2 2
+( 1440 -544 80 ) ( 1441 -544 80 ) ( 1440 -544 79 ) qodot/Bricks/DUNGEONBRICKS -8 24 0 2 2
+( 1376 -528 288 ) ( 1377 -528 288 ) ( 1376 -529 288 ) qodot/Bricks/DUNGEONBRICKS -8 0 0 2 2
+( 1376 -528 144 ) ( 1376 -528 143 ) ( 1377 -528 144 ) qodot/Bricks/DUNGEONBRICKS -8 24 0 2 2
+( 2656 -528 208 ) ( 2752 -528 240 ) ( 2752 -400 240 ) qodot/Bricks/DUNGEONBRICKS -8 0 0 2 2
+( 2848 -592 80 ) ( 2848 -592 79 ) ( 2848 -593 80 ) qodot/Bricks/DUNGEONBRICKS 0 24 0 2 2
+}
+// brush 63
+{
+( 2656 -528 224 ) ( 2656 -400 256 ) ( 2656 -528 256 ) qodot/Bricks/DUNGEONBRICKS 0 24 0 2 2
+( 1440 -544 80 ) ( 1441 -544 80 ) ( 1440 -544 79 ) qodot/Bricks/DUNGEONBRICKS -8 24 0 2 2
+( 1376 -528 144 ) ( 1376 -528 143 ) ( 1377 -528 144 ) qodot/Bricks/DUNGEONBRICKS -8 24 0 2 2
+( 2656 -528 208 ) ( 2752 -528 240 ) ( 2752 -400 240 ) qodot/Bricks/DUNGEONBRICKS -8 0 0 2 2
+( 2848 -528 208 ) ( 2752 -528 240 ) ( 2752 -400 240 ) qodot/Bricks/DUNGEONBRICKS -8 0 0 2 2
+}
+// brush 64
+{
+( 2848 -528 208 ) ( 2752 -400 240 ) ( 2752 -528 240 ) qodot/Bricks/DUNGEONBRICKS -8 0 0 2 2
+( 2656 -528 208 ) ( 2752 -400 240 ) ( 2752 -528 240 ) qodot/Bricks/DUNGEONBRICKS -8 0 0 2 2
+( 1440 -544 80 ) ( 1441 -544 80 ) ( 1440 -544 79 ) qodot/Bricks/DUNGEONBRICKS -8 24 0 2 2
+( 1376 -528 144 ) ( 1376 -528 143 ) ( 1377 -528 144 ) qodot/Bricks/DUNGEONBRICKS -8 24 0 2 2
+( 2848 -592 80 ) ( 2848 -592 79 ) ( 2848 -593 80 ) qodot/Bricks/DUNGEONBRICKS 0 24 0 2 2
+}
+// brush 65
+{
+( 2848 -544 208 ) ( 2848 -544 128 ) ( 2848 -416 128 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1840 -544 -96 ) ( 1841 -544 -96 ) ( 1840 -544 -97 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 2
+( 1840 -592 0 ) ( 1840 -593 0 ) ( 1841 -592 0 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 2
+( 1776 -528 288 ) ( 1777 -528 288 ) ( 1776 -529 288 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 2
+( 1776 -528 -32 ) ( 1776 -528 -33 ) ( 1777 -528 -32 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 2
+( 2880 -528 48 ) ( 2880 -528 80 ) ( 2880 -400 80 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+}
+// brush 66
+{
+( 2880 -528 224 ) ( 2880 -400 256 ) ( 2880 -528 256 ) qodot/Bricks/DUNGEONBRICKS 0 24 0 2 2
+( 3072 -528 208 ) ( 2976 -400 240 ) ( 2976 -528 240 ) qodot/Bricks/DUNGEONBRICKS -24 0 0 2 2
+( 1664 -544 80 ) ( 1665 -544 80 ) ( 1664 -544 79 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 1600 -528 288 ) ( 1601 -528 288 ) ( 1600 -529 288 ) qodot/Bricks/DUNGEONBRICKS -24 0 0 2 2
+( 1600 -528 144 ) ( 1600 -528 143 ) ( 1601 -528 144 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 2880 -528 208 ) ( 2976 -528 240 ) ( 2976 -400 240 ) qodot/Bricks/DUNGEONBRICKS -24 0 0 2 2
+( 3072 -592 80 ) ( 3072 -592 79 ) ( 3072 -593 80 ) qodot/Bricks/DUNGEONBRICKS 0 24 0 2 2
+}
+// brush 67
+{
+( 2880 -528 224 ) ( 2880 -400 256 ) ( 2880 -528 256 ) qodot/Bricks/DUNGEONBRICKS 0 24 0 2 2
+( 1664 -544 80 ) ( 1665 -544 80 ) ( 1664 -544 79 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 1600 -528 144 ) ( 1600 -528 143 ) ( 1601 -528 144 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 2880 -528 208 ) ( 2976 -528 240 ) ( 2976 -400 240 ) qodot/Bricks/DUNGEONBRICKS -24 0 0 2 2
+( 3072 -528 208 ) ( 2976 -528 240 ) ( 2976 -400 240 ) qodot/Bricks/DUNGEONBRICKS -24 0 0 2 2
+}
+// brush 68
+{
+( 3072 -528 208 ) ( 2976 -400 240 ) ( 2976 -528 240 ) qodot/Bricks/DUNGEONBRICKS -24 0 0 2 2
+( 2880 -528 208 ) ( 2976 -400 240 ) ( 2976 -528 240 ) qodot/Bricks/DUNGEONBRICKS -24 0 0 2 2
+( 1664 -544 80 ) ( 1665 -544 80 ) ( 1664 -544 79 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 1600 -528 144 ) ( 1600 -528 143 ) ( 1601 -528 144 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 3072 -592 80 ) ( 3072 -592 79 ) ( 3072 -593 80 ) qodot/Bricks/DUNGEONBRICKS 0 24 0 2 2
+}
+// brush 69
+{
+( 3072 -544 208 ) ( 3072 -544 128 ) ( 3072 -416 128 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 2064 -544 -96 ) ( 2065 -544 -96 ) ( 2064 -544 -97 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 2064 -592 0 ) ( 2064 -593 0 ) ( 2065 -592 0 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 2000 -528 288 ) ( 2001 -528 288 ) ( 2000 -529 288 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 2000 -528 -32 ) ( 2000 -528 -33 ) ( 2001 -528 -32 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 3104 -528 48 ) ( 3104 -528 80 ) ( 3104 -400 80 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+}
+// brush 70
+{
+( 3104 -528 224 ) ( 3104 -400 256 ) ( 3104 -528 256 ) qodot/Bricks/DUNGEONBRICKS 0 24 0 2 2
+( 3296 -528 208 ) ( 3200 -400 240 ) ( 3200 -528 240 ) qodot/Bricks/DUNGEONBRICKS -8 0 0 2 2
+( 1888 -544 80 ) ( 1889 -544 80 ) ( 1888 -544 79 ) qodot/Bricks/DUNGEONBRICKS -8 24 0 2 2
+( 1824 -528 288 ) ( 1825 -528 288 ) ( 1824 -529 288 ) qodot/Bricks/DUNGEONBRICKS -8 0 0 2 2
+( 1824 -528 144 ) ( 1824 -528 143 ) ( 1825 -528 144 ) qodot/Bricks/DUNGEONBRICKS -8 24 0 2 2
+( 3104 -528 208 ) ( 3200 -528 240 ) ( 3200 -400 240 ) qodot/Bricks/DUNGEONBRICKS -8 0 0 2 2
+( 3296 -592 80 ) ( 3296 -592 79 ) ( 3296 -593 80 ) qodot/Bricks/DUNGEONBRICKS 0 24 0 2 2
+}
+// brush 71
+{
+( 3104 -528 224 ) ( 3104 -400 256 ) ( 3104 -528 256 ) qodot/Bricks/DUNGEONBRICKS 0 24 0 2 2
+( 1888 -544 80 ) ( 1889 -544 80 ) ( 1888 -544 79 ) qodot/Bricks/DUNGEONBRICKS -8 24 0 2 2
+( 1824 -528 144 ) ( 1824 -528 143 ) ( 1825 -528 144 ) qodot/Bricks/DUNGEONBRICKS -8 24 0 2 2
+( 3104 -528 208 ) ( 3200 -528 240 ) ( 3200 -400 240 ) qodot/Bricks/DUNGEONBRICKS -8 0 0 2 2
+( 3296 -528 208 ) ( 3200 -528 240 ) ( 3200 -400 240 ) qodot/Bricks/DUNGEONBRICKS -8 0 0 2 2
+}
+// brush 72
+{
+( 3296 -528 208 ) ( 3200 -400 240 ) ( 3200 -528 240 ) qodot/Bricks/DUNGEONBRICKS -8 0 0 2 2
+( 3104 -528 208 ) ( 3200 -400 240 ) ( 3200 -528 240 ) qodot/Bricks/DUNGEONBRICKS -8 0 0 2 2
+( 1888 -544 80 ) ( 1889 -544 80 ) ( 1888 -544 79 ) qodot/Bricks/DUNGEONBRICKS -8 24 0 2 2
+( 1824 -528 144 ) ( 1824 -528 143 ) ( 1825 -528 144 ) qodot/Bricks/DUNGEONBRICKS -8 24 0 2 2
+( 3296 -592 80 ) ( 3296 -592 79 ) ( 3296 -593 80 ) qodot/Bricks/DUNGEONBRICKS 0 24 0 2 2
+}
+// brush 73
+{
+( 3296 -544 208 ) ( 3296 -544 128 ) ( 3296 -416 128 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 2288 -544 -96 ) ( 2289 -544 -96 ) ( 2288 -544 -97 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 2
+( 2288 -592 0 ) ( 2288 -593 0 ) ( 2289 -592 0 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 2
+( 2224 -528 288 ) ( 2225 -528 288 ) ( 2224 -529 288 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 2
+( 2224 -528 -32 ) ( 2224 -528 -33 ) ( 2225 -528 -32 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 2
+( 3328 -528 48 ) ( 3328 -528 80 ) ( 3328 -400 80 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+}
+// brush 74
+{
+( 2208 544 224 ) ( 2208 672 256 ) ( 2208 544 256 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 992 528 80 ) ( 993 528 80 ) ( 992 528 79 ) qodot/Bricks/DUNGEONBRICKS 24 24 0 2 2
+( 928 544 144 ) ( 928 544 143 ) ( 929 544 144 ) qodot/Bricks/DUNGEONBRICKS 24 24 0 2 2
+( 2208 544 208 ) ( 2304 544 240 ) ( 2304 672 240 ) qodot/Bricks/DUNGEONBRICKS 24 24 0 2 2
+( 2400 544 208 ) ( 2304 544 240 ) ( 2304 672 240 ) qodot/Bricks/DUNGEONBRICKS 24 24 0 2 2
+}
+// brush 75
+{
+( 2208 544 224 ) ( 2208 672 256 ) ( 2208 544 256 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 2400 544 208 ) ( 2304 672 240 ) ( 2304 544 240 ) qodot/Bricks/DUNGEONBRICKS 24 24 0 2 2
+( 992 528 80 ) ( 993 528 80 ) ( 992 528 79 ) qodot/Bricks/DUNGEONBRICKS 24 24 0 2 2
+( 928 544 288 ) ( 929 544 288 ) ( 928 543 288 ) qodot/Bricks/DUNGEONBRICKS 24 24 0 2 2
+( 928 544 144 ) ( 928 544 143 ) ( 929 544 144 ) qodot/Bricks/DUNGEONBRICKS 24 24 0 2 2
+( 2208 544 208 ) ( 2304 544 240 ) ( 2304 672 240 ) qodot/Bricks/DUNGEONBRICKS 24 24 0 2 2
+( 2400 480 80 ) ( 2400 480 79 ) ( 2400 479 80 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+}
+// brush 76
+{
+( 2400 544 208 ) ( 2304 672 240 ) ( 2304 544 240 ) qodot/Bricks/DUNGEONBRICKS 24 24 0 2 2
+( 2208 544 208 ) ( 2304 672 240 ) ( 2304 544 240 ) qodot/Bricks/DUNGEONBRICKS 24 24 0 2 2
+( 992 528 80 ) ( 993 528 80 ) ( 992 528 79 ) qodot/Bricks/DUNGEONBRICKS 24 24 0 2 2
+( 928 544 144 ) ( 928 544 143 ) ( 929 544 144 ) qodot/Bricks/DUNGEONBRICKS 24 24 0 2 2
+( 2400 480 80 ) ( 2400 480 79 ) ( 2400 479 80 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+}
+// brush 77
+{
+( 2400 528 208 ) ( 2400 528 128 ) ( 2400 656 128 ) qodot/Bricks/DUNGEONBRICKS -24 0 0 2 2
+( 1392 528 -96 ) ( 1393 528 -96 ) ( 1392 528 -97 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 2
+( 1392 480 0 ) ( 1392 479 0 ) ( 1393 480 0 ) qodot/Bricks/DUNGEONBRICKS -16 24 0 2 2
+( 1328 544 288 ) ( 1329 544 288 ) ( 1328 543 288 ) qodot/Bricks/DUNGEONBRICKS -16 24 0 2 2
+( 1328 544 -32 ) ( 1328 544 -33 ) ( 1329 544 -32 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 2
+( 2432 544 48 ) ( 2432 544 80 ) ( 2432 672 80 ) qodot/Bricks/DUNGEONBRICKS -24 0 0 2 2
+}
+// brush 78
+{
+( 2432 544 224 ) ( 2432 672 256 ) ( 2432 544 256 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 1216 528 80 ) ( 1217 528 80 ) ( 1216 528 79 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 1152 544 144 ) ( 1152 544 143 ) ( 1153 544 144 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 2432 544 208 ) ( 2528 544 240 ) ( 2528 672 240 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 2624 544 208 ) ( 2528 544 240 ) ( 2528 672 240 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+}
+// brush 79
+{
+( 2432 544 224 ) ( 2432 672 256 ) ( 2432 544 256 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 2624 544 208 ) ( 2528 672 240 ) ( 2528 544 240 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 1216 528 80 ) ( 1217 528 80 ) ( 1216 528 79 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 1152 544 288 ) ( 1153 544 288 ) ( 1152 543 288 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 1152 544 144 ) ( 1152 544 143 ) ( 1153 544 144 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 2432 544 208 ) ( 2528 544 240 ) ( 2528 672 240 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 2624 480 80 ) ( 2624 480 79 ) ( 2624 479 80 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+}
+// brush 80
+{
+( 2624 544 208 ) ( 2528 672 240 ) ( 2528 544 240 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 2432 544 208 ) ( 2528 672 240 ) ( 2528 544 240 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 1216 528 80 ) ( 1217 528 80 ) ( 1216 528 79 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 1152 544 144 ) ( 1152 544 143 ) ( 1153 544 144 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 2624 480 80 ) ( 2624 480 79 ) ( 2624 479 80 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+}
+// brush 81
+{
+( 2624 528 208 ) ( 2624 528 128 ) ( 2624 656 128 ) qodot/Bricks/DUNGEONBRICKS -24 0 0 2 2
+( 1616 528 -96 ) ( 1617 528 -96 ) ( 1616 528 -97 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1616 480 0 ) ( 1616 479 0 ) ( 1617 480 0 ) qodot/Bricks/DUNGEONBRICKS 0 24 0 2 2
+( 1552 544 288 ) ( 1553 544 288 ) ( 1552 543 288 ) qodot/Bricks/DUNGEONBRICKS 0 24 0 2 2
+( 1552 544 -32 ) ( 1552 544 -33 ) ( 1553 544 -32 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 2656 544 48 ) ( 2656 544 80 ) ( 2656 672 80 ) qodot/Bricks/DUNGEONBRICKS -24 0 0 2 2
+}
+// brush 82
+{
+( 2656 544 224 ) ( 2656 672 256 ) ( 2656 544 256 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 1440 528 80 ) ( 1441 528 80 ) ( 1440 528 79 ) qodot/Bricks/DUNGEONBRICKS -8 24 0 2 2
+( 1376 544 144 ) ( 1376 544 143 ) ( 1377 544 144 ) qodot/Bricks/DUNGEONBRICKS -8 24 0 2 2
+( 2656 544 208 ) ( 2752 544 240 ) ( 2752 672 240 ) qodot/Bricks/DUNGEONBRICKS -8 24 0 2 2
+( 2848 544 208 ) ( 2752 544 240 ) ( 2752 672 240 ) qodot/Bricks/DUNGEONBRICKS -8 24 0 2 2
+}
+// brush 83
+{
+( 2656 544 224 ) ( 2656 672 256 ) ( 2656 544 256 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 2848 544 208 ) ( 2752 672 240 ) ( 2752 544 240 ) qodot/Bricks/DUNGEONBRICKS -8 24 0 2 2
+( 1440 528 80 ) ( 1441 528 80 ) ( 1440 528 79 ) qodot/Bricks/DUNGEONBRICKS -8 24 0 2 2
+( 1376 544 288 ) ( 1377 544 288 ) ( 1376 543 288 ) qodot/Bricks/DUNGEONBRICKS -8 24 0 2 2
+( 1376 544 144 ) ( 1376 544 143 ) ( 1377 544 144 ) qodot/Bricks/DUNGEONBRICKS -8 24 0 2 2
+( 2656 544 208 ) ( 2752 544 240 ) ( 2752 672 240 ) qodot/Bricks/DUNGEONBRICKS -8 24 0 2 2
+( 2848 480 80 ) ( 2848 480 79 ) ( 2848 479 80 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+}
+// brush 84
+{
+( 2848 544 208 ) ( 2752 672 240 ) ( 2752 544 240 ) qodot/Bricks/DUNGEONBRICKS -8 24 0 2 2
+( 2656 544 208 ) ( 2752 672 240 ) ( 2752 544 240 ) qodot/Bricks/DUNGEONBRICKS -8 24 0 2 2
+( 1440 528 80 ) ( 1441 528 80 ) ( 1440 528 79 ) qodot/Bricks/DUNGEONBRICKS -8 24 0 2 2
+( 1376 544 144 ) ( 1376 544 143 ) ( 1377 544 144 ) qodot/Bricks/DUNGEONBRICKS -8 24 0 2 2
+( 2848 480 80 ) ( 2848 480 79 ) ( 2848 479 80 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+}
+// brush 85
+{
+( 2848 528 208 ) ( 2848 528 128 ) ( 2848 656 128 ) qodot/Bricks/DUNGEONBRICKS -24 0 0 2 2
+( 1840 528 -96 ) ( 1841 528 -96 ) ( 1840 528 -97 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 2
+( 1840 480 0 ) ( 1840 479 0 ) ( 1841 480 0 ) qodot/Bricks/DUNGEONBRICKS -16 24 0 2 2
+( 1776 544 288 ) ( 1777 544 288 ) ( 1776 543 288 ) qodot/Bricks/DUNGEONBRICKS -16 24 0 2 2
+( 1776 544 -32 ) ( 1776 544 -33 ) ( 1777 544 -32 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 2
+( 2880 544 48 ) ( 2880 544 80 ) ( 2880 672 80 ) qodot/Bricks/DUNGEONBRICKS -24 0 0 2 2
+}
+// brush 86
+{
+( 2880 544 224 ) ( 2880 672 256 ) ( 2880 544 256 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 1664 528 80 ) ( 1665 528 80 ) ( 1664 528 79 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 1600 544 144 ) ( 1600 544 143 ) ( 1601 544 144 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 2880 544 208 ) ( 2976 544 240 ) ( 2976 672 240 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 3072 544 208 ) ( 2976 544 240 ) ( 2976 672 240 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+}
+// brush 87
+{
+( 2880 544 224 ) ( 2880 672 256 ) ( 2880 544 256 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 3072 544 208 ) ( 2976 672 240 ) ( 2976 544 240 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 1664 528 80 ) ( 1665 528 80 ) ( 1664 528 79 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 1600 544 288 ) ( 1601 544 288 ) ( 1600 543 288 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 1600 544 144 ) ( 1600 544 143 ) ( 1601 544 144 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 2880 544 208 ) ( 2976 544 240 ) ( 2976 672 240 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 3072 480 80 ) ( 3072 480 79 ) ( 3072 479 80 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+}
+// brush 88
+{
+( 3072 544 208 ) ( 2976 672 240 ) ( 2976 544 240 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 2880 544 208 ) ( 2976 672 240 ) ( 2976 544 240 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 1664 528 80 ) ( 1665 528 80 ) ( 1664 528 79 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 1600 544 144 ) ( 1600 544 143 ) ( 1601 544 144 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 3072 480 80 ) ( 3072 480 79 ) ( 3072 479 80 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+}
+// brush 89
+{
+( 3072 528 208 ) ( 3072 528 128 ) ( 3072 656 128 ) qodot/Bricks/DUNGEONBRICKS -24 0 0 2 2
+( 2064 528 -96 ) ( 2065 528 -96 ) ( 2064 528 -97 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 2064 480 0 ) ( 2064 479 0 ) ( 2065 480 0 ) qodot/Bricks/DUNGEONBRICKS 0 24 0 2 2
+( 2000 544 288 ) ( 2001 544 288 ) ( 2000 543 288 ) qodot/Bricks/DUNGEONBRICKS 0 24 0 2 2
+( 2000 544 -32 ) ( 2000 544 -33 ) ( 2001 544 -32 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 3104 544 48 ) ( 3104 544 80 ) ( 3104 672 80 ) qodot/Bricks/DUNGEONBRICKS -24 0 0 2 2
+}
+// brush 90
+{
+( 3104 544 224 ) ( 3104 672 256 ) ( 3104 544 256 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 1888 528 80 ) ( 1889 528 80 ) ( 1888 528 79 ) qodot/Bricks/DUNGEONBRICKS -8 24 0 2 2
+( 1824 544 144 ) ( 1824 544 143 ) ( 1825 544 144 ) qodot/Bricks/DUNGEONBRICKS -8 24 0 2 2
+( 3104 544 208 ) ( 3200 544 240 ) ( 3200 672 240 ) qodot/Bricks/DUNGEONBRICKS -8 24 0 2 2
+( 3296 544 208 ) ( 3200 544 240 ) ( 3200 672 240 ) qodot/Bricks/DUNGEONBRICKS -8 24 0 2 2
+}
+// brush 91
+{
+( 3104 544 224 ) ( 3104 672 256 ) ( 3104 544 256 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+( 3296 544 208 ) ( 3200 672 240 ) ( 3200 544 240 ) qodot/Bricks/DUNGEONBRICKS -8 24 0 2 2
+( 1888 528 80 ) ( 1889 528 80 ) ( 1888 528 79 ) qodot/Bricks/DUNGEONBRICKS -8 24 0 2 2
+( 1824 544 288 ) ( 1825 544 288 ) ( 1824 543 288 ) qodot/Bricks/DUNGEONBRICKS -8 24 0 2 2
+( 1824 544 144 ) ( 1824 544 143 ) ( 1825 544 144 ) qodot/Bricks/DUNGEONBRICKS -8 24 0 2 2
+( 3104 544 208 ) ( 3200 544 240 ) ( 3200 672 240 ) qodot/Bricks/DUNGEONBRICKS -8 24 0 2 2
+( 3296 480 80 ) ( 3296 480 79 ) ( 3296 479 80 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+}
+// brush 92
+{
+( 3296 544 208 ) ( 3200 672 240 ) ( 3200 544 240 ) qodot/Bricks/DUNGEONBRICKS -8 24 0 2 2
+( 3104 544 208 ) ( 3200 672 240 ) ( 3200 544 240 ) qodot/Bricks/DUNGEONBRICKS -8 24 0 2 2
+( 1888 528 80 ) ( 1889 528 80 ) ( 1888 528 79 ) qodot/Bricks/DUNGEONBRICKS -8 24 0 2 2
+( 1824 544 144 ) ( 1824 544 143 ) ( 1825 544 144 ) qodot/Bricks/DUNGEONBRICKS -8 24 0 2 2
+( 3296 480 80 ) ( 3296 480 79 ) ( 3296 479 80 ) qodot/Bricks/DUNGEONBRICKS -24 24 0 2 2
+}
+// brush 93
+{
+( 3296 528 208 ) ( 3296 528 128 ) ( 3296 656 128 ) qodot/Bricks/DUNGEONBRICKS -24 0 0 2 2
+( 2288 528 -96 ) ( 2289 528 -96 ) ( 2288 528 -97 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 2
+( 2288 480 0 ) ( 2288 479 0 ) ( 2289 480 0 ) qodot/Bricks/DUNGEONBRICKS -16 24 0 2 2
+( 2224 544 288 ) ( 2225 544 288 ) ( 2224 543 288 ) qodot/Bricks/DUNGEONBRICKS -16 24 0 2 2
+( 2224 544 -32 ) ( 2224 544 -33 ) ( 2225 544 -32 ) qodot/Bricks/DUNGEONBRICKS -16 0 0 2 2
+( 3328 544 48 ) ( 3328 544 80 ) ( 3328 672 80 ) qodot/Bricks/DUNGEONBRICKS -24 0 0 2 2
+}
+// brush 94
+{
+( 2176 528 208 ) ( 2176 528 128 ) ( 2176 656 128 ) qodot/Bricks/DUNGEONBRICKS -24 0 0 2 2
+( 1168 528 -96 ) ( 1169 528 -96 ) ( 1168 528 -97 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 1168 480 0 ) ( 1168 479 0 ) ( 1169 480 0 ) qodot/Bricks/DUNGEONBRICKS 0 24 0 2 2
+( 1104 544 288 ) ( 1105 544 288 ) ( 1104 543 288 ) qodot/Bricks/DUNGEONBRICKS 0 24 0 2 2
+( 1104 544 -32 ) ( 1104 544 -33 ) ( 1105 544 -32 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( 2208 544 48 ) ( 2208 544 80 ) ( 2208 672 80 ) qodot/Bricks/DUNGEONBRICKS -24 0 0 2 2
+}
+// brush 95
+{
+( -848 -784 -16 ) ( -848 -783 -16 ) ( -848 -784 -15 ) qodot/Bricks/ROUNDBRICKS 0 0 0 1 1
+( -848 -784 -16 ) ( -848 -784 -15 ) ( -847 -784 -16 ) qodot/Bricks/ROUNDBRICKS 0 0 0 1 1
+( -848 -784 -16 ) ( -847 -784 -16 ) ( -848 -783 -16 ) qodot/Bricks/ROUNDBRICKS 0 0 0 1 1
+( -768 -720 112 ) ( -768 -719 112 ) ( -767 -720 112 ) qodot/Bricks/ROUNDBRICKS 0 0 0 1 1
+( -768 -720 0 ) ( -767 -720 0 ) ( -768 -720 1 ) qodot/Bricks/ROUNDBRICKS 0 0 0 1 1
+( -768 -720 0 ) ( -768 -720 1 ) ( -768 -719 0 ) qodot/Bricks/ROUNDBRICKS 0 0 0 1 1
+}
+// brush 96
+{
+( -848 -656 -16 ) ( -848 -655 -16 ) ( -848 -656 -15 ) qodot/Bricks/BIGBRICKS 0 0 0 1 1
+( -848 -656 -16 ) ( -848 -656 -15 ) ( -847 -656 -16 ) qodot/Bricks/BIGBRICKS 0 0 0 1 1
+( -848 -656 -16 ) ( -847 -656 -16 ) ( -848 -655 -16 ) qodot/Bricks/BIGBRICKS 0 0 0 1 1
+( -768 -592 112 ) ( -768 -591 112 ) ( -767 -592 112 ) qodot/Bricks/BIGBRICKS 0 0 0 1 1
+( -768 -592 0 ) ( -767 -592 0 ) ( -768 -592 1 ) qodot/Bricks/BIGBRICKS 0 0 0 1 1
+( -768 -592 0 ) ( -768 -592 1 ) ( -768 -591 0 ) qodot/Bricks/BIGBRICKS 0 0 0 1 1
+}
+// brush 97
+{
+( -848 -528 -16 ) ( -848 -527 -16 ) ( -848 -528 -15 ) qodot/Bricks/CASTLEBRICKS 0 0 0 1 1
+( -848 -528 -16 ) ( -848 -528 -15 ) ( -847 -528 -16 ) qodot/Bricks/CASTLEBRICKS 0 0 0 1 1
+( -848 -528 -16 ) ( -847 -528 -16 ) ( -848 -527 -16 ) qodot/Bricks/CASTLEBRICKS 0 0 0 1 1
+( -768 -464 112 ) ( -768 -463 112 ) ( -767 -464 112 ) qodot/Bricks/CASTLEBRICKS 0 0 0 1 1
+( -768 -464 0 ) ( -767 -464 0 ) ( -768 -464 1 ) qodot/Bricks/CASTLEBRICKS 0 0 0 1 1
+( -768 -464 0 ) ( -768 -464 1 ) ( -768 -463 0 ) qodot/Bricks/CASTLEBRICKS 0 0 0 1 1
+}
+// brush 98
+{
+( -848 -400 -16 ) ( -848 -399 -16 ) ( -848 -400 -15 ) qodot/Bricks/CLAYBRICKS 0 0 0 1 1
+( -848 -400 -16 ) ( -848 -400 -15 ) ( -847 -400 -16 ) qodot/Bricks/CLAYBRICKS 0 0 0 1 1
+( -848 -400 -16 ) ( -847 -400 -16 ) ( -848 -399 -16 ) qodot/Bricks/CLAYBRICKS 0 0 0 1 1
+( -768 -336 112 ) ( -768 -335 112 ) ( -767 -336 112 ) qodot/Bricks/CLAYBRICKS 0 0 0 1 1
+( -768 -336 0 ) ( -767 -336 0 ) ( -768 -336 1 ) qodot/Bricks/CLAYBRICKS 0 0 0 1 1
+( -768 -336 0 ) ( -768 -336 1 ) ( -768 -335 0 ) qodot/Bricks/CLAYBRICKS 0 0 0 1 1
+}
+// brush 99
+{
+( -848 -144 -16 ) ( -848 -143 -16 ) ( -848 -144 -15 ) qodot/Bricks/DUNGEONBRICKS -8 0 0 2 2
+( -848 -144 -16 ) ( -848 -144 -15 ) ( -847 -144 -16 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( -848 -144 -16 ) ( -847 -144 -16 ) ( -848 -143 -16 ) qodot/Bricks/DUNGEONBRICKS 0 8 0 2 2
+( -768 -80 112 ) ( -768 -79 112 ) ( -767 -80 112 ) qodot/Bricks/DUNGEONBRICKS 0 8 0 2 2
+( -768 -80 0 ) ( -767 -80 0 ) ( -768 -80 1 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 2 2
+( -768 -80 0 ) ( -768 -80 1 ) ( -768 -79 0 ) qodot/Bricks/DUNGEONBRICKS -8 0 0 2 2
+}
+// brush 100
+{
+( -848 -272 -16 ) ( -848 -271 -16 ) ( -848 -272 -15 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+( -848 -272 -16 ) ( -848 -272 -15 ) ( -847 -272 -16 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+( -848 -272 -16 ) ( -847 -272 -16 ) ( -848 -271 -16 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+( -768 -208 112 ) ( -768 -207 112 ) ( -767 -208 112 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+( -768 -208 0 ) ( -767 -208 0 ) ( -768 -208 1 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+( -768 -208 0 ) ( -768 -208 1 ) ( -768 -207 0 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+}
+// brush 101
+{
+( -848 112 -16 ) ( -848 113 -16 ) ( -848 112 -15 ) qodot/Bricks/GOOBRICKS -8 0 0 2 2
+( -848 112 -16 ) ( -848 112 -15 ) ( -847 112 -16 ) qodot/Bricks/GOOBRICKS 0 0 0 2 2
+( -848 112 -16 ) ( -847 112 -16 ) ( -848 113 -16 ) qodot/Bricks/GOOBRICKS 0 8 0 2 2
+( -768 176 112 ) ( -768 177 112 ) ( -767 176 112 ) qodot/Bricks/GOOBRICKS 0 8 0 2 2
+( -768 176 0 ) ( -767 176 0 ) ( -768 176 1 ) qodot/Bricks/GOOBRICKS 0 0 0 2 2
+( -768 176 0 ) ( -768 176 1 ) ( -768 177 0 ) qodot/Bricks/GOOBRICKS -8 0 0 2 2
+}
+// brush 102
+{
+( -848 -16 -16 ) ( -848 -15 -16 ) ( -848 -16 -15 ) qodot/Bricks/GOOBRICKS 0 0 0 1 1
+( -848 -16 -16 ) ( -848 -16 -15 ) ( -847 -16 -16 ) qodot/Bricks/GOOBRICKS 0 0 0 1 1
+( -848 -16 -16 ) ( -847 -16 -16 ) ( -848 -15 -16 ) qodot/Bricks/GOOBRICKS 0 0 0 1 1
+( -768 48 112 ) ( -768 49 112 ) ( -767 48 112 ) qodot/Bricks/GOOBRICKS 0 0 0 1 1
+( -768 48 0 ) ( -767 48 0 ) ( -768 48 1 ) qodot/Bricks/GOOBRICKS 0 0 0 1 1
+( -768 48 0 ) ( -768 48 1 ) ( -768 49 0 ) qodot/Bricks/GOOBRICKS 0 0 0 1 1
+}
+// brush 103
+{
+( -848 240 -16 ) ( -848 241 -16 ) ( -848 240 -15 ) qodot/Bricks/DUNGEONCELL 0 0 0 1 1
+( -848 240 -16 ) ( -848 240 -15 ) ( -847 240 -16 ) qodot/Bricks/DUNGEONCELL 0 0 0 1 1
+( -848 240 -16 ) ( -847 240 -16 ) ( -848 241 -16 ) qodot/Bricks/DUNGEONCELL 0 0 0 1 1
+( -768 304 112 ) ( -768 305 112 ) ( -767 304 112 ) qodot/Bricks/DUNGEONCELL 0 0 0 1 1
+( -768 304 0 ) ( -767 304 0 ) ( -768 304 1 ) qodot/Bricks/DUNGEONCELL 0 0 0 1 1
+( -768 304 0 ) ( -768 304 1 ) ( -768 305 0 ) qodot/Bricks/DUNGEONCELL 0 0 0 1 1
+}
+// brush 104
+{
+( -848 368 -16 ) ( -848 369 -16 ) ( -848 368 -15 ) qodot/Bricks/DUNGEONCELL -8 0 0 2 2
+( -848 368 -16 ) ( -848 368 -15 ) ( -847 368 -16 ) qodot/Bricks/DUNGEONCELL 0 0 0 2 2
+( -848 368 -16 ) ( -847 368 -16 ) ( -848 369 -16 ) qodot/Bricks/DUNGEONCELL 0 8 0 2 2
+( -768 432 112 ) ( -768 433 112 ) ( -767 432 112 ) qodot/Bricks/DUNGEONCELL 0 8 0 2 2
+( -768 432 0 ) ( -767 432 0 ) ( -768 432 1 ) qodot/Bricks/DUNGEONCELL 0 0 0 2 2
+( -768 432 0 ) ( -768 432 1 ) ( -768 433 0 ) qodot/Bricks/DUNGEONCELL -8 0 0 2 2
+}
+}
+// entity 1
+{
+"classname" "func_group"
+"_tb_type" "_tb_group"
+"_tb_name" "torch"
+"_tb_id" "1"
+// brush 0
+{
+( 723 73 48 ) ( 723 74 48 ) ( 723 73 49 ) qodot/Elements/LAVA -16 0 0 1 1
+( 723 75 48 ) ( 723 75 49 ) ( 724 75 48 ) qodot/Elements/LAVA 0 0 0 1 1
+( 723 73 48 ) ( 724 73 48 ) ( 723 74 48 ) qodot/Elements/LAVA 0 16 0 1 1
+( 727 77 52 ) ( 727 78 52 ) ( 728 77 52 ) qodot/Elements/LAVA 0 16 0 1 1
+( 727 77 52 ) ( 728 77 52 ) ( 727 77 53 ) qodot/Elements/LAVA 0 0 0 1 1
+( 725 77 52 ) ( 725 77 53 ) ( 725 78 52 ) qodot/Elements/LAVA -16 0 0 1 1
+}
+// brush 1
+{
+( 720 76 32 ) ( 720 80 48 ) ( 720 72 48 ) qodot/Industrial/CROSSWALL -16 0 0 1 1
+( 720 72 48 ) ( 728 72 48 ) ( 720 76 32 ) qodot/Industrial/CROSSWALL 0 0 0 1 1
+( 720 80 48 ) ( 728 80 48 ) ( 728 72 48 ) qodot/Industrial/CROSSWALL 0 16 0 1 1
+( 720 76 32 ) ( 728 80 48 ) ( 720 80 48 ) qodot/Industrial/CROSSWALL 0 0 0 1 1
+( 728 72 48 ) ( 728 80 48 ) ( 720 76 32 ) qodot/Industrial/CROSSWALL -16 0 0 1 1
+}
+}
+// entity 2
+{
+"classname" "func_group"
+"_tb_type" "_tb_group"
+"_tb_name" "torch"
+"_tb_id" "2"
+// brush 0
+{
+( 723 -71 48 ) ( 723 -70 48 ) ( 723 -71 49 ) qodot/Elements/LAVA 16 0 0 1 1
+( 723 -69 48 ) ( 723 -69 49 ) ( 724 -69 48 ) qodot/Elements/LAVA 0 0 0 1 1
+( 723 -71 48 ) ( 724 -71 48 ) ( 723 -70 48 ) qodot/Elements/LAVA 0 -16 0 1 1
+( 727 -67 52 ) ( 727 -66 52 ) ( 728 -67 52 ) qodot/Elements/LAVA 0 -16 0 1 1
+( 727 -67 52 ) ( 728 -67 52 ) ( 727 -67 53 ) qodot/Elements/LAVA 0 0 0 1 1
+( 725 -67 52 ) ( 725 -67 53 ) ( 725 -66 52 ) qodot/Elements/LAVA 16 0 0 1 1
+}
+// brush 1
+{
+( 720 -68 32 ) ( 720 -64 48 ) ( 720 -72 48 ) qodot/Industrial/CROSSWALL 16 0 0 1 1
+( 720 -72 48 ) ( 728 -72 48 ) ( 720 -68 32 ) qodot/Industrial/CROSSWALL 0 0 0 1 1
+( 720 -64 48 ) ( 728 -64 48 ) ( 728 -72 48 ) qodot/Industrial/CROSSWALL 0 -16 0 1 1
+( 720 -68 32 ) ( 728 -64 48 ) ( 720 -64 48 ) qodot/Industrial/CROSSWALL 0 0 0 1 1
+( 728 -72 48 ) ( 728 -64 48 ) ( 720 -68 32 ) qodot/Industrial/CROSSWALL 16 0 0 1 1
+}
+}
+// entity 3
+{
+"classname" "QodotEnemyZombie"
+"origin" "760 120 8"
+}
+// entity 4
+{
+"classname" "QodotEnemyZombie"
+"origin" "1016 8 8"
+}
+// entity 5
+{
+"classname" "QodotEnemyZombie"
+"origin" "1352 168 8"
+}
+// entity 6
+{
+"classname" "QodotEnemyZombie"
+"origin" "2024 424 8"
+}
+// entity 7
+{
+"classname" "QodotEnemyZombie"
+"origin" "2088 -56 8"
+}
+// entity 8
+{
+"classname" "QodotEnemyZombie"
+"origin" "1960 -472 8"
+}
+// entity 9
+{
+"classname" "QodotEnemyZombie"
+"origin" "3032 616 8"
+}
+// entity 10
+{
+"classname" "QodotEnemyZombie"
+"origin" "2184 -552 8"
+}
+// entity 11
+{
+"classname" "QodotEnemyZombie"
+"origin" "2808 -296 8"
+}
+// entity 12
+{
+"classname" "QodotEnemyZombie"
+"origin" "2760 136 8"
+}
+// entity 13
+{
+"classname" "QodotEnemyZombie"
+"origin" "3160 -8 8"
+}
+// entity 14
+{
+"classname" "QodotEnemyZombie"
+"origin" "1240 -152 8"
+}
+// entity 15
+{
+"classname" "QodotEnemyZombie"
+"origin" "1640 -152 8"
+}
+// entity 16
+{
+"classname" "QodotEnemyZombie"
+"origin" "1960 136 8"
+}
+// entity 17
+{
+"classname" "QodotEnemyZombie"
+"origin" "2072 -264 8"
+}
+// entity 18
+{
+"classname" "QodotEnemyZombie"
+"origin" "2584 376 8"
+}
+// entity 19
+{
+"classname" "QodotEnemyZombie"
+"origin" "3080 -472 8"
+}
+// entity 20
+{
+"classname" "QodotEnemyZombie"
+"origin" "2216 -200 8"
+}
+// entity 21
+{
+"classname" "QodotEnemyZombie"
+"origin" "2200 200 8"
+}
+// entity 22
+{
+"classname" "QodotEnemyZombie"
+"origin" "2200 504 8"
+}

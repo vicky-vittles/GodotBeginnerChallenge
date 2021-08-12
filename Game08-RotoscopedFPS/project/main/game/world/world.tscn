@@ -1,49 +1,32 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://main/game/world/world.gd" type="Script" id=1]
 [ext_resource path="res://entities/player/player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://libs/gt_currency/gt_currency.gd" type="Script" id=4]
-[ext_resource path="res://icon.png" type="Texture" id=5]
-[ext_resource path="res://assets/palettes/bluem0ld-8x.png" type="Texture" id=6]
-[ext_resource path="res://assets/shaders/color-filter.shader" type="Shader" id=7]
 
-[sub_resource type="ShaderMaterial" id=1]
-shader = ExtResource( 7 )
-shader_param/flip = false
-shader_param/gradient = ExtResource( 6 )
+[sub_resource type="PanoramaSky" id=1]
 
-[sub_resource type="PanoramaSky" id=2]
-
-[sub_resource type="Environment" id=3]
+[sub_resource type="Environment" id=2]
 background_mode = 1
-background_sky = SubResource( 2 )
+background_sky = SubResource( 1 )
 ambient_light_color = Color( 1, 1, 1, 1 )
-ambient_light_energy = 0.35
 ambient_light_sky_contribution = 0.0
 fog_enabled = true
-fog_color = Color( 0.145098, 0.145098, 0.145098, 1 )
-fog_depth_end = 60.0
+fog_color = Color( 0, 0, 0, 1 )
+fog_depth_begin = 5.0
+fog_depth_end = 80.0
 
 [node name="World" type="Spatial"]
 script = ExtResource( 1 )
-current_level = 1
-
-[node name="color_gradient" type="Sprite" parent="."]
-material = SubResource( 1 )
-scale = Vector2( 16, 9.5 )
-texture = ExtResource( 5 )
-centered = false
-__meta__ = {
-"_edit_lock_": true
-}
+current_level = 2
 
 [node name="CheckpointManager" type="Node" parent="."]
 script = ExtResource( 4 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 13.9, 5.9 )
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 2.5, 0 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 3 )
+environment = SubResource( 2 )
 
 [connection signal="died" from="Player" to="." method="_on_Player_died"]

@@ -1,0 +1,145 @@
+// Game: Game08-RotoscopeClone
+// Format: Standard
+// entity 0
+{
+"classname" "worldspawn"
+"_tb_textures" "textures/qodot/Bricks;textures/qodot/Doors;textures/qodot/Elements;textures/qodot/Industrial"
+// brush 0
+{
+( -272 -64 -64 ) ( -272 -63 -64 ) ( -272 -64 -63 ) qodot/Bricks/BIGBRICKS 0 0 0 1 1
+( 0 -256 -64 ) ( 0 -256 -63 ) ( 1 -256 -64 ) qodot/Bricks/BIGBRICKS 0 0 0 1 1
+( 0 -64 -64 ) ( 1 -64 -64 ) ( 0 -63 -64 ) qodot/Bricks/BIGBRICKS 0 0 0 1 1
+( 64 0 0 ) ( 64 1 0 ) ( 65 0 0 ) qodot/Bricks/BIGBRICKS 0 0 0 1 1
+( 64 272 0 ) ( 65 272 0 ) ( 64 272 1 ) qodot/Bricks/BIGBRICKS 0 0 0 1 1
+( 768 0 0 ) ( 768 0 1 ) ( 768 1 0 ) qodot/Bricks/BIGBRICKS 0 0 0 1 1
+}
+// brush 1
+{
+( -268 -40 32 ) ( -268 -40 34 ) ( -268 -41.25 32 ) qodot/Doors/CREAKYDOOR 0 0 180 1.25 -2
+( -272 -40 32 ) ( -273 -40 32 ) ( -272 -40 34 ) qodot/Doors/CREAKYDOOR -16 0 180 1 -2
+( -256 0 0 ) ( -257 0 0 ) ( -256 -1.2499999999999982 0 ) qodot/Doors/CREAKYDOOR -16 0 180 1 1.25
+( -272 -40 48 ) ( -272 -41.25 48 ) ( -273 -40 48 ) qodot/Doors/CREAKYDOOR -16 0 180 1 1.25
+( -256 0 0 ) ( -256 0 2 ) ( -257 0 0 ) qodot/Doors/CREAKYDOOR -16 0 180 1 -2
+( -260 0 0 ) ( -260 -1.2499999999999982 0 ) ( -260 0 2 ) qodot/Doors/CREAKYDOOR 0 0 180 1.25 -2
+}
+// brush 2
+{
+( -268 0 0 ) ( -268 1.2500000000000018 0 ) ( -268 0 2 ) qodot/Doors/CREAKYDOOR 0 0 0 1.25 2
+( -272 0 0 ) ( -272 0 2 ) ( -271 0 0 ) qodot/Doors/CREAKYDOOR 0 0 0 1 2
+( -272 0 0 ) ( -271 0 0 ) ( -272 1.2500000000000018 0 ) qodot/Doors/CREAKYDOOR 0 0 0 1 1.25
+( -256 40 48 ) ( -256 41.25000000000001 48 ) ( -255 40 48 ) qodot/Doors/CREAKYDOOR 0 0 0 1 1.25
+( -256 40 32 ) ( -255 40 32 ) ( -256 40 34 ) qodot/Doors/CREAKYDOOR 0 0 0 1 2
+( -260 40 32 ) ( -260 40 34 ) ( -260 41.25000000000001 32 ) qodot/Doors/CREAKYDOOR 0 0 0 1.25 2
+}
+// brush 3
+{
+( -272 224 -32 ) ( -272 224 -33 ) ( -272 225 -32 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+( -272 40 -32 ) ( -271 40 -32 ) ( -272 40 -33 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+( -208 288 0 ) ( -207 288 0 ) ( -208 289 0 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+( -272 224 224 ) ( -272 225 224 ) ( -271 224 224 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+( -208 256 -96 ) ( -208 256 -97 ) ( -207 256 -96 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+( -256 288 -96 ) ( -256 289 -96 ) ( -256 288 -97 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+}
+// brush 4
+{
+( -272 -64 -32 ) ( -272 -64 -33 ) ( -272 -63 -32 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+( -272 -256 -32 ) ( -271 -256 -32 ) ( -272 -256 -33 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+( -208 0 0 ) ( -207 0 0 ) ( -208 1 0 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+( -272 -64 224 ) ( -272 -63 224 ) ( -271 -64 224 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+( -208 -40 -96 ) ( -208 -40 -97 ) ( -207 -40 -96 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+( -256 0 -96 ) ( -256 1 -96 ) ( -256 0 -97 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+}
+// brush 5
+{
+( -272 160 48 ) ( -272 160 47 ) ( -272 161 48 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+( -272 -40 48 ) ( -271 -40 48 ) ( -272 -40 47 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+( -208 224 80 ) ( -207 224 80 ) ( -208 225 80 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+( -272 160 224 ) ( -272 161 224 ) ( -271 160 224 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+( -208 40 -16 ) ( -208 40 -17 ) ( -207 40 -16 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+( -256 224 -16 ) ( -256 225 -16 ) ( -256 224 -17 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+}
+// brush 6
+{
+( -272 272 -32 ) ( -272 271 -32 ) ( -272 272 -33 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+( 0 256 -96 ) ( 1 256 -96 ) ( 0 256 -97 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+( 0 208 0 ) ( 0 207 0 ) ( 1 208 0 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+( -64 272 224 ) ( -63 272 224 ) ( -64 271 224 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+( -64 272 -32 ) ( -64 272 -33 ) ( -63 272 -32 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+( 592 208 -96 ) ( 592 208 -97 ) ( 592 207 -96 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+}
+// brush 7
+{
+( 672 272 -32 ) ( 672 271 -32 ) ( 672 272 -33 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+( 976 256 -96 ) ( 977 256 -96 ) ( 976 256 -97 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+( 976 208 0 ) ( 976 207 0 ) ( 977 208 0 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+( 912 272 224 ) ( 913 272 224 ) ( 912 271 224 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+( 912 272 -32 ) ( 912 272 -33 ) ( 913 272 -32 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+( 768 208 -96 ) ( 768 208 -97 ) ( 768 207 -96 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+}
+// brush 8
+{
+( 592 272 -32 ) ( 592 271 -32 ) ( 592 272 -33 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+( 896 256 -96 ) ( 897 256 -96 ) ( 896 256 -97 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+( 896 208 80 ) ( 896 207 80 ) ( 897 208 80 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+( 832 272 224 ) ( 833 272 224 ) ( 832 271 224 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+( 832 272 -32 ) ( 832 272 -33 ) ( 833 272 -32 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+( 672 208 -96 ) ( 672 208 -97 ) ( 672 207 -96 ) qodot/Bricks/DUNGEONBRICKS 0 0 0 1 1
+}
+// brush 9
+{
+( -220 0 0 ) ( -220 1 0 ) ( -220 0 2.5 ) qodot/Doors/CREAKYDOOR 0 0 0 1 2.5
+( -224 0 0 ) ( -224 0 2.5 ) ( -223 0 0 ) qodot/Doors/CREAKYDOOR 0 0 0 1 2.5
+( -224 0 0 ) ( -223 0 0 ) ( -224 1 0 ) qodot/Doors/CREAKYDOOR 0 0 0 1 1
+( -208 48 80 ) ( -208 49 80 ) ( -207 48 80 ) qodot/Doors/CREAKYDOOR 0 0 0 1 1
+( -208 32 40 ) ( -207 32 40 ) ( -208 32 42.5 ) qodot/Doors/CREAKYDOOR 0 0 0 1 2.5
+( -212 48 40 ) ( -212 48 42.5 ) ( -212 49 40 ) qodot/Doors/CREAKYDOOR 0 0 0 1 2.5
+}
+}
+// entity 1
+{
+"classname" "func_group"
+"_tb_type" "_tb_group"
+"_tb_name" "torch"
+"_tb_id" "1"
+// brush 0
+{
+( -253 57 48 ) ( -253 58 48 ) ( -253 57 49 ) qodot/Elements/LAVA 0 0 0 1 1
+( -253 59 48 ) ( -253 59 49 ) ( -252 59 48 ) qodot/Elements/LAVA 0 0 0 1 1
+( -253 57 48 ) ( -252 57 48 ) ( -253 58 48 ) qodot/Elements/LAVA 0 0 0 1 1
+( -249 61 52 ) ( -249 62 52 ) ( -248 61 52 ) qodot/Elements/LAVA 0 0 0 1 1
+( -249 61 52 ) ( -248 61 52 ) ( -249 61 53 ) qodot/Elements/LAVA 0 0 0 1 1
+( -251 61 52 ) ( -251 61 53 ) ( -251 62 52 ) qodot/Elements/LAVA 0 0 0 1 1
+}
+// brush 1
+{
+( -256 60 32 ) ( -256 64 48 ) ( -256 56 48 ) qodot/Industrial/CROSSWALL 0 0 0 1 1
+( -256 56 48 ) ( -248 56 48 ) ( -256 60 32 ) qodot/Industrial/CROSSWALL 0 0 0 1 1
+( -256 64 48 ) ( -248 64 48 ) ( -248 56 48 ) qodot/Industrial/CROSSWALL 0 0 0 1 1
+( -256 60 32 ) ( -248 64 48 ) ( -256 64 48 ) qodot/Industrial/CROSSWALL 0 0 0 1 1
+( -248 56 48 ) ( -248 64 48 ) ( -256 60 32 ) qodot/Industrial/CROSSWALL 0 0 0 1 1
+}
+}
+// entity 2
+{
+"classname" "func_group"
+"_tb_type" "_tb_group"
+"_tb_name" "torch"
+"_tb_id" "2"
+// brush 0
+{
+( -253 -55 48 ) ( -253 -54 48 ) ( -253 -55 49 ) qodot/Elements/LAVA 0 0 0 1 1
+( -253 -53 48 ) ( -253 -53 49 ) ( -252 -53 48 ) qodot/Elements/LAVA 0 0 0 1 1
+( -253 -55 48 ) ( -252 -55 48 ) ( -253 -54 48 ) qodot/Elements/LAVA 0 0 0 1 1
+( -249 -51 52 ) ( -249 -50 52 ) ( -248 -51 52 ) qodot/Elements/LAVA 0 0 0 1 1
+( -249 -51 52 ) ( -248 -51 52 ) ( -249 -51 53 ) qodot/Elements/LAVA 0 0 0 1 1
+( -251 -51 52 ) ( -251 -51 53 ) ( -251 -50 52 ) qodot/Elements/LAVA 0 0 0 1 1
+}
+// brush 1
+{
+( -256 -52 32 ) ( -256 -48 48 ) ( -256 -56 48 ) qodot/Industrial/CROSSWALL 0 0 0 1 1
+( -256 -56 48 ) ( -248 -56 48 ) ( -256 -52 32 ) qodot/Industrial/CROSSWALL 0 0 0 1 1
+( -256 -48 48 ) ( -248 -48 48 ) ( -248 -56 48 ) qodot/Industrial/CROSSWALL 0 0 0 1 1
+( -256 -52 32 ) ( -248 -48 48 ) ( -256 -48 48 ) qodot/Industrial/CROSSWALL 0 0 0 1 1
+( -248 -56 48 ) ( -248 -48 48 ) ( -256 -52 32 ) qodot/Industrial/CROSSWALL 0 0 0 1 1
+}
+}

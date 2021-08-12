@@ -1,6 +1,6 @@
 extends Spatial
 
-onready var world = $World
+onready var world = $viewport_container/viewport/World
 
 #func _ready():
 #	var qodot_fgd = load("res://addons/qodot/game_definitions/fgd/qodot_fgd.tres")

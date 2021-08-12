@@ -3,6 +3,8 @@ extends GTState
 onready var IDLE = $'../Idle'
 onready var JUMP = $"../Jump"
 
+onready var footsteps_timer = $FootstepsTimer
+
 func process(delta):
 	actor.input_controller.poll_input()
 

@@ -1,9 +1,37 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://main/game/game.gd" type="Script" id=1]
+[ext_resource path="res://assets/shaders/dither.shader" type="Shader" id=2]
 [ext_resource path="res://main/game/world/world.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/palettes/nymph-gb-8x.png" type="Texture" id=4]
+[ext_resource path="res://assets/textures/bayer16tile2.png" type="Texture" id=5]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 2 )
+shader_param/apply_dither = false
+shader_param/flip = false
+shader_param/u_bit_depth = 64
+shader_param/u_contrast = 1.0
+shader_param/u_offset = null
+shader_param/u_dither_size = 1
+shader_param/u_dither_tex = ExtResource( 5 )
+shader_param/u_color_tex = ExtResource( 4 )
 
 [node name="Game" type="Spatial"]
 script = ExtResource( 1 )
 
-[node name="World" parent="." instance=ExtResource( 3 )]
+[node name="viewport_container" type="ViewportContainer" parent="."]
+material = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="viewport" type="Viewport" parent="viewport_container"]
+size = Vector2( 1024, 600 )
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="World" parent="viewport_container/viewport" instance=ExtResource( 3 )]

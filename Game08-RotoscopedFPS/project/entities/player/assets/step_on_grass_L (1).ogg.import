@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/step_on_grass_L (1).ogg-e45172730c27fa99e492e71021ecaa5c.oggstr"
+
+[deps]
+
+source_file="res://entities/player/assets/step_on_grass_L (1).ogg"
+dest_files=[ "res://.import/step_on_grass_L (1).ogg-e45172730c27fa99e492e71021ecaa5c.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

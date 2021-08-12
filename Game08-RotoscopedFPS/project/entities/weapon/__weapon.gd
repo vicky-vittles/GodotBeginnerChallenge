@@ -1,8 +1,8 @@
 extends Spatial
 
 signal pressed_shoot()
-signal start_flash()
-signal stop_flash()
+signal weapon_fired()
+signal weapon_reloading()
 
 export (NodePath) var actor_path
 export (Array, String) var bullet_groups
