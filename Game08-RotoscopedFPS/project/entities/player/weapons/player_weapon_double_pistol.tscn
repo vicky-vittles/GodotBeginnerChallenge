@@ -80,5 +80,3 @@ frame = 0
 [node name="AnimationPlayer" parent="." index="5"]
 anims/ready = SubResource( 1 )
 anims/shoot = SubResource( 2 )
-
-[connection signal="pressed_shoot" from="." to="StateMachine/Ready" method="_on_weapon_pressed_shoot"]
