@@ -10,9 +10,12 @@ onready var weapon = $Weapon
 onready var entity_mover = $EntityMover
 onready var input_controller = $PlayerController
 onready var camera = $Head/bobbing/tilt/Camera
+onready var muzzle_flash = $Head/bobbing/tilt/Camera/muzzle_flash
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	weapon.connect("weapon_fired", muzzle_flash, "start_flash")
+	weapon.connect("weapon_reloading", muzzle_flash, "stop_flash")
 
 func _input(event):
 	if event is InputEventMouseMotion:

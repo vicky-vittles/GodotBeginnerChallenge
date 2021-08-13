@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://entities/player/player.gd" type="Script" id=1]
 [ext_resource path="res://libs/gt_entity_mover_3d/gt_entity_mover_3d.gd" type="Script" id=2]
@@ -8,7 +8,7 @@
 [ext_resource path="res://entities/player/states/player_idle.gd" type="Script" id=6]
 [ext_resource path="res://entities/player/states/player_run.gd" type="Script" id=7]
 [ext_resource path="res://entities/player/states/player_jump.gd" type="Script" id=8]
-[ext_resource path="res://entities/player/weapons/player_weapon_pistol.tscn" type="PackedScene" id=9]
+[ext_resource path="res://entities/player/weapons/player_weapon_double_pistol.tscn" type="PackedScene" id=9]
 [ext_resource path="res://entities/player/scripts/player_damage_hurtbox.gd" type="Script" id=10]
 [ext_resource path="res://libs/gt_health/gt_health.gd" type="Script" id=11]
 [ext_resource path="res://entities/player/scripts/player_presence_hurtbox.gd" type="Script" id=12]
@@ -16,9 +16,6 @@
 [ext_resource path="res://entities/player/scripts/player_head_bobbing.gd" type="Script" id=14]
 [ext_resource path="res://entities/player/scripts/player_head_tilt.gd" type="Script" id=15]
 [ext_resource path="res://libs/gt_random_audio_player/gt_random_audio_player.gd" type="Script" id=16]
-[ext_resource path="res://entities/player/assets/pistol1.ogg" type="AudioStream" id=17]
-[ext_resource path="res://entities/player/assets/pistol2.ogg" type="AudioStream" id=18]
-[ext_resource path="res://entities/player/assets/pistol3.ogg" type="AudioStream" id=19]
 [ext_resource path="res://entities/player/assets/step_on_grass_L (3).ogg" type="AudioStream" id=20]
 [ext_resource path="res://entities/player/assets/step_on_grass_L (2).ogg" type="AudioStream" id=21]
 [ext_resource path="res://entities/player/assets/step_on_grass_L (1).ogg" type="AudioStream" id=22]
@@ -26,6 +23,7 @@
 [ext_resource path="res://entities/player/assets/step_on_grass_R (3).ogg" type="AudioStream" id=24]
 [ext_resource path="res://entities/player/assets/step_on_grass_R (1).ogg" type="AudioStream" id=25]
 [ext_resource path="res://entities/player/scripts/footsteps_timer.gd" type="Script" id=26]
+[ext_resource path="res://entities/player/scripts/player_sfx.gd" type="Script" id=27]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 1, 1.5, 1 )
@@ -43,15 +41,10 @@ script = ExtResource( 1 )
 entity_type = 1
 
 [node name="Weapon" parent="." instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
-actor_path = NodePath("../../Player")
+actor_path = NodePath("..")
 
 [node name="SFX" type="Node" parent="."]
-
-[node name="pistol_shot" type="AudioStreamPlayer" parent="SFX"]
-bus = "Sound"
-script = ExtResource( 16 )
-samples = [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ) ]
+script = ExtResource( 27 )
 
 [node name="footsteps_left" type="AudioStreamPlayer" parent="SFX"]
 volume_db = -6.0
@@ -69,7 +62,7 @@ samples = [ ExtResource( 25 ), ExtResource( 23 ), ExtResource( 24 ) ]
 script = ExtResource( 2 )
 body_path = NodePath("../../Player")
 MAX_RUN_SPEED = 20.0
-RUN_ACCELERATION = 15.0
+RUN_ACCELERATION = 10.0
 RUN_DECELERATION = 4.0
 JUMP_HEIGHT = 4.0
 JUMP_TIME = 0.3
@@ -202,9 +195,6 @@ fsm_path = NodePath("../../../Player/StateMachine")
 script = ExtResource( 5 )
 fsm_path = NodePath("../../../Player/StateMachine")
 
-[connection signal="weapon_fired" from="Weapon" to="SFX/pistol_shot" method="play_random"]
-[connection signal="weapon_fired" from="Weapon" to="Head/bobbing/tilt/Camera/muzzle_flash" method="start_flash"]
-[connection signal="weapon_reloading" from="Weapon" to="Head/bobbing/tilt/Camera/muzzle_flash" method="stop_flash"]
 [connection signal="died" from="Health" to="." method="_on_Health_died"]
 [connection signal="take_damage" from="Hitboxes/DamageHurtbox" to="Health" method="lose_health"]
 [connection signal="just_pressed" from="PlayerController/jump" to="StateMachine/Idle" method="_on_jump_just_pressed"]
