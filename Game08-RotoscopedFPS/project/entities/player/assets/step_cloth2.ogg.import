@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/step_cloth2.ogg-9c9204baeb024454f7362870e2e461d1.oggstr"
+
+[deps]
+
+source_file="res://entities/player/assets/step_cloth2.ogg"
+dest_files=[ "res://.import/step_cloth2.ogg-9c9204baeb024454f7362870e2e461d1.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

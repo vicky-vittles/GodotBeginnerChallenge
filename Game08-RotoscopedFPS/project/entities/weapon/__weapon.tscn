@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://entities/weapon/__weapon.gd" type="Script" id=1]
 [ext_resource path="res://libs/gt_state_machine/gt_state_machine.gd" type="Script" id=2]
 [ext_resource path="res://libs/gt_state_machine/__gt_state.gd" type="Script" id=3]
 [ext_resource path="res://entities/weapon/states/weapon_ready.gd" type="Script" id=4]
 [ext_resource path="res://entities/weapon/weapon_sway.gd" type="Script" id=5]
+[ext_resource path="res://entities/weapon/weapon_animation_player.gd" type="Script" id=6]
 
 [node name="Weapon" type="Spatial"]
 script = ExtResource( 1 )
@@ -83,11 +84,12 @@ script = ExtResource( 3 )
 fsm_path = NodePath("..")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+script = ExtResource( 6 )
 
 [connection signal="pressed_shoot" from="." to="StateMachine/Ready" method="_on_weapon_pressed_shoot"]
 [connection signal="timeout" from="hud/root/bottom/sway/ZeroMovementTimer" to="hud/root/bottom/sway" method="_on_ZeroMovementTimer_timeout"]
 [connection signal="timeout" from="ReloadTimer" to="StateMachine" method="change_state_path" binds= [ "Ready" ]]
-[connection signal="state_entered" from="StateMachine/Ready" to="AnimationPlayer" method="play" binds= [ "ready" ]]
+[connection signal="state_entered" from="StateMachine/Ready" to="AnimationPlayer" method="play_ready"]
+[connection signal="state_entered" from="StateMachine/Shooting" to="AnimationPlayer" method="play_shoot"]
 [connection signal="state_entered" from="StateMachine/Shooting" to="." method="fire"]
-[connection signal="state_entered" from="StateMachine/Shooting" to="AnimationPlayer" method="play" binds= [ "shoot" ]]
 [connection signal="state_entered" from="StateMachine/Shooting" to="ReloadTimer" method="start"]

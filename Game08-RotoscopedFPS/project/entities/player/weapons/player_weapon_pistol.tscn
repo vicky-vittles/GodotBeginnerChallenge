@@ -16,5 +16,5 @@ move_speed = 4.0
 is_active = true
 
 [connection signal="timeout" from="MuzzleFlashTimer" to="." method="emit_signal" binds= [ "weapon_reloading" ]]
-[connection signal="state_entered" from="StateMachine/Shooting" to="." method="emit_signal" binds= [ "weapon_fired" ]]
 [connection signal="state_entered" from="StateMachine/Shooting" to="MuzzleFlashTimer" method="start"]
+[connection signal="state_entered" from="StateMachine/Shooting" to="." method="emit_signal" binds= [ "weapon_fired" ]]

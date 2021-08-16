@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/enemy_zombie_attack (1).wav-cc3d47f264f3ac73c070ee09e9a07e05.sample"
+
+[deps]
+
+source_file="res://entities/enemies/enemy_zombie/assets/enemy_zombie_attack (1).wav"
+dest_files=[ "res://.import/enemy_zombie_attack (1).wav-cc3d47f264f3ac73c070ee09e9a07e05.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

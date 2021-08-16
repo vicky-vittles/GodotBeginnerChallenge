@@ -1,13 +1,129 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://entities/weapon/weapon_pistol/weapon_pistol.tscn" type="PackedScene" id=1]
-[ext_resource path="res://entities/weapon/assets/weapon_pistol.png" type="Texture" id=2]
+[ext_resource path="res://entities/weapon/__weapon.tscn" type="PackedScene" id=1]
+[ext_resource path="res://entities/weapon/weapon_double_pistol/weapon_double_pistol.gd" type="Script" id=2]
+[ext_resource path="res://entities/weapon/weapon_double_pistol/scripts/weapon_double_pistol_animation_player.gd" type="Script" id=3]
+[ext_resource path="res://entities/weapon/assets/weapon_pistol.png" type="Texture" id=4]
+[ext_resource path="res://libs/gt_random_audio_player/gt_random_audio_player.gd" type="Script" id=5]
+[ext_resource path="res://entities/weapon/assets/pistol3.ogg" type="AudioStream" id=6]
+[ext_resource path="res://entities/weapon/assets/pistol1.ogg" type="AudioStream" id=7]
+[ext_resource path="res://entities/weapon/assets/pistol2.ogg" type="AudioStream" id=8]
+
+[sub_resource type="Animation" id=1]
+resource_name = "ready"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("hud/root/bottom/sway/right_weapon:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("hud/root/bottom/sway/left_weapon:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "shoot_left"
+length = 0.3
+step = 0.075
+tracks/0/type = "value"
+tracks/0/path = NodePath("hud/root/bottom/sway/left_weapon:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.075, 0.15, 0.225 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("hud/root/bottom/sway/right_weapon:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "shoot_right"
+length = 0.3
+step = 0.075
+tracks/0/type = "value"
+tracks/0/path = NodePath("hud/root/bottom/sway/right_weapon:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.075, 0.15, 0.225 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("hud/root/bottom/sway/left_weapon:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
 
 [node name="Weapon" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="right_weapon" parent="hud/root/bottom/sway" index="0"]
+position = Vector2( 276, -150 )
+texture = ExtResource( 4 )
+hframes = 4
 
 [node name="left_weapon" parent="hud/root/bottom/sway" index="1"]
-position = Vector2( -200, -150 )
+position = Vector2( -250, -150 )
 scale = Vector2( -1, 1 )
-texture = ExtResource( 2 )
+texture = ExtResource( 4 )
 hframes = 4
-frame = 1
+
+[node name="pistol_shot" type="AudioStreamPlayer" parent="SFX" index="0"]
+bus = "Sound"
+script = ExtResource( 5 )
+samples = [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 6 ) ]
+
+[node name="ReloadTimer" parent="." index="2"]
+wait_time = 0.3
+
+[node name="MuzzleFlashTimer" type="Timer" parent="." index="3"]
+wait_time = 0.1
+one_shot = true
+
+[node name="AnimationPlayer" parent="." index="5"]
+autoplay = "ready"
+anims/ready = SubResource( 1 )
+anims/shoot_left = SubResource( 2 )
+anims/shoot_right = SubResource( 3 )
+script = ExtResource( 3 )

@@ -8,7 +8,7 @@
 [ext_resource path="res://entities/player/states/player_idle.gd" type="Script" id=6]
 [ext_resource path="res://entities/player/states/player_run.gd" type="Script" id=7]
 [ext_resource path="res://entities/player/states/player_jump.gd" type="Script" id=8]
-[ext_resource path="res://entities/player/weapons/player_weapon_pistol.tscn" type="PackedScene" id=9]
+[ext_resource path="res://entities/player/weapons/player_weapon_double_pistol.tscn" type="PackedScene" id=9]
 [ext_resource path="res://entities/player/scripts/player_damage_hurtbox.gd" type="Script" id=10]
 [ext_resource path="res://libs/gt_health/gt_health.gd" type="Script" id=11]
 [ext_resource path="res://entities/player/scripts/player_presence_hurtbox.gd" type="Script" id=12]
@@ -16,12 +16,12 @@
 [ext_resource path="res://entities/player/scripts/player_head_bobbing.gd" type="Script" id=14]
 [ext_resource path="res://entities/player/scripts/player_head_tilt.gd" type="Script" id=15]
 [ext_resource path="res://libs/gt_random_audio_player/gt_random_audio_player.gd" type="Script" id=16]
-[ext_resource path="res://entities/player/assets/step_on_grass_L (3).ogg" type="AudioStream" id=20]
-[ext_resource path="res://entities/player/assets/step_on_grass_L (2).ogg" type="AudioStream" id=21]
-[ext_resource path="res://entities/player/assets/step_on_grass_L (1).ogg" type="AudioStream" id=22]
-[ext_resource path="res://entities/player/assets/step_on_grass_R (2).ogg" type="AudioStream" id=23]
-[ext_resource path="res://entities/player/assets/step_on_grass_R (3).ogg" type="AudioStream" id=24]
-[ext_resource path="res://entities/player/assets/step_on_grass_R (1).ogg" type="AudioStream" id=25]
+[ext_resource path="res://entities/player/assets/step_cloth3.ogg" type="AudioStream" id=17]
+[ext_resource path="res://entities/player/assets/step_cloth4.ogg" type="AudioStream" id=18]
+[ext_resource path="res://entities/player/assets/step_cloth1.ogg" type="AudioStream" id=19]
+[ext_resource path="res://entities/player/assets/step_cloth2.ogg" type="AudioStream" id=20]
+[ext_resource path="res://entities/player/assets/player_hurt.wav" type="AudioStream" id=21]
+[ext_resource path="res://entities/player/assets/player_fall.wav" type="AudioStream" id=22]
 [ext_resource path="res://entities/player/scripts/footsteps_timer.gd" type="Script" id=26]
 [ext_resource path="res://entities/player/scripts/player_sfx.gd" type="Script" id=27]
 
@@ -47,26 +47,34 @@ actor_path = NodePath("..")
 script = ExtResource( 27 )
 
 [node name="footsteps_left" type="AudioStreamPlayer" parent="SFX"]
-volume_db = -6.0
+volume_db = 18.0
 bus = "Sound"
 script = ExtResource( 16 )
-samples = [ ExtResource( 22 ), ExtResource( 21 ), ExtResource( 20 ) ]
+samples = [ ExtResource( 19 ), ExtResource( 20 ), ExtResource( 17 ), ExtResource( 18 ) ]
 
 [node name="footsteps_right" type="AudioStreamPlayer" parent="SFX"]
-volume_db = -6.0
+volume_db = 18.0
 bus = "Sound"
 script = ExtResource( 16 )
-samples = [ ExtResource( 25 ), ExtResource( 23 ), ExtResource( 24 ) ]
+samples = [ ExtResource( 19 ), ExtResource( 20 ), ExtResource( 17 ), ExtResource( 18 ) ]
+
+[node name="hurt" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 21 )
+bus = "Sound"
+
+[node name="fall_thud" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 22 )
+volume_db = 3.0
+bus = "Sound"
 
 [node name="EntityMover" type="Node" parent="."]
 script = ExtResource( 2 )
 body_path = NodePath("../../Player")
-MAX_RUN_SPEED = 20.0
-RUN_ACCELERATION = 10.0
+MAX_RUN_SPEED = 22.0
+RUN_ACCELERATION = 12.0
 RUN_DECELERATION = 4.0
 JUMP_HEIGHT = 4.5
-JUMP_TIME = 0.35
-JUMP_DAMPING = 0.5
+JUMP_DAMPING = 0.6
 stop_on_slopes = true
 
 [node name="Health" type="Node" parent="."]
@@ -152,7 +160,7 @@ __meta__ = {
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0 )
 light_energy = 0.0
 shadow_enabled = true
-spot_range = 10.0
+spot_range = 15.0
 spot_attenuation = 0.574349
 spot_angle_attenuation = 0.420448
 script = ExtResource( 13 )
@@ -184,7 +192,7 @@ script = ExtResource( 7 )
 fsm_path = NodePath("../../../Player/StateMachine")
 
 [node name="FootstepsTimer" type="Timer" parent="StateMachine/Run"]
-wait_time = 0.3
+wait_time = 0.25
 script = ExtResource( 26 )
 
 [node name="CoyoteTimer" type="Timer" parent="StateMachine/Run"]
@@ -200,6 +208,7 @@ script = ExtResource( 5 )
 fsm_path = NodePath("../../../Player/StateMachine")
 
 [connection signal="died" from="Health" to="." method="_on_Health_died"]
+[connection signal="hurt" from="Hitboxes/DamageHurtbox" to="SFX/hurt" method="play"]
 [connection signal="take_damage" from="Hitboxes/DamageHurtbox" to="Health" method="lose_health"]
 [connection signal="just_pressed" from="PlayerController/jump" to="StateMachine/Run" method="_on_jump_just_pressed"]
 [connection signal="just_pressed" from="PlayerController/jump" to="StateMachine/Idle" method="_on_jump_just_pressed"]
@@ -211,5 +220,6 @@ fsm_path = NodePath("../../../Player/StateMachine")
 [connection signal="right_foot" from="StateMachine/Run/FootstepsTimer" to="SFX/footsteps_right" method="play_random"]
 [connection signal="timeout" from="StateMachine/Run/FootstepsTimer" to="StateMachine/Run/FootstepsTimer" method="_on_timeout"]
 [connection signal="timeout" from="StateMachine/Run/CoyoteTimer" to="StateMachine/Run" method="_on_CoyoteTimer_timeout"]
+[connection signal="fall_thud" from="StateMachine/Fall" to="SFX/fall_thud" method="play"]
 
 [editable path="PlayerController"]

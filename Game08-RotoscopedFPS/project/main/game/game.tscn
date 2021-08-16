@@ -3,7 +3,7 @@
 [ext_resource path="res://main/game/game.gd" type="Script" id=1]
 [ext_resource path="res://assets/shaders/dither.shader" type="Shader" id=2]
 [ext_resource path="res://main/game/world/world.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/palettes/nymph-gb-8x.png" type="Texture" id=4]
+[ext_resource path="res://assets/palettes/bluem0ld-8x.png" type="Texture" id=4]
 [ext_resource path="res://assets/textures/bayer16tile2.png" type="Texture" id=5]
 
 [sub_resource type="ShaderMaterial" id=1]
