@@ -1,5 +1,7 @@
 extends Entity
 
+signal died()
+
 export (bool) var can_shoot = true
 export (float) var headshot_multiplier = 1.0
 
@@ -13,6 +15,7 @@ var move_direction : Vector2 = Vector2.ZERO
 var shoot_direction : Vector3 = Vector3.RIGHT
 var near_entities = {}
 var is_near_player : bool = false
+var damage_info
 
 func _on_PlayerDetector_grouped_area_entered(area):
 	if not near_entities.has(area.actor):
@@ -37,4 +40,5 @@ func get_nearest_player():
 			return entity
 
 func take_damage(damage, info):
+	damage_info = info
 	health.lose_health(damage)

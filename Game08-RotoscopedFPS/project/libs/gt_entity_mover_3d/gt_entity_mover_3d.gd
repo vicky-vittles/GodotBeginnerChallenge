@@ -10,6 +10,7 @@ onready var body = get_node(body_path)
 export (float) var MAX_RUN_SPEED = 16
 export (float) var RUN_ACCELERATION = 20
 export (float) var RUN_DECELERATION = 5
+export (float) var SPEED_MODIFIER = 1.0
 export (float) var JUMP_HEIGHT = 3
 export (float) var JUMP_TIME = 0.35
 export (float, 0.0, 1.0) var JUMP_DAMPING = 0.3
@@ -36,6 +37,9 @@ func _ready():
 func set_move_direction(_dir: Vector2):
 	move_direction = _dir
 
+func set_speed_modifier(_mod):
+	SPEED_MODIFIER = _mod
+
 func move(delta):
 	if frozen:
 		return
@@ -44,7 +48,7 @@ func move(delta):
 		current_move_direction = current_move_direction.rotated(Vector3.UP, body.rotation.y)
 	
 	var ground_velocity = velocity * Vector3(1, 0, 1)
-	var desired_velocity = MAX_RUN_SPEED * current_move_direction
+	var desired_velocity = MAX_RUN_SPEED * SPEED_MODIFIER * current_move_direction
 	acceleration = RUN_DECELERATION
 	if current_move_direction.dot(ground_velocity) > 0:
 		acceleration = RUN_ACCELERATION

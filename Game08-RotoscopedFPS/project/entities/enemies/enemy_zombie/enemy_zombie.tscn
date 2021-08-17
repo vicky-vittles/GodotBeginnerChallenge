@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://entities/enemies/enemy_zombie_corpse/enemy_zombie_corpse.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/enemies/enemy_zombie/enemy_zombie.gd" type="Script" id=2]
@@ -17,17 +17,30 @@
 [ext_resource path="res://entities/enemies/enemy_zombie/assets/enemy_zombie_grunt (2).wav" type="AudioStream" id=15]
 [ext_resource path="res://entities/enemies/enemy_zombie/assets/enemy_zombie_grunt (3).wav" type="AudioStream" id=16]
 [ext_resource path="res://entities/enemies/enemy_zombie/assets/enemy_zombie_grunt (4).wav" type="AudioStream" id=17]
+[ext_resource path="res://entities/enemies/enemy_zombie/assets/blood_particle.png" type="Texture" id=18]
+[ext_resource path="res://libs/gt_particles/gt_particles.gd" type="Script" id=19]
 
-[sub_resource type="CylinderShape" id=1]
+[sub_resource type="ParticlesMaterial" id=1]
+direction = Vector3( 0, 1, 0 )
+gravity = Vector3( 0, -40, 0 )
+initial_velocity = 8.0
+scale_random = 0.1
+
+[sub_resource type="SpatialMaterial" id=2]
+params_billboard_mode = 2
+albedo_texture = ExtResource( 18 )
+
+[sub_resource type="QuadMesh" id=3]
+material = SubResource( 2 )
+size = Vector2( 0.25, 0.25 )
+
+[sub_resource type="CylinderShape" id=4]
 radius = 1.5
 height = 4.0
 
-[sub_resource type="SphereMesh" id=7]
+[sub_resource type="CapsuleShape" id=5]
 
-[sub_resource type="CapsuleShape" id=2]
-
-[sub_resource type="Animation" id=3]
-resource_name = "chase"
+[sub_resource type="Animation" id=6]
 length = 0.4
 loop = true
 tracks/0/type = "value"
@@ -43,8 +56,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "dead"
+[sub_resource type="Animation" id=7]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Graphics/main:frame")
@@ -71,7 +83,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=8]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Graphics/main:frame")
@@ -98,8 +110,7 @@ tracks/1/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "pain"
+[sub_resource type="Animation" id=9]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Graphics/main:frame")
@@ -131,9 +142,26 @@ hframes = 5
 vframes = 2
 frame = 6
 
+[node name="small_blood_splatter" type="Particles" parent="Graphics" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
+emitting = false
+amount = 12
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.8
+randomness = 0.1
+visibility_aabb = AABB( -20, -8, -20, 40, 16, 40 )
+local_coords = false
+process_material = SubResource( 1 )
+draw_pass_1 = SubResource( 3 )
+script = ExtResource( 19 )
+
+[node name="Hitboxes" parent="." index="1"]
+visible = false
+
 [node name="body" parent="Hitboxes/DamageHurtbox" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
-shape = SubResource( 1 )
+shape = SubResource( 4 )
 
 [node name="PlayerDetector" parent="Hitboxes" index="1"]
 collision_layer = 16
@@ -143,15 +171,10 @@ collidable_groups = [ "player_presence", "entity_presence", "enemy_presence" ]
 [node name="CollisionShape" parent="Hitboxes/PlayerDetector" index="0"]
 shape = ExtResource( 12 )
 
-[node name="MeshInstance" type="MeshInstance" parent="Hitboxes" index="2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -2 )
-visible = false
-mesh = SubResource( 7 )
-material/0 = null
-
 [node name="CollisionShape" parent="." index="2"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 1.5, 0 )
-shape = SubResource( 2 )
+visible = false
+shape = SubResource( 5 )
 
 [node name="CorpseSpawner" type="Node" parent="." index="3"]
 script = ExtResource( 11 )
@@ -206,30 +229,34 @@ script = ExtResource( 6 )
 
 [node name="AnimationPlayer" parent="." index="8"]
 autoplay = "default"
-anims/chase = SubResource( 3 )
-anims/dead = SubResource( 4 )
-anims/default = SubResource( 5 )
-anims/pain = SubResource( 6 )
+anims/chase = SubResource( 6 )
+anims/dead = SubResource( 7 )
+anims/default = SubResource( 8 )
+anims/pain = SubResource( 9 )
 
 [connection signal="take_damage" from="Hitboxes/DamageHurtbox" to="." method="take_damage"]
-[connection signal="died" from="Health" to="StateMachine/Standing" method="_on_Health_died"]
-[connection signal="died" from="Health" to="StateMachine/Chase" method="_on_Health_died"]
 [connection signal="died" from="Health" to="StateMachine/Missile" method="_on_Health_died"]
-[connection signal="health_lost" from="Health" to="StateMachine/Standing" method="_on_Health_health_lost"]
-[connection signal="health_lost" from="Health" to="StateMachine/Chase" method="_on_Health_health_lost"]
+[connection signal="died" from="Health" to="StateMachine/Standing" method="_on_Health_died"]
+[connection signal="died" from="Health" to="StateMachine/Pain" method="_on_Health_died"]
+[connection signal="died" from="Health" to="StateMachine/Chase" method="_on_Health_died"]
 [connection signal="health_lost" from="Health" to="StateMachine/Missile" method="_on_Health_health_lost"]
-[connection signal="state_entered" from="StateMachine/Chase" to="AnimationPlayer" method="play" binds= [ "chase" ]]
-[connection signal="state_entered" from="StateMachine/Chase" to="StateMachine/Chase/ReadjustDirectionTimer" method="start"]
+[connection signal="health_lost" from="Health" to="StateMachine/Standing" method="_on_Health_health_lost"]
+[connection signal="health_lost" from="Health" to="StateMachine/Pain" method="_on_Health_health_lost"]
+[connection signal="health_lost" from="Health" to="StateMachine/Chase" method="_on_Health_health_lost"]
 [connection signal="state_entered" from="StateMachine/Chase" to="StateMachine/Chase/GruntTimer" method="start"]
-[connection signal="state_exited" from="StateMachine/Chase" to="StateMachine/Chase/ReadjustDirectionTimer" method="stop"]
+[connection signal="state_entered" from="StateMachine/Chase" to="StateMachine/Chase/ReadjustDirectionTimer" method="start"]
+[connection signal="state_entered" from="StateMachine/Chase" to="AnimationPlayer" method="play" binds= [ "chase" ]]
 [connection signal="state_exited" from="StateMachine/Chase" to="StateMachine/Chase/GruntTimer" method="stop"]
+[connection signal="state_exited" from="StateMachine/Chase" to="StateMachine/Chase/ReadjustDirectionTimer" method="stop"]
 [connection signal="timeout" from="StateMachine/Chase/ReadjustDirectionTimer" to="StateMachine/Chase" method="_on_ReadjustDirectionTimer_timeout"]
 [connection signal="timeout" from="StateMachine/Chase/GruntTimer" to="SFX/grunt" method="play_random"]
 [connection signal="state_entered" from="StateMachine/Missile" to="StateMachine/Missile/CooldownTimer" method="start"]
 [connection signal="state_exited" from="StateMachine/Missile" to="StateMachine/Missile/CooldownTimer" method="stop"]
 [connection signal="timeout" from="StateMachine/Missile/CooldownTimer" to="StateMachine/Missile" method="_on_CooldownTimer_timeout"]
-[connection signal="state_entered" from="StateMachine/Pain" to="AnimationPlayer" method="play" binds= [ "pain" ]]
 [connection signal="state_entered" from="StateMachine/Pain" to="StateMachine/Pain/StunTimer" method="start"]
+[connection signal="state_entered" from="StateMachine/Pain" to="AnimationPlayer" method="play" binds= [ "pain" ]]
+[connection signal="state_entered" from="StateMachine/Pain" to="Graphics/small_blood_splatter" method="start"]
 [connection signal="timeout" from="StateMachine/Pain/StunTimer" to="StateMachine/Pain" method="_on_StunTimer_timeout"]
 [connection signal="state_entered" from="StateMachine/Dead" to="AnimationPlayer" method="play" binds= [ "dead" ]]
+[connection signal="state_entered" from="StateMachine/Dead" to="." method="emit_signal" binds= [ "died" ]]
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Dead" method="_on_AnimationPlayer_animation_finished"]

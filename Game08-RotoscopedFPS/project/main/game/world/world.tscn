@@ -1,8 +1,43 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://main/game/world/world.gd" type="Script" id=1]
 [ext_resource path="res://entities/player/player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://libs/gt_pattern_label/gt_pattern_label.gd" type="Script" id=3]
 [ext_resource path="res://libs/gt_currency/gt_currency.gd" type="Script" id=4]
+[ext_resource path="res://assets/ui/compass_s32_o2.tres" type="DynamicFont" id=5]
+
+[sub_resource type="Animation" id=4]
+resource_name = "default"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("enemies_remaining:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "show_enemies_remaining"
+length = 3.0
+step = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("enemies_remaining:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [sub_resource type="PanoramaSky" id=1]
 
@@ -20,7 +55,61 @@ fog_depth_end = 80.0
 script = ExtResource( 1 )
 current_level = 2
 
+[node name="HUD" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="root" type="Control" parent="HUD"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="enemies_killed" type="Label" parent="HUD/root"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 68.0
+margin_bottom = 30.0
+custom_fonts/font = ExtResource( 5 )
+text = "Killed: 0"
+align = 1
+valign = 1
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+pattern_text = "Killed: %s"
+
+[node name="enemies_remaining" type="Label" parent="HUD/root"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -125.0
+margin_top = 40.0
+margin_right = 125.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "0 zombies remaining"
+align = 1
+valign = 1
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+pattern_text = "%s zombies remaining"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/root"]
+autoplay = "default"
+anims/default = SubResource( 4 )
+anims/show_enemies_remaining = SubResource( 3 )
+
 [node name="CheckpointManager" type="Node" parent="."]
+script = ExtResource( 4 )
+
+[node name="ZombiesKilled" type="Node" parent="."]
 script = ExtResource( 4 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
@@ -29,4 +118,7 @@ transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 2.5,
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 2 )
 
+[connection signal="player_killed_zombie" from="." to="ZombiesKilled" method="gain_amount" binds= [ 1 ]]
+[connection signal="amount_updated" from="ZombiesKilled" to="." method="_on_ZombiesKilled_amount_updated"]
+[connection signal="amount_updated" from="ZombiesKilled" to="HUD/root/enemies_killed" method="apply_text_simple"]
 [connection signal="died" from="Player" to="." method="_on_Player_died"]

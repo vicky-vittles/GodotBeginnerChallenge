@@ -4,6 +4,9 @@ onready var corpse_spawner = $CorpseSpawner
 
 var target
 
+func _ready():
+	entity_type = Globals.ENTITIES.ENEMY_ZOMBIE
+
 func generate_random_direction():
 	var rand_angle = rand_range(-PI, PI)
 	move_direction = Vector2(1,0).rotated(rand_angle)

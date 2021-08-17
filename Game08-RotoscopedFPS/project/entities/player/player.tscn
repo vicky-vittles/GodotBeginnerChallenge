@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://entities/player/player.gd" type="Script" id=1]
 [ext_resource path="res://libs/gt_entity_mover_3d/gt_entity_mover_3d.gd" type="Script" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://entities/player/assets/step_cloth2.ogg" type="AudioStream" id=20]
 [ext_resource path="res://entities/player/assets/player_hurt.wav" type="AudioStream" id=21]
 [ext_resource path="res://entities/player/assets/player_fall.wav" type="AudioStream" id=22]
+[ext_resource path="res://entities/player/assets/player_jump.wav" type="AudioStream" id=23]
 [ext_resource path="res://entities/player/scripts/footsteps_timer.gd" type="Script" id=26]
 [ext_resource path="res://entities/player/scripts/player_sfx.gd" type="Script" id=27]
 
@@ -31,7 +32,24 @@ extents = Vector3( 1, 1.5, 1 )
 [sub_resource type="BoxShape" id=2]
 extents = Vector3( 1, 1.5, 1 )
 
-[sub_resource type="SphereShape" id=3]
+[sub_resource type="Animation" id=3]
+resource_name = "land_ground"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:translation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, -0.6, 0 ), Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="SphereShape" id=4]
 radius = 1.95
 
 [node name="Player" type="KinematicBody"]
@@ -47,24 +65,29 @@ actor_path = NodePath("..")
 script = ExtResource( 27 )
 
 [node name="footsteps_left" type="AudioStreamPlayer" parent="SFX"]
-volume_db = 18.0
+volume_db = 24.0
 bus = "Sound"
 script = ExtResource( 16 )
 samples = [ ExtResource( 19 ), ExtResource( 20 ), ExtResource( 17 ), ExtResource( 18 ) ]
 
 [node name="footsteps_right" type="AudioStreamPlayer" parent="SFX"]
-volume_db = 18.0
+volume_db = 24.0
 bus = "Sound"
 script = ExtResource( 16 )
 samples = [ ExtResource( 19 ), ExtResource( 20 ), ExtResource( 17 ), ExtResource( 18 ) ]
 
-[node name="hurt" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource( 21 )
+[node name="jump" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 23 )
+volume_db = -3.0
 bus = "Sound"
 
 [node name="fall_thud" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 22 )
 volume_db = 3.0
+bus = "Sound"
+
+[node name="hurt" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 21 )
 bus = "Sound"
 
 [node name="EntityMover" type="Node" parent="."]
@@ -171,10 +194,13 @@ max_light_energy = 3.0
 
 [node name="Tween" type="Tween" parent="Head/bobbing/tilt/Camera/muzzle_flash"]
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Head"]
+anims/land_ground = SubResource( 3 )
+
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2, 0 )
 visible = false
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -210,8 +236,8 @@ fsm_path = NodePath("../../../Player/StateMachine")
 [connection signal="died" from="Health" to="." method="_on_Health_died"]
 [connection signal="hurt" from="Hitboxes/DamageHurtbox" to="SFX/hurt" method="play"]
 [connection signal="take_damage" from="Hitboxes/DamageHurtbox" to="Health" method="lose_health"]
-[connection signal="just_pressed" from="PlayerController/jump" to="StateMachine/Run" method="_on_jump_just_pressed"]
 [connection signal="just_pressed" from="PlayerController/jump" to="StateMachine/Idle" method="_on_jump_just_pressed"]
+[connection signal="just_pressed" from="PlayerController/jump" to="StateMachine/Run" method="_on_jump_just_pressed"]
 [connection signal="just_released" from="PlayerController/jump" to="StateMachine/Jump" method="_on_jump_just_released"]
 [connection signal="pressed" from="PlayerController/shoot" to="." method="shoot"]
 [connection signal="state_entered" from="StateMachine/Run" to="StateMachine/Run/FootstepsTimer" method="start"]
@@ -220,6 +246,8 @@ fsm_path = NodePath("../../../Player/StateMachine")
 [connection signal="right_foot" from="StateMachine/Run/FootstepsTimer" to="SFX/footsteps_right" method="play_random"]
 [connection signal="timeout" from="StateMachine/Run/FootstepsTimer" to="StateMachine/Run/FootstepsTimer" method="_on_timeout"]
 [connection signal="timeout" from="StateMachine/Run/CoyoteTimer" to="StateMachine/Run" method="_on_CoyoteTimer_timeout"]
-[connection signal="fall_thud" from="StateMachine/Fall" to="SFX/fall_thud" method="play"]
+[connection signal="state_entered" from="StateMachine/Jump" to="SFX/jump" method="play"]
+[connection signal="state_exited" from="StateMachine/Fall" to="SFX/fall_thud" method="play"]
+[connection signal="state_exited" from="StateMachine/Fall" to="Head/AnimationPlayer" method="play" binds= [ "land_ground" ]]
 
 [editable path="PlayerController"]

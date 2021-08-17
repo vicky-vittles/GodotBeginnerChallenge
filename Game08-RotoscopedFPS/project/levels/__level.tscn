@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://addons/qodot/src/nodes/qodot_map.gd" type="Script" id=1]
-[ext_resource path="res://scenes/file_manager/file_manager.gd" type="Script" id=2]
 [ext_resource path="res://levels/__level.gd" type="Script" id=3]
 [ext_resource path="res://levels/scripts/level_root.gd" type="Script" id=4]
 [ext_resource path="res://addons/qodot/game_definitions/fgd/qodot_fgd.tres" type="Resource" id=5]
@@ -42,6 +41,11 @@ use_trenchbroom_group_hierarchy = false
 tree_attach_batch_size = 16
 set_owner_batch_size = 16
 
+[node name="entities" type="Spatial" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="objects" type="Spatial" parent="."]
 __meta__ = {
 "_edit_lock_": true
@@ -52,7 +56,6 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="FileManager" type="Node" parent="."]
-script = ExtResource( 2 )
-
-[connection signal="checkpoint_reached" from="root" to="." method="_on_checkpoint_reached"]
+[node name="music" type="AudioStreamPlayer" parent="."]
+autoplay = true
+bus = "Music"

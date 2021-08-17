@@ -1,0 +1,77 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/ui/main_theme.tres" type="Theme" id=1]
+[ext_resource path="res://assets/ui/compass_s32_o2.tres" type="DynamicFont" id=2]
+[ext_resource path="res://libs/gt_menus/screens/__gt_simple_screen.tscn" type="PackedScene" id=3]
+[ext_resource path="res://menus/screens/screen_title.gd" type="Script" id=4]
+
+[node name="screen_title" instance=ExtResource( 3 )]
+theme = ExtResource( 1 )
+script = ExtResource( 4 )
+
+[node name="vbox" parent="." index="0"]
+margin_left = -96.0
+margin_top = -163.0
+margin_right = 96.0
+margin_bottom = 163.0
+
+[node name="hbox" parent="vbox" index="0"]
+margin_right = 192.0
+margin_bottom = 326.0
+
+[node name="vbox" parent="vbox/hbox" index="0"]
+margin_right = 192.0
+margin_bottom = 326.0
+custom_constants/separation = 150
+
+[node name="title" type="Label" parent="vbox/hbox/vbox" index="0"]
+margin_right = 192.0
+margin_bottom = 60.0
+text = "Zombies"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="buttons" type="VBoxContainer" parent="vbox/hbox/vbox" index="1"]
+margin_top = 210.0
+margin_right = 192.0
+margin_bottom = 326.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="play" type="Button" parent="vbox/hbox/vbox/buttons" index="0"]
+margin_right = 192.0
+margin_bottom = 36.0
+custom_fonts/font = ExtResource( 2 )
+text = "play"
+flat = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="settings" type="Button" parent="vbox/hbox/vbox/buttons" index="1"]
+margin_top = 40.0
+margin_right = 192.0
+margin_bottom = 76.0
+custom_fonts/font = ExtResource( 2 )
+text = "settings"
+flat = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="quit" type="Button" parent="vbox/hbox/vbox/buttons" index="2"]
+margin_top = 80.0
+margin_right = 192.0
+margin_bottom = 116.0
+custom_fonts/font = ExtResource( 2 )
+text = "quit"
+flat = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[connection signal="pressed" from="vbox/hbox/vbox/buttons/quit" to="." method="emit_signal" binds= [ "button_quit" ]]

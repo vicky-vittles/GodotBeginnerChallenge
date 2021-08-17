@@ -1,5 +1,7 @@
 extends Spatial
 
+signal player_killed_zombie()
+
 enum LEVELS {
 	TEST_00 = 0,
 	FOREST_01 = 1,
@@ -12,8 +14,9 @@ const LEVEL_SCENES = {
 
 export (LEVELS) var current_level = LEVELS.TEST_00
 
+onready var enemies_remaining = $HUD/root/enemies_remaining
+onready var hud_animation_player = $HUD/root/AnimationPlayer
 onready var player = $Player
-onready var checkpoint_manager = $CheckpointManager
 var level
 
 func _ready():
@@ -22,16 +25,14 @@ func _ready():
 func load_level(level_id):
 	var level_node = LEVEL_SCENES[level_id].instance()
 	add_child(level_node)
-	level_node.connect("checkpoint_reached", self, "checkpoint_reached")
+	level_node.connect("killed_zombie", self, "emit_signal", ["player_killed_zombie"])
 	level = level_node
 
-func checkpoint_reached(checkpoint):
-	var current_point = checkpoint_manager.current_amount
-	var new_point = checkpoint.checkpoint_id
-	
-	if new_point > current_point:
-		checkpoint_manager.set_amount(new_point)
-		level.create_checkpoint(player.get_info())
+func _on_ZombiesKilled_amount_updated(current):
+	var remaining_enemies = level.total_enemies_to_kill-current
+	if remaining_enemies <= 10:
+		enemies_remaining.apply_text_simple(remaining_enemies)
+		hud_animation_player.play("show_enemies_remaining")
 
 func _on_Player_died():
 	print("morri")

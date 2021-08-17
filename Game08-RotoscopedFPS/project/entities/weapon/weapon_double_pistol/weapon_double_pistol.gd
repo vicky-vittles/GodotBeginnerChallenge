@@ -23,5 +23,6 @@ func fire():
 				return
 		for group in weapon_collidable_groups:
 			if collider.is_in_group(group) and collider.has_method("hurt"):
+				result["player_direction"] = direction
 				collider.hurt(MAX_DAMAGE, result)
 				break
