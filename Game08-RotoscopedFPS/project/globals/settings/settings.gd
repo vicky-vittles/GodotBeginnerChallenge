@@ -7,8 +7,8 @@ var music_volume : float
 var sound_volume : float
 
 func _ready():
-	change_music_volume(0.0)
-	change_sound_volume(0.0)
+	change_music_volume(0.2)
+	change_sound_volume(0.2)
 
 func change_music_volume(new_volume: float):
 	music_volume = new_volume

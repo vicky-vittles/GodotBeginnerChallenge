@@ -11,7 +11,7 @@ var previous_state
 var knockback_direction : Vector2
 
 func enter(info = null):
-	previous_state = info["previous_state"] if info else null
+	previous_state = info["previous_state"] if info and info.has("previous_state") else null
 	var collision_normal = actor.damage_info["player_direction"]
 	knockback_direction = Vector2(collision_normal.x, collision_normal.z)
 	actor.entity_mover.set_speed_modifier(0.75)

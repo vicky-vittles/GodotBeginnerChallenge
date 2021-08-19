@@ -1,19 +1,17 @@
 extends Control
 class_name GTScreen
 
-var enter_transition
-var exit_transition
+var transition
 
 func _ready():
 	for child in get_children():
 		if child is GTScreenTransition:
-			if child.is_enter:
-				enter_transition = child
-			else:
-				exit_transition = child
+			transition = child
+	assert(transition != null, "%s has no set Transition" % self.name)
+	visible = false
 
 func enter():
-	enter_transition.enter()
+	transition.enter()
 
 func exit():
-	exit_transition.exit()
+	transition.exit()

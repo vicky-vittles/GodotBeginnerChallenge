@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://entities/player/player.gd" type="Script" id=1]
 [ext_resource path="res://libs/gt_entity_mover_3d/gt_entity_mover_3d.gd" type="Script" id=2]
@@ -20,20 +20,56 @@
 [ext_resource path="res://entities/player/assets/step_cloth4.ogg" type="AudioStream" id=18]
 [ext_resource path="res://entities/player/assets/step_cloth1.ogg" type="AudioStream" id=19]
 [ext_resource path="res://entities/player/assets/step_cloth2.ogg" type="AudioStream" id=20]
-[ext_resource path="res://entities/player/assets/player_hurt.wav" type="AudioStream" id=21]
+[ext_resource path="res://entities/player/assets/player_pain (3).wav" type="AudioStream" id=21]
 [ext_resource path="res://entities/player/assets/player_fall.wav" type="AudioStream" id=22]
 [ext_resource path="res://entities/player/assets/player_jump.wav" type="AudioStream" id=23]
+[ext_resource path="res://entities/player/assets/player_pain (2).wav" type="AudioStream" id=24]
+[ext_resource path="res://entities/player/assets/player_pain (1).wav" type="AudioStream" id=25]
 [ext_resource path="res://entities/player/scripts/footsteps_timer.gd" type="Script" id=26]
 [ext_resource path="res://entities/player/scripts/player_sfx.gd" type="Script" id=27]
+[ext_resource path="res://entities/player/assets/player_pain (4).wav" type="AudioStream" id=28]
+[ext_resource path="res://entities/player/assets/player_pain (5).wav" type="AudioStream" id=29]
+[ext_resource path="res://entities/player/assets/player_pain (6).wav" type="AudioStream" id=30]
 
-[sub_resource type="BoxShape" id=1]
+[sub_resource type="Animation" id=1]
+resource_name = "pain"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("root/color_modulate:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.25098 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "ready"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("root/color_modulate:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="BoxShape" id=3]
 extents = Vector3( 1, 1.5, 1 )
 
-[sub_resource type="BoxShape" id=2]
+[sub_resource type="BoxShape" id=4]
 extents = Vector3( 1, 1.5, 1 )
 
-[sub_resource type="Animation" id=3]
-resource_name = "land_ground"
+[sub_resource type="Animation" id=5]
 length = 0.4
 step = 0.05
 tracks/0/type = "value"
@@ -49,7 +85,7 @@ tracks/0/keys = {
 "values": [ Vector3( 0, 0, 0 ), Vector3( 0, -0.6, 0 ), Vector3( 0, 0, 0 ) ]
 }
 
-[sub_resource type="SphereShape" id=4]
+[sub_resource type="SphereShape" id=6]
 radius = 1.95
 
 [node name="Player" type="KinematicBody"]
@@ -57,6 +93,33 @@ collision_layer = 4
 collision_mask = 2
 script = ExtResource( 1 )
 entity_type = 1
+
+[node name="HUD" type="CanvasLayer" parent="."]
+layer = 9
+
+[node name="root" type="Control" parent="HUD"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="color_modulate" type="ColorRect" parent="HUD/root"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD"]
+autoplay = "ready"
+anims/pain = SubResource( 1 )
+anims/ready = SubResource( 2 )
 
 [node name="Weapon" parent="." instance=ExtResource( 9 )]
 actor_path = NodePath("..")
@@ -87,8 +150,9 @@ volume_db = 3.0
 bus = "Sound"
 
 [node name="hurt" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource( 21 )
 bus = "Sound"
+script = ExtResource( 16 )
+samples = [ ExtResource( 25 ), ExtResource( 24 ), ExtResource( 21 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 30 ) ]
 
 [node name="EntityMover" type="Node" parent="."]
 script = ExtResource( 2 )
@@ -122,10 +186,14 @@ __meta__ = {
 
 [node name="CollisionShape" type="CollisionShape" parent="Hitboxes/DamageHurtbox"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
-shape = SubResource( 1 )
+shape = SubResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="DamageCooldownTimer" type="Timer" parent="Hitboxes/DamageHurtbox"]
+wait_time = 0.5
+one_shot = true
 
 [node name="PresenceHurtbox" type="Area" parent="Hitboxes" groups=[
 "entity_presence",
@@ -141,7 +209,7 @@ actor_path = NodePath("../../../Player")
 
 [node name="CollisionShape" type="CollisionShape" parent="Hitboxes/PresenceHurtbox"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
-shape = SubResource( 2 )
+shape = SubResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -168,8 +236,8 @@ __meta__ = {
 "_edit_lock_": true
 }
 input_controller_path = NodePath("../../../PlayerController")
-tilt_amount = 3.0
-tilt_speed = 1.5
+tilt_amount = 3.5
+tilt_speed = 1.7
 
 [node name="Camera" type="Camera" parent="Head/bobbing/tilt"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
@@ -195,12 +263,12 @@ max_light_energy = 3.0
 [node name="Tween" type="Tween" parent="Head/bobbing/tilt/Camera/muzzle_flash"]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Head"]
-anims/land_ground = SubResource( 3 )
+anims/land_ground = SubResource( 5 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2, 0 )
 visible = false
-shape = SubResource( 4 )
+shape = SubResource( 6 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -234,7 +302,10 @@ script = ExtResource( 5 )
 fsm_path = NodePath("../../../Player/StateMachine")
 
 [connection signal="died" from="Health" to="." method="_on_Health_died"]
-[connection signal="hurt" from="Hitboxes/DamageHurtbox" to="SFX/hurt" method="play"]
+[connection signal="health_updated" from="Health" to="." method="_on_Health_health_updated"]
+[connection signal="hurt" from="Hitboxes/DamageHurtbox" to="Hitboxes/DamageHurtbox/DamageCooldownTimer" method="start"]
+[connection signal="hurt" from="Hitboxes/DamageHurtbox" to="SFX/hurt" method="play_random"]
+[connection signal="hurt" from="Hitboxes/DamageHurtbox" to="HUD/AnimationPlayer" method="play" binds= [ "pain" ]]
 [connection signal="take_damage" from="Hitboxes/DamageHurtbox" to="Health" method="lose_health"]
 [connection signal="just_pressed" from="PlayerController/jump" to="StateMachine/Idle" method="_on_jump_just_pressed"]
 [connection signal="just_pressed" from="PlayerController/jump" to="StateMachine/Run" method="_on_jump_just_pressed"]

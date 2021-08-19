@@ -1,16 +1,17 @@
 extends GTState
 
+onready var CHASE = $"../Chase"
+onready var PAIN = $"../Pain"
+onready var DEAD = $"../Dead"
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+func _on_DurationTimer_timeout():
+	if fsm.current_state == self:
+		fsm.change_state(CHASE)
 
+func _on_Health_health_lost(current, lost):
+	if fsm.current_state == self:
+		fsm.change_state(PAIN)
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _on_Health_died(current):
+	if fsm.current_state == self:
+		fsm.change_state(DEAD)

@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://libs/gt_input_controller/controllers/gt_device_controller.gd" type="Script" id=1]
+[ext_resource path="res://libs/gt_input_controller/actions/__gt_input_action.gd" type="Script" id=2]
+
+[node name="SystemController" type="Node"]
+script = ExtResource( 1 )
+
+[node name="escape" type="Node" parent="."]
+script = ExtResource( 2 )
+action = "sys_escape"
+
+[node name="reload" type="Node" parent="."]
+script = ExtResource( 2 )
+action = "sys_reload"
+
+[node name="exit" type="Node" parent="."]
+script = ExtResource( 2 )
+action = "sys_exit"

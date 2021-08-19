@@ -110,6 +110,7 @@ texture = ExtResource( 4 )
 hframes = 4
 
 [node name="pistol_shot" type="AudioStreamPlayer" parent="SFX" index="0"]
+volume_db = -3.0
 bus = "Sound"
 script = ExtResource( 5 )
 samples = [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 6 ) ]

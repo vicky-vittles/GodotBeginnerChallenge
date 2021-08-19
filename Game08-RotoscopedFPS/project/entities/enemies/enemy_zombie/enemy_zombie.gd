@@ -1,5 +1,9 @@
 extends "res://entities/enemies/__enemy/__enemy.gd"
 
+export (float) var ATTACK_REACH = 3.0
+
+onready var damage_hitbox = $Hitboxes/DamageHitbox
+onready var melee_cooldown_timer = $Timers/MeleeCooldownTimer
 onready var corpse_spawner = $CorpseSpawner
 
 var target

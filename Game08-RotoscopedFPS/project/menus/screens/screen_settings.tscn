@@ -1,0 +1,160 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://libs/gt_menus/screens/__gt_simple_screen.tscn" type="PackedScene" id=1]
+[ext_resource path="res://menus/screens/screen_settings.gd" type="Script" id=2]
+[ext_resource path="res://assets/ui/main_theme.tres" type="Theme" id=3]
+[ext_resource path="res://assets/ui/compass_s32_o2.tres" type="DynamicFont" id=4]
+[ext_resource path="res://assets/ui/musicOn.png" type="Texture" id=5]
+[ext_resource path="res://assets/ui/audioOn.png" type="Texture" id=6]
+[ext_resource path="res://assets/ui/audioOff.png" type="Texture" id=7]
+[ext_resource path="res://assets/ui/musicOff.png" type="Texture" id=8]
+
+[node name="screen_settings" instance=ExtResource( 1 )]
+margin_left = 2.1189
+margin_right = 2.1189
+theme = ExtResource( 3 )
+script = ExtResource( 2 )
+music_on = ExtResource( 5 )
+music_off = ExtResource( 8 )
+sound_on = ExtResource( 6 )
+sound_off = ExtResource( 7 )
+
+[node name="vbox" parent="." index="0"]
+margin_left = -102.0
+margin_top = -196.0
+margin_right = 102.0
+margin_bottom = 196.0
+
+[node name="hbox" parent="vbox" index="0"]
+margin_right = 204.0
+margin_bottom = 392.0
+
+[node name="vbox" parent="vbox/hbox" index="0"]
+margin_right = 204.0
+margin_bottom = 392.0
+custom_constants/separation = 100
+
+[node name="title" type="Label" parent="vbox/hbox/vbox" index="0"]
+margin_right = 204.0
+margin_bottom = 60.0
+text = "Settings"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="buttons" type="VBoxContainer" parent="vbox/hbox/vbox" index="1"]
+margin_top = 160.0
+margin_right = 204.0
+margin_bottom = 336.0
+custom_constants/separation = 30
+alignment = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="sliders" type="VBoxContainer" parent="vbox/hbox/vbox/buttons" index="0"]
+margin_right = 204.0
+margin_bottom = 110.0
+custom_constants/separation = 10
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="music" type="HBoxContainer" parent="vbox/hbox/vbox/buttons/sliders" index="0"]
+margin_right = 204.0
+margin_bottom = 50.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="icon_vbox" type="VBoxContainer" parent="vbox/hbox/vbox/buttons/sliders/music" index="0"]
+margin_right = 50.0
+margin_bottom = 50.0
+alignment = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="icon" type="TextureRect" parent="vbox/hbox/vbox/buttons/sliders/music/icon_vbox" index="0"]
+margin_right = 50.0
+margin_bottom = 50.0
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="slider_vbox" type="VBoxContainer" parent="vbox/hbox/vbox/buttons/sliders/music" index="1"]
+margin_left = 54.0
+margin_right = 189.0
+margin_bottom = 50.0
+alignment = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="slider" type="HSlider" parent="vbox/hbox/vbox/buttons/sliders/music/slider_vbox" index="0"]
+margin_top = 17.0
+margin_right = 135.0
+margin_bottom = 33.0
+rect_min_size = Vector2( 135, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="sound" type="HBoxContainer" parent="vbox/hbox/vbox/buttons/sliders" index="1"]
+margin_top = 60.0
+margin_right = 204.0
+margin_bottom = 110.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="icon_vbox" type="VBoxContainer" parent="vbox/hbox/vbox/buttons/sliders/sound" index="0"]
+margin_right = 50.0
+margin_bottom = 50.0
+alignment = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="icon" type="TextureRect" parent="vbox/hbox/vbox/buttons/sliders/sound/icon_vbox" index="0"]
+margin_right = 50.0
+margin_bottom = 50.0
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="slider_vbox" type="VBoxContainer" parent="vbox/hbox/vbox/buttons/sliders/sound" index="1"]
+margin_left = 54.0
+margin_right = 189.0
+margin_bottom = 50.0
+alignment = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="slider" type="HSlider" parent="vbox/hbox/vbox/buttons/sliders/sound/slider_vbox" index="0"]
+margin_top = 17.0
+margin_right = 135.0
+margin_bottom = 33.0
+rect_min_size = Vector2( 135, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="back" type="Button" parent="vbox/hbox/vbox/buttons" index="1"]
+margin_top = 140.0
+margin_right = 204.0
+margin_bottom = 176.0
+custom_fonts/font = ExtResource( 4 )
+text = "back"
+flat = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[connection signal="ready" from="." to="." method="load_settings"]
+[connection signal="value_changed" from="vbox/hbox/vbox/buttons/sliders/music/slider_vbox/slider" to="." method="change_music_volume"]
+[connection signal="value_changed" from="vbox/hbox/vbox/buttons/sliders/sound/slider_vbox/slider" to="." method="change_sound_volume"]
+[connection signal="pressed" from="vbox/hbox/vbox/buttons/back" to="." method="emit_signal" binds= [ "button_back" ]]

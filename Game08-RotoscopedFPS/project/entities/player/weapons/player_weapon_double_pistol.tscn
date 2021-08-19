@@ -11,18 +11,22 @@ MAX_DAMAGE = 40.0
 shoot_using_look_direction = true
 MAX_RANGE = 200.0
 
+[node name="root" parent="hud" index="0"]
+mouse_filter = 2
+
 [node name="sway" parent="hud/root/bottom" index="0"]
 move_amount = 40
 move_speed = 4.0
 is_active = true
 
 [node name="crosshair" parent="hud/root" index="1"]
-modulate = Color( 1, 1, 1, 0.45098 )
+modulate = Color( 1, 1, 1, 0.635294 )
 margin_left = -32.0
 margin_top = -32.0
+mouse_filter = 2
 texture = ExtResource( 2 )
 
 [connection signal="weapon_fired" from="." to="SFX/pistol_shot" method="play_random"]
 [connection signal="timeout" from="MuzzleFlashTimer" to="." method="emit_signal" binds= [ "weapon_reloading" ]]
-[connection signal="state_entered" from="StateMachine/Shooting" to="." method="emit_signal" binds= [ "weapon_fired" ]]
 [connection signal="state_entered" from="StateMachine/Shooting" to="MuzzleFlashTimer" method="start"]
+[connection signal="state_entered" from="StateMachine/Shooting" to="." method="emit_signal" binds= [ "weapon_fired" ]]

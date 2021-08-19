@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/shaders/dither.shader" type="Shader" id=1]
+[ext_resource path="res://assets/palettes/bluem0ld-8x.png" type="Texture" id=2]
+[ext_resource path="res://assets/textures/bayer16tile2.png" type="Texture" id=3]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/apply_dither = false
+shader_param/flip = false
+shader_param/u_bit_depth = 64
+shader_param/u_contrast = 1.0
+shader_param/u_offset = null
+shader_param/u_dither_size = 1
+shader_param/u_dither_tex = ExtResource( 3 )
+shader_param/u_color_tex = ExtResource( 2 )
+
+[node name="viewport_container" type="ViewportContainer"]
+material = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="viewport" type="Viewport" parent="."]
+size = Vector2( 1024, 600 )
+handle_input_locally = false
+render_target_update_mode = 3

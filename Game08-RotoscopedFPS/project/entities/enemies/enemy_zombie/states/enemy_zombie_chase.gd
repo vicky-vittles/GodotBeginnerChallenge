@@ -9,7 +9,18 @@ func enter(_info = null):
 	actor.target = actor.get_nearest_player()
 
 func physics_process(delta):
-	actor.entity_mover.set_move_direction(actor.move_direction)
+	var move_direction = actor.move_direction
+	
+	if actor.target:
+		var target_pos = actor.target.global_transform.origin
+		var my_pos = actor.global_transform.origin
+		var dist = my_pos.distance_to(target_pos)
+		if dist <= actor.ATTACK_REACH:
+			move_direction = Vector2.ZERO
+			if actor.melee_cooldown_timer.is_stopped():
+				fsm.change_state(MELEE)
+			
+	actor.entity_mover.set_move_direction(move_direction)
 	actor.entity_mover.move(delta)
 	
 	if not actor.is_near_player:

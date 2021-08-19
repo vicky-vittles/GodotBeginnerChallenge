@@ -1,5 +1,6 @@
 extends Entity
 
+signal health_updated(current)
 signal died()
 
 export (float, 0.0, 1.0) var mouse_sensitivity = 0.15
@@ -36,5 +37,8 @@ func get_info():
 		"rotation": rotation,
 		"type": Globals.ENTITIES.PLAYER}
 
+func _on_Health_health_updated(current):
+	emit_signal("health_updated", current)
+	
 func _on_Health_died(current):
 	emit_signal("died")

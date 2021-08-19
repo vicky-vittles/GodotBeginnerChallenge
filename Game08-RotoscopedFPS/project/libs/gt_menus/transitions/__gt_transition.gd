@@ -6,21 +6,17 @@ onready var screen = get_node(screen_path)
 onready var tween = $Tween
 onready var v_timer = $VisibilityTimer
 export (float) var anim_time = 1.0
-export (bool) var is_enter
 
 
 func _ready():
 	assert(screen_path != null and not screen_path.is_empty())
 	v_timer.wait_time = anim_time
 
-
 func enter():
 	pass
 
-
 func exit():
 	pass
-
 
 func disable_screen():
 	screen.visible = false

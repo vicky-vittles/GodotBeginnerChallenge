@@ -5,3 +5,4 @@
 
 [node name="transition_fade" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+anim_time = 0.15
