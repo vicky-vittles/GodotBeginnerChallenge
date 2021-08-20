@@ -1,6 +1,7 @@
 extends GTState
 
 onready var FALL = $"../Fall"
+onready var DEAD = $"../Dead"
 
 func enter(_info = null):
 	actor.jump()
@@ -19,3 +20,7 @@ func physics_process(delta):
 func _on_jump_just_released():
 	if fsm.current_state == self and actor.can_jump:
 		actor.entity_mover.damp_jump()
+
+func _on_Player_died():
+	if fsm.current_state == self:
+		fsm.change_state(DEAD)

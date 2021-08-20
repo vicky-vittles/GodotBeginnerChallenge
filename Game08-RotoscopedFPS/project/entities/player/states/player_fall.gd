@@ -2,6 +2,7 @@ extends GTState
 
 onready var IDLE = $"../Idle"
 onready var RUN = $"../Run"
+onready var DEAD = $"../Dead"
 
 func exit():
 	actor.entity_mover.turn_on_snap()
@@ -19,3 +20,7 @@ func physics_process(delta):
 			fsm.change_state(RUN)
 		else:
 			fsm.change_state(IDLE)
+
+func _on_Player_died():
+	if fsm.current_state == self:
+		fsm.change_state(DEAD)

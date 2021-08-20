@@ -2,6 +2,7 @@ extends GTState
 
 onready var RUN = $"../Run"
 onready var JUMP = $"../Jump"
+onready var DEAD = $"../Dead"
 
 func process(delta):
 	actor.input_controller.poll_input()
@@ -17,3 +18,7 @@ func physics_process(delta):
 func _on_jump_just_pressed():
 	if fsm.current_state == self and actor.can_jump:
 		fsm.change_state(JUMP)
+
+func _on_Player_died():
+	if fsm.current_state == self:
+		fsm.change_state(DEAD)

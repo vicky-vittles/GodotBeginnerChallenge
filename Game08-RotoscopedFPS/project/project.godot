@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "ApplicationManager",
 "language": "GDScript",
-"path": "res://main/application_manager.gd"
+"path": "res://main/scripts/application_manager.gd"
 }, {
 "base": "QodotEntity",
 "class": "Checkpoint",

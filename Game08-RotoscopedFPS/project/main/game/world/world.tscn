@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://main/game/world/world.gd" type="Script" id=1]
 [ext_resource path="res://entities/player/player.tscn" type="PackedScene" id=2]
@@ -21,9 +21,59 @@ tracks/0/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("you_win_label:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("enemies_remaining:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("you_died_label:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=2]
-resource_name = "show_enemies_remaining"
+resource_name = "died"
+tracks/0/type = "value"
+tracks/0/path = NodePath("you_died_label:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=3]
 length = 3.0
 step = 1.0
 tracks/0/type = "value"
@@ -39,11 +89,49 @@ tracks/0/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="PanoramaSky" id=3]
+[sub_resource type="Animation" id=4]
+tracks/0/type = "value"
+tracks/0/path = NodePath("you_win_label:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("enemies_remaining:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("enemies_remaining:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
-[sub_resource type="Environment" id=4]
+[sub_resource type="PanoramaSky" id=5]
+
+[sub_resource type="Environment" id=6]
 background_mode = 1
-background_sky = SubResource( 3 )
+background_sky = SubResource( 5 )
 ambient_light_color = Color( 1, 1, 1, 1 )
 ambient_light_sky_contribution = 0.0
 fog_enabled = true
@@ -122,6 +210,43 @@ __meta__ = {
 }
 pattern_text = "Killed: %s"
 
+[node name="you_win_label" type="Label" parent="HUD/root"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -56.0
+margin_top = 40.0
+margin_right = 56.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 5 )
+text = "You won!"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="you_died_label" type="Label" parent="HUD/root"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -114.0
+margin_top = 40.0
+margin_right = 114.0
+margin_bottom = 31.5
+custom_fonts/font = ExtResource( 5 )
+text = "You died!
+Press R to restart"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
 [node name="enemies_remaining" type="Label" parent="HUD/root"]
 visible = false
 anchor_left = 0.5
@@ -146,7 +271,9 @@ pattern_text = "%s zombies remaining"
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/root"]
 autoplay = "default"
 anims/default = SubResource( 1 )
-anims/show_enemies_remaining = SubResource( 2 )
+anims/died = SubResource( 2 )
+anims/show_enemies_remaining = SubResource( 3 )
+anims/win = SubResource( 4 )
 
 [node name="CheckpointManager" type="Node" parent="."]
 script = ExtResource( 4 )
@@ -158,10 +285,11 @@ script = ExtResource( 4 )
 transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 2.5, 0 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 4 )
+environment = SubResource( 6 )
 
+[connection signal="player_died" from="." to="HUD/root/AnimationPlayer" method="play" binds= [ "died" ]]
 [connection signal="player_killed_zombie" from="." to="ZombiesKilled" method="gain_amount" binds= [ 1 ]]
 [connection signal="amount_updated" from="ZombiesKilled" to="." method="_on_ZombiesKilled_amount_updated"]
 [connection signal="amount_updated" from="ZombiesKilled" to="HUD/root/top/top_right/enemies_killed" method="apply_text_simple"]
-[connection signal="died" from="Player" to="." method="_on_Player_died"]
+[connection signal="died" from="Player" to="." method="emit_signal" binds= [ "player_died" ]]
 [connection signal="health_updated" from="Player" to="HUD/root/top/top_left/player_health" method="apply_text_simple"]

@@ -11,6 +11,12 @@ export (bool) var is_active = true
 onready var input_controller = get_node(input_controller_path)
 var bobbing_timer : float = 0.0
 
+func enable():
+	is_active = true
+
+func disable():
+	is_active = false
+
 func _physics_process(delta):
 	if not is_active:
 		return

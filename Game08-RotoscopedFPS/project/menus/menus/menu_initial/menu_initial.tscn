@@ -4,7 +4,7 @@
 [ext_resource path="res://menus/screens/screen_title.tscn" type="PackedScene" id=2]
 [ext_resource path="res://libs/gt_menus/menus/__gt_menu.tscn" type="PackedScene" id=3]
 [ext_resource path="res://menus/screens/screen_settings.tscn" type="PackedScene" id=4]
-[ext_resource path="res://main/application_manager.gd" type="Script" id=5]
+[ext_resource path="res://main/scripts/application_manager.gd" type="Script" id=5]
 [ext_resource path="res://libs/gt_state_machine/__gt_state.gd" type="Script" id=6]
 
 [node name="menu_initial" instance=ExtResource( 3 )]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://entities/player/player.gd" type="Script" id=1]
 [ext_resource path="res://libs/gt_entity_mover_3d/gt_entity_mover_3d.gd" type="Script" id=2]
@@ -30,6 +30,7 @@
 [ext_resource path="res://entities/player/assets/player_pain (4).wav" type="AudioStream" id=28]
 [ext_resource path="res://entities/player/assets/player_pain (5).wav" type="AudioStream" id=29]
 [ext_resource path="res://entities/player/assets/player_pain (6).wav" type="AudioStream" id=30]
+[ext_resource path="res://entities/player/states/player_dead.gd" type="Script" id=31]
 
 [sub_resource type="Animation" id=1]
 resource_name = "pain"
@@ -70,6 +71,70 @@ extents = Vector3( 1, 1.5, 1 )
 extents = Vector3( 1, 1.5, 1 )
 
 [sub_resource type="Animation" id=5]
+resource_name = "default"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("DamageHurtbox/CollisionShape:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "die"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("DamageHurtbox/CollisionShape:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "default"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "die"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:translation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, -1.9, 0 ) ]
+}
+
+[sub_resource type="Animation" id=7]
 length = 0.4
 step = 0.05
 tracks/0/type = "value"
@@ -85,7 +150,7 @@ tracks/0/keys = {
 "values": [ Vector3( 0, 0, 0 ), Vector3( 0, -0.6, 0 ), Vector3( 0, 0, 0 ) ]
 }
 
-[sub_resource type="SphereShape" id=6]
+[sub_resource type="SphereShape" id=8]
 radius = 1.95
 
 [node name="Player" type="KinematicBody"]
@@ -214,6 +279,11 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Hitboxes"]
+autoplay = "default"
+anims/default = SubResource( 5 )
+anims/die = SubResource( 6 )
+
 [node name="PlayerController" parent="." instance=ExtResource( 3 )]
 
 [node name="Head" type="Spatial" parent="."]
@@ -263,12 +333,15 @@ max_light_energy = 3.0
 [node name="Tween" type="Tween" parent="Head/bobbing/tilt/Camera/muzzle_flash"]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Head"]
-anims/land_ground = SubResource( 5 )
+autoplay = "default"
+anims/default = SubResource( 10 )
+anims/die = SubResource( 9 )
+anims/land_ground = SubResource( 7 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2, 0 )
 visible = false
-shape = SubResource( 6 )
+shape = SubResource( 8 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -301,14 +374,26 @@ fsm_path = NodePath("../../../Player/StateMachine")
 script = ExtResource( 5 )
 fsm_path = NodePath("../../../Player/StateMachine")
 
+[node name="Dead" type="Node" parent="StateMachine"]
+script = ExtResource( 31 )
+fsm_path = NodePath("..")
+
+[connection signal="died" from="." to="StateMachine/Run" method="_on_Player_died"]
+[connection signal="died" from="." to="StateMachine/Fall" method="_on_Player_died"]
+[connection signal="died" from="." to="StateMachine/Jump" method="_on_Player_died"]
+[connection signal="died" from="." to="StateMachine/Idle" method="_on_Player_died"]
+[connection signal="died" from="." to="Hitboxes/AnimationPlayer" method="play" binds= [ "die" ]]
+[connection signal="died" from="." to="Head/AnimationPlayer" method="play" binds= [ "die" ]]
+[connection signal="died" from="." to="Head/bobbing" method="disable"]
+[connection signal="died" from="." to="Head/bobbing/tilt" method="disable"]
 [connection signal="died" from="Health" to="." method="_on_Health_died"]
 [connection signal="health_updated" from="Health" to="." method="_on_Health_health_updated"]
 [connection signal="hurt" from="Hitboxes/DamageHurtbox" to="Hitboxes/DamageHurtbox/DamageCooldownTimer" method="start"]
 [connection signal="hurt" from="Hitboxes/DamageHurtbox" to="SFX/hurt" method="play_random"]
 [connection signal="hurt" from="Hitboxes/DamageHurtbox" to="HUD/AnimationPlayer" method="play" binds= [ "pain" ]]
 [connection signal="take_damage" from="Hitboxes/DamageHurtbox" to="Health" method="lose_health"]
-[connection signal="just_pressed" from="PlayerController/jump" to="StateMachine/Idle" method="_on_jump_just_pressed"]
 [connection signal="just_pressed" from="PlayerController/jump" to="StateMachine/Run" method="_on_jump_just_pressed"]
+[connection signal="just_pressed" from="PlayerController/jump" to="StateMachine/Idle" method="_on_jump_just_pressed"]
 [connection signal="just_released" from="PlayerController/jump" to="StateMachine/Jump" method="_on_jump_just_released"]
 [connection signal="pressed" from="PlayerController/shoot" to="." method="shoot"]
 [connection signal="state_entered" from="StateMachine/Run" to="StateMachine/Run/FootstepsTimer" method="start"]

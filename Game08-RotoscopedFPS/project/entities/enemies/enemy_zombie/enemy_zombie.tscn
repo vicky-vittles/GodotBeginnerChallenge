@@ -35,14 +35,14 @@ albedo_texture = ExtResource( 18 )
 material = SubResource( 2 )
 size = Vector2( 0.25, 0.25 )
 
-[sub_resource type="BoxShape" id=10]
+[sub_resource type="BoxShape" id=4]
 extents = Vector3( 1.5, 2.1, 1.5 )
 
-[sub_resource type="CylinderShape" id=4]
+[sub_resource type="CylinderShape" id=5]
 radius = 1.5
 height = 4.0
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=6]
 resource_name = "melee"
 length = 0.2
 tracks/0/type = "value"
@@ -58,7 +58,7 @@ tracks/0/keys = {
 "values": [ false, true ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=7]
 resource_name = "ready"
 length = 0.1
 tracks/0/type = "value"
@@ -74,9 +74,9 @@ tracks/0/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="CapsuleShape" id=5]
+[sub_resource type="CapsuleShape" id=8]
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=9]
 length = 0.4
 loop = true
 tracks/0/type = "value"
@@ -92,7 +92,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=10]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Graphics/main:frame")
@@ -119,7 +119,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=11]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Graphics/main:frame")
@@ -146,7 +146,7 @@ tracks/1/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=12]
 resource_name = "melee"
 length = 0.2
 tracks/0/type = "value"
@@ -162,7 +162,7 @@ tracks/0/keys = {
 "values": [ 1, 3, 1 ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=13]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Graphics/main:frame")
@@ -222,14 +222,14 @@ collidable_groups = [ "player_hurtbox" ]
 
 [node name="CollisionShape" type="CollisionShape" parent="Hitboxes/DamageHitbox" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -3 )
-shape = SubResource( 10 )
+shape = SubResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="body" parent="Hitboxes/DamageHurtbox" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="PlayerDetector" parent="Hitboxes" index="2"]
 collision_layer = 16
@@ -241,13 +241,13 @@ shape = ExtResource( 12 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Hitboxes" index="3"]
 autoplay = "ready"
-anims/melee = SubResource( 11 )
-anims/ready = SubResource( 12 )
+anims/melee = SubResource( 6 )
+anims/ready = SubResource( 7 )
 
 [node name="CollisionShape" parent="." index="2"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 1.5, 0 )
 visible = false
-shape = SubResource( 5 )
+shape = SubResource( 8 )
 
 [node name="CorpseSpawner" type="Node" parent="." index="3"]
 script = ExtResource( 11 )
@@ -312,44 +312,44 @@ script = ExtResource( 6 )
 
 [node name="AnimationPlayer" parent="." index="9"]
 autoplay = "default"
-anims/chase = SubResource( 6 )
-anims/dead = SubResource( 7 )
-anims/default = SubResource( 8 )
-anims/melee = SubResource( 13 )
-anims/pain = SubResource( 9 )
+anims/chase = SubResource( 9 )
+anims/dead = SubResource( 10 )
+anims/default = SubResource( 11 )
+anims/melee = SubResource( 12 )
+anims/pain = SubResource( 13 )
 
 [connection signal="grouped_area_entered" from="Hitboxes/DamageHitbox" to="Hitboxes/DamageHitbox" method="_on_grouped_area_entered"]
 [connection signal="take_damage" from="Hitboxes/DamageHurtbox" to="." method="take_damage"]
+[connection signal="died" from="Health" to="StateMachine/Pain" method="_on_Health_died"]
 [connection signal="died" from="Health" to="StateMachine/Melee" method="_on_Health_died"]
 [connection signal="died" from="Health" to="StateMachine/Missile" method="_on_Health_died"]
-[connection signal="died" from="Health" to="StateMachine/Pain" method="_on_Health_died"]
-[connection signal="died" from="Health" to="StateMachine/Standing" method="_on_Health_died"]
 [connection signal="died" from="Health" to="StateMachine/Chase" method="_on_Health_died"]
+[connection signal="died" from="Health" to="StateMachine/Standing" method="_on_Health_died"]
+[connection signal="health_lost" from="Health" to="StateMachine/Pain" method="_on_Health_health_lost"]
 [connection signal="health_lost" from="Health" to="StateMachine/Melee" method="_on_Health_health_lost"]
 [connection signal="health_lost" from="Health" to="StateMachine/Missile" method="_on_Health_health_lost"]
-[connection signal="health_lost" from="Health" to="StateMachine/Pain" method="_on_Health_health_lost"]
-[connection signal="health_lost" from="Health" to="StateMachine/Standing" method="_on_Health_health_lost"]
 [connection signal="health_lost" from="Health" to="StateMachine/Chase" method="_on_Health_health_lost"]
-[connection signal="state_entered" from="StateMachine/Chase" to="StateMachine/Chase/ReadjustDirectionTimer" method="start"]
+[connection signal="health_lost" from="Health" to="StateMachine/Standing" method="_on_Health_health_lost"]
 [connection signal="state_entered" from="StateMachine/Chase" to="StateMachine/Chase/GruntTimer" method="start"]
+[connection signal="state_entered" from="StateMachine/Chase" to="StateMachine/Chase/ReadjustDirectionTimer" method="start"]
 [connection signal="state_entered" from="StateMachine/Chase" to="AnimationPlayer" method="play" binds= [ "chase" ]]
-[connection signal="state_exited" from="StateMachine/Chase" to="StateMachine/Chase/ReadjustDirectionTimer" method="stop"]
 [connection signal="state_exited" from="StateMachine/Chase" to="StateMachine/Chase/GruntTimer" method="stop"]
+[connection signal="state_exited" from="StateMachine/Chase" to="StateMachine/Chase/ReadjustDirectionTimer" method="stop"]
 [connection signal="timeout" from="StateMachine/Chase/ReadjustDirectionTimer" to="StateMachine/Chase" method="_on_ReadjustDirectionTimer_timeout"]
 [connection signal="timeout" from="StateMachine/Chase/GruntTimer" to="SFX/grunt" method="play_random"]
 [connection signal="state_entered" from="StateMachine/Melee" to="StateMachine/Melee/DurationTimer" method="start"]
 [connection signal="state_entered" from="StateMachine/Melee" to="Hitboxes/AnimationPlayer" method="play" binds= [ "melee" ]]
 [connection signal="state_entered" from="StateMachine/Melee" to="AnimationPlayer" method="play" binds= [ "melee" ]]
-[connection signal="state_exited" from="StateMachine/Melee" to="StateMachine/Melee/DurationTimer" method="stop"]
 [connection signal="state_exited" from="StateMachine/Melee" to="Timers/MeleeCooldownTimer" method="start"]
+[connection signal="state_exited" from="StateMachine/Melee" to="StateMachine/Melee/DurationTimer" method="stop"]
 [connection signal="timeout" from="StateMachine/Melee/DurationTimer" to="StateMachine/Melee" method="_on_DurationTimer_timeout"]
 [connection signal="state_entered" from="StateMachine/Missile" to="StateMachine/Missile/CooldownTimer" method="start"]
 [connection signal="state_exited" from="StateMachine/Missile" to="StateMachine/Missile/CooldownTimer" method="stop"]
 [connection signal="timeout" from="StateMachine/Missile/CooldownTimer" to="StateMachine/Missile" method="_on_CooldownTimer_timeout"]
-[connection signal="state_entered" from="StateMachine/Pain" to="Graphics/small_blood_splatter" method="start"]
 [connection signal="state_entered" from="StateMachine/Pain" to="StateMachine/Pain/StunTimer" method="start"]
 [connection signal="state_entered" from="StateMachine/Pain" to="AnimationPlayer" method="play" binds= [ "pain" ]]
+[connection signal="state_entered" from="StateMachine/Pain" to="Graphics/small_blood_splatter" method="start"]
 [connection signal="timeout" from="StateMachine/Pain/StunTimer" to="StateMachine/Pain" method="_on_StunTimer_timeout"]
-[connection signal="state_entered" from="StateMachine/Dead" to="." method="emit_signal" binds= [ "died" ]]
 [connection signal="state_entered" from="StateMachine/Dead" to="AnimationPlayer" method="play" binds= [ "dead" ]]
+[connection signal="state_entered" from="StateMachine/Dead" to="." method="emit_signal" binds= [ "died" ]]
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Dead" method="_on_AnimationPlayer_animation_finished"]

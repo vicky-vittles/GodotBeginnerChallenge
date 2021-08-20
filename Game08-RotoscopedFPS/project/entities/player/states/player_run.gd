@@ -3,6 +3,7 @@ extends GTState
 onready var IDLE = $'../Idle'
 onready var JUMP = $"../Jump"
 onready var FALL = $"../Fall"
+onready var DEAD = $"../Dead"
 
 onready var footsteps_timer = $FootstepsTimer
 onready var coyote_timer = $CoyoteTimer
@@ -31,3 +32,7 @@ func _on_jump_just_pressed():
 func _on_CoyoteTimer_timeout():
 	if fsm.current_state == self and not actor.entity_mover.is_grounded():
 		fsm.change_state(FALL)
+
+func _on_Player_died():
+	if fsm.current_state == self:
+		fsm.change_state(DEAD)

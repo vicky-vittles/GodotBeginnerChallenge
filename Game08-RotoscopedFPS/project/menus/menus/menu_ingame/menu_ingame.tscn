@@ -9,7 +9,7 @@
 [ext_resource path="res://menus/menus/menu_ingame/states/menu_ingame_screen_empty.gd" type="Script" id=7]
 [ext_resource path="res://menus/transitions/transition_fade.tscn" type="PackedScene" id=8]
 [ext_resource path="res://menus/menus/menu_ingame/menu_ingame.gd" type="Script" id=9]
-[ext_resource path="res://main/application_manager.gd" type="Script" id=10]
+[ext_resource path="res://main/scripts/application_manager.gd" type="Script" id=10]
 
 [node name="menu_ingame" instance=ExtResource( 3 )]
 pause_mode = 2
@@ -24,6 +24,7 @@ script = ExtResource( 10 )
 layer = 10
 
 [node name="screen_empty" parent="Screens" index="0" instance=ExtResource( 2 )]
+mouse_filter = 0
 
 [node name="transition_fade" parent="Screens/screen_empty" index="0" instance=ExtResource( 8 )]
 screen_path = NodePath("..")
@@ -34,7 +35,6 @@ screen_path = NodePath("..")
 screen_path = NodePath("..")
 
 [node name="screen_settings" parent="Screens" index="2" instance=ExtResource( 4 )]
-mouse_filter = 2
 
 [node name="transition_fade" parent="Screens/screen_settings" index="1" instance=ExtResource( 8 )]
 screen_path = NodePath("..")
@@ -58,8 +58,10 @@ fsm_path = NodePath("..")
 [connection signal="button_back" from="Screens/screen_settings" to="StateMachine" method="change_state_path" binds= [ "screen_game_paused" ]]
 [connection signal="pause_game" from="StateMachine/screen_empty" to="StateMachine" method="change_state_path" binds= [ "screen_game_paused" ]]
 [connection signal="state_entered" from="StateMachine/screen_empty" to="Screens/screen_empty" method="enter"]
+[connection signal="state_entered" from="StateMachine/screen_empty" to="." method="emit_signal" binds= [ "game_resumed" ]]
 [connection signal="state_exited" from="StateMachine/screen_empty" to="Screens/screen_empty" method="exit"]
 [connection signal="state_entered" from="StateMachine/screen_game_paused" to="Screens/screen_game_paused" method="enter"]
+[connection signal="state_entered" from="StateMachine/screen_game_paused" to="." method="emit_signal" binds= [ "game_paused" ]]
 [connection signal="state_exited" from="StateMachine/screen_game_paused" to="Screens/screen_game_paused" method="exit"]
 [connection signal="state_entered" from="StateMachine/screen_settings" to="Screens/screen_settings" method="enter"]
 [connection signal="state_exited" from="StateMachine/screen_settings" to="Screens/screen_settings" method="exit"]

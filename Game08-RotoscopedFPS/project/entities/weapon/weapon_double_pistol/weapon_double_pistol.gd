@@ -6,6 +6,7 @@ export (bool) var shoot_using_look_direction = false
 export (float) var MAX_RANGE = 100
 
 onready var muzzle_flash_timer = $MuzzleFlashTimer
+onready var sway = $hud/root/bottom/sway
 
 func fire():
 	var space_rid = get_world().space

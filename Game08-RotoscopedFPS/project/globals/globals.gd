@@ -13,4 +13,4 @@ func _process(delta):
 		get_tree().quit()
 
 func get_game():
-	return get_parent().get_node("Game")
+	return get_parent().get_node("game")

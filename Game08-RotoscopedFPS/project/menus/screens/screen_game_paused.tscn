@@ -78,6 +78,5 @@ __meta__ = {
 }
 
 [connection signal="pressed" from="vbox/hbox/vbox/buttons/resume" to="." method="emit_signal" binds= [ "button_resume" ]]
-[connection signal="pressed" from="vbox/hbox/vbox/buttons/resume" to="." method="teste"]
 [connection signal="pressed" from="vbox/hbox/vbox/buttons/settings" to="." method="emit_signal" binds= [ "button_settings" ]]
 [connection signal="pressed" from="vbox/hbox/vbox/buttons/quit" to="." method="emit_signal" binds= [ "button_quit" ]]

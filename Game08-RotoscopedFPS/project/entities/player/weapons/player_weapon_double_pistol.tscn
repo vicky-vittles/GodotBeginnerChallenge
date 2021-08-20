@@ -5,11 +5,13 @@
 
 [node name="Weapon" instance=ExtResource( 1 )]
 weapon_collidable_groups = [ "enemy_hurtbox" ]
-weapon_excluded_groups = [ "projectile", "projectile_bullet" ]
 player_use = true
 MAX_DAMAGE = 40.0
 shoot_using_look_direction = true
 MAX_RANGE = 200.0
+
+[node name="hud" parent="." index="0"]
+layer = 3
 
 [node name="root" parent="hud" index="0"]
 mouse_filter = 2

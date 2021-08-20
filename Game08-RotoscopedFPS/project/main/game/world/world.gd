@@ -1,6 +1,7 @@
 extends Spatial
 
 signal player_killed_zombie()
+signal player_died()
 
 enum LEVELS {
 	TEST_00 = 0,
@@ -31,8 +32,8 @@ func load_level(level_id):
 func _on_ZombiesKilled_amount_updated(current):
 	var remaining_enemies = level.total_enemies_to_kill-current
 	if remaining_enemies <= 10:
-		enemies_remaining.apply_text_simple(remaining_enemies)
-		hud_animation_player.play("show_enemies_remaining")
-
-func _on_Player_died():
-	print("morri")
+		if remaining_enemies > 0:
+			enemies_remaining.apply_text_simple(remaining_enemies)
+			hud_animation_player.play("show_enemies_remaining")
+		else:
+			hud_animation_player.play("win")

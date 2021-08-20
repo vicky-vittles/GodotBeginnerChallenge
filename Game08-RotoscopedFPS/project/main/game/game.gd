@@ -1,4 +1,4 @@
-extends Spatial
+extends Node
 
 onready var world = $viewport_container/viewport/world
 

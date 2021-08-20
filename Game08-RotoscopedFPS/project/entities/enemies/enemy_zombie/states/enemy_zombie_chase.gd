@@ -12,6 +12,8 @@ func physics_process(delta):
 	var move_direction = actor.move_direction
 	
 	if actor.target:
+		if not actor.target.health.is_alive:
+			fsm.change_state(STANDING)
 		var target_pos = actor.target.global_transform.origin
 		var my_pos = actor.global_transform.origin
 		var dist = my_pos.distance_to(target_pos)
