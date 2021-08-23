@@ -10,7 +10,7 @@
 [ext_resource path="res://addons/qodot/textures/qodot/Elements/WATER.png" type="Texture" id=8]
 [ext_resource path="res://addons/qodot/textures/qodot/Bricks/CLAYBRICKS.png" type="Texture" id=9]
 [ext_resource path="res://addons/qodot/textures/qodot/Wood/CREAKYWOOD.png" type="Texture" id=10]
-[ext_resource path="res://assets/music/[5] Mossy Catacombs.wav" type="AudioStream" id=11]
+[ext_resource path="res://assets/music/d_e1m2.ogg" type="AudioStream" id=11]
 [ext_resource path="res://addons/qodot/textures/qodot/Bricks/GOOBRICKS.png" type="Texture" id=13]
 [ext_resource path="res://entities/enemies/enemy_zombie/enemy_zombie.tscn" type="PackedScene" id=15]
 [ext_resource path="res://addons/qodot/textures/qodot/Wood/WOODA.png" type="Texture" id=16]
@@ -2592,5 +2592,4 @@ __meta__ = {
 }
 
 [node name="music" parent="." index="4"]
-pause_mode = 2
 stream = ExtResource( 11 )

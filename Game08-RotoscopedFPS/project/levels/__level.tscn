@@ -57,5 +57,6 @@ __meta__ = {
 }
 
 [node name="music" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
 autoplay = true
 bus = "Music"

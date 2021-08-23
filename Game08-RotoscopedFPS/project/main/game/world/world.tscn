@@ -289,7 +289,7 @@ environment = SubResource( 6 )
 
 [connection signal="player_died" from="." to="HUD/root/AnimationPlayer" method="play" binds= [ "died" ]]
 [connection signal="player_killed_zombie" from="." to="ZombiesKilled" method="gain_amount" binds= [ 1 ]]
-[connection signal="amount_updated" from="ZombiesKilled" to="." method="_on_ZombiesKilled_amount_updated"]
 [connection signal="amount_updated" from="ZombiesKilled" to="HUD/root/top/top_right/enemies_killed" method="apply_text_simple"]
+[connection signal="amount_updated" from="ZombiesKilled" to="." method="_on_ZombiesKilled_amount_updated"]
 [connection signal="died" from="Player" to="." method="emit_signal" binds= [ "player_died" ]]
 [connection signal="health_updated" from="Player" to="HUD/root/top/top_left/player_health" method="apply_text_simple"]

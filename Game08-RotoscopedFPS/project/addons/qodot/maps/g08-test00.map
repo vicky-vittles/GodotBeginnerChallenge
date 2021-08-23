@@ -59,24 +59,3 @@
 ( -64 -624 16 ) ( -64 -624 17 ) ( -64 -623 16 ) qodot/Rocks/GOLDROCKS 0 0 0 1 1
 }
 }
-// entity 1
-{
-"classname" "QodotCheckpoint"
-"origin" "72 -408 24"
-"checkpoint_id" "1"
-}
-// entity 2
-{
-"classname" "QodotEnemyZombie"
-"origin" "200 -280 8"
-}
-// entity 3
-{
-"classname" "QodotEnemyZombie"
-"origin" "344 -264 8"
-}
-// entity 4
-{
-"classname" "QodotEnemyZombie"
-"origin" "296 -360 8"
-}

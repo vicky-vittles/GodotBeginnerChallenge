@@ -3671,11 +3671,6 @@
 }
 // entity 5
 {
-"classname" "QodotEnemyZombieCorpse"
-"origin" "56 280 0"
-}
-// entity 6
-{
 "classname" "func_group"
 "_tb_type" "_tb_group"
 "_tb_name" "guard_rail_1"
@@ -4185,7 +4180,7 @@
 ( -128 16 32 ) ( -128 16 33 ) ( -128 17 32 ) qodot/Urban/GARAGE 0 0 0 1 1
 }
 }
-// entity 7
+// entity 6
 {
 "classname" "func_group"
 "_tb_type" "_tb_group"
@@ -4642,7 +4637,7 @@
 ( -2472 216 8 ) ( -2472 216 9 ) ( -2472 217 8 ) qodot/Urban/GARAGE 0 0 0 1 1
 }
 }
-// entity 8
+// entity 7
 {
 "classname" "func_group"
 "_tb_type" "_tb_group"
@@ -7168,7 +7163,7 @@
 ( 448 1216 20 ) ( 464 1280 0 ) ( 464 1280 -64 ) qodot/Elements/TINYLEAVES 0 0 0 2 2
 }
 }
-// entity 9
+// entity 8
 {
 "classname" "func_group"
 "_tb_type" "_tb_group"
@@ -9694,7 +9689,7 @@
 ( 1728 1152 4 ) ( 1728 1216 4 ) ( 1728 1216 -64 ) qodot/Elements/TINYLEAVES 0 1.8823528 0 2 2.125
 }
 }
-// entity 10
+// entity 9
 {
 "classname" "func_group"
 "_tb_type" "_tb_group"
@@ -12217,7 +12212,7 @@
 ( 2000 2368 -64 ) ( 2000 2368 0 ) ( 1984 2432 4 ) qodot/Elements/TINYLEAVES 0 0 0 2 2
 }
 }
-// entity 11
+// entity 10
 {
 "classname" "func_group"
 "_tb_type" "_tb_group"
@@ -14739,9 +14734,4 @@
 ( 448 1920 4 ) ( 464 1856 0 ) ( 384 1856 4 ) qodot/Elements/TINYLEAVES 0 0 0 2 2
 ( 464 1856 -64 ) ( 464 1856 0 ) ( 448 1920 4 ) qodot/Elements/TINYLEAVES 0 0 0 2 2
 }
-}
-// entity 12
-{
-"classname" "QodotEnemyZombie"
-"origin" "200 2200 24"
 }
