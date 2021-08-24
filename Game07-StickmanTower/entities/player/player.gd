@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+signal touched_enemy()
+
 onready var input_controller = $InputController
 onready var entity_mover = $EntityMover
 onready var graphics = $Graphics

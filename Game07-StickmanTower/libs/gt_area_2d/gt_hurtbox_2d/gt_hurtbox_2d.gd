@@ -1,0 +1,2 @@
+extends GTArea2D
+class_name GTHurtbox2D

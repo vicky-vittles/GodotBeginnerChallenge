@@ -1,0 +1,2 @@
+extends GTTriggerArea2D
+class_name GTHitbox2D

@@ -34,6 +34,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://libs/gt_health/gt_health.gd"
 }, {
+"base": "GTTriggerArea2D",
+"class": "GTHitbox2D",
+"language": "GDScript",
+"path": "res://libs/gt_area_2d/gt_trigger_area_2d/gt_hitbox_2d/gt_hitbox_2d.gd"
+}, {
+"base": "GTArea2D",
+"class": "GTHurtbox2D",
+"language": "GDScript",
+"path": "res://libs/gt_area_2d/gt_hurtbox_2d/gt_hurtbox_2d.gd"
+}, {
 "base": "Node",
 "class": "GTInputAction",
 "language": "GDScript",
@@ -84,6 +94,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://libs/gt_teleporter_2d/gt_teleporter_2d.gd"
 }, {
+"base": "Node",
+"class": "GTTopdownEntityMover2D",
+"language": "GDScript",
+"path": "res://libs/gt_topdown_entity_mover_2d/gt_topdown_entity_mover_2d.gd"
+}, {
 "base": "GTArea2D",
 "class": "GTTriggerArea2D",
 "language": "GDScript",
@@ -93,6 +108,11 @@ _global_script_classes=[ {
 "class": "MultitargetCamera2D",
 "language": "GDScript",
 "path": "res://libs/multitarget_camera_2d/multitarget_camera_2d.gd"
+}, {
+"base": "Node2D",
+"class": "RegularPolygon2D",
+"language": "GDScript",
+"path": "res://addons/regular_polygon2d_node/RegularPolygon2D.gd"
 } ]
 _global_script_class_icons={
 "ApplicationManager": "",
@@ -100,6 +120,8 @@ _global_script_class_icons={
 "GTDeviceController": "res://libs/gt_input_controller/icons/gt_device_controller.svg",
 "GTGravityEntityMover2D": "",
 "GTHealth": "",
+"GTHitbox2D": "",
+"GTHurtbox2D": "",
 "GTInputAction": "",
 "GTInputController": "res://libs/gt_input_controller/icons/gt_default_controller.svg",
 "GTJuice2D": "",
@@ -110,8 +132,10 @@ _global_script_class_icons={
 "GTState": "",
 "GTStateMachine": "res://libs/gt_state_machine/icons/gt_state_machine.svg",
 "GTTeleporter2D": "",
+"GTTopdownEntityMover2D": "",
 "GTTriggerArea2D": "",
-"MultitargetCamera2D": ""
+"MultitargetCamera2D": "",
+"RegularPolygon2D": "res://addons/regular_polygon2d_node/addon_icon.png"
 }
 
 [application]
@@ -181,8 +205,9 @@ act_jump={
 [layer_names]
 
 2d_physics/layer_2="terrain"
-2d_physics/layer_3="entities"
+2d_physics/layer_3="bodies"
 2d_physics/layer_4="triggers"
+2d_physics/layer_5="hitboxes"
 
 [rendering]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://entities/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://main/game/game.gd" type="Script" id=2]
@@ -14,8 +14,42 @@
 [ext_resource path="res://levels/floors/L09.tscn" type="PackedScene" id=12]
 [ext_resource path="res://levels/floors/L10.tscn" type="PackedScene" id=13]
 
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 500, 4800 )
+
+[sub_resource type="Environment" id=1]
+background_mode = 4
+glow_enabled = true
+glow_intensity = 1.2
+glow_bloom = 0.05
+glow_blend_mode = 0
+glow_hdr_threshold = 0.5
+glow_bicubic_upscale = true
+
 [node name="game" type="Node2D"]
 script = ExtResource( 2 )
+
+[node name="terrain" type="StaticBody2D" parent="."]
+visible = false
+collision_layer = 2
+collision_mask = 4
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="1" type="CollisionShape2D" parent="terrain"]
+position = Vector2( -500, -3840 )
+shape = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="2" type="CollisionShape2D" parent="terrain"]
+position = Vector2( 1780, -3840 )
+shape = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Floors" type="Node2D" parent="."]
 __meta__ = {
@@ -64,5 +98,8 @@ min_zoom = 1.0
 max_zoom = 1.0
 allow_zoom = false
 margin = Vector2( 0, 0 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 1 )
 
 [connection signal="floor_updated" from="." to="Player" method="_on_game_floor_updated"]
