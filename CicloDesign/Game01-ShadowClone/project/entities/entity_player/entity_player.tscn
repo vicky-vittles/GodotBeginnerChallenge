@@ -1,0 +1,108 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://entities/entity_player/entity_player.gd" type="Script" id=1]
+[ext_resource path="res://addons/regular_polygon2d_node/RegularPolygon2D.gd" type="Script" id=2]
+[ext_resource path="res://libs/gt_state_machine/gt_state_machine.gd" type="Script" id=3]
+[ext_resource path="res://entities/entity_player/states/entity_player_fall.gd" type="Script" id=4]
+[ext_resource path="res://entities/entity_player/states/entity_player_idle.gd" type="Script" id=5]
+[ext_resource path="res://entities/entity_player/states/entity_player_run.gd" type="Script" id=6]
+[ext_resource path="res://entities/entity_player/states/entity_player_jump.gd" type="Script" id=7]
+[ext_resource path="res://libs/gt_gravity_entity_mover_2d/gt_gravity_entity_mover_2d.gd" type="Script" id=8]
+[ext_resource path="res://components/player_controller/player_controller.tscn" type="PackedScene" id=9]
+[ext_resource path="res://libs/gt_state_machine/__gt_state_transition.gd" type="Script" id=10]
+[ext_resource path="res://entities/entity_player/scripts/entity_player_body.gd" type="Script" id=12]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 8.0
+height = 16.0
+
+[node name="Player" type="Node2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+entity_type = 1
+
+[node name="InputController" parent="." instance=ExtResource( 9 )]
+
+[node name="Body" type="KinematicBody2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Graphics" type="Node2D" parent="Body"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="main" type="Node2D" parent="Body/Graphics"]
+scale = Vector2( 1, 2 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+centered = true
+num_sides = 4
+size = 22.5
+polygon_color = Color( 0.960784, 1, 0.313726, 1 )
+polygon_rotation = 45.0
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Body"]
+visible = false
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="EntityMover" type="Node" parent="Body"]
+script = ExtResource( 8 )
+body_path = NodePath("..")
+
+[node name="MovementStateMachine" type="Node" parent="."]
+script = ExtResource( 3 )
+actor_path = NodePath("..")
+debug_mode = true
+
+[node name="Idle" type="Node" parent="MovementStateMachine"]
+script = ExtResource( 5 )
+fsm_path = NodePath("..")
+
+[node name="ToRun" type="Node" parent="MovementStateMachine/Idle"]
+script = ExtResource( 10 )
+transition_state_path = NodePath("../../Run")
+
+[node name="ToJump" type="Node" parent="MovementStateMachine/Idle"]
+script = ExtResource( 10 )
+transition_state_path = NodePath("../../Jump")
+
+[node name="Run" type="Node" parent="MovementStateMachine"]
+script = ExtResource( 6 )
+fsm_path = NodePath("..")
+
+[node name="ToIdle" type="Node" parent="MovementStateMachine/Run"]
+script = ExtResource( 10 )
+transition_state_path = NodePath("../../Idle")
+
+[node name="ToJump" type="Node" parent="MovementStateMachine/Run"]
+script = ExtResource( 10 )
+transition_state_path = NodePath("../../Jump")
+
+[node name="Jump" type="Node" parent="MovementStateMachine"]
+script = ExtResource( 7 )
+fsm_path = NodePath("..")
+
+[node name="Fall" type="Node" parent="MovementStateMachine"]
+script = ExtResource( 4 )
+fsm_path = NodePath("..")
+
+[connection signal="just_pressed" from="InputController/move_left" to="MovementStateMachine/Idle/ToRun" method="do_transition"]
+[connection signal="just_released" from="InputController/move_left" to="MovementStateMachine/Run/ToIdle" method="do_transition"]
+[connection signal="just_pressed" from="InputController/move_right" to="MovementStateMachine/Idle/ToRun" method="do_transition"]
+[connection signal="just_released" from="InputController/move_right" to="MovementStateMachine/Run/ToIdle" method="do_transition"]
+[connection signal="just_pressed" from="InputController/jump" to="MovementStateMachine/Idle/ToJump" method="do_transition"]
+[connection signal="just_pressed" from="InputController/jump" to="MovementStateMachine/Run/ToJump" method="do_transition"]
+
+[editable path="InputController"]
