@@ -1,8 +1,8 @@
-extends GTState
+extends "res://entities/entity_player/states/entity_player_movement_state.gd"
 
-func process(delta):
-	actor.input_controller.poll_input()
+signal started_moving()
 
 func physics_process(delta):
-	actor.entity_mover.set_move_direction(0)
-	actor.entity_mover.move(delta)
+	.physics_process(delta)
+	if actor.input_controller.move_direction != 0:
+		emit_signal("started_moving")

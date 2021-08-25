@@ -4,7 +4,7 @@
 [ext_resource path="res://main/game/game.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 647, 39 )
+extents = Vector2( 647, 68.2644 )
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 2 )
@@ -13,7 +13,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 318, 40 )
+position = Vector2( 484.124, 9.69353 )
 
 [node name="Terrain" type="StaticBody2D" parent="."]
 collision_layer = 2
@@ -23,8 +23,9 @@ __meta__ = {
 }
 
 [node name="1" type="CollisionShape2D" parent="Terrain"]
-position = Vector2( 309, 324 )
+position = Vector2( 225.938, 402.572 )
 shape = SubResource( 1 )
-__meta__ = {
-"_edit_lock_": true
-}
+
+[node name="2" type="CollisionShape2D" parent="Terrain"]
+position = Vector2( 974.62, 146.651 )
+shape = SubResource( 1 )
