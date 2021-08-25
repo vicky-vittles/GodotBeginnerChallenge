@@ -36,7 +36,7 @@ script = ExtResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
-collidable_groups = [ "entity_player" ]
+collidable_groups = [ "entity_player_trampoline_trigger" ]
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Body/Triggers/TrampolineTrigger" index="0"]
 visible = false
