@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://levels/__level.gd" type="Script" id=1]
 [ext_resource path="res://entities/entity_player/entity_player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://entities/entity_cloned_player/entity_cloned_player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://levels/components/level_coins.gd" type="Script" id=4]
 [ext_resource path="res://libs/gt_points/gt_points.gd" type="Script" id=5]
+[ext_resource path="res://levels/components/level_enemies.gd" type="Script" id=6]
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 1 )
@@ -24,6 +25,17 @@ __meta__ = {
 
 [node name="Coins" type="Node2D" parent="."]
 script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Enemies" type="Node2D" parent="."]
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Checkpoints" type="Node2D" parent="."]
 __meta__ = {
 "_edit_lock_": true
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://entities/__entity_platformer_player/__entity_platformer_player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/entity_player/entity_player.gd" type="Script" id=2]
@@ -9,11 +9,15 @@
 [ext_resource path="res://entities/entity_player/states/entity_player_trampoline_jump.gd" type="Script" id=7]
 [ext_resource path="res://libs/gt_state_machine/__gt_state_transition.gd" type="Script" id=8]
 [ext_resource path="res://libs/gt_area_2d/gt_area_2d.gd" type="Script" id=9]
+[ext_resource path="res://entities/entity_player/components/entity_player_hurtbox.gd" type="Script" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 6 )
 
 [sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 8, 16 )
+
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 8, 16 )
 
 [node name="Player" instance=ExtResource( 1 )]
@@ -75,6 +79,25 @@ collidable_groups = [ "entity_coin" ]
 [node name="CollisionShape" type="CollisionShape2D" parent="Body/Triggers/CoinTrigger" index="0"]
 visible = false
 shape = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Hurtbox" type="Area2D" parent="Body/Triggers" index="2" groups=[
+"entity_player_hurtbox",
+]]
+collision_layer = 16
+collision_mask = 16
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_lock_": true
+}
+collidable_groups = [ "entity_spike", "entity_diamond" ]
+actor_path = NodePath("../..")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Body/Triggers/Hurtbox" index="0"]
+visible = false
+shape = SubResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -146,9 +169,9 @@ end_state_path = NodePath("../../Fall")
 [connection signal="started_trampoline_jump" from="MovementStateMachine/Jump" to="MovementStateMachine/Jump/ToTrampoline" method="do_transition"]
 [connection signal="started_trampoline_jump" from="MovementStateMachine/Fall" to="MovementStateMachine/Fall/ToTrampolineJump" method="do_transition"]
 [connection signal="started_falling" from="MovementStateMachine/TrampolineJump" to="MovementStateMachine/TrampolineJump/ToFall" method="do_transition"]
+[connection signal="state_entered" from="MovementStateMachine/TrampolineJump" to="Timers/JumpCooldownTimer" method="start"]
 [connection signal="state_entered" from="MovementStateMachine/TrampolineJump" to="Body/EntityMover" method="jump" binds= [ 1.5 ]]
 [connection signal="state_entered" from="MovementStateMachine/TrampolineJump" to="Body/EntityMover" method="restore_jumps"]
-[connection signal="state_entered" from="MovementStateMachine/TrampolineJump" to="Timers/JumpCooldownTimer" method="start"]
 [connection signal="state_exited" from="MovementStateMachine/TrampolineJump" to="Timers/JumpCooldownTimer" method="stop"]
 
 [editable path="InputController"]

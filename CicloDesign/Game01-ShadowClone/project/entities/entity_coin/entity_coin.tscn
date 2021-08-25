@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://entities/entity_coin/entity_coin.gd" type="Script" id=1]
 [ext_resource path="res://entities/entity_coin/components/entity_coin_body.gd" type="Script" id=2]
 [ext_resource path="res://addons/regular_polygon2d_node/RegularPolygon2D.gd" type="Script" id=3]
+[ext_resource path="res://entities/entity_coin/components/entity_coin_graphics.gd" type="Script" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 8.0
@@ -25,6 +26,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=3]
 length = 0.1
+step = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("main:visible")
 tracks/0/interp = 1
@@ -40,6 +42,7 @@ tracks/0/keys = {
 
 [node name="Coin" type="Node2D"]
 script = ExtResource( 1 )
+entity_type = 3
 
 [node name="Body" type="Area2D" parent="." groups=[
 "entity_coin",
@@ -60,11 +63,14 @@ __meta__ = {
 }
 
 [node name="Graphics" type="Node2D" parent="."]
+script = ExtResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
+final_pos = Vector2( 0, -8 )
 
 [node name="main" type="Node2D" parent="Graphics"]
+position = Vector2( 0, -3.87731 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
@@ -79,11 +85,19 @@ autoplay = "default"
 anims/collected = SubResource( 2 )
 anims/default = SubResource( 3 )
 
+[node name="Tween" type="Tween" parent="Graphics"]
+
+[node name="Timer" type="Timer" parent="Graphics"]
+wait_time = 2.0
+one_shot = true
+
 [node name="DestroyTimer" type="Timer" parent="."]
 one_shot = true
 
 [connection signal="effect" from="Body" to="Body" method="disable_all_shapes"]
-[connection signal="effect" from="Body" to="Graphics/AnimationPlayer" method="play" binds= [ "collected" ]]
 [connection signal="effect" from="Body" to="DestroyTimer" method="start"]
 [connection signal="effect" from="Body" to="." method="_on_Body_effect"]
+[connection signal="effect" from="Body" to="Graphics/AnimationPlayer" method="play" binds= [ "collected" ]]
+[connection signal="tree_entered" from="Graphics" to="." method="_on_Graphics_tree_entered"]
+[connection signal="timeout" from="Graphics/Timer" to="Graphics" method="floating_anim"]
 [connection signal="timeout" from="DestroyTimer" to="." method="queue_free"]
