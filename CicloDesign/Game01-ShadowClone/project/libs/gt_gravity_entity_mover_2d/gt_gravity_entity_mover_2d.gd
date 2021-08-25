@@ -1,6 +1,7 @@
 extends Node
 class_name GTGravityEntityMover2D
 
+signal position_updated(pos)
 signal movement_info(info)
 signal jumped()
 
@@ -43,6 +44,7 @@ func move(delta):
 	velocity.y *= movement_mask.y
 	velocity = body.move_and_slide_with_snap(velocity, snap, floor_normal)
 	#velocity = body.move_and_slide(velocity, floor_normal)
+	emit_signal("position_updated", body.global_position)
 
 func can_jump() -> bool:
 	return available_jumps > 0

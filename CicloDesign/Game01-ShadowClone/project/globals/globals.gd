@@ -2,7 +2,8 @@ extends Node
 
 enum ENTITY_TYPES {
 	NULL = 0,
-	PLAYER = 1}
+	PLAYER = 1,
+	CLONED_PLAYER = 2}
 
 func _process(delta):
 	if Input.is_action_just_pressed("sys_reload"):
