@@ -1,0 +1,152 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://entities/entity_button/entity_button.gd" type="Script" id=1]
+[ext_resource path="res://addons/regular_polygon2d_node/RegularPolygon2D.gd" type="Script" id=2]
+[ext_resource path="res://entities/entity_button/components/entity_button_activation_trigger.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 9, 5 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "default"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("main:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -4 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "press"
+length = 0.05
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("main:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -4 ), Vector2( 0, 4 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Body:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 8 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "release"
+length = 0.05
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("main:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 4 ), Vector2( 0, -4 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Body:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 8 ), Vector2( 0, 0 ) ]
+}
+
+[node name="Button" type="Node2D"]
+script = ExtResource( 1 )
+entity_type = 7
+
+[node name="Body" type="KinematicBody2D" parent="."]
+position = Vector2( 0, 8 )
+collision_layer = 2
+collision_mask = 4
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionPolygon" type="CollisionPolygon2D" parent="Body"]
+visible = false
+polygon = PoolVector2Array( -8, 0, 0, -8, 8, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ActivationTrigger" type="Area2D" parent="." groups=[
+"entity_button",
+]]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+collidable_groups = [ "entity_player_feet_trigger" ]
+
+[node name="CollisionShape" type="CollisionShape2D" parent="ActivationTrigger"]
+visible = false
+position = Vector2( 0, -4 )
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Graphics" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="main" type="Node2D" parent="Graphics"]
+position = Vector2( 0, -4 )
+scale = Vector2( 1, 0.5 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+centered = true
+num_sides = 4
+size = 22.5
+polygon_color = Color( 1, 1, 1, 1 )
+polygon_rotation = 45.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Graphics"]
+autoplay = "default"
+playback_process_mode = 0
+anims/default = SubResource( 2 )
+anims/press = SubResource( 3 )
+anims/release = SubResource( 4 )
+
+[connection signal="grouped_area_entered" from="ActivationTrigger" to="ActivationTrigger" method="_on_ActivationTrigger_grouped_area_entered"]
+[connection signal="grouped_area_exited" from="ActivationTrigger" to="ActivationTrigger" method="_on_ActivationTrigger_grouped_area_exited"]
+[connection signal="pressed" from="ActivationTrigger" to="." method="press"]
+[connection signal="pressed" from="ActivationTrigger" to="Graphics/AnimationPlayer" method="play" binds= [ "press" ]]
+[connection signal="released" from="ActivationTrigger" to="." method="release"]
+[connection signal="released" from="ActivationTrigger" to="Graphics/AnimationPlayer" method="play" binds= [ "release" ]]

@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://entities/entity_coin/entity_coin.gd" type="Script" id=1]
 [ext_resource path="res://entities/entity_coin/components/entity_coin_body.gd" type="Script" id=2]
 [ext_resource path="res://addons/regular_polygon2d_node/RegularPolygon2D.gd" type="Script" id=3]
 [ext_resource path="res://entities/entity_coin/components/entity_coin_graphics.gd" type="Script" id=4]
+[ext_resource path="res://libs/gt_random_audio_player/gt_random_audio_player.gd" type="Script" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 8.0
@@ -91,12 +92,17 @@ anims/default = SubResource( 3 )
 wait_time = 2.0
 one_shot = true
 
+[node name="CollectedSFX" type="AudioStreamPlayer" parent="."]
+bus = "Sound"
+script = ExtResource( 5 )
+
 [node name="DestroyTimer" type="Timer" parent="."]
 one_shot = true
 
+[connection signal="effect" from="Body" to="CollectedSFX" method="play_random"]
 [connection signal="effect" from="Body" to="Body" method="disable_all_shapes"]
-[connection signal="effect" from="Body" to="DestroyTimer" method="start"]
 [connection signal="effect" from="Body" to="." method="_on_Body_effect"]
+[connection signal="effect" from="Body" to="DestroyTimer" method="start"]
 [connection signal="effect" from="Body" to="Graphics/AnimationPlayer" method="play" binds= [ "collected" ]]
 [connection signal="tree_entered" from="Graphics" to="." method="_on_Graphics_tree_entered"]
 [connection signal="timeout" from="Graphics/Timer" to="Graphics" method="floating_anim"]

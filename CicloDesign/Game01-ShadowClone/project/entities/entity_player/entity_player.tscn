@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://entities/__entity_platformer_player/__entity_platformer_player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/entity_player/entity_player.gd" type="Script" id=2]
@@ -18,6 +18,9 @@ extents = Vector2( 8, 6 )
 extents = Vector2( 8, 16 )
 
 [sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 9, 8 )
+
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 8, 16 )
 
 [node name="Player" instance=ExtResource( 1 )]
@@ -83,7 +86,26 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Hurtbox" type="Area2D" parent="Body/Triggers" index="2" groups=[
+[node name="FeetTrigger" type="Area2D" parent="Body/Triggers" index="2" groups=[
+"entity_player_feet_trigger",
+]]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
+collidable_groups = [ "entity_button" ]
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Body/Triggers/FeetTrigger" index="0"]
+visible = false
+position = Vector2( 0, 9 )
+shape = SubResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Hurtbox" type="Area2D" parent="Body/Triggers" index="3" groups=[
 "entity_player_hurtbox",
 ]]
 collision_layer = 16
@@ -97,7 +119,7 @@ actor_path = NodePath("../..")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Body/Triggers/Hurtbox" index="0"]
 visible = false
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }

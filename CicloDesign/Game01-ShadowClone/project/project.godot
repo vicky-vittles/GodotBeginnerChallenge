@@ -30,6 +30,11 @@ _global_script_classes=[ {
 "path": "res://libs/gt_entity_2d/__gt_entity_2d.gd"
 }, {
 "base": "Node",
+"class": "GTFormula",
+"language": "GDScript",
+"path": "res://libs/gt_formula/gt_formula.gd"
+}, {
+"base": "Node",
 "class": "GTGravityEntityMover2D",
 "language": "GDScript",
 "path": "res://libs/gt_gravity_entity_mover_2d/gt_gravity_entity_mover_2d.gd"
@@ -99,6 +104,7 @@ _global_script_class_icons={
 "GTArea2D": "",
 "GTDeviceController": "res://libs/gt_input_controller/icons/gt_device_controller.svg",
 "GTEntity2D": "",
+"GTFormula": "",
 "GTGravityEntityMover2D": "",
 "GTHealth": "",
 "GTInputAction": "",
