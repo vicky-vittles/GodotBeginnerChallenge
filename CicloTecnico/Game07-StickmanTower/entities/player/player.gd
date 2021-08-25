@@ -1,7 +1,5 @@
 extends KinematicBody2D
 
-signal touched_enemy()
-
 onready var input_controller = $InputController
 onready var entity_mover = $EntityMover
 onready var graphics = $Graphics
@@ -9,7 +7,7 @@ onready var jump_cooldown = $Timers/JumpCooldown
 onready var freeze_timer = $Timers/FreezeTimer
 
 var move_direction : int setget ,get_move_direction
-var max_jumps : int = 3
+export (int) var max_jumps = 3
 onready var available_jumps : int = max_jumps
 
 func get_move_direction() -> int:

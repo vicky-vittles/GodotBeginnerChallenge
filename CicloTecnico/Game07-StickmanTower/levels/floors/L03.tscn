@@ -24,6 +24,7 @@ tag = "3"
 position = Vector2( 102.142, 720 )
 
 [node name="door" parent="root/key_door_1" index="1"]
+modulate = Color( 1, 0.92549, 0.152941, 1 )
 position = Vector2( 432, 704 )
 
 [node name="key_door_2" parent="root" index="6" instance=ExtResource( 2 )]

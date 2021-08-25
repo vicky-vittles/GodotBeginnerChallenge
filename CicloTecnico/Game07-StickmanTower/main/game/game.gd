@@ -8,8 +8,8 @@ var level_floors = {}
 var current_floor_number : int = 0
 var current_floor
 
-onready var floors = $Floors
-onready var camera = $Camera
+onready var floors = $World/Floors
+onready var camera = $World/Camera
 
 func _ready():
 	setup_floors()

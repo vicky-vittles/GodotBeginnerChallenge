@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://main/application_manager.gd"
 }, {
+"base": "GTTeleporter2D",
+"class": "EnemyDiamond",
+"language": "GDScript",
+"path": "res://entities/enemy_diamond/enemy_diamond.gd"
+}, {
 "base": "Area2D",
 "class": "GTArea2D",
 "language": "GDScript",
@@ -59,6 +64,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://libs/gt_juice_2d/gt_juice_2d.gd"
 }, {
+"base": "Node",
+"class": "GTMenu",
+"language": "GDScript",
+"path": "res://libs/gt_menus/menus/__gt_menu.gd"
+}, {
 "base": "Label",
 "class": "GTPatternLabel",
 "language": "GDScript",
@@ -79,6 +89,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://libs/gt_random_point_zone_2d/gt_random_point_zone_2d.gd"
 }, {
+"base": "Control",
+"class": "GTScreen",
+"language": "GDScript",
+"path": "res://libs/gt_menus/screens/__gt_screen.gd"
+}, {
+"base": "Node",
+"class": "GTScreenTransition",
+"language": "GDScript",
+"path": "res://libs/gt_menus/transitions/__gt_transition.gd"
+}, {
 "base": "Node",
 "class": "GTState",
 "language": "GDScript",
@@ -93,6 +113,11 @@ _global_script_classes=[ {
 "class": "GTTeleporter2D",
 "language": "GDScript",
 "path": "res://libs/gt_teleporter_2d/gt_teleporter_2d.gd"
+}, {
+"base": "Node",
+"class": "GTTime",
+"language": "GDScript",
+"path": "res://libs/gt_time/gt_time.gd"
 }, {
 "base": "Node",
 "class": "GTTopdownEntityMover2D",
@@ -116,6 +141,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "ApplicationManager": "",
+"EnemyDiamond": "",
 "GTArea2D": "",
 "GTDeviceController": "res://libs/gt_input_controller/icons/gt_device_controller.svg",
 "GTGravityEntityMover2D": "",
@@ -125,13 +151,17 @@ _global_script_class_icons={
 "GTInputAction": "",
 "GTInputController": "res://libs/gt_input_controller/icons/gt_default_controller.svg",
 "GTJuice2D": "",
+"GTMenu": "",
 "GTPatternLabel": "",
 "GTPoints": "",
 "GTRandomAudioPlayer": "",
 "GTRandomPointZone2D": "",
+"GTScreen": "",
+"GTScreenTransition": "res://libs/gt_menus/transitions/gt_transition.svg",
 "GTState": "",
 "GTStateMachine": "res://libs/gt_state_machine/icons/gt_state_machine.svg",
 "GTTeleporter2D": "",
+"GTTime": "",
 "GTTopdownEntityMover2D": "",
 "GTTriggerArea2D": "",
 "MultitargetCamera2D": "",
@@ -141,7 +171,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Game07-StickmanTower"
-run/main_scene="res://main/game/game.tscn"
+run/main_scene="res://main/main.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -174,13 +204,11 @@ window/stretch/aspect="keep"
 
 sys_exit={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777217,"unicode":0,"echo":false,"script":null)
- ]
+"events": [  ]
 }
 sys_reload={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":82,"unicode":0,"echo":false,"script":null)
- ]
+"events": [  ]
 }
 act_move_left={
 "deadzone": 0.5,
@@ -199,6 +227,11 @@ act_jump={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":88,"unicode":0,"echo":false,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777232,"unicode":0,"echo":false,"script":null)
+ ]
+}
+sys_escape={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777217,"unicode":0,"echo":false,"script":null)
  ]
 }
 

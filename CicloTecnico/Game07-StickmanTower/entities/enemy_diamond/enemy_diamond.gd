@@ -1,4 +1,5 @@
-extends GTArea2D
+extends GTTeleporter2D
+class_name EnemyDiamond
 
 export (Vector2) var move_direction = Vector2(1,0)
 export (int) var move_speed = 128

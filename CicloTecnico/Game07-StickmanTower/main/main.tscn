@@ -1,3 +1,28 @@
-[gd_scene format=2]
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://menus/menus/menu_initial.tscn" type="PackedScene" id=1]
+[ext_resource path="res://main/main.gd" type="Script" id=2]
 
 [node name="main" type="Node"]
+script = ExtResource( 2 )
+
+[node name="root" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="background_color" type="ColorRect" parent="root"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="menu_initial" parent="." instance=ExtResource( 1 )]

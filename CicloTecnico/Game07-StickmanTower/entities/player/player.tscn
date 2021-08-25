@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://libs/gt_input_controller/controllers/gt_device_controller.gd" type="Script" id=1]
 [ext_resource path="res://libs/gt_input_controller/actions/__gt_input_action.gd" type="Script" id=2]
@@ -12,7 +12,6 @@
 [ext_resource path="res://libs/gt_juice_2d/gt_juice_2d.gd" type="Script" id=10]
 [ext_resource path="res://entities/player/assets/player-sheet.png" type="Texture" id=11]
 [ext_resource path="res://entities/player/scripts/player_graphics.gd" type="Script" id=12]
-[ext_resource path="res://libs/gt_area_2d/gt_trigger_area_2d/gt_trigger_area_2d.gd" type="Script" id=13]
 
 [sub_resource type="Animation" id=1]
 resource_name = "air_jump"
@@ -203,10 +202,6 @@ graph_offset = Vector2( -164, 83 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=30]
 
-[sub_resource type="CapsuleShape2D" id=32]
-radius = 5.0
-height = 30.0
-
 [sub_resource type="CapsuleShape2D" id=31]
 radius = 5.0
 height = 25.0
@@ -214,8 +209,8 @@ height = 25.0
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
 ]]
-collision_layer = 12
-collision_mask = 10
+collision_layer = 28
+collision_mask = 26
 script = ExtResource( 9 )
 
 [node name="InputController" type="Node" parent="."]
@@ -276,30 +271,6 @@ anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 30 )
 
-[node name="Triggers" type="Node2D" parent="."]
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="LifeTrigger" type="Area2D" parent="Triggers" groups=[
-"player",
-]]
-collision_layer = 16
-collision_mask = 16
-script = ExtResource( 13 )
-__meta__ = {
-"_edit_lock_": true
-}
-collidable_groups = [ "enemy_diamond" ]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/LifeTrigger"]
-visible = false
-position = Vector2( 0, 12 )
-shape = SubResource( 32 )
-__meta__ = {
-"_edit_lock_": true
-}
-
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2( 0, 15 )
@@ -338,15 +309,14 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
-[connection signal="just_pressed" from="InputController/Jump" to="StateMachine/Idle" method="_on_Jump_just_pressed"]
-[connection signal="just_pressed" from="InputController/Jump" to="StateMachine/Run" method="_on_Jump_just_pressed"]
 [connection signal="just_pressed" from="InputController/Jump" to="StateMachine/Jump" method="_on_Jump_just_pressed"]
+[connection signal="just_pressed" from="InputController/Jump" to="StateMachine/Run" method="_on_Jump_just_pressed"]
 [connection signal="just_pressed" from="InputController/Jump" to="StateMachine/Fall" method="_on_Jump_just_pressed"]
+[connection signal="just_pressed" from="InputController/Jump" to="StateMachine/Idle" method="_on_Jump_just_pressed"]
 [connection signal="just_released" from="InputController/Jump" to="StateMachine/Jump" method="_on_Jump_just_released"]
-[connection signal="jumped" from="EntityMover" to="." method="decrease_jump"]
 [connection signal="jumped" from="EntityMover" to="Timers/JumpCooldown" method="start"]
 [connection signal="jumped" from="EntityMover" to="Graphics/main" method="jump" binds= [ 0.3, 0.15 ]]
-[connection signal="effect" from="Triggers/LifeTrigger" to="." method="emit_signal" binds= [ "touched_enemy" ]]
+[connection signal="jumped" from="EntityMover" to="." method="decrease_jump"]
 [connection signal="state_entered" from="StateMachine/Idle" to="." method="restore_jumps"]
 [connection signal="state_entered" from="StateMachine/Run" to="." method="restore_jumps"]
 [connection signal="landed" from="StateMachine/Fall" to="Graphics/main" method="jump" binds= [ 0.3, 0.1 ]]

@@ -1,0 +1,72 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://libs/gt_menus/screens/__gt_simple_screen.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/ui/main_theme.tres" type="Theme" id=2]
+[ext_resource path="res://assets/ui/m5x7_s32_o2.tres" type="DynamicFont" id=3]
+[ext_resource path="res://menus/screens/screen_game_paused.gd" type="Script" id=4]
+
+[node name="screen_game_paused" instance=ExtResource( 1 )]
+margin_left = 1.18921
+margin_top = -2.37842
+margin_right = 1.18921
+margin_bottom = -2.37842
+theme = ExtResource( 2 )
+script = ExtResource( 4 )
+
+[node name="vbox" parent="." index="0"]
+margin_left = -86.0
+margin_top = -138.0
+margin_right = 86.0
+margin_bottom = 138.0
+
+[node name="hbox" parent="vbox" index="0"]
+margin_right = 172.0
+margin_bottom = 276.0
+
+[node name="vbox" parent="vbox/hbox" index="0"]
+margin_right = 172.0
+margin_bottom = 276.0
+custom_constants/separation = 100
+
+[node name="title" type="Label" parent="vbox/hbox/vbox" index="0"]
+margin_right = 172.0
+margin_bottom = 51.0
+text = "paused"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="buttons" type="VBoxContainer" parent="vbox/hbox/vbox" index="1"]
+margin_top = 151.0
+margin_right = 172.0
+margin_bottom = 269.0
+alignment = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="resume" type="Button" parent="vbox/hbox/vbox/buttons" index="0"]
+margin_right = 172.0
+margin_bottom = 57.0
+custom_fonts/font = ExtResource( 3 )
+text = "resume"
+flat = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="quit" type="Button" parent="vbox/hbox/vbox/buttons" index="1"]
+margin_top = 61.0
+margin_right = 172.0
+margin_bottom = 118.0
+custom_fonts/font = ExtResource( 3 )
+text = "quit"
+flat = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[connection signal="pressed" from="vbox/hbox/vbox/buttons/resume" to="." method="emit_signal" binds= [ "button_resume" ]]
+[connection signal="pressed" from="vbox/hbox/vbox/buttons/quit" to="." method="emit_signal" binds= [ "button_quit" ]]
