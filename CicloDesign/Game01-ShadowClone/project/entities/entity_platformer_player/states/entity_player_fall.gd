@@ -1,4 +1,4 @@
-extends "res://entities/entity_player/states/entity_player_movement_state.gd"
+extends "res://entities/entity_platformer_player/states/entity_player_movement_state.gd"
 
 signal started_jumping()
 signal touched_ground_while_idle()
