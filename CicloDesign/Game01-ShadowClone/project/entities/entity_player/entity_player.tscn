@@ -1,14 +1,21 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://entities/__entity_platformer_player/__entity_platformer_player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/entity_player/entity_player.gd" type="Script" id=2]
 [ext_resource path="res://addons/regular_polygon2d_node/RegularPolygon2D.gd" type="Script" id=3]
 [ext_resource path="res://entities/entity_player/components/entity_player_graphics.gd" type="Script" id=4]
 [ext_resource path="res://entities/entity_player/components/entity_player_position_buffer.gd" type="Script" id=5]
+[ext_resource path="res://entities/entity_player/components/entity_player_trampoline_trigger.gd" type="Script" id=6]
+[ext_resource path="res://entities/entity_player/states/entity_player_trampoline_jump.gd" type="Script" id=7]
+[ext_resource path="res://libs/gt_state_machine/__gt_state_transition.gd" type="Script" id=8]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 6 )
 
 [node name="Player" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 entity_type = 1
+run_speed = 200
 max_jumps = 2
 
 [node name="Graphics" parent="Body" index="0"]
@@ -26,22 +33,100 @@ size = 22.5
 polygon_color = Color( 0.960784, 1, 0.313726, 1 )
 polygon_rotation = 45.0
 
-[node name="PositionBuffer" type="Node" parent="Body" index="3"]
+[node name="Triggers" type="Node2D" parent="Body" index="3"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="TrampolineTrigger" type="Area2D" parent="Body/Triggers" index="0" groups=[
+"entity_player",
+]]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
+collidable_groups = [ "entity_cloned_player" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Triggers/TrampolineTrigger" index="0"]
+visible = false
+position = Vector2( 0, 10 )
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="GroundRaycasts" type="Node2D" parent="Body" index="4"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="1" type="RayCast2D" parent="Body/GroundRaycasts" index="0"]
+visible = false
+enabled = true
+cast_to = Vector2( 0, 28 )
+collision_mask = 2
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="2" type="RayCast2D" parent="Body/GroundRaycasts" index="1"]
+visible = false
+position = Vector2( 8, 0 )
+enabled = true
+cast_to = Vector2( 0, 28 )
+collision_mask = 2
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="3" type="RayCast2D" parent="Body/GroundRaycasts" index="2"]
+visible = false
+position = Vector2( -8, 0 )
+enabled = true
+cast_to = Vector2( 0, 28 )
+collision_mask = 2
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PositionBuffer" type="Node" parent="Body" index="5"]
 script = ExtResource( 5 )
 
 [node name="DelayTimer" type="Timer" parent="Body/PositionBuffer" index="0"]
 one_shot = true
 
-[node name="Triggers" type="Node2D" parent="." index="2"]
-__meta__ = {
-"_edit_lock_": true
-}
+[node name="ToTrampoline" type="Node" parent="MovementStateMachine/Jump" index="2"]
+script = ExtResource( 8 )
+end_state_path = NodePath("../../TrampolineJump")
+
+[node name="ToTrampolineJump" type="Node" parent="MovementStateMachine/Fall" index="3"]
+script = ExtResource( 8 )
+end_state_path = NodePath("../../TrampolineJump")
+
+[node name="TrampolineJump" type="Node" parent="MovementStateMachine" index="4"]
+script = ExtResource( 7 )
+fsm_path = NodePath("..")
+
+[node name="ToFall" type="Node" parent="MovementStateMachine/TrampolineJump" index="0"]
+script = ExtResource( 8 )
+end_state_path = NodePath("../../Fall")
 
 [connection signal="ready" from="." to="Body/PositionBuffer/DelayTimer" method="start"]
 [connection signal="graphics_updated" from="Body/Graphics" to="." method="_on_Graphics_graphics_updated"]
 [connection signal="position_updated" from="Body/EntityMover" to="Body/PositionBuffer" method="add_position"]
+[connection signal="grouped_area_entered" from="Body/Triggers/TrampolineTrigger" to="Body/Triggers/TrampolineTrigger" method="_on_TrampolineTrigger_grouped_area_entered"]
+[connection signal="grouped_area_exited" from="Body/Triggers/TrampolineTrigger" to="Body/Triggers/TrampolineTrigger" method="_on_TrampolineTrigger_grouped_area_exited"]
 [connection signal="update_position" from="Body/PositionBuffer" to="." method="_on_PositionBuffer_update_position"]
 [connection signal="timeout" from="Body/PositionBuffer/DelayTimer" to="Body/PositionBuffer" method="enable"]
 [connection signal="tree_entered" from="Body/PositionBuffer/DelayTimer" to="." method="_on_DelayTimer_tree_entered"]
+[connection signal="started_trampoline_jump" from="MovementStateMachine/Jump" to="MovementStateMachine/Jump/ToTrampoline" method="do_transition"]
+[connection signal="started_trampoline_jump" from="MovementStateMachine/Fall" to="MovementStateMachine/Fall/ToTrampolineJump" method="do_transition"]
+[connection signal="started_falling" from="MovementStateMachine/TrampolineJump" to="MovementStateMachine/TrampolineJump/ToFall" method="do_transition"]
+[connection signal="state_entered" from="MovementStateMachine/TrampolineJump" to="Timers/JumpCooldownTimer" method="start"]
+[connection signal="state_entered" from="MovementStateMachine/TrampolineJump" to="Body/EntityMover" method="restore_jumps"]
+[connection signal="state_entered" from="MovementStateMachine/TrampolineJump" to="Body/EntityMover" method="jump" binds= [ 1.5 ]]
+[connection signal="state_exited" from="MovementStateMachine/TrampolineJump" to="Timers/JumpCooldownTimer" method="stop"]
 
 [editable path="InputController"]

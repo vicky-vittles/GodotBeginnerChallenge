@@ -10,3 +10,11 @@ __meta__ = {
 }
 
 [node name="Level" parent="." instance=ExtResource( 2 )]
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2( 320, 180 )
+current = true
+zoom = Vector2( 2, 2 )
+__meta__ = {
+"_edit_lock_": true
+}

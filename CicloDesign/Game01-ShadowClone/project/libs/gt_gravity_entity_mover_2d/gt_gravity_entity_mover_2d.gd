@@ -49,10 +49,10 @@ func move(delta):
 func can_jump() -> bool:
 	return available_jumps > 0
 
-func jump() -> void:
+func jump(multiplier: float = 1.0) -> void:
 	turn_off_snap()
 	decrease_jump()
-	velocity.y = JUMP_SPEED * movement_mask.y
+	velocity.y = JUMP_SPEED * multiplier * movement_mask.y
 	emit_signal("jumped")
 
 func damp_jump() -> void:

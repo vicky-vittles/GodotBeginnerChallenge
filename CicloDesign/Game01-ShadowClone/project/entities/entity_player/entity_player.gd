@@ -5,6 +5,8 @@ signal info_updated(info)
 
 export (float) var clone_time_delay = 1.0
 
+onready var trampoline_trigger = $Body/Triggers/TrampolineTrigger
+
 func _on_DelayTimer_tree_entered():
 	get_node("Body/PositionBuffer/DelayTimer").wait_time = clone_time_delay
 
