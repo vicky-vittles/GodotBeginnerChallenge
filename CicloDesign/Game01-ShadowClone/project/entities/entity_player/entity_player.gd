@@ -10,6 +10,7 @@ export (bool) var can_jump_while_falling = true
 onready var input_controller = $InputController
 onready var body = $Body
 onready var entity_mover = $Body/EntityMover
+onready var jump_cooldown_timer = $Timers/JumpCooldownTimer
 onready var coyote_timer = $Timers/CoyoteTimer
 
 func _on_EntityMover_tree_entered():

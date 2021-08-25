@@ -12,6 +12,7 @@ export (float) var JUMP_SPEED = -1024
 export (float) var GRAVITY = 2048
 export (float, 0.0, 1.0) var JUMP_DAMPING = 0.3
 export (int) var MAX_JUMPS = 1
+export (Vector2) var ground_snap = Vector2.DOWN * 8
 
 export (Vector2) var movement_mask = Vector2(1, 1)
 export (Vector2) var floor_normal = Vector2.UP
@@ -22,13 +23,14 @@ var move_direction : int
 var velocity : Vector2
 var acceleration : Vector2
 var available_jumps : int
-var snap : Vector2 = Vector2.DOWN * 16
+var snap : Vector2
 
 func _ready():
 	assert(body != null, "%s has no body set" % [self.name])
 	if apply_gravity:
 		acceleration.y = GRAVITY
 	available_jumps = MAX_JUMPS
+	snap = ground_snap
 
 func set_move_direction(_dir: int):
 	move_direction = _dir
@@ -46,15 +48,25 @@ func can_jump() -> bool:
 	return available_jumps > 0
 
 func jump() -> void:
+	turn_off_snap()
+	decrease_jump()
 	velocity.y = JUMP_SPEED * movement_mask.y
-	available_jumps = clamp(available_jumps - 1, 0, MAX_JUMPS)
 	emit_signal("jumped")
 
 func damp_jump() -> void:
 	velocity.y *= JUMP_DAMPING
 
+func decrease_jump() -> void:
+	available_jumps = clamp(available_jumps - 1, 0, MAX_JUMPS)
+
 func restore_jumps() -> void:
 	available_jumps = MAX_JUMPS
+
+func turn_on_snap() -> void:
+	snap = ground_snap
+
+func turn_off_snap() -> void:
+	snap = Vector2.ZERO
 
 func freeze(preserve_momentum: bool = true):
 	if not preserve_momentum:
