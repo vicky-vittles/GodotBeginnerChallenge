@@ -1,5 +1,6 @@
 extends GTEntity2D
 
+signal updated(flag)
 signal pressed()
 signal released()
 

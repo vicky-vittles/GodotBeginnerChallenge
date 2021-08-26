@@ -1,7 +1,8 @@
 extends Node
 class_name GTFormula
 
-signal validated()
+signal succeded()
+signal failed()
 
 enum FORMULA_TYPE {
 	EQUALS,
@@ -30,6 +31,9 @@ func validate(current_value) -> bool:
 			result = current_value < expected_value
 		FORMULA_TYPE.LESS_OR_EQUAL:
 			result = current_value <= expected_value
-	if emit_result and result:
-		emit_signal("validated")
+	if emit_result:
+		if result:
+			emit_signal("succeded")
+		else:
+			emit_signal("failed")
 	return result

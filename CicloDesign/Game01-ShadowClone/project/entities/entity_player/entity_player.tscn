@@ -6,7 +6,7 @@
 [ext_resource path="res://entities/entity_player/components/entity_player_graphics.gd" type="Script" id=4]
 [ext_resource path="res://entities/entity_player/components/entity_player_position_buffer.gd" type="Script" id=5]
 [ext_resource path="res://entities/entity_player/components/entity_player_trampoline_trigger.gd" type="Script" id=6]
-[ext_resource path="res://entities/entity_player/states/entity_player_trampoline_jump.gd" type="Script" id=7]
+[ext_resource path="res://entities/entity_player/states/entity_player_boost.gd" type="Script" id=7]
 [ext_resource path="res://libs/gt_state_machine/__gt_state_transition.gd" type="Script" id=8]
 [ext_resource path="res://libs/gt_area_2d/gt_area_2d.gd" type="Script" id=9]
 [ext_resource path="res://entities/entity_player/components/entity_player_hurtbox.gd" type="Script" id=10]
@@ -26,8 +26,12 @@ extents = Vector2( 8, 16 )
 [node name="Player" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 entity_type = 1
-run_speed = 200
+max_move_speed = 240
+air_acceleration = 0.07
+air_deceleration = 0.03
 max_jumps = 2
+boost_speed = 800
+boost_direction_mask = Vector2( 0.8, 1 )
 
 [node name="Graphics" parent="Body" index="0"]
 script = ExtResource( 4 )
@@ -41,7 +45,7 @@ __meta__ = {
 centered = true
 num_sides = 4
 size = 22.5
-polygon_color = Color( 0.960784, 1, 0.313726, 1 )
+polygon_color = Color( 0.956863, 0.262745, 0.411765, 1 )
 polygon_rotation = 45.0
 
 [node name="Triggers" type="Node2D" parent="Body" index="3"]
@@ -164,19 +168,19 @@ script = ExtResource( 5 )
 [node name="DelayTimer" type="Timer" parent="Body/PositionBuffer" index="0"]
 one_shot = true
 
-[node name="ToTrampoline" type="Node" parent="MovementStateMachine/Jump" index="2"]
+[node name="ToBoost" type="Node" parent="MovementStateMachine/Jump" index="2"]
 script = ExtResource( 8 )
-end_state_path = NodePath("../../TrampolineJump")
+end_state_path = NodePath("../../Boost")
 
-[node name="ToTrampolineJump" type="Node" parent="MovementStateMachine/Fall" index="3"]
+[node name="ToBoost" type="Node" parent="MovementStateMachine/Fall" index="3"]
 script = ExtResource( 8 )
-end_state_path = NodePath("../../TrampolineJump")
+end_state_path = NodePath("../../Boost")
 
-[node name="TrampolineJump" type="Node" parent="MovementStateMachine" index="4"]
+[node name="Boost" type="Node" parent="MovementStateMachine" index="4"]
 script = ExtResource( 7 )
 fsm_path = NodePath("..")
 
-[node name="ToFall" type="Node" parent="MovementStateMachine/TrampolineJump" index="0"]
+[node name="ToFall" type="Node" parent="MovementStateMachine/Boost" index="0"]
 script = ExtResource( 8 )
 end_state_path = NodePath("../../Fall")
 
@@ -188,12 +192,11 @@ end_state_path = NodePath("../../Fall")
 [connection signal="update_position" from="Body/PositionBuffer" to="." method="_on_PositionBuffer_update_position"]
 [connection signal="timeout" from="Body/PositionBuffer/DelayTimer" to="Body/PositionBuffer" method="enable"]
 [connection signal="tree_entered" from="Body/PositionBuffer/DelayTimer" to="." method="_on_DelayTimer_tree_entered"]
-[connection signal="started_trampoline_jump" from="MovementStateMachine/Jump" to="MovementStateMachine/Jump/ToTrampoline" method="do_transition"]
-[connection signal="started_trampoline_jump" from="MovementStateMachine/Fall" to="MovementStateMachine/Fall/ToTrampolineJump" method="do_transition"]
-[connection signal="started_falling" from="MovementStateMachine/TrampolineJump" to="MovementStateMachine/TrampolineJump/ToFall" method="do_transition"]
-[connection signal="state_entered" from="MovementStateMachine/TrampolineJump" to="Timers/JumpCooldownTimer" method="start"]
-[connection signal="state_entered" from="MovementStateMachine/TrampolineJump" to="Body/EntityMover" method="jump" binds= [ 1.5 ]]
-[connection signal="state_entered" from="MovementStateMachine/TrampolineJump" to="Body/EntityMover" method="restore_jumps"]
-[connection signal="state_exited" from="MovementStateMachine/TrampolineJump" to="Timers/JumpCooldownTimer" method="stop"]
+[connection signal="started_boost" from="MovementStateMachine/Jump" to="MovementStateMachine/Jump/ToBoost" method="do_transition"]
+[connection signal="started_boost" from="MovementStateMachine/Fall" to="MovementStateMachine/Fall/ToBoost" method="do_transition"]
+[connection signal="started_falling" from="MovementStateMachine/Boost" to="MovementStateMachine/Boost/ToFall" method="do_transition"]
+[connection signal="state_entered" from="MovementStateMachine/Boost" to="Timers/JumpCooldownTimer" method="start"]
+[connection signal="state_entered" from="MovementStateMachine/Boost" to="Body/EntityMover" method="restore_jumps"]
+[connection signal="state_exited" from="MovementStateMachine/Boost" to="Timers/JumpCooldownTimer" method="stop"]
 
 [editable path="InputController"]

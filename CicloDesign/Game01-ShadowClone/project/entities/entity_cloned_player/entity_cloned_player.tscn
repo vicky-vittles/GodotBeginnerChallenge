@@ -16,13 +16,12 @@ script = ExtResource( 2 )
 entity_type = 2
 
 [node name="main" type="Node2D" parent="Body/Graphics" index="0"]
-modulate = Color( 1, 1, 1, 0.254902 )
 scale = Vector2( 1, 2 )
 script = ExtResource( 3 )
 centered = true
 num_sides = 4
 size = 22.5
-polygon_color = Color( 0.721569, 0.313726, 1, 1 )
+polygon_color = Color( 0.243137, 0.231373, 0.572549, 1 )
 polygon_rotation = 45.0
 
 [node name="Triggers" type="Node2D" parent="Body" index="1"]

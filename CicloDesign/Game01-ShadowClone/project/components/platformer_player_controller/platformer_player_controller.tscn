@@ -25,3 +25,7 @@ action = "act_move_right"
 [node name="jump" type="Node" parent="."]
 script = ExtResource( 1 )
 action = "act_jump"
+
+[node name="boost" type="Node" parent="."]
+script = ExtResource( 1 )
+action = "act_boost"

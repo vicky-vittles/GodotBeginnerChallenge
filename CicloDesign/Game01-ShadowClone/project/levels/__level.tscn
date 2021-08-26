@@ -13,6 +13,17 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="background" type="ColorRect" parent="."]
+margin_left = -161.0
+margin_top = -186.0
+margin_right = 824.0
+margin_bottom = 542.0
+color = Color( 0.6, 0.247059, 0.494118, 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
 [node name="CoinAmount" type="Node" parent="."]
 script = ExtResource( 5 )
 
@@ -45,9 +56,9 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
-
 [node name="ClonedPlayer" parent="." instance=ExtResource( 3 )]
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
 
 [connection signal="coin_collected" from="Coins" to="CoinAmount" method="gain_points" binds= [ 1 ]]
 [connection signal="info_updated" from="Player" to="ClonedPlayer" method="update_info"]

@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://entities/entity_coin/entity_coin.gd" type="Script" id=1]
 [ext_resource path="res://entities/entity_coin/components/entity_coin_body.gd" type="Script" id=2]
 [ext_resource path="res://addons/regular_polygon2d_node/RegularPolygon2D.gd" type="Script" id=3]
 [ext_resource path="res://entities/entity_coin/components/entity_coin_graphics.gd" type="Script" id=4]
 [ext_resource path="res://libs/gt_random_audio_player/gt_random_audio_player.gd" type="Script" id=5]
+[ext_resource path="res://assets/textures/gradient-light.png" type="Texture" id=6]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 8.0
@@ -79,7 +80,15 @@ __meta__ = {
 centered = true
 num_sides = 6
 size = 10.0
-polygon_color = Color( 1, 1, 1, 1 )
+polygon_color = Color( 0.423529, 0.239216, 0.533333, 1 )
+
+[node name="light" type="Light2D" parent="Graphics"]
+visible = false
+position = Vector2( 0, -4 )
+texture = ExtResource( 6 )
+texture_scale = 0.2
+energy = 0.2
+shadow_enabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Graphics"]
 autoplay = "default"
@@ -99,11 +108,11 @@ script = ExtResource( 5 )
 [node name="DestroyTimer" type="Timer" parent="."]
 one_shot = true
 
-[connection signal="effect" from="Body" to="CollectedSFX" method="play_random"]
-[connection signal="effect" from="Body" to="Body" method="disable_all_shapes"]
-[connection signal="effect" from="Body" to="." method="_on_Body_effect"]
 [connection signal="effect" from="Body" to="DestroyTimer" method="start"]
 [connection signal="effect" from="Body" to="Graphics/AnimationPlayer" method="play" binds= [ "collected" ]]
+[connection signal="effect" from="Body" to="." method="_on_Body_effect"]
+[connection signal="effect" from="Body" to="CollectedSFX" method="play_random"]
+[connection signal="effect" from="Body" to="Body" method="disable_all_shapes"]
 [connection signal="tree_entered" from="Graphics" to="." method="_on_Graphics_tree_entered"]
 [connection signal="timeout" from="Graphics/Timer" to="Graphics" method="floating_anim"]
 [connection signal="timeout" from="DestroyTimer" to="." method="queue_free"]

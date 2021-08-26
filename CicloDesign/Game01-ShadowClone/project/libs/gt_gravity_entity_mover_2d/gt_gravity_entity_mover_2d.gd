@@ -8,7 +8,12 @@ signal jumped()
 export (NodePath) var body_path
 onready var body = get_node(body_path)
 
-export (int) var MOVE_SPEED = 256
+export (int) var MAX_MOVE_SPEED = 256
+export (float) var MOVE_ACCELERATION = 0.2
+export (float) var MOVE_DECELERATION = 0.2
+export (float) var AIR_ACCELERATION = 0.2
+export (float) var AIR_DECELERATION = 0.2
+
 export (float) var JUMP_SPEED = -1024
 export (float) var GRAVITY = 2048
 export (float, 0.0, 1.0) var JUMP_DAMPING = 0.3
@@ -21,8 +26,12 @@ export (bool) var apply_gravity = true
 export (bool) var frozen = false
 
 var move_direction : int
+var move_velocity : Vector2
 var velocity : Vector2
 var acceleration : Vector2
+var impulse : Vector2
+var impulse_time : float
+var impulse_timer : Timer
 var available_jumps : int
 var snap : Vector2
 
@@ -32,6 +41,9 @@ func _ready():
 		acceleration.y = GRAVITY
 	available_jumps = MAX_JUMPS
 	snap = ground_snap
+	impulse_timer = Timer.new()
+	impulse_timer.one_shot = true
+	add_child(impulse_timer)
 
 func set_move_direction(_dir: int):
 	move_direction = _dir
@@ -39,11 +51,16 @@ func set_move_direction(_dir: int):
 func move(delta):
 	if frozen:
 		return
-	velocity.x = MOVE_SPEED * move_direction * movement_mask.x
+	acceleration.x = MOVE_ACCELERATION if move_direction != 0 else MOVE_DECELERATION
+	if abs(velocity.y) > 10:
+		acceleration.x = AIR_ACCELERATION if move_direction != 0 else AIR_DECELERATION
+	move_velocity.x = lerp(move_velocity.x, MAX_MOVE_SPEED * move_direction, acceleration.x)
+	move_velocity.x = clamp(move_velocity.x, -MAX_MOVE_SPEED, MAX_MOVE_SPEED)
+	velocity.x = move_velocity.x
+	velocity.x = velocity.x + impulse.x*(1.0-get_impulse_completion()) if not impulse_timer.is_stopped() else velocity.x
 	velocity.y += acceleration.y * delta
-	velocity.y *= movement_mask.y
+	velocity *= movement_mask
 	velocity = body.move_and_slide_with_snap(velocity, snap, floor_normal)
-	#velocity = body.move_and_slide(velocity, floor_normal)
 	emit_signal("position_updated", body.global_position)
 
 func can_jump() -> bool:
@@ -69,6 +86,16 @@ func turn_on_snap() -> void:
 
 func turn_off_snap() -> void:
 	snap = Vector2.ZERO
+
+func set_impulse(_impulse, _time) -> void:
+	impulse = _impulse
+	impulse_time = _time
+	velocity.y = impulse.y
+	impulse_timer.wait_time = impulse_time
+	impulse_timer.start()
+
+func get_impulse_completion() -> float:
+	return (impulse_timer.wait_time-impulse_timer.time_left)/impulse_timer.wait_time
 
 func freeze(preserve_momentum: bool = true):
 	if not preserve_momentum:

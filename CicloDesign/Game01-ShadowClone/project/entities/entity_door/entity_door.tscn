@@ -2,7 +2,7 @@
 
 [ext_resource path="res://entities/entity_door/entity_door.gd" type="Script" id=1]
 [ext_resource path="res://addons/regular_polygon2d_node/RegularPolygon2D.gd" type="Script" id=2]
-[ext_resource path="res://entities/entity_door/entity_door_graphics.gd" type="Script" id=3]
+[ext_resource path="res://entities/entity_door/components/entity_door_graphics.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 9, 18 )
@@ -129,7 +129,7 @@ __meta__ = {
 centered = true
 num_sides = 4
 size = 25.0
-polygon_color = Color( 1, 1, 1, 0.0627451 )
+polygon_color = Color( 0.423529, 0.239216, 0.533333, 1 )
 polygon_rotation = 45.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Graphics"]

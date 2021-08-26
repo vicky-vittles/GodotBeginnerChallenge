@@ -1,7 +1,27 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
+[ext_resource path="res://assets/textures/vignette.png" type="Texture" id=1]
 [ext_resource path="res://main/game/game.gd" type="Script" id=2]
 [ext_resource path="res://main/game/world/world.tscn" type="PackedScene" id=3]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+uniform float luminance_threshold = 0.6;
+
+void fragment() {
+	vec4 color = texture(TEXTURE, UV);
+	color.a = 1.0 - color.r;
+	if (color.a < luminance_threshold) {
+		color.a = 0.0;
+	}
+	COLOR = color;
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/luminance_threshold = 0.68
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 2 )
@@ -10,3 +30,13 @@ __meta__ = {
 }
 
 [node name="World" parent="." instance=ExtResource( 3 )]
+
+[node name="vignette_effect" type="Sprite" parent="."]
+visible = false
+material = SubResource( 2 )
+scale = Vector2( 9.6, 5.44 )
+texture = ExtResource( 1 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
