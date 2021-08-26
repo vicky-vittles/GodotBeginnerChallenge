@@ -1,59 +1,104 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://entities/__entity_platformer_player/__entity_platformer_player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/entity_player/entity_player.gd" type="Script" id=2]
 [ext_resource path="res://addons/regular_polygon2d_node/RegularPolygon2D.gd" type="Script" id=3]
 [ext_resource path="res://entities/entity_player/components/entity_player_graphics.gd" type="Script" id=4]
 [ext_resource path="res://entities/entity_player/components/entity_player_position_buffer.gd" type="Script" id=5]
-[ext_resource path="res://entities/entity_player/components/entity_player_trampoline_trigger.gd" type="Script" id=6]
+[ext_resource path="res://entities/entity_player/components/entity_player_boost_trigger.gd" type="Script" id=6]
 [ext_resource path="res://entities/entity_player/states/entity_player_boost.gd" type="Script" id=7]
 [ext_resource path="res://libs/gt_state_machine/__gt_state_transition.gd" type="Script" id=8]
 [ext_resource path="res://libs/gt_area_2d/gt_area_2d.gd" type="Script" id=9]
 [ext_resource path="res://entities/entity_player/components/entity_player_hurtbox.gd" type="Script" id=10]
+[ext_resource path="res://addons/Trail/trail_2d.gd" type="Script" id=11]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 6 )
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 0.545455 ), 0.0, 0.454546, 0, 1, Vector2( 1, 1 ), 0.454546, 0.0, 1, 0 ]
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 8, 16 )
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.481928, 0.60241, 1 )
+colors = PoolColorArray( 0.243137, 0.231373, 0.572549, 1, 0.309063, 0.234271, 0.557697, 1, 0.888015, 0.259719, 0.427275, 1, 0.956863, 0.262745, 0.411765, 1 )
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 9, 8 )
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 0 ), 0.0, 1.0, 0, 1, Vector2( 1, 1 ), 1.0, 0.0, 1, 0 ]
 
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 8, 16 )
+[sub_resource type="CircleShape2D" id=4]
+radius = 12.0
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 24.0
+
+[sub_resource type="CircleShape2D" id=6]
+radius = 13.0384
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 9, 7 )
+
+[sub_resource type="CircleShape2D" id=8]
+radius = 12.0416
+
+[sub_resource type="CircleShape2D" id=9]
+radius = 13.0384
 
 [node name="Player" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 entity_type = 1
 max_move_speed = 240
-air_acceleration = 0.07
+air_acceleration = 0.12
 air_deceleration = 0.03
+jump_time = 0.55
 max_jumps = 2
-boost_speed = 800
+boost_speed = 1000
+boost_max_time = 0.8
 boost_direction_mask = Vector2( 0.8, 1 )
 
 [node name="Graphics" parent="Body" index="0"]
 script = ExtResource( 4 )
 
-[node name="main" type="Node2D" parent="Body/Graphics" index="0"]
-scale = Vector2( 1, 2 )
+[node name="clone_trail" type="Line2D" parent="Body/Graphics" index="0"]
+width = 8.0
+width_curve = SubResource( 1 )
+default_color = Color( 0.243137, 0.231373, 0.572549, 1 )
+gradient = SubResource( 2 )
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_lock_": true
+}
+lifetime = 1.0
+distance = 5.0
+segments = 100
+
+[node name="move_trail" type="Line2D" parent="Body/Graphics" index="1"]
+width = 25.0
+width_curve = SubResource( 3 )
+default_color = Color( 0.956863, 0.262745, 0.411765, 1 )
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_lock_": true
+}
+lifetime = 0.15
+distance = 5.0
+segments = 25
+
+[node name="main" type="Node2D" parent="Body/Graphics" index="2"]
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
 centered = true
-num_sides = 4
-size = 22.5
+num_sides = 20
+size = 25.0
 polygon_color = Color( 0.956863, 0.262745, 0.411765, 1 )
-polygon_rotation = 45.0
+
+[node name="CollisionShape" parent="Body" index="1"]
+shape = SubResource( 4 )
 
 [node name="Triggers" type="Node2D" parent="Body" index="3"]
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="TrampolineTrigger" type="Area2D" parent="Body/Triggers" index="0" groups=[
+[node name="BoostTrigger" type="Area2D" parent="Body/Triggers" index="0" groups=[
 "entity_player_trampoline_trigger",
 ]]
 collision_layer = 8
@@ -64,10 +109,9 @@ __meta__ = {
 }
 collidable_groups = [ "entity_cloned_player" ]
 
-[node name="CollisionShape" type="CollisionShape2D" parent="Body/Triggers/TrampolineTrigger" index="0"]
+[node name="CollisionShape" type="CollisionShape2D" parent="Body/Triggers/BoostTrigger" index="0"]
 visible = false
-position = Vector2( 0, 10 )
-shape = SubResource( 1 )
+shape = SubResource( 5 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -85,7 +129,7 @@ collidable_groups = [ "entity_coin" ]
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Body/Triggers/CoinTrigger" index="0"]
 visible = false
-shape = SubResource( 2 )
+shape = SubResource( 6 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -103,8 +147,8 @@ collidable_groups = [ "entity_button" ]
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Body/Triggers/FeetTrigger" index="0"]
 visible = false
-position = Vector2( 0, 9 )
-shape = SubResource( 3 )
+position = Vector2( 0, 7 )
+shape = SubResource( 7 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -123,7 +167,25 @@ actor_path = NodePath("../..")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Body/Triggers/Hurtbox" index="0"]
 visible = false
-shape = SubResource( 4 )
+shape = SubResource( 8 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PresenceTrigger" type="Area2D" parent="Body/Triggers" index="4" groups=[
+"entity_player_presence_trigger",
+]]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
+collidable_groups = [ "entity_level" ]
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Body/Triggers/PresenceTrigger" index="0"]
+visible = false
+shape = SubResource( 9 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -135,6 +197,7 @@ __meta__ = {
 
 [node name="1" type="RayCast2D" parent="Body/GroundRaycasts" index="0"]
 visible = false
+position = Vector2( 0, 12 )
 enabled = true
 cast_to = Vector2( 0, 28 )
 collision_mask = 2
@@ -144,9 +207,9 @@ __meta__ = {
 
 [node name="2" type="RayCast2D" parent="Body/GroundRaycasts" index="1"]
 visible = false
-position = Vector2( 8, 0 )
+position = Vector2( 8, 9 )
 enabled = true
-cast_to = Vector2( 0, 28 )
+cast_to = Vector2( 0, 31 )
 collision_mask = 2
 __meta__ = {
 "_edit_lock_": true
@@ -154,9 +217,9 @@ __meta__ = {
 
 [node name="3" type="RayCast2D" parent="Body/GroundRaycasts" index="2"]
 visible = false
-position = Vector2( -8, 0 )
+position = Vector2( -8, 9 )
 enabled = true
-cast_to = Vector2( 0, 28 )
+cast_to = Vector2( 0, 31 )
 collision_mask = 2
 __meta__ = {
 "_edit_lock_": true
@@ -185,10 +248,12 @@ script = ExtResource( 8 )
 end_state_path = NodePath("../../Fall")
 
 [connection signal="ready" from="." to="Body/PositionBuffer/DelayTimer" method="start"]
+[connection signal="just_pressed" from="InputController/boost" to="MovementStateMachine/Jump" method="_on_boost_just_pressed"]
+[connection signal="just_pressed" from="InputController/boost" to="MovementStateMachine/Fall" method="_on_boost_just_pressed"]
 [connection signal="graphics_updated" from="Body/Graphics" to="." method="_on_Graphics_graphics_updated"]
 [connection signal="position_updated" from="Body/EntityMover" to="Body/PositionBuffer" method="add_position"]
-[connection signal="grouped_area_entered" from="Body/Triggers/TrampolineTrigger" to="Body/Triggers/TrampolineTrigger" method="_on_TrampolineTrigger_grouped_area_entered"]
-[connection signal="grouped_area_exited" from="Body/Triggers/TrampolineTrigger" to="Body/Triggers/TrampolineTrigger" method="_on_TrampolineTrigger_grouped_area_exited"]
+[connection signal="grouped_area_entered" from="Body/Triggers/BoostTrigger" to="Body/Triggers/BoostTrigger" method="_on_TrampolineTrigger_grouped_area_entered"]
+[connection signal="grouped_area_exited" from="Body/Triggers/BoostTrigger" to="Body/Triggers/BoostTrigger" method="_on_TrampolineTrigger_grouped_area_exited"]
 [connection signal="update_position" from="Body/PositionBuffer" to="." method="_on_PositionBuffer_update_position"]
 [connection signal="timeout" from="Body/PositionBuffer/DelayTimer" to="Body/PositionBuffer" method="enable"]
 [connection signal="tree_entered" from="Body/PositionBuffer/DelayTimer" to="." method="_on_DelayTimer_tree_entered"]

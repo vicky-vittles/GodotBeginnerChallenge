@@ -5,7 +5,7 @@
 [ext_resource path="res://entities/entity_button/components/entity_button_activation_trigger.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 11, 7 )
+extents = Vector2( 13, 7 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "default"
@@ -20,7 +20,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, -4 ) ]
+"values": [ Vector2( 0, -5 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("../Body:position")
@@ -49,7 +49,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.05 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, -4 ), Vector2( 0, 4 ) ]
+"values": [ Vector2( 0, -5 ), Vector2( 0, 5.5 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("../Body:position")
@@ -78,7 +78,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.05 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 4 ), Vector2( 0, -4 ) ]
+"values": [ Vector2( 0, 5.5 ), Vector2( 0, -5 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("../Body:position")
@@ -125,7 +125,7 @@ collidable_groups = [ "entity_player_feet_trigger" ]
 
 [node name="CollisionShape" type="CollisionShape2D" parent="ActivationTrigger"]
 visible = false
-position = Vector2( 0, -4 )
+position = Vector2( 0, -5 )
 shape = SubResource( 1 )
 __meta__ = {
 "_edit_lock_": true
@@ -137,7 +137,7 @@ __meta__ = {
 }
 
 [node name="main" type="Node2D" parent="Graphics"]
-position = Vector2( 0, -4 )
+position = Vector2( 0, -5 )
 scale = Vector2( 1, 0.5 )
 script = ExtResource( 2 )
 __meta__ = {
@@ -145,7 +145,7 @@ __meta__ = {
 }
 centered = true
 num_sides = 4
-size = 22.5
+size = 30.0
 polygon_color = Color( 0.423529, 0.239216, 0.533333, 1 )
 polygon_rotation = 45.0
 

@@ -99,10 +99,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://libs/gt_teleporter_2d/gt_teleporter_2d.gd"
 }, {
+"base": "Node",
+"class": "GTTime",
+"language": "GDScript",
+"path": "res://libs/gt_time/gt_time.gd"
+}, {
 "base": "GTArea2D",
 "class": "GTTriggerArea2D",
 "language": "GDScript",
 "path": "res://libs/gt_area_2d/gt_trigger_area_2d/gt_trigger_area_2d.gd"
+}, {
+"base": "Line2D",
+"class": "Trail2D",
+"language": "GDScript",
+"path": "res://addons/Trail/trail_2d.gd"
 } ]
 _global_script_class_icons={
 "ApplicationManager": "",
@@ -123,7 +133,9 @@ _global_script_class_icons={
 "GTStateMachine": "res://libs/gt_state_machine/icons/gt_state_machine.svg",
 "GTStateTransition": "",
 "GTTeleporter2D": "",
-"GTTriggerArea2D": ""
+"GTTime": "",
+"GTTriggerArea2D": "",
+"Trail2D": ""
 }
 
 [application]

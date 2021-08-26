@@ -15,7 +15,9 @@ func physics_process(delta):
 
 func _on_jump_just_pressed():
 	if fsm.current_state == self and actor.entity_mover.can_jump() and actor.jump_cooldown_timer.is_stopped():
-		if actor.trampoline_trigger.can_trampoline:
+		emit_signal("started_jumping")
+
+func _on_boost_just_pressed():
+	if fsm.current_state == self:
+		if actor.boost_trigger.can_boost:
 			emit_signal("started_boost")
-		else:
-			emit_signal("started_jumping")

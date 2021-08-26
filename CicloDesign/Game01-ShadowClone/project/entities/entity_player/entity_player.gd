@@ -8,7 +8,7 @@ export (float) var boost_max_time = 1.0
 export (Vector2) var boost_direction_mask = Vector2(1, 1)
 export (float) var clone_time_delay = 1.0
 
-onready var trampoline_trigger = $Body/Triggers/TrampolineTrigger
+onready var boost_trigger = $Body/Triggers/BoostTrigger
 
 func _on_DelayTimer_tree_entered():
 	get_node("Body/PositionBuffer/DelayTimer").wait_time = clone_time_delay

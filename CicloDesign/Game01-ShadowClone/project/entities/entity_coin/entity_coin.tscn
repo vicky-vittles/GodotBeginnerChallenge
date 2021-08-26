@@ -25,6 +25,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("light:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=3]
 length = 0.1
@@ -36,6 +48,18 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("light:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
@@ -72,6 +96,7 @@ __meta__ = {
 final_pos = Vector2( 0, -8 )
 
 [node name="main" type="Node2D" parent="Graphics"]
+visible = false
 position = Vector2( 0, -3.87731 )
 script = ExtResource( 3 )
 __meta__ = {
@@ -79,11 +104,10 @@ __meta__ = {
 }
 centered = true
 num_sides = 6
-size = 10.0
+size = 15.0
 polygon_color = Color( 0.423529, 0.239216, 0.533333, 1 )
 
 [node name="light" type="Light2D" parent="Graphics"]
-visible = false
 position = Vector2( 0, -4 )
 texture = ExtResource( 6 )
 texture_scale = 0.2
@@ -108,11 +132,11 @@ script = ExtResource( 5 )
 [node name="DestroyTimer" type="Timer" parent="."]
 one_shot = true
 
-[connection signal="effect" from="Body" to="DestroyTimer" method="start"]
-[connection signal="effect" from="Body" to="Graphics/AnimationPlayer" method="play" binds= [ "collected" ]]
 [connection signal="effect" from="Body" to="." method="_on_Body_effect"]
-[connection signal="effect" from="Body" to="CollectedSFX" method="play_random"]
 [connection signal="effect" from="Body" to="Body" method="disable_all_shapes"]
+[connection signal="effect" from="Body" to="Graphics/AnimationPlayer" method="play" binds= [ "collected" ]]
+[connection signal="effect" from="Body" to="CollectedSFX" method="play_random"]
+[connection signal="effect" from="Body" to="DestroyTimer" method="start"]
 [connection signal="tree_entered" from="Graphics" to="." method="_on_Graphics_tree_entered"]
 [connection signal="timeout" from="Graphics/Timer" to="Graphics" method="floating_anim"]
 [connection signal="timeout" from="DestroyTimer" to="." method="queue_free"]

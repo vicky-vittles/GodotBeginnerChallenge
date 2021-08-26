@@ -5,7 +5,8 @@ signal started_falling()
 var boost_impulse : Vector2
 
 func enter(_info = null):
-	var direction_to_clone = actor.body.global_position.direction_to(actor.trampoline_trigger.clone_entity.global_position)
+	var direction_to_clone = actor.body.global_position.direction_to(actor.boost_trigger.clone_entity.global_position)
+	direction_to_clone.y = abs(direction_to_clone.y)
 	boost_impulse = actor.boost_speed * -direction_to_clone * actor.boost_direction_mask
 	actor.entity_mover.set_impulse(boost_impulse, actor.boost_max_time)
 
