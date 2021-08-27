@@ -4,6 +4,7 @@ class_name GTGravityEntityMover2D
 signal position_updated(pos)
 signal movement_info(info)
 signal jumped()
+signal ran_out_of_jumps()
 
 export (NodePath) var body_path
 onready var body = get_node(body_path)
@@ -77,6 +78,8 @@ func damp_jump() -> void:
 
 func decrease_jump() -> void:
 	available_jumps = clamp(available_jumps - 1, 0, MAX_JUMPS)
+	if available_jumps == 0:
+		emit_signal("ran_out_of_jumps")
 
 func restore_jumps() -> void:
 	available_jumps = MAX_JUMPS

@@ -3,6 +3,7 @@ extends "res://entities/__entity_platformer_player/states/entity_player_movement
 signal started_jumping()
 signal pressed_boost()
 signal started_boost()
+signal missed_boost()
 signal started_falling()
 
 func physics_process(delta):
@@ -23,3 +24,5 @@ func _on_boost_just_pressed():
 		emit_signal("pressed_boost")
 		if actor.boost_trigger.can_boost:
 			emit_signal("started_boost")
+		else:
+			emit_signal("missed_boost")

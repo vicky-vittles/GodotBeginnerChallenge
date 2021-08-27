@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://entities/entity_coin/entity_coin.gd" type="Script" id=1]
 [ext_resource path="res://entities/entity_coin/components/entity_coin_body.gd" type="Script" id=2]
@@ -6,6 +6,9 @@
 [ext_resource path="res://entities/entity_coin/components/entity_coin_graphics.gd" type="Script" id=4]
 [ext_resource path="res://libs/gt_random_audio_player/gt_random_audio_player.gd" type="Script" id=5]
 [ext_resource path="res://assets/textures/gradient-light.png" type="Texture" id=6]
+[ext_resource path="res://entities/entity_coin/assets/coin1.wav" type="AudioStream" id=7]
+[ext_resource path="res://entities/entity_coin/assets/coin2.wav" type="AudioStream" id=8]
+[ext_resource path="res://entities/entity_coin/assets/coin3.wav" type="AudioStream" id=9]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 11.0454
@@ -112,17 +115,19 @@ anims/default = SubResource( 3 )
 wait_time = 2.0
 one_shot = true
 
-[node name="CollectedSFX" type="AudioStreamPlayer" parent="."]
+[node name="collected" type="AudioStreamPlayer" parent="."]
+volume_db = -8.0
 bus = "Sound"
 script = ExtResource( 5 )
+samples = [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ]
 
 [node name="DestroyTimer" type="Timer" parent="."]
 one_shot = true
 
-[connection signal="effect" from="Body" to="Body/Graphics/AnimationPlayer" method="play" binds= [ "collected" ]]
-[connection signal="effect" from="Body" to="CollectedSFX" method="play_random"]
-[connection signal="effect" from="Body" to="DestroyTimer" method="start"]
 [connection signal="effect" from="Body" to="." method="_on_Body_effect"]
+[connection signal="effect" from="Body" to="DestroyTimer" method="start"]
+[connection signal="effect" from="Body" to="collected" method="play"]
 [connection signal="effect" from="Body" to="Body" method="disable_all_shapes"]
+[connection signal="effect" from="Body" to="Body/Graphics/AnimationPlayer" method="play" binds= [ "collected" ]]
 [connection signal="timeout" from="Body/Graphics/Timer" to="Body/Graphics" method="floating_anim"]
 [connection signal="timeout" from="DestroyTimer" to="." method="queue_free"]

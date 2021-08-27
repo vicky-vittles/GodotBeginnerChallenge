@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/boost-hit-2.wav-51b18b12dbdd518b9911a64cd48cc8b9.sample"
+
+[deps]
+
+source_file="res://entities/entity_player/assets/boost-hit-2.wav"
+dest_files=[ "res://.import/boost-hit-2.wav-51b18b12dbdd518b9911a64cd48cc8b9.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

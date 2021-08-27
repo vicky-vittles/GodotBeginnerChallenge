@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/boost-missed.wav-1a8d84e5af6b829cbbf45c100e17e313.sample"
+
+[deps]
+
+source_file="res://entities/entity_player/assets/boost-missed.wav"
+dest_files=[ "res://.import/boost-missed.wav-1a8d84e5af6b829cbbf45c100e17e313.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,6 +1,8 @@
 extends Node
 class_name GTStateTransition
 
+signal transition_done()
+
 export (NodePath) var end_state_path
 export (bool) var is_active = true
 var start_state : Node
@@ -22,3 +24,4 @@ func can_transition() -> bool:
 func do_transition():
 	if can_transition():
 		start_state.fsm.change_state(end_state, info_for_transition)
+		emit_signal("transition_done")

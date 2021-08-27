@@ -8,6 +8,6 @@ func choose_random():
 		var rand_index = randi() % samples.size()
 		stream = samples[rand_index]
 
-func play_random(from_position : float = 0.0):
+func play(from_position : float = 0.0):
 	choose_random()
-	play(from_position)
+	.play(from_position)

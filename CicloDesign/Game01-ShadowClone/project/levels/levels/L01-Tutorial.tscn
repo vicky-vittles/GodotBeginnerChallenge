@@ -110,7 +110,7 @@ __meta__ = {
 
 [node name="10" type="CollisionPolygon2D" parent="Terrain" index="11"]
 visible = false
-polygon = PoolVector2Array( 2648, -64, 2936, 200, 3112, -72, 3272, -208, 3464, -208, 3144, -304, 2728, -304, 2728, -216 )
+polygon = PoolVector2Array( 2648, -64, 2936, 200, 3112, -72, 3272, -208, 3776, -208, 3776, -344, 3144, -304, 2728, -304, 2728, -216 )
 __meta__ = {
 "_edit_lock_": true
 }

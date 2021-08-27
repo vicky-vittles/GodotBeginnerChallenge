@@ -54,10 +54,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://libs/gt_input_controller/__gt_input_controller.gd"
 }, {
-"base": "Node",
-"class": "GTLogic",
+"base": "Node2D",
+"class": "GTJuice2D",
 "language": "GDScript",
-"path": "res://libs/gt_logic/gt_logic.gd"
+"path": "res://libs/gt_juice_2d/gt_juice_2d.gd"
 }, {
 "base": "Label",
 "class": "GTPatternLabel",
@@ -134,7 +134,7 @@ _global_script_class_icons={
 "GTHealth": "",
 "GTInputAction": "",
 "GTInputController": "res://libs/gt_input_controller/icons/gt_default_controller.svg",
-"GTLogic": "",
+"GTJuice2D": "",
 "GTPatternLabel": "",
 "GTPoint2D": "",
 "GTPoints": "",
