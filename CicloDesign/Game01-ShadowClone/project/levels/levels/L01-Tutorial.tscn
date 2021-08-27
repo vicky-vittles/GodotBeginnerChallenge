@@ -140,9 +140,6 @@ position = Vector2( 3648, -104 )
 [node name="CollisionShape" parent="Triggers/LevelEndTrigger" index="0"]
 visible = true
 
-[node name="Lights" parent="." index="5"]
-visible = false
-
 [node name="1" type="Light2D" parent="Lights" index="0"]
 position = Vector2( 630.589, 386.913 )
 texture = ExtResource( 3 )

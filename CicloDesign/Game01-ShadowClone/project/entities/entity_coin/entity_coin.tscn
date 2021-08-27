@@ -8,7 +8,7 @@
 [ext_resource path="res://assets/textures/gradient-light.png" type="Texture" id=6]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 8.0
+radius = 11.0454
 
 [sub_resource type="Animation" id=2]
 resource_name = "collected"
@@ -75,15 +75,15 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Graphics" type="Node2D" parent="."]
+[node name="Graphics" type="Node2D" parent="Body"]
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
+body_path = NodePath("..")
 final_pos = Vector2( 0, -12 )
 
-[node name="main" type="Node2D" parent="Graphics"]
-position = Vector2( 0, -3.87731 )
+[node name="main" type="Node2D" parent="Body/Graphics"]
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
@@ -93,7 +93,7 @@ num_sides = 6
 size = 15.0
 polygon_color = Color( 0.129412, 0.129412, 0.129412, 1 )
 
-[node name="light" type="Light2D" parent="Graphics"]
+[node name="light" type="Light2D" parent="Body/Graphics"]
 visible = false
 position = Vector2( 0, -4 )
 texture = ExtResource( 6 )
@@ -101,14 +101,14 @@ texture_scale = 0.15
 energy = 0.4
 shadow_enabled = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Graphics"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Body/Graphics"]
 autoplay = "default"
 anims/collected = SubResource( 2 )
 anims/default = SubResource( 3 )
 
-[node name="Tween" type="Tween" parent="Graphics"]
+[node name="Tween" type="Tween" parent="Body/Graphics"]
 
-[node name="Timer" type="Timer" parent="Graphics"]
+[node name="Timer" type="Timer" parent="Body/Graphics"]
 wait_time = 2.0
 one_shot = true
 
@@ -119,10 +119,10 @@ script = ExtResource( 5 )
 [node name="DestroyTimer" type="Timer" parent="."]
 one_shot = true
 
-[connection signal="effect" from="Body" to="Body" method="disable_all_shapes"]
-[connection signal="effect" from="Body" to="." method="_on_Body_effect"]
-[connection signal="effect" from="Body" to="Graphics/AnimationPlayer" method="play" binds= [ "collected" ]]
+[connection signal="effect" from="Body" to="Body/Graphics/AnimationPlayer" method="play" binds= [ "collected" ]]
 [connection signal="effect" from="Body" to="CollectedSFX" method="play_random"]
 [connection signal="effect" from="Body" to="DestroyTimer" method="start"]
-[connection signal="timeout" from="Graphics/Timer" to="Graphics" method="floating_anim"]
+[connection signal="effect" from="Body" to="." method="_on_Body_effect"]
+[connection signal="effect" from="Body" to="Body" method="disable_all_shapes"]
+[connection signal="timeout" from="Body/Graphics/Timer" to="Body/Graphics" method="floating_anim"]
 [connection signal="timeout" from="DestroyTimer" to="." method="queue_free"]

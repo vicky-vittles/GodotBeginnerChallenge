@@ -1,14 +1,18 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://entities/entity_diamond/entity_diamond.gd" type="Script" id=1]
 [ext_resource path="res://libs/gt_teleporter_2d/gt_teleporter_2d.gd" type="Script" id=2]
 [ext_resource path="res://addons/regular_polygon2d_node/RegularPolygon2D.gd" type="Script" id=3]
+[ext_resource path="res://entities/entity_diamond/components/entity_diamond_point_follow.gd" type="Script" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
+radius = 16.0
 
 [node name="Diamond" type="Node2D"]
 script = ExtResource( 1 )
 entity_type = 4
+transition_type = 4
+ease_type = 2
 
 [node name="Body" type="Area2D" parent="." groups=[
 "entity_diamond",
@@ -19,25 +23,32 @@ script = ExtResource( 2 )
 collidable_groups = [ "entity_player_hurtbox" ]
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Body"]
-visible = false
 shape = SubResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Graphics" type="Node2D" parent="."]
+[node name="Graphics" type="Node2D" parent="Body"]
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="main" type="Node2D" parent="Graphics"]
+[node name="main" type="Node2D" parent="Body/Graphics"]
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
 centered = true
 num_sides = 4
-size = 22.5
+size = 32.0
 polygon_color = Color( 0.129412, 0.129412, 0.129412, 1 )
 
+[node name="PointFollow" type="Node" parent="."]
+script = ExtResource( 4 )
+actor_path = NodePath("..")
+body_path = NodePath("../Body")
+transition_type = 4
+ease_type = 2
+
 [connection signal="tree_entered" from="Body" to="." method="_on_Body_tree_entered"]
+[connection signal="tree_entered" from="PointFollow" to="." method="_on_PointFollow_tree_entered"]
