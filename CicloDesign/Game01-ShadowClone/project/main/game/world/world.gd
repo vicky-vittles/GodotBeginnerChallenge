@@ -6,7 +6,8 @@ signal load_level(level_id, with_delay)
 
 const LEVEL_SCENES = {
 	0: preload("res://levels/levels/L00-Test.tscn"),
-	1: preload("res://levels/levels/L01-Tutorial.tscn")}
+	1: preload("res://levels/levels/L01-Tutorial.tscn"),
+	2: preload("res://levels/levels/L02-Beginnings.tscn")}
 
 export (int) var max_levels = 5
 export (int) var current_level = 0

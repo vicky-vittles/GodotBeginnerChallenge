@@ -38,6 +38,6 @@ __meta__ = {
 centered = true
 num_sides = 4
 size = 22.5
-polygon_color = Color( 0.423529, 0.239216, 0.533333, 1 )
+polygon_color = Color( 0.129412, 0.129412, 0.129412, 1 )
 
 [connection signal="tree_entered" from="Body" to="." method="_on_Body_tree_entered"]

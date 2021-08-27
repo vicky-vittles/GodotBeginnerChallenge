@@ -1,0 +1,146 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://levels/__level.tscn" type="PackedScene" id=1]
+[ext_resource path="res://entities/entity_spike/entity_spike.tscn" type="PackedScene" id=2]
+[ext_resource path="res://libs/gt_teleporter_2d/gt_teleporter_2d.gd" type="Script" id=3]
+[ext_resource path="res://entities/entity_coin/entity_coin.tscn" type="PackedScene" id=4]
+
+[node name="Level" instance=ExtResource( 1 )]
+
+[node name="1" type="CollisionPolygon2D" parent="Terrain" index="2"]
+polygon = PoolVector2Array( -80, -64, 272, -64, 272, 352, 960, 352, 960, 520, 1280, 520, 1280, 232, 1440, 232, 1440, 536, 1888, 536, 1888, 112, 2048.27, 112, 2048, 0, 2240, 0, 2240, 112, 2240, 640, -80, 640 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="2" type="CollisionPolygon2D" parent="Terrain" index="3"]
+polygon = PoolVector2Array( -80, -208, 320, -208, 704, 48, 1344, 48, 1704, 232, 1768, 8, 1888, -112, 2096, -224, 2096, -360, 1152, -360, 272, -360, -80, -360 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="1" parent="Entities/Coins" index="0" instance=ExtResource( 4 )]
+position = Vector2( 312, -120 )
+
+[node name="2" parent="Entities/Coins" index="1" instance=ExtResource( 4 )]
+position = Vector2( 336, -96 )
+
+[node name="3" parent="Entities/Coins" index="2" instance=ExtResource( 4 )]
+position = Vector2( 360, -64 )
+
+[node name="4" parent="Entities/Coins" index="3" instance=ExtResource( 4 )]
+position = Vector2( 384, -32 )
+
+[node name="5" parent="Entities/Coins" index="4" instance=ExtResource( 4 )]
+position = Vector2( 408, 8 )
+
+[node name="6" parent="Entities/Coins" index="5" instance=ExtResource( 4 )]
+position = Vector2( 424, 64 )
+
+[node name="7" parent="Entities/Coins" index="6" instance=ExtResource( 4 )]
+position = Vector2( 608, 272 )
+
+[node name="8" parent="Entities/Coins" index="7" instance=ExtResource( 4 )]
+position = Vector2( 672, 272 )
+
+[node name="9" parent="Entities/Coins" index="8" instance=ExtResource( 4 )]
+position = Vector2( 736, 272 )
+
+[node name="10" parent="Entities/Coins" index="9" instance=ExtResource( 4 )]
+position = Vector2( 800, 272 )
+
+[node name="11" parent="Entities/Coins" index="10" instance=ExtResource( 4 )]
+position = Vector2( 640, 272 )
+
+[node name="12" parent="Entities/Coins" index="11" instance=ExtResource( 4 )]
+position = Vector2( 704, 272 )
+
+[node name="13" parent="Entities/Coins" index="12" instance=ExtResource( 4 )]
+position = Vector2( 768, 272 )
+
+[node name="14" parent="Entities/Coins" index="13" instance=ExtResource( 4 )]
+position = Vector2( 832, 272 )
+
+[node name="1" type="Area2D" parent="Entities/Checkpoints" index="0"]
+position = Vector2( 360, 240 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+is_cause = false
+is_indirect = true
+tag = "L02-1"
+
+[node name="2" type="Area2D" parent="Entities/Checkpoints" index="1"]
+position = Vector2( 1352, 160 )
+script = ExtResource( 3 )
+is_cause = false
+is_indirect = true
+tag = "L02-2"
+
+[node name="1" type="Node2D" parent="Entities/Spikes" index="0"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Spike1" parent="Entities/Spikes/1" index="0" instance=ExtResource( 2 )]
+position = Vector2( 992, 520 )
+teleporter_tag = "L02-1"
+
+[node name="Spike2" parent="Entities/Spikes/1" index="1" instance=ExtResource( 2 )]
+position = Vector2( 1056, 520 )
+teleporter_tag = "L02-1"
+
+[node name="Spike3" parent="Entities/Spikes/1" index="2" instance=ExtResource( 2 )]
+position = Vector2( 1120, 520 )
+teleporter_tag = "L02-1"
+
+[node name="Spike4" parent="Entities/Spikes/1" index="3" instance=ExtResource( 2 )]
+position = Vector2( 1184, 520 )
+teleporter_tag = "L02-1"
+
+[node name="Spike5" parent="Entities/Spikes/1" index="4" instance=ExtResource( 2 )]
+position = Vector2( 1248, 520 )
+teleporter_tag = "L02-1"
+
+[node name="2" type="Node2D" parent="Entities/Spikes" index="1"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Spike6" parent="Entities/Spikes/2" index="0" instance=ExtResource( 2 )]
+position = Vector2( 1472, 536 )
+teleporter_tag = "L02-2"
+
+[node name="Spike7" parent="Entities/Spikes/2" index="1" instance=ExtResource( 2 )]
+position = Vector2( 1536, 536 )
+teleporter_tag = "L02-2"
+
+[node name="Spike8" parent="Entities/Spikes/2" index="2" instance=ExtResource( 2 )]
+position = Vector2( 1600, 536 )
+teleporter_tag = "L02-2"
+
+[node name="Spike9" parent="Entities/Spikes/2" index="3" instance=ExtResource( 2 )]
+position = Vector2( 1664, 536 )
+teleporter_tag = "L02-2"
+
+[node name="Spike10" parent="Entities/Spikes/2" index="4" instance=ExtResource( 2 )]
+position = Vector2( 1728, 536 )
+teleporter_tag = "L02-2"
+
+[node name="Spike11" parent="Entities/Spikes/2" index="5" instance=ExtResource( 2 )]
+position = Vector2( 1792, 536 )
+teleporter_tag = "L02-2"
+
+[node name="Spike12" parent="Entities/Spikes/2" index="6" instance=ExtResource( 2 )]
+position = Vector2( 1856, 536 )
+teleporter_tag = "L02-2"
+
+[node name="ClonedPlayer" parent="." index="6"]
+position = Vector2( 16, -80 )
+
+[node name="Player" parent="." index="7"]
+position = Vector2( 16, -80 )
+
+[node name="Camera" parent="." index="8"]
+position = Vector2( 480, 270 )

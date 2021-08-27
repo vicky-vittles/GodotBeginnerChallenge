@@ -35,10 +35,10 @@ position = Vector2( 111.377, 235.969 )
 [node name="CollisionShape" parent="Triggers/LevelEndTrigger" index="0"]
 visible = true
 
-[node name="ClonedPlayer" parent="." index="5"]
+[node name="ClonedPlayer" parent="." index="6"]
 position = Vector2( 32, 192 )
 
-[node name="Player" parent="." index="6"]
+[node name="Player" parent="." index="7"]
 position = Vector2( 32, 192 )
 
 [connection signal="pressed" from="Entities/Button1" to="Entities/Door1" method="open"]
