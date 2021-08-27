@@ -5,8 +5,8 @@
 [ext_resource path="res://addons/regular_polygon2d_node/RegularPolygon2D.gd" type="Script" id=3]
 [ext_resource path="res://libs/gt_area_2d/gt_area_2d.gd" type="Script" id=4]
 
-[sub_resource type="CircleShape2D" id=3]
-radius = 24.0
+[sub_resource type="CircleShape2D" id=1]
+radius = 12.5
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 9, 7 )
@@ -39,8 +39,7 @@ __meta__ = {
 collidable_groups = [ "entity_player_trampoline_trigger" ]
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Body/Triggers/TrampolineTrigger" index="0"]
-visible = false
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }

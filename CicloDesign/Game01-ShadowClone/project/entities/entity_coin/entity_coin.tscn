@@ -40,7 +40,6 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=3]
 length = 0.1
-step = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("main:visible")
 tracks/0/interp = 1
@@ -93,10 +92,9 @@ script = ExtResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
-final_pos = Vector2( 0, -8 )
+final_pos = Vector2( 0, -12 )
 
 [node name="main" type="Node2D" parent="Graphics"]
-visible = false
 position = Vector2( 0, -3.87731 )
 script = ExtResource( 3 )
 __meta__ = {
@@ -110,7 +108,7 @@ polygon_color = Color( 0.423529, 0.239216, 0.533333, 1 )
 [node name="light" type="Light2D" parent="Graphics"]
 position = Vector2( 0, -4 )
 texture = ExtResource( 6 )
-texture_scale = 0.2
+texture_scale = 0.15
 energy = 0.2
 shadow_enabled = true
 
@@ -132,11 +130,10 @@ script = ExtResource( 5 )
 [node name="DestroyTimer" type="Timer" parent="."]
 one_shot = true
 
+[connection signal="effect" from="Body" to="DestroyTimer" method="start"]
 [connection signal="effect" from="Body" to="." method="_on_Body_effect"]
-[connection signal="effect" from="Body" to="Body" method="disable_all_shapes"]
 [connection signal="effect" from="Body" to="Graphics/AnimationPlayer" method="play" binds= [ "collected" ]]
 [connection signal="effect" from="Body" to="CollectedSFX" method="play_random"]
-[connection signal="effect" from="Body" to="DestroyTimer" method="start"]
-[connection signal="tree_entered" from="Graphics" to="." method="_on_Graphics_tree_entered"]
+[connection signal="effect" from="Body" to="Body" method="disable_all_shapes"]
 [connection signal="timeout" from="Graphics/Timer" to="Graphics" method="floating_anim"]
 [connection signal="timeout" from="DestroyTimer" to="." method="queue_free"]

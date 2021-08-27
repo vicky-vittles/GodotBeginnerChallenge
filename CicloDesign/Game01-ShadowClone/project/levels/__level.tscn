@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://levels/__level.gd" type="Script" id=1]
 [ext_resource path="res://entities/entity_player/entity_player.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://libs/gt_points/gt_points.gd" type="Script" id=5]
 [ext_resource path="res://levels/components/level_enemies.gd" type="Script" id=6]
 [ext_resource path="res://libs/gt_area_2d/gt_trigger_area_2d/gt_trigger_area_2d.gd" type="Script" id=7]
+[ext_resource path="res://libs/multitarget_camera_2d/multitarget_camera_2d.gd" type="Script" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 20, 40 )
@@ -18,8 +19,10 @@ __meta__ = {
 }
 
 [node name="background" type="ColorRect" parent="."]
+margin_top = -1620.0
 margin_right = 960.0
-margin_bottom = 542.0
+margin_bottom = -1080.0
+rect_scale = Vector2( 4, 4 )
 color = Color( 0.6, 0.247059, 0.494118, 1 )
 __meta__ = {
 "_edit_lock_": true,
@@ -32,6 +35,16 @@ script = ExtResource( 5 )
 [node name="Terrain" type="StaticBody2D" parent="."]
 collision_layer = 2
 collision_mask = 4
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="graphics" type="Node2D" parent="Terrain"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="light_occluders" type="Node2D" parent="Terrain"]
 __meta__ = {
 "_edit_lock_": true
 }
@@ -77,8 +90,25 @@ __meta__ = {
 }
 
 [node name="ClonedPlayer" parent="." instance=ExtResource( 3 )]
+position = Vector2( 32, 48 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 32, 48 )
+
+[node name="Camera" type="Camera2D" parent="."]
+current = true
+limit_left = 0
+limit_bottom = 540
+editor_draw_limits = true
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_lock_": true
+}
+move_speed = 0.2
+zoom_speed = 1.0
+min_zoom = 1.0
+max_zoom = 1.0
+allow_zoom = false
 
 [connection signal="coin_collected" from="Entities/Coins" to="CoinAmount" method="gain_points" binds= [ 1 ]]
 [connection signal="effect" from="Triggers/LevelEndTrigger" to="." method="end_level"]

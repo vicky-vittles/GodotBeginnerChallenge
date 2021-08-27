@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://entities/__entity_platformer_player/__entity_platformer_player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/entity_player/entity_player.gd" type="Script" id=2]
@@ -11,33 +11,33 @@
 [ext_resource path="res://libs/gt_area_2d/gt_area_2d.gd" type="Script" id=9]
 [ext_resource path="res://entities/entity_player/components/entity_player_hurtbox.gd" type="Script" id=10]
 [ext_resource path="res://addons/Trail/trail_2d.gd" type="Script" id=11]
+[ext_resource path="res://components/entity_spawner/entity_spawner.tscn" type="PackedScene" id=12]
+[ext_resource path="res://entities/entity_boost_explosion/entity_boost_explosion.tscn" type="PackedScene" id=13]
+[ext_resource path="res://entities/entity_player/components/entity_player_boost_animation_spawner.gd" type="Script" id=14]
 
-[sub_resource type="Curve" id=1]
-_data = [ Vector2( 0, 0.545455 ), 0.0, 0.454546, 0, 1, Vector2( 1, 1 ), 0.454546, 0.0, 1, 0 ]
-
-[sub_resource type="Gradient" id=2]
+[sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0, 0.481928, 0.60241, 1 )
 colors = PoolColorArray( 0.243137, 0.231373, 0.572549, 1, 0.309063, 0.234271, 0.557697, 1, 0.888015, 0.259719, 0.427275, 1, 0.956863, 0.262745, 0.411765, 1 )
 
-[sub_resource type="Curve" id=3]
+[sub_resource type="Curve" id=2]
 _data = [ Vector2( 0, 0 ), 0.0, 1.0, 0, 1, Vector2( 1, 1 ), 1.0, 0.0, 1, 0 ]
 
+[sub_resource type="CircleShape2D" id=3]
+radius = 12.5
+
 [sub_resource type="CircleShape2D" id=4]
-radius = 12.0
+radius = 70.0
 
 [sub_resource type="CircleShape2D" id=5]
-radius = 24.0
-
-[sub_resource type="CircleShape2D" id=6]
 radius = 13.0384
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 9, 7 )
 
-[sub_resource type="CircleShape2D" id=8]
+[sub_resource type="CircleShape2D" id=7]
 radius = 12.0416
 
-[sub_resource type="CircleShape2D" id=9]
+[sub_resource type="CircleShape2D" id=8]
 radius = 13.0384
 
 [node name="Player" instance=ExtResource( 1 )]
@@ -50,16 +50,17 @@ jump_time = 0.55
 max_jumps = 2
 boost_speed = 1000
 boost_max_time = 0.8
+boost_cooldown_time = 0.75
 boost_direction_mask = Vector2( 0.8, 1 )
 
 [node name="Graphics" parent="Body" index="0"]
 script = ExtResource( 4 )
 
 [node name="clone_trail" type="Line2D" parent="Body/Graphics" index="0"]
+modulate = Color( 1, 1, 1, 0.498039 )
 width = 8.0
-width_curve = SubResource( 1 )
 default_color = Color( 0.243137, 0.231373, 0.572549, 1 )
-gradient = SubResource( 2 )
+gradient = SubResource( 1 )
 script = ExtResource( 11 )
 __meta__ = {
 "_edit_lock_": true
@@ -70,15 +71,15 @@ segments = 100
 
 [node name="move_trail" type="Line2D" parent="Body/Graphics" index="1"]
 width = 25.0
-width_curve = SubResource( 3 )
+width_curve = SubResource( 2 )
 default_color = Color( 0.956863, 0.262745, 0.411765, 1 )
 script = ExtResource( 11 )
 __meta__ = {
 "_edit_lock_": true
 }
 lifetime = 0.15
-distance = 5.0
-segments = 25
+distance = 2.0
+segments = 30
 
 [node name="main" type="Node2D" parent="Body/Graphics" index="2"]
 script = ExtResource( 3 )
@@ -91,7 +92,7 @@ size = 25.0
 polygon_color = Color( 0.956863, 0.262745, 0.411765, 1 )
 
 [node name="CollisionShape" parent="Body" index="1"]
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="Triggers" type="Node2D" parent="Body" index="3"]
 __meta__ = {
@@ -111,7 +112,7 @@ collidable_groups = [ "entity_cloned_player" ]
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Body/Triggers/BoostTrigger" index="0"]
 visible = false
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -129,7 +130,7 @@ collidable_groups = [ "entity_coin" ]
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Body/Triggers/CoinTrigger" index="0"]
 visible = false
-shape = SubResource( 6 )
+shape = SubResource( 5 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -148,7 +149,7 @@ collidable_groups = [ "entity_button" ]
 [node name="CollisionShape" type="CollisionShape2D" parent="Body/Triggers/FeetTrigger" index="0"]
 visible = false
 position = Vector2( 0, 7 )
-shape = SubResource( 7 )
+shape = SubResource( 6 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -167,7 +168,7 @@ actor_path = NodePath("../..")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Body/Triggers/Hurtbox" index="0"]
 visible = false
-shape = SubResource( 8 )
+shape = SubResource( 7 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -185,7 +186,7 @@ collidable_groups = [ "entity_level" ]
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Body/Triggers/PresenceTrigger" index="0"]
 visible = false
-shape = SubResource( 9 )
+shape = SubResource( 8 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -231,6 +232,14 @@ script = ExtResource( 5 )
 [node name="DelayTimer" type="Timer" parent="Body/PositionBuffer" index="0"]
 one_shot = true
 
+[node name="BoostCooldownTimer" type="Timer" parent="Timers" index="2"]
+one_shot = true
+
+[node name="BoostAnimationSpawner" parent="." index="3" instance=ExtResource( 12 )]
+script = ExtResource( 14 )
+actor_path = NodePath("..")
+entity_template = ExtResource( 13 )
+
 [node name="ToBoost" type="Node" parent="MovementStateMachine/Jump" index="2"]
 script = ExtResource( 8 )
 end_state_path = NodePath("../../Boost")
@@ -257,11 +266,18 @@ end_state_path = NodePath("../../Fall")
 [connection signal="update_position" from="Body/PositionBuffer" to="." method="_on_PositionBuffer_update_position"]
 [connection signal="timeout" from="Body/PositionBuffer/DelayTimer" to="Body/PositionBuffer" method="enable"]
 [connection signal="tree_entered" from="Body/PositionBuffer/DelayTimer" to="." method="_on_DelayTimer_tree_entered"]
+[connection signal="tree_entered" from="Timers/BoostCooldownTimer" to="." method="_on_BoostCooldownTimer_tree_entered"]
+[connection signal="pressed_boost" from="MovementStateMachine/Jump" to="BoostAnimationSpawner" method="spawn_boost_animation"]
+[connection signal="pressed_boost" from="MovementStateMachine/Jump" to="Timers/BoostCooldownTimer" method="start"]
 [connection signal="started_boost" from="MovementStateMachine/Jump" to="MovementStateMachine/Jump/ToBoost" method="do_transition"]
+[connection signal="pressed_boost" from="MovementStateMachine/Fall" to="BoostAnimationSpawner" method="spawn_boost_animation"]
+[connection signal="pressed_boost" from="MovementStateMachine/Fall" to="Timers/BoostCooldownTimer" method="start"]
 [connection signal="started_boost" from="MovementStateMachine/Fall" to="MovementStateMachine/Fall/ToBoost" method="do_transition"]
 [connection signal="started_falling" from="MovementStateMachine/Boost" to="MovementStateMachine/Boost/ToFall" method="do_transition"]
-[connection signal="state_entered" from="MovementStateMachine/Boost" to="Timers/JumpCooldownTimer" method="start"]
+[connection signal="state_entered" from="MovementStateMachine/Boost" to="Body/EntityMover" method="turn_off_snap"]
 [connection signal="state_entered" from="MovementStateMachine/Boost" to="Body/EntityMover" method="restore_jumps"]
+[connection signal="state_entered" from="MovementStateMachine/Boost" to="Timers/JumpCooldownTimer" method="start"]
+[connection signal="state_entered" from="MovementStateMachine/Boost" to="Timers/BoostCooldownTimer" method="start"]
 [connection signal="state_exited" from="MovementStateMachine/Boost" to="Timers/JumpCooldownTimer" method="stop"]
 
 [editable path="InputController"]
