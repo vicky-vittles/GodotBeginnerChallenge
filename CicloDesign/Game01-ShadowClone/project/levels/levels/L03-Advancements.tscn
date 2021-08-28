@@ -2,7 +2,7 @@
 
 [ext_resource path="res://levels/__level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/entity_spike/entity_spike.tscn" type="PackedScene" id=2]
-[ext_resource path="res://libs/gt_teleporter_2d/gt_teleporter_2d.gd" type="Script" id=3]
+[ext_resource path="res://libs/gt_area_2d/gt_teleporter_2d/gt_teleporter_2d.gd" type="Script" id=3]
 [ext_resource path="res://entities/entity_diamond/entity_diamond.tscn" type="PackedScene" id=4]
 [ext_resource path="res://libs/gt_point_2d/gt_point_2d.gd" type="Script" id=5]
 [ext_resource path="res://assets/textures/black-border-light-512.png" type="Texture" id=6]

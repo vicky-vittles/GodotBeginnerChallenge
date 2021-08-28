@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://components/accelerometer_controller/accelerometer_controller.gd" type="Script" id=1]
+
+[node name="AccelerometerController" type="Node"]
+script = ExtResource( 1 )

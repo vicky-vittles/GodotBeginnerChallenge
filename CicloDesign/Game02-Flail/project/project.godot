@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node",
+"class": "AccelerometerController",
+"language": "GDScript",
+"path": "res://components/accelerometer_controller/accelerometer_controller.gd"
+}, {
+"base": "Node",
 "class": "ApplicationManager",
 "language": "GDScript",
 "path": "res://main/application_manager.gd"
@@ -35,11 +40,6 @@ _global_script_classes=[ {
 "path": "res://libs/gt_formula/gt_formula.gd"
 }, {
 "base": "Node",
-"class": "GTGravityEntityMover2D",
-"language": "GDScript",
-"path": "res://libs/gt_gravity_entity_mover_2d/gt_gravity_entity_mover_2d.gd"
-}, {
-"base": "Node",
 "class": "GTHealth",
 "language": "GDScript",
 "path": "res://libs/gt_health/gt_health.gd"
@@ -58,11 +58,6 @@ _global_script_classes=[ {
 "class": "GTJuice2D",
 "language": "GDScript",
 "path": "res://libs/gt_juice_2d/gt_juice_2d.gd"
-}, {
-"base": "Node",
-"class": "GTMenu",
-"language": "GDScript",
-"path": "res://libs/gt_menus/menus/__gt_menu.gd"
 }, {
 "base": "Label",
 "class": "GTPatternLabel",
@@ -88,16 +83,6 @@ _global_script_classes=[ {
 "class": "GTRandomPointZone2D",
 "language": "GDScript",
 "path": "res://libs/gt_random_point_zone_2d/gt_random_point_zone_2d.gd"
-}, {
-"base": "Control",
-"class": "GTScreen",
-"language": "GDScript",
-"path": "res://libs/gt_menus/screens/__gt_screen.gd"
-}, {
-"base": "Node",
-"class": "GTScreenTransition",
-"language": "GDScript",
-"path": "res://libs/gt_menus/transitions/__gt_transition.gd"
 }, {
 "base": "Node",
 "class": "GTState",
@@ -128,50 +113,35 @@ _global_script_classes=[ {
 "class": "GTTriggerArea2D",
 "language": "GDScript",
 "path": "res://libs/gt_area_2d/gt_trigger_area_2d/gt_trigger_area_2d.gd"
-}, {
-"base": "Camera2D",
-"class": "MultitargetCamera2D",
-"language": "GDScript",
-"path": "res://libs/multitarget_camera_2d/multitarget_camera_2d.gd"
-}, {
-"base": "Line2D",
-"class": "Trail2D",
-"language": "GDScript",
-"path": "res://addons/Trail/trail_2d.gd"
 } ]
 _global_script_class_icons={
+"AccelerometerController": "res://libs/gt_input_controller/icons/gt_device_controller.svg",
 "ApplicationManager": "",
 "GTArea2D": "",
 "GTDeviceController": "res://libs/gt_input_controller/icons/gt_device_controller.svg",
 "GTEntity2D": "",
 "GTFormula": "",
-"GTGravityEntityMover2D": "",
 "GTHealth": "",
 "GTInputAction": "",
 "GTInputController": "res://libs/gt_input_controller/icons/gt_default_controller.svg",
 "GTJuice2D": "",
-"GTMenu": "",
 "GTPatternLabel": "",
 "GTPoint2D": "",
 "GTPoints": "",
 "GTRandomAudioPlayer": "",
 "GTRandomPointZone2D": "",
-"GTScreen": "",
-"GTScreenTransition": "res://libs/gt_menus/transitions/gt_transition.svg",
 "GTState": "",
 "GTStateMachine": "res://libs/gt_state_machine/icons/gt_state_machine.svg",
 "GTStateTransition": "",
 "GTTeleporter2D": "",
 "GTTime": "",
-"GTTriggerArea2D": "",
-"MultitargetCamera2D": "",
-"Trail2D": ""
+"GTTriggerArea2D": ""
 }
 
 [application]
 
-config/name="Game01-ShadowClone"
-run/main_scene="res://main/main.tscn"
+config/name="Game02-Flail"
+run/main_scene="res://main/game/game.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -196,12 +166,13 @@ window/size/width=960
 window/size/height=540
 window/size/test_width=960
 window/size/test_height=540
+window/dpi/allow_hidpi=true
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/regular_polygon2d_node/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/Trail/plugin.cfg", "res://addons/regular_polygon2d_node/plugin.cfg" )
 
 [input]
 
@@ -215,32 +186,6 @@ sys_reload={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":82,"unicode":0,"echo":false,"script":null)
  ]
 }
-act_move_left={
-"deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777231,"unicode":0,"echo":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"unicode":0,"echo":false,"script":null)
- ]
-}
-act_move_right={
-"deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777233,"unicode":0,"echo":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"unicode":0,"echo":false,"script":null)
- ]
-}
-act_jump={
-"deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":90,"unicode":0,"echo":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":75,"unicode":0,"echo":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
- ]
-}
-act_boost={
-"deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":88,"unicode":0,"echo":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":74,"unicode":0,"echo":false,"script":null)
-, Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
- ]
-}
 
 [layer_names]
 
@@ -248,10 +193,6 @@ act_boost={
 2d_physics/layer_3="bodies"
 2d_physics/layer_4="triggers"
 2d_physics/layer_5="hitboxes"
-
-[locale]
-
-translations=PoolStringArray( "res://assets/translation/translation.en.translation", "res://assets/translation/translation.pt.translation" )
 
 [physics]
 
