@@ -81,5 +81,5 @@ script = ExtResource( 3 )
 [connection signal="level_finished" from="." to="CanvasLayer/AnimationPlayer" method="play" binds= [ "level_transition" ]]
 [connection signal="load_level" from="." to="LevelLoader" method="load_level"]
 [connection signal="level_finished" from="LevelLoader" to="." method="level_finished"]
-[connection signal="level_started" from="LevelLoader" to="TimeManager" method="pause_time" binds= [ 0.8 ]]
 [connection signal="level_started" from="LevelLoader" to="." method="level_started"]
+[connection signal="level_started" from="LevelLoader" to="TimeManager" method="pause_time" binds= [ 0.8 ]]

@@ -1,5 +1,6 @@
 extends "res://entities/__entity_platformer_player/__entity_platformer_player.gd"
 
+signal boost_available()
 signal position_updated(pos)
 signal info_updated(info)
 

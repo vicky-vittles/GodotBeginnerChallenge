@@ -1,0 +1,66 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://libs/gt_menus/screens/__gt_simple_screen.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/ui/thaleah-s32-o2.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/ui/thaleah-s64-o8.tres" type="DynamicFont" id=3]
+[ext_resource path="res://menus/screens/screen_title.gd" type="Script" id=4]
+
+[node name="screen_title" instance=ExtResource( 1 )]
+script = ExtResource( 4 )
+
+[node name="vbox" parent="." index="0"]
+margin_left = -186.0
+margin_top = -110.5
+margin_right = 186.0
+margin_bottom = 110.5
+
+[node name="hbox" parent="vbox" index="0"]
+margin_right = 372.0
+margin_bottom = 221.0
+
+[node name="vbox" parent="vbox/hbox" index="0"]
+margin_right = 372.0
+margin_bottom = 221.0
+custom_constants/separation = 80
+
+[node name="title" type="Label" parent="vbox/hbox/vbox" index="0"]
+margin_right = 372.0
+margin_bottom = 59.0
+custom_fonts/font = ExtResource( 3 )
+text = "Shadow Clone"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="buttons" type="VBoxContainer" parent="vbox/hbox/vbox" index="1"]
+margin_top = 139.0
+margin_right = 372.0
+margin_bottom = 221.0
+custom_constants/separation = 10
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="play" type="Button" parent="vbox/hbox/vbox/buttons" index="0"]
+margin_right = 372.0
+margin_bottom = 36.0
+custom_fonts/font = ExtResource( 2 )
+text = "play"
+flat = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="quit" type="Button" parent="vbox/hbox/vbox/buttons" index="1"]
+margin_top = 46.0
+margin_right = 372.0
+margin_bottom = 82.0
+custom_fonts/font = ExtResource( 2 )
+text = "quit"
+flat = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[connection signal="pressed" from="vbox/hbox/vbox/buttons/play" to="." method="emit_signal" binds= [ "button_play" ]]
+[connection signal="pressed" from="vbox/hbox/vbox/buttons/quit" to="." method="emit_signal" binds= [ "button_quit" ]]

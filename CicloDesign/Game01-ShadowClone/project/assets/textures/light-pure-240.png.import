@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/spotlight.png-5506da904485951e178be0aadcdc0d27.stex"
+path="res://.import/light-pure-240.png-eef7d08d2b31a1e2b9ee65da515ef4d5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/spotlight.png"
-dest_files=[ "res://.import/spotlight.png-5506da904485951e178be0aadcdc0d27.stex" ]
+source_file="res://assets/textures/light-pure-240.png"
+dest_files=[ "res://.import/light-pure-240.png-eef7d08d2b31a1e2b9ee65da515ef4d5.stex" ]
 
 [params]
 

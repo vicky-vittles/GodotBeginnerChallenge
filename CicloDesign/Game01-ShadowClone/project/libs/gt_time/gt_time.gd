@@ -18,3 +18,9 @@ func pause_time(seconds: float = 0.0) -> void:
 
 func resume_time() -> void:
 	get_tree().paused = false
+
+func slow_time(speed: float = 1.0) -> void:
+	Engine.time_scale = speed
+
+func normalize_time() -> void:
+	Engine.time_scale = 1.0
