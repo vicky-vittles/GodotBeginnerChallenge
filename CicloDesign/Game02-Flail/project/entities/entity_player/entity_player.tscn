@@ -1,0 +1,84 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://entities/entity_player/entity_player.gd" type="Script" id=1]
+[ext_resource path="res://components/mobile_accelerometer_controller/mobile_shake_controller/mobile_shake_controller.tscn" type="PackedScene" id=2]
+[ext_resource path="res://addons/regular_polygon2d_node/RegularPolygon2D.gd" type="Script" id=3]
+[ext_resource path="res://libs/gt_topdown_entity_mover_2d/gt_topdown_entity_mover_2d.gd" type="Script" id=4]
+[ext_resource path="res://addons/Trail/trail_2d.gd" type="Script" id=5]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 42.0
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 0 ), 0.0, 1.0, 0, 1, Vector2( 1, 1 ), 1.0, 0.0, 1, 0 ]
+
+[sub_resource type="Gradient" id=3]
+colors = PoolColorArray( 1, 0.466667, 0.466667, 0.0299625, 1, 0.466667, 0.466667, 1 )
+
+[node name="Player" type="Node2D"]
+script = ExtResource( 1 )
+entity_type = 1
+
+[node name="MobileShakeController" parent="." instance=ExtResource( 2 )]
+min_movement = Vector2( 6, 6 )
+grace_time_threshold = 0.7
+grace_time = 0.1
+
+[node name="Body" type="KinematicBody2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="EntityMover" type="Node" parent="Body"]
+script = ExtResource( 4 )
+body_path = NodePath("..")
+MAX_SPEED = 2000
+TIME_TO_MAX_SPEED = 0.05
+TIME_TO_ZERO_SPEED = 5.0
+bounce = 1.0
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Body"]
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="graphics" type="Node2D" parent="Body"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="move_trail" type="Line2D" parent="Body/graphics"]
+width = 80.0
+width_curve = SubResource( 2 )
+default_color = Color( 1, 0.466667, 0.466667, 1 )
+gradient = SubResource( 3 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_lock_": true
+}
+distance = 5.0
+segments = 30
+
+[node name="shadow" type="Node2D" parent="Body/graphics"]
+visible = false
+position = Vector2( 5, -8.5 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+centered = true
+num_sides = 4
+size = 128.0
+
+[node name="circle" type="Node2D" parent="Body/graphics"]
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+centered = true
+num_sides = 4
+size = 128.0
+polygon_color = Color( 1, 0.466667, 0.466667, 1 )

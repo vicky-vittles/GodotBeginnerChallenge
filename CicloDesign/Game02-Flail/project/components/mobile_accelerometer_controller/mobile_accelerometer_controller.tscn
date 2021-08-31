@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://components/mobile_accelerometer_controller/mobile_accelerometer_controller.gd" type="Script" id=1]
+
+[node name="MobileAccelerometerController" type="Node"]
+script = ExtResource( 1 )
