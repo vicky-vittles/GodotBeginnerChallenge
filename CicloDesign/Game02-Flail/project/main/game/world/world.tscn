@@ -63,7 +63,7 @@ entity_template = ExtResource( 2 )
 is_independent_entity = false
 
 [node name="EnemySpawnTimer" type="Timer" parent="SpawnManager"]
-autostart = true
+one_shot = true
 
 [node name="EnemySpawnZone" type="Node2D" parent="SpawnManager"]
 script = ExtResource( 5 )

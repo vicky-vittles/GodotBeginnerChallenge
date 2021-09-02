@@ -8,10 +8,12 @@ export (NodePath) var body_path
 onready var body = get_node(body_path)
 
 export (int) var MAX_SPEED = 128
+export (int) var MAX_ACC_SPEED = 128
+export (int) var MAX_DEC_SPEED = 128
 export (float) var TIME_TO_MAX_SPEED = 0.5
 export (float) var TIME_TO_ZERO_SPEED = 2.0
-onready var MOVE_ACCELERATION = MAX_SPEED / TIME_TO_MAX_SPEED
-onready var MOVE_DECELERATION = MAX_SPEED / TIME_TO_ZERO_SPEED
+onready var MOVE_ACCELERATION = MAX_ACC_SPEED / TIME_TO_MAX_SPEED
+onready var MOVE_DECELERATION = MAX_DEC_SPEED / TIME_TO_ZERO_SPEED
 
 export (float) var bounce = 0.0
 
