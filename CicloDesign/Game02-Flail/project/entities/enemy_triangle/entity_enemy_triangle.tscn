@@ -1,0 +1,147 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://libs/gt_area_2d/gt_trigger_area_2d/gt_trigger_area_2d.gd" type="Script" id=1]
+[ext_resource path="res://addons/regular_polygon2d_node/RegularPolygon2D.gd" type="Script" id=2]
+[ext_resource path="res://entities/enemy_triangle/entity_enemy_triangle.gd" type="Script" id=3]
+[ext_resource path="res://components/steering_ai_entity_mover/behaviors/steering_ai_seek_behavior.gd" type="Script" id=4]
+[ext_resource path="res://entities/enemy_triangle/components/entity_enemy_triangle_body.gd" type="Script" id=5]
+[ext_resource path="res://libs/gt_state_machine/gt_state_machine.gd" type="Script" id=6]
+[ext_resource path="res://entities/enemy_triangle/states/enemy_triangle_dead.gd" type="Script" id=7]
+[ext_resource path="res://entities/enemy_triangle/states/enemy_triangle_alive.gd" type="Script" id=8]
+[ext_resource path="res://libs/gt_state_machine/__gt_state_transition.gd" type="Script" id=9]
+[ext_resource path="res://components/steering_ai_entity_mover/steering_ai_entity_mover.gd" type="Script" id=10]
+[ext_resource path="res://components/steering_ai_entity_mover/behaviors/steering_ai_wander_behavior.gd" type="Script" id=11]
+[ext_resource path="res://entities/enemy_triangle/components/entity_enemy_triangle_target_manager.gd" type="Script" id=12]
+
+[sub_resource type="Animation" id=2]
+resource_name = "default"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "die"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[node name="EnemyTriangle" type="Node2D"]
+script = ExtResource( 3 )
+entity_type = 2
+max_speed = 192.0
+max_force = 128.0
+
+[node name="Body" type="KinematicBody2D" parent="."]
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="EntityMover" type="Node" parent="Body"]
+script = ExtResource( 10 )
+body_path = NodePath("..")
+
+[node name="Seek" type="Node" parent="Body/EntityMover"]
+script = ExtResource( 4 )
+actor_path = NodePath("..")
+
+[node name="Wander" type="Node" parent="Body/EntityMover"]
+script = ExtResource( 11 )
+actor_path = NodePath("..")
+circle_distance = 64
+circle_radius = 64
+angle_change = 10.0
+
+[node name="graphics" type="Node2D" parent="Body"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="triangle" type="Node2D" parent="Body/graphics"]
+scale = Vector2( 1, 1.5 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+centered = true
+size = 38.0
+polygon_color = Color( 1, 0.807843, 0.588235, 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Body/graphics"]
+autoplay = "default"
+anims/default = SubResource( 2 )
+anims/die = SubResource( 1 )
+
+[node name="Triggers" type="Node2D" parent="Body"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="DamageHurtbox" type="Area2D" parent="Body/Triggers" groups=[
+"entity_enemy_triangle",
+]]
+collision_layer = 16
+collision_mask = 16
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+collidable_groups = [ "entity_player" ]
+
+[node name="CollisionPolygon" type="CollisionPolygon2D" parent="Body/Triggers/DamageHurtbox"]
+visible = false
+polygon = PoolVector2Array( -16, 14, 0, -29, 16, 14 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="TargetManager" type="Node" parent="."]
+script = ExtResource( 12 )
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 6 )
+actor_path = NodePath("..")
+
+[node name="Alive" type="Node" parent="StateMachine"]
+script = ExtResource( 8 )
+fsm_path = NodePath("..")
+
+[node name="ToDead" type="Node" parent="StateMachine/Alive"]
+script = ExtResource( 9 )
+end_state_path = NodePath("../../Dead")
+
+[node name="Dead" type="Node" parent="StateMachine"]
+script = ExtResource( 7 )
+fsm_path = NodePath("..")
+
+[node name="ToAlive" type="Node" parent="StateMachine/Dead"]
+script = ExtResource( 9 )
+end_state_path = NodePath("../../Alive")
+
+[connection signal="tree_entered" from="Body/EntityMover" to="." method="_on_EntityMover_tree_entered"]
+[connection signal="effect" from="Body/Triggers/DamageHurtbox" to="StateMachine/Alive/ToDead" method="do_transition"]
+[connection signal="target_updated" from="TargetManager" to="StateMachine/Alive" method="_on_TargetManager_target_updated"]
+[connection signal="tree_entered" from="TargetManager" to="." method="_on_TargetManager_tree_entered"]
+[connection signal="reached_target" from="StateMachine/Alive" to="TargetManager" method="advance_target" binds= [ true ]]
+[connection signal="died" from="StateMachine/Dead" to="." method="_on_Dead_died"]
+[connection signal="died" from="StateMachine/Dead" to="Body/graphics/AnimationPlayer" method="play" binds= [ "die" ]]

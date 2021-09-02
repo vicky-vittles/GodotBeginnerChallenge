@@ -125,6 +125,26 @@ _global_script_classes=[ {
 "path": "res://components/mobile_accelerometer_controller/mobile_shake_controller/mobile_shake_controller.gd"
 }, {
 "base": "Node",
+"class": "SteeringAIBehavior",
+"language": "GDScript",
+"path": "res://components/steering_ai_entity_mover/__steering_ai_behavior.gd"
+}, {
+"base": "Node",
+"class": "SteeringAIEntityMover",
+"language": "GDScript",
+"path": "res://components/steering_ai_entity_mover/steering_ai_entity_mover.gd"
+}, {
+"base": "SteeringAIBehavior",
+"class": "SteeringAISeekBehavior",
+"language": "GDScript",
+"path": "res://components/steering_ai_entity_mover/behaviors/steering_ai_seek_behavior.gd"
+}, {
+"base": "SteeringAIBehavior",
+"class": "SteeringAIWanderBehavior",
+"language": "GDScript",
+"path": "res://components/steering_ai_entity_mover/behaviors/steering_ai_wander_behavior.gd"
+}, {
+"base": "Node",
 "class": "SwipeGestureController",
 "language": "GDScript",
 "path": "res://components/swipe_gesture_controller/swipe_gesture_controller.gd"
@@ -153,6 +173,10 @@ _global_script_class_icons={
 "GTTriggerArea2D": "",
 "MobileAccelerometerController": "res://libs/gt_input_controller/icons/gt_device_controller.svg",
 "MobileShakeController": "",
+"SteeringAIBehavior": "",
+"SteeringAIEntityMover": "",
+"SteeringAISeekBehavior": "",
+"SteeringAIWanderBehavior": "",
 "SwipeGestureController": "res://libs/gt_input_controller/icons/gt_device_controller.svg"
 }
 

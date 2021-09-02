@@ -57,6 +57,11 @@ func _on_body_exited(body: Node) -> void:
 		collider_body = null
 		emit_signal("grouped_body_exited", body)
 
+func enable_all_shapes() -> void:
+	for child in get_children():
+		if child is CollisionShape2D:
+			child.set_deferred("disabled", false)
+
 func disable_all_shapes() -> void:
 	for child in get_children():
 		if child is CollisionShape2D:

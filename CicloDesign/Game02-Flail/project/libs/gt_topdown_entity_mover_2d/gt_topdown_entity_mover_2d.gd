@@ -1,6 +1,9 @@
 extends Node
 class_name GTTopdownEntityMover2D
 
+signal position_updated(position)
+signal velocity_updated(velocity)
+
 export (NodePath) var body_path
 onready var body = get_node(body_path)
 
@@ -44,6 +47,8 @@ func move(delta):
 	var collision = body.move_and_collide(velocity * delta)
 	if collision:
 		velocity = velocity.bounce(collision.normal) * bounce
+	emit_signal("position_updated", body.global_position)
+	emit_signal("velocity_updated", velocity)
 
 func freeze(preserve_momentum: bool = true):
 	if not preserve_momentum:

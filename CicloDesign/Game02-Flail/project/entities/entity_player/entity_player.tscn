@@ -1,13 +1,15 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://entities/entity_player/entity_player.gd" type="Script" id=1]
 [ext_resource path="res://components/mobile_accelerometer_controller/mobile_shake_controller/mobile_shake_controller.tscn" type="PackedScene" id=2]
 [ext_resource path="res://addons/regular_polygon2d_node/RegularPolygon2D.gd" type="Script" id=3]
 [ext_resource path="res://libs/gt_topdown_entity_mover_2d/gt_topdown_entity_mover_2d.gd" type="Script" id=4]
 [ext_resource path="res://addons/Trail/trail_2d.gd" type="Script" id=5]
+[ext_resource path="res://entities/entity_player/components/entity_player_damage_hitbox.gd" type="Script" id=6]
+[ext_resource path="res://components/debug_controller/debug_controller.tscn" type="PackedScene" id=7]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 42.0
+radius = 40.0
 
 [sub_resource type="Curve" id=2]
 _data = [ Vector2( 0, 0 ), 0.0, 1.0, 0, 1, Vector2( 1, 1 ), 1.0, 0.0, 1, 0 ]
@@ -15,9 +17,15 @@ _data = [ Vector2( 0, 0 ), 0.0, 1.0, 0, 1, Vector2( 1, 1 ), 1.0, 0.0, 1, 0 ]
 [sub_resource type="Gradient" id=3]
 colors = PoolColorArray( 1, 0.466667, 0.466667, 0.0299625, 1, 0.466667, 0.466667, 1 )
 
+[sub_resource type="CircleShape2D" id=4]
+radius = 52.0
+
 [node name="Player" type="Node2D"]
 script = ExtResource( 1 )
 entity_type = 1
+
+[node name="DebugController" parent="." instance=ExtResource( 7 )]
+is_active = false
 
 [node name="MobileShakeController" parent="." instance=ExtResource( 2 )]
 min_movement = Vector2( 6, 6 )
@@ -34,9 +42,9 @@ __meta__ = {
 [node name="EntityMover" type="Node" parent="Body"]
 script = ExtResource( 4 )
 body_path = NodePath("..")
-MAX_SPEED = 2000
+MAX_SPEED = 2500
 TIME_TO_MAX_SPEED = 0.05
-TIME_TO_ZERO_SPEED = 5.0
+TIME_TO_ZERO_SPEED = 4.0
 bounce = 1.0
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Body"]
@@ -73,7 +81,7 @@ centered = true
 num_sides = 4
 size = 128.0
 
-[node name="circle" type="Node2D" parent="Body/graphics"]
+[node name="diamond" type="Node2D" parent="Body/graphics"]
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
@@ -82,3 +90,27 @@ centered = true
 num_sides = 4
 size = 128.0
 polygon_color = Color( 1, 0.466667, 0.466667, 1 )
+
+[node name="Triggers" type="Node2D" parent="Body"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="DamageHitbox" type="Area2D" parent="Body/Triggers" groups=[
+"entity_player",
+]]
+collision_layer = 16
+collision_mask = 16
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Triggers/DamageHitbox"]
+visible = false
+shape = SubResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[connection signal="velocity_updated" from="Body/EntityMover" to="Body/Triggers/DamageHitbox" method="_on_EntityMover_velocity_updated"]
