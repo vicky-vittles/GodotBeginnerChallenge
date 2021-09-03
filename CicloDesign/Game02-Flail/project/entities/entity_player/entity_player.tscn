@@ -25,14 +25,10 @@ script = ExtResource( 1 )
 entity_type = 1
 
 [node name="DebugController" parent="." instance=ExtResource( 7 )]
-is_active = false
 
 [node name="MobileShakeController" parent="." instance=ExtResource( 2 )]
-min_movement = Vector2( 5, 5 )
-movement_mask = Vector2( 1, 0 )
-grace_time_threshold = 0.9
-grace_time = 0.05
-debug_mode = true
+is_active = false
+movement_threshold = 6.0
 
 [node name="Body" type="KinematicBody2D" parent="."]
 collision_layer = 4
@@ -44,10 +40,10 @@ __meta__ = {
 [node name="EntityMover" type="Node" parent="Body"]
 script = ExtResource( 4 )
 body_path = NodePath("..")
-MAX_SPEED = 2500
-MAX_ACC_SPEED = 2500
-MAX_DEC_SPEED = 2500
-TIME_TO_MAX_SPEED = 0.2
+MAX_SPEED = 3000
+MAX_ACC_SPEED = 3000
+MAX_DEC_SPEED = 3000
+TIME_TO_MAX_SPEED = 0.01
 TIME_TO_ZERO_SPEED = 5.0
 bounce = 1.0
 

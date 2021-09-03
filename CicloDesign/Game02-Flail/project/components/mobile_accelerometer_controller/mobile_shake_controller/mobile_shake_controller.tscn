@@ -6,7 +6,7 @@
 [node name="MobileShakeController" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
-[node name="GraceTimer" type="Timer" parent="." index="0"]
+[node name="CooldownTimer" type="Timer" parent="." index="0"]
 one_shot = true
 
 [connection signal="updated_direction" from="." to="." method="_on_updated_direction"]

@@ -2,8 +2,8 @@ extends GTEntity2D
 
 signal died()
 
-var targets
-export (float) var max_speed = 128
+var targets : Array
+var max_speed : float
 export (float) var max_force = 64
 
 onready var body = $Body

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://entities/entity_player/entity_player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/enemy_triangle/entity_enemy_triangle.tscn" type="PackedScene" id=2]
@@ -8,18 +8,22 @@
 [ext_resource path="res://main/game/world/components/world_spawn_manager.gd" type="Script" id=6]
 [ext_resource path="res://main/game/world/components/world_enemy_spawner.gd" type="Script" id=7]
 [ext_resource path="res://main/game/world/components/world_entities.gd" type="Script" id=8]
+[ext_resource path="res://main/game/world/components/world_wave_manager.gd" type="Script" id=9]
+[ext_resource path="res://libs/gt_timer/gt_timer.gd" type="Script" id=10]
+[ext_resource path="res://libs/gt_points/gt_points.gd" type="Script" id=11]
+[ext_resource path="res://libs/gt_formula/gt_formula.gd" type="Script" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 710, 100 )
+extents = Vector2( 370, 50 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 710, 100 )
+extents = Vector2( 370, 50 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 170, 580 )
+extents = Vector2( 50, 480 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 170, 580 )
+extents = Vector2( 50, 480 )
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 810, 200 )
@@ -52,57 +56,85 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="SpawnManager" type="Node" parent="."]
-script = ExtResource( 6 )
-world_path = NodePath("..")
+[node name="WaveManager" type="Node" parent="."]
+script = ExtResource( 9 )
+WAVE_DURATIONS = {
+1: 30
+}
+ENEMY_SPEED = {
+1: 160
+}
 
-[node name="EnemySpawner" parent="SpawnManager" instance=ExtResource( 3 )]
+[node name="DurationTimer" type="Timer" parent="WaveManager"]
+one_shot = true
+script = ExtResource( 10 )
+
+[node name="RestTimer" type="Timer" parent="WaveManager"]
+one_shot = true
+script = ExtResource( 10 )
+
+[node name="SpawnTimer" type="Timer" parent="WaveManager"]
+wait_time = 2.0
+one_shot = true
+
+[node name="EnemiesKilled" type="Node" parent="WaveManager"]
+script = ExtResource( 11 )
+
+[node name="AllEnemiesKilledFormula" type="Node" parent="WaveManager"]
+script = ExtResource( 12 )
+
+[node name="SpawnManager" type="Node" parent="WaveManager"]
+script = ExtResource( 6 )
+enemy_random_speed = 0.3
+world_path = NodePath("../..")
+
+[node name="EnemySpawner" parent="WaveManager/SpawnManager" instance=ExtResource( 3 )]
 script = ExtResource( 7 )
-actor_path = NodePath("../../Entities")
+actor_path = NodePath("../../../Entities")
 entity_template = ExtResource( 2 )
 is_independent_entity = false
 
-[node name="EnemySpawnTimer" type="Timer" parent="SpawnManager"]
-one_shot = true
-
-[node name="EnemySpawnZone" type="Node2D" parent="SpawnManager"]
+[node name="EnemySpawnZone" type="Node2D" parent="WaveManager/SpawnManager"]
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
 }
 
-[node name="1" type="CollisionShape2D" parent="SpawnManager/EnemySpawnZone"]
+[node name="1" type="CollisionShape2D" parent="WaveManager/SpawnManager/EnemySpawnZone"]
 visible = false
-position = Vector2( 270, -200 )
+position = Vector2( 270, -50 )
 shape = SubResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="2" type="CollisionShape2D" parent="SpawnManager/EnemySpawnZone"]
+[node name="2" type="CollisionShape2D" parent="WaveManager/SpawnManager/EnemySpawnZone"]
 visible = false
-position = Vector2( 270, 1160 )
+position = Vector2( 270, 1010 )
 shape = SubResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="3" type="CollisionShape2D" parent="SpawnManager/EnemySpawnZone"]
+[node name="3" type="CollisionShape2D" parent="WaveManager/SpawnManager/EnemySpawnZone"]
 visible = false
-position = Vector2( 810, 480 )
+position = Vector2( 590, 480 )
 shape = SubResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="4" type="CollisionShape2D" parent="SpawnManager/EnemySpawnZone"]
+[node name="4" type="CollisionShape2D" parent="WaveManager/SpawnManager/EnemySpawnZone"]
 visible = false
-position = Vector2( -270, 480 )
+position = Vector2( -50, 480 )
 shape = SubResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="TotalEnemiesKilled" type="Node" parent="."]
+script = ExtResource( 11 )
 
 [node name="Terrain" type="StaticBody2D" parent="."]
 collision_layer = 2
@@ -167,5 +199,17 @@ __meta__ = {
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 270, 480 )
 
-[connection signal="entity_spawned" from="SpawnManager/EnemySpawner" to="Entities" method="_on_EnemySpawner_entity_spawned"]
-[connection signal="timeout" from="SpawnManager/EnemySpawnTimer" to="SpawnManager" method="spawn_enemy"]
+[connection signal="enemy_spawn_timeout" from="WaveManager" to="WaveManager/SpawnManager" method="spawn_enemy"]
+[connection signal="rest_ended" from="WaveManager" to="WaveManager/EnemiesKilled" method="clear_points"]
+[connection signal="wave_ended" from="WaveManager" to="WaveManager/AllEnemiesKilledFormula" method="validate"]
+[connection signal="wave_updated" from="WaveManager" to="." method="_on_WaveManager_wave_updated"]
+[connection signal="time_left_updated" from="WaveManager/DurationTimer" to="." method="_on_DurationTimer_time_left_updated"]
+[connection signal="timeout" from="WaveManager/DurationTimer" to="WaveManager" method="_on_DurationTimer_timeout"]
+[connection signal="time_left_updated" from="WaveManager/RestTimer" to="." method="_on_RestTimer_time_left_updated"]
+[connection signal="timeout" from="WaveManager/RestTimer" to="WaveManager" method="_on_RestTimer_timeout"]
+[connection signal="timeout" from="WaveManager/SpawnTimer" to="WaveManager" method="_on_SpawnTimer_timeout"]
+[connection signal="failed" from="WaveManager/AllEnemiesKilledFormula" to="." method="_on_AllEnemiesKilledFormula_failed"]
+[connection signal="succeded" from="WaveManager/AllEnemiesKilledFormula" to="." method="_on_AllEnemiesKilledFormula_succeded"]
+[connection signal="entity_spawned" from="WaveManager/SpawnManager/EnemySpawner" to="Entities" method="_on_EnemySpawner_entity_spawned"]
+[connection signal="enemy_died" from="Entities" to="TotalEnemiesKilled" method="gain_points" binds= [ 1 ]]
+[connection signal="enemy_died" from="Entities" to="WaveManager/EnemiesKilled" method="gain_points" binds= [ 1 ]]

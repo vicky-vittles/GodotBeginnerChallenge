@@ -47,8 +47,6 @@ tracks/0/keys = {
 [node name="EnemyTriangle" type="Node2D"]
 script = ExtResource( 3 )
 entity_type = 2
-max_speed = 192.0
-max_force = 128.0
 
 [node name="Body" type="KinematicBody2D" parent="."]
 script = ExtResource( 5 )
@@ -142,5 +140,5 @@ end_state_path = NodePath("../../Alive")
 [connection signal="target_updated" from="TargetManager" to="StateMachine/Alive" method="_on_TargetManager_target_updated"]
 [connection signal="tree_entered" from="TargetManager" to="." method="_on_TargetManager_tree_entered"]
 [connection signal="reached_target" from="StateMachine/Alive" to="TargetManager" method="advance_target" binds= [ true ]]
-[connection signal="died" from="StateMachine/Dead" to="." method="_on_Dead_died"]
 [connection signal="died" from="StateMachine/Dead" to="Body/graphics/AnimationPlayer" method="play" binds= [ "die" ]]
+[connection signal="died" from="StateMachine/Dead" to="." method="_on_Dead_died"]
