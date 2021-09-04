@@ -200,12 +200,12 @@ one_shot = true
 [node name="app_manager" type="Node" parent="."]
 script = ExtResource( 5 )
 
-[connection signal="enemy_died" from="World" to="HUD/root/total_enemies_killed" method="change_scale" binds= [ Vector2( 1.5, 1.5 ), Vector2( 1, 1 ), 0.2 ]]
 [connection signal="enemy_died" from="World" to="Camera/AnimationPlayer" method="play" binds= [ "zoom_out" ]]
+[connection signal="enemy_died" from="World" to="HUD/root/total_enemies_killed" method="change_scale" binds= [ Vector2( 1.5, 1.5 ), Vector2( 1, 1 ), 0.2 ]]
 [connection signal="player_collided" from="World" to="Camera/ScreenShake" method="shake_with_collision"]
-[connection signal="player_died" from="World" to="Timers/GameOverTimer" method="start"]
-[connection signal="player_died" from="World" to="Camera/ScreenShake" method="shake_simple" binds= [ 32.0, 1.0, 0.1 ]]
 [connection signal="player_died" from="World" to="Camera/AnimationPlayer" method="play" binds= [ "zoom_out" ]]
+[connection signal="player_died" from="World" to="Camera/ScreenShake" method="shake_simple" binds= [ 32.0, 1.0, 0.1 ]]
+[connection signal="player_died" from="World" to="Timers/GameOverTimer" method="start"]
 [connection signal="total_enemies_killed_updated" from="World" to="HUD/root/total_enemies_killed/total_enemies_killed_label" method="apply_text_simple"]
 [connection signal="timeout" from="Timers/GameOverTimer" to="menu_ingame" method="game_over"]
 [connection signal="timeout" from="Timers/GameOverTimer" to="HUD/root/AnimationPlayer" method="play" binds= [ "fade_to_black" ]]

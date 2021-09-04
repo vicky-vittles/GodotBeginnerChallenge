@@ -33,7 +33,7 @@ margin_right = 399.0
 margin_bottom = 525.0
 custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color = Color( 0.945098, 0.94902, 0.854902, 1 )
-text = "Shake phone
+text = "Move mouse
 to move the ball
 
 

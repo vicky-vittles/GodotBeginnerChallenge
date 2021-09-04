@@ -144,6 +144,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://components/mobile_accelerometer_controller/mobile_accelerometer_controller.gd"
 }, {
+"base": "Node",
+"class": "MobileAccelerometerMouseController",
+"language": "GDScript",
+"path": "res://components/mobile_accelerometer_mouse_controller/mobile_accelerometer_mouse_controller.gd"
+}, {
 "base": "MobileAccelerometerController",
 "class": "MobileShakeController",
 "language": "GDScript",
@@ -202,6 +207,7 @@ _global_script_class_icons={
 "GTTopdownEntityMover2D": "",
 "GTTriggerArea2D": "",
 "MobileAccelerometerController": "res://libs/gt_input_controller/icons/gt_device_controller.svg",
+"MobileAccelerometerMouseController": "res://libs/gt_input_controller/icons/gt_device_controller.svg",
 "MobileShakeController": "",
 "SteeringAIBehavior": "",
 "SteeringAIEntityMover": "",
@@ -272,6 +278,11 @@ act_move_up={
 act_move_down={
 "deadzone": 0.5,
 "events": [  ]
+}
+sys_escape={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777217,"unicode":0,"echo":false,"script":null)
+ ]
 }
 
 [input_devices]
