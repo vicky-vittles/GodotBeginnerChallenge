@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://entities/entity_player/entity_player.gd" type="Script" id=1]
 [ext_resource path="res://components/mobile_accelerometer_controller/mobile_shake_controller/mobile_shake_controller.tscn" type="PackedScene" id=2]
@@ -6,12 +6,11 @@
 [ext_resource path="res://libs/gt_topdown_entity_mover_2d/gt_topdown_entity_mover_2d.gd" type="Script" id=4]
 [ext_resource path="res://addons/Trail/trail_2d.gd" type="Script" id=5]
 [ext_resource path="res://entities/entity_player/components/vibration_manager.gd" type="Script" id=6]
-[ext_resource path="res://components/debug_controller/debug_controller.tscn" type="PackedScene" id=7]
 [ext_resource path="res://libs/gt_juice_2d/gt_juice_2d.gd" type="Script" id=8]
 [ext_resource path="res://entities/entity_player/components/entity_player_body.gd" type="Script" id=9]
 [ext_resource path="res://libs/gt_state_machine/gt_state_machine.gd" type="Script" id=10]
 [ext_resource path="res://entities/entity_player/states/entity_player_asleep.gd" type="Script" id=11]
-[ext_resource path="res://entities/entity_player/states/entity_player_inactive.gd" type="Script" id=12]
+[ext_resource path="res://libs/gt_health/gt_health.gd" type="Script" id=12]
 [ext_resource path="res://entities/entity_player/states/entity_player_active.gd" type="Script" id=13]
 [ext_resource path="res://entities/entity_player/states/entity_player_dead.gd" type="Script" id=14]
 [ext_resource path="res://libs/gt_state_machine/__gt_state_transition.gd" type="Script" id=15]
@@ -21,6 +20,7 @@
 [ext_resource path="res://libs/gt_audio_player/gt_audio_player.gd" type="Script" id=19]
 [ext_resource path="res://entities/entity_player/assets/player-die.wav" type="AudioStream" id=20]
 [ext_resource path="res://assets/audio/hit.wav" type="AudioStream" id=21]
+[ext_resource path="res://entities/entity_player/components/entity_player_graphics.gd" type="Script" id=23]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 40.0
@@ -47,7 +47,7 @@ tracks/0/keys = {
 "values": [ false ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("../juice_squash/juice_collision:modulate")
+tracks/1/path = NodePath("../sized_diamond/juice_squash/juice_collision:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -87,7 +87,7 @@ tracks/0/keys = {
 "values": [ true ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("../juice_squash/juice_collision:modulate")
+tracks/1/path = NodePath("../sized_diamond/juice_squash/juice_collision:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -126,48 +126,9 @@ tracks/3/keys = {
 }
 
 [sub_resource type="Animation" id=6]
-length = 0.2
-tracks/0/type = "value"
-tracks/0/path = NodePath("juice_squash/juice_collision/diamond:polygon_color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 0.945098, 0.94902, 0.854902, 1 ), Color( 1, 0.466667, 0.466667, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("move_trail:default_color")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 0.945098, 0.94902, 0.854902, 1 ), Color( 1, 0.466667, 0.466667, 1 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("particles:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 0.945098, 0.94902, 0.854902, 1 ), Color( 1, 0.466667, 0.466667, 1 ) ]
-}
-
-[sub_resource type="Animation" id=7]
 length = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("juice_squash/juice_collision/diamond:polygon_color")
+tracks/0/path = NodePath("sized_diamond/juice_squash/juice_collision/diamond:polygon_color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -176,7 +137,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 0.945098, 0.94902, 0.854902, 1 ) ]
+"values": [ Color( 1, 0.466667, 0.466667, 1 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("move_trail:default_color")
@@ -188,10 +149,10 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 0.945098, 0.94902, 0.854902, 1 ) ]
+"values": [ Color( 1, 0.466667, 0.466667, 1 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("particles:modulate")
+tracks/2/path = NodePath("sized_diamond:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -200,67 +161,26 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 0.945098, 0.94902, 0.854902, 1 ) ]
+"values": [ Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=8]
-length = 0.2
-tracks/0/type = "value"
-tracks/0/path = NodePath("juice_squash/juice_collision/diamond:polygon_color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 0.466667, 0.466667, 1 ), Color( 0.945098, 0.94902, 0.854902, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("move_trail:default_color")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 0.466667, 0.466667, 1 ), Color( 0.945098, 0.94902, 0.854902, 1 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("particles:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 0.466667, 0.466667, 1 ), Color( 0.945098, 0.94902, 0.854902, 1 ) ]
-}
-
-[sub_resource type="CircleShape2D" id=9]
+[sub_resource type="CircleShape2D" id=7]
 radius = 52.0
-
-[sub_resource type="CircleShape2D" id=10]
-radius = 40.0
 
 [node name="Player" type="Node2D"]
 script = ExtResource( 1 )
 entity_type = 1
+diamond_scale_min = Vector2( 0.2, 0.2 )
 min_speed_for_damage = 500
-
-[node name="DebugController" parent="." instance=ExtResource( 7 )]
-is_active = false
 
 [node name="MobileShakeController" parent="." instance=ExtResource( 2 )]
 movement_threshold = 6.0
 
 [node name="VibrationManager" type="Node" parent="."]
 script = ExtResource( 6 )
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource( 12 )
 
 [node name="Body" type="KinematicBody2D" parent="."]
 collision_layer = 4
@@ -289,12 +209,14 @@ __meta__ = {
 }
 
 [node name="graphics" type="Node2D" parent="Body"]
+script = ExtResource( 23 )
 __meta__ = {
 "_edit_lock_": true
 }
+actor_path = NodePath("../..")
+color_threshold = 0.6
 
 [node name="move_trail" type="Line2D" parent="Body/graphics"]
-modulate = Color( 1, 1, 1, 0 )
 width = 80.0
 width_curve = SubResource( 2 )
 default_color = Color( 1, 0.466667, 0.466667, 1 )
@@ -305,20 +227,25 @@ __meta__ = {
 distance = 5.0
 segments = 15
 
-[node name="juice_squash" type="Node2D" parent="Body/graphics"]
+[node name="sized_diamond" type="Node2D" parent="Body/graphics"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="juice_squash" type="Node2D" parent="Body/graphics/sized_diamond"]
+scale = Vector2( 1.25, 1.25 )
 script = ExtResource( 8 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="juice_collision" type="Node2D" parent="Body/graphics/juice_squash"]
-modulate = Color( 1, 1, 1, 0 )
+[node name="juice_collision" type="Node2D" parent="Body/graphics/sized_diamond/juice_squash"]
 script = ExtResource( 8 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="shadow" type="Node2D" parent="Body/graphics/juice_squash/juice_collision"]
+[node name="shadow" type="Node2D" parent="Body/graphics/sized_diamond/juice_squash/juice_collision"]
 visible = false
 position = Vector2( 5, -8.5 )
 script = ExtResource( 3 )
@@ -329,7 +256,8 @@ centered = true
 num_sides = 4
 size = 128.0
 
-[node name="diamond" type="Node2D" parent="Body/graphics/juice_squash/juice_collision"]
+[node name="diamond" type="Node2D" parent="Body/graphics/sized_diamond/juice_squash/juice_collision"]
+scale = Vector2( 0.8, 0.8 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
@@ -340,7 +268,7 @@ size = 128.0
 polygon_color = Color( 1, 0.466667, 0.466667, 1 )
 
 [node name="particles" type="Node2D" parent="Body/graphics"]
-modulate = Color( 1, 0.466667, 0.466667, 1 )
+modulate = Color( 0.945098, 0.94902, 0.854902, 1 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -371,9 +299,7 @@ anims/die = SubResource( 5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Body/graphics"]
 autoplay = "default"
-anims/active = SubResource( 6 )
-anims/default = SubResource( 7 )
-anims/inactive = SubResource( 8 )
+anims/default = SubResource( 6 )
 
 [node name="Triggers" type="Node2D" parent="Body"]
 __meta__ = {
@@ -394,22 +320,7 @@ disable_on_ready = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Triggers/DamageHitbox"]
 visible = false
-shape = SubResource( 9 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="DamageHurtbox" type="Area2D" parent="Body/Triggers" groups=[
-"entity_player_hurtbox",
-]]
-collision_layer = 16
-collision_mask = 16
-script = ExtResource( 16 )
-collidable_groups = [ "entity_enemy_triangle_hitbox" ]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Triggers/DamageHurtbox"]
-visible = false
-shape = SubResource( 10 )
+shape = SubResource( 7 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -443,6 +354,9 @@ wait_time = 0.5
 one_shot = true
 autostart = true
 
+[node name="HealthTimer" type="Timer" parent="Timers"]
+wait_time = 0.1
+
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 10 )
 actor_path = NodePath("..")
@@ -451,49 +365,37 @@ actor_path = NodePath("..")
 script = ExtResource( 11 )
 fsm_path = NodePath("..")
 
-[node name="ToInactive" type="Node" parent="StateMachine/Asleep"]
-script = ExtResource( 15 )
-end_state_path = NodePath("../../Inactive")
-
-[node name="Inactive" type="Node" parent="StateMachine"]
-script = ExtResource( 12 )
-fsm_path = NodePath("..")
-
-[node name="ToActive" type="Node" parent="StateMachine/Inactive"]
+[node name="ToActive" type="Node" parent="StateMachine/Asleep"]
 script = ExtResource( 15 )
 end_state_path = NodePath("../../Active")
-
-[node name="ToDead" type="Node" parent="StateMachine/Inactive"]
-script = ExtResource( 15 )
-end_state_path = NodePath("../../Dead")
 
 [node name="Active" type="Node" parent="StateMachine"]
 script = ExtResource( 13 )
 fsm_path = NodePath("..")
 
-[node name="ToInactive" type="Node" parent="StateMachine/Active"]
+[node name="ToDead" type="Node" parent="StateMachine/Active"]
 script = ExtResource( 15 )
-end_state_path = NodePath("../../Inactive")
+end_state_path = NodePath("../../Dead")
 
 [node name="Dead" type="Node" parent="StateMachine"]
 script = ExtResource( 14 )
 fsm_path = NodePath("..")
 
 [connection signal="shook" from="MobileShakeController" to="VibrationManager" method="vibrate" binds= [ 50.0 ]]
-[connection signal="updated_faster_velocity" from="Body" to="StateMachine/Inactive/ToActive" method="do_transition"]
-[connection signal="updated_slower_velocity" from="Body" to="StateMachine/Active/ToInactive" method="do_transition"]
+[connection signal="died" from="Health" to="StateMachine/Active/ToDead" method="do_transition"]
+[connection signal="health_updated" from="Health" to="Body/graphics" method="_on_Health_health_updated"]
 [connection signal="collided" from="Body/EntityMover" to="." method="_on_EntityMover_collided"]
 [connection signal="has_collided" from="Body/EntityMover" to="SFX/hit_wall" method="play"]
-[connection signal="has_collided" from="Body/EntityMover" to="Body/graphics/juice_squash/juice_collision" method="change_scale" binds= [ Vector2( 1.35, 1.35 ), Vector2( 1, 1 ), 0.3 ]]
+[connection signal="has_collided" from="Body/EntityMover" to="Body/graphics/sized_diamond/juice_squash/juice_collision" method="change_scale" binds= [ Vector2( 1.35, 1.35 ), Vector2( 1, 1 ), 0.3 ]]
 [connection signal="velocity_updated" from="Body/EntityMover" to="Body" method="_on_EntityMover_velocity_updated"]
-[connection signal="effect" from="Body/Triggers/DamageHitbox" to="Body/graphics/juice_squash" method="squash_stretch" binds= [ 0.5, 0.3 ]]
-[connection signal="effect" from="Body/Triggers/DamageHurtbox" to="StateMachine/Inactive" method="_on_DamageHurtbox_effect"]
-[connection signal="timeout" from="Timers/SleepTimer" to="StateMachine/Asleep/ToInactive" method="do_transition"]
-[connection signal="state_entered" from="StateMachine/Inactive" to="Body/Triggers/DamageHitbox" method="disable_all_shapes"]
-[connection signal="took_damage" from="StateMachine/Inactive" to="StateMachine/Inactive/ToDead" method="do_transition"]
-[connection signal="transition_done" from="StateMachine/Inactive/ToActive" to="Body/graphics/AnimationPlayer" method="play" binds= [ "active" ]]
+[connection signal="effect" from="Body/Triggers/DamageHitbox" to="Health" method="gain_health" binds= [ 100 ]]
+[connection signal="effect" from="Body/Triggers/DamageHitbox" to="Body/graphics/sized_diamond/juice_squash" method="simple_squash_stretch"]
+[connection signal="timeout" from="Timers/SleepTimer" to="StateMachine/Asleep/ToActive" method="do_transition"]
+[connection signal="timeout" from="Timers/HealthTimer" to="Health" method="lose_health" binds= [ 4 ]]
+[connection signal="transition_done" from="StateMachine/Asleep/ToActive" to="Timers/HealthTimer" method="start"]
 [connection signal="state_entered" from="StateMachine/Active" to="Body/Triggers/DamageHitbox" method="enable_all_shapes"]
-[connection signal="transition_done" from="StateMachine/Active/ToInactive" to="Body/graphics/AnimationPlayer" method="play" binds= [ "inactive" ]]
+[connection signal="transition_done" from="StateMachine/Active/ToDead" to="Timers/HealthTimer" method="stop"]
 [connection signal="state_entered" from="StateMachine/Dead" to="SFX/hurt" method="play"]
 [connection signal="state_entered" from="StateMachine/Dead" to="Body/graphics/particles/AnimationPlayer" method="play" binds= [ "die" ]]
 [connection signal="state_entered" from="StateMachine/Dead" to="." method="_on_Dead_state_entered"]
+[connection signal="state_entered" from="StateMachine/Dead" to="Body/Triggers/DamageHitbox" method="disable_all_shapes"]

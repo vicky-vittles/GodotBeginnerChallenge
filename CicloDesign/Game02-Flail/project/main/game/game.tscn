@@ -1,15 +1,87 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://main/game/world/world.tscn" type="PackedScene" id=1]
 [ext_resource path="res://main/game/game.gd" type="Script" id=2]
 [ext_resource path="res://libs/gt_pattern_label/gt_pattern_label.gd" type="Script" id=3]
-[ext_resource path="res://assets/fonts/thaleah-s64-o4.tres" type="DynamicFont" id=4]
+[ext_resource path="res://menus/menus/menu_ingame/menu_ingame.tscn" type="PackedScene" id=4]
 [ext_resource path="res://main/application_manager.gd" type="Script" id=5]
 [ext_resource path="res://main/game/components/game_screen_shake.gd" type="Script" id=6]
 [ext_resource path="res://assets/fonts/diffusion-bold-s64-o4.tres" type="DynamicFont" id=7]
+[ext_resource path="res://libs/gt_juice_2d/gt_juice_2d.gd" type="Script" id=8]
 
 [sub_resource type="Animation" id=1]
 resource_name = "default"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("black_fade:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("total_enemies_killed:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "fade_from_black"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("black_fade:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0.654902 ), Color( 0, 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "fade_to_black"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("black_fade:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 0.654902 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("total_enemies_killed:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=4]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:zoom")
@@ -24,8 +96,7 @@ tracks/0/keys = {
 "values": [ Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "zoom_out"
+[sub_resource type="Animation" id=5]
 length = 0.2
 step = 0.05
 tracks/0/type = "value"
@@ -47,9 +118,11 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="menu_ingame" parent="." instance=ExtResource( 4 )]
 
-[node name="root" type="Control" parent="CanvasLayer"]
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="root" type="Control" parent="HUD"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -57,9 +130,32 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="total_enemies_killed_label" type="Label" parent="CanvasLayer/root"]
+[node name="black_fade" type="ColorRect" parent="HUD/root"]
 anchor_right = 1.0
-margin_bottom = 81.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="total_enemies_killed" type="Node2D" parent="HUD/root"]
+visible = false
+position = Vector2( 270, 40 )
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="total_enemies_killed_label" type="Label" parent="HUD/root/total_enemies_killed"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -38.0
+margin_top = -40.5
+margin_right = 38.0
+margin_bottom = 40.5
 custom_fonts/font = ExtResource( 7 )
 custom_colors/font_color = Color( 0.945098, 0.94902, 0.854902, 1 )
 text = "0"
@@ -67,90 +163,16 @@ align = 1
 valign = 1
 script = ExtResource( 3 )
 __meta__ = {
-"_edit_use_anchors_": false
-}
-pattern_text = "%s"
-
-[node name="time_label" type="Label" parent="CanvasLayer/root"]
-visible = false
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -32.0
-margin_right = 32.0
-margin_bottom = 59.0
-custom_fonts/font = ExtResource( 4 )
-text = "30"
-align = 1
-valign = 1
-script = ExtResource( 3 )
-__meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 pattern_text = "%s"
 
-[node name="enemies_remaining_label" type="Label" parent="CanvasLayer/root"]
-visible = false
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -50.0
-margin_top = -59.0
-margin_right = 50.0
-custom_fonts/font = ExtResource( 4 )
-text = "0/10"
-align = 1
-valign = 1
-script = ExtResource( 3 )
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="center" type="Node2D" parent="CanvasLayer/root"]
-visible = false
-position = Vector2( 270, 280 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="wave_label" type="Label" parent="CanvasLayer/root/center"]
-modulate = Color( 1, 1, 1, 0 )
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -90.0
-margin_top = -29.5
-margin_right = 90.0
-margin_bottom = 29.5
-custom_fonts/font = ExtResource( 4 )
-text = "Wave 1"
-script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-pattern_text = "Wave %s"
-
-[node name="rest_label" type="Label" parent="CanvasLayer/root/center"]
-modulate = Color( 1, 1, 1, 0 )
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -124.0
-margin_top = -29.5
-margin_right = 124.0
-margin_bottom = 29.5
-custom_fonts/font = ExtResource( 4 )
-text = "Rest Time"
-align = 1
-valign = 1
-script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/root"]
+autoplay = "default"
+anims/default = SubResource( 1 )
+anims/fade_from_black = SubResource( 2 )
+anims/fade_to_black = SubResource( 3 )
 
 [node name="World" parent="." instance=ExtResource( 1 )]
 
@@ -167,20 +189,23 @@ camera_path = NodePath("..")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Camera"]
 autoplay = "default"
-anims/default = SubResource( 1 )
-anims/zoom_out = SubResource( 2 )
+anims/default = SubResource( 4 )
+anims/zoom_out = SubResource( 5 )
 
 [node name="Timers" type="Node" parent="."]
 
 [node name="GameOverTimer" type="Timer" parent="Timers"]
 one_shot = true
 
-[node name="ApplicationManager" type="Node" parent="."]
+[node name="app_manager" type="Node" parent="."]
 script = ExtResource( 5 )
 
+[connection signal="enemy_died" from="World" to="HUD/root/total_enemies_killed" method="change_scale" binds= [ Vector2( 1.5, 1.5 ), Vector2( 1, 1 ), 0.2 ]]
 [connection signal="enemy_died" from="World" to="Camera/AnimationPlayer" method="play" binds= [ "zoom_out" ]]
 [connection signal="player_collided" from="World" to="Camera/ScreenShake" method="shake_with_collision"]
+[connection signal="player_died" from="World" to="Timers/GameOverTimer" method="start"]
 [connection signal="player_died" from="World" to="Camera/ScreenShake" method="shake_simple" binds= [ 32.0, 1.0, 0.1 ]]
 [connection signal="player_died" from="World" to="Camera/AnimationPlayer" method="play" binds= [ "zoom_out" ]]
-[connection signal="player_died" from="World" to="Timers/GameOverTimer" method="start"]
-[connection signal="total_enemies_killed_updated" from="World" to="CanvasLayer/root/total_enemies_killed_label" method="apply_text_simple"]
+[connection signal="total_enemies_killed_updated" from="World" to="HUD/root/total_enemies_killed/total_enemies_killed_label" method="apply_text_simple"]
+[connection signal="timeout" from="Timers/GameOverTimer" to="menu_ingame" method="game_over"]
+[connection signal="timeout" from="Timers/GameOverTimer" to="HUD/root/AnimationPlayer" method="play" binds= [ "fade_to_black" ]]

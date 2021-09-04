@@ -14,6 +14,7 @@ func _on_Entities_enemy_died():
 	emit_signal("enemy_died")
 
 func _on_TotalEnemiesKilled_points_updated(current):
+	Globals.current_score = current
 	emit_signal("total_enemies_killed_updated", current)
 	
 func _on_Player_collided(collision):

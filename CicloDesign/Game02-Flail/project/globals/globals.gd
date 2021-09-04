@@ -11,6 +11,8 @@ enum ENTITY_TYPES {
 	PLAYER = 1,
 	ENEMY_TRIANGLE = 2}
 
+var current_score : int = 0
+
 func _process(delta):
 	if Input.is_action_just_pressed("sys_reload"):
 		get_tree().reload_current_scene()

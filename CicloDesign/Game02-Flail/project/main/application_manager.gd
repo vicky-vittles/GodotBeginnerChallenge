@@ -2,17 +2,15 @@ extends Node
 class_name ApplicationManager
 
 enum SCENES {
-	MAIN,
-	GAME_2D,
-	GAME_3D}
+	MAIN = 1,
+	GAME = 2}
 
 const SCENES_PATH = {
 	SCENES.MAIN : "res://main/main.tscn",
-	SCENES.GAME_2D : "res://main/game/game_2d.tscn",
-	SCENES.GAME_3D : "res://main/game/game_3d.tscn"}
+	SCENES.GAME : "res://main/game/game.tscn"}
 
 func load_scene(scene: int):
-	if SCENES.has(scene):
+	if SCENES.values().has(scene):
 		get_tree().change_scene(SCENES_PATH[scene])
 
 func reload():
