@@ -1,6 +1,7 @@
 extends MobileAccelerometerController
 class_name MobileShakeController
 
+signal shook()
 signal updated_movement(movement)
 
 export (float) var movement_threshold = 5.0
@@ -40,3 +41,5 @@ func _on_updated_direction(acc_3d: Vector3):
 	if move_direction != Vector2.ZERO and debug_mode:
 		print(move_direction)
 	emit_signal("updated_movement", move_direction)
+	if move_direction != Vector2.ZERO:
+		emit_signal("shook")

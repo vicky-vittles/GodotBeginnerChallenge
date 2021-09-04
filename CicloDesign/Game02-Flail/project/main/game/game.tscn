@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://main/game/world/world.tscn" type="PackedScene" id=1]
 [ext_resource path="res://main/game/game.gd" type="Script" id=2]
@@ -7,6 +7,39 @@
 [ext_resource path="res://main/application_manager.gd" type="Script" id=5]
 [ext_resource path="res://main/game/components/game_screen_shake.gd" type="Script" id=6]
 [ext_resource path="res://assets/fonts/diffusion-bold-s64-o4.tres" type="DynamicFont" id=7]
+
+[sub_resource type="Animation" id=1]
+resource_name = "default"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "zoom_out"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.15, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.2, 1.2 ), Vector2( 1.2, 1.2 ), Vector2( 1, 1 ) ]
+}
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 2 )
@@ -132,8 +165,22 @@ __meta__ = {
 script = ExtResource( 6 )
 camera_path = NodePath("..")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera"]
+autoplay = "default"
+anims/default = SubResource( 1 )
+anims/zoom_out = SubResource( 2 )
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="GameOverTimer" type="Timer" parent="Timers"]
+one_shot = true
+
 [node name="ApplicationManager" type="Node" parent="."]
 script = ExtResource( 5 )
 
+[connection signal="enemy_died" from="World" to="Camera/AnimationPlayer" method="play" binds= [ "zoom_out" ]]
 [connection signal="player_collided" from="World" to="Camera/ScreenShake" method="shake_with_collision"]
+[connection signal="player_died" from="World" to="Camera/ScreenShake" method="shake_simple" binds= [ 32.0, 1.0, 0.1 ]]
+[connection signal="player_died" from="World" to="Camera/AnimationPlayer" method="play" binds= [ "zoom_out" ]]
+[connection signal="player_died" from="World" to="Timers/GameOverTimer" method="start"]
 [connection signal="total_enemies_killed_updated" from="World" to="CanvasLayer/root/total_enemies_killed_label" method="apply_text_simple"]
