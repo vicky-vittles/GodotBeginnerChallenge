@@ -5,62 +5,8 @@
 [ext_resource path="res://libs/gt_pattern_label/gt_pattern_label.gd" type="Script" id=3]
 [ext_resource path="res://assets/fonts/thaleah-s64-o4.tres" type="DynamicFont" id=4]
 [ext_resource path="res://main/application_manager.gd" type="Script" id=5]
-
-[sub_resource type="Animation" id=2]
-resource_name = "default"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("root/center:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 270, 280 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("root/center/wave_label:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ) ]
-}
-
-[sub_resource type="Animation" id=1]
-resource_name = "update_wave"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/path = NodePath("root/center/wave_label:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4, 1.6, 2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("root/center:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.4, 1.6, 2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 270, 280 ), Vector2( 270, 260 ), Vector2( 270, 260 ), Vector2( 270, 240 ) ]
-}
+[ext_resource path="res://main/game/components/game_screen_shake.gd" type="Script" id=6]
+[ext_resource path="res://assets/fonts/diffusion-bold-s64-o4.tres" type="DynamicFont" id=7]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 2 )
@@ -78,11 +24,26 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="total_enemies_killed_label" type="Label" parent="CanvasLayer/root"]
+anchor_right = 1.0
+margin_bottom = 81.0
+custom_fonts/font = ExtResource( 7 )
+custom_colors/font_color = Color( 0.945098, 0.94902, 0.854902, 1 )
+text = "0"
+align = 1
+valign = 1
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+pattern_text = "%s"
+
 [node name="time_label" type="Label" parent="CanvasLayer/root"]
+visible = false
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -20.0
-margin_right = 20.0
+margin_left = -32.0
+margin_right = 32.0
 margin_bottom = 59.0
 custom_fonts/font = ExtResource( 4 )
 text = "30"
@@ -95,8 +56,28 @@ __meta__ = {
 }
 pattern_text = "%s"
 
+[node name="enemies_remaining_label" type="Label" parent="CanvasLayer/root"]
+visible = false
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -50.0
+margin_top = -59.0
+margin_right = 50.0
+custom_fonts/font = ExtResource( 4 )
+text = "0/10"
+align = 1
+valign = 1
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
 [node name="center" type="Node2D" parent="CanvasLayer/root"]
-position = Vector2( 270, 240 )
+visible = false
+position = Vector2( 270, 280 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -119,10 +100,24 @@ __meta__ = {
 }
 pattern_text = "Wave %s"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
-autoplay = "default"
-anims/default = SubResource( 2 )
-anims/update_wave = SubResource( 1 )
+[node name="rest_label" type="Label" parent="CanvasLayer/root/center"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -124.0
+margin_top = -29.5
+margin_right = 124.0
+margin_bottom = 29.5
+custom_fonts/font = ExtResource( 4 )
+text = "Rest Time"
+align = 1
+valign = 1
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="World" parent="." instance=ExtResource( 1 )]
 
@@ -133,12 +128,12 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="ScreenShake" type="Node" parent="Camera"]
+script = ExtResource( 6 )
+camera_path = NodePath("..")
+
 [node name="ApplicationManager" type="Node" parent="."]
 script = ExtResource( 5 )
 
-[connection signal="wave_updated" from="." to="CanvasLayer/AnimationPlayer" method="play" binds= [ "update_wave" ]]
-[connection signal="duration_time_left_updated" from="World" to="CanvasLayer/root/time_label" method="apply_text_simple"]
-[connection signal="rest_time_left_updated" from="World" to="CanvasLayer/root/time_label" method="apply_text_simple"]
-[connection signal="wave_lost" from="World" to="ApplicationManager" method="quit"]
-[connection signal="wave_updated" from="World" to="." method="_on_World_wave_updated"]
-[connection signal="wave_updated" from="World" to="CanvasLayer/root/center/wave_label" method="apply_text_simple"]
+[connection signal="player_collided" from="World" to="Camera/ScreenShake" method="shake_with_collision"]
+[connection signal="total_enemies_killed_updated" from="World" to="CanvasLayer/root/total_enemies_killed_label" method="apply_text_simple"]

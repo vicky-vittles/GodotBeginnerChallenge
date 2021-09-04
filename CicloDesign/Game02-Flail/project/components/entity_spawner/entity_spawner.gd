@@ -25,7 +25,7 @@ func spawn_with_info(info: Dictionary):
 		if is_independent_entity:
 			Globals.get_game().add_entity(entity)
 		else:
-			actor.add_child(entity)
+			actor.call_deferred("add_child", entity)
 	entity.global_position = info["position"]
 	emit_signal("entity_spawned", entity)
 	return entity

@@ -1,12 +1,21 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://entities/entity_player/entity_player.gd" type="Script" id=1]
 [ext_resource path="res://components/mobile_accelerometer_controller/mobile_shake_controller/mobile_shake_controller.tscn" type="PackedScene" id=2]
 [ext_resource path="res://addons/regular_polygon2d_node/RegularPolygon2D.gd" type="Script" id=3]
 [ext_resource path="res://libs/gt_topdown_entity_mover_2d/gt_topdown_entity_mover_2d.gd" type="Script" id=4]
 [ext_resource path="res://addons/Trail/trail_2d.gd" type="Script" id=5]
-[ext_resource path="res://entities/entity_player/components/entity_player_damage_hitbox.gd" type="Script" id=6]
+[ext_resource path="res://libs/gt_area_2d/gt_area_2d.gd" type="Script" id=6]
 [ext_resource path="res://components/debug_controller/debug_controller.tscn" type="PackedScene" id=7]
+[ext_resource path="res://libs/gt_juice_2d/gt_juice_2d.gd" type="Script" id=8]
+[ext_resource path="res://entities/entity_player/components/entity_player_body.gd" type="Script" id=9]
+[ext_resource path="res://libs/gt_state_machine/gt_state_machine.gd" type="Script" id=10]
+[ext_resource path="res://entities/entity_player/states/entity_player_asleep.gd" type="Script" id=11]
+[ext_resource path="res://entities/entity_player/states/entity_player_inactive.gd" type="Script" id=12]
+[ext_resource path="res://entities/entity_player/states/entity_player_active.gd" type="Script" id=13]
+[ext_resource path="res://entities/entity_player/states/entity_player_dead.gd" type="Script" id=14]
+[ext_resource path="res://libs/gt_state_machine/__gt_state_transition.gd" type="Script" id=15]
+[ext_resource path="res://libs/gt_area_2d/gt_trigger_area_2d/gt_trigger_area_2d.gd" type="Script" id=16]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 40.0
@@ -14,15 +23,100 @@ radius = 40.0
 [sub_resource type="Curve" id=2]
 _data = [ Vector2( 0, 0 ), 0.0, 1.0, 0, 1, Vector2( 1, 1 ), 1.0, 0.0, 1, 0 ]
 
-[sub_resource type="Gradient" id=3]
-colors = PoolColorArray( 1, 0.466667, 0.466667, 0.0299625, 1, 0.466667, 0.466667, 1 )
+[sub_resource type="Animation" id=5]
+resource_name = "active"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("polygons/diamond:polygon_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.945098, 0.94902, 0.854902, 1 ), Color( 1, 0.466667, 0.466667, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("polygons/move_trail:default_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.945098, 0.94902, 0.854902, 1 ), Color( 1, 0.466667, 0.466667, 1 ) ]
+}
 
-[sub_resource type="CircleShape2D" id=4]
+[sub_resource type="Animation" id=4]
+resource_name = "default"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("polygons/diamond:polygon_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.945098, 0.94902, 0.854902, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("polygons/move_trail:default_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.945098, 0.94902, 0.854902, 1 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "inactive"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("polygons/diamond:polygon_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0.466667, 0.466667, 1 ), Color( 0.945098, 0.94902, 0.854902, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("polygons/move_trail:default_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0.466667, 0.466667, 1 ), Color( 0.945098, 0.94902, 0.854902, 1 ) ]
+}
+
+[sub_resource type="CircleShape2D" id=7]
 radius = 52.0
+
+[sub_resource type="CircleShape2D" id=8]
+radius = 40.0
 
 [node name="Player" type="Node2D"]
 script = ExtResource( 1 )
 entity_type = 1
+min_speed_for_damage = 500
 
 [node name="DebugController" parent="." instance=ExtResource( 7 )]
 
@@ -33,9 +127,11 @@ movement_threshold = 6.0
 [node name="Body" type="KinematicBody2D" parent="."]
 collision_layer = 4
 collision_mask = 2
+script = ExtResource( 9 )
 __meta__ = {
 "_edit_lock_": true
 }
+actor_path = NodePath("..")
 
 [node name="EntityMover" type="Node" parent="Body"]
 script = ExtResource( 4 )
@@ -44,7 +140,7 @@ MAX_SPEED = 3000
 MAX_ACC_SPEED = 3000
 MAX_DEC_SPEED = 3000
 TIME_TO_MAX_SPEED = 0.01
-TIME_TO_ZERO_SPEED = 5.0
+TIME_TO_ZERO_SPEED = 3.0
 bounce = 1.0
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Body"]
@@ -58,19 +154,24 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="move_trail" type="Line2D" parent="Body/graphics"]
+[node name="polygons" type="Node2D" parent="Body/graphics"]
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="move_trail" type="Line2D" parent="Body/graphics/polygons"]
 width = 80.0
 width_curve = SubResource( 2 )
 default_color = Color( 1, 0.466667, 0.466667, 1 )
-gradient = SubResource( 3 )
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_lock_": true
 }
 distance = 5.0
-segments = 30
+segments = 15
 
-[node name="shadow" type="Node2D" parent="Body/graphics"]
+[node name="shadow" type="Node2D" parent="Body/graphics/polygons"]
 visible = false
 position = Vector2( 5, -8.5 )
 script = ExtResource( 3 )
@@ -81,7 +182,7 @@ centered = true
 num_sides = 4
 size = 128.0
 
-[node name="diamond" type="Node2D" parent="Body/graphics"]
+[node name="diamond" type="Node2D" parent="Body/graphics/polygons"]
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
@@ -91,13 +192,19 @@ num_sides = 4
 size = 128.0
 polygon_color = Color( 1, 0.466667, 0.466667, 1 )
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Body/graphics"]
+autoplay = "default"
+anims/active = SubResource( 5 )
+anims/default = SubResource( 4 )
+anims/inactive = SubResource( 9 )
+
 [node name="Triggers" type="Node2D" parent="Body"]
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="DamageHitbox" type="Area2D" parent="Body/Triggers" groups=[
-"entity_player",
+"entity_player_hitbox",
 ]]
 collision_layer = 16
 collision_mask = 16
@@ -105,12 +212,83 @@ script = ExtResource( 6 )
 __meta__ = {
 "_edit_lock_": true
 }
+collidable_groups = [ "entity_enemy_triangle_hurtbox" ]
+disable_on_ready = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Triggers/DamageHitbox"]
 visible = false
-shape = SubResource( 4 )
+shape = SubResource( 7 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[connection signal="velocity_updated" from="Body/EntityMover" to="Body/Triggers/DamageHitbox" method="_on_EntityMover_velocity_updated"]
+[node name="DamageHurtbox" type="Area2D" parent="Body/Triggers" groups=[
+"entity_player_hurtbox",
+]]
+collision_layer = 16
+collision_mask = 16
+script = ExtResource( 16 )
+collidable_groups = [ "entity_enemy_triangle_hitbox" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Triggers/DamageHurtbox"]
+visible = false
+shape = SubResource( 8 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="SleepTimer" type="Timer" parent="Timers"]
+wait_time = 0.5
+one_shot = true
+autostart = true
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 10 )
+actor_path = NodePath("..")
+
+[node name="Asleep" type="Node" parent="StateMachine"]
+script = ExtResource( 11 )
+fsm_path = NodePath("..")
+
+[node name="ToInactive" type="Node" parent="StateMachine/Asleep"]
+script = ExtResource( 15 )
+end_state_path = NodePath("../../Inactive")
+
+[node name="Inactive" type="Node" parent="StateMachine"]
+script = ExtResource( 12 )
+fsm_path = NodePath("..")
+
+[node name="ToActive" type="Node" parent="StateMachine/Inactive"]
+script = ExtResource( 15 )
+end_state_path = NodePath("../../Active")
+
+[node name="ToDead" type="Node" parent="StateMachine/Inactive"]
+script = ExtResource( 15 )
+end_state_path = NodePath("../../Dead")
+
+[node name="Active" type="Node" parent="StateMachine"]
+script = ExtResource( 13 )
+fsm_path = NodePath("..")
+
+[node name="ToInactive" type="Node" parent="StateMachine/Active"]
+script = ExtResource( 15 )
+end_state_path = NodePath("../../Inactive")
+
+[node name="Dead" type="Node" parent="StateMachine"]
+script = ExtResource( 14 )
+fsm_path = NodePath("..")
+
+[connection signal="updated_faster_velocity" from="Body" to="StateMachine/Inactive/ToActive" method="do_transition"]
+[connection signal="updated_slower_velocity" from="Body" to="StateMachine/Active/ToInactive" method="do_transition"]
+[connection signal="collided" from="Body/EntityMover" to="." method="_on_EntityMover_collided"]
+[connection signal="has_collided" from="Body/EntityMover" to="Body/graphics/polygons" method="change_scale" binds= [ Vector2( 1.25, 1.25 ), Vector2( 1, 1 ), 0.3 ]]
+[connection signal="velocity_updated" from="Body/EntityMover" to="Body" method="_on_EntityMover_velocity_updated"]
+[connection signal="effect" from="Body/Triggers/DamageHurtbox" to="StateMachine/Inactive" method="_on_DamageHurtbox_effect"]
+[connection signal="timeout" from="Timers/SleepTimer" to="StateMachine/Asleep/ToInactive" method="do_transition"]
+[connection signal="state_entered" from="StateMachine/Inactive" to="Body/Triggers/DamageHitbox" method="disable_all_shapes"]
+[connection signal="took_damage" from="StateMachine/Inactive" to="StateMachine/Inactive/ToDead" method="do_transition"]
+[connection signal="transition_done" from="StateMachine/Inactive/ToActive" to="Body/graphics/AnimationPlayer" method="play" binds= [ "active" ]]
+[connection signal="state_entered" from="StateMachine/Active" to="Body/Triggers/DamageHitbox" method="enable_all_shapes"]
+[connection signal="transition_done" from="StateMachine/Active/ToInactive" to="Body/graphics/AnimationPlayer" method="play" binds= [ "inactive" ]]

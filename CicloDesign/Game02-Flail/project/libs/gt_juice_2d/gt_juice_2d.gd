@@ -26,3 +26,7 @@ func squash_stretch(strength: float = 0.45, time: float = 0.2):
 	tween.interpolate_property(self, "scale", Vector2(1+strength/2,1-strength/2), Vector2(1-strength/2,1+strength/2), time/3, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, 3*time/5)
 	tween.interpolate_property(self, "scale", Vector2(1-strength/2,1+strength/2), Vector2.ONE, time/3, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, 4*time/5)
 	tween.start()
+
+func change_scale(start_size: Vector2 = Vector2.ONE, end_size: Vector2 = Vector2(1.2, 1.2), time: float = 0.3):
+	tween.interpolate_property(self, "scale", start_size, end_size, time, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	tween.start()

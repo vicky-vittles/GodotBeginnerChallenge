@@ -1,5 +1,11 @@
 extends Node
 
+const PALETTE_COLORS = [
+	Color("#00303b"),
+	Color("#ff7777"),
+	Color("#ffce96"),
+	Color("#f1f2da")]
+
 enum ENTITY_TYPES {
 	NULL = 0,
 	PLAYER = 1,

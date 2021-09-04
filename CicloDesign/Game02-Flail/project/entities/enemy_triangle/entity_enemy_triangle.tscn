@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://libs/gt_area_2d/gt_trigger_area_2d/gt_trigger_area_2d.gd" type="Script" id=1]
 [ext_resource path="res://addons/regular_polygon2d_node/RegularPolygon2D.gd" type="Script" id=2]
@@ -12,9 +12,17 @@
 [ext_resource path="res://components/steering_ai_entity_mover/steering_ai_entity_mover.gd" type="Script" id=10]
 [ext_resource path="res://components/steering_ai_entity_mover/behaviors/steering_ai_wander_behavior.gd" type="Script" id=11]
 [ext_resource path="res://entities/enemy_triangle/components/entity_enemy_triangle_target_manager.gd" type="Script" id=12]
+[ext_resource path="res://addons/Trail/trail_2d.gd" type="Script" id=13]
+[ext_resource path="res://libs/gt_area_2d/gt_area_2d.gd" type="Script" id=14]
 
-[sub_resource type="Animation" id=1]
-resource_name = "default"
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 0 ), 0.0, 1.0, 0, 1, Vector2( 1, 1 ), 1.0, 0.0, 1, 0 ]
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.988764 )
+colors = PoolColorArray( 1, 0.807843, 0.588235, 0, 1, 0.807843, 0.588235, 1 )
+
+[sub_resource type="Animation" id=3]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
@@ -28,9 +36,21 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
 
-[sub_resource type="Animation" id=2]
-length = 0.3
+[sub_resource type="Animation" id=4]
+length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
@@ -38,10 +58,22 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
+"times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.5, 0.5 ) ]
 }
 
 [node name="EnemyTriangle" type="Node2D"]
@@ -74,6 +106,18 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="move_trail" type="Line2D" parent="Body/graphics"]
+visible = false
+width = 8.0
+width_curve = SubResource( 1 )
+default_color = Color( 1, 0.807843, 0.588235, 1 )
+gradient = SubResource( 2 )
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_lock_": true
+}
+distance = 5.0
+
 [node name="triangle" type="Node2D" parent="Body/graphics"]
 scale = Vector2( 1, 1.5 )
 script = ExtResource( 2 )
@@ -81,21 +125,36 @@ __meta__ = {
 "_edit_lock_": true
 }
 centered = true
-size = 38.0
+size = 50.0
 polygon_color = Color( 1, 0.807843, 0.588235, 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Body/graphics"]
 autoplay = "default"
-anims/default = SubResource( 1 )
-anims/die = SubResource( 2 )
+anims/default = SubResource( 3 )
+anims/die = SubResource( 4 )
 
 [node name="Triggers" type="Node2D" parent="Body"]
 __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="DamageHitbox" type="Area2D" parent="Body/Triggers" groups=[
+"entity_enemy_triangle_hitbox",
+]]
+collision_layer = 16
+collision_mask = 16
+script = ExtResource( 14 )
+collidable_groups = [ "entity_player_hurtbox" ]
+
+[node name="CollisionPolygon" type="CollisionPolygon2D" parent="Body/Triggers/DamageHitbox"]
+visible = false
+polygon = PoolVector2Array( -22, 19, 0, -37, 22, 19 )
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="DamageHurtbox" type="Area2D" parent="Body/Triggers" groups=[
-"entity_enemy_triangle",
+"entity_enemy_triangle_hurtbox",
 ]]
 collision_layer = 16
 collision_mask = 16
@@ -103,11 +162,11 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
-collidable_groups = [ "entity_player" ]
+collidable_groups = [ "entity_player_hitbox" ]
 
 [node name="CollisionPolygon" type="CollisionPolygon2D" parent="Body/Triggers/DamageHurtbox"]
 visible = false
-polygon = PoolVector2Array( -16, 14, 0, -29, 16, 14 )
+polygon = PoolVector2Array( -22, 19, 0, -37, 22, 19 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -136,6 +195,7 @@ script = ExtResource( 9 )
 end_state_path = NodePath("../../Alive")
 
 [connection signal="tree_entered" from="Body/EntityMover" to="." method="_on_EntityMover_tree_entered"]
+[connection signal="animation_finished" from="Body/graphics/AnimationPlayer" to="StateMachine/Dead" method="_on_AnimationPlayer_animation_finished"]
 [connection signal="effect" from="Body/Triggers/DamageHurtbox" to="StateMachine/Alive/ToDead" method="do_transition"]
 [connection signal="target_updated" from="TargetManager" to="StateMachine/Alive" method="_on_TargetManager_target_updated"]
 [connection signal="tree_entered" from="TargetManager" to="." method="_on_TargetManager_tree_entered"]
