@@ -1,7 +1,7 @@
 [gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://entities/entity_player/entity_player.gd" type="Script" id=1]
-[ext_resource path="res://components/mobile_accelerometer_mouse_controller/mobile_accelerometer_mouse_controller.tscn" type="PackedScene" id=2]
+[ext_resource path="res://components/mobile_accelerometer_controller/mobile_shake_controller/mobile_shake_controller.tscn" type="PackedScene" id=2]
 [ext_resource path="res://addons/regular_polygon2d_node/RegularPolygon2D.gd" type="Script" id=3]
 [ext_resource path="res://libs/gt_topdown_entity_mover_2d/gt_topdown_entity_mover_2d.gd" type="Script" id=4]
 [ext_resource path="res://addons/Trail/trail_2d.gd" type="Script" id=5]
@@ -173,7 +173,7 @@ entity_type = 1
 diamond_scale_min = Vector2( 0.2, 0.2 )
 min_speed_for_damage = 500
 
-[node name="InputController" parent="." instance=ExtResource( 2 )]
+[node name="MobileShakeController" parent="." instance=ExtResource( 2 )]
 
 [node name="VibrationManager" type="Node" parent="."]
 script = ExtResource( 6 )
@@ -380,6 +380,7 @@ end_state_path = NodePath("../../Dead")
 script = ExtResource( 14 )
 fsm_path = NodePath("..")
 
+[connection signal="shook" from="MobileShakeController" to="VibrationManager" method="vibrate" binds= [ 50.0 ]]
 [connection signal="died" from="Health" to="StateMachine/Active/ToDead" method="do_transition"]
 [connection signal="health_updated" from="Health" to="Body/graphics" method="_on_Health_health_updated"]
 [connection signal="collided" from="Body/EntityMover" to="." method="_on_EntityMover_collided"]
@@ -394,6 +395,6 @@ fsm_path = NodePath("..")
 [connection signal="state_entered" from="StateMachine/Active" to="Body/Triggers/DamageHitbox" method="enable_all_shapes"]
 [connection signal="transition_done" from="StateMachine/Active/ToDead" to="Timers/HealthTimer" method="stop"]
 [connection signal="state_entered" from="StateMachine/Dead" to="." method="_on_Dead_state_entered"]
+[connection signal="state_entered" from="StateMachine/Dead" to="Body/Triggers/DamageHitbox" method="disable_all_shapes"]
 [connection signal="state_entered" from="StateMachine/Dead" to="Body/graphics/particles/AnimationPlayer" method="play" binds= [ "die" ]]
 [connection signal="state_entered" from="StateMachine/Dead" to="SFX/hurt" method="play"]
-[connection signal="state_entered" from="StateMachine/Dead" to="Body/Triggers/DamageHitbox" method="disable_all_shapes"]
