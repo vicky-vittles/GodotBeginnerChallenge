@@ -194,13 +194,11 @@ __meta__ = {
 }
 
 [node name="triangle" type="Node2D" parent="Body/graphics"]
-scale = Vector2( 1e-05, 1e-05 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="triangle" type="Node2D" parent="Body/graphics/triangle"]
-modulate = Color( 1, 1, 1, 0 )
 scale = Vector2( 1, 1.5 )
 script = ExtResource( 2 )
 __meta__ = {
@@ -300,5 +298,5 @@ end_state_path = NodePath("../../Alive")
 [connection signal="tree_entered" from="TargetManager" to="." method="_on_TargetManager_tree_entered"]
 [connection signal="reached_target" from="StateMachine/Alive" to="TargetManager" method="advance_target" binds= [ true ]]
 [connection signal="transition_done" from="StateMachine/Alive/ToDead" to="SFX/hit" method="play"]
-[connection signal="died" from="StateMachine/Dead" to="." method="_on_Dead_died"]
 [connection signal="died" from="StateMachine/Dead" to="Body/graphics/AnimationPlayer" method="play" binds= [ "die" ]]
+[connection signal="died" from="StateMachine/Dead" to="." method="_on_Dead_died"]

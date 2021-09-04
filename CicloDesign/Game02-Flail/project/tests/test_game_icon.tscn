@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://addons/Trail/trail_2d.gd" type="Script" id=1]
+[ext_resource path="res://addons/regular_polygon2d_node/RegularPolygon2D.gd" type="Script" id=2]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 1 ), 0.0, -1.0, 0, 1, Vector2( 1, 0 ), -1.0, 0.0, 1, 0 ]
+
+[node name="test_game_icon" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 128.0
+margin_bottom = 128.0
+color = Color( 0, 0.188235, 0.231373, 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="player" type="Node2D" parent="."]
+position = Vector2( 47.3365, 82.7155 )
+scale = Vector2( 0.3, 0.3 )
+script = ExtResource( 2 )
+centered = true
+num_sides = 4
+size = 128.0
+polygon_color = Color( 1, 0.466667, 0.466667, 1 )
+
+[node name="trail" type="Line2D" parent="player"]
+position = Vector2( 0, 1.32283 )
+width = 80.0
+width_curve = SubResource( 1 )
+default_color = Color( 1, 0.466667, 0.466667, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="enemy1" type="Node2D" parent="."]
+position = Vector2( 107.501, 65.1054 )
+rotation = -1.42022
+scale = Vector2( 0.3, 0.45 )
+script = ExtResource( 2 )
+centered = true
+size = 50.0
+polygon_color = Color( 1, 0.807843, 0.588235, 1 )
+
+[node name="enemy2" type="Node2D" parent="."]
+position = Vector2( 34.0337, 28.4765 )
+rotation = 2.54914
+scale = Vector2( 0.3, 0.45 )
+script = ExtResource( 2 )
+centered = true
+size = 50.0
+polygon_color = Color( 1, 0.807843, 0.588235, 1 )
