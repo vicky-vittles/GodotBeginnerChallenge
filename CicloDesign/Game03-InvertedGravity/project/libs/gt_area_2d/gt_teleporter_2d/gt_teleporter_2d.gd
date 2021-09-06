@@ -27,5 +27,5 @@ func teleport(cause, entity):
 		if not is_indirect:
 			entity.global_position = global_position
 		else:
-			entity.actor.global_position = global_position
+			entity.body.global_position = global_position
 		emit_signal("teleported_entity", cause, entity)

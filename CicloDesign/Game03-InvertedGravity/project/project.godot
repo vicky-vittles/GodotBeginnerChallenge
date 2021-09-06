@@ -64,6 +64,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://libs/gt_juice_2d/gt_juice_2d.gd"
 }, {
+"base": "Node",
+"class": "GTPathEntityMover2D",
+"language": "GDScript",
+"path": "res://libs/gt_path_entity_mover_2d/gt_path_entity_mover_2d.gd"
+}, {
 "base": "Label",
 "class": "GTPatternLabel",
 "language": "GDScript",
@@ -136,6 +141,7 @@ _global_script_class_icons={
 "GTInputAction": "",
 "GTInputController": "res://libs/gt_input_controller/icons/gt_default_controller.svg",
 "GTJuice2D": "",
+"GTPathEntityMover2D": "",
 "GTPatternLabel": "",
 "GTPoint2D": "",
 "GTPoints": "",

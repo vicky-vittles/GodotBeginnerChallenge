@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://entities/entity_enemy_diamond/entity_enemy_diamond.gd" type="Script" id=1]
+[ext_resource path="res://addons/regular_polygon2d_node/RegularPolygon2D.gd" type="Script" id=3]
+[ext_resource path="res://libs/gt_area_2d/gt_teleporter_2d/gt_teleporter_2d.gd" type="Script" id=4]
+[ext_resource path="res://libs/gt_path_entity_mover_2d/gt_path_entity_mover_2d.gd" type="Script" id=5]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 16.0
+
+[node name="Diamond" type="Node2D"]
+script = ExtResource( 1 )
+entity_type = 3
+transition_type = 4
+ease_type = 2
+
+[node name="Body" type="Area2D" parent="." groups=[
+"entity_enemy",
+"entity_enemy_diamond",
+]]
+collision_layer = 16
+collision_mask = 16
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+body_path = NodePath(".")
+collidable_groups = [ "entity_player_hurtbox" ]
+
+[node name="graphics" type="Node2D" parent="Body"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="color" type="Node2D" parent="Body/graphics"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="main" type="Node2D" parent="Body/graphics/color"]
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+centered = true
+num_sides = 4
+size = 32.0
+polygon_color = Color( 1, 1, 1, 1 )
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Body"]
+visible = false
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PathEntityMover" type="Node" parent="Body"]
+script = ExtResource( 5 )
+points_parent_path = NodePath("../..")
+body_path = NodePath("..")
+transition_type = 4
+ease_type = 2
+duration = 1.0
+
+[connection signal="tree_entered" from="Body" to="." method="_on_Body_tree_entered"]
+[connection signal="tree_entered" from="Body/PathEntityMover" to="." method="_on_PathEntityMover_tree_entered"]

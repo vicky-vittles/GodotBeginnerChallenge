@@ -30,3 +30,9 @@ func simple_scale(start_size: Vector2 = Vector2.ONE, end_size: Vector2 = Vector2
 	if not is_active: return
 	tween.interpolate_property(self, "scale", start_size, end_size, time, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.start()
+
+func rand_floating(amplitude: float = 16.0, time: float = 1.0, delay: float = 0.0):
+	if not is_active: return
+	tween.interpolate_property(self, "position", Vector2.ZERO, Vector2.UP*amplitude, time, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT, delay)
+	tween.interpolate_property(self, "position", Vector2.UP*amplitude, Vector2.ZERO, time, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT, 1.0 + delay)
+	tween.start()

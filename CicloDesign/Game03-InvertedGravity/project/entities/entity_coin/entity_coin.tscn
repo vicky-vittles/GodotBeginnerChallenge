@@ -1,0 +1,105 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://entities/entity_coin/entity_coin.gd" type="Script" id=1]
+[ext_resource path="res://entities/entity_coin/components/entity_coin_body.gd" type="Script" id=2]
+[ext_resource path="res://addons/regular_polygon2d_node/RegularPolygon2D.gd" type="Script" id=3]
+[ext_resource path="res://libs/gt_juice_2d/gt_juice_2d.gd" type="Script" id=4]
+
+[sub_resource type="Animation" id=1]
+resource_name = "collected"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("color/floating/main:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("color/floating/main:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 11.0454
+
+[node name="Coin" type="Node2D"]
+script = ExtResource( 1 )
+entity_type = 2
+
+[node name="Body" type="Area2D" parent="." groups=[
+"entity_coin",
+]]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+body_path = NodePath(".")
+collidable_groups = [ "entity_player_coin_area" ]
+one_shot = true
+
+[node name="Graphics" type="Node2D" parent="Body"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="color" type="Node2D" parent="Body/Graphics"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="floating" type="Node2D" parent="Body/Graphics/color"]
+script = ExtResource( 4 )
+
+[node name="main" type="Node2D" parent="Body/Graphics/color/floating"]
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+centered = true
+num_sides = 6
+size = 16.0
+polygon_color = Color( 1, 1, 1, 1 )
+
+[node name="RepeatTimer" type="Timer" parent="Body/Graphics/color/floating"]
+wait_time = 2.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Body/Graphics"]
+autoplay = "default"
+anims/collected = SubResource( 1 )
+anims/default = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Body"]
+visible = false
+shape = SubResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="DestroyTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="effect" from="Body" to="DestroyTimer" method="start"]
+[connection signal="effect" from="Body" to="." method="_on_Body_effect"]
+[connection signal="effect" from="Body" to="Body/Graphics/AnimationPlayer" method="play" binds= [ "collected" ]]
+[connection signal="start_floating" from="Body" to="Body/Graphics/color/floating" method="rand_floating"]
+[connection signal="timeout" from="Body/Graphics/color/floating/RepeatTimer" to="Body" method="play_anim"]
+[connection signal="timeout" from="DestroyTimer" to="." method="queue_free"]

@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://entities/entity_player/entity_player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://entities/entity_coin/entity_coin.tscn" type="PackedScene" id=2]
+[ext_resource path="res://entities/entity_spike/entity_spike.tscn" type="PackedScene" id=3]
+[ext_resource path="res://libs/gt_area_2d/gt_teleporter_2d/gt_teleporter_2d.gd" type="Script" id=5]
 
 [node name="World" type="Node2D"]
 position = Vector2( 242.872, 141.279 )
@@ -22,3 +25,26 @@ __meta__ = {
 }
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
+
+[node name="Coin" parent="." instance=ExtResource( 2 )]
+position = Vector2( 121, 118 )
+
+[node name="Coin2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 160.688, 118.63 )
+
+[node name="Coin3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 209.195, 125.56 )
+
+[node name="Coin4" parent="." instance=ExtResource( 2 )]
+position = Vector2( 262.111, 124.93 )
+
+[node name="Spike" parent="." instance=ExtResource( 3 )]
+position = Vector2( 13.128, 242.721 )
+teleporter_tag = "t1"
+
+[node name="t1" type="Area2D" parent="."]
+script = ExtResource( 5 )
+body_path = NodePath(".")
+is_cause = false
+is_indirect = true
+tag = "t1"

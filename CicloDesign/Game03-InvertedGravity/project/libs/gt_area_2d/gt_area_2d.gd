@@ -6,6 +6,7 @@ signal grouped_area_exited(area)
 signal grouped_body_entered(body)
 signal grouped_body_exited(body)
 
+export (NodePath) var body_path
 export (Array, String) var collidable_groups
 export (Array, String) var excluded_groups
 export (bool) var disable_on_ready = false
@@ -14,8 +15,11 @@ var is_area_colliding : bool = false
 var is_body_colliding : bool = false
 var collider_area : Node2D
 var collider_body : Node2D
+var body
 
 func _ready():
+	body = get_node(body_path)
+	assert(body != null, "%s has no body set" % [self.name])
 	connect("area_entered", self, "_on_area_entered")
 	connect("area_exited", self, "_on_area_exited")
 	connect("body_entered", self, "_on_body_entered")
@@ -48,17 +52,17 @@ func _on_area_exited(area: Area2D) -> void:
 		collider_area = null
 		emit_signal("grouped_area_exited", area)
 
-func _on_body_entered(body: Node) -> void:
-	if is_node_collidable(body):
+func _on_body_entered(_body: Node) -> void:
+	if is_node_collidable(_body):
 		is_body_colliding = true
-		collider_body = body
-		emit_signal("grouped_body_entered", body)
+		collider_body = _body
+		emit_signal("grouped_body_entered", _body)
 
-func _on_body_exited(body: Node) -> void:
-	if is_node_collidable(body):
+func _on_body_exited(_body: Node) -> void:
+	if is_node_collidable(_body):
 		is_body_colliding = false
 		collider_body = null
-		emit_signal("grouped_body_exited", body)
+		emit_signal("grouped_body_exited", _body)
 
 func enable_all_shapes() -> void:
 	for child in get_children():
