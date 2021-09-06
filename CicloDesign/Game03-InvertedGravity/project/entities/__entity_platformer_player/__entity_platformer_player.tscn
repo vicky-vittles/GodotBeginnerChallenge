@@ -1,0 +1,154 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://libs/gt_state_machine/gt_state_machine.gd" type="Script" id=1]
+[ext_resource path="res://entities/__entity_platformer_player/states/entity_platformer_player_fall.gd" type="Script" id=2]
+[ext_resource path="res://entities/__entity_platformer_player/states/entity_platformer_player_jump.gd" type="Script" id=3]
+[ext_resource path="res://libs/gt_state_machine/__gt_state_transition.gd" type="Script" id=4]
+[ext_resource path="res://libs/gt_gravity_entity_mover_2d/gt_gravity_entity_mover_2d.gd" type="Script" id=5]
+[ext_resource path="res://entities/__entity_platformer_player/components/entity_platformer_player_body.gd" type="Script" id=6]
+[ext_resource path="res://entities/__entity_platformer_player/states/entity_platformer_player_run.gd" type="Script" id=7]
+[ext_resource path="res://entities/__entity_platformer_player/states/entity_platformer_player_idle.gd" type="Script" id=8]
+[ext_resource path="res://components/platformer_player_controller/platformer_player_controller.tscn" type="PackedScene" id=9]
+[ext_resource path="res://entities/__entity_platformer_player/__entity_platformer_player.gd" type="Script" id=10]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 8.0
+height = 16.0
+
+[node name="PlatformerPlayer" type="Node2D"]
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_lock_": true
+}
+jump_height = 128
+
+[node name="InputController" parent="." instance=ExtResource( 9 )]
+
+[node name="Body" type="KinematicBody2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
+actor_path = NodePath("..")
+
+[node name="Graphics" type="Node2D" parent="Body"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="GroundRaycasts" type="Node2D" parent="Body"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Body"]
+visible = false
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="EntityMover" type="Node" parent="Body"]
+script = ExtResource( 5 )
+body_path = NodePath("..")
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="JumpCooldownTimer" type="Timer" parent="Timers"]
+wait_time = 0.03
+one_shot = true
+
+[node name="CoyoteTimer" type="Timer" parent="Timers"]
+wait_time = 0.1
+one_shot = true
+
+[node name="MovementStateMachine" type="Node" parent="."]
+script = ExtResource( 1 )
+actor_path = NodePath("..")
+
+[node name="Idle" type="Node" parent="MovementStateMachine"]
+script = ExtResource( 8 )
+fsm_path = NodePath("..")
+
+[node name="ToRun" type="Node" parent="MovementStateMachine/Idle"]
+script = ExtResource( 4 )
+end_state_path = NodePath("../../Run")
+
+[node name="ToJump" type="Node" parent="MovementStateMachine/Idle"]
+script = ExtResource( 4 )
+end_state_path = NodePath("../../Jump")
+
+[node name="Run" type="Node" parent="MovementStateMachine"]
+script = ExtResource( 7 )
+fsm_path = NodePath("..")
+
+[node name="ToIdle" type="Node" parent="MovementStateMachine/Run"]
+script = ExtResource( 4 )
+end_state_path = NodePath("../../Idle")
+
+[node name="ToJump" type="Node" parent="MovementStateMachine/Run"]
+script = ExtResource( 4 )
+end_state_path = NodePath("../../Jump")
+
+[node name="ToFall" type="Node" parent="MovementStateMachine/Run"]
+script = ExtResource( 4 )
+end_state_path = NodePath("../../Fall")
+
+[node name="Jump" type="Node" parent="MovementStateMachine"]
+script = ExtResource( 3 )
+fsm_path = NodePath("..")
+
+[node name="Tojump" type="Node" parent="MovementStateMachine/Jump"]
+script = ExtResource( 4 )
+end_state_path = NodePath("..")
+
+[node name="ToFall" type="Node" parent="MovementStateMachine/Jump"]
+script = ExtResource( 4 )
+end_state_path = NodePath("../../Fall")
+
+[node name="Fall" type="Node" parent="MovementStateMachine"]
+script = ExtResource( 2 )
+fsm_path = NodePath("..")
+
+[node name="ToIdle" type="Node" parent="MovementStateMachine/Fall"]
+script = ExtResource( 4 )
+end_state_path = NodePath("../../Idle")
+
+[node name="ToRun" type="Node" parent="MovementStateMachine/Fall"]
+script = ExtResource( 4 )
+end_state_path = NodePath("../../Run")
+
+[node name="Tojump" type="Node" parent="MovementStateMachine/Fall"]
+script = ExtResource( 4 )
+end_state_path = NodePath("../../Jump")
+
+[connection signal="just_pressed" from="InputController/jump" to="MovementStateMachine/Idle" method="_on_jump_just_pressed"]
+[connection signal="just_pressed" from="InputController/jump" to="MovementStateMachine/Run" method="_on_jump_just_pressed"]
+[connection signal="just_pressed" from="InputController/jump" to="MovementStateMachine/Fall" method="_on_jump_just_pressed"]
+[connection signal="just_pressed" from="InputController/jump" to="MovementStateMachine/Jump" method="_on_jump_just_pressed"]
+[connection signal="just_released" from="InputController/jump" to="MovementStateMachine/Jump" method="damp_jump"]
+[connection signal="tree_entered" from="Body/EntityMover" to="." method="_on_EntityMover_tree_entered"]
+[connection signal="timeout" from="Timers/CoyoteTimer" to="MovementStateMachine/Run/ToFall" method="do_transition"]
+[connection signal="started_jumping" from="MovementStateMachine/Idle" to="MovementStateMachine/Idle/ToJump" method="do_transition"]
+[connection signal="started_moving" from="MovementStateMachine/Idle" to="MovementStateMachine/Idle/ToRun" method="do_transition"]
+[connection signal="state_entered" from="MovementStateMachine/Idle" to="Body/EntityMover" method="restore_jumps"]
+[connection signal="state_entered" from="MovementStateMachine/Idle" to="Body/EntityMover" method="turn_on_snap"]
+[connection signal="started_falling" from="MovementStateMachine/Run" to="Timers/CoyoteTimer" method="start"]
+[connection signal="started_jumping" from="MovementStateMachine/Run" to="MovementStateMachine/Run/ToJump" method="do_transition"]
+[connection signal="state_entered" from="MovementStateMachine/Run" to="Timers/CoyoteTimer" method="stop"]
+[connection signal="state_entered" from="MovementStateMachine/Run" to="Body/EntityMover" method="restore_jumps"]
+[connection signal="state_entered" from="MovementStateMachine/Run" to="Body/EntityMover" method="turn_on_snap"]
+[connection signal="state_exited" from="MovementStateMachine/Run" to="Timers/CoyoteTimer" method="stop"]
+[connection signal="stopped_moving" from="MovementStateMachine/Run" to="MovementStateMachine/Run/ToIdle" method="do_transition"]
+[connection signal="started_falling" from="MovementStateMachine/Jump" to="MovementStateMachine/Jump/ToFall" method="do_transition"]
+[connection signal="started_jumping" from="MovementStateMachine/Jump" to="MovementStateMachine/Jump/Tojump" method="do_transition"]
+[connection signal="state_entered" from="MovementStateMachine/Jump" to="Timers/JumpCooldownTimer" method="start"]
+[connection signal="state_entered" from="MovementStateMachine/Jump" to="Body/EntityMover" method="jump"]
+[connection signal="state_exited" from="MovementStateMachine/Jump" to="Timers/JumpCooldownTimer" method="stop"]
+[connection signal="started_jumping" from="MovementStateMachine/Fall" to="MovementStateMachine/Fall/Tojump" method="do_transition"]
+[connection signal="touched_ground_while_idle" from="MovementStateMachine/Fall" to="MovementStateMachine/Fall/ToIdle" method="do_transition"]
+[connection signal="touched_ground_while_moving" from="MovementStateMachine/Fall" to="MovementStateMachine/Fall/ToRun" method="do_transition"]
+
+[editable path="InputController"]
