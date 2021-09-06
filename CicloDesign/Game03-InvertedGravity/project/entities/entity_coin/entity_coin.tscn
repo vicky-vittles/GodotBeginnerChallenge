@@ -55,6 +55,7 @@ __meta__ = {
 body_path = NodePath(".")
 collidable_groups = [ "entity_player_coin_area" ]
 one_shot = true
+amplitude = 8.0
 
 [node name="Graphics" type="Node2D" parent="Body"]
 __meta__ = {
@@ -62,6 +63,7 @@ __meta__ = {
 }
 
 [node name="color" type="Node2D" parent="Body/Graphics"]
+modulate = Color( 0.290196, 0.478431, 0.588235, 1 )
 __meta__ = {
 "_edit_lock_": true
 }

@@ -1,3 +1,28 @@
-[gd_scene format=2]
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://assets/palettes/nm5-8x.png" type="Texture" id=3]
+[ext_resource path="res://assets/palettes/empty-night-8x.png" type="Texture" id=5]
+[ext_resource path="res://assets/palettes/twilight-5-8x.png" type="Texture" id=6]
 
 [node name="Main" type="Node"]
+
+[node name="empty-night-8x" type="Sprite" parent="."]
+position = Vector2( 234.984, 437.604 )
+scale = Vector2( 10, 10 )
+texture = ExtResource( 5 )
+
+[node name="nm5-8x" type="Sprite" parent="."]
+position = Vector2( 254.012, 191.438 )
+scale = Vector2( 10, 10 )
+texture = ExtResource( 3 )
+
+[node name="twilight-5-8x" type="Sprite" parent="."]
+position = Vector2( 233.795, 321.062 )
+scale = Vector2( 10, 10 )
+texture = ExtResource( 6 )
+
+[node name="icon" type="Sprite" parent="."]
+position = Vector2( 738.019, 256.845 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 1 )

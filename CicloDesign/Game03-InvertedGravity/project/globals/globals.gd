@@ -1,11 +1,7 @@
 extends Node
 
 enum ENTITY_TYPES {
-	NULL = 0,
-	PLAYER = 1,
-	COIN = 2,
-	ENEMY_DIAMOND = 3,
-	SPIKE = 4}
+	NULL = 0}
 
 func _process(delta):
 	if Input.is_action_just_pressed("sys_reload"):

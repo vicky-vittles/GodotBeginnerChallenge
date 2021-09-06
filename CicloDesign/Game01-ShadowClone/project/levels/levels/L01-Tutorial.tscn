@@ -19,14 +19,13 @@ extents = Vector2( 80, 128 )
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 96, 96 )
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 128, 128 )
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 256, 64 )
 
-[sub_resource type="Animation" id=5]
-resource_name = "default"
+[sub_resource type="Animation" id=7]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
@@ -41,8 +40,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "hide"
+[sub_resource type="Animation" id=8]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
@@ -69,7 +67,7 @@ tracks/1/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=9]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
@@ -378,7 +376,7 @@ collidable_groups = [ "entity_player_presence_trigger" ]
 one_shot = true
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Triggers/Text3_Enter" index="0"]
-shape = SubResource( 8 )
+shape = SubResource( 5 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -396,7 +394,7 @@ trigger_type = 2
 one_shot = true
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Triggers/Text3_Exit" index="0"]
-shape = SubResource( 9 )
+shape = SubResource( 6 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -473,9 +471,9 @@ custom_fonts/font = ExtResource( 5 )
 text = "TUTORIAL_3"
 
 [node name="AnimationPlayer" parent="Texts/3" index="1"]
-anims/default = SubResource( 5 )
-anims/hide = SubResource( 6 )
-anims/show = SubResource( 7 )
+anims/default = SubResource( 7 )
+anims/hide = SubResource( 8 )
+anims/show = SubResource( 9 )
 
 [node name="ClonedPlayer" parent="." index="7"]
 position = Vector2( 248, 408 )

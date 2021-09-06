@@ -126,8 +126,8 @@ end_state_path = NodePath("../../Jump")
 
 [connection signal="just_pressed" from="InputController/jump" to="MovementStateMachine/Idle" method="_on_jump_just_pressed"]
 [connection signal="just_pressed" from="InputController/jump" to="MovementStateMachine/Run" method="_on_jump_just_pressed"]
-[connection signal="just_pressed" from="InputController/jump" to="MovementStateMachine/Fall" method="_on_jump_just_pressed"]
 [connection signal="just_pressed" from="InputController/jump" to="MovementStateMachine/Jump" method="_on_jump_just_pressed"]
+[connection signal="just_pressed" from="InputController/jump" to="MovementStateMachine/Fall" method="_on_jump_just_pressed"]
 [connection signal="just_released" from="InputController/jump" to="MovementStateMachine/Jump" method="damp_jump"]
 [connection signal="tree_entered" from="Body/EntityMover" to="." method="_on_EntityMover_tree_entered"]
 [connection signal="timeout" from="Timers/CoyoteTimer" to="MovementStateMachine/Run/ToFall" method="do_transition"]
