@@ -240,6 +240,8 @@ act_jump={
 
 [layer_names]
 
+2d_render/layer_1="unlit"
+2d_render/layer_2="lit"
 2d_physics/layer_2="terrain"
 2d_physics/layer_3="bodies"
 2d_physics/layer_4="triggers"

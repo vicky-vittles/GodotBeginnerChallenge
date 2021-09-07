@@ -1,5 +1,243 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://levels/__level.tscn" type="PackedScene" id=1]
+[ext_resource path="res://libs/gt_collision_polygon_2d/gt_collision_polygon_2d.gd" type="Script" id=2]
+[ext_resource path="res://entities/entity_moving_platform/entity_moving_platform.tscn" type="PackedScene" id=3]
+[ext_resource path="res://libs/gt_point_2d/gt_point_2d.gd" type="Script" id=4]
+[ext_resource path="res://entities/entity_spike/entity_spike.tscn" type="PackedScene" id=5]
+[ext_resource path="res://libs/gt_area_2d/gt_teleporter_2d/gt_teleporter_2d.gd" type="Script" id=6]
+[ext_resource path="res://entities/entity_coin/entity_coin.tscn" type="PackedScene" id=7]
 
 [node name="Level" instance=ExtResource( 1 )]
+
+[node name="1" type="CollisionPolygon2D" parent="Terrain" index="0"]
+polygon = PoolVector2Array( -64, 256, 0, 256, -1.28419, 223.676, 152, 256, 168, 128, 712, 128, 712, 224, 960, 256, 960, 0, -128, 0, -128, 256, -64, 384 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+graphics_color = Color( 0.290196, 0.478431, 0.588235, 1 )
+
+[node name="2" type="CollisionPolygon2D" parent="Terrain" index="1"]
+polygon = PoolVector2Array( -64, 384, 192, 384, 192, 512, 704, 512, 704, 384, 960, 384, 960, 640, -64, 640 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+graphics_color = Color( 0.290196, 0.478431, 0.588235, 1 )
+
+[node name="1" type="Node2D" parent="Entities/Coins" index="0"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="1" parent="Entities/Coins/1" index="0" instance=ExtResource( 7 )]
+position = Vector2( 392, 360 )
+
+[node name="2" parent="Entities/Coins/1" index="1" instance=ExtResource( 7 )]
+position = Vector2( 416, 360 )
+
+[node name="3" parent="Entities/Coins/1" index="2" instance=ExtResource( 7 )]
+position = Vector2( 440, 360 )
+
+[node name="4" parent="Entities/Coins/1" index="3" instance=ExtResource( 7 )]
+position = Vector2( 464, 360 )
+
+[node name="5" parent="Entities/Coins/1" index="4" instance=ExtResource( 7 )]
+position = Vector2( 488, 360 )
+
+[node name="1" type="Node2D" parent="Entities/Spikes" index="0"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="1" parent="Entities/Spikes/1" index="0" instance=ExtResource( 5 )]
+position = Vector2( 208, 512 )
+teleporter_tag = "L02-1"
+
+[node name="2" parent="Entities/Spikes/1" index="1" instance=ExtResource( 5 )]
+position = Vector2( 240, 512 )
+teleporter_tag = "L02-1"
+
+[node name="3" parent="Entities/Spikes/1" index="2" instance=ExtResource( 5 )]
+position = Vector2( 272, 512 )
+teleporter_tag = "L02-1"
+
+[node name="4" parent="Entities/Spikes/1" index="3" instance=ExtResource( 5 )]
+position = Vector2( 304, 512 )
+teleporter_tag = "L02-1"
+
+[node name="5" parent="Entities/Spikes/1" index="4" instance=ExtResource( 5 )]
+position = Vector2( 336, 512 )
+teleporter_tag = "L02-1"
+
+[node name="6" parent="Entities/Spikes/1" index="5" instance=ExtResource( 5 )]
+position = Vector2( 368, 512 )
+teleporter_tag = "L02-1"
+
+[node name="7" parent="Entities/Spikes/1" index="6" instance=ExtResource( 5 )]
+position = Vector2( 400, 512 )
+teleporter_tag = "L02-1"
+
+[node name="8" parent="Entities/Spikes/1" index="7" instance=ExtResource( 5 )]
+position = Vector2( 432, 512 )
+teleporter_tag = "L02-1"
+
+[node name="9" parent="Entities/Spikes/1" index="8" instance=ExtResource( 5 )]
+position = Vector2( 464, 512 )
+teleporter_tag = "L02-1"
+
+[node name="10" parent="Entities/Spikes/1" index="9" instance=ExtResource( 5 )]
+position = Vector2( 496, 512 )
+teleporter_tag = "L02-1"
+
+[node name="11" parent="Entities/Spikes/1" index="10" instance=ExtResource( 5 )]
+position = Vector2( 528, 512 )
+teleporter_tag = "L02-1"
+
+[node name="12" parent="Entities/Spikes/1" index="11" instance=ExtResource( 5 )]
+position = Vector2( 560, 512 )
+teleporter_tag = "L02-1"
+
+[node name="13" parent="Entities/Spikes/1" index="12" instance=ExtResource( 5 )]
+position = Vector2( 592, 512 )
+teleporter_tag = "L02-1"
+
+[node name="14" parent="Entities/Spikes/1" index="13" instance=ExtResource( 5 )]
+position = Vector2( 624, 512 )
+teleporter_tag = "L02-1"
+
+[node name="15" parent="Entities/Spikes/1" index="14" instance=ExtResource( 5 )]
+position = Vector2( 656, 512 )
+teleporter_tag = "L02-1"
+
+[node name="16" parent="Entities/Spikes/1" index="15" instance=ExtResource( 5 )]
+position = Vector2( 688, 512 )
+teleporter_tag = "L02-1"
+
+[node name="2" type="Node2D" parent="Entities/Spikes" index="1"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="1" parent="Entities/Spikes/2" index="0" instance=ExtResource( 5 )]
+position = Vector2( 184, 128 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L02-1"
+
+[node name="2" parent="Entities/Spikes/2" index="1" instance=ExtResource( 5 )]
+position = Vector2( 216, 128 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L02-1"
+
+[node name="3" parent="Entities/Spikes/2" index="2" instance=ExtResource( 5 )]
+position = Vector2( 248, 128 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L02-1"
+
+[node name="4" parent="Entities/Spikes/2" index="3" instance=ExtResource( 5 )]
+position = Vector2( 280, 128 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L02-1"
+
+[node name="5" parent="Entities/Spikes/2" index="4" instance=ExtResource( 5 )]
+position = Vector2( 312, 128 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L02-1"
+
+[node name="6" parent="Entities/Spikes/2" index="5" instance=ExtResource( 5 )]
+position = Vector2( 344, 128 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L02-1"
+
+[node name="7" parent="Entities/Spikes/2" index="6" instance=ExtResource( 5 )]
+position = Vector2( 376, 128 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L02-1"
+
+[node name="8" parent="Entities/Spikes/2" index="7" instance=ExtResource( 5 )]
+position = Vector2( 408, 128 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L02-1"
+
+[node name="9" parent="Entities/Spikes/2" index="8" instance=ExtResource( 5 )]
+position = Vector2( 440, 128 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L02-1"
+
+[node name="10" parent="Entities/Spikes/2" index="9" instance=ExtResource( 5 )]
+position = Vector2( 472, 128 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L02-1"
+
+[node name="11" parent="Entities/Spikes/2" index="10" instance=ExtResource( 5 )]
+position = Vector2( 504, 128 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L02-1"
+
+[node name="12" parent="Entities/Spikes/2" index="11" instance=ExtResource( 5 )]
+position = Vector2( 536, 128 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L02-1"
+
+[node name="13" parent="Entities/Spikes/2" index="12" instance=ExtResource( 5 )]
+position = Vector2( 568, 128 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L02-1"
+
+[node name="14" parent="Entities/Spikes/2" index="13" instance=ExtResource( 5 )]
+position = Vector2( 600, 128 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L02-1"
+
+[node name="15" parent="Entities/Spikes/2" index="14" instance=ExtResource( 5 )]
+position = Vector2( 632, 128 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L02-1"
+
+[node name="16" parent="Entities/Spikes/2" index="15" instance=ExtResource( 5 )]
+position = Vector2( 664, 128 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L02-1"
+
+[node name="17" parent="Entities/Spikes/2" index="16" instance=ExtResource( 5 )]
+position = Vector2( 696, 128 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L02-1"
+
+[node name="1" parent="Entities/Platforms" index="0" instance=ExtResource( 3 )]
+position = Vector2( 224, 392 )
+transition_type = 4
+ease_type = 2
+duration = 3.0
+
+[node name="1" type="Position2D" parent="Entities/Platforms/1" index="1"]
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="2" type="Position2D" parent="Entities/Platforms/1" index="2"]
+position = Vector2( 448, 0 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="T1" type="Area2D" parent="Triggers" index="0"]
+position = Vector2( 24, 288 )
+script = ExtResource( 6 )
+body_path = NodePath(".")
+is_cause = false
+is_indirect = true
+tag = "L02-1"
+
+[node name="Player" parent="." index="6"]
+position = Vector2( -32, 320 )
+
+[node name="Camera" parent="." index="7"]
+position = Vector2( 480, 270 )
+limit_left = 0
+limit_top = 0
+limit_bottom = 540
+editor_draw_limits = true

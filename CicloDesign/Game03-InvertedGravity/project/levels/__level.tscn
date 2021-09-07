@@ -14,11 +14,18 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="white_canvas" type="CanvasModulate" parent="."]
+light_mask = 2
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="colored_background" type="ColorRect" parent="."]
+light_mask = 2
 margin_right = 40.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 960, 540 )
-color = Color( 0.0862745, 0.0862745, 0.0862745, 1 )
+color = Color( 0.2, 0.247059, 0.345098, 1 )
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
@@ -46,6 +53,11 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Platforms" type="Node2D" parent="Entities"]
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="Triggers" type="Node2D" parent="."]
 __meta__ = {
 "_edit_lock_": true
@@ -61,6 +73,16 @@ one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/EndTrigger"]
 shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Lights" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Occluders" type="Node2D" parent="Lights"]
 __meta__ = {
 "_edit_lock_": true
 }

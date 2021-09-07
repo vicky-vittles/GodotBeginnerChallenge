@@ -31,6 +31,11 @@ func simple_scale(start_size: Vector2 = Vector2.ONE, end_size: Vector2 = Vector2
 	tween.interpolate_property(self, "scale", start_size, end_size, time, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.start()
 
+func simple_tilt(amplitude: float = 5.0, time: float = 0.15):
+	if not is_active: return
+	tween.interpolate_property(self, "rotation_degrees", rotation_degrees, amplitude, time, Tween.TRANS_QUAD, Tween.EASE_IN)
+	tween.start()
+
 func rand_floating(amplitude: float = 16.0, time: float = 1.0, delay: float = 0.0):
 	if not is_active: return
 	tween.interpolate_property(self, "position", Vector2.ZERO, Vector2.UP*amplitude, time, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT, delay)
