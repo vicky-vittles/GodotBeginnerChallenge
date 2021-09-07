@@ -4,7 +4,7 @@
 [ext_resource path="res://libs/gt_area_2d/gt_teleporter_2d/gt_teleporter_2d.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 10, 16 )
+extents = Vector2( 14, 10 )
 
 [node name="Spike" type="Node2D"]
 script = ExtResource( 1 )
@@ -28,7 +28,7 @@ __meta__ = {
 }
 
 [node name="color" type="Node2D" parent="Body/graphics"]
-modulate = Color( 0.290196, 0.478431, 0.588235, 1 )
+modulate = Color( 0.160784, 0.156863, 0.192157, 1 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -42,7 +42,6 @@ __meta__ = {
 [node name="CollisionShape" type="CollisionShape2D" parent="Body"]
 visible = false
 position = Vector2( 0, -11 )
-rotation = 1.5708
 shape = SubResource( 1 )
 __meta__ = {
 "_edit_lock_": true

@@ -86,6 +86,7 @@ func turn_off_snap() -> void:
 
 func invert_gravity_mask() -> void:
 	gravity_mask *= -1
+	floor_normal *= -1
 
 func freeze(preserve_momentum: bool = true):
 	if not preserve_momentum:

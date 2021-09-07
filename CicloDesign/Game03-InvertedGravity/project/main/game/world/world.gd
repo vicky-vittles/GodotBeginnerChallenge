@@ -5,9 +5,10 @@ signal level_finished()
 signal load_level(level_id, with_delay)
 
 const LEVEL_SCENES = {
-	0: preload("res://levels/levels/L00-Test.tscn"),
-	1: preload("res://levels/levels/L01-Tutorial.tscn"),
-	2: preload("res://levels/levels/L02.tscn")}
+	0: preload("res://levels/levels/L00.tscn"),
+	1: preload("res://levels/levels/L01.tscn"),
+	2: preload("res://levels/levels/L02.tscn"),
+	3: preload("res://levels/levels/L03.tscn")}
 
 export (int) var current_level = 0
 

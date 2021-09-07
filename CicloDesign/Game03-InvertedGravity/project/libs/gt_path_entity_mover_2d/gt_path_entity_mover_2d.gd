@@ -47,7 +47,7 @@ func _ready():
 	assert(points_parent != null, "%s has no points_parent set" % [self.name])
 	assert(body != null, "%s has no body set" % [self.name])
 	for child in points_parent.get_children():
-		if child is GTPoint2D:
+		if child is Position2D:
 			points.append(child.global_position)
 	tween = Tween.new()
 	add_child(tween)

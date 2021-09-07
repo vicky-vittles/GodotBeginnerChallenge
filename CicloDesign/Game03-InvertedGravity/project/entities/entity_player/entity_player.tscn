@@ -33,9 +33,7 @@ extents = Vector2( 8, 16 )
 script = ExtResource( 2 )
 max_move_speed = 288
 move_deceleration = 0.25
-air_acceleration = 0.1
-air_deceleration = 0.1
-jump_time = 0.3
+jump_time = 0.35
 
 [node name="Body" parent="." index="1"]
 script = ExtResource( 3 )
@@ -118,7 +116,6 @@ __meta__ = {
 }
 
 [node name="color" type="Node2D" parent="Body/Graphics" index="0"]
-modulate = Color( 0.933333, 0.52549, 0.584314, 1 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -156,14 +153,15 @@ __meta__ = {
 
 [node name="rect_body" type="Polygon2D" parent="Body/Graphics/color/invert_pivot/tilt_juice/jump_juice" index="0"]
 position = Vector2( 0, -16 )
+color = Color( 0.933333, 0.52549, 0.584314, 1 )
 polygon = PoolVector2Array( -8, 16, 8, 16, 8, -16, -8, -16 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="rect_feet" type="Polygon2D" parent="Body/Graphics/color/invert_pivot/tilt_juice/jump_juice" index="1"]
-color = Color( 0.290196, 0.478431, 0.588235, 1 )
-polygon = PoolVector2Array( -5, -3, -5, -10, 5, -10, 5, -3 )
+color = Color( 0.2, 0.247059, 0.345098, 1 )
+polygon = PoolVector2Array( 0, -2, -6, -8, 6, -8 )
 __meta__ = {
 "_edit_lock_": true
 }

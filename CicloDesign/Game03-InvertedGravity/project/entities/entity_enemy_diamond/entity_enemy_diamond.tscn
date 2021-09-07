@@ -33,7 +33,7 @@ __meta__ = {
 }
 
 [node name="color" type="Node2D" parent="Body/graphics"]
-modulate = Color( 0.290196, 0.478431, 0.588235, 1 )
+modulate = Color( 0.160784, 0.156863, 0.192157, 1 )
 __meta__ = {
 "_edit_lock_": true
 }

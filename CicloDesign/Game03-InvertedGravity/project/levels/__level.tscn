@@ -58,6 +58,16 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Diamonds" type="Node2D" parent="Entities"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="GravityFields" type="Node2D" parent="Entities"]
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="Triggers" type="Node2D" parent="."]
 __meta__ = {
 "_edit_lock_": true
