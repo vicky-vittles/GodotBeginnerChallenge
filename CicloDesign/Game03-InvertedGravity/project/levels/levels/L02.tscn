@@ -15,6 +15,7 @@ margin_top = -540.0
 margin_right = 3840.0
 margin_bottom = 0.0
 rect_min_size = Vector2( 3840, 1080 )
+color = Color( 0.305882, 0.192157, 0.227451, 1 )
 
 [node name="1" type="CollisionPolygon2D" parent="Terrain" index="0"]
 polygon = PoolVector2Array( -64, 256, 0, 256, -1.28419, 223.676, 152, 256, 168, 128, 712, 128, 712, 224, 960, 256, 1160, 256, 1160, 64.2182, 1512, 64, 1512, 88, 1560, 88, 1560, 64, 1672, 64, 2192, 304, 2192, 64, 3072, 64, 3072, 256, 3344, 280, 3456, 280, 3456, 576, 3648, 264, 3648, -544, -128, -544, -128, 256, -64, 384 )
@@ -22,7 +23,7 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
-graphics_color = Color( 0.290196, 0.478431, 0.588235, 1 )
+graphics_color = Color( 0.160784, 0.113725, 0.133333, 1 )
 
 [node name="2" type="CollisionPolygon2D" parent="Terrain" index="1"]
 polygon = PoolVector2Array( -64, 384, 192, 384, 192, 512, 704, 512, 704, 384, 960, 384, 960, 432, 1160, 432, 1160, 464, 1352, 464, 1352, 248, 1728, 248, 1728, 384, 2048, 384, 2048, 448, 2448, 448, 2448, 216, 2624, 216, 2624, 488, 3072, 488, 3072, 408, 3456, 408, 3456, 640, -64, 640 )
@@ -30,7 +31,7 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
-graphics_color = Color( 0.290196, 0.478431, 0.588235, 1 )
+graphics_color = Color( 0.160784, 0.113725, 0.133333, 1 )
 
 [node name="1" type="Node2D" parent="Entities/Coins" index="0"]
 __meta__ = {

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://libs/gt_state_machine/gt_state_machine.gd" type="Script" id=1]
 [ext_resource path="res://entities/__entity_platformer_player/states/entity_platformer_player_fall.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://entities/__entity_platformer_player/states/entity_platformer_player_idle.gd" type="Script" id=8]
 [ext_resource path="res://components/platformer_player_controller/platformer_player_controller.tscn" type="PackedScene" id=9]
 [ext_resource path="res://entities/__entity_platformer_player/__entity_platformer_player.gd" type="Script" id=10]
+[ext_resource path="res://libs/gt_state_machine/__gt_state.gd" type="Script" id=11]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 8.0
@@ -108,6 +109,10 @@ end_state_path = NodePath("..")
 script = ExtResource( 4 )
 end_state_path = NodePath("../../Fall")
 
+[node name="Hang" type="Node" parent="MovementStateMachine"]
+script = ExtResource( 11 )
+fsm_path = NodePath("..")
+
 [node name="Fall" type="Node" parent="MovementStateMachine"]
 script = ExtResource( 2 )
 fsm_path = NodePath("..")
@@ -124,10 +129,10 @@ end_state_path = NodePath("../../Run")
 script = ExtResource( 4 )
 end_state_path = NodePath("../../Jump")
 
-[connection signal="just_pressed" from="InputController/jump" to="MovementStateMachine/Idle" method="_on_jump_just_pressed"]
-[connection signal="just_pressed" from="InputController/jump" to="MovementStateMachine/Run" method="_on_jump_just_pressed"]
 [connection signal="just_pressed" from="InputController/jump" to="MovementStateMachine/Jump" method="_on_jump_just_pressed"]
 [connection signal="just_pressed" from="InputController/jump" to="MovementStateMachine/Fall" method="_on_jump_just_pressed"]
+[connection signal="just_pressed" from="InputController/jump" to="MovementStateMachine/Idle" method="_on_jump_just_pressed"]
+[connection signal="just_pressed" from="InputController/jump" to="MovementStateMachine/Run" method="_on_jump_just_pressed"]
 [connection signal="just_released" from="InputController/jump" to="MovementStateMachine/Jump" method="damp_jump"]
 [connection signal="tree_entered" from="Body/EntityMover" to="." method="_on_EntityMover_tree_entered"]
 [connection signal="timeout" from="Timers/CoyoteTimer" to="MovementStateMachine/Run/ToFall" method="do_transition"]

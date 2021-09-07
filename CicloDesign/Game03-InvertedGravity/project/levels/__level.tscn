@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://levels/__level.gd" type="Script" id=1]
 [ext_resource path="res://entities/entity_player/entity_player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://libs/multitarget_camera_2d/multitarget_camera_2d.gd" type="Script" id=3]
 [ext_resource path="res://libs/gt_area_2d/gt_trigger_area_2d/gt_trigger_area_2d.gd" type="Script" id=4]
+[ext_resource path="res://levels/components/level_enemies.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 64 )
@@ -39,9 +40,11 @@ __meta__ = {
 }
 
 [node name="Entities" type="Node2D" parent="."]
+script = ExtResource( 5 )
 __meta__ = {
 "_edit_lock_": true
 }
+actor_path = NodePath("..")
 
 [node name="Coins" type="Node2D" parent="Entities"]
 __meta__ = {
@@ -107,4 +110,5 @@ min_zoom = 1.0
 max_zoom = 1.0
 allow_zoom = false
 
+[connection signal="ready" from="." to="Entities" method="_on_Level_ready"]
 [connection signal="effect" from="Triggers/EndTrigger" to="." method="end_level"]

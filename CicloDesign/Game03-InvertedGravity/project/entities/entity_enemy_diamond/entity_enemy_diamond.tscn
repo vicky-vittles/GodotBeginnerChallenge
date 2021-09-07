@@ -1,9 +1,13 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://entities/entity_enemy_diamond/entity_enemy_diamond.gd" type="Script" id=1]
+[ext_resource path="res://addons/Trail/trail_2d.gd" type="Script" id=2]
 [ext_resource path="res://addons/regular_polygon2d_node/RegularPolygon2D.gd" type="Script" id=3]
 [ext_resource path="res://libs/gt_area_2d/gt_teleporter_2d/gt_teleporter_2d.gd" type="Script" id=4]
 [ext_resource path="res://libs/gt_path_entity_mover_2d/gt_path_entity_mover_2d.gd" type="Script" id=5]
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 0 ), 0.0, 1.0, 0, 1, Vector2( 1, 1 ), 1.0, 0.0, 1, 0 ]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 16.0
@@ -32,13 +36,18 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="color" type="Node2D" parent="Body/graphics"]
-modulate = Color( 0.160784, 0.156863, 0.192157, 1 )
+[node name="move_trail" type="Line2D" parent="Body/graphics"]
+width = 16.0
+width_curve = SubResource( 2 )
+default_color = Color( 0.615686, 0.333333, 0.313726, 1 )
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
+lifetime = 0.2
+distance = 2.0
 
-[node name="main" type="Node2D" parent="Body/graphics/color"]
+[node name="main" type="Node2D" parent="Body/graphics"]
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
@@ -46,7 +55,7 @@ __meta__ = {
 centered = true
 num_sides = 4
 size = 32.0
-polygon_color = Color( 1, 1, 1, 1 )
+polygon_color = Color( 0.615686, 0.333333, 0.313726, 1 )
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Body"]
 visible = false

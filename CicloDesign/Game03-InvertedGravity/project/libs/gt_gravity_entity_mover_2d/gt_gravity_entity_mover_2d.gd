@@ -3,6 +3,7 @@ class_name GTGravityEntityMover2D
 
 signal position_updated(pos)
 signal movement_info(info)
+signal updated_gravity_mask(mask)
 signal jumped()
 signal ran_out_of_jumps()
 
@@ -87,6 +88,7 @@ func turn_off_snap() -> void:
 func invert_gravity_mask() -> void:
 	gravity_mask *= -1
 	floor_normal *= -1
+	emit_signal("updated_gravity_mask", gravity_mask)
 
 func freeze(preserve_momentum: bool = true):
 	if not preserve_momentum:

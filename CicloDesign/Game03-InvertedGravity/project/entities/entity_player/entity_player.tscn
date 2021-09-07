@@ -129,7 +129,7 @@ __meta__ = {
 [node name="move_trail" type="Line2D" parent="Body/Graphics/color/invert_pivot" index="0"]
 width = 6.0
 width_curve = SubResource( 5 )
-default_color = Color( 0.933333, 0.52549, 0.584314, 1 )
+default_color = Color( 1, 1, 1, 1 )
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_lock_": true
@@ -153,15 +153,15 @@ __meta__ = {
 
 [node name="rect_body" type="Polygon2D" parent="Body/Graphics/color/invert_pivot/tilt_juice/jump_juice" index="0"]
 position = Vector2( 0, -16 )
-color = Color( 0.933333, 0.52549, 0.584314, 1 )
+color = Color( 0.980392, 0.909804, 0.737255, 1 )
 polygon = PoolVector2Array( -8, 16, 8, 16, 8, -16, -8, -16 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="rect_feet" type="Polygon2D" parent="Body/Graphics/color/invert_pivot/tilt_juice/jump_juice" index="1"]
-color = Color( 0.2, 0.247059, 0.345098, 1 )
-polygon = PoolVector2Array( 0, -2, -6, -8, 6, -8 )
+color = Color( 0.615686, 0.333333, 0.313726, 1 )
+polygon = PoolVector2Array( 8, 0, -8, 0, -8, -6, 8, -6 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -211,6 +211,7 @@ shape = SubResource( 7 )
 [connection signal="tilt" from="Body" to="Body/Graphics/color/invert_pivot/tilt_juice" method="simple_tilt"]
 [connection signal="effect" from="Body/Triggers/InvertGravityTrigger" to="Body" method="invert_gravity"]
 [connection signal="jumped" from="Body/EntityMover" to="Body/Graphics/color/invert_pivot/tilt_juice/jump_juice" method="simple_squash_stretch"]
+[connection signal="updated_gravity_mask" from="Body/EntityMover" to="." method="_on_EntityMover_updated_gravity_mask"]
 [connection signal="state_entered" from="MovementStateMachine/Idle" to="Body" method="update_tilt"]
 [connection signal="state_entered" from="MovementStateMachine/Run" to="Body" method="update_tilt"]
 [connection signal="updated_move_direction" from="MovementStateMachine/Run" to="Body" method="update_tilt"]

@@ -14,7 +14,7 @@ polygon = PoolVector2Array( 352, 192, 64, 120, 64, 0, 1088, 0, 1088, 120, 432, 1
 
 [node name="colored_background" parent="." index="1"]
 rect_min_size = Vector2( 3840, 540 )
-color = Color( 0.2, 0.247059, 0.345098, 1 )
+color = Color( 0.305882, 0.192157, 0.227451, 1 )
 
 [node name="1" type="CollisionPolygon2D" parent="Terrain" index="0"]
 polygon = PoolVector2Array( -128, -192, 2752, -192, 3328, -192, 3328, 256, 3200, 256, 2752, 64, 2175.76, 64.9491, 2136, 264, 1944, 224, 1936, 88, 1488, 64, 1472, 256, 1088, 224, 1088, 120, 432, 104, 352, 192, 0, 104, 0, 536, -128, 128 )
@@ -22,7 +22,7 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
-graphics_color = Color( 0.160784, 0.156863, 0.192157, 1 )
+graphics_color = Color( 0.160784, 0.113725, 0.133333, 1 )
 
 [node name="2" type="CollisionPolygon2D" parent="Terrain" index="1"]
 polygon = PoolVector2Array( 0, 408, 432, 408, 448, 320, 896, 320, 912, 480, 1664, 480, 1664, 168, 1792, 168, 1792, 448, 2112, 448, 2240, 448, 2240, 512, 2816, 512, 2816, 704, 0, 704 )
@@ -30,7 +30,7 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
-graphics_color = Color( 0.160784, 0.156863, 0.192157, 1 )
+graphics_color = Color( 0.160784, 0.113725, 0.133333, 1 )
 
 [node name="3" type="CollisionPolygon2D" parent="Terrain" index="2"]
 polygon = PoolVector2Array( 2328, 424, 2328, 384, 2504, 384, 2504, 424 )
@@ -38,7 +38,7 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
-graphics_color = Color( 0.160784, 0.156863, 0.192157, 1 )
+graphics_color = Color( 0.160784, 0.113725, 0.133333, 1 )
 
 [node name="4" type="CollisionPolygon2D" parent="Terrain" index="3"]
 polygon = PoolVector2Array( 2608, 424, 2608, 384, 2816, 384, 3328, 384, 3328, 128, 3456, 384, 3456, 704, 3328, 704, 2816, 704, 2816, 424 )
@@ -46,7 +46,7 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
-graphics_color = Color( 0.160784, 0.156863, 0.192157, 1 )
+graphics_color = Color( 0.160784, 0.113725, 0.133333, 1 )
 
 [node name="1" type="Node2D" parent="Entities/Coins" index="0"]
 __meta__ = {
