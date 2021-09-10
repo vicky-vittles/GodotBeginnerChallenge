@@ -85,6 +85,9 @@ func turn_on_snap() -> void:
 func turn_off_snap() -> void:
 	snap = Vector2.ZERO
 
+func set_movement_mask(_mask) -> void:
+	movement_mask = _mask
+
 func invert_gravity_mask() -> void:
 	gravity_mask *= -1
 	floor_normal *= -1

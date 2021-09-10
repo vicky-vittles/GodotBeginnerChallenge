@@ -10,7 +10,7 @@
 [ext_resource path="res://entities/__entity_platformer_player/states/entity_platformer_player_idle.gd" type="Script" id=8]
 [ext_resource path="res://components/platformer_player_controller/platformer_player_controller.tscn" type="PackedScene" id=9]
 [ext_resource path="res://entities/__entity_platformer_player/__entity_platformer_player.gd" type="Script" id=10]
-[ext_resource path="res://libs/gt_state_machine/__gt_state.gd" type="Script" id=11]
+[ext_resource path="res://entities/__entity_platformer_player/states/entity_platformer_player_hang.gd" type="Script" id=11]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 8.0
@@ -65,6 +65,9 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
+[node name="HangTimer" type="Timer" parent="Timers"]
+one_shot = true
+
 [node name="MovementStateMachine" type="Node" parent="."]
 script = ExtResource( 1 )
 actor_path = NodePath("..")
@@ -105,13 +108,17 @@ fsm_path = NodePath("..")
 script = ExtResource( 4 )
 end_state_path = NodePath("..")
 
-[node name="ToFall" type="Node" parent="MovementStateMachine/Jump"]
+[node name="ToHang" type="Node" parent="MovementStateMachine/Jump"]
 script = ExtResource( 4 )
-end_state_path = NodePath("../../Fall")
+end_state_path = NodePath("../../Hang")
 
 [node name="Hang" type="Node" parent="MovementStateMachine"]
 script = ExtResource( 11 )
 fsm_path = NodePath("..")
+
+[node name="ToFall" type="Node" parent="MovementStateMachine/Hang"]
+script = ExtResource( 4 )
+end_state_path = NodePath("../../Fall")
 
 [node name="Fall" type="Node" parent="MovementStateMachine"]
 script = ExtResource( 2 )
@@ -136,6 +143,8 @@ end_state_path = NodePath("../../Jump")
 [connection signal="just_released" from="InputController/jump" to="MovementStateMachine/Jump" method="damp_jump"]
 [connection signal="tree_entered" from="Body/EntityMover" to="." method="_on_EntityMover_tree_entered"]
 [connection signal="timeout" from="Timers/CoyoteTimer" to="MovementStateMachine/Run/ToFall" method="do_transition"]
+[connection signal="timeout" from="Timers/HangTimer" to="MovementStateMachine/Hang/ToFall" method="do_transition"]
+[connection signal="tree_entered" from="Timers/HangTimer" to="." method="_on_HangTimer_tree_entered"]
 [connection signal="started_jumping" from="MovementStateMachine/Idle" to="MovementStateMachine/Idle/ToJump" method="do_transition"]
 [connection signal="started_moving" from="MovementStateMachine/Idle" to="MovementStateMachine/Idle/ToRun" method="do_transition"]
 [connection signal="state_entered" from="MovementStateMachine/Idle" to="Body/EntityMover" method="restore_jumps"]
@@ -147,11 +156,13 @@ end_state_path = NodePath("../../Jump")
 [connection signal="state_entered" from="MovementStateMachine/Run" to="Body/EntityMover" method="turn_on_snap"]
 [connection signal="state_exited" from="MovementStateMachine/Run" to="Timers/CoyoteTimer" method="stop"]
 [connection signal="stopped_moving" from="MovementStateMachine/Run" to="MovementStateMachine/Run/ToIdle" method="do_transition"]
-[connection signal="started_falling" from="MovementStateMachine/Jump" to="MovementStateMachine/Jump/ToFall" method="do_transition"]
+[connection signal="started_falling" from="MovementStateMachine/Jump" to="MovementStateMachine/Jump/ToHang" method="do_transition"]
 [connection signal="started_jumping" from="MovementStateMachine/Jump" to="MovementStateMachine/Jump/Tojump" method="do_transition"]
 [connection signal="state_entered" from="MovementStateMachine/Jump" to="Timers/JumpCooldownTimer" method="start"]
 [connection signal="state_entered" from="MovementStateMachine/Jump" to="Body/EntityMover" method="jump"]
 [connection signal="state_exited" from="MovementStateMachine/Jump" to="Timers/JumpCooldownTimer" method="stop"]
+[connection signal="state_entered" from="MovementStateMachine/Hang" to="Body/EntityMover" method="set_movement_mask" binds= [ Vector2( 1, 0 ) ]]
+[connection signal="state_exited" from="MovementStateMachine/Hang" to="Body/EntityMover" method="set_movement_mask" binds= [ Vector2( 1, 1 ) ]]
 [connection signal="started_jumping" from="MovementStateMachine/Fall" to="MovementStateMachine/Fall/Tojump" method="do_transition"]
 [connection signal="touched_ground_while_idle" from="MovementStateMachine/Fall" to="MovementStateMachine/Fall/ToIdle" method="do_transition"]
 [connection signal="touched_ground_while_moving" from="MovementStateMachine/Fall" to="MovementStateMachine/Fall/ToRun" method="do_transition"]

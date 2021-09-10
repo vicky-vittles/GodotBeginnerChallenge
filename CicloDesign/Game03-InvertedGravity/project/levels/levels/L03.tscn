@@ -1,16 +1,22 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://levels/__level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://libs/gt_collision_polygon_2d/gt_collision_polygon_2d.gd" type="Script" id=2]
-[ext_resource path="res://entities/entity_gravity_field/entity_gravity_field.tscn" type="PackedScene" id=3]
+[ext_resource path="res://entities/entity_gravity_crystal/entity_gravity_crystal.tscn" type="PackedScene" id=3]
+[ext_resource path="res://libs/gt_area_2d/gt_teleporter_2d/gt_teleporter_2d.gd" type="Script" id=4]
+[ext_resource path="res://entities/entity_spike/entity_spike.tscn" type="PackedScene" id=5]
+[ext_resource path="res://entities/entity_coin/entity_coin.tscn" type="PackedScene" id=6]
 
 [node name="Level" instance=ExtResource( 1 )]
 
 [node name="colored_background" parent="." index="1"]
-color = Color( 0.305882, 0.192157, 0.227451, 1 )
+margin_top = -540.0
+margin_right = 3840.0
+margin_bottom = 0.0
+rect_min_size = Vector2( 3840, 1080 )
 
 [node name="1" type="CollisionPolygon2D" parent="Terrain" index="0"]
-polygon = PoolVector2Array( -128, 160, 1152, 160, 1152, -192, -128, -192 )
+polygon = PoolVector2Array( -128, 320, -24, 320, -24, 336, 0, 336, 0.216629, 320, 112.059, 320, 112, 336, 144, 336, 143.872, 320, 528, 320, 528, 32, 816, 32, 816, 48, 848, 48, 848, 32, 960, 32, 960, 48, 992, 48, 992, 32, 1760, 32, 1760, 48, 1792, 48, 1791.85, 32, 2112, 48, 2464, 48, 2464, 192, 2624, 192, 2623.93, 79.6664, 3136, 192, 3264, 192, 3264, 448, 3392, -192, -384, -192, -384, 192, -128, 504 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
@@ -18,26 +24,656 @@ __meta__ = {
 graphics_color = Color( 0.160784, 0.113725, 0.133333, 1 )
 
 [node name="2" type="CollisionPolygon2D" parent="Terrain" index="1"]
-polygon = PoolVector2Array( -128, 448, 1152, 448, 1152, 640, -128, 640 )
+polygon = PoolVector2Array( -128, 448, 680, 448, 680, 224, 992, 224, 992, 447.476, 1920, 448, 1920, 432, 1952, 432, 1952, 448, 2240, 448, 2240, 320, 2272, 320, 2272, 448, 3008, 448, 3008, 353.313, 2752, 352, 2752, 320, 3008, 320, 3264, 320, 3264, 640, -128, 640 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
 graphics_color = Color( 0.160784, 0.113725, 0.133333, 1 )
 
-[node name="GravityField" parent="Entities/GravityFields" index="0" instance=ExtResource( 3 )]
-position = Vector2( 711.452, 380.896 )
-scale = Vector2( 10, 4 )
+[node name="3" type="CollisionPolygon2D" parent="Terrain" index="2"]
+polygon = PoolVector2Array( 1160, 296, 1160, 280, 1288, 280, 1288, 296 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+graphics_color = Color( 0.160784, 0.113725, 0.133333, 1 )
 
-[node name="EndTrigger" parent="Triggers" index="0"]
-position = Vector2( 428.598, -277.795 )
+[node name="1" type="Node2D" parent="Entities/Coins" index="0"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="1" parent="Entities/Coins/1" index="0" instance=ExtResource( 6 )]
+position = Vector2( 608, 256 )
+
+[node name="2" parent="Entities/Coins/1" index="1" instance=ExtResource( 6 )]
+position = Vector2( 608, 296 )
+
+[node name="3" parent="Entities/Coins/1" index="2" instance=ExtResource( 6 )]
+position = Vector2( 608, 336 )
+
+[node name="2" type="Node2D" parent="Entities/Coins" index="1"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="1" parent="Entities/Coins/2" index="0" instance=ExtResource( 6 )]
+position = Vector2( 1040, 216 )
+
+[node name="2" parent="Entities/Coins/2" index="1" instance=ExtResource( 6 )]
+position = Vector2( 1064, 240 )
+
+[node name="3" parent="Entities/Coins/2" index="2" instance=ExtResource( 6 )]
+position = Vector2( 1080, 272 )
+
+[node name="3" type="Node2D" parent="Entities/Coins" index="2"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="1" parent="Entities/Coins/3" index="0" instance=ExtResource( 6 )]
+position = Vector2( 1392, 232 )
+
+[node name="2" parent="Entities/Coins/3" index="1" instance=ExtResource( 6 )]
+position = Vector2( 1376, 264 )
+
+[node name="3" parent="Entities/Coins/3" index="2" instance=ExtResource( 6 )]
+position = Vector2( 1352, 288 )
+
+[node name="4" type="Node2D" parent="Entities/Coins" index="3"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="1" parent="Entities/Coins/4" index="0" instance=ExtResource( 6 )]
+position = Vector2( 1640, 304 )
+
+[node name="2" parent="Entities/Coins/4" index="1" instance=ExtResource( 6 )]
+position = Vector2( 1664, 336 )
+
+[node name="3" parent="Entities/Coins/4" index="2" instance=ExtResource( 6 )]
+position = Vector2( 1688, 304 )
+
+[node name="1" type="Node2D" parent="Entities/Spikes" index="0"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="1" parent="Entities/Spikes/1" index="0" instance=ExtResource( 5 )]
+position = Vector2( 160, 320 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-1"
+
+[node name="2" parent="Entities/Spikes/1" index="1" instance=ExtResource( 5 )]
+position = Vector2( 192, 320 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-1"
+
+[node name="3" parent="Entities/Spikes/1" index="2" instance=ExtResource( 5 )]
+position = Vector2( 224, 320 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-1"
+
+[node name="4" parent="Entities/Spikes/1" index="3" instance=ExtResource( 5 )]
+position = Vector2( 256, 320 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-1"
+
+[node name="5" parent="Entities/Spikes/1" index="4" instance=ExtResource( 5 )]
+position = Vector2( 288, 320 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-1"
+
+[node name="6" parent="Entities/Spikes/1" index="5" instance=ExtResource( 5 )]
+position = Vector2( 320, 320 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-1"
+
+[node name="7" parent="Entities/Spikes/1" index="6" instance=ExtResource( 5 )]
+position = Vector2( 352, 320 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-1"
+
+[node name="8" parent="Entities/Spikes/1" index="7" instance=ExtResource( 5 )]
+position = Vector2( 384, 320 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-1"
+
+[node name="9" parent="Entities/Spikes/1" index="8" instance=ExtResource( 5 )]
+position = Vector2( 416, 320 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-1"
+
+[node name="10" parent="Entities/Spikes/1" index="9" instance=ExtResource( 5 )]
+position = Vector2( 448, 320 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-1"
+
+[node name="11" parent="Entities/Spikes/1" index="10" instance=ExtResource( 5 )]
+position = Vector2( 480, 320 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-1"
+
+[node name="12" parent="Entities/Spikes/1" index="11" instance=ExtResource( 5 )]
+position = Vector2( 512, 320 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-1"
+
+[node name="2" type="Node2D" parent="Entities/Spikes" index="1"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="1" parent="Entities/Spikes/2" index="0" instance=ExtResource( 5 )]
+position = Vector2( 544, 32 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-1"
+
+[node name="2" parent="Entities/Spikes/2" index="1" instance=ExtResource( 5 )]
+position = Vector2( 576, 32 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-1"
+
+[node name="3" parent="Entities/Spikes/2" index="2" instance=ExtResource( 5 )]
+position = Vector2( 608, 32 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-1"
+
+[node name="4" parent="Entities/Spikes/2" index="3" instance=ExtResource( 5 )]
+position = Vector2( 640, 32 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-1"
+
+[node name="5" parent="Entities/Spikes/2" index="4" instance=ExtResource( 5 )]
+position = Vector2( 672, 32 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-1"
+
+[node name="6" parent="Entities/Spikes/2" index="5" instance=ExtResource( 5 )]
+position = Vector2( 704, 32 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-1"
+
+[node name="7" parent="Entities/Spikes/2" index="6" instance=ExtResource( 5 )]
+position = Vector2( 736, 32 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-1"
+
+[node name="8" parent="Entities/Spikes/2" index="7" instance=ExtResource( 5 )]
+position = Vector2( 768, 32 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-1"
+
+[node name="9" parent="Entities/Spikes/2" index="8" instance=ExtResource( 5 )]
+position = Vector2( 800, 32 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-1"
+
+[node name="3" type="Node2D" parent="Entities/Spikes" index="2"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="1" parent="Entities/Spikes/3" index="0" instance=ExtResource( 5 )]
+position = Vector2( 1008, 448 )
+teleporter_tag = "L03-2"
+
+[node name="2" parent="Entities/Spikes/3" index="1" instance=ExtResource( 5 )]
+position = Vector2( 1040, 448 )
+teleporter_tag = "L03-2"
+
+[node name="3" parent="Entities/Spikes/3" index="2" instance=ExtResource( 5 )]
+position = Vector2( 1072, 448 )
+teleporter_tag = "L03-2"
+
+[node name="4" parent="Entities/Spikes/3" index="3" instance=ExtResource( 5 )]
+position = Vector2( 1104, 448 )
+teleporter_tag = "L03-2"
+
+[node name="5" parent="Entities/Spikes/3" index="4" instance=ExtResource( 5 )]
+position = Vector2( 1136, 448 )
+teleporter_tag = "L03-2"
+
+[node name="6" parent="Entities/Spikes/3" index="5" instance=ExtResource( 5 )]
+position = Vector2( 1176, 280 )
+teleporter_tag = "L03-2"
+
+[node name="7" parent="Entities/Spikes/3" index="6" instance=ExtResource( 5 )]
+position = Vector2( 1208, 280 )
+teleporter_tag = "L03-2"
+
+[node name="8" parent="Entities/Spikes/3" index="7" instance=ExtResource( 5 )]
+position = Vector2( 1240, 280 )
+teleporter_tag = "L03-2"
+
+[node name="9" parent="Entities/Spikes/3" index="8" instance=ExtResource( 5 )]
+position = Vector2( 1272, 280 )
+teleporter_tag = "L03-2"
+
+[node name="22" parent="Entities/Spikes/3" index="9" instance=ExtResource( 5 )]
+position = Vector2( 1008, 32 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-2"
+
+[node name="23" parent="Entities/Spikes/3" index="10" instance=ExtResource( 5 )]
+position = Vector2( 1040, 32 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-2"
+
+[node name="24" parent="Entities/Spikes/3" index="11" instance=ExtResource( 5 )]
+position = Vector2( 1072, 32 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-2"
+
+[node name="25" parent="Entities/Spikes/3" index="12" instance=ExtResource( 5 )]
+position = Vector2( 1104, 32 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-2"
+
+[node name="26" parent="Entities/Spikes/3" index="13" instance=ExtResource( 5 )]
+position = Vector2( 1136, 32 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-2"
+
+[node name="27" parent="Entities/Spikes/3" index="14" instance=ExtResource( 5 )]
+position = Vector2( 1168, 32 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-2"
+
+[node name="28" parent="Entities/Spikes/3" index="15" instance=ExtResource( 5 )]
+position = Vector2( 1200, 32 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-2"
+
+[node name="29" parent="Entities/Spikes/3" index="16" instance=ExtResource( 5 )]
+position = Vector2( 1232, 32 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-2"
+
+[node name="30" parent="Entities/Spikes/3" index="17" instance=ExtResource( 5 )]
+position = Vector2( 1264, 32 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-2"
+
+[node name="31" parent="Entities/Spikes/3" index="18" instance=ExtResource( 5 )]
+position = Vector2( 1296, 32 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-2"
+
+[node name="32" parent="Entities/Spikes/3" index="19" instance=ExtResource( 5 )]
+position = Vector2( 1328, 32 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-2"
+
+[node name="33" parent="Entities/Spikes/3" index="20" instance=ExtResource( 5 )]
+position = Vector2( 1360, 32 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-2"
+
+[node name="34" parent="Entities/Spikes/3" index="21" instance=ExtResource( 5 )]
+position = Vector2( 1392, 32 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-2"
+
+[node name="35" parent="Entities/Spikes/3" index="22" instance=ExtResource( 5 )]
+position = Vector2( 1424, 32 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-2"
+
+[node name="36" parent="Entities/Spikes/3" index="23" instance=ExtResource( 5 )]
+position = Vector2( 1456, 32 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-2"
+
+[node name="37" parent="Entities/Spikes/3" index="24" instance=ExtResource( 5 )]
+position = Vector2( 1488, 32 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-2"
+
+[node name="38" parent="Entities/Spikes/3" index="25" instance=ExtResource( 5 )]
+position = Vector2( 1520, 32 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-2"
+
+[node name="39" parent="Entities/Spikes/3" index="26" instance=ExtResource( 5 )]
+position = Vector2( 1552, 32 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-2"
+
+[node name="40" parent="Entities/Spikes/3" index="27" instance=ExtResource( 5 )]
+position = Vector2( 1584, 32 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-2"
+
+[node name="41" parent="Entities/Spikes/3" index="28" instance=ExtResource( 5 )]
+position = Vector2( 1616, 32 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-2"
+
+[node name="42" parent="Entities/Spikes/3" index="29" instance=ExtResource( 5 )]
+position = Vector2( 1648, 32 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-2"
+
+[node name="43" parent="Entities/Spikes/3" index="30" instance=ExtResource( 5 )]
+position = Vector2( 1680, 32 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-2"
+
+[node name="44" parent="Entities/Spikes/3" index="31" instance=ExtResource( 5 )]
+position = Vector2( 1712, 32 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-2"
+
+[node name="45" parent="Entities/Spikes/3" index="32" instance=ExtResource( 5 )]
+position = Vector2( 1744, 32 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-2"
+
+[node name="10" parent="Entities/Spikes/3" index="33" instance=ExtResource( 5 )]
+position = Vector2( 1168, 448 )
+teleporter_tag = "L03-2"
+
+[node name="11" parent="Entities/Spikes/3" index="34" instance=ExtResource( 5 )]
+position = Vector2( 1200, 448 )
+teleporter_tag = "L03-2"
+
+[node name="12" parent="Entities/Spikes/3" index="35" instance=ExtResource( 5 )]
+position = Vector2( 1232, 448 )
+teleporter_tag = "L03-2"
+
+[node name="13" parent="Entities/Spikes/3" index="36" instance=ExtResource( 5 )]
+position = Vector2( 1264, 448 )
+teleporter_tag = "L03-2"
+
+[node name="14" parent="Entities/Spikes/3" index="37" instance=ExtResource( 5 )]
+position = Vector2( 1296, 448 )
+teleporter_tag = "L03-2"
+
+[node name="15" parent="Entities/Spikes/3" index="38" instance=ExtResource( 5 )]
+position = Vector2( 1328, 448 )
+teleporter_tag = "L03-2"
+
+[node name="16" parent="Entities/Spikes/3" index="39" instance=ExtResource( 5 )]
+position = Vector2( 1360, 448 )
+teleporter_tag = "L03-2"
+
+[node name="17" parent="Entities/Spikes/3" index="40" instance=ExtResource( 5 )]
+position = Vector2( 1392, 448 )
+teleporter_tag = "L03-2"
+
+[node name="18" parent="Entities/Spikes/3" index="41" instance=ExtResource( 5 )]
+position = Vector2( 1424, 448 )
+teleporter_tag = "L03-2"
+
+[node name="19" parent="Entities/Spikes/3" index="42" instance=ExtResource( 5 )]
+position = Vector2( 1456, 448 )
+teleporter_tag = "L03-2"
+
+[node name="20" parent="Entities/Spikes/3" index="43" instance=ExtResource( 5 )]
+position = Vector2( 1488, 448 )
+teleporter_tag = "L03-2"
+
+[node name="21" parent="Entities/Spikes/3" index="44" instance=ExtResource( 5 )]
+position = Vector2( 1520, 448 )
+teleporter_tag = "L03-2"
+
+[node name="46" parent="Entities/Spikes/3" index="45" instance=ExtResource( 5 )]
+position = Vector2( 1552, 448 )
+teleporter_tag = "L03-2"
+
+[node name="47" parent="Entities/Spikes/3" index="46" instance=ExtResource( 5 )]
+position = Vector2( 1584, 448 )
+teleporter_tag = "L03-2"
+
+[node name="48" parent="Entities/Spikes/3" index="47" instance=ExtResource( 5 )]
+position = Vector2( 1616, 448 )
+teleporter_tag = "L03-2"
+
+[node name="49" parent="Entities/Spikes/3" index="48" instance=ExtResource( 5 )]
+position = Vector2( 1648, 448 )
+teleporter_tag = "L03-2"
+
+[node name="50" parent="Entities/Spikes/3" index="49" instance=ExtResource( 5 )]
+position = Vector2( 1680, 448 )
+teleporter_tag = "L03-2"
+
+[node name="51" parent="Entities/Spikes/3" index="50" instance=ExtResource( 5 )]
+position = Vector2( 1712, 448 )
+teleporter_tag = "L03-2"
+
+[node name="52" parent="Entities/Spikes/3" index="51" instance=ExtResource( 5 )]
+position = Vector2( 1744, 448 )
+teleporter_tag = "L03-2"
+
+[node name="53" parent="Entities/Spikes/3" index="52" instance=ExtResource( 5 )]
+position = Vector2( 1776, 448 )
+teleporter_tag = "L03-2"
+
+[node name="54" parent="Entities/Spikes/3" index="53" instance=ExtResource( 5 )]
+position = Vector2( 1808, 448 )
+teleporter_tag = "L03-2"
+
+[node name="55" parent="Entities/Spikes/3" index="54" instance=ExtResource( 5 )]
+position = Vector2( 1840, 448 )
+teleporter_tag = "L03-2"
+
+[node name="56" parent="Entities/Spikes/3" index="55" instance=ExtResource( 5 )]
+position = Vector2( 1872, 448 )
+teleporter_tag = "L03-2"
+
+[node name="57" parent="Entities/Spikes/3" index="56" instance=ExtResource( 5 )]
+position = Vector2( 1904, 448 )
+teleporter_tag = "L03-2"
+
+[node name="4" type="Node2D" parent="Entities/Spikes" index="3"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="1" parent="Entities/Spikes/4" index="0" instance=ExtResource( 5 )]
+position = Vector2( 2256, 320 )
+teleporter_tag = "L03-3"
+
+[node name="2" parent="Entities/Spikes/4" index="1" instance=ExtResource( 5 )]
+position = Vector2( 2128, 48 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-3"
+
+[node name="3" parent="Entities/Spikes/4" index="2" instance=ExtResource( 5 )]
+position = Vector2( 2160, 48 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-3"
+
+[node name="4" parent="Entities/Spikes/4" index="3" instance=ExtResource( 5 )]
+position = Vector2( 2192, 48 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-3"
+
+[node name="5" parent="Entities/Spikes/4" index="4" instance=ExtResource( 5 )]
+position = Vector2( 2224, 48 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-3"
+
+[node name="6" parent="Entities/Spikes/4" index="5" instance=ExtResource( 5 )]
+position = Vector2( 2256, 48 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-3"
+
+[node name="7" parent="Entities/Spikes/4" index="6" instance=ExtResource( 5 )]
+position = Vector2( 2288, 48 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-3"
+
+[node name="8" parent="Entities/Spikes/4" index="7" instance=ExtResource( 5 )]
+position = Vector2( 2320, 48 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-3"
+
+[node name="9" parent="Entities/Spikes/4" index="8" instance=ExtResource( 5 )]
+position = Vector2( 2352, 48 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-3"
+
+[node name="20" parent="Entities/Spikes/4" index="9" instance=ExtResource( 5 )]
+position = Vector2( 2384, 48 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-3"
+
+[node name="21" parent="Entities/Spikes/4" index="10" instance=ExtResource( 5 )]
+position = Vector2( 2416, 48 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-3"
+
+[node name="19" parent="Entities/Spikes/4" index="11" instance=ExtResource( 5 )]
+position = Vector2( 2448, 48 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-3"
+
+[node name="18" parent="Entities/Spikes/4" index="12" instance=ExtResource( 5 )]
+position = Vector2( 2480, 192 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-3"
+
+[node name="30" parent="Entities/Spikes/4" index="13" instance=ExtResource( 5 )]
+position = Vector2( 2512, 192 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-3"
+
+[node name="31" parent="Entities/Spikes/4" index="14" instance=ExtResource( 5 )]
+position = Vector2( 2544, 192 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-3"
+
+[node name="32" parent="Entities/Spikes/4" index="15" instance=ExtResource( 5 )]
+position = Vector2( 2576, 192 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-3"
+
+[node name="33" parent="Entities/Spikes/4" index="16" instance=ExtResource( 5 )]
+position = Vector2( 2608, 192 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L03-3"
+
+[node name="34" parent="Entities/Spikes/4" index="17" instance=ExtResource( 5 )]
+position = Vector2( 2752, 336 )
+rotation = 4.71239
+teleporter_tag = "L03-3"
+
+[node name="10" parent="Entities/Spikes/4" index="18" instance=ExtResource( 5 )]
+position = Vector2( 2512, 448 )
+teleporter_tag = "L03-3"
+
+[node name="11" parent="Entities/Spikes/4" index="19" instance=ExtResource( 5 )]
+position = Vector2( 2544, 448 )
+teleporter_tag = "L03-3"
+
+[node name="12" parent="Entities/Spikes/4" index="20" instance=ExtResource( 5 )]
+position = Vector2( 2576, 448 )
+teleporter_tag = "L03-3"
+
+[node name="13" parent="Entities/Spikes/4" index="21" instance=ExtResource( 5 )]
+position = Vector2( 2608, 448 )
+teleporter_tag = "L03-3"
+
+[node name="14" parent="Entities/Spikes/4" index="22" instance=ExtResource( 5 )]
+position = Vector2( 2640, 448 )
+teleporter_tag = "L03-3"
+
+[node name="15" parent="Entities/Spikes/4" index="23" instance=ExtResource( 5 )]
+position = Vector2( 2672, 448 )
+teleporter_tag = "L03-3"
+
+[node name="16" parent="Entities/Spikes/4" index="24" instance=ExtResource( 5 )]
+position = Vector2( 2704, 448 )
+teleporter_tag = "L03-3"
+
+[node name="17" parent="Entities/Spikes/4" index="25" instance=ExtResource( 5 )]
+position = Vector2( 2736, 448 )
+teleporter_tag = "L03-3"
+
+[node name="22" parent="Entities/Spikes/4" index="26" instance=ExtResource( 5 )]
+position = Vector2( 2768, 448 )
+teleporter_tag = "L03-3"
+
+[node name="23" parent="Entities/Spikes/4" index="27" instance=ExtResource( 5 )]
+position = Vector2( 2800, 448 )
+teleporter_tag = "L03-3"
+
+[node name="24" parent="Entities/Spikes/4" index="28" instance=ExtResource( 5 )]
+position = Vector2( 2832, 448 )
+teleporter_tag = "L03-3"
+
+[node name="25" parent="Entities/Spikes/4" index="29" instance=ExtResource( 5 )]
+position = Vector2( 2864, 448 )
+teleporter_tag = "L03-3"
+
+[node name="26" parent="Entities/Spikes/4" index="30" instance=ExtResource( 5 )]
+position = Vector2( 2896, 448 )
+teleporter_tag = "L03-3"
+
+[node name="27" parent="Entities/Spikes/4" index="31" instance=ExtResource( 5 )]
+position = Vector2( 2928, 448 )
+teleporter_tag = "L03-3"
+
+[node name="28" parent="Entities/Spikes/4" index="32" instance=ExtResource( 5 )]
+position = Vector2( 2960, 448 )
+teleporter_tag = "L03-3"
+
+[node name="29" parent="Entities/Spikes/4" index="33" instance=ExtResource( 5 )]
+position = Vector2( 2992, 448 )
+teleporter_tag = "L03-3"
+
+[node name="1" parent="Entities/Crystals" index="0" instance=ExtResource( 3 )]
+position = Vector2( 608, 208 )
+
+[node name="2" parent="Entities/Crystals" index="1" instance=ExtResource( 3 )]
+position = Vector2( 1080, 320 )
+
+[node name="3" parent="Entities/Crystals" index="2" instance=ExtResource( 3 )]
+position = Vector2( 1392, 176 )
+
+[node name="4" parent="Entities/Crystals" index="3" instance=ExtResource( 3 )]
+position = Vector2( 2192, 272 )
+
+[node name="5" parent="Entities/Crystals" index="4" instance=ExtResource( 3 )]
+position = Vector2( 2712, 128 )
+
+[node name="1" type="Area2D" parent="Triggers" index="0"]
+position = Vector2( 40, 384 )
+script = ExtResource( 4 )
+body_path = NodePath(".")
+is_cause = false
+is_indirect = true
+tag = "L03-1"
+
+[node name="2" type="Area2D" parent="Triggers" index="1"]
+position = Vector2( 896, 72 )
+script = ExtResource( 4 )
+body_path = NodePath(".")
+is_cause = false
+is_indirect = true
+tag = "L03-2"
+
+[node name="3" type="Area2D" parent="Triggers" index="2"]
+position = Vector2( 2016, 432 )
+script = ExtResource( 4 )
+body_path = NodePath(".")
+is_cause = false
+is_indirect = true
+tag = "L03-3"
+
+[node name="EndTrigger" parent="Triggers" index="3"]
+position = Vector2( 3200, 256 )
 
 [node name="Player" parent="." index="6"]
-position = Vector2( 320.655, 341.291 )
+position = Vector2( -40, 352 )
 
 [node name="Camera" parent="." index="7"]
 position = Vector2( 480, 270 )
 limit_left = 0
 limit_top = 0
+limit_right = 3136
 limit_bottom = 540
 editor_draw_limits = true

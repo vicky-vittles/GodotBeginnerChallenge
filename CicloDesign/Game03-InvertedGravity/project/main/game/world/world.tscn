@@ -39,7 +39,7 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
-current_level = 2
+current_level = 1
 
 [node name="HUD" type="CanvasLayer" parent="."]
 

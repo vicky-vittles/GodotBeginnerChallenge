@@ -8,6 +8,7 @@ export (float) var air_deceleration = 0.2
 
 export (int) var jump_height = 256
 export (float) var jump_time = 0.5
+export (float) var hang_time = 0.05
 export (int) var max_jumps = 1
 export (bool) var can_jump_while_falling = true
 export (bool) var can_small_jump = true
@@ -27,3 +28,6 @@ func _on_EntityMover_tree_entered():
 	get_node("Body/EntityMover").JUMP_SPEED = Utils.jump_speed_formula(jump_height, jump_time)
 	get_node("Body/EntityMover").GRAVITY = Utils.gravity_formula(jump_height, jump_time)
 	get_node("Body/EntityMover").MAX_JUMPS = max_jumps
+
+func _on_HangTimer_tree_entered():
+	get_node("Timers/HangTimer").wait_time = hang_time

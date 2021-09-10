@@ -65,6 +65,7 @@ __meta__ = {
 [node name="PresenceArea" type="Area2D" parent="Body/Triggers" index="1" groups=[
 "entity_player_presence_area",
 ]]
+visible = false
 collision_layer = 8
 collision_mask = 8
 script = ExtResource( 5 )
@@ -91,7 +92,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 body_path = NodePath("../..")
-collidable_groups = [ "entity_gravity_field" ]
+collidable_groups = [ "entity_gravity_crystal" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Triggers/InvertGravityTrigger" index="0"]
 shape = SubResource( 3 )
@@ -153,7 +154,7 @@ __meta__ = {
 
 [node name="rect_body" type="Polygon2D" parent="Body/Graphics/color/invert_pivot/tilt_juice/jump_juice" index="0"]
 position = Vector2( 0, -16 )
-color = Color( 0.980392, 0.909804, 0.737255, 1 )
+color = Color( 0.976471, 0.694118, 0.556863, 1 )
 polygon = PoolVector2Array( -8, 16, 8, 16, 8, -16, -8, -16 )
 __meta__ = {
 "_edit_lock_": true
@@ -161,7 +162,7 @@ __meta__ = {
 
 [node name="rect_feet" type="Polygon2D" parent="Body/Graphics/color/invert_pivot/tilt_juice/jump_juice" index="1"]
 color = Color( 0.615686, 0.333333, 0.313726, 1 )
-polygon = PoolVector2Array( 8, 0, -8, 0, -8, -6, 8, -6 )
+polygon = PoolVector2Array( 8, 0, -8, 0, -8, -10, 0, -8, 8, -10 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -216,6 +217,7 @@ shape = SubResource( 7 )
 [connection signal="state_entered" from="MovementStateMachine/Run" to="Body" method="update_tilt"]
 [connection signal="updated_move_direction" from="MovementStateMachine/Run" to="Body" method="update_tilt"]
 [connection signal="updated_move_direction" from="MovementStateMachine/Jump" to="Body" method="update_tilt"]
-[connection signal="transition_done" from="MovementStateMachine/Jump/ToFall" to="Body" method="invert_gravity"]
+[connection signal="state_entered" from="MovementStateMachine/Hang" to="Timers/HangTimer" method="start"]
+[connection signal="transition_done" from="MovementStateMachine/Hang/ToFall" to="Body" method="invert_gravity"]
 
 [editable path="InputController"]

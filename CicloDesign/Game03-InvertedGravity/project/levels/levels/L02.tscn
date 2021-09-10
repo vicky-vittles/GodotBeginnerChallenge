@@ -15,10 +15,9 @@ margin_top = -540.0
 margin_right = 3840.0
 margin_bottom = 0.0
 rect_min_size = Vector2( 3840, 1080 )
-color = Color( 0.305882, 0.192157, 0.227451, 1 )
 
 [node name="1" type="CollisionPolygon2D" parent="Terrain" index="0"]
-polygon = PoolVector2Array( -64, 256, 0, 256, -1.28419, 223.676, 152, 256, 168, 128, 712, 128, 712, 224, 960, 256, 1160, 256, 1160, 64.2182, 1512, 64, 1512, 88, 1560, 88, 1560, 64, 1672, 64, 2192, 304, 2192, 64, 3072, 64, 3072, 256, 3344, 280, 3456, 280, 3456, 576, 3648, 264, 3648, -544, -128, -544, -128, 256, -64, 384 )
+polygon = PoolVector2Array( -64, 256, 0, 256, -1.28419, 223.676, 152, 256, 168, 128, 712, 128, 712, 224, 960, 256, 1160, 256, 1160, 64.2182, 1512, 64, 1512, 88, 1560, 88, 1560, 64, 1856, 64, 1856, 128, 2048, 232, 2192, 304, 2192, 64, 3072, 64, 3072, 256, 3344, 280, 3456, 280, 3456, 576, 3648, 264, 3648, -544, -128, -544, -128, 256, -64, 384 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
@@ -52,6 +51,17 @@ position = Vector2( 464, 360 )
 
 [node name="5" parent="Entities/Coins/1" index="4" instance=ExtResource( 7 )]
 position = Vector2( 488, 360 )
+
+[node name="2" type="Node2D" parent="Entities/Coins" index="1"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="1" parent="Entities/Coins/2" index="0" instance=ExtResource( 7 )]
+position = Vector2( 1256, 112 )
+
+[node name="2" parent="Entities/Coins/2" index="1" instance=ExtResource( 7 )]
+position = Vector2( 1256, 144 )
 
 [node name="1" type="Node2D" parent="Entities/Spikes" index="0"]
 __meta__ = {
@@ -468,7 +478,7 @@ position = Vector2( 3056, 488 )
 teleporter_tag = "L02-4"
 
 [node name="1" parent="Entities/Platforms" index="0" instance=ExtResource( 3 )]
-position = Vector2( 224, 392 )
+position = Vector2( 672, 392 )
 transition_type = 4
 ease_type = 2
 duration = 3.0
@@ -479,7 +489,7 @@ __meta__ = {
 }
 
 [node name="2" type="Position2D" parent="Entities/Platforms/1" index="2"]
-position = Vector2( 448, 0 )
+position = Vector2( -448, 0 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -542,13 +552,14 @@ __meta__ = {
 }
 
 [node name="2" type="Position2D" parent="Entities/Diamonds/1" index="2"]
-position = Vector2( 380, 0 )
+position = Vector2( 0, -216 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="2" parent="Entities/Diamonds" index="1" instance=ExtResource( 4 )]
-position = Vector2( 2216, 240 )
+position = Vector2( 2424, 240 )
+rotation = 3.14159
 teleporter_tag = "L02-3"
 
 [node name="1" type="Position2D" parent="Entities/Diamonds/2" index="1"]
