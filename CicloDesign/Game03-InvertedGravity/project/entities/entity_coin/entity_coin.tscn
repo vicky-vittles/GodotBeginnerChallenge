@@ -1,9 +1,13 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://entities/entity_coin/entity_coin.gd" type="Script" id=1]
 [ext_resource path="res://entities/entity_coin/components/entity_coin_body.gd" type="Script" id=2]
 [ext_resource path="res://addons/regular_polygon2d_node/RegularPolygon2D.gd" type="Script" id=3]
 [ext_resource path="res://libs/gt_juice_2d/gt_juice_2d.gd" type="Script" id=4]
+[ext_resource path="res://libs/gt_audio_player/gt_audio_player.gd" type="Script" id=5]
+[ext_resource path="res://entities/entity_coin/assets/coin3.wav" type="AudioStream" id=6]
+[ext_resource path="res://entities/entity_coin/assets/coin1.wav" type="AudioStream" id=7]
+[ext_resource path="res://entities/entity_coin/assets/coin2.wav" type="AudioStream" id=8]
 
 [sub_resource type="Animation" id=1]
 resource_name = "collected"
@@ -96,10 +100,18 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="SFX" type="Node" parent="."]
+
+[node name="collected" type="AudioStreamPlayer" parent="SFX"]
+bus = "Sound"
+script = ExtResource( 5 )
+samples = [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 6 ) ]
+
 [node name="DestroyTimer" type="Timer" parent="."]
 one_shot = true
 
 [connection signal="effect" from="Body" to="DestroyTimer" method="start"]
+[connection signal="effect" from="Body" to="SFX/collected" method="play"]
 [connection signal="effect" from="Body" to="." method="_on_Body_effect"]
 [connection signal="effect" from="Body" to="Body/Graphics/AnimationPlayer" method="play" binds= [ "collected" ]]
 [connection signal="start_floating" from="Body" to="Body/Graphics/color/floating" method="rand_floating"]

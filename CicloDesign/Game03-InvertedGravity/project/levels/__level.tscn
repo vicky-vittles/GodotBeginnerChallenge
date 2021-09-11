@@ -1,11 +1,70 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://levels/__level.gd" type="Script" id=1]
 [ext_resource path="res://entities/entity_player/entity_player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://libs/multitarget_camera_2d/multitarget_camera_2d.gd" type="Script" id=3]
 [ext_resource path="res://libs/gt_area_2d/gt_trigger_area_2d/gt_trigger_area_2d.gd" type="Script" id=4]
+[ext_resource path="res://libs/gt_screen_shake_2d/gt_screen_shake_2d.gd" type="Script" id=5]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://assets/fonts/diffusion-bold.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+outline_size = 2
+outline_color = Color( 0.160784, 0.113725, 0.133333, 1 )
+use_mipmaps = true
+font_data = SubResource( 1 )
+
+[sub_resource type="Animation" id=4]
+resource_name = "default"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("root:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "fade_invisible"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("root:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "fade_visible"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("root:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 32, 64 )
 
 [node name="Level" type="Node2D"]
@@ -30,6 +89,43 @@ __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="root" type="Control" parent="HUD"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="vbox" type="VBoxContainer" parent="HUD/root"]
+anchor_right = 1.0
+margin_left = 10.0
+margin_top = 10.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="level_label" type="Label" parent="HUD/root/vbox"]
+margin_right = 950.0
+margin_bottom = 41.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.980392, 0.909804, 0.737255, 1 )
+text = "Level 00"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD"]
+autoplay = "default"
+anims/default = SubResource( 4 )
+anims/fade_invisible = SubResource( 6 )
+anims/fade_visible = SubResource( 5 )
 
 [node name="Terrain" type="StaticBody2D" parent="."]
 collision_layer = 2
@@ -82,7 +178,7 @@ collidable_groups = [ "entity_player_presence_area" ]
 one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/EndTrigger"]
-shape = SubResource( 1 )
+shape = SubResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -102,9 +198,17 @@ __meta__ = {
 [node name="Camera" type="Camera2D" parent="."]
 current = true
 script = ExtResource( 3 )
+move_speed = 0.1
 zoom_speed = 1.0
 min_zoom = 1.0
 max_zoom = 1.0
 allow_zoom = false
 
+[node name="ScreenShake" type="Node" parent="Camera"]
+script = ExtResource( 5 )
+camera_path = NodePath("..")
+
+[connection signal="level_finished" from="." to="HUD/AnimationPlayer" method="play" binds= [ "fade_invisible" ]]
+[connection signal="level_started" from="." to="HUD/AnimationPlayer" method="play" binds= [ "fade_visible" ]]
 [connection signal="effect" from="Triggers/EndTrigger" to="." method="end_level"]
+[connection signal="died" from="Player" to="Camera/ScreenShake" method="shake_simple" binds= [ 8.0, 0.3, 0.1 ]]

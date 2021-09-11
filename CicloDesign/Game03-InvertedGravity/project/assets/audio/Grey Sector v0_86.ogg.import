@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Grey Sector v0_86.ogg-044e78241cd024acf0497b61585d7ea9.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/Grey Sector v0_86.ogg"
+dest_files=[ "res://.import/Grey Sector v0_86.ogg-044e78241cd024acf0497b61585d7ea9.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/crystal-pickup.wav-9775c6b1be1098ed63870ba286850cee.sample"
+
+[deps]
+
+source_file="res://entities/entity_gravity_crystal/assets/crystal-pickup.wav"
+dest_files=[ "res://.import/crystal-pickup.wav-9775c6b1be1098ed63870ba286850cee.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

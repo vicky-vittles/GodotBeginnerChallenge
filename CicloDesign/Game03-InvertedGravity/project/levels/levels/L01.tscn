@@ -14,7 +14,9 @@ polygon = PoolVector2Array( 352, 192, 64, 120, 64, 0, 1088, 0, 1088, 120, 432, 1
 
 [node name="colored_background" parent="." index="1"]
 rect_min_size = Vector2( 3840, 540 )
-color = Color( 0.305882, 0.192157, 0.227451, 1 )
+
+[node name="level_label" parent="HUD/root/vbox" index="0"]
+text = "Level 01"
 
 [node name="1" type="CollisionPolygon2D" parent="Terrain" index="0"]
 polygon = PoolVector2Array( -128, -192, 2752, -192, 3328, -192, 3328, 256, 3200, 256, 2752, 64, 2175.76, 64.9491, 2136, 264, 1944, 224, 1936, 88, 1488, 64, 1472, 256, 1088, 224, 1088, 120, 432, 104, 352, 192, 0, 104, 0, 536, -128, 128 )
@@ -109,6 +111,48 @@ position = Vector2( 1872, 344 )
 
 [node name="4" parent="Entities/Coins/4" index="3" instance=ExtResource( 5 )]
 position = Vector2( 1872, 312 )
+
+[node name="5" type="Node2D" parent="Entities/Coins" index="4"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="1" parent="Entities/Coins/5" index="0" instance=ExtResource( 5 )]
+position = Vector2( 2232, 344 )
+
+[node name="2" parent="Entities/Coins/5" index="1" instance=ExtResource( 5 )]
+position = Vector2( 2248, 320 )
+
+[node name="3" parent="Entities/Coins/5" index="2" instance=ExtResource( 5 )]
+position = Vector2( 2272, 304 )
+
+[node name="6" type="Node2D" parent="Entities/Coins" index="5"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="1" parent="Entities/Coins/6" index="0" instance=ExtResource( 5 )]
+position = Vector2( 2528, 168 )
+
+[node name="2" parent="Entities/Coins/6" index="1" instance=ExtResource( 5 )]
+position = Vector2( 2544, 192 )
+
+[node name="3" parent="Entities/Coins/6" index="2" instance=ExtResource( 5 )]
+position = Vector2( 2568, 208 )
+
+[node name="7" type="Node2D" parent="Entities/Coins" index="6"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="1" parent="Entities/Coins/7" index="0" instance=ExtResource( 5 )]
+position = Vector2( 3008, 352 )
+
+[node name="2" parent="Entities/Coins/7" index="1" instance=ExtResource( 5 )]
+position = Vector2( 3040, 352 )
+
+[node name="3" parent="Entities/Coins/7" index="2" instance=ExtResource( 5 )]
+position = Vector2( 3072, 352 )
 
 [node name="1" type="Node2D" parent="Entities/Spikes" index="0"]
 __meta__ = {
@@ -258,7 +302,7 @@ tag = "L01-1"
 [node name="EndTrigger" parent="Triggers" index="1"]
 position = Vector2( 3264, 320 )
 
-[node name="Lights" parent="." index="5"]
+[node name="Lights" parent="." index="6"]
 visible = false
 
 [node name="1" type="Light2D" parent="Lights" index="0"]
@@ -276,10 +320,10 @@ light_mask = 2
 occluder = SubResource( 1 )
 light_mask = 2
 
-[node name="Player" parent="." index="6"]
+[node name="Player" parent="." index="7"]
 position = Vector2( 96, 256 )
 
-[node name="Camera" parent="." index="7"]
+[node name="Camera" parent="." index="8"]
 position = Vector2( 480, 270 )
 limit_left = 0
 limit_top = 0

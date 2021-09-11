@@ -11,6 +11,7 @@ script = ExtResource( 1 )
 entity_type = 4
 
 [node name="Body" type="Area2D" parent="." groups=[
+"entity_enemy",
 "entity_spike",
 ]]
 collision_layer = 16

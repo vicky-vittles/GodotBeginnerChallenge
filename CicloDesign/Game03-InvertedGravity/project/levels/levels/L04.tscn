@@ -14,6 +14,9 @@
 [node name="colored_background" parent="." index="1"]
 rect_min_size = Vector2( 3840, 540 )
 
+[node name="level_label" parent="HUD/root/vbox" index="0"]
+text = "Level 04"
+
 [node name="1" type="CollisionPolygon2D" parent="Terrain" index="0"]
 polygon = PoolVector2Array( -128, 256, 0, 256, 1.44395, 64, 480, 64, 480, 200, 512, 200, 512, 32, 768, 32, 768, 200, 800, 200, 800, 31.4212, 1152, 32, 1152, 48, 1184, 48, 1184, 32, 1408, 32, 1728, 192, 2304, 192, 2304, 208, 2336, 208, 2336, 200, 2560, 256, 2560, 30.6934, 3520, 32, 3744.6, 32, 3744, 128, 3840, 192, 3968, 192, 3968, 512, 4224, 192, 4224, -320, -320, -320, -320, 128, -128, 512 )
 script = ExtResource( 2 )
@@ -43,6 +46,105 @@ position = Vector2( 640, 120 )
 
 [node name="3" parent="Entities/Coins/1" index="2" instance=ExtResource( 6 )]
 position = Vector2( 664, 136 )
+
+[node name="7" parent="Entities/Coins/1" index="3" instance=ExtResource( 6 )]
+position = Vector2( 1008, 120 )
+
+[node name="8" parent="Entities/Coins/1" index="4" instance=ExtResource( 6 )]
+position = Vector2( 1032, 104 )
+
+[node name="9" parent="Entities/Coins/1" index="5" instance=ExtResource( 6 )]
+position = Vector2( 1056, 120 )
+
+[node name="10" parent="Entities/Coins/1" index="6" instance=ExtResource( 6 )]
+position = Vector2( 1248, 48 )
+
+[node name="11" parent="Entities/Coins/1" index="7" instance=ExtResource( 6 )]
+position = Vector2( 1280, 48 )
+
+[node name="12" parent="Entities/Coins/1" index="8" instance=ExtResource( 6 )]
+position = Vector2( 1312, 48 )
+
+[node name="13" parent="Entities/Coins/1" index="9" instance=ExtResource( 6 )]
+position = Vector2( 1440, 360 )
+
+[node name="14" parent="Entities/Coins/1" index="10" instance=ExtResource( 6 )]
+position = Vector2( 1472, 360 )
+
+[node name="15" parent="Entities/Coins/1" index="11" instance=ExtResource( 6 )]
+position = Vector2( 1504, 360 )
+
+[node name="16" parent="Entities/Coins/1" index="12" instance=ExtResource( 6 )]
+position = Vector2( 1856, 208 )
+
+[node name="17" parent="Entities/Coins/1" index="13" instance=ExtResource( 6 )]
+position = Vector2( 1888, 208 )
+
+[node name="18" parent="Entities/Coins/1" index="14" instance=ExtResource( 6 )]
+position = Vector2( 1920, 208 )
+
+[node name="19" parent="Entities/Coins/1" index="15" instance=ExtResource( 6 )]
+position = Vector2( 2112, 208 )
+
+[node name="20" parent="Entities/Coins/1" index="16" instance=ExtResource( 6 )]
+position = Vector2( 2144, 208 )
+
+[node name="21" parent="Entities/Coins/1" index="17" instance=ExtResource( 6 )]
+position = Vector2( 2176, 208 )
+
+[node name="22" parent="Entities/Coins/1" index="18" instance=ExtResource( 6 )]
+position = Vector2( 2400, 360 )
+
+[node name="23" parent="Entities/Coins/1" index="19" instance=ExtResource( 6 )]
+position = Vector2( 2432, 360 )
+
+[node name="24" parent="Entities/Coins/1" index="20" instance=ExtResource( 6 )]
+position = Vector2( 2464, 360 )
+
+[node name="25" parent="Entities/Coins/1" index="21" instance=ExtResource( 6 )]
+position = Vector2( 2656, 216 )
+
+[node name="26" parent="Entities/Coins/1" index="22" instance=ExtResource( 6 )]
+position = Vector2( 2656, 248 )
+
+[node name="27" parent="Entities/Coins/1" index="23" instance=ExtResource( 6 )]
+position = Vector2( 2656, 280 )
+
+[node name="28" parent="Entities/Coins/1" index="24" instance=ExtResource( 6 )]
+position = Vector2( 2848, 216 )
+
+[node name="29" parent="Entities/Coins/1" index="25" instance=ExtResource( 6 )]
+position = Vector2( 2848, 248 )
+
+[node name="30" parent="Entities/Coins/1" index="26" instance=ExtResource( 6 )]
+position = Vector2( 2848, 280 )
+
+[node name="31" parent="Entities/Coins/1" index="27" instance=ExtResource( 6 )]
+position = Vector2( 3040, 216 )
+
+[node name="32" parent="Entities/Coins/1" index="28" instance=ExtResource( 6 )]
+position = Vector2( 3040, 248 )
+
+[node name="33" parent="Entities/Coins/1" index="29" instance=ExtResource( 6 )]
+position = Vector2( 3040, 280 )
+
+[node name="34" parent="Entities/Coins/1" index="30" instance=ExtResource( 6 )]
+position = Vector2( 3712, 296 )
+
+[node name="35" parent="Entities/Coins/1" index="31" instance=ExtResource( 6 )]
+position = Vector2( 3744, 296 )
+
+[node name="36" parent="Entities/Coins/1" index="32" instance=ExtResource( 6 )]
+position = Vector2( 3776, 296 )
+
+[node name="4" parent="Entities/Coins/1" index="33" instance=ExtResource( 6 )]
+position = Vector2( 784, 352 )
+
+[node name="5" parent="Entities/Coins/1" index="34" instance=ExtResource( 6 )]
+position = Vector2( 808, 368 )
+
+[node name="6" parent="Entities/Coins/1" index="35" instance=ExtResource( 6 )]
+position = Vector2( 832, 352 )
 
 [node name="1" type="Node2D" parent="Entities/Spikes" index="0"]
 __meta__ = {
@@ -802,7 +904,7 @@ position = Vector2( 3176, 256 )
 position = Vector2( 3312, 256 )
 
 [node name="6" parent="Entities/Crystals" index="5" instance=ExtResource( 5 )]
-position = Vector2( 3448, 256 )
+position = Vector2( 3432, 256 )
 
 [node name="EndTrigger" parent="Triggers" index="0"]
 position = Vector2( 3904, 256 )
@@ -831,10 +933,10 @@ is_cause = false
 is_indirect = true
 tag = "L04-3"
 
-[node name="Player" parent="." index="6"]
+[node name="Player" parent="." index="7"]
 position = Vector2( -64, 304 )
 
-[node name="Camera" parent="." index="7"]
+[node name="Camera" parent="." index="8"]
 position = Vector2( 480, 270 )
 limit_left = 0
 limit_top = 0

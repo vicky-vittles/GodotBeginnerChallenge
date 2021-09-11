@@ -12,6 +12,7 @@ var duration_timer
 var is_playing : bool = false
 var current_intensity : float = 0.0
 var current_direction : Vector2
+var initial_direction : Vector2
 
 
 func _ready():
@@ -32,6 +33,7 @@ func shake_simple(_intensity: float = 8.0, duration: float = 0.5, frequency: flo
 	if not is_active:
 		return
 	current_intensity = _intensity
+	initial_direction = direction
 	is_playing = true
 	
 	frequency_timer.wait_time = frequency
@@ -42,7 +44,7 @@ func shake_simple(_intensity: float = 8.0, duration: float = 0.5, frequency: flo
 
 
 func _shake(direction: Vector2 = Vector2.ZERO):
-	if direction == Vector2.ZERO:
+	if initial_direction == Vector2.ZERO:
 		direction = Utils.rand_direction()
 	current_direction = direction
 	
@@ -53,7 +55,10 @@ func _shake(direction: Vector2 = Vector2.ZERO):
 func _on_FrequencyTimer_timeout():
 	if is_playing:
 		frequency_timer.start()
-		_shake(-current_direction)
+		if initial_direction == Vector2.ZERO:
+			_shake(-current_direction)
+		else:
+			_shake(current_direction)
 
 func _on_DurationTimer_timeout():
 	is_playing = false

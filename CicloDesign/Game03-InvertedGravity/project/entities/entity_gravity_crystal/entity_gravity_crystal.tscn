@@ -1,13 +1,22 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://entities/entity_gravity_crystal/entity_gravity_crystal.gd" type="Script" id=1]
 [ext_resource path="res://entities/entity_gravity_crystal/components/entity_gravity_crystal_body.gd" type="Script" id=2]
 [ext_resource path="res://addons/regular_polygon2d_node/RegularPolygon2D.gd" type="Script" id=3]
 [ext_resource path="res://libs/gt_juice_2d/gt_juice_2d.gd" type="Script" id=4]
 [ext_resource path="res://libs/gt_path_entity_mover_2d/gt_path_entity_mover_2d.gd" type="Script" id=5]
+[ext_resource path="res://libs/gt_time/gt_time.gd" type="Script" id=6]
+[ext_resource path="res://assets/textures/white-triangle.png" type="Texture" id=7]
+[ext_resource path="res://libs/gt_audio_player/gt_audio_player.gd" type="Script" id=8]
+[ext_resource path="res://entities/entity_gravity_crystal/assets/crystal-pickup.wav" type="AudioStream" id=12]
 
-[sub_resource type="Animation" id=1]
-resource_name = "collected"
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 1 ), 0.0, -1.0, 0, 1, Vector2( 1, 0 ), -1.0, 0.0, 1, 0 ]
+
+[sub_resource type="Gradient" id=2]
+colors = PoolColorArray( 0.976471, 0.694118, 0.556863, 1, 0.976471, 0.694118, 0.556863, 0.0745098 )
+
+[sub_resource type="Animation" id=3]
 length = 2.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("color/floating/main:visible")
@@ -22,7 +31,7 @@ tracks/0/keys = {
 "values": [ false, true ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath(".:modulate")
+tracks/1/path = NodePath("color/floating:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -34,8 +43,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "default"
+[sub_resource type="Animation" id=4]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("color/floating/main:visible")
@@ -50,7 +58,7 @@ tracks/0/keys = {
 "values": [ true ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath(".:modulate")
+tracks/1/path = NodePath("color/floating:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -62,7 +70,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="CircleShape2D" id=3]
+[sub_resource type="CircleShape2D" id=5]
 radius = 11.0
 
 [node name="GravityCrystal" type="Node2D"]
@@ -108,14 +116,35 @@ polygon_color = Color( 0.976471, 0.694118, 0.556863, 1 )
 wait_time = 2.0
 autostart = true
 
+[node name="death_particles" type="CPUParticles2D" parent="Body/Graphics/color"]
+emitting = false
+amount = 12
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource( 7 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 200.0
+damping = 50.0
+angle = 90.0
+angle_random = 1.0
+scale_amount = 0.05
+scale_amount_random = 0.02
+scale_amount_curve = SubResource( 1 )
+color_ramp = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Body/Graphics"]
 autoplay = "default"
-anims/collected = SubResource( 1 )
-anims/default = SubResource( 2 )
+anims/collected = SubResource( 3 )
+anims/default = SubResource( 4 )
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Body"]
 visible = false
-shape = SubResource( 3 )
+shape = SubResource( 5 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -132,8 +161,22 @@ duration = 1.0
 wait_time = 2.0
 one_shot = true
 
+[node name="SFX" type="Node" parent="."]
+
+[node name="collected" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 12 )
+bus = "Sound"
+script = ExtResource( 8 )
+random_pitch_deviation = 0.1
+
+[node name="TimeManager" type="Node" parent="."]
+script = ExtResource( 6 )
+
 [connection signal="effect" from="Body" to="RecoverTimer" method="start"]
+[connection signal="effect" from="Body" to="Body/Graphics/color/death_particles" method="set_emitting" binds= [ true ]]
+[connection signal="effect" from="Body" to="TimeManager" method="slow_time" binds= [ 0.5, 0.2 ]]
 [connection signal="effect" from="Body" to="Body/Graphics/AnimationPlayer" method="play" binds= [ "collected" ]]
+[connection signal="effect" from="Body" to="SFX/collected" method="play"]
 [connection signal="effect" from="Body" to="Body" method="disable_all_shapes"]
 [connection signal="timeout" from="Body/Graphics/color/floating/RepeatTimer" to="Body/Graphics/color/floating" method="rand_floating" binds= [ 12.0, 1.0, 0.0 ]]
 [connection signal="tree_entered" from="Body/PathEntityMover" to="." method="_on_PathEntityMover_tree_entered"]
