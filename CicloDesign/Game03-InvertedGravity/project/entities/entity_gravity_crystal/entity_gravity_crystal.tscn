@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://libs/gt_entity_2d/__gt_entity_2d.gd" type="Script" id=1]
-[ext_resource path="res://libs/gt_area_2d/gt_trigger_area_2d/gt_trigger_area_2d.gd" type="Script" id=2]
+[ext_resource path="res://entities/entity_gravity_crystal/entity_gravity_crystal.gd" type="Script" id=1]
+[ext_resource path="res://entities/entity_gravity_crystal/components/entity_gravity_crystal_body.gd" type="Script" id=2]
 [ext_resource path="res://addons/regular_polygon2d_node/RegularPolygon2D.gd" type="Script" id=3]
 [ext_resource path="res://libs/gt_juice_2d/gt_juice_2d.gd" type="Script" id=4]
+[ext_resource path="res://libs/gt_path_entity_mover_2d/gt_path_entity_mover_2d.gd" type="Script" id=5]
 
 [sub_resource type="Animation" id=1]
 resource_name = "collected"
@@ -77,7 +78,6 @@ __meta__ = {
 "_edit_lock_": true
 }
 body_path = NodePath(".")
-collidable_groups = [ "entity_player_invert_gravity_trigger" ]
 
 [node name="Graphics" type="Node2D" parent="Body"]
 __meta__ = {
@@ -102,7 +102,7 @@ __meta__ = {
 }
 centered = true
 size = 25.0
-polygon_color = Color( 0.980392, 0.909804, 0.737255, 1 )
+polygon_color = Color( 0.976471, 0.694118, 0.556863, 1 )
 
 [node name="RepeatTimer" type="Timer" parent="Body/Graphics/color/floating"]
 wait_time = 2.0
@@ -120,12 +120,21 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="PathEntityMover" type="Node" parent="Body"]
+script = ExtResource( 5 )
+points_parent_path = NodePath("../..")
+body_path = NodePath("..")
+transition_type = 4
+ease_type = 2
+duration = 1.0
+
 [node name="RecoverTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
 
 [connection signal="effect" from="Body" to="RecoverTimer" method="start"]
-[connection signal="effect" from="Body" to="Body" method="disable_all_shapes"]
 [connection signal="effect" from="Body" to="Body/Graphics/AnimationPlayer" method="play" binds= [ "collected" ]]
+[connection signal="effect" from="Body" to="Body" method="disable_all_shapes"]
 [connection signal="timeout" from="Body/Graphics/color/floating/RepeatTimer" to="Body/Graphics/color/floating" method="rand_floating" binds= [ 12.0, 1.0, 0.0 ]]
+[connection signal="tree_entered" from="Body/PathEntityMover" to="." method="_on_PathEntityMover_tree_entered"]
 [connection signal="timeout" from="RecoverTimer" to="Body" method="enable_all_shapes"]

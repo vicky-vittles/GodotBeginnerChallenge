@@ -9,7 +9,9 @@ const LEVEL_SCENES = {
 	1: preload("res://levels/levels/L01.tscn"),
 	2: preload("res://levels/levels/L02.tscn"),
 	3: preload("res://levels/levels/L03.tscn"),
-	4: preload("res://levels/levels/L04.tscn")}
+	4: preload("res://levels/levels/L04.tscn"),
+	5: preload("res://levels/levels/L05.tscn"),
+	6: preload("res://levels/levels/L06.tscn")}
 
 export (int) var current_level = 0
 

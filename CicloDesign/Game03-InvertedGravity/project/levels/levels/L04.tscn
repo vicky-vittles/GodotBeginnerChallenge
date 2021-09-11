@@ -15,7 +15,7 @@
 rect_min_size = Vector2( 3840, 540 )
 
 [node name="1" type="CollisionPolygon2D" parent="Terrain" index="0"]
-polygon = PoolVector2Array( -128, 256, 0, 256, 1.44395, 64, 480, 64, 480, 200, 512, 200, 512, 32, 768, 32, 768, 200, 800, 200, 800, 31.4212, 1152, 32, 1152, 48, 1184, 48, 1184, 32, 1408, 32, 1728, 192, 2304, 192, 2560, 256, 2560, 30.6934, 3520, 32, 3744.6, 32, 3744, 128, 3840, 192, 3968, 192, 3968, 512, 4224, 192, 4224, -320, -320, -320, -320, 128, -128, 512 )
+polygon = PoolVector2Array( -128, 256, 0, 256, 1.44395, 64, 480, 64, 480, 200, 512, 200, 512, 32, 768, 32, 768, 200, 800, 200, 800, 31.4212, 1152, 32, 1152, 48, 1184, 48, 1184, 32, 1408, 32, 1728, 192, 2304, 192, 2304, 208, 2336, 208, 2336, 200, 2560, 256, 2560, 30.6934, 3520, 32, 3744.6, 32, 3744, 128, 3840, 192, 3968, 192, 3968, 512, 4224, 192, 4224, -320, -320, -320, -320, 128, -128, 512 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
@@ -773,7 +773,7 @@ __meta__ = {
 [node name="2" parent="Entities/Diamonds" index="1" instance=ExtResource( 7 )]
 position = Vector2( 1824, 216 )
 teleporter_tag = "L04-2"
-duration = 2.0
+duration = 3.0
 
 [node name="1" type="Position2D" parent="Entities/Diamonds/2" index="1"]
 __meta__ = {
@@ -781,23 +781,7 @@ __meta__ = {
 }
 
 [node name="2" type="Position2D" parent="Entities/Diamonds/2" index="2"]
-position = Vector2( 128, 0 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="3" parent="Entities/Diamonds" index="2" instance=ExtResource( 7 )]
-position = Vector2( 2080, 216 )
-teleporter_tag = "L04-2"
-duration = 2.0
-
-[node name="1" type="Position2D" parent="Entities/Diamonds/3" index="1"]
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="2" type="Position2D" parent="Entities/Diamonds/3" index="2"]
-position = Vector2( 128, 0 )
+position = Vector2( 384, 0 )
 __meta__ = {
 "_edit_lock_": true
 }

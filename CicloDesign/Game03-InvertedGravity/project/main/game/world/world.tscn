@@ -39,7 +39,7 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
-current_level = 1
+current_level = 6
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
@@ -70,6 +70,6 @@ script = ExtResource( 1 )
 world_path = NodePath("..")
 
 [connection signal="load_level" from="." to="LevelLoader" method="load_level"]
-[connection signal="level_finished" from="LevelLoader" to="HUD/root/AnimationPlayer" method="play" binds= [ "level_transition" ]]
 [connection signal="level_finished" from="LevelLoader" to="." method="level_finished"]
+[connection signal="level_finished" from="LevelLoader" to="HUD/root/AnimationPlayer" method="play" binds= [ "level_transition" ]]
 [connection signal="level_started" from="LevelLoader" to="." method="level_started"]
