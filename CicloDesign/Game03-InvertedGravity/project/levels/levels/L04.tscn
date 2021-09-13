@@ -15,7 +15,7 @@
 rect_min_size = Vector2( 3840, 540 )
 
 [node name="level_label" parent="HUD/root/vbox" index="0"]
-text = "Level 04"
+text = "Level: 4"
 
 [node name="1" type="CollisionPolygon2D" parent="Terrain" index="0"]
 polygon = PoolVector2Array( -128, 256, 0, 256, 1.44395, 64, 480, 64, 480, 200, 512, 200, 512, 32, 768, 32, 768, 200, 800, 200, 800, 31.4212, 1152, 32, 1152, 48, 1184, 48, 1184, 32, 1408, 32, 1728, 192, 2304, 192, 2304, 208, 2336, 208, 2336, 200, 2560, 256, 2560, 30.6934, 3520, 32, 3744.6, 32, 3744, 128, 3840, 192, 3968, 192, 3968, 512, 4224, 192, 4224, -320, -320, -320, -320, 128, -128, 512 )
@@ -102,48 +102,39 @@ position = Vector2( 2432, 360 )
 position = Vector2( 2464, 360 )
 
 [node name="25" parent="Entities/Coins/1" index="21" instance=ExtResource( 6 )]
-position = Vector2( 2656, 216 )
+position = Vector2( 2752, 216 )
 
 [node name="26" parent="Entities/Coins/1" index="22" instance=ExtResource( 6 )]
-position = Vector2( 2656, 248 )
+position = Vector2( 2752, 248 )
 
 [node name="27" parent="Entities/Coins/1" index="23" instance=ExtResource( 6 )]
-position = Vector2( 2656, 280 )
+position = Vector2( 2752, 280 )
 
-[node name="28" parent="Entities/Coins/1" index="24" instance=ExtResource( 6 )]
-position = Vector2( 2848, 216 )
+[node name="31" parent="Entities/Coins/1" index="24" instance=ExtResource( 6 )]
+position = Vector2( 3008, 216 )
 
-[node name="29" parent="Entities/Coins/1" index="25" instance=ExtResource( 6 )]
-position = Vector2( 2848, 248 )
+[node name="32" parent="Entities/Coins/1" index="25" instance=ExtResource( 6 )]
+position = Vector2( 3008, 248 )
 
-[node name="30" parent="Entities/Coins/1" index="26" instance=ExtResource( 6 )]
-position = Vector2( 2848, 280 )
+[node name="33" parent="Entities/Coins/1" index="26" instance=ExtResource( 6 )]
+position = Vector2( 3008, 280 )
 
-[node name="31" parent="Entities/Coins/1" index="27" instance=ExtResource( 6 )]
-position = Vector2( 3040, 216 )
-
-[node name="32" parent="Entities/Coins/1" index="28" instance=ExtResource( 6 )]
-position = Vector2( 3040, 248 )
-
-[node name="33" parent="Entities/Coins/1" index="29" instance=ExtResource( 6 )]
-position = Vector2( 3040, 280 )
-
-[node name="34" parent="Entities/Coins/1" index="30" instance=ExtResource( 6 )]
+[node name="34" parent="Entities/Coins/1" index="27" instance=ExtResource( 6 )]
 position = Vector2( 3712, 296 )
 
-[node name="35" parent="Entities/Coins/1" index="31" instance=ExtResource( 6 )]
+[node name="35" parent="Entities/Coins/1" index="28" instance=ExtResource( 6 )]
 position = Vector2( 3744, 296 )
 
-[node name="36" parent="Entities/Coins/1" index="32" instance=ExtResource( 6 )]
+[node name="36" parent="Entities/Coins/1" index="29" instance=ExtResource( 6 )]
 position = Vector2( 3776, 296 )
 
-[node name="4" parent="Entities/Coins/1" index="33" instance=ExtResource( 6 )]
+[node name="4" parent="Entities/Coins/1" index="30" instance=ExtResource( 6 )]
 position = Vector2( 784, 352 )
 
-[node name="5" parent="Entities/Coins/1" index="34" instance=ExtResource( 6 )]
+[node name="5" parent="Entities/Coins/1" index="31" instance=ExtResource( 6 )]
 position = Vector2( 808, 368 )
 
-[node name="6" parent="Entities/Coins/1" index="35" instance=ExtResource( 6 )]
+[node name="6" parent="Entities/Coins/1" index="32" instance=ExtResource( 6 )]
 position = Vector2( 832, 352 )
 
 [node name="1" type="Node2D" parent="Entities/Spikes" index="0"]
@@ -784,34 +775,9 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="2" parent="Entities/Platforms" index="1" instance=ExtResource( 8 )]
-position = Vector2( 2656, 472 )
+[node name="3" parent="Entities/Platforms" index="1" instance=ExtResource( 8 )]
+position = Vector2( 2720, 72 )
 duration = 2.0
-
-[node name="13" parent="Entities/Platforms/2/Body" index="3" instance=ExtResource( 4 )]
-position = Vector2( -16, 8 )
-scale = Vector2( 1, -1 )
-teleporter_tag = "L04-3"
-
-[node name="14" parent="Entities/Platforms/2/Body" index="4" instance=ExtResource( 4 )]
-position = Vector2( 16, 8 )
-scale = Vector2( 1, -1 )
-teleporter_tag = "L04-3"
-
-[node name="1" type="Position2D" parent="Entities/Platforms/2" index="1"]
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="2" type="Position2D" parent="Entities/Platforms/2" index="2"]
-position = Vector2( 0, -400 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="3" parent="Entities/Platforms" index="2" instance=ExtResource( 8 )]
-position = Vector2( 2848, 72 )
-duration = 2.5
 
 [node name="13" parent="Entities/Platforms/3/Body" index="3" instance=ExtResource( 4 )]
 position = Vector2( -16, -8 )
@@ -827,6 +793,29 @@ __meta__ = {
 }
 
 [node name="2" type="Position2D" parent="Entities/Platforms/3" index="2"]
+position = Vector2( 0, 400 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="5" parent="Entities/Platforms" index="2" instance=ExtResource( 8 )]
+position = Vector2( 2784, 72 )
+duration = 2.0
+
+[node name="13" parent="Entities/Platforms/5/Body" index="3" instance=ExtResource( 4 )]
+position = Vector2( -16, -8 )
+teleporter_tag = "L04-3"
+
+[node name="14" parent="Entities/Platforms/5/Body" index="4" instance=ExtResource( 4 )]
+position = Vector2( 16, -8 )
+teleporter_tag = "L04-3"
+
+[node name="1" type="Position2D" parent="Entities/Platforms/5" index="1"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="2" type="Position2D" parent="Entities/Platforms/5" index="2"]
 position = Vector2( 0, 400 )
 __meta__ = {
 "_edit_lock_": true
@@ -852,6 +841,31 @@ __meta__ = {
 }
 
 [node name="2" type="Position2D" parent="Entities/Platforms/4" index="2"]
+position = Vector2( 0, -400 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="6" parent="Entities/Platforms" index="4" instance=ExtResource( 8 )]
+position = Vector2( 2976, 472 )
+duration = 2.0
+
+[node name="13" parent="Entities/Platforms/6/Body" index="3" instance=ExtResource( 4 )]
+position = Vector2( -16, 8 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L04-3"
+
+[node name="14" parent="Entities/Platforms/6/Body" index="4" instance=ExtResource( 4 )]
+position = Vector2( 16, 8 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L04-3"
+
+[node name="1" type="Position2D" parent="Entities/Platforms/6" index="1"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="2" type="Position2D" parent="Entities/Platforms/6" index="2"]
 position = Vector2( 0, -400 )
 __meta__ = {
 "_edit_lock_": true
@@ -944,6 +958,7 @@ limit_right = 3840
 limit_bottom = 540
 editor_draw_limits = true
 
-[editable path="Entities/Platforms/2"]
 [editable path="Entities/Platforms/3"]
+[editable path="Entities/Platforms/5"]
 [editable path="Entities/Platforms/4"]
+[editable path="Entities/Platforms/6"]

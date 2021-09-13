@@ -1,5 +1,6 @@
 extends Node2D
 
+signal player_died()
 signal level_started()
 signal level_finished()
 
@@ -12,3 +13,6 @@ func _ready():
 
 func end_level():
 	emit_signal("level_finished")
+
+func _on_Player_died():
+	emit_signal("player_died")

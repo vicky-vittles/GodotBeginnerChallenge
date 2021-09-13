@@ -17,10 +17,10 @@ margin_bottom = 0.0
 rect_min_size = Vector2( 3840, 1080 )
 
 [node name="level_label" parent="HUD/root/vbox" index="0"]
-text = "Level 02"
+text = "Level: 2"
 
 [node name="1" type="CollisionPolygon2D" parent="Terrain" index="0"]
-polygon = PoolVector2Array( -64, 256, 0, 256, -1.28419, 223.676, 152, 256, 168, 128, 712, 128, 712, 224, 960, 256, 1160, 256, 1160, 64.2182, 1512, 64, 1512, 88, 1560, 88, 1560, 64, 1856, 64, 1856, 128, 2048, 232, 2192, 304, 2192, 64, 2448, 64, 2448, 80, 2480, 80, 2480, 64, 3072, 64, 3072, 256, 3344, 280, 3456, 280, 3456, 576, 3648, 264, 3648, -544, -128, -544, -128, 256, -64, 384 )
+polygon = PoolVector2Array( -64, 256, 0, 256, -1.28419, 223.676, 152, 256, 168, 128, 712, 128, 712, 224, 960, 256, 1160, 256, 1160, 64.2182, 1512, 64, 1512, 88, 1560, 88, 1560, 64, 1856, 64, 1856, 128, 2048, 232, 2192, 304, 2192, 64, 2448, 64, 2448, 80, 2480, 80, 2480, 64, 2624, 64, 2624, 80, 2656, 80, 2656, 64, 3200, 64, 3200, 256, 3392, 280, 3584, 280, 3584, 576, 3776, 264, 3776, -544, -128, -544, -128, 256, -64, 384 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
@@ -28,7 +28,7 @@ __meta__ = {
 graphics_color = Color( 0.160784, 0.113725, 0.133333, 1 )
 
 [node name="2" type="CollisionPolygon2D" parent="Terrain" index="1"]
-polygon = PoolVector2Array( -64, 384, 192, 384, 192, 512, 704, 512, 704, 384, 960, 384, 960, 432, 1160, 432, 1160, 464, 1352, 464, 1352, 320, 1728, 320, 1728, 384, 2048, 384, 2048, 448, 2448, 448, 2448, 216, 2624, 216, 2624, 488, 3072, 488, 3072, 408, 3456, 408, 3456, 640, -64, 640 )
+polygon = PoolVector2Array( -64, 384, 192, 384, 192, 512, 704, 512, 704, 384, 960, 384, 960, 432, 1160, 432, 1160, 464, 1352, 464, 1352, 320, 1728, 320, 1728, 384, 2048, 384, 2048, 448, 2448, 448, 2448, 216, 2624, 216, 2624, 488, 3200, 488, 3200, 408, 3584, 408, 3584, 640, -64, 640 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
@@ -90,13 +90,13 @@ position = Vector2( 1568, 288 )
 position = Vector2( 1592, 288 )
 
 [node name="13" parent="Entities/Coins/3" index="9" instance=ExtResource( 7 )]
-position = Vector2( 3144, 384 )
+position = Vector2( 3288, 384 )
 
 [node name="14" parent="Entities/Coins/3" index="10" instance=ExtResource( 7 )]
-position = Vector2( 3168, 384 )
+position = Vector2( 3312, 384 )
 
 [node name="15" parent="Entities/Coins/3" index="11" instance=ExtResource( 7 )]
-position = Vector2( 3192, 384 )
+position = Vector2( 3336, 384 )
 
 [node name="16" parent="Entities/Coins/3" index="12" instance=ExtResource( 7 )]
 position = Vector2( 2520, 80 )
@@ -346,7 +346,7 @@ scale = Vector2( 1, -1 )
 teleporter_tag = "L02-2"
 
 [node name="10" parent="Entities/Spikes/4" index="9" instance=ExtResource( 5 )]
-position = Vector2( 1464, 64 )
+position = Vector2( 1462.5, 64 )
 scale = Vector2( 1, -1 )
 teleporter_tag = "L02-2"
 
@@ -430,33 +430,78 @@ position = Vector2( 2864, 64 )
 scale = Vector2( 1, -1 )
 teleporter_tag = "L02-4"
 
-[node name="3" parent="Entities/Spikes/7" index="2" instance=ExtResource( 5 )]
+[node name="9" parent="Entities/Spikes/7" index="2" instance=ExtResource( 5 )]
+position = Vector2( 2768, 64 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L02-4"
+
+[node name="10" parent="Entities/Spikes/7" index="3" instance=ExtResource( 5 )]
+position = Vector2( 2800, 64 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L02-4"
+
+[node name="11" parent="Entities/Spikes/7" index="4" instance=ExtResource( 5 )]
+position = Vector2( 2704, 64 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L02-4"
+
+[node name="13" parent="Entities/Spikes/7" index="5" instance=ExtResource( 5 )]
+position = Vector2( 2672, 64 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L02-4"
+
+[node name="12" parent="Entities/Spikes/7" index="6" instance=ExtResource( 5 )]
+position = Vector2( 2736, 64 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L02-4"
+
+[node name="3" parent="Entities/Spikes/7" index="7" instance=ExtResource( 5 )]
 position = Vector2( 2896, 64 )
 scale = Vector2( 1, -1 )
 teleporter_tag = "L02-4"
 
-[node name="4" parent="Entities/Spikes/7" index="3" instance=ExtResource( 5 )]
+[node name="4" parent="Entities/Spikes/7" index="8" instance=ExtResource( 5 )]
 position = Vector2( 2928, 64 )
 scale = Vector2( 1, -1 )
 teleporter_tag = "L02-4"
 
-[node name="5" parent="Entities/Spikes/7" index="4" instance=ExtResource( 5 )]
+[node name="5" parent="Entities/Spikes/7" index="9" instance=ExtResource( 5 )]
 position = Vector2( 2960, 64 )
 scale = Vector2( 1, -1 )
 teleporter_tag = "L02-4"
 
-[node name="6" parent="Entities/Spikes/7" index="5" instance=ExtResource( 5 )]
+[node name="6" parent="Entities/Spikes/7" index="10" instance=ExtResource( 5 )]
 position = Vector2( 2992, 64 )
 scale = Vector2( 1, -1 )
 teleporter_tag = "L02-4"
 
-[node name="7" parent="Entities/Spikes/7" index="6" instance=ExtResource( 5 )]
+[node name="7" parent="Entities/Spikes/7" index="11" instance=ExtResource( 5 )]
 position = Vector2( 3024, 64 )
 scale = Vector2( 1, -1 )
 teleporter_tag = "L02-4"
 
-[node name="8" parent="Entities/Spikes/7" index="7" instance=ExtResource( 5 )]
+[node name="8" parent="Entities/Spikes/7" index="12" instance=ExtResource( 5 )]
 position = Vector2( 3056, 64 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L02-4"
+
+[node name="14" parent="Entities/Spikes/7" index="13" instance=ExtResource( 5 )]
+position = Vector2( 3088, 64 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L02-4"
+
+[node name="15" parent="Entities/Spikes/7" index="14" instance=ExtResource( 5 )]
+position = Vector2( 3120, 64 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L02-4"
+
+[node name="16" parent="Entities/Spikes/7" index="15" instance=ExtResource( 5 )]
+position = Vector2( 3152, 64 )
+scale = Vector2( 1, -1 )
+teleporter_tag = "L02-4"
+
+[node name="17" parent="Entities/Spikes/7" index="16" instance=ExtResource( 5 )]
+position = Vector2( 3184, 64 )
 scale = Vector2( 1, -1 )
 teleporter_tag = "L02-4"
 
@@ -519,6 +564,22 @@ teleporter_tag = "L02-4"
 
 [node name="14" parent="Entities/Spikes/8" index="13" instance=ExtResource( 5 )]
 position = Vector2( 3056, 488 )
+teleporter_tag = "L02-4"
+
+[node name="15" parent="Entities/Spikes/8" index="14" instance=ExtResource( 5 )]
+position = Vector2( 3088, 488 )
+teleporter_tag = "L02-4"
+
+[node name="16" parent="Entities/Spikes/8" index="15" instance=ExtResource( 5 )]
+position = Vector2( 3120, 488 )
+teleporter_tag = "L02-4"
+
+[node name="17" parent="Entities/Spikes/8" index="16" instance=ExtResource( 5 )]
+position = Vector2( 3152, 488 )
+teleporter_tag = "L02-4"
+
+[node name="18" parent="Entities/Spikes/8" index="17" instance=ExtResource( 5 )]
+position = Vector2( 3184, 488 )
 teleporter_tag = "L02-4"
 
 [node name="1" parent="Entities/Platforms" index="0" instance=ExtResource( 3 )]
@@ -595,7 +656,7 @@ __meta__ = {
 }
 
 [node name="2" type="Position2D" parent="Entities/Platforms/3" index="2"]
-position = Vector2( 320, 0 )
+position = Vector2( 448, 0 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -656,7 +717,7 @@ is_indirect = true
 tag = "L02-3"
 
 [node name="T4" type="Area2D" parent="Triggers" index="3"]
-position = Vector2( 2544, 152 )
+position = Vector2( 2544, 104 )
 script = ExtResource( 6 )
 body_path = NodePath(".")
 is_cause = false
@@ -664,7 +725,7 @@ is_indirect = true
 tag = "L02-4"
 
 [node name="EndTrigger" parent="Triggers" index="4"]
-position = Vector2( 3344, 344 )
+position = Vector2( 3472, 344 )
 
 [node name="Player" parent="." index="7"]
 position = Vector2( -32, 320 )
@@ -673,7 +734,7 @@ position = Vector2( -32, 320 )
 position = Vector2( 480, 270 )
 limit_left = 0
 limit_top = 0
-limit_right = 3264
+limit_right = 3392
 limit_bottom = 540
 editor_draw_limits = true
 

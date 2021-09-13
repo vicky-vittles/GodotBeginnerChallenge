@@ -16,7 +16,7 @@ polygon = PoolVector2Array( 352, 192, 64, 120, 64, 0, 1088, 0, 1088, 120, 432, 1
 rect_min_size = Vector2( 3840, 540 )
 
 [node name="level_label" parent="HUD/root/vbox" index="0"]
-text = "Level 01"
+text = "Level: 1"
 
 [node name="1" type="CollisionPolygon2D" parent="Terrain" index="0"]
 polygon = PoolVector2Array( -128, -192, 2752, -192, 3328, -192, 3328, 256, 3200, 256, 2752, 64, 2175.76, 64.9491, 2136, 264, 1944, 224, 1936, 88, 1488, 64, 1472, 256, 1088, 224, 1088, 120, 432, 104, 352, 192, 0, 104, 0, 536, -128, 128 )

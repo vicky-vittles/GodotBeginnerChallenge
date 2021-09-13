@@ -35,7 +35,7 @@ __meta__ = {
 }
 
 [node name="level_label" parent="HUD/root/vbox" index="0"]
-text = "Level 06"
+text = ""
 
 [node name="1" type="CollisionPolygon2D" parent="Terrain" index="0"]
 polygon = PoolVector2Array( 0, 192, 960, 192, 960, 640, 1216, 128, 1216, -192, -256, -192, -256, 128, 0, 640 )

@@ -1,11 +1,22 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://components/level_loader/level_loader.gd" type="Script" id=1]
+[ext_resource path="res://main/game/world/components/world_level_loader.gd" type="Script" id=1]
 [ext_resource path="res://main/game/world/world.gd" type="Script" id=2]
 [ext_resource path="res://assets/audio/Grey Sector v0_86.ogg" type="AudioStream" id=3]
+[ext_resource path="res://libs/gt_pattern_label/gt_pattern_label.gd" type="Script" id=4]
+[ext_resource path="res://libs/gt_points/gt_points.gd" type="Script" id=5]
 
-[sub_resource type="Animation" id=1]
-resource_name = "default"
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://assets/fonts/diffusion-bold.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+outline_size = 2
+outline_color = Color( 0.160784, 0.113725, 0.133333, 1 )
+use_mipmaps = true
+font_data = SubResource( 1 )
+
+[sub_resource type="Animation" id=3]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("black_fade:modulate")
@@ -20,8 +31,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "level_transition"
+[sub_resource type="Animation" id=4]
 tracks/0/type = "value"
 tracks/0/path = NodePath("black_fade:modulate")
 tracks/0/interp = 1
@@ -33,6 +43,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("top_wide:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
 [node name="World" type="Node2D"]
@@ -61,10 +83,35 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="top_wide" type="VBoxContainer" parent="HUD/root"]
+anchor_right = 1.0
+margin_left = 10.0
+margin_top = 50.0
+margin_bottom = 91.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="deaths_label" type="Label" parent="HUD/root/top_wide"]
+margin_right = 950.0
+margin_bottom = 41.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.980392, 0.909804, 0.737255, 1 )
+text = "Deaths: 0"
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+pattern_text = "Deaths: %s"
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/root"]
 autoplay = "default"
-anims/default = SubResource( 1 )
-anims/level_transition = SubResource( 2 )
+anims/default = SubResource( 3 )
+anims/level_transition = SubResource( 4 )
+
+[node name="PlayerDeathCounter" type="Node" parent="."]
+script = ExtResource( 5 )
 
 [node name="LevelLoader" type="Node" parent="."]
 script = ExtResource( 1 )
@@ -76,6 +123,9 @@ autoplay = true
 bus = "Music"
 
 [connection signal="load_level" from="." to="LevelLoader" method="load_level"]
+[connection signal="points_updated" from="PlayerDeathCounter" to="HUD/root/top_wide/deaths_label" method="apply_text_simple"]
 [connection signal="level_finished" from="LevelLoader" to="." method="level_finished"]
 [connection signal="level_finished" from="LevelLoader" to="HUD/root/AnimationPlayer" method="play" binds= [ "level_transition" ]]
 [connection signal="level_started" from="LevelLoader" to="." method="level_started"]
+[connection signal="level_started" from="LevelLoader" to="LevelLoader" method="_on_level_started"]
+[connection signal="player_died" from="LevelLoader" to="PlayerDeathCounter" method="gain_points" binds= [ 1 ]]

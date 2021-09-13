@@ -212,7 +212,6 @@ __meta__ = {
 }
 
 [node name="jump_juice" type="Node2D" parent="Body/Graphics/color/invert_pivot/tilt_juice" index="0"]
-modulate = Color( 1, 1, 1, 0 )
 script = ExtResource( 7 )
 __meta__ = {
 "_edit_lock_": true
@@ -361,11 +360,11 @@ end_state_path = NodePath("../../Fall")
 [connection signal="invert" from="Body" to="Body/Graphics/color/invert_pivot" method="simple_tilt"]
 [connection signal="tilt" from="Body" to="Body/Graphics/color/invert_pivot/tilt_juice" method="simple_tilt"]
 [connection signal="effect" from="Body/Triggers/InvertGravityTrigger" to="Body" method="invert_gravity"]
-[connection signal="effect" from="Body/Triggers/Hurtbox" to="MovementStateMachine/Idle/ToDead" method="do_transition"]
 [connection signal="effect" from="Body/Triggers/Hurtbox" to="MovementStateMachine/Run/ToDead" method="do_transition"]
-[connection signal="effect" from="Body/Triggers/Hurtbox" to="MovementStateMachine/Hang/ToDead" method="do_transition"]
 [connection signal="effect" from="Body/Triggers/Hurtbox" to="MovementStateMachine/Fall/ToDead" method="do_transition"]
+[connection signal="effect" from="Body/Triggers/Hurtbox" to="MovementStateMachine/Idle/ToDead" method="do_transition"]
 [connection signal="effect" from="Body/Triggers/Hurtbox" to="MovementStateMachine/Jump/ToDead" method="do_transition"]
+[connection signal="effect" from="Body/Triggers/Hurtbox" to="MovementStateMachine/Hang/ToDead" method="do_transition"]
 [connection signal="jumped" from="Body/EntityMover" to="Body/Graphics/color/invert_pivot/tilt_juice/jump_juice" method="simple_squash_stretch" binds= [ 0.5, 0.15 ]]
 [connection signal="updated_gravity_mask" from="Body/EntityMover" to="." method="_on_EntityMover_updated_gravity_mask"]
 [connection signal="timeout" from="Timers/DeathTimer" to="MovementStateMachine/Dead/ToFall" method="do_transition"]
@@ -381,12 +380,12 @@ end_state_path = NodePath("../../Fall")
 [connection signal="transition_done" from="MovementStateMachine/Fall/ToRun" to="Body/Graphics/color/invert_pivot/tilt_juice/jump_juice" method="simple_squash_stretch"]
 [connection signal="transition_done" from="MovementStateMachine/Fall/ToRun" to="SFX/land" method="play"]
 [connection signal="state_entered" from="MovementStateMachine/Dead" to="." method="_on_Dead_state_entered"]
-[connection signal="state_entered" from="MovementStateMachine/Dead" to="Body/Graphics/color/death_particles" method="set_emitting" binds= [ true ]]
 [connection signal="state_entered" from="MovementStateMachine/Dead" to="SFX/died" method="play"]
-[connection signal="state_entered" from="MovementStateMachine/Dead" to="Body/Graphics/color/invert_pivot/tilt_juice/jump_juice/AnimationPlayer" method="play" binds= [ "fade_invisible" ]]
 [connection signal="state_entered" from="MovementStateMachine/Dead" to="Body/EntityMover" method="freeze" binds= [ false ]]
+[connection signal="state_entered" from="MovementStateMachine/Dead" to="Body/Graphics/color/invert_pivot/tilt_juice/jump_juice/AnimationPlayer" method="play" binds= [ "fade_invisible" ]]
 [connection signal="state_entered" from="MovementStateMachine/Dead" to="Timers/DeathTimer" method="start"]
-[connection signal="transition_done" from="MovementStateMachine/Dead/ToFall" to="Body/Graphics/color/invert_pivot/tilt_juice/jump_juice/AnimationPlayer" method="play" binds= [ "fade_visible" ]]
+[connection signal="state_entered" from="MovementStateMachine/Dead" to="Body/Graphics/color/death_particles" method="set_emitting" binds= [ true ]]
 [connection signal="transition_done" from="MovementStateMachine/Dead/ToFall" to="Body/EntityMover" method="unfreeze"]
+[connection signal="transition_done" from="MovementStateMachine/Dead/ToFall" to="Body/Graphics/color/invert_pivot/tilt_juice/jump_juice/AnimationPlayer" method="play" binds= [ "fade_visible" ]]
 
 [editable path="InputController"]
