@@ -5,4 +5,4 @@ func _ready():
 	pass
 
 func add_entity(entity):
-	add_child(entity)
+	get_node("World/Entities").add_child(entity)

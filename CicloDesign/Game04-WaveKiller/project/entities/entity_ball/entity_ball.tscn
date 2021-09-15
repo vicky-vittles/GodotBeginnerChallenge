@@ -1,0 +1,72 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://entities/entity_ball/entity_ball.gd" type="Script" id=1]
+[ext_resource path="res://libs/gt_area_2d/gt_trigger_area_2d/gt_trigger_area_2d.gd" type="Script" id=2]
+[ext_resource path="res://entities/entity_ball/components/entity_ball_body.gd" type="Script" id=4]
+
+[sub_resource type="PhysicsMaterial" id=1]
+bounce = 0.8
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 32.0
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 32.0
+
+[node name="Ball" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Body" type="RigidBody2D" parent="."]
+mode = 2
+physics_material_override = SubResource( 1 )
+gravity_scale = 2.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+FORCE = 2000.0
+
+[node name="Graphics" type="Node2D" parent="Body"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ball" type="Polygon2D" parent="Body/Graphics"]
+color = Color( 0.772549, 0.227451, 0.615686, 1 )
+polygon = PoolVector2Array( -32, 0, 0, -32, 32, 0, 0, 32 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Triggers" type="Node2D" parent="Body"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="WaveTrigger" type="Area2D" parent="Body/Triggers" groups=[
+"entity_ball",
+]]
+visible = false
+collision_layer = 16
+collision_mask = 16
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+body_path = NodePath("../..")
+collidable_groups = [ "entity_wave" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Triggers/WaveTrigger"]
+shape = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
+visible = false
+shape = SubResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[connection signal="grouped_area_entered" from="Body/Triggers/WaveTrigger" to="Body" method="_on_WaveTrigger_grouped_area_entered"]
