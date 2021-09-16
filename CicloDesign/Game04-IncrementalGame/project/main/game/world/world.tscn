@@ -1,0 +1,125 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/ui/main_theme.tres" type="Theme" id=1]
+[ext_resource path="res://components/ui/ui_button_large/ui_button_large.tscn" type="PackedScene" id=2]
+[ext_resource path="res://components/ui/ui_label/ui_label.tscn" type="PackedScene" id=3]
+[ext_resource path="res://components/ui/ui_button_small/ui_button_small.tscn" type="PackedScene" id=4]
+[ext_resource path="res://components/ui/ui_progress_bar/ui_progress_bar.tscn" type="PackedScene" id=5]
+[ext_resource path="res://libs/gt_points/gt_points.gd" type="Script" id=6]
+[ext_resource path="res://main/game/world/components/world_inventory.gd" type="Script" id=7]
+[ext_resource path="res://components/ui/ui_resource_button/ui_resource_button.tscn" type="PackedScene" id=8]
+
+[node name="World" type="Node2D"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Inventory" type="Node" parent="."]
+script = ExtResource( 7 )
+
+[node name="Resources" type="Node" parent="Inventory"]
+
+[node name="wood" type="Node" parent="Inventory/Resources"]
+script = ExtResource( 6 )
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="color_background" type="ColorRect" parent="HUD"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="root" type="MarginContainer" parent="HUD"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 288.0
+margin_top = 20.0
+margin_right = -288.0
+margin_bottom = -20.0
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="row" type="HBoxContainer" parent="HUD/root"]
+margin_right = 704.0
+margin_bottom = 680.0
+alignment = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="text_window" type="VBoxContainer" parent="HUD/root/row"]
+margin_right = 232.0
+margin_bottom = 680.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="1" parent="HUD/root/row/text_window" instance=ExtResource( 3 )]
+margin_right = 232.0
+margin_bottom = 21.0
+text = "Teste"
+
+[node name="2" parent="HUD/root/row/text_window" instance=ExtResource( 3 )]
+margin_top = 25.0
+margin_right = 232.0
+margin_bottom = 46.0
+text = "Teste"
+
+[node name="main_window" type="VBoxContainer" parent="HUD/root/row"]
+margin_left = 236.0
+margin_right = 468.0
+margin_bottom = 680.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="acts" type="HBoxContainer" parent="HUD/root/row/main_window"]
+margin_right = 232.0
+margin_bottom = 32.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="act_1" parent="HUD/root/row/main_window/acts" instance=ExtResource( 2 )]
+margin_right = 72.0
+margin_bottom = 32.0
+text = "Act 1"
+
+[node name="buttons" type="VBoxContainer" parent="HUD/root/row/main_window"]
+margin_top = 36.0
+margin_right = 232.0
+margin_bottom = 98.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="fsd" parent="HUD/root/row/main_window/buttons" instance=ExtResource( 4 )]
+margin_right = 118.0
+margin_bottom = 29.0
+text = "gather wood"
+
+[node name="progress" parent="HUD/root/row/main_window/buttons/fsd" instance=ExtResource( 5 )]
+rect_color = Color( 1, 0, 0, 1 )
+
+[node name="gather_wood" parent="HUD/root/row/main_window/buttons" instance=ExtResource( 8 )]
+margin_top = 33.0
+margin_right = 118.0
+margin_bottom = 62.0
+text = "gather wood"
+
+[node name="resource_window" type="VBoxContainer" parent="HUD/root/row"]
+margin_left = 472.0
+margin_right = 704.0
+margin_bottom = 680.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_lock_": true
+}

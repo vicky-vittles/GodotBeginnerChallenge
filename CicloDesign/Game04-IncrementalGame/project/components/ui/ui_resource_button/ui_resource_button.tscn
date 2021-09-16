@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://components/ui/ui_button_small/ui_button_small.tscn" type="PackedScene" id=1]
+[ext_resource path="res://components/ui/ui_progress_bar/ui_progress_bar.tscn" type="PackedScene" id=2]
+[ext_resource path="res://components/ui/ui_resource_button/ui_resource_button.gd" type="Script" id=3]
+
+[node name="ResourceButton" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+progress_color = Color( 0.866667, 0.866667, 0.866667, 1 )
+
+[node name="progress" parent="." index="0" instance=ExtResource( 2 )]
+
+[node name="cooldown_timer" type="Timer" parent="." index="1"]
+one_shot = true
+
+[node name="Tween" type="Tween" parent="." index="2"]
+
+[connection signal="pressed" from="." to="." method="_on_button_pressed"]
+[connection signal="timeout" from="cooldown_timer" to="." method="_on_cooldown_timer_timeout"]
