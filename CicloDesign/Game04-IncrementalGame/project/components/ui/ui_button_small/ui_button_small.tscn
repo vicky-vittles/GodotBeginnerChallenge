@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/ui/fonts/diffusion-regular-s16.tres" type="DynamicFont" id=1]
-[ext_resource path="res://assets/ui/components/ex_sm_button_normal_style.tres" type="StyleBox" id=2]
-[ext_resource path="res://assets/ui/components/ex_sm_button_disabled_style.tres" type="StyleBox" id=3]
-[ext_resource path="res://assets/ui/components/ex_sm_button_hover_style.tres" type="StyleBox" id=4]
+[ext_resource path="res://assets/ui/components/ui_button_small_normal_style.tres" type="StyleBox" id=2]
+[ext_resource path="res://assets/ui/components/ui_button_small_disabled_style.tres" type="StyleBox" id=3]
+[ext_resource path="res://assets/ui/components/ui_button_small_pressed_style.tres" type="StyleBox" id=4]
 
 [node name="Button" type="Button"]
 margin_right = 12.0
@@ -11,7 +11,7 @@ margin_bottom = 20.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 custom_styles/hover = ExtResource( 4 )
-custom_styles/pressed = ExtResource( 2 )
+custom_styles/pressed = ExtResource( 4 )
 custom_styles/focus = ExtResource( 2 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 2 )

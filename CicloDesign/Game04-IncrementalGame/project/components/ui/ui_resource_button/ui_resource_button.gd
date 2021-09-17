@@ -11,10 +11,13 @@ onready var tween = $Tween
 
 func _ready():
 	progress.rect_color = progress_color
-	cooldown_timer.wait_time = cooldown_time
+	if cooldown_time > 0.0:
+		cooldown_timer.wait_time = cooldown_time
 
 func _on_button_pressed():
-	disabled = true
+	if cooldown_time > 0.0:
+		disabled = true
+		cooldown_timer.start()
 	tween.interpolate_property(progress, "value", 100.0, 0.0, cooldown_time)
 	tween.start()
 	emit_signal("collect")

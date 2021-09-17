@@ -1,15 +1,36 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/ui/main_theme.tres" type="Theme" id=1]
 [ext_resource path="res://components/ui/ui_button_large/ui_button_large.tscn" type="PackedScene" id=2]
 [ext_resource path="res://components/ui/ui_label/ui_label.tscn" type="PackedScene" id=3]
-[ext_resource path="res://components/ui/ui_button_small/ui_button_small.tscn" type="PackedScene" id=4]
-[ext_resource path="res://components/ui/ui_progress_bar/ui_progress_bar.tscn" type="PackedScene" id=5]
+[ext_resource path="res://components/calculator/calculator.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/ui/components/ui_button_small_normal_style.tres" type="StyleBox" id=5]
 [ext_resource path="res://libs/gt_points/gt_points.gd" type="Script" id=6]
 [ext_resource path="res://main/game/world/components/world_inventory.gd" type="Script" id=7]
 [ext_resource path="res://components/ui/ui_resource_button/ui_resource_button.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/ui/components/ui_empty_separator.tres" type="StyleBox" id=9]
+[ext_resource path="res://libs/gt_formula/gt_formula.gd" type="Script" id=10]
+[ext_resource path="res://main/game/world/world.gd" type="Script" id=11]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0, 0, 0, 1 )
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 1, 1, 1, 0 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 1 )
 
 [node name="World" type="Node2D"]
+script = ExtResource( 11 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -21,6 +42,36 @@ script = ExtResource( 7 )
 
 [node name="wood" type="Node" parent="Inventory/Resources"]
 script = ExtResource( 6 )
+
+[node name="huts" type="Node" parent="Inventory/Resources"]
+script = ExtResource( 6 )
+
+[node name="Multipliers" type="Node" parent="Inventory"]
+
+[node name="wood_per_click" type="Node" parent="Inventory/Multipliers"]
+script = ExtResource( 6 )
+initial_points = 10
+
+[node name="calculator" parent="Inventory/Multipliers/wood_per_click" instance=ExtResource( 4 )]
+node_a_path = NodePath("..")
+
+[node name="Costs" type="Node" parent="Inventory"]
+
+[node name="hut_cost" type="Node" parent="Inventory/Costs"]
+script = ExtResource( 6 )
+initial_points = 10
+
+[node name="can_afford" type="Node" parent="Inventory/Costs/hut_cost"]
+script = ExtResource( 10 )
+node_a_path = NodePath("../../../Resources/wood")
+node_b_path = NodePath("..")
+formula_type = 3
+invert_result = true
+
+[node name="perform_pay" parent="Inventory/Costs/hut_cost" instance=ExtResource( 4 )]
+node_a_path = NodePath("../../../Resources/wood")
+node_b_path = NodePath("..")
+operator = 3
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
@@ -61,15 +112,25 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="1" parent="HUD/root/row/text_window" instance=ExtResource( 3 )]
+[node name="empty_space" type="VSeparator" parent="HUD/root/row/text_window"]
 margin_right = 232.0
-margin_bottom = 21.0
+margin_bottom = 10.0
+rect_min_size = Vector2( 0, 10 )
+custom_styles/separator = ExtResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="1" parent="HUD/root/row/text_window" instance=ExtResource( 3 )]
+margin_top = 14.0
+margin_right = 232.0
+margin_bottom = 35.0
 text = "Teste"
 
 [node name="2" parent="HUD/root/row/text_window" instance=ExtResource( 3 )]
-margin_top = 25.0
+margin_top = 39.0
 margin_right = 232.0
-margin_bottom = 46.0
+margin_bottom = 60.0
 text = "Teste"
 
 [node name="main_window" type="VBoxContainer" parent="HUD/root/row"]
@@ -81,39 +142,94 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="acts" type="HBoxContainer" parent="HUD/root/row/main_window"]
+[node name="tab_buttons" type="HBoxContainer" parent="HUD/root/row/main_window"]
 margin_right = 232.0
 margin_bottom = 32.0
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="act_1" parent="HUD/root/row/main_window/acts" instance=ExtResource( 2 )]
-margin_right = 72.0
+[node name="tab_gather" parent="HUD/root/row/main_window/tab_buttons" instance=ExtResource( 2 )]
+margin_right = 84.0
 margin_bottom = 32.0
-text = "Act 1"
+text = "Gather"
 
-[node name="buttons" type="VBoxContainer" parent="HUD/root/row/main_window"]
+[node name="separator" type="VSeparator" parent="HUD/root/row/main_window/tab_buttons"]
+margin_left = 88.0
+margin_top = 6.0
+margin_right = 92.0
+margin_bottom = 26.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 0
+size_flags_vertical = 4
+custom_styles/separator = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="tab_build" parent="HUD/root/row/main_window/tab_buttons" instance=ExtResource( 2 )]
+margin_left = 96.0
+margin_right = 168.0
+margin_bottom = 32.0
+text = "Build"
+
+[node name="tab_container" type="TabContainer" parent="HUD/root/row/main_window"]
 margin_top = 36.0
 margin_right = 232.0
-margin_bottom = 98.0
+margin_bottom = 680.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+tab_align = 0
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="fsd" parent="HUD/root/row/main_window/buttons" instance=ExtResource( 4 )]
+[node name="Gather" type="MarginContainer" parent="HUD/root/row/main_window/tab_container"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 26.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="buttons" type="VBoxContainer" parent="HUD/root/row/main_window/tab_container/Gather"]
+margin_right = 118.0
+margin_bottom = 618.0
+size_flags_horizontal = 0
+size_flags_vertical = 3
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="gather_wood" parent="HUD/root/row/main_window/tab_container/Gather/buttons" instance=ExtResource( 8 )]
 margin_right = 118.0
 margin_bottom = 29.0
+custom_styles/pressed = ExtResource( 5 )
 text = "gather wood"
+cooldown_time = 10.0
 
-[node name="progress" parent="HUD/root/row/main_window/buttons/fsd" instance=ExtResource( 5 )]
-rect_color = Color( 1, 0, 0, 1 )
+[node name="Build" type="MarginContainer" parent="HUD/root/row/main_window/tab_container"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 26.0
 
-[node name="gather_wood" parent="HUD/root/row/main_window/buttons" instance=ExtResource( 8 )]
-margin_top = 33.0
-margin_right = 118.0
-margin_bottom = 62.0
-text = "gather wood"
+[node name="buttons" type="VBoxContainer" parent="HUD/root/row/main_window/tab_container/Build"]
+margin_right = 98.0
+margin_bottom = 618.0
+size_flags_horizontal = 0
+size_flags_vertical = 3
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="build_hut" parent="HUD/root/row/main_window/tab_container/Build/buttons" instance=ExtResource( 8 )]
+margin_right = 98.0
+margin_bottom = 29.0
+hint_tooltip = "wood          10"
+custom_styles/pressed = ExtResource( 5 )
+text = "build hut"
+cooldown_time = 0.0
 
 [node name="resource_window" type="VBoxContainer" parent="HUD/root/row"]
 margin_left = 472.0
@@ -123,3 +239,204 @@ size_flags_horizontal = 3
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="empty_space" type="VSeparator" parent="HUD/root/row/resource_window"]
+margin_right = 232.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 0, 64 )
+custom_styles/separator = ExtResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="village" type="MarginContainer" parent="HUD/root/row/resource_window"]
+margin_top = 68.0
+margin_right = 232.0
+margin_bottom = 125.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="panel" type="PanelContainer" parent="HUD/root/row/resource_window/village"]
+margin_right = 232.0
+margin_bottom = 57.0
+custom_styles/panel = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="items" type="VBoxContainer" parent="HUD/root/row/resource_window/village/panel"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 230.0
+margin_bottom = 55.0
+alignment = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="title" parent="HUD/root/row/resource_window/village/panel/items" instance=ExtResource( 3 )]
+margin_right = 228.0
+margin_bottom = 21.0
+text = "Village"
+align = 1
+
+[node name="empty_space" type="VSeparator" parent="HUD/root/row/resource_window/village/panel/items"]
+margin_top = 25.0
+margin_right = 228.0
+margin_bottom = 28.0
+custom_styles/separator = ExtResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="hut" type="HBoxContainer" parent="HUD/root/row/resource_window/village/panel/items"]
+margin_top = 32.0
+margin_right = 228.0
+margin_bottom = 53.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="empty_space" type="VSeparator" parent="HUD/root/row/resource_window/village/panel/items/hut"]
+margin_right = 4.0
+margin_bottom = 21.0
+custom_styles/separator = ExtResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="title" parent="HUD/root/row/resource_window/village/panel/items/hut" instance=ExtResource( 3 )]
+margin_left = 8.0
+margin_right = 38.0
+margin_bottom = 21.0
+text = "Hut"
+
+[node name="empty" type="Label" parent="HUD/root/row/resource_window/village/panel/items/hut"]
+margin_left = 42.0
+margin_top = 3.0
+margin_right = 206.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="amount" parent="HUD/root/row/resource_window/village/panel/items/hut" instance=ExtResource( 3 )]
+margin_left = 210.0
+margin_right = 220.0
+margin_bottom = 21.0
+text = "0"
+pattern_text = "%s"
+
+[node name="empty_space2" type="VSeparator" parent="HUD/root/row/resource_window/village/panel/items/hut"]
+margin_left = 224.0
+margin_right = 228.0
+margin_bottom = 21.0
+custom_styles/separator = ExtResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="resources" type="MarginContainer" parent="HUD/root/row/resource_window"]
+margin_top = 129.0
+margin_right = 232.0
+margin_bottom = 186.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="panel" type="PanelContainer" parent="HUD/root/row/resource_window/resources"]
+margin_right = 232.0
+margin_bottom = 57.0
+custom_styles/panel = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="items" type="VBoxContainer" parent="HUD/root/row/resource_window/resources/panel"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 230.0
+margin_bottom = 55.0
+alignment = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="title" parent="HUD/root/row/resource_window/resources/panel/items" instance=ExtResource( 3 )]
+margin_right = 228.0
+margin_bottom = 21.0
+text = "Resources"
+align = 1
+
+[node name="empty_space" type="VSeparator" parent="HUD/root/row/resource_window/resources/panel/items"]
+margin_top = 25.0
+margin_right = 228.0
+margin_bottom = 28.0
+custom_styles/separator = ExtResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="wood" type="HBoxContainer" parent="HUD/root/row/resource_window/resources/panel/items"]
+margin_top = 32.0
+margin_right = 228.0
+margin_bottom = 53.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="empty_space" type="VSeparator" parent="HUD/root/row/resource_window/resources/panel/items/wood"]
+margin_right = 4.0
+margin_bottom = 21.0
+custom_styles/separator = ExtResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="title" parent="HUD/root/row/resource_window/resources/panel/items/wood" instance=ExtResource( 3 )]
+margin_left = 8.0
+margin_right = 48.0
+margin_bottom = 21.0
+text = "Wood"
+
+[node name="empty" type="Label" parent="HUD/root/row/resource_window/resources/panel/items/wood"]
+margin_left = 52.0
+margin_top = 3.0
+margin_right = 206.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="amount" parent="HUD/root/row/resource_window/resources/panel/items/wood" instance=ExtResource( 3 )]
+margin_left = 210.0
+margin_right = 220.0
+margin_bottom = 21.0
+text = "0"
+pattern_text = "%s"
+
+[node name="empty_space2" type="VSeparator" parent="HUD/root/row/resource_window/resources/panel/items/wood"]
+margin_left = 224.0
+margin_right = 228.0
+margin_bottom = 21.0
+custom_styles/separator = ExtResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[connection signal="resource_points_updated" from="Inventory" to="Inventory/Costs/hut_cost/can_afford" method="validate"]
+[connection signal="points_updated" from="Inventory/Resources/wood" to="HUD/root/row/resource_window/resources/panel/items/wood/amount" method="apply_text_simple"]
+[connection signal="points_updated" from="Inventory/Resources/wood" to="Inventory" method="_on_points_updated"]
+[connection signal="points_updated" from="Inventory/Resources/huts" to="HUD/root/row/resource_window/village/panel/items/hut/amount" method="apply_text_simple"]
+[connection signal="points_updated" from="Inventory/Resources/huts" to="Inventory" method="_on_points_updated"]
+[connection signal="result" from="Inventory/Multipliers/wood_per_click/calculator" to="Inventory/Resources/wood" method="gain_points"]
+[connection signal="result" from="Inventory/Costs/hut_cost/can_afford" to="HUD/root/row/main_window/tab_container/Build/buttons/build_hut" method="set_disabled"]
+[connection signal="calculated" from="Inventory/Costs/hut_cost/perform_pay" to="Inventory/Resources/huts" method="gain_points"]
+[connection signal="result" from="Inventory/Costs/hut_cost/perform_pay" to="Inventory/Resources/wood" method="set_points"]
+[connection signal="pressed" from="HUD/root/row/main_window/tab_buttons/tab_gather" to="HUD/root/row/main_window/tab_container" method="set_current_tab" binds= [ 0 ]]
+[connection signal="pressed" from="HUD/root/row/main_window/tab_buttons/tab_build" to="HUD/root/row/main_window/tab_container" method="set_current_tab" binds= [ 1 ]]
+[connection signal="collect" from="HUD/root/row/main_window/tab_container/Gather/buttons/gather_wood" to="Inventory/Multipliers/wood_per_click/calculator" method="calculate"]
+[connection signal="collect" from="HUD/root/row/main_window/tab_container/Build/buttons/build_hut" to="Inventory/Costs/hut_cost/perform_pay" method="calculate"]

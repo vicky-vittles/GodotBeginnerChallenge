@@ -21,3 +21,7 @@ func lose_points(amount: int = 1) -> void:
 
 func clear_points() -> void:
 	lose_points(current_points)
+
+func set_points(value):
+	current_points = value
+	emit_signal("points_updated", current_points)
