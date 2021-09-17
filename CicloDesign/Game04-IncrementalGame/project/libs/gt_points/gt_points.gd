@@ -1,6 +1,9 @@
 extends Node
 class_name GTPoints, "res://libs/gt_points/icons/gt_points.svg"
 
+signal gained_points()
+signal lost_points()
+
 signal points_updated(current)
 signal points_gained(current, gained)
 signal points_lost(current, lost)

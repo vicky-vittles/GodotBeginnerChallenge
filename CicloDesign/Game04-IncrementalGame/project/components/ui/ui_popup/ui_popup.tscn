@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/ui/fonts/diffusion-bold-s24.tres" type="DynamicFont" id=1]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 1, 1, 1, 0 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0, 0, 0, 1 )
+
+[node name="Popup" type="WindowDialog"]
+margin_right = 274.0
+margin_bottom = 180.0
+custom_styles/panel = SubResource( 1 )
+custom_fonts/title_font = ExtResource( 1 )
+custom_colors/title_color = Color( 0, 0, 0, 1 )
+popup_exclusive = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
