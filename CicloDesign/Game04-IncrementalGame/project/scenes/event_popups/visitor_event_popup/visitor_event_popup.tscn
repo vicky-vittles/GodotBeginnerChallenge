@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/event_popups/visitor_event_popup/visitor_event_popup_content.tscn" type="PackedScene" id=1]
+[ext_resource path="res://components/ui/ui_popup/ui_popup.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/event_popups/visitor_event_popup/visitor_event_popup.gd" type="Script" id=3]
+
+[node name="VisitorEventPopup" instance=ExtResource( 2 )]
+margin_right = 376.0
+margin_bottom = 224.0
+window_title = "EVENT_1"
+script = ExtResource( 3 )
+
+[node name="margin" parent="." index="1" instance=ExtResource( 1 )]
+
+[node name="items" parent="margin" index="0"]
+margin_right = 356.0
+margin_bottom = 194.0
+
+[node name="1" parent="margin/items" index="0"]
+margin_right = 356.0
+
+[node name="2" parent="margin/items" index="1"]
+margin_right = 356.0
+
+[node name="3" parent="margin/items" index="2"]
+margin_right = 356.0
+
+[node name="buttons" parent="margin/items" index="3"]
+margin_right = 356.0
+
+[node name="yes" parent="margin/items/buttons" index="0"]
+margin_left = 40.0
+margin_right = 158.0
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+
+[node name="no" parent="margin/items/buttons" index="1"]
+margin_left = 208.0
+margin_right = 316.0
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+
+[connection signal="collect" from="margin/items/buttons/yes" to="." method="_on_yes_collect"]
+[connection signal="collect" from="margin/items/buttons/no" to="." method="_on_no_collect"]
+
+[editable path="margin"]
