@@ -1,0 +1,1 @@
+extends GTEntity2D
