@@ -1,5 +1,5 @@
 extends Node
-class_name GTGravityEntityMover2D
+class_name GTGravityEntityMoverOld2D
 
 signal position_updated(pos)
 signal movement_info(info)
@@ -27,6 +27,7 @@ export (Vector2) var movement_mask = Vector2(1, 1)
 export (Vector2) var floor_normal = Vector2.UP
 export (bool) var apply_gravity = true
 export (bool) var frozen = false
+export (bool) var is_enabled = true
 
 var move_direction : int
 var move_velocity : Vector2
@@ -46,7 +47,7 @@ func set_move_direction(_dir: int):
 	move_direction = _dir
 
 func move(delta):
-	if frozen:
+	if frozen or not is_enabled:
 		return
 	acceleration.x = MOVE_ACCELERATION if move_direction != 0 else MOVE_DECELERATION
 	if abs(velocity.y) > 10:
@@ -63,13 +64,15 @@ func can_jump() -> bool:
 	return available_jumps > 0
 
 func jump(multiplier: float = 1.0) -> void:
-	turn_off_snap()
-	decrease_jump()
-	velocity.y = JUMP_SPEED * multiplier * movement_mask.y * gravity_mask
-	emit_signal("jumped")
+	if is_enabled:
+		turn_off_snap()
+		decrease_jump()
+		velocity.y = JUMP_SPEED * multiplier * movement_mask.y * gravity_mask
+		emit_signal("jumped")
 
 func damp_jump() -> void:
-	velocity.y *= JUMP_DAMPING
+	if is_enabled:
+		velocity.y *= JUMP_DAMPING
 
 func decrease_jump() -> void:
 	available_jumps = clamp(available_jumps - 1, 0, MAX_JUMPS)
@@ -89,9 +92,10 @@ func set_movement_mask(_mask) -> void:
 	movement_mask = _mask
 
 func invert_gravity_mask() -> void:
-	gravity_mask *= -1
-	floor_normal *= -1
-	emit_signal("updated_gravity_mask", gravity_mask)
+	if is_enabled:
+		gravity_mask *= -1
+		floor_normal *= -1
+		emit_signal("updated_gravity_mask", gravity_mask)
 
 func freeze(preserve_momentum: bool = true):
 	if not preserve_momentum:
@@ -100,3 +104,9 @@ func freeze(preserve_momentum: bool = true):
 
 func unfreeze():
 	frozen = false
+
+func enable():
+	is_enabled = true
+
+func disable():
+	is_enabled = false
