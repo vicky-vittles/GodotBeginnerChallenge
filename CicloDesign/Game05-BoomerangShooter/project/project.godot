@@ -242,7 +242,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Recoil Shooter"
+config/name="Boomerang Shooter"
 run/main_scene="res://main/game/game.tscn"
 config/icon="res://icon.png"
 

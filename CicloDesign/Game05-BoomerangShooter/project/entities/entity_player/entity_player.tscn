@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://entities/__entity_topdown_player/__entity_topdown_player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/entity_player/entity_player.gd" type="Script" id=2]
@@ -7,7 +7,6 @@
 [ext_resource path="res://components/mouse_controller/mouse_controller.tscn" type="PackedScene" id=5]
 [ext_resource path="res://entities/entity_player/components/entity_player_body.gd" type="Script" id=6]
 [ext_resource path="res://entities/entity_player/components/entity_player_entity_mover.gd" type="Script" id=7]
-[ext_resource path="res://libs/gt_entity_mover_2d/gt_topdown_entity_mover_2d/gt_topdown_entity_mover_2d.gd" type="Script" id=8]
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 0 ), 0.0, 1.0, 0, 1, Vector2( 1, 1 ), 1.0, 0.0, 1, 0 ]
@@ -36,7 +35,7 @@ script = ExtResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
-lifetime = 0.25
+lifetime = 0.15
 distance = 2.0
 segments = 40
 
@@ -46,6 +45,7 @@ __meta__ = {
 }
 
 [node name="arrow" type="Polygon2D" parent="Body/graphics/rotation_pivot" index="0"]
+visible = false
 color = Color( 0.921569, 0.341176, 0.537255, 1 )
 polygon = PoolVector2Array( 0, 16, 0, -16, 7, -14, 36, 0, 7, 14 )
 __meta__ = {
@@ -68,17 +68,10 @@ shape = SubResource( 3 )
 
 [node name="EntityMover" parent="Body" index="2"]
 script = ExtResource( 7 )
-movement_mode = 1
 move_deceleration_time = 0.5
+bounce_factor = 0.0
 
-[node name="RecoilMover" type="Node" parent="Body" index="3"]
-script = ExtResource( 8 )
-body_path = NodePath("..")
-max_move_speed = 384
-move_acceleration_time = 0.05
-move_deceleration_time = 0.5
-
-[connection signal="just_pressed" from="InputController/fire" to="Body" method="_on_fire_just_pressed"]
+[connection signal="updated_move_direction" from="InputController" to="Body/EntityMover" method="set_move_direction"]
 [connection signal="mouse_position" from="MouseController" to="Body" method="_on_MouseController_mouse_position"]
 
 [editable path="InputController"]
