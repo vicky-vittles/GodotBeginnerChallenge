@@ -55,11 +55,6 @@ _global_script_classes=[ {
 "path": "res://libs/gt_entity_mover_2d/gt_gravity_entity_mover_2d/gt_gravity_entity_mover_2d.gd"
 }, {
 "base": "Node",
-"class": "GTGravityEntityMoverOld2D",
-"language": "GDScript",
-"path": "res://libs/gt_gravity_entity_mover_2d/gt_gravity_entity_mover_2d.gd"
-}, {
-"base": "Node",
 "class": "GTHealth",
 "language": "GDScript",
 "path": "res://libs/gt_health/gt_health.gd"
@@ -159,10 +154,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://libs/gt_timer/gt_timer.gd"
 }, {
-"base": "Node",
+"base": "GTEntityMover2D",
 "class": "GTTopdownEntityMover2D",
 "language": "GDScript",
-"path": "res://libs/gt_topdown_entity_mover_2d/gt_topdown_entity_mover_2d.gd"
+"path": "res://libs/gt_entity_mover_2d/gt_topdown_entity_mover_2d/gt_topdown_entity_mover_2d.gd"
 }, {
 "base": "GTArea2D",
 "class": "GTTriggerArea2D",
@@ -189,7 +184,6 @@ _global_script_class_icons={
 "GTEntityMover2D": "",
 "GTFormula": "",
 "GTGravityEntityMover2D": "",
-"GTGravityEntityMoverOld2D": "",
 "GTHealth": "",
 "GTInputAction": "",
 "GTInputController": "res://libs/gt_input_controller/icons/gt_default_controller.svg",
@@ -290,6 +284,10 @@ act_fire={
 2d_physics/layer_3="bodies"
 2d_physics/layer_4="triggers"
 2d_physics/layer_5="hitboxes"
+
+[network]
+
+limits/debugger_stdout/max_chars_per_second=4096
 
 [physics]
 

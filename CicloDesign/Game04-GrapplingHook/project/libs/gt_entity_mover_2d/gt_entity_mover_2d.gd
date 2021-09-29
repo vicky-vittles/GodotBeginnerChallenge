@@ -9,6 +9,7 @@ enum MOVEMENT_MODE {
 	MOVE_AND_SLIDE = 2,
 	MOVE_AND_SLIDE_WITH_SNAP = 3}
 
+export (float) var LENGTH_THRESHOLD = 4
 export (NodePath) var body_path
 export (MOVEMENT_MODE) var movement_mode = MOVEMENT_MODE.MOVE_AND_COLLIDE
 export (Vector2) var floor_normal = Vector2.UP
@@ -16,6 +17,7 @@ export (Vector2) var snap = Vector2.ZERO
 export (Vector2) var movement_mask = Vector2(1,1)
 export (bool) var frozen = false
 export (bool) var is_enabled = true
+export (bool) var debug_mode = false
 
 var body : KinematicBody2D
 var acceleration : Vector2
@@ -29,10 +31,10 @@ func _physics_process(delta):
 	if frozen or not is_enabled:
 		return
 	velocity += acceleration * delta
-	move(delta)
+	_move(delta)
 	acceleration *= 0
 
-func move(delta) -> void:
+func _move(delta) -> void:
 	match movement_mode:
 		MOVEMENT_MODE.MOVE_AND_COLLIDE:
 			var collision = body.move_and_collide(velocity * movement_mask * delta)
@@ -65,3 +67,6 @@ func enable() -> void:
 # Disables the entity mover
 func disable() -> void:
 	is_enabled = false
+
+func set_movement_mask(mask: Vector2) -> void:
+	movement_mask = mask

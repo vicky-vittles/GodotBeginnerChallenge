@@ -1,0 +1,82 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://main/game/world/world.gd" type="Script" id=1]
+[ext_resource path="res://entities/entity_player/entity_player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://libs/gt_collision_polygon_2d/gt_collision_polygon_2d.gd" type="Script" id=3]
+[ext_resource path="res://libs/multitarget_camera_2d/multitarget_camera_2d.gd" type="Script" id=4]
+
+[node name="World" type="Node2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="colored_background" type="ColorRect" parent="."]
+margin_right = 960.0
+margin_bottom = 544.0
+rect_scale = Vector2( 3, 3 )
+color = Color( 0.227451, 0.0313726, 0.305882, 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Terrain" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="1" type="CollisionPolygon2D" parent="Terrain"]
+polygon = PoolVector2Array( 0, 0, 2880, 0, 2880, -128, 0, -128 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+graphics_color = Color( 0.227451, 0.0313726, 0.305882, 1 )
+
+[node name="2" type="CollisionPolygon2D" parent="Terrain"]
+polygon = PoolVector2Array( 0, 1632, 2880, 1632, 2880, 1792, 0, 1792 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+graphics_color = Color( 0.227451, 0.0313726, 0.305882, 1 )
+
+[node name="3" type="CollisionPolygon2D" parent="Terrain"]
+polygon = PoolVector2Array( -128, -128, 0, -128, 0, 1792, -128, 1792 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+graphics_color = Color( 0.227451, 0.0313726, 0.305882, 1 )
+
+[node name="4" type="CollisionPolygon2D" parent="Terrain"]
+polygon = PoolVector2Array( 2880, -128, 3008, -128, 3008, 1792, 2880, 1792 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+graphics_color = Color( 0.227451, 0.0313726, 0.305882, 1 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1440, 810 )
+camera_path = NodePath("../Camera")
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2( 1440, 810 )
+current = true
+limit_left = 0
+limit_top = 0
+limit_right = 2880
+limit_bottom = 1620
+editor_draw_limits = true
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+zoom_speed = 1.0
+min_zoom = 1.0
+max_zoom = 1.0
+allow_zoom = false

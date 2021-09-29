@@ -16,4 +16,3 @@ func physics_process(delta):
 		emit_signal("updated_move_direction", move_direction)
 	previous_move_direction = move_direction
 	actor.entity_mover.set_move_direction(move_direction)
-	actor.entity_mover.move(delta)

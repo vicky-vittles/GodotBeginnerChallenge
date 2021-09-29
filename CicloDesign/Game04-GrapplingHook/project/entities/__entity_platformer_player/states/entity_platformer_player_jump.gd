@@ -5,10 +5,8 @@ signal started_falling()
 
 func physics_process(delta):
 	.physics_process(delta)
-	if actor.entity_mover.gravity_mask == 1.0:
-		if actor.entity_mover.velocity.y > 0: emit_signal("started_falling")
-	elif actor.entity_mover.gravity_mask == -1.0:
-		if actor.entity_mover.velocity.y < 0 : emit_signal("started_falling")
+	if actor.entity_mover.velocity.y > 0:
+		emit_signal("started_falling")
 
 func damp_jump():
 	if fsm.current_state == self and actor.can_small_jump:

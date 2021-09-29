@@ -20,10 +20,8 @@ func _ready():
 	visible = false
 
 func _physics_process(delta):
-	entity_mover.move(delta)
 	tip.rotation = player_body.global_position.direction_to(tip.global_position).angle()
 	link.points = [player_body.global_position-global_position, tip.global_position-global_position]
-	entity_mover.set_move_direction(Vector2.ZERO)
 
 func fire():
 	if flying or not can_shoot:
@@ -34,6 +32,7 @@ func fire():
 	cooldown_timer.start()
 	tip.global_position = player_body.global_position
 	entity_mover.set_move_direction(direction)
+	entity_mover.enable()
 
 func release():
 	visible = false
@@ -45,6 +44,8 @@ func _on_MouseController_mouse_position(pos):
 func _on_EntityMover_collided(result):
 	if flying:
 		flying = false
+		entity_mover.set_move_direction(Vector2.ZERO)
+		entity_mover.disable()
 		emit_signal("collided", result)
 
 func enable_shoot():

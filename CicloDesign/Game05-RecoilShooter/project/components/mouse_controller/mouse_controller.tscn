@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://components/mouse_controller/mouse_controller.gd" type="Script" id=1]
+
+[node name="MouseController" type="Node"]
+script = ExtResource( 1 )
+use_icon = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="mouse_icon" type="Polygon2D" parent="CanvasLayer"]
+rotation = 0.785398
+scale = Vector2( 0.5, 0.5 )
+color = Color( 0.921569, 0.341176, 0.537255, 0.627451 )
+polygon = PoolVector2Array( -8, -8, 0, -32, 8, -8, 32, 0, 8, 8, 0, 32, -8, 8, -32, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
