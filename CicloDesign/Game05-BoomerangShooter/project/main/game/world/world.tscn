@@ -76,8 +76,7 @@ __meta__ = {
 graphics_color = Color( 0.227451, 0.0313726, 0.305882, 1 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 480, 270 )
-camera_path = NodePath("../Camera")
+position = Vector2( 24.2345, 78.2758 )
 
 [node name="Camera" type="Camera2D" parent="."]
 current = true

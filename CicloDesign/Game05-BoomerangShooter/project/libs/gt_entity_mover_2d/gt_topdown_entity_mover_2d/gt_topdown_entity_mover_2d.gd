@@ -8,7 +8,15 @@ export (float) var move_deceleration_time = 0.1
 onready var move_acceleration = max_move_speed / move_acceleration_time
 onready var move_deceleration = max_move_speed / move_deceleration_time
 
+var move_timer : Timer
 var move_direction : Vector2
+
+func _ready():
+	move_timer = Timer.new()
+	move_timer.one_shot = true
+	move_timer.name = "_MoveTimer"
+	move_timer.connect("timeout", self, "set_move_direction", [Vector2.ZERO])
+	add_child(move_timer)
 
 func _physics_process(delta):
 	if frozen or not is_enabled:
@@ -29,5 +37,8 @@ func _physics_process(delta):
 		print("velocity: %s" % [velocity])
 		print("\n")
 
-func set_move_direction(_dir: Vector2) -> void:
+func set_move_direction(_dir: Vector2, duration: float = 0.0) -> void:
 	move_direction = _dir
+	if duration > 0.0:
+		move_timer.wait_time = duration
+		move_timer.start()

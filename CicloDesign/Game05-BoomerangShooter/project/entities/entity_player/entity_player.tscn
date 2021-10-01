@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://entities/__entity_topdown_player/__entity_topdown_player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/entity_player/entity_player.gd" type="Script" id=2]
@@ -7,6 +7,10 @@
 [ext_resource path="res://components/mouse_controller/mouse_controller.tscn" type="PackedScene" id=5]
 [ext_resource path="res://entities/entity_player/components/entity_player_body.gd" type="Script" id=6]
 [ext_resource path="res://entities/entity_player/components/entity_player_entity_mover.gd" type="Script" id=7]
+[ext_resource path="res://entities/entity_player/components/entity_player_boomerang/entity_player_boomerang.tscn" type="PackedScene" id=8]
+[ext_resource path="res://entities/entity_player/states/entity_player_move_state.gd" type="Script" id=9]
+[ext_resource path="res://entities/entity_player/states/entity_player_idle_state.gd" type="Script" id=10]
+[ext_resource path="res://libs/gt_area_2d/gt_area_2d.gd" type="Script" id=11]
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 0 ), 0.0, 1.0, 0, 1, Vector2( 1, 1 ), 1.0, 0.0, 1, 0 ]
@@ -16,6 +20,9 @@ colors = PoolColorArray( 0.921569, 0.341176, 0.537255, 0, 0.921569, 0.341176, 0.
 
 [sub_resource type="CircleShape2D" id=3]
 radius = 14.0
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 16.0
 
 [node name="Player" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -45,9 +52,8 @@ __meta__ = {
 }
 
 [node name="arrow" type="Polygon2D" parent="Body/graphics/rotation_pivot" index="0"]
-visible = false
 color = Color( 0.921569, 0.341176, 0.537255, 1 )
-polygon = PoolVector2Array( 0, 16, 0, -16, 7, -14, 36, 0, 7, 14 )
+polygon = PoolVector2Array( 0, 15, 0, -15, 32, 0 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -66,12 +72,58 @@ polygon_color = Color( 0.921569, 0.341176, 0.537255, 1 )
 visible = false
 shape = SubResource( 3 )
 
-[node name="EntityMover" parent="Body" index="2"]
+[node name="Triggers" type="Node2D" parent="Body" index="2"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CatchTrigger" type="Area2D" parent="Body/Triggers" index="0" groups=[
+"entity_player_catch_trigger",
+]]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_lock_": true
+}
+body_path = NodePath(".")
+collidable_groups = [ "entity_player_boomerang_catch_trigger" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Triggers/CatchTrigger" index="0"]
+visible = false
+shape = SubResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="EntityMover" parent="Body" index="3"]
 script = ExtResource( 7 )
-move_deceleration_time = 0.5
 bounce_factor = 0.0
 
-[connection signal="updated_move_direction" from="InputController" to="Body/EntityMover" method="set_move_direction"]
+[node name="Boomerang" parent="." index="3" instance=ExtResource( 8 )]
+player_path = NodePath("..")
+
+[node name="Idle" parent="StateMachine" index="0"]
+script = ExtResource( 10 )
+
+[node name="Move" parent="StateMachine" index="1"]
+script = ExtResource( 9 )
+
+[connection signal="updated_move_direction" from="InputController" to="StateMachine/Idle" method="_on_InputController_updated_move_direction"]
+[connection signal="updated_move_direction" from="InputController" to="StateMachine/Move" method="_on_InputController_updated_move_direction"]
+[connection signal="just_pressed" from="InputController/fire" to="StateMachine/Idle" method="_on_fire_just_pressed"]
+[connection signal="just_pressed" from="InputController/fire" to="StateMachine/Move" method="_on_fire_just_pressed"]
+[connection signal="just_released" from="InputController/fire" to="StateMachine/Idle" method="_on_fire_just_released"]
+[connection signal="just_released" from="InputController/fire" to="StateMachine/Move" method="_on_fire_just_released"]
 [connection signal="mouse_position" from="MouseController" to="Body" method="_on_MouseController_mouse_position"]
+[connection signal="boomerang_exited_screen" from="Boomerang" to="MouseController/CanvasLayer/mouse_pos/effects_center" method="bounce_scale" binds= [ Vector2( 1, 1 ), Vector2( 0.5, 0.5 ), 1.0 ]]
+[connection signal="boomerang_ready" from="Boomerang" to="MouseController/CanvasLayer/mouse_pos/effects_center" method="bounce_scale" binds= [ Vector2( 0.5, 0.5 ), Vector2( 1, 1 ), 1.0 ]]
+[connection signal="fired_boomerang" from="StateMachine/Idle" to="Boomerang" method="fire"]
+[connection signal="released_boomerang" from="StateMachine/Idle" to="Boomerang" method="release"]
+[connection signal="started_moving" from="StateMachine/Idle" to="StateMachine/Idle/ToMove" method="do_transition"]
+[connection signal="fired_boomerang" from="StateMachine/Move" to="Boomerang" method="fire"]
+[connection signal="released_boomerang" from="StateMachine/Move" to="Boomerang" method="release"]
+[connection signal="stopped_moving" from="StateMachine/Move" to="StateMachine/Move/ToIdle" method="do_transition"]
 
 [editable path="InputController"]
+[editable path="MouseController"]

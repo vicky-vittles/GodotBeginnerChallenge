@@ -17,3 +17,6 @@ func get_screen_size() -> Vector2:
 
 func get_screen_center() -> Vector2:
 	return get_screen_size() / 2
+
+func rand_sign() -> int:
+	return int(pow(-1,randi()%2))

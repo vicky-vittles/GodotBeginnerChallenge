@@ -59,6 +59,8 @@ func _on_collision(result):
 
 # Applies a force with a certain duration (if 0.0, then it's instantaneous)
 func apply_force(force: Vector2, duration: float = 0.0) -> void:
+	if not is_enabled:
+		return
 	acceleration += force
 	if duration > 0.0:
 		forces.append([force, duration])
@@ -86,3 +88,6 @@ func disable() -> void:
 
 func set_movement_mask(mask: Vector2) -> void:
 	movement_mask = mask
+
+func set_velocity(_velocity: Vector2) -> void:
+	velocity = _velocity

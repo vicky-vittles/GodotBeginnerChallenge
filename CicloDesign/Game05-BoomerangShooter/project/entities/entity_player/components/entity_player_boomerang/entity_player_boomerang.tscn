@@ -1,0 +1,323 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://entities/entity_player/components/entity_player_boomerang/entity_player_boomerang.gd" type="Script" id=1]
+[ext_resource path="res://libs/gt_area_2d/gt_area_2d.gd" type="Script" id=2]
+[ext_resource path="res://libs/gt_state_machine/gt_state_machine.gd" type="Script" id=3]
+[ext_resource path="res://entities/entity_player/components/entity_player_boomerang/states/entity_player_boomerang_cooldown_state.gd" type="Script" id=4]
+[ext_resource path="res://libs/gt_state_machine/__gt_state_transition.gd" type="Script" id=5]
+[ext_resource path="res://entities/entity_player/components/entity_player_boomerang/states/entity_player_boomerang_ready_state.gd" type="Script" id=6]
+[ext_resource path="res://entities/entity_player/components/entity_player_boomerang/states/entity_player_boomerang_flying_state.gd" type="Script" id=7]
+[ext_resource path="res://libs/gt_area_2d/gt_trigger_area_2d/gt_trigger_area_2d.gd" type="Script" id=8]
+[ext_resource path="res://libs/gt_entity_mover_2d/gt_topdown_entity_mover_2d/gt_topdown_entity_mover_2d.gd" type="Script" id=9]
+[ext_resource path="res://addons/Trail/trail_2d.gd" type="Script" id=10]
+[ext_resource path="res://entities/entity_player/components/entity_player_boomerang/entity_player_boomerang_body.gd" type="Script" id=11]
+[ext_resource path="res://libs/gt_timer/gt_timer.gd" type="Script" id=12]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 0 ), 0.0, 1.0, 0, 1, Vector2( 1, 1 ), 1.0, 0.0, 1, 0 ]
+
+[sub_resource type="Gradient" id=2]
+colors = PoolColorArray( 0.921569, 0.341176, 0.537255, 0, 0.921569, 0.341176, 0.537255, 1 )
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 14.0
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 16.0
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 16.0
+
+[sub_resource type="Animation" id=6]
+resource_name = "appear"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("graphics/move_trail:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("graphics/move_trail:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "disappear"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("graphics/move_trail:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[node name="Boomerang" type="Node2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+min_boomerang_size = 0.5
+max_boomerang_size = 2.0
+min_return_angle = 15.0
+max_return_angle = 40.0
+min_rotation_speed = 360.0
+max_rotation_speed = 1080.0
+
+[node name="Body" type="KinematicBody2D" parent="."]
+visible = false
+collision_layer = 4
+collision_mask = 2
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_lock_": true
+}
+actor_path = NodePath("..")
+
+[node name="graphics" type="Node2D" parent="Body"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="move_trail" type="Line2D" parent="Body/graphics"]
+width = 16.0
+width_curve = SubResource( 1 )
+gradient = SubResource( 2 )
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_lock_": true
+}
+lifetime = 0.09
+distance = 2.0
+segments = 40
+
+[node name="rotation_pivot" type="Node2D" parent="Body/graphics"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="star" type="Polygon2D" parent="Body/graphics/rotation_pivot"]
+scale = Vector2( 1.5, 1.5 )
+color = Color( 0.921569, 0.341176, 0.537255, 1 )
+polygon = PoolVector2Array( -16, 0, -4, -4, 0, -16, 4, -4, 16, 0, 4, 4, 0, 16, -4, 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="VisibilityNotifier" type="VisibilityNotifier2D" parent="Body"]
+visible = false
+position = Vector2( 4.76837e-07, -1.19209e-06 )
+scale = Vector2( 4.8, 4.8 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Body"]
+visible = false
+shape = SubResource( 3 )
+disabled = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Triggers" type="Node2D" parent="Body"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="DamageHitbox" type="Area2D" parent="Body/Triggers" groups=[
+"entity_player_boomerang_damage_hitbox",
+]]
+collision_layer = 16
+collision_mask = 16
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+body_path = NodePath(".")
+collidable_groups = [ "entity_enemy_damage_hurtbox" ]
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Body/Triggers/DamageHitbox"]
+visible = false
+shape = SubResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CatchTrigger" type="Area2D" parent="Body/Triggers" groups=[
+"entity_player_boomerang_catch_trigger",
+]]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_lock_": true
+}
+body_path = NodePath(".")
+collidable_groups = [ "entity_player_catch_trigger" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Triggers/CatchTrigger"]
+visible = false
+shape = SubResource( 5 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="GoEntityMover" type="Node" parent="Body"]
+script = ExtResource( 9 )
+body_path = NodePath("..")
+max_move_speed = 640
+move_acceleration_time = 0.6
+move_deceleration_time = 0.4
+
+[node name="ReturnEntityMover" type="Node" parent="Body"]
+script = ExtResource( 9 )
+body_path = NodePath("..")
+is_enabled = false
+max_move_speed = 640
+move_acceleration_time = 0.8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Body"]
+autoplay = "default"
+anims/appear = SubResource( 6 )
+anims/default = SubResource( 7 )
+anims/disappear = SubResource( 8 )
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="FlightTimer" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="TurnaroundTimer" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="MinimumFlightTimer" type="Timer" parent="Timers"]
+wait_time = 0.5
+one_shot = true
+
+[node name="CooldownTimer" type="Timer" parent="Timers"]
+one_shot = true
+script = ExtResource( 12 )
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 3 )
+actor_path = NodePath("..")
+
+[node name="Ready" type="Node" parent="StateMachine"]
+script = ExtResource( 6 )
+fsm_path = NodePath("..")
+
+[node name="ToFlying" type="Node" parent="StateMachine/Ready"]
+script = ExtResource( 5 )
+end_state_path = NodePath("../../Flying")
+
+[node name="Flying" type="Node" parent="StateMachine"]
+script = ExtResource( 7 )
+fsm_path = NodePath("..")
+
+[node name="ToReady" type="Node" parent="StateMachine/Flying"]
+script = ExtResource( 5 )
+end_state_path = NodePath("../../Ready")
+
+[node name="ToCooldown" type="Node" parent="StateMachine/Flying"]
+script = ExtResource( 5 )
+end_state_path = NodePath("../../Cooldown")
+
+[node name="Cooldown" type="Node" parent="StateMachine"]
+script = ExtResource( 4 )
+fsm_path = NodePath("..")
+
+[node name="ToReady" type="Node" parent="StateMachine/Cooldown"]
+script = ExtResource( 5 )
+end_state_path = NodePath("../../Ready")
+
+[connection signal="player_fired" from="." to="StateMachine/Ready" method="_on_Boomerang_player_fired"]
+[connection signal="player_released" from="." to="StateMachine/Flying" method="turn_around"]
+[connection signal="screen_exited" from="Body/VisibilityNotifier" to="StateMachine/Flying" method="_on_VisibilityNotifier_screen_exited"]
+[connection signal="effect" from="Body/Triggers/CatchTrigger" to="StateMachine/Flying" method="_on_CatchTrigger_effect"]
+[connection signal="timeout" from="Timers/TurnaroundTimer" to="StateMachine/Flying" method="turn_around"]
+[connection signal="timeout" from="Timers/CooldownTimer" to="StateMachine/Cooldown" method="_on_CooldownTimer_timeout"]
+[connection signal="started_flying" from="StateMachine/Ready" to="StateMachine/Ready/ToFlying" method="do_transition"]
+[connection signal="started_flying" from="StateMachine/Ready" to="Timers/TurnaroundTimer" method="start"]
+[connection signal="state_entered" from="StateMachine/Ready" to="." method="_on_Ready_state_entered"]
+[connection signal="state_entered" from="StateMachine/Ready" to="Body/Triggers/CatchTrigger" method="disable_all_shapes"]
+[connection signal="state_entered" from="StateMachine/Ready" to="Body/Triggers/DamageHitbox" method="disable_all_shapes"]
+[connection signal="catched_by_player" from="StateMachine/Flying" to="StateMachine/Flying/ToReady" method="do_transition"]
+[connection signal="exited_screen" from="StateMachine/Flying" to="StateMachine/Flying/ToCooldown" method="do_transition"]
+[connection signal="exited_screen" from="StateMachine/Flying" to="." method="_on_Flying_exited_screen"]
+[connection signal="started_returning" from="StateMachine/Flying" to="Body/ReturnEntityMover" method="enable"]
+[connection signal="started_returning" from="StateMachine/Flying" to="Body/GoEntityMover" method="disable"]
+[connection signal="started_returning" from="StateMachine/Flying" to="Timers/FlightTimer" method="stop"]
+[connection signal="started_returning" from="StateMachine/Flying" to="Body/Triggers/CatchTrigger" method="enable_all_shapes"]
+[connection signal="started_returning" from="StateMachine/Flying" to="Body/Triggers/DamageHitbox" method="enable_all_shapes"]
+[connection signal="state_entered" from="StateMachine/Flying" to="Body/ReturnEntityMover" method="disable"]
+[connection signal="state_entered" from="StateMachine/Flying" to="Body/GoEntityMover" method="enable"]
+[connection signal="state_entered" from="StateMachine/Flying" to="Timers/MinimumFlightTimer" method="start"]
+[connection signal="state_entered" from="StateMachine/Flying" to="Timers/FlightTimer" method="start"]
+[connection signal="state_entered" from="StateMachine/Flying" to="Body" method="appear"]
+[connection signal="state_exited" from="StateMachine/Flying" to="Body/ReturnEntityMover" method="set_velocity" binds= [ Vector2( 0, 0 ) ]]
+[connection signal="state_exited" from="StateMachine/Flying" to="Body/ReturnEntityMover" method="disable"]
+[connection signal="state_exited" from="StateMachine/Flying" to="Body/GoEntityMover" method="enable"]
+[connection signal="state_exited" from="StateMachine/Flying" to="Body/GoEntityMover" method="set_velocity" binds= [ Vector2( 0, 0 ) ]]
+[connection signal="state_exited" from="StateMachine/Flying" to="Body" method="disappear"]
+[connection signal="cooldown_ended" from="StateMachine/Cooldown" to="StateMachine/Cooldown/ToReady" method="do_transition"]
+[connection signal="state_entered" from="StateMachine/Cooldown" to="Timers/CooldownTimer" method="start"]

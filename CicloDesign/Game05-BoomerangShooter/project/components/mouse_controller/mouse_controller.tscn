@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://components/mouse_controller/mouse_controller.gd" type="Script" id=1]
+[ext_resource path="res://libs/gt_juice_2d/gt_juice_2d.gd" type="Script" id=2]
 
 [node name="MouseController" type="Node"]
 script = ExtResource( 1 )
@@ -8,10 +9,22 @@ use_icon = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="mouse_icon" type="Polygon2D" parent="CanvasLayer"]
+[node name="mouse_pos" type="Node2D" parent="CanvasLayer"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="effects_center" type="Node2D" parent="CanvasLayer/mouse_pos"]
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="mouse_icon" type="Polygon2D" parent="CanvasLayer/mouse_pos/effects_center"]
+modulate = Color( 1, 1, 1, 0.705882 )
 rotation = 0.785398
 scale = Vector2( 0.5, 0.5 )
-color = Color( 0.921569, 0.341176, 0.537255, 0.627451 )
+color = Color( 0.921569, 0.341176, 0.537255, 1 )
 polygon = PoolVector2Array( -8, -8, 0, -32, 8, -8, 32, 0, 8, 8, 0, 32, -8, 8, -32, 0 )
 __meta__ = {
 "_edit_lock_": true
