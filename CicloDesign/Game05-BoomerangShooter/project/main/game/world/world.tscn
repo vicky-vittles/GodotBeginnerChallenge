@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://main/game/world/world.gd" type="Script" id=1]
 [ext_resource path="res://entities/entity_player/entity_player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://libs/gt_collision_polygon_2d/gt_collision_polygon_2d.gd" type="Script" id=3]
+[ext_resource path="res://entities/entity_enemy_follower/entity_enemy_follower.tscn" type="PackedScene" id=4]
+[ext_resource path="res://main/game/world/components/world_enemies.gd" type="Script" id=5]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
@@ -14,13 +16,14 @@ __meta__ = {
 margin_right = 960.0
 margin_bottom = 544.0
 rect_scale = Vector2( 3, 3 )
-color = Color( 0.227451, 0.0313726, 0.305882, 1 )
+color = Color( 0.419608, 0.380392, 1, 1 )
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
 [node name="Terrain" type="StaticBody2D" parent="."]
+visible = false
 collision_layer = 2
 collision_mask = 4
 __meta__ = {
@@ -33,7 +36,7 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
-graphics_color = Color( 0.227451, 0.0313726, 0.305882, 1 )
+graphics_color = Color( 0.419608, 0.380392, 1, 1 )
 
 [node name="2" type="CollisionPolygon2D" parent="Terrain"]
 polygon = PoolVector2Array( 0, 1632, 2880, 1632, 2880, 1792, 0, 1792 )
@@ -41,7 +44,7 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
-graphics_color = Color( 0.227451, 0.0313726, 0.305882, 1 )
+graphics_color = Color( 0.419608, 0.380392, 1, 1 )
 
 [node name="3" type="CollisionPolygon2D" parent="Terrain"]
 polygon = PoolVector2Array( -128, -128, 0, -128, 0, 1792, -128, 1792 )
@@ -49,7 +52,7 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
-graphics_color = Color( 0.227451, 0.0313726, 0.305882, 1 )
+graphics_color = Color( 0.419608, 0.380392, 1, 1 )
 
 [node name="4" type="CollisionPolygon2D" parent="Terrain"]
 polygon = PoolVector2Array( 2880, -128, 3008, -128, 3008, 1792, 2880, 1792 )
@@ -57,7 +60,7 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
-graphics_color = Color( 0.227451, 0.0313726, 0.305882, 1 )
+graphics_color = Color( 0.419608, 0.380392, 1, 1 )
 
 [node name="5" type="CollisionPolygon2D" parent="Terrain"]
 polygon = PoolVector2Array( 960, 0, 1088, 0, 1088, 640, 960, 640 )
@@ -65,7 +68,7 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
-graphics_color = Color( 0.227451, 0.0313726, 0.305882, 1 )
+graphics_color = Color( 0.419608, 0.380392, 1, 1 )
 
 [node name="6" type="CollisionPolygon2D" parent="Terrain"]
 polygon = PoolVector2Array( 0, 536, 960, 536, 960, 640, 0, 640 )
@@ -73,10 +76,18 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
-graphics_color = Color( 0.227451, 0.0313726, 0.305882, 1 )
+graphics_color = Color( 0.419608, 0.380392, 1, 1 )
+
+[node name="Enemies" type="Node2D" parent="."]
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="EnemyFollower" parent="Enemies" instance=ExtResource( 4 )]
+position = Vector2( 427.52, 228.328 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 24.2345, 78.2758 )
 
 [node name="Camera" type="Camera2D" parent="."]
 current = true

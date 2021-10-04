@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://entities/__entity_topdown_player/__entity_topdown_player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/entity_player/entity_player.gd" type="Script" id=2]
@@ -11,25 +11,95 @@
 [ext_resource path="res://entities/entity_player/states/entity_player_move_state.gd" type="Script" id=9]
 [ext_resource path="res://entities/entity_player/states/entity_player_idle_state.gd" type="Script" id=10]
 [ext_resource path="res://libs/gt_area_2d/gt_area_2d.gd" type="Script" id=11]
+[ext_resource path="res://entities/entity_player/components/entity_player_dashed_line_indicator.gd" type="Script" id=12]
+
+[sub_resource type="Animation" id=6]
+resource_name = "appear"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.509804 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "default"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "disappear"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.509804 ), Color( 1, 1, 1, 0 ) ]
+}
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 0 ), 0.0, 1.0, 0, 1, Vector2( 1, 1 ), 1.0, 0.0, 1, 0 ]
 
 [sub_resource type="Gradient" id=2]
-colors = PoolColorArray( 0.921569, 0.341176, 0.537255, 0, 0.921569, 0.341176, 0.537255, 1 )
+colors = PoolColorArray( 0.980392, 0.866667, 0.635294, 0, 0.980392, 0.866667, 0.635294, 1 )
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 14.0
+radius = 12.0
 
 [sub_resource type="CircleShape2D" id=4]
-radius = 16.0
+radius = 30.0
 
 [node name="Player" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+catch_mode = 1
 
 [node name="MouseController" parent="." index="1" instance=ExtResource( 5 )]
 
-[node name="Body" parent="." index="2"]
+[node name="DashedLineIndicator" type="Node2D" parent="." index="2"]
+modulate = Color( 1, 1, 1, 0.509804 )
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_lock_": true
+}
+body_path = NodePath("../Body")
+boomerang_path = NodePath("../Boomerang")
+line_color = Color( 0.980392, 0.866667, 0.635294, 1 )
+line_dash = 6.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DashedLineIndicator" index="0"]
+autoplay = "default"
+anims/appear = SubResource( 6 )
+anims/default = SubResource( 5 )
+anims/disappear = SubResource( 7 )
+
+[node name="Boomerang" parent="." index="3" instance=ExtResource( 8 )]
+player_path = NodePath("..")
+
+[node name="Body" parent="." index="4"]
 script = ExtResource( 6 )
 actor_path = NodePath("..")
 
@@ -52,8 +122,8 @@ __meta__ = {
 }
 
 [node name="arrow" type="Polygon2D" parent="Body/graphics/rotation_pivot" index="0"]
-color = Color( 0.921569, 0.341176, 0.537255, 1 )
-polygon = PoolVector2Array( 0, 15, 0, -15, 32, 0 )
+color = Color( 0.980392, 0.866667, 0.635294, 1 )
+polygon = PoolVector2Array( 0, 11, 0, -11, 28, 0 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -65,8 +135,8 @@ __meta__ = {
 }
 centered = true
 num_sides = 32
-size = 32.0
-polygon_color = Color( 0.921569, 0.341176, 0.537255, 1 )
+size = 24.0
+polygon_color = Color( 0.980392, 0.866667, 0.635294, 1 )
 
 [node name="CollisionShape" parent="Body" index="1"]
 visible = false
@@ -100,8 +170,11 @@ __meta__ = {
 script = ExtResource( 7 )
 bounce_factor = 0.0
 
-[node name="Boomerang" parent="." index="3" instance=ExtResource( 8 )]
-player_path = NodePath("..")
+[node name="Timers" type="Node" parent="." index="5"]
+
+[node name="CatchTimer" type="Timer" parent="Timers" index="0"]
+wait_time = 0.1
+one_shot = true
 
 [node name="Idle" parent="StateMachine" index="0"]
 script = ExtResource( 10 )
@@ -109,18 +182,25 @@ script = ExtResource( 10 )
 [node name="Move" parent="StateMachine" index="1"]
 script = ExtResource( 9 )
 
-[connection signal="updated_move_direction" from="InputController" to="StateMachine/Idle" method="_on_InputController_updated_move_direction"]
 [connection signal="updated_move_direction" from="InputController" to="StateMachine/Move" method="_on_InputController_updated_move_direction"]
-[connection signal="just_pressed" from="InputController/fire" to="StateMachine/Idle" method="_on_fire_just_pressed"]
+[connection signal="updated_move_direction" from="InputController" to="StateMachine/Idle" method="_on_InputController_updated_move_direction"]
 [connection signal="just_pressed" from="InputController/fire" to="StateMachine/Move" method="_on_fire_just_pressed"]
-[connection signal="just_released" from="InputController/fire" to="StateMachine/Idle" method="_on_fire_just_released"]
+[connection signal="just_pressed" from="InputController/fire" to="StateMachine/Idle" method="_on_fire_just_pressed"]
 [connection signal="just_released" from="InputController/fire" to="StateMachine/Move" method="_on_fire_just_released"]
+[connection signal="just_released" from="InputController/fire" to="StateMachine/Idle" method="_on_fire_just_released"]
 [connection signal="mouse_position" from="MouseController" to="Body" method="_on_MouseController_mouse_position"]
 [connection signal="boomerang_exited_screen" from="Boomerang" to="MouseController/CanvasLayer/mouse_pos/effects_center" method="bounce_scale" binds= [ Vector2( 1, 1 ), Vector2( 0.5, 0.5 ), 1.0 ]]
+[connection signal="boomerang_flying" from="Boomerang" to="DashedLineIndicator/AnimationPlayer" method="play" binds= [ "appear" ]]
 [connection signal="boomerang_ready" from="Boomerang" to="MouseController/CanvasLayer/mouse_pos/effects_center" method="bounce_scale" binds= [ Vector2( 0.5, 0.5 ), Vector2( 1, 1 ), 1.0 ]]
+[connection signal="boomerang_returning" from="Boomerang" to="DashedLineIndicator/AnimationPlayer" method="play" binds= [ "disappear" ]]
+[connection signal="timeout" from="Timers/CatchTimer" to="Body" method="_on_CatchTimer_timeout"]
+[connection signal="fire_just_pressed" from="StateMachine/Idle" to="Timers/CatchTimer" method="start"]
+[connection signal="fire_just_pressed" from="StateMachine/Idle" to="Body" method="_on_fire_just_pressed"]
 [connection signal="fired_boomerang" from="StateMachine/Idle" to="Boomerang" method="fire"]
 [connection signal="released_boomerang" from="StateMachine/Idle" to="Boomerang" method="release"]
 [connection signal="started_moving" from="StateMachine/Idle" to="StateMachine/Idle/ToMove" method="do_transition"]
+[connection signal="fire_just_pressed" from="StateMachine/Move" to="Timers/CatchTimer" method="start"]
+[connection signal="fire_just_pressed" from="StateMachine/Move" to="Body" method="_on_fire_just_pressed"]
 [connection signal="fired_boomerang" from="StateMachine/Move" to="Boomerang" method="fire"]
 [connection signal="released_boomerang" from="StateMachine/Move" to="Boomerang" method="release"]
 [connection signal="stopped_moving" from="StateMachine/Move" to="StateMachine/Move/ToIdle" method="do_transition"]

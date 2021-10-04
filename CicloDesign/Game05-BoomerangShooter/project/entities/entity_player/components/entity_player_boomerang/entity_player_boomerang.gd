@@ -3,6 +3,8 @@ extends Node2D
 signal player_fired(direction)
 signal player_released()
 signal boomerang_ready()
+signal boomerang_flying()
+signal boomerang_returning()
 signal boomerang_exited_screen()
 
 enum BOOMERANG_MODE {
@@ -20,6 +22,7 @@ export (float) var max_rotation_speed = 720.0
 
 onready var player = get_node(player_path)
 onready var body = $Body
+onready var offscreen_arrow = $OffscreenIndicator
 onready var go_entity_mover = $Body/GoEntityMover
 onready var return_entity_mover = $Body/ReturnEntityMover
 onready var rotation_pivot = $Body/graphics/rotation_pivot
@@ -37,6 +40,12 @@ func release():
 
 func _on_Ready_state_entered():
 	emit_signal("boomerang_ready")
+
+func _on_Flying_state_entered():
+	emit_signal("boomerang_flying")
+
+func _on_Flying_started_returning():
+	emit_signal("boomerang_returning")
 
 func _on_Flying_exited_screen():
 	emit_signal("boomerang_exited_screen")
