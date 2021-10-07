@@ -214,7 +214,7 @@ __meta__ = {
 }
 min_boomerang_size = 0.5
 max_boomerang_size = 3.0
-max_return_angle = 20.0
+max_return_angle = 30.0
 min_rotation_speed = 360.0
 max_rotation_speed = 1440.0
 
@@ -372,8 +372,8 @@ body_path = NodePath("../Body")
 
 [node name="line" type="Line2D" parent="DirectionalIndicator"]
 modulate = Color( 1, 1, 1, 0.509804 )
-position = Vector2( 1280, 0 )
-points = PoolVector2Array( 0, 0, -1280, 0 )
+position = Vector2( 1600, 0 )
+points = PoolVector2Array( 0, 0, -1600, 0 )
 width = 32.0
 default_color = Color( 0.980392, 0.866667, 0.635294, 1 )
 __meta__ = {
@@ -443,35 +443,35 @@ end_state_path = NodePath("../../Ready")
 [connection signal="effect" from="Body/Triggers/CatchTrigger" to="StateMachine/Flying" method="_on_CatchTrigger_effect"]
 [connection signal="timeout" from="Timers/TurnaroundTimer" to="StateMachine/Flying" method="turn_around"]
 [connection signal="timeout" from="Timers/CooldownTimer" to="StateMachine/Cooldown" method="_on_CooldownTimer_timeout"]
-[connection signal="started_flying" from="StateMachine/Ready" to="Timers/TurnaroundTimer" method="start"]
 [connection signal="started_flying" from="StateMachine/Ready" to="StateMachine/Ready/ToFlying" method="do_transition"]
-[connection signal="state_entered" from="StateMachine/Ready" to="." method="_on_Ready_state_entered"]
+[connection signal="started_flying" from="StateMachine/Ready" to="Timers/TurnaroundTimer" method="start"]
 [connection signal="state_entered" from="StateMachine/Ready" to="Body/Triggers/CatchTrigger" method="disable_all_shapes"]
+[connection signal="state_entered" from="StateMachine/Ready" to="." method="_on_Ready_state_entered"]
 [connection signal="catched_by_player" from="StateMachine/Flying" to="StateMachine/Flying/ToReady" method="do_transition"]
 [connection signal="exited_screen" from="StateMachine/Flying" to="StateMachine/Flying/ToCooldown" method="do_transition"]
 [connection signal="exited_screen" from="StateMachine/Flying" to="." method="_on_Flying_exited_screen"]
-[connection signal="started_returning" from="StateMachine/Flying" to="DirectionalIndicator/AnimationPlayer" method="play" binds= [ "appear" ]]
-[connection signal="started_returning" from="StateMachine/Flying" to="Body/GoEntityMover" method="disable"]
 [connection signal="started_returning" from="StateMachine/Flying" to="Body/ReturnEntityMover" method="enable"]
+[connection signal="started_returning" from="StateMachine/Flying" to="Body/GoEntityMover" method="disable"]
 [connection signal="started_returning" from="StateMachine/Flying" to="Timers/FlightTimer" method="stop"]
-[connection signal="started_returning" from="StateMachine/Flying" to="DirectionalIndicator" method="appear"]
-[connection signal="started_returning" from="StateMachine/Flying" to="." method="_on_Flying_started_returning"]
 [connection signal="started_returning" from="StateMachine/Flying" to="Body/Triggers/CatchTrigger" method="enable_all_shapes"]
-[connection signal="state_entered" from="StateMachine/Flying" to="Body" method="appear"]
-[connection signal="state_entered" from="StateMachine/Flying" to="Body/GoEntityMover" method="enable"]
+[connection signal="started_returning" from="StateMachine/Flying" to="." method="_on_Flying_started_returning"]
+[connection signal="started_returning" from="StateMachine/Flying" to="DirectionalIndicator" method="appear"]
+[connection signal="started_returning" from="StateMachine/Flying" to="DirectionalIndicator/AnimationPlayer" method="play" binds= [ "appear" ]]
 [connection signal="state_entered" from="StateMachine/Flying" to="Body/ReturnEntityMover" method="disable"]
+[connection signal="state_entered" from="StateMachine/Flying" to="Body/GoEntityMover" method="enable"]
 [connection signal="state_entered" from="StateMachine/Flying" to="Timers/MinimumFlightTimer" method="start"]
 [connection signal="state_entered" from="StateMachine/Flying" to="Timers/FlightTimer" method="start"]
-[connection signal="state_entered" from="StateMachine/Flying" to="." method="_on_Flying_state_entered"]
+[connection signal="state_entered" from="StateMachine/Flying" to="Body" method="appear"]
 [connection signal="state_entered" from="StateMachine/Flying" to="Body/Triggers/DamageHitbox" method="enable_all_shapes"]
+[connection signal="state_entered" from="StateMachine/Flying" to="." method="_on_Flying_state_entered"]
 [connection signal="state_entered" from="StateMachine/Flying" to="OffscreenIndicator/AnimationPlayer" method="play" binds= [ "appear" ]]
-[connection signal="state_exited" from="StateMachine/Flying" to="Body" method="disappear"]
-[connection signal="state_exited" from="StateMachine/Flying" to="DirectionalIndicator/AnimationPlayer" method="play" binds= [ "disappear" ]]
-[connection signal="state_exited" from="StateMachine/Flying" to="Body/GoEntityMover" method="enable"]
-[connection signal="state_exited" from="StateMachine/Flying" to="Body/GoEntityMover" method="set_velocity" binds= [ Vector2( 0, 0 ) ]]
 [connection signal="state_exited" from="StateMachine/Flying" to="Body/ReturnEntityMover" method="set_velocity" binds= [ Vector2( 0, 0 ) ]]
 [connection signal="state_exited" from="StateMachine/Flying" to="Body/ReturnEntityMover" method="disable"]
+[connection signal="state_exited" from="StateMachine/Flying" to="Body/GoEntityMover" method="enable"]
+[connection signal="state_exited" from="StateMachine/Flying" to="Body/GoEntityMover" method="set_velocity" binds= [ Vector2( 0, 0 ) ]]
+[connection signal="state_exited" from="StateMachine/Flying" to="Body" method="disappear"]
 [connection signal="state_exited" from="StateMachine/Flying" to="Body/Triggers/DamageHitbox" method="disable_all_shapes"]
 [connection signal="state_exited" from="StateMachine/Flying" to="OffscreenIndicator/AnimationPlayer" method="play" binds= [ "disappear" ]]
+[connection signal="state_exited" from="StateMachine/Flying" to="DirectionalIndicator/AnimationPlayer" method="play" binds= [ "disappear" ]]
 [connection signal="cooldown_ended" from="StateMachine/Cooldown" to="StateMachine/Cooldown/ToReady" method="do_transition"]
 [connection signal="state_entered" from="StateMachine/Cooldown" to="Timers/CooldownTimer" method="start"]

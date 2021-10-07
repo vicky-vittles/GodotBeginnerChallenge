@@ -11,4 +11,4 @@ func _physics_process(delta):
 	rotation = direction.angle()
 
 func appear():
-	line.points = [Vector2.ZERO, Vector2(-1280, 0)]
+	line.points = [Vector2.ZERO, Vector2(-1600, 0)]

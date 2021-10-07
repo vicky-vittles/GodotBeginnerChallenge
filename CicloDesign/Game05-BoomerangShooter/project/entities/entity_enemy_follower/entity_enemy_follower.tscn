@@ -23,8 +23,8 @@ extents = Vector2( 18, 14 )
 script = ExtResource( 1 )
 
 [node name="Body" type="KinematicBody2D" parent="."]
-collision_layer = 4
-collision_mask = 2
+collision_layer = 0
+collision_mask = 0
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_lock_": true
@@ -157,6 +157,7 @@ fsm_path = NodePath("..")
 [connection signal="state_exited" from="StateMachine/Hurt" to="Body/EntityMover" method="enable"]
 [connection signal="state_exited" from="StateMachine/Hurt" to="Body/KnockbackMover" method="disable"]
 [connection signal="state_entered" from="StateMachine/Dead" to="Timers/QueueFreeTimer" method="start"]
+[connection signal="state_entered" from="StateMachine/Dead" to="." method="_on_Dead_state_entered"]
 [connection signal="state_entered" from="StateMachine/Dead" to="Body/graphics/particles/dead" method="set_emitting" binds= [ true ]]
 [connection signal="state_entered" from="StateMachine/Dead" to="Body/EntityMover" method="disable"]
 [connection signal="state_exited" from="StateMachine/Dead" to="Body/KnockbackMover" method="disable"]
