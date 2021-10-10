@@ -26,6 +26,8 @@ var enemies_killed : int # The number of enemies that have been killed in this c
 var enemy_spawn_queue : int # The number of enemies waiting in queue for being spawned
 onready var current_wave : int = initial_wave
 
+var screen_enemies : int
+var wave_enemies : int
 onready var between_wave_timer = $BetweenWavesTimer
 onready var replacement_timer = $ReplacementTimer
 
@@ -34,9 +36,9 @@ func _physics_process(delta): check_advance_wave()
 func start(): _set_wave(initial_wave)
 func can_spawn() -> bool: return enemies_spawned < get_variable(STR_WAVE_ENEMIES)
 func get_variable(name: String): return _get_variable(name, current_wave)
+func has_variable(name: String): return _has_variable(name, current_wave)
 
 func check_advance_wave():
-	var wave_enemies = get_variable(STR_WAVE_ENEMIES)
 	if enemies_killed >= wave_enemies and between_wave_timer.is_stopped():
 		between_wave_timer.start()
 
@@ -55,7 +57,7 @@ func spawn_enemy():
 func _set_wave(_wave):
 	current_wave = _wave
 	_set_variables()
-	for i in get_variable(STR_SCREEN_ENEMIES):
+	for i in screen_enemies:
 		spawn_enemy()
 	emit_signal("updated_wave", current_wave)
 	if debug_mode: print("current_wave: %s" % [current_wave])
@@ -64,13 +66,20 @@ func _set_variables():
 	enemies_spawned = 0
 	enemies_killed = 0
 	enemy_spawn_queue = 0
-	between_wave_timer.wait_time = get_variable(STR_TIME_BETWEEN_WAVES)
-	replacement_timer.wait_time = get_variable(STR_REPLACEMENT_TIME)
+	screen_enemies = get_variable(STR_SCREEN_ENEMIES) if has_variable(STR_SCREEN_ENEMIES) else screen_enemies
+	wave_enemies = get_variable(STR_WAVE_ENEMIES) if has_variable(STR_WAVE_ENEMIES) else wave_enemies
+	between_wave_timer.wait_time = get_variable(STR_TIME_BETWEEN_WAVES) if has_variable(STR_TIME_BETWEEN_WAVES) else between_wave_timer.wait_time
+	replacement_timer.wait_time = get_variable(STR_REPLACEMENT_TIME) if has_variable(STR_REPLACEMENT_TIME) else replacement_timer.wait_time
 	emit_signal("updated_properties", wave_properties)
 
 func _get_variable(name: String, wave: int):
 	if wave > 0 and wave_properties.has(name) and wave_properties[name].size() >= wave:
 		return wave_properties[name][wave-1]
+
+func _has_variable(name: String, wave: int) -> bool:
+	if wave > 0 and wave_properties.has(name) and wave_properties[name].size() >= wave:
+		return true
+	return false
 
 func _on_EntitySpawner_spawned_entity(entity):
 	assert(entity.has_signal("died"), "%s NSTManager tried to utilize an entity %s that does not contain the 'died' signal" % [self.name, entity.name])

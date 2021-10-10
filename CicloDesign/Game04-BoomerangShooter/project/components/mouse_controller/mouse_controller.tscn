@@ -24,7 +24,7 @@ __meta__ = {
 modulate = Color( 1, 1, 1, 0.705882 )
 rotation = 0.785398
 scale = Vector2( 0.5, 0.5 )
-color = Color( 0.980392, 0.866667, 0.635294, 1 )
+color = Color( 0.929412, 0.627451, 0.192157, 1 )
 polygon = PoolVector2Array( -8, -8, 0, -32, 8, -8, 32, 0, 8, 8, 0, 32, -8, 8, -32, 0 )
 __meta__ = {
 "_edit_lock_": true

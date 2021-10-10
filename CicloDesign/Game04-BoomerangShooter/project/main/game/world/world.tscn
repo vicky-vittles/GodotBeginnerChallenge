@@ -8,10 +8,10 @@
 [ext_resource path="res://components/entity_spawner/nst_manager/nst_manager.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 480, 40 )
+extents = Vector2( 640, 40 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 40, 270 )
+extents = Vector2( 40, 360 )
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
@@ -20,16 +20,22 @@ __meta__ = {
 }
 
 [node name="colored_background" type="ColorRect" parent="."]
-margin_right = 960.0
-margin_bottom = 544.0
-color = Color( 0.419608, 0.380392, 1, 1 )
+margin_right = 1280.0
+margin_bottom = 720.0
+color = Color( 0.152941, 0.160784, 0.27451, 1 )
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
 [node name="WaveManager" parent="." instance=ExtResource( 6 )]
-debug_mode = true
+wave_properties = {
+"replacement_time": [ 1.0 ],
+"screen_enemies": [ 2 ],
+"time_between_waves": [ 3.0 ],
+"wave_enemies": [ 5, 10 ]
+}
+max_waves = 2
 
 [node name="EntitySpawner" parent="WaveManager" index="1"]
 entity_template = ExtResource( 5 )
@@ -41,28 +47,28 @@ __meta__ = {
 }
 
 [node name="1" type="CollisionShape2D" parent="EnemySpawnZone"]
-position = Vector2( 480, -40 )
+position = Vector2( 640, -40 )
 shape = SubResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="2" type="CollisionShape2D" parent="EnemySpawnZone"]
-position = Vector2( 480, 580 )
+position = Vector2( 640, 760 )
 shape = SubResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="3" type="CollisionShape2D" parent="EnemySpawnZone"]
-position = Vector2( -40, 270 )
+position = Vector2( -40, 360 )
 shape = SubResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="4" type="CollisionShape2D" parent="EnemySpawnZone"]
-position = Vector2( 1000, 270 )
+position = Vector2( 1320, 360 )
 shape = SubResource( 2 )
 __meta__ = {
 "_edit_lock_": true
@@ -74,7 +80,6 @@ __meta__ = {
 one_shot = true
 
 [node name="Terrain" type="StaticBody2D" parent="."]
-visible = false
 collision_layer = 2
 collision_mask = 4
 __meta__ = {
@@ -82,7 +87,7 @@ __meta__ = {
 }
 
 [node name="1" type="CollisionPolygon2D" parent="Terrain"]
-polygon = PoolVector2Array( 0, 0, 2880, 0, 2880, -128, 0, -128 )
+polygon = PoolVector2Array( 0, 0, 1280, 0, 1280, -80, 0, -80 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
@@ -90,7 +95,7 @@ __meta__ = {
 graphics_color = Color( 0.419608, 0.380392, 1, 1 )
 
 [node name="2" type="CollisionPolygon2D" parent="Terrain"]
-polygon = PoolVector2Array( 0, 1632, 2880, 1632, 2880, 1792, 0, 1792 )
+polygon = PoolVector2Array( -80, 0, 0, 0, 0, 720, -80, 720 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
@@ -98,7 +103,7 @@ __meta__ = {
 graphics_color = Color( 0.419608, 0.380392, 1, 1 )
 
 [node name="3" type="CollisionPolygon2D" parent="Terrain"]
-polygon = PoolVector2Array( -128, -128, 0, -128, 0, 1792, -128, 1792 )
+polygon = PoolVector2Array( 1280, 0, 1360, 0, 1360, 720, 1280, 720 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
@@ -106,23 +111,7 @@ __meta__ = {
 graphics_color = Color( 0.419608, 0.380392, 1, 1 )
 
 [node name="4" type="CollisionPolygon2D" parent="Terrain"]
-polygon = PoolVector2Array( 2880, -128, 3008, -128, 3008, 1792, 2880, 1792 )
-script = ExtResource( 3 )
-__meta__ = {
-"_edit_lock_": true
-}
-graphics_color = Color( 0.419608, 0.380392, 1, 1 )
-
-[node name="5" type="CollisionPolygon2D" parent="Terrain"]
-polygon = PoolVector2Array( 960, 0, 1088, 0, 1088, 640, 960, 640 )
-script = ExtResource( 3 )
-__meta__ = {
-"_edit_lock_": true
-}
-graphics_color = Color( 0.419608, 0.380392, 1, 1 )
-
-[node name="6" type="CollisionPolygon2D" parent="Terrain"]
-polygon = PoolVector2Array( 0, 536, 960, 536, 960, 640, 0, 640 )
+polygon = PoolVector2Array( 0, 720, 1280, 720, 1280, 800, 0, 800 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
@@ -132,11 +121,12 @@ graphics_color = Color( 0.419608, 0.380392, 1, 1 )
 [node name="Player" parent="." instance=ExtResource( 2 )]
 
 [node name="Camera" type="Camera2D" parent="."]
+position = Vector2( 640, 360 )
 current = true
 limit_left = 0
 limit_top = 0
-limit_right = 960
-limit_bottom = 540
+limit_right = 1280
+limit_bottom = 720
 editor_draw_limits = true
 __meta__ = {
 "_edit_lock_": true

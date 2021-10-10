@@ -1,6 +1,7 @@
 extends Node
 
 signal mouse_position(pos)
+signal mouse_global_position(global_pos)
 signal mouse_from_center(direction)
 
 export (bool) var use_icon = false
@@ -25,4 +26,5 @@ func _input(event):
 
 func _physics_process(delta):
 	emit_signal("mouse_position", mouse_position)
+	emit_signal("mouse_global_position", Globals.get_screen_size()*mouse_position)
 	emit_signal("mouse_from_center", direction_to_center)

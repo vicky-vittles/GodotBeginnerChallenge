@@ -2,6 +2,7 @@ extends Node
 class_name GTEntityMover2D
 
 signal updated_position(new_position)
+signal has_collided()
 signal collided(result)
 
 enum MOVEMENT_MODE {
@@ -47,6 +48,7 @@ func _move(delta) -> void:
 			var collision = body.move_and_collide(velocity * movement_mask * delta)
 			if collision:
 				_on_collision(collision)
+				emit_signal("has_collided")
 				emit_signal("collided", collision)
 		MOVEMENT_MODE.MOVE_AND_SLIDE:
 			velocity = body.move_and_slide(velocity * movement_mask, floor_normal)

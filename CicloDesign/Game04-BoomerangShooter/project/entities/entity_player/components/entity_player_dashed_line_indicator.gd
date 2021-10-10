@@ -1,21 +1,21 @@
 extends Node2D
 
-export (NodePath) var body_path
 export (NodePath) var boomerang_path
 export (bool) var is_active = true
 export (Color) var line_color
 export (float) var line_width = 8.0
 export (float) var line_dash = 4.0
 
-onready var body = get_node(body_path)
 onready var boomerang = get_node(boomerang_path)
+
+var mouse_pos : Vector2
 
 func _process(delta):
 	if is_active:
 		update()
 
 func _draw():
-	draw_dashed_line(body.global_position, boomerang.body.global_position, line_color, line_width, line_dash)
+	draw_dashed_line(mouse_pos, boomerang.body.global_position, line_color, line_width, line_dash)
 
 func draw_dashed_line(from, to, color, width, dash_length = 5, cap_end = false, antialiased = false):
 	var length = (to - from).length()
@@ -40,3 +40,6 @@ func draw_dashed_line(from, to, color, width, dash_length = 5, cap_end = false, 
 		
 		if cap_end:
 			draw_line(segment_start, to, color, width, antialiased)
+
+func _on_MouseController_mouse_global_position(global_pos):
+	mouse_pos = global_pos

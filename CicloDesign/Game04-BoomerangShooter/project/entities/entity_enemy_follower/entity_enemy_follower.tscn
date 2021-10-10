@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://entities/entity_enemy_follower/entity_enemy_follower.gd" type="Script" id=1]
 [ext_resource path="res://libs/gt_entity_mover_2d/gt_steering_entity_mover_2d/gt_steering_entity_mover_2d.gd" type="Script" id=2]
@@ -12,6 +12,15 @@
 [ext_resource path="res://entities/entity_enemy_follower/components/states/entity_enemy_follower_hurt_state.gd" type="Script" id=10]
 [ext_resource path="res://entities/entity_enemy_follower/components/states/entity_enemy_follower_dead_state.gd" type="Script" id=11]
 [ext_resource path="res://libs/gt_health/gt_health.gd" type="Script" id=12]
+[ext_resource path="res://libs/gt_area_2d/gt_trigger_area_2d/gt_hitbox_2d/gt_hitbox_2d.gd" type="Script" id=13]
+[ext_resource path="res://assets/images/white-triangle.png" type="Texture" id=14]
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 1 ), 0.0, -0.736364, 0, 1, Vector2( 1, 0.263636 ), -0.736364, 0.0, 1, 0 ]
+
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0, 0.719595 )
+colors = PoolColorArray( 0.905882, 1, 0.933333, 1, 0.905882, 1, 0.933333, 0 )
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 12.0
@@ -19,12 +28,70 @@ radius = 12.0
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 18, 14 )
 
+[sub_resource type="Animation" id=7]
+resource_name = "dead"
+tracks/0/type = "value"
+tracks/0/path = NodePath("graphics/scale_pivot:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "default"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("CollisionShape:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("graphics/scale_pivot:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "hurt"
+tracks/0/type = "value"
+tracks/0/path = NodePath("CollisionShape:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
 [node name="EnemyFollower" type="Node2D"]
 script = ExtResource( 1 )
 
 [node name="Body" type="KinematicBody2D" parent="."]
-collision_layer = 0
-collision_mask = 0
+collision_layer = 4
+collision_mask = 2
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_lock_": true
@@ -42,14 +109,32 @@ __meta__ = {
 
 [node name="dead" type="CPUParticles2D" parent="Body/graphics/particles"]
 emitting = false
+amount = 20
 one_shot = true
+explosiveness = 0.5
+randomness = 0.5
+texture = ExtResource( 14 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 200.0
+angle = 180.0
+angle_random = 1.0
+scale_amount = 0.03
+scale_amount_random = 0.02
+scale_amount_curve = SubResource( 3 )
+color_ramp = SubResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="main" type="Polygon2D" parent="Body/graphics"]
+[node name="scale_pivot" type="Node2D" parent="Body/graphics"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="main" type="Polygon2D" parent="Body/graphics/scale_pivot"]
 rotation = 1.5708
-color = Color( 0.556863, 0.803922, 0.901961, 1 )
+color = Color( 0.905882, 1, 0.933333, 1 )
 polygon = PoolVector2Array( -14, 14, 0, -22, 14, 14 )
 __meta__ = {
 "_edit_lock_": true
@@ -58,11 +143,33 @@ __meta__ = {
 [node name="CollisionShape" type="CollisionShape2D" parent="Body"]
 visible = false
 shape = SubResource( 1 )
+disabled = true
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="Triggers" type="Node2D" parent="Body"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="DamageHitbox" type="Area2D" parent="Body/Triggers" groups=[
+"entity_enemy_damage_hitbox",
+]]
+collision_layer = 16
+collision_mask = 16
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_lock_": true
+}
+body_path = NodePath("../..")
+collidable_groups = [ "entity_player_damage_hurtbox" ]
+damage = 50
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Body/Triggers/DamageHitbox"]
+visible = false
+position = Vector2( 4, 0 )
+shape = SubResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -90,7 +197,9 @@ __meta__ = {
 [node name="EntityMover" type="Node" parent="Body"]
 script = ExtResource( 2 )
 body_path = NodePath("..")
+use_target_node = true
 max_speed = 96
+max_force = 16
 
 [node name="Seek" type="Node" parent="Body/EntityMover"]
 script = ExtResource( 3 )
@@ -99,8 +208,14 @@ actor_path = NodePath("..")
 [node name="KnockbackMover" type="Node" parent="Body"]
 script = ExtResource( 6 )
 body_path = NodePath("..")
-max_move_speed = 240
-move_acceleration_time = 0.05
+max_move_speed = 500
+move_deceleration_time = 0.9
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Body"]
+autoplay = "default"
+anims/dead = SubResource( 7 )
+anims/default = SubResource( 5 )
+anims/hurt = SubResource( 6 )
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource( 12 )
@@ -108,7 +223,6 @@ script = ExtResource( 12 )
 [node name="Timers" type="Node" parent="."]
 
 [node name="KnockbackTimer" type="Timer" parent="Timers"]
-wait_time = 0.2
 one_shot = true
 
 [node name="QueueFreeTimer" type="Timer" parent="Timers"]
@@ -144,6 +258,7 @@ fsm_path = NodePath("..")
 
 [connection signal="grouped_area_entered" from="Body/Triggers/DamageHurtbox" to="StateMachine/Move" method="_on_DamageHurtbox_grouped_area_entered"]
 [connection signal="took_damage" from="Body/Triggers/DamageHurtbox" to="Health" method="lose_health"]
+[connection signal="collided" from="Body/EntityMover" to="StateMachine/Hurt" method="_on_EntityMover_collided"]
 [connection signal="timeout" from="Timers/KnockbackTimer" to="StateMachine/Hurt" method="_on_KnockbackTimer_timeout"]
 [connection signal="timeout" from="Timers/QueueFreeTimer" to="." method="queue_free"]
 [connection signal="took_damage" from="StateMachine/Move" to="StateMachine/Move/ToHurt" method="do_transition"]
@@ -151,13 +266,15 @@ fsm_path = NodePath("..")
 [connection signal="died" from="StateMachine/Hurt" to="StateMachine/Hurt/ToDead" method="do_transition"]
 [connection signal="started_moving" from="StateMachine/Hurt" to="Body/KnockbackMover" method="set_move_direction"]
 [connection signal="state_entered" from="StateMachine/Hurt" to="Timers/KnockbackTimer" method="start"]
-[connection signal="state_entered" from="StateMachine/Hurt" to="Body/EntityMover" method="disable"]
 [connection signal="state_entered" from="StateMachine/Hurt" to="Body/KnockbackMover" method="enable"]
+[connection signal="state_entered" from="StateMachine/Hurt" to="Body/EntityMover" method="disable"]
+[connection signal="state_entered" from="StateMachine/Hurt" to="Body/AnimationPlayer" method="play" binds= [ "hurt" ]]
 [connection signal="state_exited" from="StateMachine/Hurt" to="Timers/KnockbackTimer" method="stop"]
-[connection signal="state_exited" from="StateMachine/Hurt" to="Body/EntityMover" method="enable"]
 [connection signal="state_exited" from="StateMachine/Hurt" to="Body/KnockbackMover" method="disable"]
-[connection signal="state_entered" from="StateMachine/Dead" to="Timers/QueueFreeTimer" method="start"]
+[connection signal="state_exited" from="StateMachine/Hurt" to="Body/EntityMover" method="enable"]
 [connection signal="state_entered" from="StateMachine/Dead" to="." method="_on_Dead_state_entered"]
-[connection signal="state_entered" from="StateMachine/Dead" to="Body/graphics/particles/dead" method="set_emitting" binds= [ true ]]
+[connection signal="state_entered" from="StateMachine/Dead" to="Timers/QueueFreeTimer" method="start"]
 [connection signal="state_entered" from="StateMachine/Dead" to="Body/EntityMover" method="disable"]
+[connection signal="state_entered" from="StateMachine/Dead" to="Body/graphics/particles/dead" method="set_emitting" binds= [ true ]]
+[connection signal="state_entered" from="StateMachine/Dead" to="Body/AnimationPlayer" method="play" binds= [ "dead" ]]
 [connection signal="state_exited" from="StateMachine/Dead" to="Body/KnockbackMover" method="disable"]

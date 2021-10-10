@@ -14,14 +14,15 @@ func enter(_info = null):
 	actor.body.scale = actor.min_boomerang_size*Vector2.ONE
 	# Teleport to player's position
 	actor.body.global_position = actor.player.body.global_position
-	# Set move_direction
-	actor.go_entity_mover.set_move_direction(actor.move_direction, actor.go_entity_mover.move_acceleration_time)
 
 func physics_process(delta):
 	if not is_returning and tried_releasing:
 		turn_around()
+	# Update target position
+	var new_direction = actor.body.global_position.direction_to(actor.target_position)
+	actor.go_entity_mover.set_move_direction(new_direction)
 	# Animate body size
-	var body_delta = (actor.max_boomerang_size-actor.min_boomerang_size)/(2*actor.go_entity_mover.move_acceleration_time)
+	var body_delta = (actor.max_boomerang_size-actor.min_boomerang_size)/(2*actor.go_flight_time)
 	actor.body.scale += body_delta*Vector2.ONE*delta
 	actor.body.scale.x = clamp(actor.body.scale.x, actor.min_boomerang_size, actor.max_boomerang_size)
 	actor.body.scale.y = clamp(actor.body.scale.y, actor.min_boomerang_size, actor.max_boomerang_size)
@@ -48,7 +49,8 @@ func turn_around():
 		# Calculate new boomerang direction
 		actor.move_direction = calculate_return_direction()
 		# Set move_direction
-		actor.return_entity_mover.set_move_direction(actor.move_direction)
+		var direction_to_mouse = actor.body.global_position.direction_to(actor.target_position)
+		actor.return_entity_mover.set_move_direction(direction_to_mouse)
 		emit_signal("started_returning")
 
 func _on_CatchTrigger_effect():
