@@ -15,20 +15,20 @@
 [ext_resource path="res://libs/gt_area_2d/gt_trigger_area_2d/gt_hitbox_2d/gt_hitbox_2d.gd" type="Script" id=13]
 [ext_resource path="res://assets/images/white-triangle.png" type="Texture" id=14]
 
-[sub_resource type="Curve" id=3]
+[sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 1 ), 0.0, -0.736364, 0, 1, Vector2( 1, 0.263636 ), -0.736364, 0.0, 1, 0 ]
 
-[sub_resource type="Gradient" id=4]
+[sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0, 0.719595 )
 colors = PoolColorArray( 0.905882, 1, 0.933333, 1, 0.905882, 1, 0.933333, 0 )
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CircleShape2D" id=3]
 radius = 12.0
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 18, 14 )
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=5]
 resource_name = "dead"
 tracks/0/type = "value"
 tracks/0/path = NodePath("graphics/scale_pivot:scale")
@@ -43,8 +43,7 @@ tracks/0/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "default"
+[sub_resource type="Animation" id=6]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("CollisionShape:disabled")
@@ -71,8 +70,7 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "hurt"
+[sub_resource type="Animation" id=7]
 tracks/0/type = "value"
 tracks/0/path = NodePath("CollisionShape:disabled")
 tracks/0/interp = 1
@@ -121,8 +119,8 @@ angle = 180.0
 angle_random = 1.0
 scale_amount = 0.03
 scale_amount_random = 0.02
-scale_amount_curve = SubResource( 3 )
-color_ramp = SubResource( 4 )
+scale_amount_curve = SubResource( 1 )
+color_ramp = SubResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -142,7 +140,7 @@ __meta__ = {
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Body"]
 visible = false
-shape = SubResource( 1 )
+shape = SubResource( 3 )
 disabled = true
 __meta__ = {
 "_edit_lock_": true
@@ -169,7 +167,7 @@ damage = 50
 [node name="CollisionShape" type="CollisionShape2D" parent="Body/Triggers/DamageHitbox"]
 visible = false
 position = Vector2( 4, 0 )
-shape = SubResource( 2 )
+shape = SubResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -189,7 +187,7 @@ collidable_groups = [ "entity_player_damage_hitbox" ]
 [node name="CollisionShape" type="CollisionShape2D" parent="Body/Triggers/DamageHurtbox"]
 visible = false
 position = Vector2( 4, 0 )
-shape = SubResource( 2 )
+shape = SubResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -213,9 +211,9 @@ move_deceleration_time = 0.9
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Body"]
 autoplay = "default"
-anims/dead = SubResource( 7 )
-anims/default = SubResource( 5 )
-anims/hurt = SubResource( 6 )
+anims/dead = SubResource( 5 )
+anims/default = SubResource( 6 )
+anims/hurt = SubResource( 7 )
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource( 12 )
@@ -265,16 +263,16 @@ fsm_path = NodePath("..")
 [connection signal="continue_moving" from="StateMachine/Hurt" to="StateMachine/Hurt/ToMove" method="do_transition"]
 [connection signal="died" from="StateMachine/Hurt" to="StateMachine/Hurt/ToDead" method="do_transition"]
 [connection signal="started_moving" from="StateMachine/Hurt" to="Body/KnockbackMover" method="set_move_direction"]
+[connection signal="state_entered" from="StateMachine/Hurt" to="Body/AnimationPlayer" method="play" binds= [ "hurt" ]]
 [connection signal="state_entered" from="StateMachine/Hurt" to="Timers/KnockbackTimer" method="start"]
 [connection signal="state_entered" from="StateMachine/Hurt" to="Body/KnockbackMover" method="enable"]
 [connection signal="state_entered" from="StateMachine/Hurt" to="Body/EntityMover" method="disable"]
-[connection signal="state_entered" from="StateMachine/Hurt" to="Body/AnimationPlayer" method="play" binds= [ "hurt" ]]
 [connection signal="state_exited" from="StateMachine/Hurt" to="Timers/KnockbackTimer" method="stop"]
 [connection signal="state_exited" from="StateMachine/Hurt" to="Body/KnockbackMover" method="disable"]
 [connection signal="state_exited" from="StateMachine/Hurt" to="Body/EntityMover" method="enable"]
 [connection signal="state_entered" from="StateMachine/Dead" to="." method="_on_Dead_state_entered"]
-[connection signal="state_entered" from="StateMachine/Dead" to="Timers/QueueFreeTimer" method="start"]
-[connection signal="state_entered" from="StateMachine/Dead" to="Body/EntityMover" method="disable"]
 [connection signal="state_entered" from="StateMachine/Dead" to="Body/graphics/particles/dead" method="set_emitting" binds= [ true ]]
 [connection signal="state_entered" from="StateMachine/Dead" to="Body/AnimationPlayer" method="play" binds= [ "dead" ]]
+[connection signal="state_entered" from="StateMachine/Dead" to="Timers/QueueFreeTimer" method="start"]
+[connection signal="state_entered" from="StateMachine/Dead" to="Body/EntityMover" method="disable"]
 [connection signal="state_exited" from="StateMachine/Dead" to="Body/KnockbackMover" method="disable"]

@@ -1,20 +1,19 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=31 format=2]
 
-[ext_resource path="res://entities/entity_player/components/entity_player_boomerang/entity_player_boomerang.gd" type="Script" id=1]
-[ext_resource path="res://libs/gt_area_2d/gt_trigger_area_2d/gt_hitbox_2d/gt_hitbox_2d.gd" type="Script" id=2]
-[ext_resource path="res://libs/gt_state_machine/gt_state_machine.gd" type="Script" id=3]
-[ext_resource path="res://entities/entity_player/components/entity_player_boomerang/states/entity_player_boomerang_cooldown_state.gd" type="Script" id=4]
-[ext_resource path="res://libs/gt_state_machine/__gt_state_transition.gd" type="Script" id=5]
-[ext_resource path="res://entities/entity_player/components/entity_player_boomerang/states/entity_player_boomerang_ready_state.gd" type="Script" id=6]
-[ext_resource path="res://entities/entity_player/components/entity_player_boomerang/states/entity_player_boomerang_flying_state.gd" type="Script" id=7]
-[ext_resource path="res://libs/gt_area_2d/gt_trigger_area_2d/gt_trigger_area_2d.gd" type="Script" id=8]
-[ext_resource path="res://libs/gt_entity_mover_2d/gt_topdown_entity_mover_2d/gt_topdown_entity_mover_2d.gd" type="Script" id=9]
-[ext_resource path="res://addons/Trail/trail_2d.gd" type="Script" id=10]
-[ext_resource path="res://entities/entity_player/components/entity_player_boomerang/components/entity_player_boomerang_body.gd" type="Script" id=11]
-[ext_resource path="res://libs/gt_timer/gt_timer.gd" type="Script" id=12]
-[ext_resource path="res://entities/entity_player/components/entity_player_boomerang/components/entity_player_boomerang_offscreen_indicator.gd" type="Script" id=13]
-[ext_resource path="res://entities/entity_player/components/entity_player_boomerang/components/entity_player_boomerang_directional_indicator.gd" type="Script" id=14]
-[ext_resource path="res://entities/entity_player/components/entity_player_boomerang/components/entity_player_boomerang_triangle_indicator.gd" type="Script" id=15]
+[ext_resource path="res://entities/entity_player/scripts/entity_player_old_boomerang/states/entity_player_boomerang_flying_state.gd" type="Script" id=1]
+[ext_resource path="res://entities/entity_player/scripts/entity_player_old_boomerang/scripts/entity_player_boomerang_body.gd" type="Script" id=2]
+[ext_resource path="res://entities/entity_player/scripts/entity_player_old_boomerang/scripts/entity_player_boomerang_directional_indicator.gd" type="Script" id=3]
+[ext_resource path="res://entities/entity_player/scripts/entity_player_old_boomerang/scripts/entity_player_boomerang_triangle_indicator.gd" type="Script" id=4]
+[ext_resource path="res://entities/entity_player/scripts/entity_player_old_boomerang/states/entity_player_boomerang_ready_state.gd" type="Script" id=5]
+[ext_resource path="res://libs/gt_area_2d/gt_trigger_area_2d/gt_hitbox_2d/gt_hitbox_2d.gd" type="Script" id=6]
+[ext_resource path="res://libs/gt_timer/gt_timer.gd" type="Script" id=7]
+[ext_resource path="res://entities/entity_player/scripts/entity_player_old_boomerang/scripts/entity_player_boomerang_offscreen_indicator.gd" type="Script" id=8]
+[ext_resource path="res://entities/entity_player/scripts/entity_player_old_boomerang/states/entity_player_boomerang_cooldown_state.gd" type="Script" id=9]
+[ext_resource path="res://libs/gt_state_machine/gt_state_machine.gd" type="Script" id=10]
+[ext_resource path="res://libs/gt_entity_mover_2d/gt_topdown_entity_mover_2d/gt_topdown_entity_mover_2d.gd" type="Script" id=11]
+[ext_resource path="res://addons/Trail/trail_2d.gd" type="Script" id=12]
+[ext_resource path="res://entities/entity_player/scripts/entity_player_old_boomerang/entity_player_old_boomerang.gd" type="Script" id=13]
+[ext_resource path="res://libs/gt_state_machine/__gt_state_transition.gd" type="Script" id=14]
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 0 ), 0.0, 1.0, 0, 1, Vector2( 1, 1 ), 1.0, 0.0, 1, 0 ]
@@ -28,10 +27,7 @@ radius = 14.0
 [sub_resource type="CircleShape2D" id=4]
 radius = 17.7778
 
-[sub_resource type="CircleShape2D" id=5]
-radius = 12.0
-
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 resource_name = "appear"
 length = 0.2
 tracks/0/type = "value"
@@ -59,7 +55,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=6]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:visible")
@@ -86,7 +82,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=7]
 resource_name = "disappear"
 length = 0.2
 tracks/0/type = "value"
@@ -114,7 +110,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=8]
 resource_name = "appear"
 length = 0.1
 tracks/0/type = "value"
@@ -130,7 +126,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=9]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
@@ -145,7 +141,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=10]
 resource_name = "disappear"
 length = 0.1
 tracks/0/type = "value"
@@ -161,7 +157,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=11]
 resource_name = "appear"
 length = 0.8
 tracks/0/type = "value"
@@ -177,7 +173,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=12]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
@@ -192,7 +188,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=13]
 resource_name = "disappear"
 length = 0.1
 tracks/0/type = "value"
@@ -208,7 +204,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=14]
 resource_name = "appear"
 length = 0.05
 step = 0.05
@@ -226,7 +222,6 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=15]
-resource_name = "default"
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
@@ -241,7 +236,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=16]
 resource_name = "disappear"
 length = 0.05
 step = 0.05
@@ -258,8 +253,8 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0.784314 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[node name="Boomerang" type="Node2D"]
-script = ExtResource( 1 )
+[node name="OldBoomerang" type="Node2D"]
+script = ExtResource( 13 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -276,7 +271,7 @@ visible = false
 scale = Vector2( 1.125, 1.125 )
 collision_layer = 4
 collision_mask = 2
-script = ExtResource( 11 )
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -292,7 +287,7 @@ width = 12.0
 width_curve = SubResource( 1 )
 default_color = Color( 0.4, 0.501961, 1, 1 )
 gradient = SubResource( 2 )
-script = ExtResource( 10 )
+script = ExtResource( 12 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -338,7 +333,7 @@ __meta__ = {
 ]]
 collision_layer = 16
 collision_mask = 16
-script = ExtResource( 2 )
+script = ExtResource( 6 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -353,32 +348,13 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="CatchTrigger" type="Area2D" parent="Body/Triggers" groups=[
-"entity_player_boomerang_catch_trigger",
-]]
-collision_layer = 8
-collision_mask = 8
-script = ExtResource( 8 )
-__meta__ = {
-"_edit_lock_": true
-}
-body_path = NodePath(".")
-collidable_groups = [ "entity_player_catch_trigger" ]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Triggers/CatchTrigger"]
-visible = false
-shape = SubResource( 5 )
-__meta__ = {
-"_edit_lock_": true
-}
-
 [node name="GoEntityMover" type="Node" parent="Body"]
-script = ExtResource( 9 )
+script = ExtResource( 11 )
 body_path = NodePath("..")
 max_move_speed = 480
 
 [node name="ReturnEntityMover" type="Node" parent="Body"]
-script = ExtResource( 9 )
+script = ExtResource( 11 )
 body_path = NodePath("..")
 is_enabled = false
 max_move_speed = 640
@@ -387,13 +363,13 @@ move_deceleration_time = 1.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Body"]
 autoplay = "default"
-anims/appear = SubResource( 6 )
-anims/default = SubResource( 7 )
-anims/disappear = SubResource( 8 )
+anims/appear = SubResource( 5 )
+anims/default = SubResource( 6 )
+anims/disappear = SubResource( 7 )
 
 [node name="OffscreenIndicator" type="Node2D" parent="."]
 modulate = Color( 1, 1, 1, 0 )
-script = ExtResource( 13 )
+script = ExtResource( 8 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -410,13 +386,13 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="OffscreenIndicator"]
 autoplay = "default"
-anims/appear = SubResource( 9 )
-anims/default = SubResource( 10 )
-anims/disappear = SubResource( 11 )
+anims/appear = SubResource( 8 )
+anims/default = SubResource( 9 )
+anims/disappear = SubResource( 10 )
 
 [node name="DirectionalIndicator" type="Node2D" parent="."]
 modulate = Color( 1, 1, 1, 0 )
-script = ExtResource( 14 )
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -434,13 +410,13 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="DirectionalIndicator"]
 autoplay = "default"
-anims/appear = SubResource( 12 )
-anims/default = SubResource( 13 )
-anims/disappear = SubResource( 14 )
+anims/appear = SubResource( 11 )
+anims/default = SubResource( 12 )
+anims/disappear = SubResource( 13 )
 
 [node name="TriangleIndicator" type="Node2D" parent="."]
 modulate = Color( 1, 1, 1, 0.509804 )
-script = ExtResource( 15 )
+script = ExtResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -457,9 +433,9 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="TriangleIndicator"]
 autoplay = "default"
-anims/appear = SubResource( 16 )
+anims/appear = SubResource( 14 )
 anims/default = SubResource( 15 )
-anims/disappear = SubResource( 17 )
+anims/disappear = SubResource( 16 )
 
 [node name="Timers" type="Node" parent="."]
 
@@ -482,80 +458,77 @@ one_shot = true
 [node name="CooldownTimer" type="Timer" parent="Timers"]
 wait_time = 2.0
 one_shot = true
-script = ExtResource( 12 )
+script = ExtResource( 7 )
 
 [node name="StateMachine" type="Node" parent="."]
-script = ExtResource( 3 )
+script = ExtResource( 10 )
 actor_path = NodePath("..")
 
 [node name="Ready" type="Node" parent="StateMachine"]
-script = ExtResource( 6 )
+script = ExtResource( 5 )
 fsm_path = NodePath("..")
 
 [node name="ToFlying" type="Node" parent="StateMachine/Ready"]
-script = ExtResource( 5 )
+script = ExtResource( 14 )
 end_state_path = NodePath("../../Flying")
 
 [node name="Flying" type="Node" parent="StateMachine"]
-script = ExtResource( 7 )
+script = ExtResource( 1 )
 fsm_path = NodePath("..")
 
 [node name="ToReady" type="Node" parent="StateMachine/Flying"]
-script = ExtResource( 5 )
+script = ExtResource( 14 )
 end_state_path = NodePath("../../Ready")
 
 [node name="ToCooldown" type="Node" parent="StateMachine/Flying"]
-script = ExtResource( 5 )
+script = ExtResource( 14 )
 end_state_path = NodePath("../../Cooldown")
 
 [node name="Cooldown" type="Node" parent="StateMachine"]
-script = ExtResource( 4 )
+script = ExtResource( 9 )
 fsm_path = NodePath("..")
 
 [node name="ToReady" type="Node" parent="StateMachine/Cooldown"]
-script = ExtResource( 5 )
+script = ExtResource( 14 )
 end_state_path = NodePath("../../Ready")
 
 [connection signal="player_fired" from="." to="StateMachine/Ready" method="_on_Boomerang_player_fired"]
 [connection signal="player_released" from="." to="StateMachine/Flying" method="turn_around"]
 [connection signal="screen_exited" from="Body/VisibilityNotifier" to="StateMachine/Flying" method="_on_VisibilityNotifier_screen_exited"]
-[connection signal="effect" from="Body/Triggers/CatchTrigger" to="StateMachine/Flying" method="_on_CatchTrigger_effect"]
-[connection signal="timeout" from="Timers/BeforeReturningTimer" to="." method="_on_BeforeReturningTimer_timeout"]
 [connection signal="timeout" from="Timers/BeforeReturningTimer" to="TriangleIndicator/AnimationPlayer" method="play" binds= [ "appear" ]]
+[connection signal="timeout" from="Timers/BeforeReturningTimer" to="." method="_on_BeforeReturningTimer_timeout"]
 [connection signal="timeout" from="Timers/TurnaroundTimer" to="StateMachine/Flying" method="turn_around"]
 [connection signal="timeout" from="Timers/CooldownTimer" to="StateMachine/Cooldown" method="_on_CooldownTimer_timeout"]
-[connection signal="started_flying" from="StateMachine/Ready" to="Timers/TurnaroundTimer" method="start"]
 [connection signal="started_flying" from="StateMachine/Ready" to="StateMachine/Ready/ToFlying" method="do_transition"]
+[connection signal="started_flying" from="StateMachine/Ready" to="Timers/TurnaroundTimer" method="start"]
 [connection signal="state_entered" from="StateMachine/Ready" to="." method="_on_Ready_state_entered"]
-[connection signal="state_entered" from="StateMachine/Ready" to="Body/Triggers/CatchTrigger" method="disable_all_shapes"]
 [connection signal="catched_by_player" from="StateMachine/Flying" to="StateMachine/Flying/ToReady" method="do_transition"]
-[connection signal="exited_screen" from="StateMachine/Flying" to="." method="_on_Flying_exited_screen"]
 [connection signal="exited_screen" from="StateMachine/Flying" to="StateMachine/Flying/ToCooldown" method="do_transition"]
-[connection signal="started_returning" from="StateMachine/Flying" to="Timers/FlightTimer" method="stop"]
-[connection signal="started_returning" from="StateMachine/Flying" to="." method="_on_Flying_started_returning"]
-[connection signal="started_returning" from="StateMachine/Flying" to="DirectionalIndicator" method="appear"]
+[connection signal="exited_screen" from="StateMachine/Flying" to="." method="_on_Flying_exited_screen"]
 [connection signal="started_returning" from="StateMachine/Flying" to="Body/ReturnEntityMover" method="enable"]
 [connection signal="started_returning" from="StateMachine/Flying" to="Body/GoEntityMover" method="disable"]
-[connection signal="started_returning" from="StateMachine/Flying" to="Body/Triggers/CatchTrigger" method="enable_all_shapes"]
-[connection signal="started_returning" from="StateMachine/Flying" to="DirectionalIndicator/AnimationPlayer" method="play" binds= [ "appear" ]]
 [connection signal="started_returning" from="StateMachine/Flying" to="TriangleIndicator/AnimationPlayer" method="play" binds= [ "disappear" ]]
-[connection signal="state_entered" from="StateMachine/Flying" to="Body" method="appear"]
-[connection signal="state_entered" from="StateMachine/Flying" to="Body/Triggers/DamageHitbox" method="enable_all_shapes"]
-[connection signal="state_entered" from="StateMachine/Flying" to="Timers/MinimumFlightTimer" method="start"]
-[connection signal="state_entered" from="StateMachine/Flying" to="Timers/FlightTimer" method="start"]
-[connection signal="state_entered" from="StateMachine/Flying" to="Timers/BeforeReturningTimer" method="start"]
-[connection signal="state_entered" from="StateMachine/Flying" to="." method="_on_Flying_state_entered"]
-[connection signal="state_entered" from="StateMachine/Flying" to="OffscreenIndicator/AnimationPlayer" method="play" binds= [ "appear" ]]
+[connection signal="started_returning" from="StateMachine/Flying" to="DirectionalIndicator/AnimationPlayer" method="play" binds= [ "appear" ]]
+[connection signal="started_returning" from="StateMachine/Flying" to="Timers/FlightTimer" method="stop"]
+[connection signal="started_returning" from="StateMachine/Flying" to="DirectionalIndicator" method="appear"]
+[connection signal="started_returning" from="StateMachine/Flying" to="." method="_on_Flying_started_returning"]
 [connection signal="state_entered" from="StateMachine/Flying" to="Body/ReturnEntityMover" method="disable"]
 [connection signal="state_entered" from="StateMachine/Flying" to="Body/GoEntityMover" method="enable"]
-[connection signal="state_exited" from="StateMachine/Flying" to="Body" method="disappear"]
-[connection signal="state_exited" from="StateMachine/Flying" to="Body/Triggers/DamageHitbox" method="disable_all_shapes"]
-[connection signal="state_exited" from="StateMachine/Flying" to="Timers/BeforeReturningTimer" method="stop"]
-[connection signal="state_exited" from="StateMachine/Flying" to="OffscreenIndicator/AnimationPlayer" method="play" binds= [ "disappear" ]]
+[connection signal="state_entered" from="StateMachine/Flying" to="OffscreenIndicator/AnimationPlayer" method="play" binds= [ "appear" ]]
+[connection signal="state_entered" from="StateMachine/Flying" to="Timers/MinimumFlightTimer" method="start"]
+[connection signal="state_entered" from="StateMachine/Flying" to="Timers/BeforeReturningTimer" method="start"]
+[connection signal="state_entered" from="StateMachine/Flying" to="Timers/FlightTimer" method="start"]
+[connection signal="state_entered" from="StateMachine/Flying" to="Body" method="appear"]
+[connection signal="state_entered" from="StateMachine/Flying" to="Body/Triggers/DamageHitbox" method="enable_all_shapes"]
+[connection signal="state_entered" from="StateMachine/Flying" to="." method="_on_Flying_state_entered"]
 [connection signal="state_exited" from="StateMachine/Flying" to="Body/ReturnEntityMover" method="set_velocity" binds= [ Vector2( 0, 0 ) ]]
 [connection signal="state_exited" from="StateMachine/Flying" to="Body/ReturnEntityMover" method="disable"]
 [connection signal="state_exited" from="StateMachine/Flying" to="Body/GoEntityMover" method="enable"]
 [connection signal="state_exited" from="StateMachine/Flying" to="Body/GoEntityMover" method="set_velocity" binds= [ Vector2( 0, 0 ) ]]
 [connection signal="state_exited" from="StateMachine/Flying" to="DirectionalIndicator/AnimationPlayer" method="play" binds= [ "disappear" ]]
+[connection signal="state_exited" from="StateMachine/Flying" to="OffscreenIndicator/AnimationPlayer" method="play" binds= [ "disappear" ]]
+[connection signal="state_exited" from="StateMachine/Flying" to="Timers/BeforeReturningTimer" method="stop"]
+[connection signal="state_exited" from="StateMachine/Flying" to="Body" method="disappear"]
+[connection signal="state_exited" from="StateMachine/Flying" to="Body/Triggers/DamageHitbox" method="disable_all_shapes"]
 [connection signal="cooldown_ended" from="StateMachine/Cooldown" to="StateMachine/Cooldown/ToReady" method="do_transition"]
 [connection signal="state_entered" from="StateMachine/Cooldown" to="Timers/CooldownTimer" method="start"]

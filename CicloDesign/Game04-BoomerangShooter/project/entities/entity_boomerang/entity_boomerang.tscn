@@ -1,0 +1,139 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://entities/entity_boomerang/entity_boomerang.gd" type="Script" id=1]
+[ext_resource path="res://libs/gt_entity_mover_2d/gt_topdown_entity_mover_2d/gt_topdown_entity_mover_2d.gd" type="Script" id=2]
+[ext_resource path="res://addons/Trail/trail_2d.gd" type="Script" id=3]
+[ext_resource path="res://libs/gt_area_2d/gt_trigger_area_2d/gt_hitbox_2d/gt_hitbox_2d.gd" type="Script" id=4]
+[ext_resource path="res://libs/gt_entity_mover_2d/gt_steering_entity_mover_2d/gt_steering_entity_mover_2d.gd" type="Script" id=5]
+[ext_resource path="res://libs/gt_area_2d/gt_trigger_area_2d/gt_trigger_area_2d.gd" type="Script" id=6]
+[ext_resource path="res://libs/gt_entity_mover_2d/gt_steering_entity_mover_2d/behaviors/gt_steering_behavior_absolute_seek_2d.gd" type="Script" id=7]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 0 ), 0.0, 1.0, 0, 1, Vector2( 1, 1 ), 1.0, 0.0, 1, 0 ]
+
+[sub_resource type="Gradient" id=3]
+colors = PoolColorArray( 0.929412, 0.627451, 0.192157, 0, 0.929412, 0.627451, 0.192157, 1 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 27.0
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 27.0
+
+[node name="Boomerang" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Body" type="KinematicBody2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="graphics" type="Node2D" parent="Body"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="move_trail" type="Line2D" parent="Body/graphics"]
+width = 16.0
+width_curve = SubResource( 1 )
+gradient = SubResource( 3 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+lifetime = 0.09
+distance = 2.0
+segments = 40
+
+[node name="rotation_pivot" type="Node2D" parent="Body/graphics"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="star" type="Polygon2D" parent="Body/graphics/rotation_pivot"]
+scale = Vector2( 1.5, 1.5 )
+color = Color( 0.929412, 0.627451, 0.192157, 1 )
+polygon = PoolVector2Array( -16, -9, 0, -5, 16, -9, 4, 3, 0, 17, -4, 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Triggers" type="Node2D" parent="Body"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="DamageHitbox" type="Area2D" parent="Body/Triggers" groups=[
+"entity_player_damage_hitbox",
+]]
+collision_layer = 16
+collision_mask = 16
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+body_path = NodePath("../..")
+collidable_groups = [ "entity_enemy_damage_hurtbox" ]
+damage = 50
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Body/Triggers/DamageHitbox"]
+visible = false
+shape = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CatchTrigger" type="Area2D" parent="Body/Triggers" groups=[
+"entity_boomerang_catch_trigger",
+]]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
+body_path = NodePath("../..")
+collidable_groups = [ "entity_player_catch_trigger" ]
+disable_on_ready = true
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Body/Triggers/CatchTrigger"]
+visible = false
+shape = SubResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Body"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="EntityMover" type="Node" parent="Body"]
+script = ExtResource( 2 )
+body_path = NodePath("..")
+max_move_speed = 384
+
+[node name="SteeringEntityMover" type="Node" parent="Body"]
+script = ExtResource( 5 )
+body_path = NodePath("..")
+is_enabled = false
+use_target_node = true
+max_speed = 384
+max_force = 384
+
+[node name="AbsoluteSeek" type="Node" parent="Body/SteeringEntityMover"]
+script = ExtResource( 7 )
+actor_path = NodePath("..")
+
+[node name="TurnaroundTimer" type="Timer" parent="."]
+wait_time = 0.8
+one_shot = true
+
+[connection signal="ready" from="." to="TurnaroundTimer" method="start"]
+[connection signal="started_moving" from="." to="Body/EntityMover" method="set_move_direction"]
+[connection signal="effect" from="Body/Triggers/CatchTrigger" to="." method="_on_CatchTrigger_effect"]
+[connection signal="timeout" from="TurnaroundTimer" to="Body/EntityMover" method="disable"]
+[connection signal="timeout" from="TurnaroundTimer" to="Body/SteeringEntityMover" method="enable"]
+[connection signal="timeout" from="TurnaroundTimer" to="Body/Triggers/CatchTrigger" method="enable_all_shapes"]

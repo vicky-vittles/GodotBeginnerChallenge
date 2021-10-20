@@ -1,120 +1,47 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://entities/__entity_topdown_player/__entity_topdown_player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/entity_player/entity_player.gd" type="Script" id=2]
 [ext_resource path="res://addons/regular_polygon2d_node/RegularPolygon2D.gd" type="Script" id=3]
 [ext_resource path="res://addons/Trail/trail_2d.gd" type="Script" id=4]
 [ext_resource path="res://components/mouse_controller/mouse_controller.tscn" type="PackedScene" id=5]
-[ext_resource path="res://entities/entity_player/components/entity_player_body.gd" type="Script" id=6]
-[ext_resource path="res://entities/entity_player/components/entity_player_entity_mover.gd" type="Script" id=7]
-[ext_resource path="res://entities/entity_player/components/entity_player_boomerang/entity_player_boomerang.tscn" type="PackedScene" id=8]
-[ext_resource path="res://entities/entity_player/states/entity_player_move_state.gd" type="Script" id=9]
-[ext_resource path="res://entities/entity_player/states/entity_player_idle_state.gd" type="Script" id=10]
-[ext_resource path="res://libs/gt_area_2d/gt_area_2d.gd" type="Script" id=11]
-[ext_resource path="res://entities/entity_player/components/entity_player_dashed_line_indicator.gd" type="Script" id=12]
+[ext_resource path="res://components/entity_spawner/entity_spawner.tscn" type="PackedScene" id=6]
+[ext_resource path="res://entities/entity_player/scripts/entity_player_entity_mover.gd" type="Script" id=7]
+[ext_resource path="res://entities/entity_boomerang/entity_boomerang.tscn" type="PackedScene" id=8]
+[ext_resource path="res://entities/entity_player/states/entity_player_base_state.gd" type="Script" id=9]
+[ext_resource path="res://entities/entity_player/scripts/entity_player_old_boomerang/entity_player_dashed_line_indicator.gd" type="Script" id=10]
+[ext_resource path="res://libs/gt_area_2d/gt_trigger_area_2d/gt_trigger_area_2d.gd" type="Script" id=11]
 [ext_resource path="res://libs/gt_health/gt_health.gd" type="Script" id=13]
 [ext_resource path="res://libs/gt_area_2d/gt_trigger_area_2d/gt_hurtbox_2d/gt_hurtbox_2d.gd" type="Script" id=14]
 
-[sub_resource type="Animation" id=1]
-resource_name = "appear"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.509804 ) ]
-}
-
-[sub_resource type="Animation" id=2]
-resource_name = "default"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ) ]
-}
-
-[sub_resource type="Animation" id=3]
-resource_name = "disappear"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0.509804 ), Color( 1, 1, 1, 0 ) ]
-}
-
-[sub_resource type="Curve" id=4]
+[sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 0 ), 0.0, 1.0, 0, 1, Vector2( 1, 1 ), 1.0, 0.0, 1, 0 ]
 
-[sub_resource type="Gradient" id=5]
+[sub_resource type="Gradient" id=2]
 colors = PoolColorArray( 0.929412, 0.627451, 0.192157, 0, 0.929412, 0.627451, 0.192157, 1 )
 
-[sub_resource type="CircleShape2D" id=6]
+[sub_resource type="CircleShape2D" id=3]
 radius = 12.0
 
-[sub_resource type="CircleShape2D" id=7]
-radius = 30.0
-
-[sub_resource type="CircleShape2D" id=8]
+[sub_resource type="CircleShape2D" id=4]
 radius = 12.0
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 16.0
 
 [node name="Player" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-catch_mode = 1
 
 [node name="Health" type="Node" parent="." index="1"]
 script = ExtResource( 13 )
 
 [node name="MouseController" parent="." index="2" instance=ExtResource( 5 )]
 
-[node name="DashedLineIndicator" type="Node2D" parent="." index="3"]
-modulate = Color( 1, 1, 1, 0.509804 )
-script = ExtResource( 12 )
-__meta__ = {
-"_edit_lock_": true
-}
-boomerang_path = NodePath("../Boomerang")
-line_color = Color( 0.929412, 0.627451, 0.192157, 1 )
-line_dash = 6.0
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="DashedLineIndicator" index="0"]
-autoplay = "default"
-anims/appear = SubResource( 1 )
-anims/default = SubResource( 2 )
-anims/disappear = SubResource( 3 )
-
-[node name="Boomerang" parent="." index="4" instance=ExtResource( 8 )]
-player_path = NodePath("..")
-
-[node name="Body" parent="." index="5"]
-script = ExtResource( 6 )
-actor_path = NodePath("..")
-
 [node name="move_trail" type="Line2D" parent="Body/graphics" index="0"]
 width = 28.0
-width_curve = SubResource( 4 )
+width_curve = SubResource( 1 )
 default_color = Color( 0, 0, 0, 1 )
-gradient = SubResource( 5 )
+gradient = SubResource( 2 )
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_lock_": true
@@ -147,33 +74,14 @@ polygon_color = Color( 0.929412, 0.627451, 0.192157, 1 )
 
 [node name="CollisionShape" parent="Body" index="1"]
 visible = false
-shape = SubResource( 6 )
+shape = SubResource( 3 )
 
 [node name="Triggers" type="Node2D" parent="Body" index="2"]
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="CatchTrigger" type="Area2D" parent="Body/Triggers" index="0" groups=[
-"entity_player_catch_trigger",
-]]
-collision_layer = 8
-collision_mask = 8
-script = ExtResource( 11 )
-__meta__ = {
-"_edit_lock_": true
-}
-body_path = NodePath(".")
-collidable_groups = [ "entity_player_boomerang_catch_trigger" ]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Triggers/CatchTrigger" index="0"]
-visible = false
-shape = SubResource( 7 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="DamageHurtbox" type="Area2D" parent="Body/Triggers" index="1" groups=[
+[node name="DamageHurtbox" type="Area2D" parent="Body/Triggers" index="0" groups=[
 "entity_player_damage_hurtbox",
 ]]
 collision_layer = 16
@@ -187,7 +95,26 @@ collidable_groups = [ "entity_enemy_damage_hitbox" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Triggers/DamageHurtbox" index="0"]
 visible = false
-shape = SubResource( 8 )
+shape = SubResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CatchTrigger" type="Area2D" parent="Body/Triggers" index="1" groups=[
+"entity_player_catch_trigger",
+]]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_lock_": true
+}
+body_path = NodePath("../..")
+collidable_groups = [ "entity_boomerang_catch_trigger" ]
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Body/Triggers/CatchTrigger" index="0"]
+visible = false
+shape = SubResource( 5 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -196,42 +123,39 @@ __meta__ = {
 script = ExtResource( 7 )
 bounce_factor = 0.0
 
-[node name="Timers" type="Node" parent="." index="6"]
-
-[node name="CatchTimer" type="Timer" parent="Timers" index="0"]
-wait_time = 0.1
-one_shot = true
-
 [node name="Idle" parent="StateMachine" index="0"]
-script = ExtResource( 10 )
+script = ExtResource( 9 )
+_movement_equals_zero = false
+_movement_signal_name = "started_moving"
 
 [node name="Move" parent="StateMachine" index="1"]
 script = ExtResource( 9 )
+_movement_signal_name = "stopped_moving"
 
-[connection signal="updated_move_direction" from="InputController" to="StateMachine/Idle" method="_on_InputController_updated_move_direction"]
+[node name="DashedLineIndicator" type="Node2D" parent="." index="5"]
+modulate = Color( 1, 1, 1, 0.156863 )
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_lock_": true
+}
+_entity_path = NodePath("..")
+line_color = Color( 0.929412, 0.627451, 0.192157, 1 )
+line_dash = 16.0
+
+[node name="BoomerangSpawner" parent="." index="6" instance=ExtResource( 6 )]
+actor_path = NodePath("..")
+entity_template = ExtResource( 8 )
+is_independent_entity = true
+
 [connection signal="updated_move_direction" from="InputController" to="StateMachine/Move" method="_on_InputController_updated_move_direction"]
-[connection signal="just_pressed" from="InputController/fire" to="StateMachine/Idle" method="_on_fire_just_pressed"]
+[connection signal="updated_move_direction" from="InputController" to="StateMachine/Idle" method="_on_InputController_updated_move_direction"]
 [connection signal="just_pressed" from="InputController/fire" to="StateMachine/Move" method="_on_fire_just_pressed"]
-[connection signal="just_released" from="InputController/fire" to="StateMachine/Idle" method="_on_fire_just_released"]
-[connection signal="just_released" from="InputController/fire" to="StateMachine/Move" method="_on_fire_just_released"]
-[connection signal="mouse_global_position" from="MouseController" to="DashedLineIndicator" method="_on_MouseController_mouse_global_position"]
-[connection signal="mouse_position" from="MouseController" to="Boomerang" method="set_mouse_position"]
-[connection signal="mouse_position" from="MouseController" to="Body" method="_on_MouseController_mouse_position"]
-[connection signal="boomerang_before_returning" from="Boomerang" to="DashedLineIndicator/AnimationPlayer" method="play" binds= [ "disappear" ]]
-[connection signal="boomerang_exited_screen" from="Boomerang" to="MouseController/CanvasLayer/mouse_pos/effects_center" method="bounce_scale" binds= [ Vector2( 1, 1 ), Vector2( 0.5, 0.5 ), 1.0 ]]
-[connection signal="boomerang_flying" from="Boomerang" to="DashedLineIndicator/AnimationPlayer" method="play" binds= [ "appear" ]]
-[connection signal="boomerang_ready" from="Boomerang" to="MouseController/CanvasLayer/mouse_pos/effects_center" method="bounce_scale" binds= [ Vector2( 0.5, 0.5 ), Vector2( 1, 1 ), 1.0 ]]
+[connection signal="just_pressed" from="InputController/fire" to="StateMachine/Idle" method="_on_fire_just_pressed"]
+[connection signal="mouse_position" from="MouseController" to="." method="_on_MouseController_mouse_position"]
 [connection signal="took_damage" from="Body/Triggers/DamageHurtbox" to="Health" method="lose_health"]
-[connection signal="timeout" from="Timers/CatchTimer" to="Body" method="_on_CatchTimer_timeout"]
-[connection signal="fire_just_pressed" from="StateMachine/Idle" to="Timers/CatchTimer" method="start"]
-[connection signal="fire_just_pressed" from="StateMachine/Idle" to="Body" method="_on_fire_just_pressed"]
-[connection signal="fired_boomerang" from="StateMachine/Idle" to="Boomerang" method="fire"]
-[connection signal="released_boomerang" from="StateMachine/Idle" to="Boomerang" method="release"]
+[connection signal="fire_just_pressed" from="StateMachine/Idle" to="." method="fire_boomerang"]
 [connection signal="started_moving" from="StateMachine/Idle" to="StateMachine/Idle/ToMove" method="do_transition"]
-[connection signal="fire_just_pressed" from="StateMachine/Move" to="Timers/CatchTimer" method="start"]
-[connection signal="fire_just_pressed" from="StateMachine/Move" to="Body" method="_on_fire_just_pressed"]
-[connection signal="fired_boomerang" from="StateMachine/Move" to="Boomerang" method="fire"]
-[connection signal="released_boomerang" from="StateMachine/Move" to="Boomerang" method="release"]
+[connection signal="fire_just_pressed" from="StateMachine/Move" to="." method="fire_boomerang"]
 [connection signal="stopped_moving" from="StateMachine/Move" to="StateMachine/Move/ToIdle" method="do_transition"]
 
 [editable path="InputController"]

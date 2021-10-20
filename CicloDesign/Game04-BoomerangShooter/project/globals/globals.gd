@@ -10,7 +10,7 @@ func _process(delta):
 		get_tree().quit()
 
 func get_game():
-	pass
+	return get_node("/root/Game")
 
 func get_screen_size() -> Vector2:
 	return get_viewport().get_visible_rect().size
