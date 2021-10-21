@@ -1,6 +1,9 @@
 extends EntityTopdownPlayer
 
-export (int) var max_ammo = 5
+signal boomerang_caused_damage()
+signal hurt()
+
+export (int) var max_ammo = 2
 
 var aim_direction : Vector2
 var current_ammo : int = max_ammo
@@ -20,10 +23,17 @@ func fire_boomerang():
 			"global_position": body.global_position,
 			"user_body": body})
 		boomerang.fire(aim_direction)
+		boomerang.connect("caused_damage", self, "_on_Boomerang_caused_damage")
 		boomerang.connect("collected", self, "_on_Boomerang_collected")
 		dashed_line_indicator.add_boomerang(boomerang)
 		current_ammo -= 1
 
+func _on_Boomerang_caused_damage():
+	emit_signal("boomerang_caused_damage")
+
 func _on_Boomerang_collected(_boomerang):
 	current_ammo += 1
 	dashed_line_indicator.remove_boomerang(_boomerang)
+
+func _on_Hurt_state_entered():
+	emit_signal("hurt")

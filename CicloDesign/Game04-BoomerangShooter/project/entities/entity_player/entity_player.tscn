@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://entities/__entity_topdown_player/__entity_topdown_player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/entity_player/entity_player.gd" type="Script" id=2]
@@ -11,14 +11,17 @@
 [ext_resource path="res://entities/entity_player/states/entity_player_base_state.gd" type="Script" id=9]
 [ext_resource path="res://entities/entity_player/scripts/entity_player_old_boomerang/entity_player_dashed_line_indicator.gd" type="Script" id=10]
 [ext_resource path="res://libs/gt_area_2d/gt_trigger_area_2d/gt_trigger_area_2d.gd" type="Script" id=11]
+[ext_resource path="res://libs/gt_state_machine/__gt_state_transition.gd" type="Script" id=12]
 [ext_resource path="res://libs/gt_health/gt_health.gd" type="Script" id=13]
 [ext_resource path="res://libs/gt_area_2d/gt_trigger_area_2d/gt_hurtbox_2d/gt_hurtbox_2d.gd" type="Script" id=14]
+[ext_resource path="res://libs/gt_input_controller/actions/__gt_input_action.gd" type="Script" id=15]
+[ext_resource path="res://entities/entity_player/states/entity_player_move_state.gd" type="Script" id=16]
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 0 ), 0.0, 1.0, 0, 1, Vector2( 1, 1 ), 1.0, 0.0, 1, 0 ]
 
 [sub_resource type="Gradient" id=2]
-colors = PoolColorArray( 0.929412, 0.627451, 0.192157, 0, 0.929412, 0.627451, 0.192157, 1 )
+colors = PoolColorArray( 0.831373, 0.596078, 0.290196, 0, 0.831373, 0.596078, 0.290196, 1 )
 
 [sub_resource type="CircleShape2D" id=3]
 radius = 12.0
@@ -29,13 +32,120 @@ radius = 12.0
 [sub_resource type="CircleShape2D" id=5]
 radius = 16.0
 
+[sub_resource type="Animation" id=9]
+resource_name = "dash"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("graphics/move_trail:lifetime")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.25 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "default"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("graphics:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("graphics/move_trail:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("graphics/move_trail:lifetime")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.08 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "hurt"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("graphics:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true, false, true, false, true, false, true, false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("graphics/move_trail:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true, false, true, false, true, false, true, false, true ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "move"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("graphics/move_trail:lifetime")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.08 ]
+}
+
 [node name="Player" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+
+[node name="dash" type="Node" parent="InputController" index="5"]
+script = ExtResource( 15 )
+action = "act_dash"
 
 [node name="Health" type="Node" parent="." index="1"]
 script = ExtResource( 13 )
 
 [node name="MouseController" parent="." index="2" instance=ExtResource( 5 )]
+
+[node name="mouse_icon" parent="MouseController/CanvasLayer/mouse_pos/effects_center" index="0"]
+color = Color( 0.831373, 0.596078, 0.290196, 1 )
 
 [node name="move_trail" type="Line2D" parent="Body/graphics" index="0"]
 width = 28.0
@@ -56,7 +166,7 @@ __meta__ = {
 }
 
 [node name="arrow" type="Polygon2D" parent="Body/graphics/rotation_pivot" index="0"]
-color = Color( 0.929412, 0.627451, 0.192157, 1 )
+color = Color( 0.831373, 0.596078, 0.290196, 1 )
 polygon = PoolVector2Array( 0, 11, 0, -11, 28, 0 )
 __meta__ = {
 "_edit_lock_": true
@@ -70,7 +180,7 @@ __meta__ = {
 centered = true
 num_sides = 32
 size = 24.0
-polygon_color = Color( 0.929412, 0.627451, 0.192157, 1 )
+polygon_color = Color( 0.831373, 0.596078, 0.290196, 1 )
 
 [node name="CollisionShape" parent="Body" index="1"]
 visible = false
@@ -121,42 +231,121 @@ __meta__ = {
 
 [node name="EntityMover" parent="Body" index="3"]
 script = ExtResource( 7 )
+LENGTH_THRESHOLD = 16.0
+max_move_speed = 320
+move_acceleration_time = 0.15
 bounce_factor = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Body" index="4"]
+autoplay = "default"
+anims/dash = SubResource( 9 )
+anims/default = SubResource( 6 )
+anims/hurt = SubResource( 7 )
+anims/move = SubResource( 8 )
 
 [node name="Idle" parent="StateMachine" index="0"]
 script = ExtResource( 9 )
 _movement_equals_zero = false
 _movement_signal_name = "started_moving"
 
+[node name="ToHurt" type="Node" parent="StateMachine/Idle" index="1"]
+script = ExtResource( 12 )
+end_state_path = NodePath("../../Hurt")
+
 [node name="Move" parent="StateMachine" index="1"]
-script = ExtResource( 9 )
+script = ExtResource( 16 )
+play_anim_on_enter = true
+anim_name = "move"
 _movement_signal_name = "stopped_moving"
 
-[node name="DashedLineIndicator" type="Node2D" parent="." index="5"]
-modulate = Color( 1, 1, 1, 0.156863 )
+[node name="ToDash" type="Node" parent="StateMachine/Move" index="1"]
+script = ExtResource( 12 )
+end_state_path = NodePath("../../Dash")
+
+[node name="ToHurt" type="Node" parent="StateMachine/Move" index="2"]
+script = ExtResource( 12 )
+end_state_path = NodePath("../../Hurt")
+
+[node name="Dash" type="Node" parent="StateMachine" index="2"]
+script = ExtResource( 9 )
+fsm_path = NodePath("..")
+play_anim_on_enter = true
+anim_name = "dash"
+_movement_change_state = false
+_movement_equals_zero = false
+
+[node name="ToIdle" type="Node" parent="StateMachine/Dash" index="0"]
+script = ExtResource( 12 )
+end_state_path = NodePath("../../Idle")
+
+[node name="ToMove" type="Node" parent="StateMachine/Dash" index="1"]
+script = ExtResource( 12 )
+end_state_path = NodePath("../../Move")
+
+[node name="Hurt" type="Node" parent="StateMachine" index="3"]
+script = ExtResource( 9 )
+fsm_path = NodePath("..")
+_movement_change_state = false
+_movement_equals_zero = false
+
+[node name="ToIdle" type="Node" parent="StateMachine/Hurt" index="0"]
+script = ExtResource( 12 )
+end_state_path = NodePath("../../Idle")
+
+[node name="Timers" type="Node" parent="." index="5"]
+
+[node name="InvincibilityTimer" type="Timer" parent="Timers" index="0"]
+one_shot = true
+
+[node name="DashTimer" type="Timer" parent="Timers" index="1"]
+wait_time = 0.25
+one_shot = true
+
+[node name="DashedLineIndicator" type="Node2D" parent="." index="6"]
+modulate = Color( 1, 1, 1, 0.588235 )
 script = ExtResource( 10 )
 __meta__ = {
 "_edit_lock_": true
 }
 _entity_path = NodePath("..")
-line_color = Color( 0.929412, 0.627451, 0.192157, 1 )
+line_color = Color( 0.972549, 0.564706, 0.12549, 1 )
 line_dash = 16.0
 
-[node name="BoomerangSpawner" parent="." index="6" instance=ExtResource( 6 )]
+[node name="BoomerangSpawner" parent="." index="7" instance=ExtResource( 6 )]
 actor_path = NodePath("..")
 entity_template = ExtResource( 8 )
 is_independent_entity = true
 
+[connection signal="updated_move_direction" from="InputController" to="StateMachine/Hurt" method="_on_InputController_updated_move_direction"]
 [connection signal="updated_move_direction" from="InputController" to="StateMachine/Move" method="_on_InputController_updated_move_direction"]
 [connection signal="updated_move_direction" from="InputController" to="StateMachine/Idle" method="_on_InputController_updated_move_direction"]
+[connection signal="just_pressed" from="InputController/fire" to="StateMachine/Hurt" method="_on_fire_just_pressed"]
 [connection signal="just_pressed" from="InputController/fire" to="StateMachine/Move" method="_on_fire_just_pressed"]
 [connection signal="just_pressed" from="InputController/fire" to="StateMachine/Idle" method="_on_fire_just_pressed"]
+[connection signal="just_pressed" from="InputController/dash" to="StateMachine/Move" method="_on_dash_just_pressed"]
 [connection signal="mouse_position" from="MouseController" to="." method="_on_MouseController_mouse_position"]
+[connection signal="effect" from="Body/Triggers/DamageHurtbox" to="StateMachine/Idle/ToHurt" method="do_transition"]
+[connection signal="effect" from="Body/Triggers/DamageHurtbox" to="StateMachine/Move/ToHurt" method="do_transition"]
 [connection signal="took_damage" from="Body/Triggers/DamageHurtbox" to="Health" method="lose_health"]
 [connection signal="fire_just_pressed" from="StateMachine/Idle" to="." method="fire_boomerang"]
 [connection signal="started_moving" from="StateMachine/Idle" to="StateMachine/Idle/ToMove" method="do_transition"]
+[connection signal="dash_just_pressed" from="StateMachine/Move" to="StateMachine/Move/ToDash" method="do_transition"]
 [connection signal="fire_just_pressed" from="StateMachine/Move" to="." method="fire_boomerang"]
+[connection signal="state_entered" from="StateMachine/Move" to="Body/EntityMover" method="set_speed_multiplier" binds= [ 1.0 ]]
 [connection signal="stopped_moving" from="StateMachine/Move" to="StateMachine/Move/ToIdle" method="do_transition"]
+[connection signal="fire_just_pressed" from="StateMachine/Dash" to="." method="fire_boomerang"]
+[connection signal="state_entered" from="StateMachine/Dash" to="Timers/DashTimer" method="start"]
+[connection signal="state_entered" from="StateMachine/Dash" to="Body/Triggers/DamageHurtbox" method="disable_all_shapes"]
+[connection signal="state_entered" from="StateMachine/Dash" to="Body/EntityMover" method="set_speed_multiplier" binds= [ 3.0 ]]
+[connection signal="state_exited" from="StateMachine/Dash" to="Timers/DashTimer" method="stop"]
+[connection signal="state_exited" from="StateMachine/Dash" to="Body/Triggers/DamageHurtbox" method="enable_all_shapes"]
+[connection signal="stopped_moving" from="StateMachine/Dash" to="StateMachine/Dash/ToIdle" method="do_transition"]
+[connection signal="fire_just_pressed" from="StateMachine/Hurt" to="." method="fire_boomerang"]
+[connection signal="state_entered" from="StateMachine/Hurt" to="Timers/InvincibilityTimer" method="start"]
+[connection signal="state_entered" from="StateMachine/Hurt" to="Body/AnimationPlayer" method="play" binds= [ "hurt" ]]
+[connection signal="state_entered" from="StateMachine/Hurt" to="." method="_on_Hurt_state_entered"]
+[connection signal="timeout" from="Timers/InvincibilityTimer" to="StateMachine/Hurt/ToIdle" method="do_transition"]
+[connection signal="timeout" from="Timers/DashTimer" to="StateMachine/Dash/ToMove" method="do_transition"]
 
 [editable path="InputController"]
 [editable path="MouseController"]

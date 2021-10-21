@@ -14,7 +14,6 @@ var current_intensity : float = 0.0
 var current_direction : Vector2
 var initial_direction : Vector2
 
-
 func _ready():
 	assert(camera != null, "There is no Camera2D set for %s" % [self.name])
 	tween = Tween.new()
@@ -28,7 +27,6 @@ func _ready():
 	frequency_timer.connect("timeout", self, "_on_FrequencyTimer_timeout")
 	duration_timer.connect("timeout", self, "_on_DurationTimer_timeout")
 
-
 func shake_simple(_intensity: float = 8.0, duration: float = 0.5, frequency: float = 0.1, direction: Vector2 = Vector2.ZERO):
 	if not is_active:
 		return
@@ -41,7 +39,6 @@ func shake_simple(_intensity: float = 8.0, duration: float = 0.5, frequency: flo
 	frequency_timer.start()
 	duration_timer.start()
 	_shake(direction)
-
 
 func _shake(direction: Vector2 = Vector2.ZERO):
 	if initial_direction == Vector2.ZERO:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://main/game/world/world.gd" type="Script" id=1]
 [ext_resource path="res://entities/entity_player/entity_player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,10 @@
 [ext_resource path="res://libs/gt_random_point_zone_2d/gt_random_point_zone_2d.gd" type="Script" id=4]
 [ext_resource path="res://entities/entity_enemy_follower/entity_enemy_follower.tscn" type="PackedScene" id=5]
 [ext_resource path="res://components/entity_spawner/nst_manager/nst_manager.tscn" type="PackedScene" id=6]
+[ext_resource path="res://libs/gt_screen_shake_2d/gt_screen_shake_2d.gd" type="Script" id=7]
+[ext_resource path="res://libs/gt_pattern_label/gt_pattern_label.gd" type="Script" id=8]
+[ext_resource path="res://assets/fonts/diffusion-bold-s32-o2.tres" type="DynamicFont" id=9]
+[ext_resource path="res://libs/gt_time/gt_time.gd" type="Script" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 640, 40 )
@@ -22,20 +26,49 @@ __meta__ = {
 [node name="colored_background" type="ColorRect" parent="."]
 margin_right = 1280.0
 margin_bottom = 720.0
-color = Color( 0.152941, 0.160784, 0.27451, 1 )
+color = Color( 0, 0.188235, 0.231373, 1 )
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="WaveManager" parent="." instance=ExtResource( 6 )]
-wave_properties = {
-"replacement_time": [ 1.0 ],
-"screen_enemies": [ 2 ],
-"time_between_waves": [ 3.0 ],
-"wave_enemies": [ 5, 10 ]
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="root" type="Control" parent="HUD"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
 }
-max_waves = 2
+
+[node name="current_wave_label" type="Label" parent="HUD/root"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 40.0
+margin_bottom = 14.0
+custom_fonts/font = ExtResource( 9 )
+custom_colors/font_color = Color( 1, 1, 0.780392, 1 )
+text = "Wave 0"
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+pattern_text = "Wave %s"
+
+[node name="WaveManager" parent="." instance=ExtResource( 6 )]
+rotation = -0.00109569
+enemy_properties = {
+"speed": [ 1.0, 1.1, 1.25, 1.35, 1.5, 1.5, 1.55, 1.6 ]
+}
+wave_properties = {
+"replacement_time": [ 1.0, 1.0, 0.8, 0.7, 0.6, 0.6, 0.6, 0.5 ],
+"screen_enemies": [ 2, 3, 3, 4, 4, 5, 6, 6 ],
+"time_between_waves": [ 3.0 ],
+"wave_enemies": [ 9, 12, 12, 15, 15, 15, 15, 18 ]
+}
+max_waves = 8
 
 [node name="EntitySpawner" parent="WaveManager" index="1"]
 entity_template = ExtResource( 5 )
@@ -79,6 +112,9 @@ __meta__ = {
 [node name="GameStartTimer" type="Timer" parent="Timers"]
 one_shot = true
 
+[node name="TimeManager" type="Node" parent="."]
+script = ExtResource( 10 )
+
 [node name="Terrain" type="StaticBody2D" parent="."]
 collision_layer = 2
 collision_mask = 4
@@ -92,7 +128,7 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
-graphics_color = Color( 0.419608, 0.380392, 1, 1 )
+graphics_color = Color( 0, 0.188235, 0.231373, 1 )
 
 [node name="2" type="CollisionPolygon2D" parent="Terrain"]
 polygon = PoolVector2Array( -80, 0, 0, 0, 0, 720, -80, 720 )
@@ -100,7 +136,7 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
-graphics_color = Color( 0.419608, 0.380392, 1, 1 )
+graphics_color = Color( 0, 0.188235, 0.231373, 1 )
 
 [node name="3" type="CollisionPolygon2D" parent="Terrain"]
 polygon = PoolVector2Array( 1280, 0, 1360, 0, 1360, 720, 1280, 720 )
@@ -108,7 +144,7 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
-graphics_color = Color( 0.419608, 0.380392, 1, 1 )
+graphics_color = Color( 0, 0.188235, 0.231373, 1 )
 
 [node name="4" type="CollisionPolygon2D" parent="Terrain"]
 polygon = PoolVector2Array( 0, 720, 1280, 720, 1280, 800, 0, 800 )
@@ -116,7 +152,7 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
-graphics_color = Color( 0.419608, 0.380392, 1, 1 )
+graphics_color = Color( 0, 0.188235, 0.231373, 1 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 
@@ -132,9 +168,16 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="ScreenShake" type="Node" parent="Camera"]
+script = ExtResource( 7 )
+camera_path = NodePath("..")
+
 [connection signal="ready" from="." to="Timers/GameStartTimer" method="start"]
 [connection signal="spawned_enemy" from="." to="WaveManager/EntitySpawner" method="spawn_with_info"]
+[connection signal="enemy_died" from="WaveManager" to="TimeManager" method="slow_time" binds= [ 0.1, 0.3 ]]
 [connection signal="spawned_enemy" from="WaveManager" to="." method="_on_WaveManager_spawned_enemy"]
+[connection signal="updated_wave" from="WaveManager" to="HUD/root/current_wave_label" method="apply_text_simple"]
 [connection signal="timeout" from="Timers/GameStartTimer" to="WaveManager" method="start"]
+[connection signal="hurt" from="Player" to="Camera/ScreenShake" method="shake_simple" binds= [ 16.0, 0.5, 0.05 ]]
 
 [editable path="WaveManager"]

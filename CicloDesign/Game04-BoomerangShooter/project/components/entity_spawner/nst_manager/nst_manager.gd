@@ -3,6 +3,7 @@
 extends Node2D
 
 signal spawned_enemy(info)
+signal enemy_died()
 signal updated_wave(wave)
 signal updated_properties(dict)
 
@@ -34,9 +35,10 @@ onready var replacement_timer = $ReplacementTimer
 func _ready(): _set_variables()
 func _physics_process(delta): check_advance_wave()
 func start(): _set_wave(initial_wave)
-func can_spawn() -> bool: return enemies_spawned < get_variable(STR_WAVE_ENEMIES)
-func get_variable(name: String): return _get_variable(name, current_wave)
-func has_variable(name: String): return _has_variable(name, current_wave)
+func can_spawn() -> bool: return enemies_spawned < get_wave_property(STR_WAVE_ENEMIES)
+func get_enemy_property(name: String): return _get_enemy_property(name, current_wave)
+func get_wave_property(name: String): return _get_wave_property(name, current_wave)
+func has_wave_property(name: String): return _has_wave_property(name, current_wave)
 
 func check_advance_wave():
 	if enemies_killed >= wave_enemies and between_wave_timer.is_stopped():
@@ -49,7 +51,7 @@ func advance_wave():
 func spawn_enemy():
 	var info = {}
 	for key in enemy_properties.keys():
-		info[key] = get_variable(key)
+		info[key] = get_enemy_property(key)
 	enemies_spawned += 1
 	emit_signal("spawned_enemy", info)
 	#if debug_mode: print("spawned enemy")
@@ -66,17 +68,21 @@ func _set_variables():
 	enemies_spawned = 0
 	enemies_killed = 0
 	enemy_spawn_queue = 0
-	screen_enemies = get_variable(STR_SCREEN_ENEMIES) if has_variable(STR_SCREEN_ENEMIES) else screen_enemies
-	wave_enemies = get_variable(STR_WAVE_ENEMIES) if has_variable(STR_WAVE_ENEMIES) else wave_enemies
-	between_wave_timer.wait_time = get_variable(STR_TIME_BETWEEN_WAVES) if has_variable(STR_TIME_BETWEEN_WAVES) else between_wave_timer.wait_time
-	replacement_timer.wait_time = get_variable(STR_REPLACEMENT_TIME) if has_variable(STR_REPLACEMENT_TIME) else replacement_timer.wait_time
+	screen_enemies = get_wave_property(STR_SCREEN_ENEMIES) if has_wave_property(STR_SCREEN_ENEMIES) else screen_enemies
+	wave_enemies = get_wave_property(STR_WAVE_ENEMIES) if has_wave_property(STR_WAVE_ENEMIES) else wave_enemies
+	between_wave_timer.wait_time = get_wave_property(STR_TIME_BETWEEN_WAVES) if has_wave_property(STR_TIME_BETWEEN_WAVES) else between_wave_timer.wait_time
+	replacement_timer.wait_time = get_wave_property(STR_REPLACEMENT_TIME) if has_wave_property(STR_REPLACEMENT_TIME) else replacement_timer.wait_time
 	emit_signal("updated_properties", wave_properties)
 
-func _get_variable(name: String, wave: int):
+func _get_enemy_property(name: String, wave: int):
+	if wave > 0 and enemy_properties.has(name) and enemy_properties[name].size() >= wave:
+		return enemy_properties[name][wave-1]
+
+func _get_wave_property(name: String, wave: int):
 	if wave > 0 and wave_properties.has(name) and wave_properties[name].size() >= wave:
 		return wave_properties[name][wave-1]
 
-func _has_variable(name: String, wave: int) -> bool:
+func _has_wave_property(name: String, wave: int) -> bool:
 	if wave > 0 and wave_properties.has(name) and wave_properties[name].size() >= wave:
 		return true
 	return false
@@ -91,8 +97,8 @@ func _on_entity_died():
 	if can_spawn() and replacement_timer.is_stopped():
 		replacement_timer.start()
 	if debug_mode:
-		#print("killed enemy")
 		print(enemies_killed)
+	emit_signal("enemy_died")
 
 func _on_ReplacementTimer_timeout():
 	enemy_spawn_queue -= 1
