@@ -2,6 +2,7 @@ extends Node2D
 
 export (NodePath) var _entity_path
 export (bool) var is_active = true
+
 export (Color) var line_color
 export (float) var line_width = 8.0
 export (float) var line_dash = 4.0
@@ -10,13 +11,20 @@ onready var entity = get_node(_entity_path)
 
 var boomerangs = []
 
+func _ready():
+	entity = get_node(_entity_path)
+
 func _process(delta):
 	if is_active:
 		update()
 
 func _draw():
 	for i in boomerangs.size():
-		_draw_dashed_line(entity.body.global_position, boomerangs[i].body.global_position, line_color, line_width, line_dash)
+		var boomerang_pos = boomerangs[i].body.global_position
+		var player_pos = entity.body.global_position
+		var dir = player_pos.direction_to(boomerang_pos)
+		player_pos += 50.0*dir
+		_draw_dashed_line(player_pos, boomerang_pos, line_color, line_width, line_dash)
 
 func add_boomerang(boomerang):
 	boomerangs.append(boomerang)

@@ -27,8 +27,8 @@ var enemies_killed : int # The number of enemies that have been killed in this c
 var enemy_spawn_queue : int # The number of enemies waiting in queue for being spawned
 onready var current_wave : int = initial_wave
 
-var screen_enemies : int
-var wave_enemies : int
+var screen_enemies : int # Current number of max enemies on the screen at a given time
+var wave_enemies : int # Current number of max enemies in a wave
 onready var between_wave_timer = $BetweenWavesTimer
 onready var replacement_timer = $ReplacementTimer
 
@@ -54,7 +54,7 @@ func spawn_enemy():
 		info[key] = get_enemy_property(key)
 	enemies_spawned += 1
 	emit_signal("spawned_enemy", info)
-	#if debug_mode: print("spawned enemy")
+	if debug_mode: print("spawned_enemy: %s" % [enemies_spawned])
 
 func _set_wave(_wave):
 	current_wave = _wave
@@ -96,12 +96,12 @@ func _on_entity_died():
 	enemy_spawn_queue += 1
 	if can_spawn() and replacement_timer.is_stopped():
 		replacement_timer.start()
-	if debug_mode:
-		print(enemies_killed)
+	if debug_mode: print("enemies_killed: %s" % [enemies_killed])
 	emit_signal("enemy_died")
 
 func _on_ReplacementTimer_timeout():
-	enemy_spawn_queue -= 1
-	if can_spawn(): spawn_enemy()
+	if can_spawn():
+		spawn_enemy()
+		enemy_spawn_queue -= 1
 	if enemy_spawn_queue > 0:
 		replacement_timer.start()

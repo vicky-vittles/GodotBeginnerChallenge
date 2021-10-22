@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://entities/__entity_topdown_player/__entity_topdown_player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/entity_player/entity_player.gd" type="Script" id=2]
@@ -16,24 +16,93 @@
 [ext_resource path="res://libs/gt_area_2d/gt_trigger_area_2d/gt_hurtbox_2d/gt_hurtbox_2d.gd" type="Script" id=14]
 [ext_resource path="res://libs/gt_input_controller/actions/__gt_input_action.gd" type="Script" id=15]
 [ext_resource path="res://entities/entity_player/states/entity_player_move_state.gd" type="Script" id=16]
+[ext_resource path="res://assets/images/white-circle.png" type="Texture" id=17]
+[ext_resource path="res://libs/gt_audio_player/gt_audio_player.gd" type="Script" id=18]
+[ext_resource path="res://entities/entity_player/assets/player-die.wav" type="AudioStream" id=19]
+[ext_resource path="res://entities/entity_player/assets/player-die-2.wav" type="AudioStream" id=20]
+[ext_resource path="res://entities/entity_player/assets/boomerang-shot.wav" type="AudioStream" id=21]
+[ext_resource path="res://entities/entity_player/assets/player-hurt-2.wav" type="AudioStream" id=22]
+[ext_resource path="res://entities/entity_player/assets/boomerang-pickup.wav" type="AudioStream" id=23]
 
 [sub_resource type="Curve" id=1]
-_data = [ Vector2( 0, 0 ), 0.0, 1.0, 0, 1, Vector2( 1, 1 ), 1.0, 0.0, 1, 0 ]
+_data = [ Vector2( 0, 1 ), 0.0, -1.0, 0, 1, Vector2( 1, 0 ), -1.0, 0.0, 1, 0 ]
 
 [sub_resource type="Gradient" id=2]
+colors = PoolColorArray( 0.831373, 0.596078, 0.290196, 1, 0.831373, 0.596078, 0.290196, 0 )
+
+[sub_resource type="Animation" id=13]
+resource_name = "boomerang_catch"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("boomerang_catch:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("boomerang_catch:border_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 40.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("boomerang_catch:size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 80.0 ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "default"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("boomerang_catch:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 0 ), 0.0, 1.0, 0, 1, Vector2( 1, 1 ), 1.0, 0.0, 1, 0 ]
+
+[sub_resource type="Gradient" id=4]
 colors = PoolColorArray( 0.831373, 0.596078, 0.290196, 0, 0.831373, 0.596078, 0.290196, 1 )
 
-[sub_resource type="CircleShape2D" id=3]
-radius = 12.0
-
-[sub_resource type="CircleShape2D" id=4]
-radius = 12.0
-
 [sub_resource type="CircleShape2D" id=5]
+radius = 12.0
+
+[sub_resource type="CircleShape2D" id=6]
+radius = 12.0
+
+[sub_resource type="CircleShape2D" id=7]
 radius = 16.0
 
-[sub_resource type="Animation" id=9]
-resource_name = "dash"
+[sub_resource type="Animation" id=8]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("graphics/move_trail:lifetime")
@@ -48,8 +117,71 @@ tracks/0/keys = {
 "values": [ 0.25 ]
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "default"
+[sub_resource type="Animation" id=9]
+resource_name = "dead"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("graphics/main:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("graphics/rotation_pivot:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("graphics/move_trail:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("graphics/particles/dead:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("graphics:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=10]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("graphics:visible")
@@ -87,10 +219,45 @@ tracks/2/keys = {
 "update": 0,
 "values": [ 0.08 ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("graphics/main:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("graphics/rotation_pivot:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("graphics/move_trail:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
 
-[sub_resource type="Animation" id=7]
-resource_name = "hurt"
-step = 0.05
+[sub_resource type="Animation" id=11]
+length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("graphics:visible")
 tracks/0/interp = 1
@@ -98,10 +265,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ true, false, true, false, true, false, true, false, true, false, true ]
+"values": [ true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false, true ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("graphics/move_trail:visible")
@@ -110,14 +277,13 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ true, false, true, false, true, false, true, false, true, false, true ]
+"values": [ true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false, true ]
 }
 
-[sub_resource type="Animation" id=8]
-resource_name = "move"
+[sub_resource type="Animation" id=12]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("graphics/move_trail:lifetime")
@@ -131,9 +297,22 @@ tracks/0/keys = {
 "update": 0,
 "values": [ 0.08 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("graphics:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [node name="Player" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+entity_type = 1
 
 [node name="dash" type="Node" parent="InputController" index="5"]
 script = ExtResource( 15 )
@@ -142,25 +321,104 @@ action = "act_dash"
 [node name="Health" type="Node" parent="." index="1"]
 script = ExtResource( 13 )
 
-[node name="MouseController" parent="." index="2" instance=ExtResource( 5 )]
+[node name="SFX" type="Node" parent="." index="2"]
+
+[node name="boomerang_shot" type="AudioStreamPlayer" parent="SFX" index="0"]
+stream = ExtResource( 21 )
+volume_db = -3.0
+bus = "Sound"
+script = ExtResource( 18 )
+random_pitch_deviation = 0.1
+
+[node name="boomerang_pickup" type="AudioStreamPlayer" parent="SFX" index="1"]
+stream = ExtResource( 23 )
+volume_db = -3.0
+bus = "Sound"
+script = ExtResource( 18 )
+random_pitch_deviation = 0.1
+
+[node name="hurt" type="AudioStreamPlayer" parent="SFX" index="2"]
+stream = ExtResource( 22 )
+volume_db = -3.0
+bus = "Sound"
+script = ExtResource( 18 )
+random_pitch_deviation = 0.1
+
+[node name="die_1" type="AudioStreamPlayer" parent="SFX" index="3"]
+stream = ExtResource( 19 )
+volume_db = -3.0
+bus = "Sound"
+script = ExtResource( 18 )
+random_pitch_deviation = 0.1
+
+[node name="die_2" type="AudioStreamPlayer" parent="SFX" index="4"]
+stream = ExtResource( 20 )
+volume_db = -3.0
+bus = "Sound"
+script = ExtResource( 18 )
+random_pitch_deviation = 0.1
+
+[node name="MouseController" parent="." index="3" instance=ExtResource( 5 )]
 
 [node name="mouse_icon" parent="MouseController/CanvasLayer/mouse_pos/effects_center" index="0"]
 color = Color( 0.831373, 0.596078, 0.290196, 1 )
 
-[node name="move_trail" type="Line2D" parent="Body/graphics" index="0"]
+[node name="particles" type="Node2D" parent="Body/graphics" index="0"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="dead" type="CPUParticles2D" parent="Body/graphics/particles" index="0"]
+emitting = false
+amount = 50
+one_shot = true
+explosiveness = 0.8
+randomness = 0.5
+texture = ExtResource( 17 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 600.0
+orbit_velocity = 0.25
+damping = 50.0
+scale_amount = 0.03
+scale_amount_random = 0.01
+scale_amount_curve = SubResource( 1 )
+color_ramp = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="boomerang_catch" type="Node2D" parent="Body/graphics/particles" index="1"]
+visible = false
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+centered = true
+num_sides = 20
+size = 80.0
+polygon_color = Color( 0, 0.188235, 0.231373, 1 )
+border_color = Color( 0.831373, 0.596078, 0.290196, 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Body/graphics/particles" index="2"]
+autoplay = "default"
+anims/boomerang_catch = SubResource( 13 )
+anims/default = SubResource( 14 )
+
+[node name="move_trail" type="Line2D" parent="Body/graphics" index="1"]
 width = 28.0
-width_curve = SubResource( 1 )
+width_curve = SubResource( 3 )
 default_color = Color( 0, 0, 0, 1 )
-gradient = SubResource( 2 )
+gradient = SubResource( 4 )
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
-lifetime = 0.15
+lifetime = 0.08
 distance = 2.0
 segments = 40
 
-[node name="rotation_pivot" type="Node2D" parent="Body/graphics" index="1"]
+[node name="rotation_pivot" type="Node2D" parent="Body/graphics" index="2"]
 __meta__ = {
 "_edit_lock_": true
 }
@@ -172,7 +430,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="main" type="Node2D" parent="Body/graphics" index="2"]
+[node name="main" type="Node2D" parent="Body/graphics" index="3"]
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
@@ -184,7 +442,7 @@ polygon_color = Color( 0.831373, 0.596078, 0.290196, 1 )
 
 [node name="CollisionShape" parent="Body" index="1"]
 visible = false
-shape = SubResource( 3 )
+shape = SubResource( 5 )
 
 [node name="Triggers" type="Node2D" parent="Body" index="2"]
 __meta__ = {
@@ -205,7 +463,7 @@ collidable_groups = [ "entity_enemy_damage_hitbox" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Triggers/DamageHurtbox" index="0"]
 visible = false
-shape = SubResource( 4 )
+shape = SubResource( 6 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -224,7 +482,7 @@ collidable_groups = [ "entity_boomerang_catch_trigger" ]
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Body/Triggers/CatchTrigger" index="0"]
 visible = false
-shape = SubResource( 5 )
+shape = SubResource( 7 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -238,10 +496,11 @@ bounce_factor = 0.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Body" index="4"]
 autoplay = "default"
-anims/dash = SubResource( 9 )
-anims/default = SubResource( 6 )
-anims/hurt = SubResource( 7 )
-anims/move = SubResource( 8 )
+anims/dash = SubResource( 8 )
+anims/dead = SubResource( 9 )
+anims/default = SubResource( 10 )
+anims/hurt = SubResource( 11 )
+anims/move = SubResource( 12 )
 
 [node name="Idle" parent="StateMachine" index="0"]
 script = ExtResource( 9 )
@@ -252,9 +511,14 @@ _movement_signal_name = "started_moving"
 script = ExtResource( 12 )
 end_state_path = NodePath("../../Hurt")
 
+[node name="ToDead" type="Node" parent="StateMachine/Idle" index="2"]
+script = ExtResource( 12 )
+end_state_path = NodePath("../../Dead")
+
 [node name="Move" parent="StateMachine" index="1"]
 script = ExtResource( 16 )
 play_anim_on_enter = true
+_animation_player_path = NodePath("../../Body/AnimationPlayer")
 anim_name = "move"
 _movement_signal_name = "stopped_moving"
 
@@ -266,10 +530,15 @@ end_state_path = NodePath("../../Dash")
 script = ExtResource( 12 )
 end_state_path = NodePath("../../Hurt")
 
+[node name="ToDead" type="Node" parent="StateMachine/Move" index="3"]
+script = ExtResource( 12 )
+end_state_path = NodePath("../../Dead")
+
 [node name="Dash" type="Node" parent="StateMachine" index="2"]
 script = ExtResource( 9 )
 fsm_path = NodePath("..")
 play_anim_on_enter = true
+_animation_player_path = NodePath("../../Body/AnimationPlayer")
 anim_name = "dash"
 _movement_change_state = false
 _movement_equals_zero = false
@@ -292,16 +561,31 @@ _movement_equals_zero = false
 script = ExtResource( 12 )
 end_state_path = NodePath("../../Idle")
 
-[node name="Timers" type="Node" parent="." index="5"]
+[node name="ToDead" type="Node" parent="StateMachine/Hurt" index="1"]
+script = ExtResource( 12 )
+end_state_path = NodePath("../../Dead")
+
+[node name="Dead" type="Node" parent="StateMachine" index="4"]
+script = ExtResource( 9 )
+fsm_path = NodePath("..")
+play_anim_on_enter = true
+_animation_player_path = NodePath("../../Body/AnimationPlayer")
+anim_name = "dead"
+_movement_change_state = false
+_movement_equals_zero = false
+can_shoot = false
+
+[node name="Timers" type="Node" parent="." index="6"]
 
 [node name="InvincibilityTimer" type="Timer" parent="Timers" index="0"]
+wait_time = 2.0
 one_shot = true
 
 [node name="DashTimer" type="Timer" parent="Timers" index="1"]
 wait_time = 0.25
 one_shot = true
 
-[node name="DashedLineIndicator" type="Node2D" parent="." index="6"]
+[node name="DashedLineIndicator" type="Node2D" parent="." index="7"]
 modulate = Color( 1, 1, 1, 0.588235 )
 script = ExtResource( 10 )
 __meta__ = {
@@ -311,22 +595,27 @@ _entity_path = NodePath("..")
 line_color = Color( 0.972549, 0.564706, 0.12549, 1 )
 line_dash = 16.0
 
-[node name="BoomerangSpawner" parent="." index="7" instance=ExtResource( 6 )]
+[node name="BoomerangSpawner" parent="." index="8" instance=ExtResource( 6 )]
 actor_path = NodePath("..")
 entity_template = ExtResource( 8 )
 is_independent_entity = true
 
-[connection signal="updated_move_direction" from="InputController" to="StateMachine/Hurt" method="_on_InputController_updated_move_direction"]
 [connection signal="updated_move_direction" from="InputController" to="StateMachine/Move" method="_on_InputController_updated_move_direction"]
 [connection signal="updated_move_direction" from="InputController" to="StateMachine/Idle" method="_on_InputController_updated_move_direction"]
-[connection signal="just_pressed" from="InputController/fire" to="StateMachine/Hurt" method="_on_fire_just_pressed"]
+[connection signal="updated_move_direction" from="InputController" to="StateMachine/Hurt" method="_on_InputController_updated_move_direction"]
 [connection signal="just_pressed" from="InputController/fire" to="StateMachine/Move" method="_on_fire_just_pressed"]
 [connection signal="just_pressed" from="InputController/fire" to="StateMachine/Idle" method="_on_fire_just_pressed"]
+[connection signal="just_pressed" from="InputController/fire" to="StateMachine/Hurt" method="_on_fire_just_pressed"]
 [connection signal="just_pressed" from="InputController/dash" to="StateMachine/Move" method="_on_dash_just_pressed"]
+[connection signal="died" from="Health" to="StateMachine/Idle/ToDead" method="do_transition"]
+[connection signal="died" from="Health" to="StateMachine/Move/ToDead" method="do_transition"]
+[connection signal="died" from="Health" to="StateMachine/Hurt/ToDead" method="do_transition"]
 [connection signal="mouse_position" from="MouseController" to="." method="_on_MouseController_mouse_position"]
-[connection signal="effect" from="Body/Triggers/DamageHurtbox" to="StateMachine/Idle/ToHurt" method="do_transition"]
 [connection signal="effect" from="Body/Triggers/DamageHurtbox" to="StateMachine/Move/ToHurt" method="do_transition"]
+[connection signal="effect" from="Body/Triggers/DamageHurtbox" to="StateMachine/Idle/ToHurt" method="do_transition"]
 [connection signal="took_damage" from="Body/Triggers/DamageHurtbox" to="Health" method="lose_health"]
+[connection signal="effect" from="Body/Triggers/CatchTrigger" to="Body/graphics/particles/AnimationPlayer" method="play" binds= [ "boomerang_catch" ]]
+[connection signal="effect" from="Body/Triggers/CatchTrigger" to="SFX/boomerang_pickup" method="play"]
 [connection signal="fire_just_pressed" from="StateMachine/Idle" to="." method="fire_boomerang"]
 [connection signal="started_moving" from="StateMachine/Idle" to="StateMachine/Idle/ToMove" method="do_transition"]
 [connection signal="dash_just_pressed" from="StateMachine/Move" to="StateMachine/Move/ToDash" method="do_transition"]
@@ -334,18 +623,27 @@ is_independent_entity = true
 [connection signal="state_entered" from="StateMachine/Move" to="Body/EntityMover" method="set_speed_multiplier" binds= [ 1.0 ]]
 [connection signal="stopped_moving" from="StateMachine/Move" to="StateMachine/Move/ToIdle" method="do_transition"]
 [connection signal="fire_just_pressed" from="StateMachine/Dash" to="." method="fire_boomerang"]
-[connection signal="state_entered" from="StateMachine/Dash" to="Timers/DashTimer" method="start"]
-[connection signal="state_entered" from="StateMachine/Dash" to="Body/Triggers/DamageHurtbox" method="disable_all_shapes"]
 [connection signal="state_entered" from="StateMachine/Dash" to="Body/EntityMover" method="set_speed_multiplier" binds= [ 3.0 ]]
-[connection signal="state_exited" from="StateMachine/Dash" to="Timers/DashTimer" method="stop"]
+[connection signal="state_entered" from="StateMachine/Dash" to="Body/Triggers/DamageHurtbox" method="disable_all_shapes"]
+[connection signal="state_entered" from="StateMachine/Dash" to="Timers/DashTimer" method="start"]
 [connection signal="state_exited" from="StateMachine/Dash" to="Body/Triggers/DamageHurtbox" method="enable_all_shapes"]
+[connection signal="state_exited" from="StateMachine/Dash" to="Timers/DashTimer" method="stop"]
 [connection signal="stopped_moving" from="StateMachine/Dash" to="StateMachine/Dash/ToIdle" method="do_transition"]
 [connection signal="fire_just_pressed" from="StateMachine/Hurt" to="." method="fire_boomerang"]
-[connection signal="state_entered" from="StateMachine/Hurt" to="Timers/InvincibilityTimer" method="start"]
-[connection signal="state_entered" from="StateMachine/Hurt" to="Body/AnimationPlayer" method="play" binds= [ "hurt" ]]
 [connection signal="state_entered" from="StateMachine/Hurt" to="." method="_on_Hurt_state_entered"]
+[connection signal="state_entered" from="StateMachine/Hurt" to="SFX/hurt" method="play"]
+[connection signal="state_entered" from="StateMachine/Hurt" to="Body/AnimationPlayer" method="play" binds= [ "hurt" ]]
+[connection signal="state_entered" from="StateMachine/Hurt" to="Body/Triggers/DamageHurtbox" method="disable_all_shapes"]
+[connection signal="state_entered" from="StateMachine/Hurt" to="Timers/InvincibilityTimer" method="start"]
+[connection signal="state_exited" from="StateMachine/Hurt" to="Body/Triggers/DamageHurtbox" method="enable_all_shapes"]
+[connection signal="state_entered" from="StateMachine/Dead" to="." method="_on_Dead_state_entered"]
+[connection signal="state_entered" from="StateMachine/Dead" to="InputController" method="disable"]
+[connection signal="state_entered" from="StateMachine/Dead" to="SFX/die_1" method="play"]
+[connection signal="state_entered" from="StateMachine/Dead" to="SFX/die_2" method="play"]
+[connection signal="state_entered" from="StateMachine/Dead" to="Body/EntityMover" method="disable"]
 [connection signal="timeout" from="Timers/InvincibilityTimer" to="StateMachine/Hurt/ToIdle" method="do_transition"]
 [connection signal="timeout" from="Timers/DashTimer" to="StateMachine/Dash/ToMove" method="do_transition"]
+[connection signal="has_spawned_entity" from="BoomerangSpawner" to="SFX/boomerang_shot" method="play"]
 
 [editable path="InputController"]
 [editable path="MouseController"]

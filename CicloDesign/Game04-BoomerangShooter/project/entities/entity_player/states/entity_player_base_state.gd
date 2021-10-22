@@ -5,11 +5,17 @@ signal stopped_moving()
 signal fire_just_pressed()
 
 export (bool) var play_anim_on_enter = false
+export (NodePath) var _animation_player_path
 export (String) var anim_name = ""
 export (bool) var _movement_change_state = true
 export (bool) var _movement_equals_zero = true
 export (String) var _movement_signal_name = ""
 export (bool) var can_shoot = true
+
+func enter(_info = null):
+	if _animation_player_path and anim_name != "":
+		var animation_player = get_node(_animation_player_path)
+		animation_player.play(anim_name)
 
 func _on_InputController_updated_move_direction(direction):
 	if fsm.current_state != self:

@@ -2,6 +2,7 @@ extends EntityTopdownPlayer
 
 signal boomerang_caused_damage()
 signal hurt()
+signal died()
 
 export (int) var max_ammo = 2
 
@@ -37,3 +38,6 @@ func _on_Boomerang_collected(_boomerang):
 
 func _on_Hurt_state_entered():
 	emit_signal("hurt")
+
+func _on_Dead_state_entered():
+	emit_signal("died")

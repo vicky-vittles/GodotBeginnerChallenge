@@ -22,6 +22,7 @@ radius = 27.0
 
 [node name="Boomerang" type="Node2D"]
 script = ExtResource( 1 )
+entity_type = 2
 max_returning_scaled_speed = 960.0
 
 [node name="Body" type="KinematicBody2D" parent="."]
@@ -137,7 +138,7 @@ one_shot = true
 [connection signal="started_moving" from="." to="Body/EntityMover" method="set_move_direction"]
 [connection signal="effect" from="Body/Triggers/DamageHitbox" to="." method="_on_DamageHitbox_effect"]
 [connection signal="effect" from="Body/Triggers/CatchTrigger" to="." method="_on_CatchTrigger_effect"]
+[connection signal="timeout" from="TurnaroundTimer" to="." method="_on_TurnaroundTimer_timeout"]
 [connection signal="timeout" from="TurnaroundTimer" to="Body/EntityMover" method="disable"]
 [connection signal="timeout" from="TurnaroundTimer" to="Body/SteeringEntityMover" method="enable"]
 [connection signal="timeout" from="TurnaroundTimer" to="Body/Triggers/CatchTrigger" method="enable_all_shapes"]
-[connection signal="timeout" from="TurnaroundTimer" to="." method="_on_TurnaroundTimer_timeout"]

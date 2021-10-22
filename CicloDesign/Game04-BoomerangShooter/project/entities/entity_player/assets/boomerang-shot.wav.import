@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/boomerang-shot.wav-f1c9bd00a89f98480c1f2fdd11d4ed2d.sample"
+
+[deps]
+
+source_file="res://entities/entity_player/assets/boomerang-shot.wav"
+dest_files=[ "res://.import/boomerang-shot.wav-f1c9bd00a89f98480c1f2fdd11d4ed2d.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

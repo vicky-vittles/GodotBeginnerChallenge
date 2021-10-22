@@ -49,3 +49,9 @@ func get_action(action: String):
 # Implementation of the method that polls input state.
 func poll_input():
 	pass
+
+func enable():
+	is_active = true
+
+func disable():
+	is_active = false

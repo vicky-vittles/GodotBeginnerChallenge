@@ -1,5 +1,6 @@
 extends Node
 
+signal has_spawned_entity()
 signal spawned_entity(entity)
 
 export (NodePath) var actor_path
@@ -26,6 +27,7 @@ func spawn_with_info(info: Dictionary):
 		else:
 			actor.add_child(entity)
 	apply_info(entity, info)
+	emit_signal("has_spawned_entity")
 	emit_signal("spawned_entity", entity)
 	return entity
 
