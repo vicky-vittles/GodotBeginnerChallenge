@@ -30,7 +30,7 @@ _data = [ Vector2( 0, 1 ), 0.0, -1.0, 0, 1, Vector2( 1, 0 ), -1.0, 0.0, 1, 0 ]
 [sub_resource type="Gradient" id=2]
 colors = PoolColorArray( 0.831373, 0.596078, 0.290196, 1, 0.831373, 0.596078, 0.290196, 0 )
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=3]
 resource_name = "boomerang_catch"
 length = 0.2
 step = 0.05
@@ -71,7 +71,7 @@ tracks/2/keys = {
 "values": [ 0.0, 80.0 ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=4]
 resource_name = "default"
 length = 0.1
 tracks/0/type = "value"
@@ -87,22 +87,22 @@ tracks/0/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Curve" id=3]
+[sub_resource type="Curve" id=5]
 _data = [ Vector2( 0, 0 ), 0.0, 1.0, 0, 1, Vector2( 1, 1 ), 1.0, 0.0, 1, 0 ]
 
-[sub_resource type="Gradient" id=4]
+[sub_resource type="Gradient" id=6]
 colors = PoolColorArray( 0.831373, 0.596078, 0.290196, 0, 0.831373, 0.596078, 0.290196, 1 )
 
-[sub_resource type="CircleShape2D" id=5]
-radius = 12.0
-
-[sub_resource type="CircleShape2D" id=6]
-radius = 12.0
-
 [sub_resource type="CircleShape2D" id=7]
+radius = 12.0
+
+[sub_resource type="CircleShape2D" id=8]
+radius = 12.0
+
+[sub_resource type="CircleShape2D" id=9]
 radius = 16.0
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=10]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("graphics/move_trail:lifetime")
@@ -117,8 +117,7 @@ tracks/0/keys = {
 "values": [ 0.25 ]
 }
 
-[sub_resource type="Animation" id=9]
-resource_name = "dead"
+[sub_resource type="Animation" id=11]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("graphics/main:scale")
@@ -181,7 +180,7 @@ tracks/4/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=12]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("graphics:visible")
@@ -256,7 +255,7 @@ tracks/5/keys = {
 "values": [ Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=13]
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("graphics:visible")
@@ -283,7 +282,7 @@ tracks/1/keys = {
 "values": [ true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false, true ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=14]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("graphics/move_trail:lifetime")
@@ -402,14 +401,15 @@ border_color = Color( 0.831373, 0.596078, 0.290196, 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Body/graphics/particles" index="2"]
 autoplay = "default"
-anims/boomerang_catch = SubResource( 13 )
-anims/default = SubResource( 14 )
+anims/boomerang_catch = SubResource( 3 )
+anims/default = SubResource( 4 )
 
 [node name="move_trail" type="Line2D" parent="Body/graphics" index="1"]
+points = PoolVector2Array( 3.82699, -48.9597 )
 width = 28.0
-width_curve = SubResource( 3 )
+width_curve = SubResource( 5 )
 default_color = Color( 0, 0, 0, 1 )
-gradient = SubResource( 4 )
+gradient = SubResource( 6 )
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_lock_": true
@@ -442,7 +442,7 @@ polygon_color = Color( 0.831373, 0.596078, 0.290196, 1 )
 
 [node name="CollisionShape" parent="Body" index="1"]
 visible = false
-shape = SubResource( 5 )
+shape = SubResource( 7 )
 
 [node name="Triggers" type="Node2D" parent="Body" index="2"]
 __meta__ = {
@@ -463,7 +463,7 @@ collidable_groups = [ "entity_enemy_damage_hitbox" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Triggers/DamageHurtbox" index="0"]
 visible = false
-shape = SubResource( 6 )
+shape = SubResource( 8 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -482,7 +482,7 @@ collidable_groups = [ "entity_boomerang_catch_trigger" ]
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Body/Triggers/CatchTrigger" index="0"]
 visible = false
-shape = SubResource( 7 )
+shape = SubResource( 9 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -496,11 +496,11 @@ bounce_factor = 0.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Body" index="4"]
 autoplay = "default"
-anims/dash = SubResource( 8 )
-anims/dead = SubResource( 9 )
-anims/default = SubResource( 10 )
-anims/hurt = SubResource( 11 )
-anims/move = SubResource( 12 )
+anims/dash = SubResource( 10 )
+anims/dead = SubResource( 11 )
+anims/default = SubResource( 12 )
+anims/hurt = SubResource( 13 )
+anims/move = SubResource( 14 )
 
 [node name="Idle" parent="StateMachine" index="0"]
 script = ExtResource( 9 )
@@ -600,22 +600,22 @@ actor_path = NodePath("..")
 entity_template = ExtResource( 8 )
 is_independent_entity = true
 
-[connection signal="updated_move_direction" from="InputController" to="StateMachine/Move" method="_on_InputController_updated_move_direction"]
 [connection signal="updated_move_direction" from="InputController" to="StateMachine/Idle" method="_on_InputController_updated_move_direction"]
+[connection signal="updated_move_direction" from="InputController" to="StateMachine/Move" method="_on_InputController_updated_move_direction"]
 [connection signal="updated_move_direction" from="InputController" to="StateMachine/Hurt" method="_on_InputController_updated_move_direction"]
-[connection signal="just_pressed" from="InputController/fire" to="StateMachine/Move" method="_on_fire_just_pressed"]
 [connection signal="just_pressed" from="InputController/fire" to="StateMachine/Idle" method="_on_fire_just_pressed"]
+[connection signal="just_pressed" from="InputController/fire" to="StateMachine/Move" method="_on_fire_just_pressed"]
 [connection signal="just_pressed" from="InputController/fire" to="StateMachine/Hurt" method="_on_fire_just_pressed"]
 [connection signal="just_pressed" from="InputController/dash" to="StateMachine/Move" method="_on_dash_just_pressed"]
-[connection signal="died" from="Health" to="StateMachine/Idle/ToDead" method="do_transition"]
 [connection signal="died" from="Health" to="StateMachine/Move/ToDead" method="do_transition"]
+[connection signal="died" from="Health" to="StateMachine/Idle/ToDead" method="do_transition"]
 [connection signal="died" from="Health" to="StateMachine/Hurt/ToDead" method="do_transition"]
 [connection signal="mouse_position" from="MouseController" to="." method="_on_MouseController_mouse_position"]
 [connection signal="effect" from="Body/Triggers/DamageHurtbox" to="StateMachine/Move/ToHurt" method="do_transition"]
 [connection signal="effect" from="Body/Triggers/DamageHurtbox" to="StateMachine/Idle/ToHurt" method="do_transition"]
 [connection signal="took_damage" from="Body/Triggers/DamageHurtbox" to="Health" method="lose_health"]
-[connection signal="effect" from="Body/Triggers/CatchTrigger" to="Body/graphics/particles/AnimationPlayer" method="play" binds= [ "boomerang_catch" ]]
 [connection signal="effect" from="Body/Triggers/CatchTrigger" to="SFX/boomerang_pickup" method="play"]
+[connection signal="effect" from="Body/Triggers/CatchTrigger" to="Body/graphics/particles/AnimationPlayer" method="play" binds= [ "boomerang_catch" ]]
 [connection signal="fire_just_pressed" from="StateMachine/Idle" to="." method="fire_boomerang"]
 [connection signal="started_moving" from="StateMachine/Idle" to="StateMachine/Idle/ToMove" method="do_transition"]
 [connection signal="dash_just_pressed" from="StateMachine/Move" to="StateMachine/Move/ToDash" method="do_transition"]
@@ -623,24 +623,24 @@ is_independent_entity = true
 [connection signal="state_entered" from="StateMachine/Move" to="Body/EntityMover" method="set_speed_multiplier" binds= [ 1.0 ]]
 [connection signal="stopped_moving" from="StateMachine/Move" to="StateMachine/Move/ToIdle" method="do_transition"]
 [connection signal="fire_just_pressed" from="StateMachine/Dash" to="." method="fire_boomerang"]
+[connection signal="state_entered" from="StateMachine/Dash" to="Timers/DashTimer" method="start"]
 [connection signal="state_entered" from="StateMachine/Dash" to="Body/EntityMover" method="set_speed_multiplier" binds= [ 3.0 ]]
 [connection signal="state_entered" from="StateMachine/Dash" to="Body/Triggers/DamageHurtbox" method="disable_all_shapes"]
-[connection signal="state_entered" from="StateMachine/Dash" to="Timers/DashTimer" method="start"]
-[connection signal="state_exited" from="StateMachine/Dash" to="Body/Triggers/DamageHurtbox" method="enable_all_shapes"]
 [connection signal="state_exited" from="StateMachine/Dash" to="Timers/DashTimer" method="stop"]
+[connection signal="state_exited" from="StateMachine/Dash" to="Body/Triggers/DamageHurtbox" method="enable_all_shapes"]
 [connection signal="stopped_moving" from="StateMachine/Dash" to="StateMachine/Dash/ToIdle" method="do_transition"]
 [connection signal="fire_just_pressed" from="StateMachine/Hurt" to="." method="fire_boomerang"]
+[connection signal="state_entered" from="StateMachine/Hurt" to="Timers/InvincibilityTimer" method="start"]
 [connection signal="state_entered" from="StateMachine/Hurt" to="." method="_on_Hurt_state_entered"]
 [connection signal="state_entered" from="StateMachine/Hurt" to="SFX/hurt" method="play"]
-[connection signal="state_entered" from="StateMachine/Hurt" to="Body/AnimationPlayer" method="play" binds= [ "hurt" ]]
 [connection signal="state_entered" from="StateMachine/Hurt" to="Body/Triggers/DamageHurtbox" method="disable_all_shapes"]
-[connection signal="state_entered" from="StateMachine/Hurt" to="Timers/InvincibilityTimer" method="start"]
+[connection signal="state_entered" from="StateMachine/Hurt" to="Body/AnimationPlayer" method="play" binds= [ "hurt" ]]
 [connection signal="state_exited" from="StateMachine/Hurt" to="Body/Triggers/DamageHurtbox" method="enable_all_shapes"]
-[connection signal="state_entered" from="StateMachine/Dead" to="." method="_on_Dead_state_entered"]
-[connection signal="state_entered" from="StateMachine/Dead" to="InputController" method="disable"]
-[connection signal="state_entered" from="StateMachine/Dead" to="SFX/die_1" method="play"]
-[connection signal="state_entered" from="StateMachine/Dead" to="SFX/die_2" method="play"]
 [connection signal="state_entered" from="StateMachine/Dead" to="Body/EntityMover" method="disable"]
+[connection signal="state_entered" from="StateMachine/Dead" to="InputController" method="disable"]
+[connection signal="state_entered" from="StateMachine/Dead" to="." method="_on_Dead_state_entered"]
+[connection signal="state_entered" from="StateMachine/Dead" to="SFX/die_2" method="play"]
+[connection signal="state_entered" from="StateMachine/Dead" to="SFX/die_1" method="play"]
 [connection signal="timeout" from="Timers/InvincibilityTimer" to="StateMachine/Hurt/ToIdle" method="do_transition"]
 [connection signal="timeout" from="Timers/DashTimer" to="StateMachine/Dash/ToMove" method="do_transition"]
 [connection signal="has_spawned_entity" from="BoomerangSpawner" to="SFX/boomerang_shot" method="play"]

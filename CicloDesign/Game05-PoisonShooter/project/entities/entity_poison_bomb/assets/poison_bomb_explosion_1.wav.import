@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/poison_bomb_explosion_1.wav-881d67c0d94e5308d04751d2e33c0f79.sample"
+
+[deps]
+
+source_file="res://entities/entity_poison_bomb/assets/poison_bomb_explosion_1.wav"
+dest_files=[ "res://.import/poison_bomb_explosion_1.wav-881d67c0d94e5308d04751d2e33c0f79.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

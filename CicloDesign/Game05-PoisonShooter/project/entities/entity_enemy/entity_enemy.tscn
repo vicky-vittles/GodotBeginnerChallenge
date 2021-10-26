@@ -1,0 +1,674 @@
+[gd_scene load_steps=33 format=2]
+
+[ext_resource path="res://entities/entity_enemy/entity_enemy.gd" type="Script" id=1]
+[ext_resource path="res://libs/gt_entity_mover_2d/gt_steering_entity_mover_2d/gt_steering_entity_mover_2d.gd" type="Script" id=2]
+[ext_resource path="res://libs/gt_entity_mover_2d/gt_steering_entity_mover_2d/behaviors/gt_steering_behavior_seek_2d.gd" type="Script" id=3]
+[ext_resource path="res://libs/gt_area_2d/gt_trigger_area_2d/gt_hurtbox_2d/gt_hurtbox_2d.gd" type="Script" id=4]
+[ext_resource path="res://addons/Trail/trail_2d.gd" type="Script" id=5]
+[ext_resource path="res://libs/gt_area_2d/gt_trigger_area_2d/gt_hitbox_2d/gt_hitbox_2d.gd" type="Script" id=6]
+[ext_resource path="res://libs/gt_health/gt_health.gd" type="Script" id=7]
+[ext_resource path="res://libs/gt_state_machine/gt_state_machine.gd" type="Script" id=8]
+[ext_resource path="res://libs/gt_state_machine/__gt_state.gd" type="Script" id=9]
+[ext_resource path="res://libs/gt_state_machine/__gt_state_transition.gd" type="Script" id=10]
+[ext_resource path="res://addons/regular_polygon2d_node/RegularPolygon2D.gd" type="Script" id=11]
+[ext_resource path="res://libs/gt_entity_mover_2d/gt_steering_entity_mover_2d/behaviors/gt_steering_behavior_cohesion_2d.gd" type="Script" id=12]
+[ext_resource path="res://libs/gt_area_2d/gt_area_2d.gd" type="Script" id=13]
+[ext_resource path="res://libs/gt_entity_mover_2d/gt_steering_entity_mover_2d/behaviors/gt_steering_behavior_separation_2d.gd" type="Script" id=14]
+[ext_resource path="res://assets/materials/poison_explosion.material" type="Material" id=15]
+[ext_resource path="res://libs/gt_audio_player/gt_audio_player.gd" type="Script" id=16]
+[ext_resource path="res://entities/entity_enemy/assets/enemy_explosion.wav" type="AudioStream" id=17]
+[ext_resource path="res://entities/entity_enemy/assets/enemy_hurt_1.wav" type="AudioStream" id=18]
+
+[sub_resource type="Animation" id=1]
+resource_name = "default"
+tracks/0/type = "value"
+tracks/0/path = NodePath("explosion/explosion_1:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "explosion"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("explosion/explosion_1:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("explosion/explosion_1:border_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 45.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("explosion/explosion_1:size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 60.0 ]
+}
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 0 ), 0.0, 1.0, 0, 1, Vector2( 1, 1 ), 1.0, 0.0, 1, 0 ]
+
+[sub_resource type="Gradient" id=4]
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1 )
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id=6]
+
+[sub_resource type="CapsuleShape2D" id=7]
+radius = 12.0
+height = 10.0
+
+[sub_resource type="CircleShape2D" id=8]
+radius = 120.0
+
+[sub_resource type="CircleShape2D" id=9]
+radius = 18.0
+
+[sub_resource type="CircleShape2D" id=10]
+radius = 60.0
+
+[sub_resource type="Animation" id=11]
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/visuals/graphics/move_trail:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Body/visuals/graphics/rotation_pivot/main:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("Body/EntityMover")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "disable"
+} ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath("Body/Triggers/DamageHitbox")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "disable_all_shapes"
+} ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath("Body/Triggers/DamageHurtbox")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "disable_all_shapes"
+} ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath("Body/Triggers/PoisonHurtbox")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "disable_all_shapes"
+} ]
+}
+tracks/6/type = "method"
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "died" ],
+"method": "emit_signal"
+} ]
+}
+tracks/7/type = "method"
+tracks/7/path = NodePath("Body/Triggers/PoisonExplosionHitbox")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "enable_all_shapes"
+}, {
+"args": [  ],
+"method": "disable_all_shapes"
+} ]
+}
+tracks/8/type = "method"
+tracks/8/path = NodePath(".")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+tracks/9/type = "method"
+tracks/9/path = NodePath("Body/visuals/particles/AnimationPlayer")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "explosion", -1, 1.0, false ],
+"method": "play"
+} ]
+}
+tracks/10/type = "method"
+tracks/10/path = NodePath("SFX/explosion")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
+}
+
+[sub_resource type="Animation" id=12]
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/visuals/graphics/move_trail:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true, false, true, false, true, false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Body/visuals/graphics/rotation_pivot/main:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true, false, true, false, true, false, true ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("Timers/InvincibilityTimer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ -1 ],
+"method": "start"
+} ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath("SFX/hurt")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
+}
+
+[sub_resource type="Animation" id=13]
+tracks/0/type = "method"
+tracks/0/path = NodePath("Timers/InvincibilityTimer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "stop"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Body/visuals/graphics/rotation_pivot/main:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Body/visuals/graphics/move_trail:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=14]
+length = 0.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/visuals/graphics/move_trail:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Body/visuals/graphics/rotation_pivot/main:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[node name="Enemy" type="Node2D"]
+script = ExtResource( 1 )
+healthy_color = Color( 0.27451, 0.529412, 0.560784, 1 )
+poisoned_color = Color( 0.580392, 0.890196, 0.266667, 1 )
+poison_multiplier = 1.0
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource( 7 )
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="hurt" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 18 )
+bus = "Sound"
+script = ExtResource( 16 )
+random_pitch_deviation = 0.1
+
+[node name="explosion" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 17 )
+bus = "Sound"
+script = ExtResource( 16 )
+random_pitch_deviation = 0.1
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="PoisonTimer" type="Timer" parent="Timers"]
+
+[node name="InvincibilityTimer" type="Timer" parent="Timers"]
+wait_time = 0.4
+one_shot = true
+
+[node name="CollisionEnableTimer" type="Timer" parent="Timers"]
+one_shot = true
+autostart = true
+
+[node name="Body" type="KinematicBody2D" parent="."]
+collision_layer = 32
+collision_mask = 34
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="visuals" type="Node2D" parent="Body"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="particles" type="Node2D" parent="Body/visuals"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="explosion" type="Node2D" parent="Body/visuals/particles"]
+scale = Vector2( 4, 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="explosion_1" type="Node2D" parent="Body/visuals/particles/explosion"]
+material = ExtResource( 15 )
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_lock_": true
+}
+centered = true
+num_sides = 20
+size = 60.0
+polygon_color = Color( 0.2, 0.172549, 0.313726, 1 )
+border_color = Color( 0.580392, 0.890196, 0.266667, 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Body/visuals/particles"]
+autoplay = "default"
+anims/default = SubResource( 1 )
+anims/explosion = SubResource( 2 )
+
+[node name="graphics" type="Node2D" parent="Body/visuals"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="move_trail" type="Line2D" parent="Body/visuals/graphics"]
+width = 14.0
+width_curve = SubResource( 3 )
+gradient = SubResource( 4 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_lock_": true
+}
+lifetime = 0.2
+distance = 2.0
+segments = 40
+
+[node name="rotation_pivot" type="Node2D" parent="Body/visuals/graphics"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="main" type="Polygon2D" parent="Body/visuals/graphics/rotation_pivot"]
+rotation = 1.5708
+polygon = PoolVector2Array( -10, 10, 0, -15, 10, 10 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
+visible = false
+rotation = 1.5708
+shape = SubResource( 5 )
+disabled = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Triggers" type="Node2D" parent="Body"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="DamageHitbox" type="Area2D" parent="Body/Triggers" groups=[
+"entity_enemy_damage_hitbox",
+]]
+visible = false
+collision_layer = 16
+collision_mask = 16
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
+_body_path = NodePath("../..")
+collidable_groups = [ "entity_player_damage_hurtbox" ]
+damage = 30
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Triggers/DamageHitbox"]
+shape = SubResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="DamageHurtbox" type="Area2D" parent="Body/Triggers" groups=[
+"entity_enemy_damage_hurtbox",
+]]
+visible = false
+collision_layer = 16
+collision_mask = 16
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+_body_path = NodePath("../..")
+collidable_groups = [ "entity_poison_bomb_damage_hitbox" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Triggers/DamageHurtbox"]
+rotation = 1.5708
+shape = SubResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PoisonExplosionHitbox" type="Area2D" parent="Body/Triggers" groups=[
+"entity_poison_bomb_poison_hitbox",
+]]
+visible = false
+collision_layer = 16
+collision_mask = 16
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
+_body_path = NodePath("../..")
+collidable_groups = [ "entity_enemy_poison_hurtbox" ]
+disable_on_ready = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Triggers/PoisonExplosionHitbox"]
+shape = SubResource( 8 )
+
+[node name="PoisonHurtbox" type="Area2D" parent="Body/Triggers" groups=[
+"entity_enemy_poison_hurtbox",
+]]
+visible = false
+collision_layer = 16
+collision_mask = 16
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+_body_path = NodePath("../..")
+collidable_groups = [ "entity_poison_bomb_poison_hitbox" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Triggers/PoisonHurtbox"]
+rotation = 1.5708
+shape = SubResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PresenceTrigger" type="Area2D" parent="Body/Triggers" groups=[
+"entity_enemy_presence_trigger",
+]]
+visible = false
+collision_layer = 8
+collision_mask = 8
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_lock_": true
+}
+_body_path = NodePath("../..")
+collidable_groups = [ "entity_enemy_presence_trigger" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Triggers/PresenceTrigger"]
+shape = SubResource( 10 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="EntityMover" type="Node" parent="Body"]
+script = ExtResource( 2 )
+body_path = NodePath("..")
+movement_mode = 2
+max_speed = 200
+
+[node name="SeekPlayer" type="Node" parent="Body/EntityMover"]
+script = ExtResource( 3 )
+_actor_path = NodePath("..")
+max_force = 200
+
+[node name="EnemySeparation" type="Node" parent="Body/EntityMover"]
+script = ExtResource( 14 )
+_actor_path = NodePath("..")
+is_enabled = false
+max_force = 128.0
+min_separation = 64.0
+
+[node name="EnemyCohesion" type="Node" parent="Body/EntityMover"]
+script = ExtResource( 12 )
+_actor_path = NodePath("..")
+is_enabled = false
+use_target_node = false
+max_cohesion = 80.0
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 8 )
+_entity_path = NodePath("..")
+
+[node name="Move" type="Node" parent="StateMachine"]
+script = ExtResource( 9 )
+_fsm_path = NodePath("..")
+_animation_player_path = NodePath("../../AnimationPlayer")
+anim_name_on_enter = "move_enter"
+play_on_enter = true
+
+[node name="ToHurt" type="Node" parent="StateMachine/Move"]
+script = ExtResource( 10 )
+_end_state_path = NodePath("../../Hurt")
+
+[node name="ToDead" type="Node" parent="StateMachine/Move"]
+script = ExtResource( 10 )
+_end_state_path = NodePath("../../Dead")
+
+[node name="Hurt" type="Node" parent="StateMachine"]
+script = ExtResource( 9 )
+_fsm_path = NodePath("..")
+_animation_player_path = NodePath("../../AnimationPlayer")
+anim_name_on_enter = "hurt_enter"
+anim_name_on_exit = "hurt_exit"
+play_on_enter = true
+play_on_exit = true
+
+[node name="ToMove" type="Node" parent="StateMachine/Hurt"]
+script = ExtResource( 10 )
+_end_state_path = NodePath("../../Move")
+
+[node name="Dead" type="Node" parent="StateMachine"]
+script = ExtResource( 9 )
+_fsm_path = NodePath("..")
+_animation_player_path = NodePath("../../AnimationPlayer")
+anim_name_on_enter = "dead_enter"
+play_on_enter = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "move_enter"
+anims/dead_enter = SubResource( 11 )
+anims/hurt_enter = SubResource( 12 )
+anims/hurt_exit = SubResource( 13 )
+anims/move_enter = SubResource( 14 )
+
+[connection signal="died" from="Health" to="StateMachine/Move/ToDead" method="do_transition"]
+[connection signal="lived" from="Health" to="StateMachine/Move/ToHurt" method="do_transition"]
+[connection signal="timeout" from="Timers/PoisonTimer" to="." method="_on_PoisonTimer_timeout"]
+[connection signal="timeout" from="Timers/InvincibilityTimer" to="StateMachine/Hurt/ToMove" method="do_transition"]
+[connection signal="timeout" from="Timers/CollisionEnableTimer" to="." method="_on_CollisionEnableTimer_timeout"]
+[connection signal="took_damage" from="Body/Triggers/DamageHurtbox" to="Health" method="lose_health"]
+[connection signal="effect" from="Body/Triggers/PoisonHurtbox" to="Timers/PoisonTimer" method="start"]
+[connection signal="grouped_area_entered" from="Body/Triggers/PoisonHurtbox" to="." method="_on_PoisonHurtbox_grouped_area_entered"]
+[connection signal="grouped_area_entered" from="Body/Triggers/PresenceTrigger" to="." method="_on_PresenceTrigger_grouped_area_entered"]
+[connection signal="grouped_area_exited" from="Body/Triggers/PresenceTrigger" to="." method="_on_PresenceTrigger_grouped_area_exited"]
