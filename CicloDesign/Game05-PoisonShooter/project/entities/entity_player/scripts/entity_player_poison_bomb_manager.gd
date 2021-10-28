@@ -38,4 +38,4 @@ func shoot_bomb():
 
 func _on_PoisonBomb_exploded(bomb):
 	range_indicator.remove_bomb(bomb)
-	ammo.gain_points(1)
+	#ammo.gain_points(1)
