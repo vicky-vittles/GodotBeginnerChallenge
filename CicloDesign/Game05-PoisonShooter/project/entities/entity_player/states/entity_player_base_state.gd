@@ -5,3 +5,7 @@ signal fire_just_pressed()
 func _on_fire_just_pressed():
 	if fsm.current_state == self:
 		emit_signal("fire_just_pressed")
+
+func _on_Player_took_damage(damage):
+	if fsm.current_state == self:
+		entity.health.lose_health(damage)

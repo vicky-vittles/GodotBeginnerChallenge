@@ -3,6 +3,9 @@
 extends GTRandomPointZone2D
 
 signal enemy_died()
+signal has_preview_wave()
+signal preview_wave(wave)
+signal has_updated_wave()
 signal updated_wave(wave)
 signal updated_properties(dict)
 
@@ -46,11 +49,17 @@ func _ready():
 
 func check_advance_wave():
 	if enemies_killed >= wave_enemies and between_wave_timer.is_stopped():
+		emit_signal("has_preview_wave")
+		emit_signal("preview_wave", current_wave+1)
 		between_wave_timer.start()
 
 func advance_wave():
 	if current_wave < max_waves:
 		_set_wave(current_wave+1)
+
+# Abstract
+func set_enemy_signals(enemy):
+	pass
 
 func set_enemy_info():
 	return {
@@ -64,6 +73,7 @@ func spawn_enemy():
 	var new_enemy = spawner.spawn_with_info(info)
 	assert(new_enemy.has_signal("died"), "%s NSTManager tried to utilize an entity %s that does not contain the 'died' signal" % [self.name, new_enemy.name])
 	new_enemy.connect("died", self, "_on_entity_died")
+	set_enemy_signals(new_enemy)
 	if _debug_mode: print("spawned_enemy: %s" % [enemies_spawned])
 
 func _set_wave(_wave):
@@ -72,6 +82,7 @@ func _set_wave(_wave):
 	for i in screen_enemies:
 		spawn_enemy()
 	emit_signal("updated_wave", current_wave)
+	emit_signal("has_updated_wave")
 	if _debug_mode: print("current_wave: %s" % [current_wave])
 
 func _set_variables():

@@ -1,5 +1,8 @@
 extends Node
 
+signal shot_bomb()
+signal bomb_caused_damage()
+
 export (NodePath) var _entity_path
 export (NodePath) var _body_path
 export (NodePath) var _range_indicator_path
@@ -26,10 +29,12 @@ func shoot_bomb():
 			"global_position": body.global_position}
 		var bomb = spawner.spawn_with_info(info)
 		bomb.shoot(entity.aim_direction)
+		bomb.connect("caused_damage", self, "emit_signal", ["bomb_caused_damage"])
 		bomb.connect("exploded", self, "_on_PoisonBomb_exploded")
 		range_indicator.add_bomb(bomb)
 		ammo.lose_points(1)
 		cooldown.start()
+		emit_signal("shot_bomb")
 
 func _on_PoisonBomb_exploded(bomb):
 	range_indicator.remove_bomb(bomb)

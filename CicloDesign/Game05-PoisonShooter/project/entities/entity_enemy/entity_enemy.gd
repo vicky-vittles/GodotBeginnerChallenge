@@ -1,5 +1,6 @@
 extends GTEntity2D
 
+signal hurt()
 signal died()
 
 const MOVEMENT_THRESHOLD = 4

@@ -99,6 +99,7 @@ radius = 18.0
 radius = 60.0
 
 [sub_resource type="Animation" id=11]
+step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body/visuals/graphics/move_trail:visible")
 tracks/0/interp = 1
@@ -231,7 +232,7 @@ tracks/9/loop_wrap = true
 tracks/9/imported = false
 tracks/9/enabled = true
 tracks/9/keys = {
-"times": PoolRealArray( 0 ),
+"times": PoolRealArray( 0.05 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [ "explosion", -1, 1.0, false ],
@@ -306,6 +307,20 @@ tracks/3/keys = {
 "values": [ {
 "args": [ 0.0 ],
 "method": "play"
+} ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "hurt" ],
+"method": "emit_signal"
 } ]
 }
 
@@ -390,15 +405,17 @@ script = ExtResource( 7 )
 
 [node name="hurt" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 18 )
+volume_db = -3.0
 bus = "Sound"
 script = ExtResource( 16 )
 random_pitch_deviation = 0.1
 
 [node name="explosion" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 17 )
+volume_db = -3.0
 bus = "Sound"
 script = ExtResource( 16 )
-random_pitch_deviation = 0.1
+random_pitch_deviation = 0.2
 
 [node name="Timers" type="Node" parent="."]
 
@@ -458,6 +475,7 @@ __meta__ = {
 }
 
 [node name="move_trail" type="Line2D" parent="Body/visuals/graphics"]
+visible = false
 width = 14.0
 width_curve = SubResource( 3 )
 gradient = SubResource( 4 )
@@ -475,6 +493,7 @@ __meta__ = {
 }
 
 [node name="main" type="Polygon2D" parent="Body/visuals/graphics/rotation_pivot"]
+visible = false
 rotation = 1.5708
 polygon = PoolVector2Array( -10, 10, 0, -15, 10, 10 )
 __meta__ = {
@@ -507,7 +526,7 @@ __meta__ = {
 }
 _body_path = NodePath("../..")
 collidable_groups = [ "entity_player_damage_hurtbox" ]
-damage = 30
+damage = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Triggers/DamageHitbox"]
 shape = SubResource( 6 )

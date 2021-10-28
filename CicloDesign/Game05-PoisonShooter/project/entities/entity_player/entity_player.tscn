@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://entities/entity_player/entity_player.gd" type="Script" id=1]
 [ext_resource path="res://libs/gt_entity_mover_2d/gt_topdown_entity_mover_2d/gt_topdown_entity_mover_2d.gd" type="Script" id=2]
@@ -18,20 +18,30 @@
 [ext_resource path="res://components/dashed_line_drawer_2d/dashed_line_drawer_2d.tscn" type="PackedScene" id=16]
 [ext_resource path="res://entities/entity_player/scripts/entity_player_range_indicator.gd" type="Script" id=17]
 [ext_resource path="res://entities/entity_player/scripts/entity_player_poison_bomb_manager.gd" type="Script" id=18]
+[ext_resource path="res://libs/gt_audio_player/gt_audio_player.gd" type="Script" id=19]
+[ext_resource path="res://entities/entity_player/assets/player-hurt.wav" type="AudioStream" id=20]
+[ext_resource path="res://entities/entity_player/assets/player-die.wav" type="AudioStream" id=21]
+[ext_resource path="res://assets/images/white-circle.png" type="Texture" id=22]
+[ext_resource path="res://libs/gt_juice_2d/gt_juice_2d.gd" type="Script" id=23]
 
 [sub_resource type="Curve" id=1]
-_data = [ Vector2( 0, 0 ), 0.0, 1.0, 0, 1, Vector2( 1, 1 ), 1.0, 0.0, 1, 0 ]
+_data = [ Vector2( 0, 1 ), 0.0, -1.0, 0, 1, Vector2( 1, 0 ), -1.0, 0.0, 1, 0 ]
 
 [sub_resource type="Gradient" id=2]
+colors = PoolColorArray( 0.886275, 0.952941, 0.894118, 1, 0.886275, 0.952941, 0.894118, 0 )
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 0 ), 0.0, 1.0, 0, 1, Vector2( 1, 1 ), 1.0, 0.0, 1, 0 ]
+
+[sub_resource type="Gradient" id=4]
 colors = PoolColorArray( 0.886275, 0.952941, 0.894118, 0, 0.886275, 0.952941, 0.894118, 1 )
 
-[sub_resource type="CircleShape2D" id=3]
+[sub_resource type="CircleShape2D" id=5]
 radius = 8.0
 
-[sub_resource type="CircleShape2D" id=4]
+[sub_resource type="CircleShape2D" id=6]
 
-[sub_resource type="Animation" id=5]
-resource_name = "dead_enter"
+[sub_resource type="Animation" id=7]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body/visuals/graphics:visible")
 tracks/0/interp = 1
@@ -84,9 +94,34 @@ tracks/3/keys = {
 "method": "emit_signal"
 } ]
 }
+tracks/4/type = "method"
+tracks/4/path = NodePath("SFX/die")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Body/visuals/effects/dead:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
-[sub_resource type="Animation" id=6]
-resource_name = "hurt_enter"
+[sub_resource type="Animation" id=8]
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body/visuals/graphics:visible")
@@ -126,9 +161,36 @@ tracks/2/keys = {
 "update": 1,
 "values": [ true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false, true ]
 }
+tracks/3/type = "method"
+tracks/3/path = NodePath("SFX/hurt")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "hurt" ],
+"method": "emit_signal"
+} ]
+}
 
-[sub_resource type="Animation" id=7]
-resource_name = "hurt_exit"
+[sub_resource type="Animation" id=9]
 length = 0.1
 tracks/0/type = "method"
 tracks/0/path = NodePath("Timers/InvincibilityTimer")
@@ -145,7 +207,7 @@ tracks/0/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=10]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body/visuals/graphics:visible")
@@ -172,7 +234,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=11]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body/visuals/graphics:visible")
@@ -212,8 +274,26 @@ action = "act_fire"
 
 [node name="MouseController" parent="." instance=ExtResource( 9 )]
 
+[node name="SFX" type="Node" parent="."]
+
+[node name="hurt" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 20 )
+volume_db = -3.0
+bus = "Sound"
+script = ExtResource( 19 )
+random_pitch_deviation = 0.1
+
+[node name="die" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 21 )
+volume_db = -3.0
+bus = "Sound"
+script = ExtResource( 19 )
+random_pitch_deviation = 0.1
+
 [node name="Health" type="Node" parent="."]
 script = ExtResource( 10 )
+max_health = 4
+initial_health = 4
 
 [node name="Timers" type="Node" parent="."]
 
@@ -271,6 +351,26 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="dead" type="CPUParticles2D" parent="Body/visuals/effects"]
+emitting = false
+amount = 40
+one_shot = true
+explosiveness = 0.9
+texture = ExtResource( 22 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 400.0
+angular_velocity = 10.0
+orbit_velocity = 0.5
+damping = 100.0
+scale_amount = 0.02
+scale_amount_random = 0.01
+scale_amount_curve = SubResource( 1 )
+color_ramp = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="graphics" type="Node2D" parent="Body/visuals"]
 __meta__ = {
 "_edit_lock_": true
@@ -278,24 +378,30 @@ __meta__ = {
 
 [node name="move_trail" type="Line2D" parent="Body/visuals/graphics"]
 width = 24.0
-width_curve = SubResource( 1 )
-gradient = SubResource( 2 )
+width_curve = SubResource( 3 )
+gradient = SubResource( 4 )
 script = ExtResource( 8 )
 __meta__ = {
 "_edit_lock_": true
 }
-lifetime = 0.08
+lifetime = 0.12
 distance = 2.0
 segments = 40
 
-[node name="arrow" type="Polygon2D" parent="Body/visuals/graphics"]
+[node name="juice" type="Node2D" parent="Body/visuals/graphics"]
+script = ExtResource( 23 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="arrow" type="Polygon2D" parent="Body/visuals/graphics/juice"]
 color = Color( 0.886275, 0.952941, 0.894118, 1 )
 polygon = PoolVector2Array( 0, -9, 0, 9, 24, 0 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="main" type="Node2D" parent="Body/visuals/graphics"]
+[node name="main" type="Node2D" parent="Body/visuals/graphics/juice"]
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_lock_": true
@@ -307,7 +413,7 @@ polygon_color = Color( 0.886275, 0.952941, 0.894118, 1 )
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Body"]
 visible = false
-shape = SubResource( 3 )
+shape = SubResource( 5 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -331,7 +437,7 @@ _body_path = NodePath("../..")
 collidable_groups = [ "entity_enemy_damage_hitbox" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Triggers/DamageHurtbox"]
-shape = SubResource( 4 )
+shape = SubResource( 6 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -408,26 +514,32 @@ can_move = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "idle_enter"
-anims/dead_enter = SubResource( 5 )
-anims/hurt_enter = SubResource( 6 )
-anims/hurt_exit = SubResource( 7 )
-anims/idle_enter = SubResource( 8 )
-anims/move_enter = SubResource( 9 )
+anims/dead_enter = SubResource( 7 )
+anims/hurt_enter = SubResource( 8 )
+anims/hurt_exit = SubResource( 9 )
+anims/idle_enter = SubResource( 10 )
+anims/move_enter = SubResource( 11 )
 
+[connection signal="took_damage" from="." to="StateMachine/Move" method="_on_Player_took_damage"]
+[connection signal="took_damage" from="." to="StateMachine/Idle" method="_on_Player_took_damage"]
+[connection signal="updated_move_direction" from="InputController" to="StateMachine/Move" method="_on_InputController_updated_move_direction"]
+[connection signal="updated_move_direction" from="InputController" to="StateMachine/Idle" method="_on_InputController_updated_move_direction"]
 [connection signal="updated_move_direction" from="InputController" to="StateMachine/Hurt" method="_on_InputController_updated_move_direction"]
 [connection signal="updated_move_direction" from="InputController" to="StateMachine/Dead" method="_on_InputController_updated_move_direction"]
-[connection signal="updated_move_direction" from="InputController" to="StateMachine/Idle" method="_on_InputController_updated_move_direction"]
-[connection signal="updated_move_direction" from="InputController" to="StateMachine/Move" method="_on_InputController_updated_move_direction"]
-[connection signal="just_pressed" from="InputController/act_fire" to="StateMachine/Hurt" method="_on_fire_just_pressed"]
-[connection signal="just_pressed" from="InputController/act_fire" to="StateMachine/Idle" method="_on_fire_just_pressed"]
 [connection signal="just_pressed" from="InputController/act_fire" to="StateMachine/Move" method="_on_fire_just_pressed"]
+[connection signal="just_pressed" from="InputController/act_fire" to="StateMachine/Idle" method="_on_fire_just_pressed"]
+[connection signal="just_pressed" from="InputController/act_fire" to="StateMachine/Hurt" method="_on_fire_just_pressed"]
 [connection signal="mouse_position" from="MouseController" to="." method="_on_MouseController_mouse_position"]
 [connection signal="died" from="Health" to="StateMachine/Move/ToDead" method="do_transition"]
 [connection signal="died" from="Health" to="StateMachine/Idle/ToDead" method="do_transition"]
-[connection signal="lived" from="Health" to="StateMachine/Move/ToHurt" method="do_transition"]
+[connection signal="health_updated" from="Health" to="." method="_on_Health_health_updated"]
 [connection signal="lived" from="Health" to="StateMachine/Idle/ToHurt" method="do_transition"]
+[connection signal="lived" from="Health" to="StateMachine/Move/ToHurt" method="do_transition"]
 [connection signal="timeout" from="Timers/InvincibilityTimer" to="StateMachine/Hurt/ToIdle" method="do_transition"]
-[connection signal="took_damage" from="Body/Triggers/DamageHurtbox" to="Health" method="lose_health"]
+[connection signal="bomb_caused_damage" from="PoisonBombs" to="." method="_on_PoisonBombs_bomb_caused_damage"]
+[connection signal="shot_bomb" from="PoisonBombs" to="Body/visuals/graphics/juice" method="simple_squash_stretch"]
+[connection signal="points_updated" from="PoisonBombs/Ammo" to="." method="_on_Ammo_points_updated"]
+[connection signal="took_damage" from="Body/Triggers/DamageHurtbox" to="." method="_on_DamageHurtbox_took_damage"]
 [connection signal="fire_just_pressed" from="StateMachine/Idle" to="PoisonBombs" method="shoot_bomb"]
 [connection signal="started_moving" from="StateMachine/Idle" to="StateMachine/Idle/ToMove" method="do_transition"]
 [connection signal="fire_just_pressed" from="StateMachine/Move" to="PoisonBombs" method="shoot_bomb"]

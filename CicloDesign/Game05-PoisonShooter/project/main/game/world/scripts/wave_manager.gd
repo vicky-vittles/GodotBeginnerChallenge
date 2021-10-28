@@ -2,10 +2,15 @@ extends "res://components/entity_spawner/nst_manager/nst_manager.gd"
 
 const STR_RANDOM_STRENGTH = "random_strength"
 
+signal enemy_hurt()
+
 export (NodePath) var _player_path
 export (float) var min_distance_to_player = 300
 
 onready var player = get_node(_player_path)
+
+func set_enemy_signals(enemy):
+	enemy.connect("hurt", self, "emit_signal", ["enemy_hurt"])
 
 func set_enemy_info():
 	var rand_pos = Vector2.ZERO

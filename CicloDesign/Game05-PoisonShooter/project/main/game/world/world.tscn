@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://entities/entity_player/entity_player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://components/entity_spawner/nst_manager/nst_manager.tscn" type="PackedScene" id=2]
@@ -7,6 +7,36 @@
 [ext_resource path="res://assets/fonts/diffusion-bold-s32-o2.tres" type="DynamicFont" id=5]
 [ext_resource path="res://entities/entity_enemy/entity_enemy.tscn" type="PackedScene" id=6]
 [ext_resource path="res://libs/gt_collision_polygon_2d/gt_collision_polygon_2d.gd" type="Script" id=7]
+[ext_resource path="res://libs/gt_state_machine/gt_state_machine.gd" type="Script" id=8]
+[ext_resource path="res://libs/gt_state_machine/__gt_state.gd" type="Script" id=9]
+[ext_resource path="res://libs/gt_state_machine/__gt_state_transition.gd" type="Script" id=10]
+[ext_resource path="res://components/screen_effects/screen_effects.tscn" type="PackedScene" id=11]
+[ext_resource path="res://libs/gt_screen_shake_2d/gt_screen_shake_2d.gd" type="Script" id=12]
+[ext_resource path="res://libs/gt_time/gt_time.gd" type="Script" id=13]
+[ext_resource path="res://assets/images/white-circle.png" type="Texture" id=14]
+[ext_resource path="res://main/game/world/scripts/world_hud_health_meter.gd" type="Script" id=15]
+[ext_resource path="res://libs/gt_juice_2d/gt_juice_2d.gd" type="Script" id=16]
+[ext_resource path="res://components/system_controller/system_controller.tscn" type="PackedScene" id=17]
+[ext_resource path="res://components/application_manager/application_manager.tscn" type="PackedScene" id=18]
+[ext_resource path="res://main/game/world/world.gd" type="Script" id=19]
+[ext_resource path="res://assets/fonts/diffusion-bold-s24-o2.tres" type="DynamicFont" id=20]
+[ext_resource path="res://main/game/world/scripts/world_hud_bomb_meter.gd" type="Script" id=21]
+
+[sub_resource type="Animation" id=5]
+resource_name = "update_wave"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("root/current_wave_label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8, 1.1, 2, 2.3, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ) ]
+}
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 50, 270 )
@@ -15,7 +45,7 @@ extents = Vector2( 50, 270 )
 extents = Vector2( 480, 50 )
 
 [sub_resource type="Animation" id=3]
-resource_name = "game_start"
+resource_name = "active_enter"
 length = 0.1
 tracks/0/type = "method"
 tracks/0/path = NodePath("WaveManager")
@@ -31,11 +61,134 @@ tracks/0/keys = {
 "method": "start"
 } ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("HUD/root/game_over_label:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HUD/root/health_label:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("HUD/root/current_wave_label:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath("SystemController")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "disable"
+} ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "game_over_enter"
+tracks/0/type = "method"
+tracks/0/path = NodePath("screen_effects")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.470588 ), 0.4 ],
+"method": "change_modulate"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HUD/root/game_over_label:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HUD/root/health_label:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("HUD/root/current_wave_label:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath("SystemController")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "enable"
+} ]
+}
 
 [node name="World" type="Node2D"]
+script = ExtResource( 19 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="SystemController" parent="." instance=ExtResource( 17 )]
+is_enabled = false
+
+[node name="ApplicationManager" parent="." instance=ExtResource( 18 )]
 
 [node name="background_color" type="ColorRect" parent="."]
 margin_right = 40.0
@@ -48,6 +201,8 @@ __meta__ = {
 }
 
 [node name="HUD" type="CanvasLayer" parent="."]
+pause_mode = 2
+layer = 2
 
 [node name="root" type="Control" parent="HUD"]
 anchor_right = 1.0
@@ -57,20 +212,181 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="current_wave_label" type="Label" parent="HUD/root"]
+[node name="health_label" type="Label" parent="HUD/root"]
+anchor_right = 1.0
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 51.0
+margin_bottom = 41.0
+custom_fonts/font = ExtResource( 20 )
+text = "Health"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="bomb_label" type="Label" parent="HUD/root"]
+anchor_right = 1.0
+margin_top = 10.0
+margin_right = -10.0
 margin_bottom = 14.0
-custom_fonts/font = ExtResource( 5 )
+custom_fonts/font = ExtResource( 20 )
+text = "Bombs"
+align = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="current_wave_label" type="Label" parent="HUD/root"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -475.0
+margin_top = -15.5
+margin_right = 475.0
+margin_bottom = 15.5
+custom_fonts/font = ExtResource( 20 )
 custom_colors/font_color = Color( 0.886275, 0.952941, 0.894118, 1 )
-text = "Wave: 1"
+text = "Wave 1"
+align = 1
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
-pattern_text = "Wave: %s"
+pattern_text = "Wave %s"
+
+[node name="game_over_label" type="Label" parent="HUD/root"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -171.0
+margin_top = -42.5
+margin_right = 171.0
+margin_bottom = 42.5
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 0.886275, 0.952941, 0.894118, 1 )
+text = "Game Over
+Press R to restart"
+align = 1
+valign = 1
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="health_meter" type="Node2D" parent="HUD/root"]
+script = ExtResource( 15 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="1" type="Node2D" parent="HUD/root/health_meter"]
+position = Vector2( 17, 55 )
+script = ExtResource( 16 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="sprite" type="Sprite" parent="HUD/root/health_meter/1"]
+modulate = Color( 0.886275, 0.952941, 0.894118, 1 )
+scale = Vector2( 0.035, 0.035 )
+texture = ExtResource( 14 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="2" type="Node2D" parent="HUD/root/health_meter"]
+position = Vector2( 42, 55 )
+script = ExtResource( 16 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="sprite" type="Sprite" parent="HUD/root/health_meter/2"]
+modulate = Color( 0.886275, 0.952941, 0.894118, 1 )
+scale = Vector2( 0.035, 0.035 )
+texture = ExtResource( 14 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="3" type="Node2D" parent="HUD/root/health_meter"]
+position = Vector2( 67, 55 )
+script = ExtResource( 16 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="sprite" type="Sprite" parent="HUD/root/health_meter/3"]
+modulate = Color( 0.886275, 0.952941, 0.894118, 1 )
+scale = Vector2( 0.035, 0.035 )
+texture = ExtResource( 14 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="4" type="Node2D" parent="HUD/root/health_meter"]
+position = Vector2( 92, 55 )
+script = ExtResource( 16 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="sprite" type="Sprite" parent="HUD/root/health_meter/4"]
+modulate = Color( 0.886275, 0.952941, 0.894118, 1 )
+scale = Vector2( 0.035, 0.035 )
+texture = ExtResource( 14 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="bomb_meter" type="Node2D" parent="HUD/root"]
+position = Vector2( 960, 0 )
+script = ExtResource( 21 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="5" type="Node2D" parent="HUD/root/bomb_meter"]
+position = Vector2( -59, 55 )
+script = ExtResource( 16 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="sprite" type="Sprite" parent="HUD/root/bomb_meter/5"]
+modulate = Color( 0.886275, 0.952941, 0.894118, 1 )
+scale = Vector2( 0.035, 0.035 )
+texture = ExtResource( 14 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="6" type="Node2D" parent="HUD/root/bomb_meter"]
+position = Vector2( -30, 55 )
+script = ExtResource( 16 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="sprite" type="Sprite" parent="HUD/root/bomb_meter/6"]
+modulate = Color( 0.886275, 0.952941, 0.894118, 1 )
+scale = Vector2( 0.035, 0.035 )
+texture = ExtResource( 14 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD"]
+anims/update_wave = SubResource( 5 )
+
+[node name="screen_effects" parent="." instance=ExtResource( 11 )]
+pause_mode = 2
+overlay_modulate = Color( 1, 1, 1, 0 )
 
 [node name="Terrain" type="StaticBody2D" parent="."]
 collision_layer = 2
@@ -115,16 +431,16 @@ graphics_color = Color( 0.2, 0.172549, 0.313726, 1 )
 script = ExtResource( 3 )
 _entity_template = ExtResource( 6 )
 enemy_properties = {
-"random_strength": [ 1.08, 1.16, 1.24, 1.32, 1.4, 1.48 ],
-"speed": [ 1.0, 1.1, 1.2, 1.3, 1.45, 1.6 ]
+"random_strength": [ 1.08, 1.16, 1.24, 1.32, 1.4, 1.48, 1.56, 1.64, 1.72, 1.8 ],
+"speed": [ 1.0, 1.1, 1.2, 1.35, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0 ]
 }
 wave_properties = {
-"replacement_time": [ 0.5, 0.4, 0.3, 0.3, 0.2, 0.2 ],
-"screen_enemies": [ 3, 3, 4, 4, 5, 5 ],
+"replacement_time": [ 0.4, 0.4, 0.3, 0.3, 0.2, 0.2, 0.15, 0.15, 0.1, 0.1 ],
+"screen_enemies": [ 3, 3, 4, 4, 4, 5, 5, 5, 6, 6 ],
 "time_between_waves": [ 3.0 ],
-"wave_enemies": [ 8, 11, 11, 15, 14, 19 ]
+"wave_enemies": [ 8, 11, 11, 15, 19, 14, 19, 24, 17, 23 ]
 }
-max_waves = 6
+max_waves = 20
 _player_path = NodePath("../Player")
 
 [node name="1" type="CollisionShape2D" parent="WaveManager"]
@@ -159,11 +475,77 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Bombs" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 459, 283 )
+position = Vector2( 480, 200 )
+
+[node name="Camera" type="Camera2D" parent="."]
+pause_mode = 2
+position = Vector2( 480, 270 )
+current = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ScreenShake" type="Node" parent="Camera"]
+script = ExtResource( 12 )
+_camera_path = NodePath("..")
+
+[node name="TimeManager" type="Node" parent="."]
+script = ExtResource( 13 )
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 8 )
+_entity_path = NodePath("..")
+
+[node name="Active" type="Node" parent="StateMachine"]
+script = ExtResource( 9 )
+_fsm_path = NodePath("..")
+_animation_player_path = NodePath("../../AnimationPlayer")
+anim_name_on_enter = "active_enter"
+play_on_enter = true
+
+[node name="ToGameOver" type="Node" parent="StateMachine/Active"]
+script = ExtResource( 10 )
+_end_state_path = NodePath("../../GameOver")
+
+[node name="ToPaused" type="Node" parent="StateMachine/Active"]
+script = ExtResource( 10 )
+_end_state_path = NodePath("../../Paused")
+
+[node name="Paused" type="Node" parent="StateMachine"]
+script = ExtResource( 9 )
+_fsm_path = NodePath("..")
+_animation_player_path = NodePath("../../AnimationPlayer")
+
+[node name="ToActive" type="Node" parent="StateMachine/Paused"]
+script = ExtResource( 10 )
+_end_state_path = NodePath("../../Active")
+
+[node name="GameOver" type="Node" parent="StateMachine"]
+script = ExtResource( 9 )
+_fsm_path = NodePath("..")
+_animation_player_path = NodePath("../../AnimationPlayer")
+anim_name_on_enter = "game_over_enter"
+play_on_enter = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "game_start"
-anims/game_start = SubResource( 3 )
+anims/active_enter = SubResource( 3 )
+anims/game_over_enter = SubResource( 4 )
 
-[connection signal="updated_wave" from="WaveManager" to="HUD/root/current_wave_label" method="apply_text_simple"]
+[connection signal="just_pressed" from="SystemController/sys_reload" to="ApplicationManager" method="reload"]
+[connection signal="enemy_died" from="WaveManager" to="TimeManager" method="pause_time" binds= [ 0.04 ]]
+[connection signal="has_preview_wave" from="WaveManager" to="HUD/AnimationPlayer" method="play" binds= [ "update_wave" ]]
+[connection signal="preview_wave" from="WaveManager" to="HUD/root/current_wave_label" method="apply_text_simple"]
+[connection signal="ammo_updated" from="Player" to="HUD/root/bomb_meter" method="update_bombs"]
+[connection signal="bomb_caused_damage" from="Player" to="TimeManager" method="pause_time" binds= [ 0.032 ]]
+[connection signal="died" from="Player" to="Camera/ScreenShake" method="simple_shake" binds= [ 24.0, 1.0, 0.1 ]]
+[connection signal="died" from="Player" to="StateMachine/Active/ToGameOver" method="do_transition"]
+[connection signal="health_updated" from="Player" to="HUD/root/health_meter" method="update_health"]
+[connection signal="hurt" from="Player" to="Camera/ScreenShake" method="simple_shake" binds= [ 16.0, 0.5, 0.05 ]]
+
+[editable path="SystemController"]

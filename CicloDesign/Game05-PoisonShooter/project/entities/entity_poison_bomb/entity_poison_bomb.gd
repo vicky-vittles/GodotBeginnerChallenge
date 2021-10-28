@@ -1,5 +1,6 @@
 extends GTEntity2D
 
+signal caused_damage()
 signal shot()
 signal exploded()
 
@@ -23,3 +24,5 @@ func explode():
 	emit_signal("exploded", self)
 
 func _set_fuse_time(_value): get_node("Timers/FuseTimer").wait_time = fuse_time
+
+func _on_DamageHitbox_effect(): emit_signal("caused_damage")

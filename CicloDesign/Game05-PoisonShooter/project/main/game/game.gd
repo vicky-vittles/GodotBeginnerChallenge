@@ -1,8 +1,15 @@
 extends Node2D
 
+export (bool) var randomize_on_ready = false
+export (bool) var unpause_on_ready = true
+
+onready var world = $World
+
 func _ready():
-	#randomize()
-	pass
+	if randomize_on_ready:
+		randomize()
+	if unpause_on_ready:
+		get_tree().paused = false
 
 func add_entity(entity):
-	add_child(entity)
+	world.bombs.add_child(entity)
