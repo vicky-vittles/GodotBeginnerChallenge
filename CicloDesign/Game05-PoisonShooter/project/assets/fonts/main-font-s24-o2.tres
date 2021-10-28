@@ -1,10 +1,10 @@
 [gd_resource type="DynamicFont" load_steps=2 format=2]
 
 [sub_resource type="DynamicFontData" id=1]
-font_path = "res://assets/fonts/diffusion-bold.ttf"
+font_path = "res://assets/fonts/main-font-diffusion-bold.ttf"
 
 [resource]
-size = 32
+size = 24
 outline_size = 2
 outline_color = Color( 0.2, 0.172549, 0.313726, 1 )
 use_mipmaps = true

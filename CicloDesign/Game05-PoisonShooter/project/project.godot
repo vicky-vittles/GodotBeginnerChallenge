@@ -19,15 +19,25 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/color-palette/ColorTile.gd"
 }, {
+"base": "Resource",
+"class": "CubicBezierCurve",
+"language": "GDScript",
+"path": "res://addons/cubic_bezier_controls/cubic_bezier_curve.gd"
+}, {
+"base": "CubicBezierRect",
+"class": "CubicBezierEdit",
+"language": "GDScript",
+"path": "res://addons/cubic_bezier_controls/cubic_bezier_edit.gd"
+}, {
+"base": "Control",
+"class": "CubicBezierRect",
+"language": "GDScript",
+"path": "res://addons/cubic_bezier_controls/cubic_bezier_rect.gd"
+}, {
 "base": "Container",
 "class": "FlexGridContainer",
 "language": "GDScript",
 "path": "res://addons/color-palette/utilities/FlexGridContainer.gd"
-}, {
-"base": "Area2D",
-"class": "GTArea2D",
-"language": "GDScript",
-"path": "res://libs/gt_area_2d/gt_area_2d.gd"
 }, {
 "base": "AudioStreamPlayer",
 "class": "GTAudioPlayer",
@@ -64,6 +74,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://libs/gt_entity_mover_2d/gt_gravity_entity_mover_2d/gt_gravity_entity_mover_2d.gd"
 }, {
+"base": "Area2D",
+"class": "GTGroupedArea2D",
+"language": "GDScript",
+"path": "res://libs/gt_grouped_area_2d/gt_grouped_area_2d.gd"
+}, {
 "base": "Node",
 "class": "GTHealth",
 "language": "GDScript",
@@ -72,12 +87,12 @@ _global_script_classes=[ {
 "base": "GTTriggerArea2D",
 "class": "GTHitbox2D",
 "language": "GDScript",
-"path": "res://libs/gt_area_2d/gt_trigger_area_2d/gt_hitbox_2d/gt_hitbox_2d.gd"
+"path": "res://libs/gt_grouped_area_2d/gt_trigger_area_2d/gt_hitbox_2d/gt_hitbox_2d.gd"
 }, {
 "base": "GTTriggerArea2D",
 "class": "GTHurtbox2D",
 "language": "GDScript",
-"path": "res://libs/gt_area_2d/gt_trigger_area_2d/gt_hurtbox_2d/gt_hurtbox_2d.gd"
+"path": "res://libs/gt_grouped_area_2d/gt_trigger_area_2d/gt_hurtbox_2d/gt_hurtbox_2d.gd"
 }, {
 "base": "Node",
 "class": "GTInputAction",
@@ -189,15 +204,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://libs/gt_entity_mover_2d/gt_steering_entity_mover_2d/gt_steering_entity_mover_2d.gd"
 }, {
-"base": "GTArea2D",
+"base": "Node",
+"class": "GTStopWatch",
+"language": "GDScript",
+"path": "res://libs/gt_stopwatch/gt_stopwatch.gd"
+}, {
+"base": "GTGroupedArea2D",
 "class": "GTTeleporter2D",
 "language": "GDScript",
-"path": "res://libs/gt_area_2d/gt_teleporter_2d/gt_teleporter_2d.gd"
+"path": "res://libs/gt_grouped_area_2d/gt_teleporter_2d/gt_teleporter_2d.gd"
 }, {
 "base": "Node",
-"class": "GTTime",
+"class": "GTTimeScale",
 "language": "GDScript",
-"path": "res://libs/gt_time/gt_time.gd"
+"path": "res://libs/gt_time_scale/gt_time_scale.gd"
 }, {
 "base": "Timer",
 "class": "GTTimer",
@@ -209,10 +229,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://libs/gt_entity_mover_2d/gt_topdown_entity_mover_2d/gt_topdown_entity_mover_2d.gd"
 }, {
-"base": "GTArea2D",
+"base": "GTGroupedArea2D",
 "class": "GTTriggerArea2D",
 "language": "GDScript",
-"path": "res://libs/gt_area_2d/gt_trigger_area_2d/gt_trigger_area_2d.gd"
+"path": "res://libs/gt_grouped_area_2d/gt_trigger_area_2d/gt_trigger_area_2d.gd"
+}, {
+"base": "Tween",
+"class": "GTTween",
+"language": "GDScript",
+"path": "res://libs/gt_tween/gt_tween.gd"
 }, {
 "base": "Node",
 "class": "LevelLoader",
@@ -237,8 +262,10 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "ApplicationManager": "",
 "ColorTile": "",
+"CubicBezierCurve": "",
+"CubicBezierEdit": "",
+"CubicBezierRect": "",
 "FlexGridContainer": "res://addons/color-palette/utilities/FlexGridContainerIcon.png",
-"GTArea2D": "",
 "GTAudioPlayer": "",
 "GTCollisionPolygon2D": "",
 "GTDeviceController": "res://libs/gt_input_controller/icons/gt_device_controller.svg",
@@ -246,6 +273,7 @@ _global_script_class_icons={
 "GTEntityMover2D": "",
 "GTFormula": "",
 "GTGravityEntityMover2D": "",
+"GTGroupedArea2D": "",
 "GTHealth": "",
 "GTHitbox2D": "",
 "GTHurtbox2D": "",
@@ -271,11 +299,13 @@ _global_script_class_icons={
 "GTSteeringBehaviorSeparation2D": "",
 "GTSteeringBehaviorWander2D": "",
 "GTSteeringEntityMover2D": "",
+"GTStopWatch": "",
 "GTTeleporter2D": "",
-"GTTime": "",
+"GTTimeScale": "",
 "GTTimer": "",
 "GTTopdownEntityMover2D": "",
 "GTTriggerArea2D": "",
+"GTTween": "",
 "LevelLoader": "",
 "Palette": "",
 "PaletteImporter": "",
@@ -315,14 +345,13 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/Trail/plugin.cfg", "res://addons/color-palette/plugin.cfg", "res://addons/regular_polygon2d_node/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/Trail/plugin.cfg", "res://addons/color-palette/plugin.cfg", "res://addons/cubic_bezier_controls/plugin.cfg", "res://addons/regular_polygon2d_node/plugin.cfg" )
 
 [input]
 
 sys_exit={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777217,"unicode":0,"echo":false,"script":null)
- ]
+"events": [  ]
 }
 sys_reload={
 "deadzone": 0.5,
@@ -357,6 +386,11 @@ act_fire={
 act_dash={
 "deadzone": 0.5,
 "events": [  ]
+}
+sys_menu={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777217,"unicode":0,"echo":false,"script":null)
+ ]
 }
 
 [layer_names]

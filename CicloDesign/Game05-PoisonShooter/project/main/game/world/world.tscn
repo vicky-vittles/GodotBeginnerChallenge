@@ -4,7 +4,7 @@
 [ext_resource path="res://components/entity_spawner/nst_manager/nst_manager.tscn" type="PackedScene" id=2]
 [ext_resource path="res://main/game/world/scripts/world_wave_manager.gd" type="Script" id=3]
 [ext_resource path="res://libs/gt_pattern_label/gt_pattern_label.gd" type="Script" id=4]
-[ext_resource path="res://assets/fonts/diffusion-bold-s32-o2.tres" type="DynamicFont" id=5]
+[ext_resource path="res://assets/fonts/main-font-s32-o2.tres" type="DynamicFont" id=5]
 [ext_resource path="res://entities/entity_enemy/entity_enemy.tscn" type="PackedScene" id=6]
 [ext_resource path="res://libs/gt_collision_polygon_2d/gt_collision_polygon_2d.gd" type="Script" id=7]
 [ext_resource path="res://libs/gt_state_machine/gt_state_machine.gd" type="Script" id=8]
@@ -12,14 +12,14 @@
 [ext_resource path="res://libs/gt_state_machine/__gt_state_transition.gd" type="Script" id=10]
 [ext_resource path="res://components/screen_effects/screen_effects.tscn" type="PackedScene" id=11]
 [ext_resource path="res://libs/gt_screen_shake_2d/gt_screen_shake_2d.gd" type="Script" id=12]
-[ext_resource path="res://libs/gt_time/gt_time.gd" type="Script" id=13]
+[ext_resource path="res://libs/gt_time_scale/gt_time_scale.gd" type="Script" id=13]
 [ext_resource path="res://assets/images/white-circle.png" type="Texture" id=14]
 [ext_resource path="res://main/game/world/scripts/world_hud_health_meter.gd" type="Script" id=15]
 [ext_resource path="res://libs/gt_juice_2d/gt_juice_2d.gd" type="Script" id=16]
 [ext_resource path="res://components/system_controller/system_controller.tscn" type="PackedScene" id=17]
 [ext_resource path="res://components/application_manager/application_manager.tscn" type="PackedScene" id=18]
 [ext_resource path="res://main/game/world/world.gd" type="Script" id=19]
-[ext_resource path="res://assets/fonts/diffusion-bold-s24-o2.tres" type="DynamicFont" id=20]
+[ext_resource path="res://assets/fonts/main-font-s24-o2.tres" type="DynamicFont" id=20]
 [ext_resource path="res://main/game/world/scripts/world_hud_bomb_meter.gd" type="Script" id=21]
 [ext_resource path="res://components/entity_spawner/entity_spawner.tscn" type="PackedScene" id=22]
 [ext_resource path="res://main/game/world/world_ammo_manager.gd" type="Script" id=23]
@@ -406,6 +406,7 @@ __meta__ = {
 }
 
 [node name="bomb_meter" type="Node2D" parent="Screen/HUD/root"]
+visible = false
 position = Vector2( 960, 0 )
 script = ExtResource( 21 )
 __meta__ = {
@@ -644,8 +645,8 @@ anims/game_over_enter = SubResource( 6 )
 
 [connection signal="just_pressed" from="System/SystemController/sys_reload" to="System/ApplicationManager" method="reload"]
 [connection signal="timeout" from="Entities/AmmoManager/PreSpawnTimer" to="Entities/AmmoManager" method="spawn_ammo"]
-[connection signal="enemy_died" from="Entities/WaveManager" to="Camera/ScreenShake" method="simple_shake" binds= [ 12.0, 0.4, 0.1 ]]
 [connection signal="enemy_died" from="Entities/WaveManager" to="TimeManager" method="pause_time" binds= [ 0.04 ]]
+[connection signal="enemy_died" from="Entities/WaveManager" to="Camera/ScreenShake" method="simple_shake" binds= [ 12.0, 0.4, 0.1 ]]
 [connection signal="has_preview_wave" from="Entities/WaveManager" to="Screen/HUD/AnimationPlayer" method="play" binds= [ "update_wave" ]]
 [connection signal="preview_wave" from="Entities/WaveManager" to="Screen/HUD/root/current_wave_label" method="apply_text_simple"]
 [connection signal="ammo_updated" from="Entities/Player" to="Screen/HUD/root/bomb_meter" method="update_bombs"]
@@ -653,8 +654,8 @@ anims/game_over_enter = SubResource( 6 )
 [connection signal="died" from="Entities/Player" to="Camera/ScreenShake" method="simple_shake" binds= [ 24.0, 1.0, 0.1 ]]
 [connection signal="died" from="Entities/Player" to="StateMachine/Active/ToGameOver" method="do_transition"]
 [connection signal="health_updated" from="Entities/Player" to="Screen/HUD/root/health_meter" method="update_health"]
-[connection signal="hurt" from="Entities/Player" to="Camera/ScreenShake" method="simple_shake" binds= [ 16.0, 0.5, 0.05 ]]
 [connection signal="hurt" from="Entities/Player" to="TimeManager" method="pause_time" binds= [ 0.1 ]]
+[connection signal="hurt" from="Entities/Player" to="Camera/ScreenShake" method="simple_shake" binds= [ 16.0, 0.5, 0.05 ]]
 [connection signal="shot_bomb" from="Entities/Player" to="Entities/AmmoManager" method="_on_Player_shot_bomb"]
 
 [editable path="System/SystemController"]

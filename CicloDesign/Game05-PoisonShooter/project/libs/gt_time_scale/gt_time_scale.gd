@@ -1,5 +1,5 @@
 extends Node
-class_name GTTime
+class_name GTTimeScale
 
 var _pause_timer : Timer
 var _count_timer : Timer

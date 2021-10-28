@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://libs/gt_menus/menus/__gt_menu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://libs/gt_state_machine/__gt_state.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://libs/gt_state_machine/__gt_state_transition.gd" type="Script" id=6]
 [ext_resource path="res://components/application_manager/application_manager.gd" type="Script" id=7]
 [ext_resource path="res://menus/transitions/transition_fade.tscn" type="PackedScene" id=8]
+[ext_resource path="res://menus/screens/screen_settings.tscn" type="PackedScene" id=9]
 
 [node name="initial_menu" instance=ExtResource( 1 )]
 
@@ -34,22 +35,42 @@ screen_path = NodePath("..")
 [node name="transition_fade" parent="Screens/screen_how_to_play" index="1" instance=ExtResource( 8 )]
 screen_path = NodePath("..")
 
+[node name="screen_settings" parent="Screens" index="3" instance=ExtResource( 9 )]
+
+[node name="transition_fade" parent="Screens/screen_settings" index="1" instance=ExtResource( 8 )]
+screen_path = NodePath("..")
+
 [node name="StateMachine" parent="." index="1"]
 _entity_path = NodePath("..")
 
 [node name="screen_title" type="Node" parent="StateMachine" index="0"]
 script = ExtResource( 2 )
 _fsm_path = NodePath("..")
+_animation_player_path = NodePath("../../AnimationPlayer")
 
 [node name="ToHowToPlay" type="Node" parent="StateMachine/screen_title" index="0"]
 script = ExtResource( 6 )
 _end_state_path = NodePath("../../screen_how_to_play")
 
+[node name="ToSettings" type="Node" parent="StateMachine/screen_title" index="1"]
+script = ExtResource( 6 )
+_end_state_path = NodePath("../../screen_settings")
+
 [node name="screen_how_to_play" type="Node" parent="StateMachine" index="1"]
 script = ExtResource( 2 )
 _fsm_path = NodePath("..")
+_animation_player_path = NodePath("../../AnimationPlayer")
 
 [node name="ToTitle" type="Node" parent="StateMachine/screen_how_to_play" index="0"]
+script = ExtResource( 6 )
+_end_state_path = NodePath("../../screen_title")
+
+[node name="screen_settings" type="Node" parent="StateMachine" index="2"]
+script = ExtResource( 2 )
+_fsm_path = NodePath("..")
+_animation_player_path = NodePath("../../AnimationPlayer")
+
+[node name="ToTitle" type="Node" parent="StateMachine/screen_settings" index="0"]
 script = ExtResource( 6 )
 _end_state_path = NodePath("../../screen_title")
 
@@ -58,9 +79,13 @@ script = ExtResource( 7 )
 
 [connection signal="button_play" from="Screens/screen_title" to="StateMachine/screen_title/ToHowToPlay" method="do_transition"]
 [connection signal="button_quit" from="Screens/screen_title" to="app_manager" method="quit"]
+[connection signal="button_settings" from="Screens/screen_title" to="StateMachine/screen_title/ToSettings" method="do_transition"]
 [connection signal="button_play" from="Screens/screen_how_to_play" to="app_manager" method="load_scene" binds= [ 2 ]]
 [connection signal="button_return" from="Screens/screen_how_to_play" to="StateMachine/screen_how_to_play/ToTitle" method="do_transition"]
+[connection signal="button_return" from="Screens/screen_settings" to="StateMachine/screen_settings/ToTitle" method="do_transition"]
 [connection signal="state_entered" from="StateMachine/screen_title" to="Screens/screen_title" method="enter"]
 [connection signal="state_exited" from="StateMachine/screen_title" to="Screens/screen_title" method="exit"]
 [connection signal="state_entered" from="StateMachine/screen_how_to_play" to="Screens/screen_how_to_play" method="enter"]
 [connection signal="state_exited" from="StateMachine/screen_how_to_play" to="Screens/screen_how_to_play" method="exit"]
+[connection signal="state_entered" from="StateMachine/screen_settings" to="Screens/screen_settings" method="enter"]
+[connection signal="state_exited" from="StateMachine/screen_settings" to="Screens/screen_settings" method="exit"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://libs/gt_entity_2d/__gt_entity_2d.gd" type="Script" id=1]
-[ext_resource path="res://libs/gt_area_2d/gt_trigger_area_2d/gt_trigger_area_2d.gd" type="Script" id=2]
+[ext_resource path="res://libs/gt_grouped_area_2d/gt_trigger_area_2d/gt_trigger_area_2d.gd" type="Script" id=2]
 [ext_resource path="res://addons/regular_polygon2d_node/RegularPolygon2D.gd" type="Script" id=3]
 [ext_resource path="res://libs/gt_juice_2d/gt_juice_2d.gd" type="Script" id=4]
 

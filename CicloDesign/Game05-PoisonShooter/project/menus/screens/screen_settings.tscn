@@ -1,0 +1,142 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://libs/gt_menus/screens/__gt_simple_screen.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/fonts/main-font-s32-o2.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/fonts/main-font-s16-o2.tres" type="DynamicFont" id=3]
+[ext_resource path="res://assets/fonts/main-font-s32.tres" type="DynamicFont" id=4]
+[ext_resource path="res://assets/ui/button_pressed_flat_style.tres" type="StyleBox" id=5]
+[ext_resource path="res://assets/ui/button_normal_flat_style.tres" type="StyleBox" id=6]
+[ext_resource path="res://menus/screens/screen_settings.gd" type="Script" id=7]
+
+[node name="screen_settings" instance=ExtResource( 1 )]
+script = ExtResource( 7 )
+
+[node name="vbox" parent="." index="0"]
+margin_left = -135.0
+margin_top = -164.0
+margin_right = 135.0
+margin_bottom = 164.0
+
+[node name="hbox" parent="vbox" index="0"]
+margin_right = 270.0
+margin_bottom = 328.0
+
+[node name="vbox" parent="vbox/hbox" index="0"]
+margin_right = 270.0
+margin_bottom = 328.0
+custom_constants/separation = 100
+alignment = 1
+
+[node name="title_label" type="Label" parent="vbox/hbox/vbox" index="0"]
+margin_right = 270.0
+margin_bottom = 41.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.580392, 0.890196, 0.266667, 1 )
+text = "Settings"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="options" type="VBoxContainer" parent="vbox/hbox/vbox" index="1"]
+margin_top = 141.0
+margin_right = 270.0
+margin_bottom = 187.0
+alignment = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="music" type="HBoxContainer" parent="vbox/hbox/vbox/options" index="0"]
+margin_right = 270.0
+margin_bottom = 21.0
+custom_constants/separation = 20
+alignment = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="label" type="Label" parent="vbox/hbox/vbox/options/music" index="0"]
+margin_right = 50.0
+margin_bottom = 21.0
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0.580392, 0.890196, 0.266667, 1 )
+text = "Music"
+valign = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="music_slider" type="HSlider" parent="vbox/hbox/vbox/options/music" index="1"]
+margin_left = 70.0
+margin_right = 270.0
+margin_bottom = 21.0
+rect_min_size = Vector2( 200, 0 )
+size_flags_vertical = 3
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="sound" type="HBoxContainer" parent="vbox/hbox/vbox/options" index="1"]
+margin_top = 25.0
+margin_right = 270.0
+margin_bottom = 46.0
+custom_constants/separation = 20
+alignment = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="label" type="Label" parent="vbox/hbox/vbox/options/sound" index="0"]
+margin_right = 50.0
+margin_bottom = 21.0
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0.580392, 0.890196, 0.266667, 1 )
+text = "Sound"
+valign = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="sound_slider" type="HSlider" parent="vbox/hbox/vbox/options/sound" index="1"]
+margin_left = 70.0
+margin_right = 270.0
+margin_bottom = 21.0
+rect_min_size = Vector2( 200, 0 )
+size_flags_vertical = 3
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="buttons" type="HBoxContainer" parent="vbox/hbox/vbox" index="2"]
+margin_top = 287.0
+margin_right = 270.0
+margin_bottom = 328.0
+size_flags_horizontal = 3
+alignment = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="return" type="Button" parent="vbox/hbox/vbox/buttons" index="0"]
+margin_left = 59.0
+margin_right = 211.0
+margin_bottom = 41.0
+custom_styles/hover = ExtResource( 5 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/normal = ExtResource( 6 )
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0.2, 0.172549, 0.313726, 1 )
+custom_colors/font_color_hover = Color( 0.580392, 0.890196, 0.266667, 1 )
+custom_colors/font_color_pressed = Color( 0.580392, 0.890196, 0.266667, 1 )
+text = " return "
+__meta__ = {
+"_edit_lock_": true
+}
+
+[connection signal="value_changed" from="vbox/hbox/vbox/options/music/music_slider" to="." method="change_music_volume"]
+[connection signal="value_changed" from="vbox/hbox/vbox/options/sound/sound_slider" to="." method="change_sound_volume"]
+[connection signal="pressed" from="vbox/hbox/vbox/buttons/return" to="." method="_on_return_pressed"]

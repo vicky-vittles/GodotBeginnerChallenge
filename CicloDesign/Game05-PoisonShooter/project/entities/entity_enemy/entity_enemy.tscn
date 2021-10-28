@@ -3,16 +3,16 @@
 [ext_resource path="res://entities/entity_enemy/entity_enemy.gd" type="Script" id=1]
 [ext_resource path="res://libs/gt_entity_mover_2d/gt_steering_entity_mover_2d/gt_steering_entity_mover_2d.gd" type="Script" id=2]
 [ext_resource path="res://libs/gt_entity_mover_2d/gt_steering_entity_mover_2d/behaviors/gt_steering_behavior_seek_2d.gd" type="Script" id=3]
-[ext_resource path="res://libs/gt_area_2d/gt_trigger_area_2d/gt_hurtbox_2d/gt_hurtbox_2d.gd" type="Script" id=4]
+[ext_resource path="res://libs/gt_grouped_area_2d/gt_trigger_area_2d/gt_hurtbox_2d/gt_hurtbox_2d.gd" type="Script" id=4]
 [ext_resource path="res://addons/Trail/trail_2d.gd" type="Script" id=5]
-[ext_resource path="res://libs/gt_area_2d/gt_trigger_area_2d/gt_hitbox_2d/gt_hitbox_2d.gd" type="Script" id=6]
+[ext_resource path="res://libs/gt_grouped_area_2d/gt_trigger_area_2d/gt_hitbox_2d/gt_hitbox_2d.gd" type="Script" id=6]
 [ext_resource path="res://libs/gt_health/gt_health.gd" type="Script" id=7]
 [ext_resource path="res://libs/gt_state_machine/gt_state_machine.gd" type="Script" id=8]
 [ext_resource path="res://libs/gt_state_machine/__gt_state.gd" type="Script" id=9]
 [ext_resource path="res://libs/gt_state_machine/__gt_state_transition.gd" type="Script" id=10]
 [ext_resource path="res://addons/regular_polygon2d_node/RegularPolygon2D.gd" type="Script" id=11]
 [ext_resource path="res://libs/gt_entity_mover_2d/gt_steering_entity_mover_2d/behaviors/gt_steering_behavior_cohesion_2d.gd" type="Script" id=12]
-[ext_resource path="res://libs/gt_area_2d/gt_area_2d.gd" type="Script" id=13]
+[ext_resource path="res://libs/gt_grouped_area_2d/gt_grouped_area_2d.gd" type="Script" id=13]
 [ext_resource path="res://libs/gt_entity_mover_2d/gt_steering_entity_mover_2d/behaviors/gt_steering_behavior_separation_2d.gd" type="Script" id=14]
 [ext_resource path="res://assets/materials/poison_explosion.material" type="Material" id=15]
 [ext_resource path="res://libs/gt_audio_player/gt_audio_player.gd" type="Script" id=16]
@@ -550,8 +550,9 @@ __meta__ = {
 }
 centered = true
 num_sides = 20
-size = 60.0
+size = 0.0
 polygon_color = Color( 0.2, 0.172549, 0.313726, 1 )
+border_size = 45.0
 border_color = Color( 0.580392, 0.890196, 0.266667, 1 )
 
 [node name="poisoned" type="CPUParticles2D" parent="Body/visuals/particles"]

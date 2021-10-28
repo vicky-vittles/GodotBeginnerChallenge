@@ -22,9 +22,9 @@ export (bool) var do_physics_process = true # Enable _physics_process callback
 
 func _ready():
 	fsm = get_node(_fsm_path)
-	if _animation_player_path:
-		animation_player = get_node(_animation_player_path)
+	animation_player = get_node(_animation_player_path)
 	assert(fsm != null, "Error initializing GTState, 'fsm' property is null")
+	assert(animation_player != null, "Error initializing GTState, 'animation_player' property is null")
 
 # Callback for when this state becomes the state machine's current state
 func enter(info: Dictionary = {}) -> void:
