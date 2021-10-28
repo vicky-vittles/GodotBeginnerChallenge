@@ -774,7 +774,7 @@ __meta__ = {
 }
 _body_path = NodePath("../..")
 collidable_groups = [ "enemy_poison_bomb_poison_hitbox" ]
-damage = 10
+damage = 20
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Triggers/PoisonHitbox"]
 shape = SubResource( 6 )
