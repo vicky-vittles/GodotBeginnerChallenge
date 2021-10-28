@@ -1,10 +1,29 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://libs/gt_entity_2d/__gt_entity_2d.gd" type="Script" id=1]
 [ext_resource path="res://libs/gt_area_2d/gt_trigger_area_2d/gt_trigger_area_2d.gd" type="Script" id=2]
 [ext_resource path="res://addons/regular_polygon2d_node/RegularPolygon2D.gd" type="Script" id=3]
+[ext_resource path="res://libs/gt_juice_2d/gt_juice_2d.gd" type="Script" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
+radius = 12.0
+
+[sub_resource type="Animation" id=2]
+resource_name = "spawn_enter"
+tracks/0/type = "method"
+tracks/0/path = NodePath("Body/graphics/juice")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ Vector2( 0, 0 ), Vector2( 1, 1 ), 0.5 ],
+"method": "bounce_scale"
+} ]
+}
 
 [node name="entity_ammo" type="Node2D"]
 script = ExtResource( 1 )
@@ -13,25 +32,32 @@ script = ExtResource( 1 )
 "entity_ammo_ammo_trigger",
 ]]
 collision_layer = 8
-collision_mask = 0
+collision_mask = 8
 script = ExtResource( 2 )
 _body_path = NodePath(".")
 collidable_groups = [ "entity_player_ammo_trigger" ]
-disable_on_ready = true
+one_shot = true
 
 [node name="graphics" type="Node2D" parent="Body"]
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="main" type="Node2D" parent="Body/graphics"]
+[node name="juice" type="Node2D" parent="Body/graphics"]
+scale = Vector2( 1e-05, 1e-05 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="main" type="Node2D" parent="Body/graphics/juice"]
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
 centered = true
 num_sides = 20
-size = 20.0
+size = 14.0
 polygon_color = Color( 0.886275, 0.952941, 0.894118, 1 )
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Body"]
@@ -40,5 +66,9 @@ shape = SubResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "spawn_enter"
+anims/spawn_enter = SubResource( 2 )
 
 [connection signal="effect" from="Body" to="." method="queue_free"]

@@ -1,8 +1,8 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://entities/entity_player/entity_player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://components/entity_spawner/nst_manager/nst_manager.tscn" type="PackedScene" id=2]
-[ext_resource path="res://main/game/world/scripts/wave_manager.gd" type="Script" id=3]
+[ext_resource path="res://main/game/world/scripts/world_wave_manager.gd" type="Script" id=3]
 [ext_resource path="res://libs/gt_pattern_label/gt_pattern_label.gd" type="Script" id=4]
 [ext_resource path="res://assets/fonts/diffusion-bold-s32-o2.tres" type="DynamicFont" id=5]
 [ext_resource path="res://entities/entity_enemy/entity_enemy.tscn" type="PackedScene" id=6]
@@ -21,6 +21,9 @@
 [ext_resource path="res://main/game/world/world.gd" type="Script" id=19]
 [ext_resource path="res://assets/fonts/diffusion-bold-s24-o2.tres" type="DynamicFont" id=20]
 [ext_resource path="res://main/game/world/scripts/world_hud_bomb_meter.gd" type="Script" id=21]
+[ext_resource path="res://components/entity_spawner/entity_spawner.tscn" type="PackedScene" id=22]
+[ext_resource path="res://main/game/world/world_ammo_manager.gd" type="Script" id=23]
+[ext_resource path="res://entities/entity_ammo/entity_ammo.tscn" type="PackedScene" id=24]
 
 [sub_resource type="Animation" id=1]
 resource_name = "update_wave"
@@ -39,15 +42,18 @@ tracks/0/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 50, 270 )
+extents = Vector2( 430, 220 )
 
 [sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 50, 270 )
+
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 480, 50 )
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=5]
 length = 0.1
 tracks/0/type = "method"
-tracks/0/path = NodePath("WaveManager")
+tracks/0/path = NodePath("Entities/WaveManager")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -61,7 +67,7 @@ tracks/0/keys = {
 } ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("HUD/root/game_over_label:visible")
+tracks/1/path = NodePath("Screen/HUD/root/game_over_label:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -73,7 +79,7 @@ tracks/1/keys = {
 "values": [ false ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("HUD/root/health_label:visible")
+tracks/2/path = NodePath("Screen/HUD/root/health_label:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -85,7 +91,7 @@ tracks/2/keys = {
 "values": [ true ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("HUD/root/current_wave_label:visible")
+tracks/3/path = NodePath("Screen/HUD/root/current_wave_label:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -111,9 +117,9 @@ tracks/4/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
 tracks/0/type = "method"
-tracks/0/path = NodePath("screen_effects")
+tracks/0/path = NodePath("Screen/screen_effects")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -127,7 +133,7 @@ tracks/0/keys = {
 } ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("HUD/root/game_over_label:visible")
+tracks/1/path = NodePath("Screen/HUD/root/game_over_label:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -139,7 +145,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("HUD/root/health_label:visible")
+tracks/2/path = NodePath("Screen/HUD/root/health_label:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -151,7 +157,7 @@ tracks/2/keys = {
 "values": [ false ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("HUD/root/current_wave_label:visible")
+tracks/3/path = NodePath("Screen/HUD/root/current_wave_label:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -195,9 +201,9 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="background_color" type="ColorRect" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+[node name="background_color" type="ColorRect" parent="Screen"]
+margin_right = 960.0
+margin_bottom = 540.0
 rect_min_size = Vector2( 960, 540 )
 color = Color( 0.2, 0.172549, 0.313726, 1 )
 __meta__ = {
@@ -205,11 +211,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HUD" type="CanvasLayer" parent="."]
+[node name="HUD" type="CanvasLayer" parent="Screen"]
 pause_mode = 2
 layer = 2
 
-[node name="root" type="Control" parent="HUD"]
+[node name="root" type="Control" parent="Screen/HUD"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -217,7 +223,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="health_label" type="Label" parent="HUD/root"]
+[node name="health_label" type="Label" parent="Screen/HUD/root"]
 anchor_right = 1.0
 margin_left = 10.0
 margin_top = 10.0
@@ -228,7 +234,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="bomb_label" type="Label" parent="HUD/root"]
+[node name="bomb_label" type="Label" parent="Screen/HUD/root"]
 anchor_right = 1.0
 margin_top = 10.0
 margin_right = -10.0
@@ -241,7 +247,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="current_wave_label" type="Label" parent="HUD/root"]
+[node name="current_wave_label" type="Label" parent="Screen/HUD/root"]
 modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.5
 anchor_top = 0.5
@@ -262,7 +268,7 @@ __meta__ = {
 }
 pattern_text = "Wave %s"
 
-[node name="game_over_label" type="Label" parent="HUD/root"]
+[node name="game_over_label" type="Label" parent="Screen/HUD/root"]
 visible = false
 anchor_left = 0.5
 anchor_top = 0.5
@@ -283,20 +289,20 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="health_meter" type="Node2D" parent="HUD/root"]
+[node name="health_meter" type="Node2D" parent="Screen/HUD/root"]
 script = ExtResource( 15 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="1" type="Node2D" parent="HUD/root/health_meter"]
+[node name="1" type="Node2D" parent="Screen/HUD/root/health_meter"]
 position = Vector2( 17, 55 )
 script = ExtResource( 16 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="sprite" type="Sprite" parent="HUD/root/health_meter/1"]
+[node name="sprite" type="Sprite" parent="Screen/HUD/root/health_meter/1"]
 modulate = Color( 0.886275, 0.952941, 0.894118, 1 )
 scale = Vector2( 0.035, 0.035 )
 texture = ExtResource( 14 )
@@ -304,14 +310,14 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="2" type="Node2D" parent="HUD/root/health_meter"]
+[node name="2" type="Node2D" parent="Screen/HUD/root/health_meter"]
 position = Vector2( 42, 55 )
 script = ExtResource( 16 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="sprite" type="Sprite" parent="HUD/root/health_meter/2"]
+[node name="sprite" type="Sprite" parent="Screen/HUD/root/health_meter/2"]
 modulate = Color( 0.886275, 0.952941, 0.894118, 1 )
 scale = Vector2( 0.035, 0.035 )
 texture = ExtResource( 14 )
@@ -319,14 +325,14 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="3" type="Node2D" parent="HUD/root/health_meter"]
+[node name="3" type="Node2D" parent="Screen/HUD/root/health_meter"]
 position = Vector2( 67, 55 )
 script = ExtResource( 16 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="sprite" type="Sprite" parent="HUD/root/health_meter/3"]
+[node name="sprite" type="Sprite" parent="Screen/HUD/root/health_meter/3"]
 modulate = Color( 0.886275, 0.952941, 0.894118, 1 )
 scale = Vector2( 0.035, 0.035 )
 texture = ExtResource( 14 )
@@ -334,14 +340,14 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="4" type="Node2D" parent="HUD/root/health_meter"]
+[node name="4" type="Node2D" parent="Screen/HUD/root/health_meter"]
 position = Vector2( 92, 55 )
 script = ExtResource( 16 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="sprite" type="Sprite" parent="HUD/root/health_meter/4"]
+[node name="sprite" type="Sprite" parent="Screen/HUD/root/health_meter/4"]
 modulate = Color( 0.886275, 0.952941, 0.894118, 1 )
 scale = Vector2( 0.035, 0.035 )
 texture = ExtResource( 14 )
@@ -349,21 +355,21 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="bomb_meter" type="Node2D" parent="HUD/root"]
+[node name="bomb_meter" type="Node2D" parent="Screen/HUD/root"]
 position = Vector2( 960, 0 )
 script = ExtResource( 21 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="5" type="Node2D" parent="HUD/root/bomb_meter"]
-position = Vector2( -59, 55 )
+[node name="1" type="Node2D" parent="Screen/HUD/root/bomb_meter"]
+position = Vector2( -73, 55 )
 script = ExtResource( 16 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="sprite" type="Sprite" parent="HUD/root/bomb_meter/5"]
+[node name="sprite" type="Sprite" parent="Screen/HUD/root/bomb_meter/1"]
 modulate = Color( 0.886275, 0.952941, 0.894118, 1 )
 scale = Vector2( 0.035, 0.035 )
 texture = ExtResource( 14 )
@@ -371,14 +377,14 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="6" type="Node2D" parent="HUD/root/bomb_meter"]
-position = Vector2( -30, 55 )
+[node name="2" type="Node2D" parent="Screen/HUD/root/bomb_meter"]
+position = Vector2( -44, 55 )
 script = ExtResource( 16 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="sprite" type="Sprite" parent="HUD/root/bomb_meter/6"]
+[node name="sprite" type="Sprite" parent="Screen/HUD/root/bomb_meter/2"]
 modulate = Color( 0.886275, 0.952941, 0.894118, 1 )
 scale = Vector2( 0.035, 0.035 )
 texture = ExtResource( 14 )
@@ -386,10 +392,25 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD"]
+[node name="3" type="Node2D" parent="Screen/HUD/root/bomb_meter"]
+position = Vector2( -15, 55 )
+script = ExtResource( 16 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="sprite" type="Sprite" parent="Screen/HUD/root/bomb_meter/3"]
+modulate = Color( 0.886275, 0.952941, 0.894118, 1 )
+scale = Vector2( 0.035, 0.035 )
+texture = ExtResource( 14 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Screen/HUD"]
 anims/update_wave = SubResource( 1 )
 
-[node name="screen_effects" parent="." instance=ExtResource( 11 )]
+[node name="screen_effects" parent="Screen" instance=ExtResource( 11 )]
 pause_mode = 2
 overlay_modulate = Color( 1, 1, 1, 0 )
 
@@ -432,9 +453,35 @@ __meta__ = {
 }
 graphics_color = Color( 0.2, 0.172549, 0.313726, 1 )
 
-[node name="AmmoManager" type="Node2D" parent="."]
+[node name="Entities" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="WaveManager" parent="." instance=ExtResource( 2 )]
+[node name="AmmoManager" type="Node2D" parent="Entities"]
+script = ExtResource( 23 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="zone_1" type="CollisionShape2D" parent="Entities/AmmoManager"]
+visible = false
+position = Vector2( 480, 270 )
+shape = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Spawner" parent="Entities/AmmoManager" instance=ExtResource( 22 )]
+_actor_path = NodePath("..")
+_entity_template = ExtResource( 24 )
+is_independent_entity = true
+
+[node name="PreSpawnTimer" type="Timer" parent="Entities/AmmoManager"]
+wait_time = 1.8
+one_shot = true
+
+[node name="WaveManager" parent="Entities" instance=ExtResource( 2 )]
 script = ExtResource( 3 )
 _entity_template = ExtResource( 6 )
 enemy_properties = {
@@ -450,44 +497,44 @@ wave_properties = {
 max_waves = 20
 _player_path = NodePath("../Player")
 
-[node name="1" type="CollisionShape2D" parent="WaveManager"]
+[node name="zone_1" type="CollisionShape2D" parent="Entities/WaveManager"]
 visible = false
 position = Vector2( -50, 270 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="2" type="CollisionShape2D" parent="WaveManager"]
+[node name="zone_2" type="CollisionShape2D" parent="Entities/WaveManager"]
 visible = false
 position = Vector2( 1010, 270 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="3" type="CollisionShape2D" parent="WaveManager"]
+[node name="zone_3" type="CollisionShape2D" parent="Entities/WaveManager"]
 visible = false
 position = Vector2( 480, -50 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="4" type="CollisionShape2D" parent="WaveManager"]
+[node name="zone_4" type="CollisionShape2D" parent="Entities/WaveManager"]
 visible = false
 position = Vector2( 480, 590 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Bombs" type="Node2D" parent="."]
+[node name="Bombs" type="Node2D" parent="Entities"]
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
+[node name="Player" parent="Entities" instance=ExtResource( 1 )]
 position = Vector2( 480, 200 )
 
 [node name="Camera" type="Camera2D" parent="."]
@@ -541,18 +588,22 @@ anim_name_on_enter = "game_over_enter"
 play_on_enter = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/active_enter = SubResource( 4 )
-anims/game_over_enter = SubResource( 5 )
+anims/active_enter = SubResource( 5 )
+anims/game_over_enter = SubResource( 6 )
 
 [connection signal="just_pressed" from="System/SystemController/sys_reload" to="System/ApplicationManager" method="reload"]
-[connection signal="enemy_died" from="WaveManager" to="TimeManager" method="pause_time" binds= [ 0.04 ]]
-[connection signal="has_preview_wave" from="WaveManager" to="HUD/AnimationPlayer" method="play" binds= [ "update_wave" ]]
-[connection signal="preview_wave" from="WaveManager" to="HUD/root/current_wave_label" method="apply_text_simple"]
-[connection signal="ammo_updated" from="Player" to="HUD/root/bomb_meter" method="update_bombs"]
-[connection signal="bomb_caused_damage" from="Player" to="TimeManager" method="pause_time" binds= [ 0.032 ]]
-[connection signal="died" from="Player" to="StateMachine/Active/ToGameOver" method="do_transition"]
-[connection signal="died" from="Player" to="Camera/ScreenShake" method="simple_shake" binds= [ 24.0, 1.0, 0.1 ]]
-[connection signal="health_updated" from="Player" to="HUD/root/health_meter" method="update_health"]
-[connection signal="hurt" from="Player" to="Camera/ScreenShake" method="simple_shake" binds= [ 16.0, 0.5, 0.05 ]]
+[connection signal="timeout" from="Entities/AmmoManager/PreSpawnTimer" to="Entities/AmmoManager" method="spawn_ammo"]
+[connection signal="enemy_died" from="Entities/WaveManager" to="Camera/ScreenShake" method="simple_shake" binds= [ 12.0, 0.4, 0.1 ]]
+[connection signal="enemy_died" from="Entities/WaveManager" to="TimeManager" method="pause_time" binds= [ 0.04 ]]
+[connection signal="has_preview_wave" from="Entities/WaveManager" to="Screen/HUD/AnimationPlayer" method="play" binds= [ "update_wave" ]]
+[connection signal="preview_wave" from="Entities/WaveManager" to="Screen/HUD/root/current_wave_label" method="apply_text_simple"]
+[connection signal="ammo_updated" from="Entities/Player" to="Screen/HUD/root/bomb_meter" method="update_bombs"]
+[connection signal="bomb_caused_damage" from="Entities/Player" to="TimeManager" method="pause_time" binds= [ 0.05 ]]
+[connection signal="died" from="Entities/Player" to="Camera/ScreenShake" method="simple_shake" binds= [ 24.0, 1.0, 0.1 ]]
+[connection signal="died" from="Entities/Player" to="StateMachine/Active/ToGameOver" method="do_transition"]
+[connection signal="health_updated" from="Entities/Player" to="Screen/HUD/root/health_meter" method="update_health"]
+[connection signal="hurt" from="Entities/Player" to="Camera/ScreenShake" method="simple_shake" binds= [ 16.0, 0.5, 0.05 ]]
+[connection signal="hurt" from="Entities/Player" to="TimeManager" method="pause_time" binds= [ 0.1 ]]
+[connection signal="shot_bomb" from="Entities/Player" to="Entities/AmmoManager" method="_on_Player_shot_bomb"]
 
 [editable path="System/SystemController"]

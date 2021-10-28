@@ -10,12 +10,15 @@ export (Color) var poisoned_color
 export (float) var strength = 1.0 setget set_strength
 export (float) var speed = 1.0 setget set_speed
 export (float) var poison_multiplier = 2.0
+export (float) var pulsating_threshold = 0.05 # Percentage of life left to trigger pulsating effect
 
 onready var body = $Body
 onready var body_collision_shape = $Body/CollisionShape2D
+onready var graphics_animation_player = $Body/visuals/graphics/AnimationPlayer
+onready var poisoned_particles = $Body/visuals/particles/poisoned
 onready var health = $Health
 onready var move_trail = $Body/visuals/graphics/move_trail
-onready var main_sprite = $Body/visuals/graphics/rotation_pivot/main
+onready var main_sprite = $Body/visuals/graphics/rotation_pivot/tilt_pivot/scale_pivot/main
 onready var poison_explosion_hitbox = $Body/Triggers/PoisonExplosionHitbox
 onready var poison_hurtbox = $Body/Triggers/PoisonHurtbox
 onready var entity_mover = $Body/EntityMover
@@ -24,6 +27,7 @@ onready var enemy_separation_behavior = $Body/EntityMover/EnemySeparation
 onready var enemy_cohesion_behavior = $Body/EntityMover/EnemyCohesion
 onready var rotation_pivot = $Body/visuals/graphics/rotation_pivot
 
+var is_pulsating : bool = false
 var facing_direction : float
 var poison_amount : int = 0
 
@@ -51,6 +55,7 @@ func _physics_process(delta):
 	var current_color = lerp(poisoned_color, healthy_color, health_t)
 	move_trail.modulate = current_color
 	main_sprite.color = current_color
+	poisoned_particles.color = current_color
 	
 	# Adjust sprite orientation
 	if entity_mover.velocity.length() > MOVEMENT_THRESHOLD:
@@ -84,3 +89,11 @@ func _on_PresenceTrigger_grouped_area_exited(area):
 
 func _on_CollisionEnableTimer_timeout():
 	body_collision_shape.set_deferred("disabled", false)
+
+func _on_Health_health_updated(current):
+	# Adjust pulsating effect
+	var current_health = health.current_health
+	var health_t = float(clamp(current_health-poison_amount, 0, health.max_health))/float(health.max_health)
+	if health_t <= pulsating_threshold and not is_pulsating:
+		graphics_animation_player.play("pulsating")
+		is_pulsating = true

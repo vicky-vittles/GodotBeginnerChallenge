@@ -37,7 +37,7 @@ func simple_scale(start_size: Vector2 = Vector2.ONE, end_size: Vector2 = Vector2
 # Scaling with bounce easing
 func bounce_scale(start_size: Vector2 = Vector2.ONE, end_size: Vector2 = Vector2(1.2, 1.2), time: float = 0.3) -> void:
 	if not is_enabled: return
-	_tween.interpolate_property(self, "scale", start_size, end_size, time, Tween.TRANS_BOUNCE, Tween.EASE_IN)
+	_tween.interpolate_property(self, "scale", start_size, end_size, time, Tween.TRANS_BOUNCE, Tween.EASE_IN_OUT)
 	_tween.start()
 
 # Rotation with quad easing

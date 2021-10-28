@@ -438,7 +438,7 @@ tracks/6/keys = {
 }
 
 [sub_resource type="Animation" id=8]
-length = 0.6
+length = 0.5
 tracks/0/type = "method"
 tracks/0/path = NodePath("Timers/FuseTimer")
 tracks/0/interp = 1
@@ -526,7 +526,7 @@ tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0, 0.4 ),
+"times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "values": [ {
 "args": [ 0.3, 0.15 ],
@@ -543,7 +543,7 @@ tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 0, 0.4 ),
+"times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 10.0, 10.0 ]
@@ -563,7 +563,7 @@ random_pitch_deviation = 0.1
 
 [node name="explosion" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 13 )
-volume_db = -3.0
+volume_db = -8.0
 bus = "Sound"
 script = ExtResource( 11 )
 random_pitch_deviation = 0.1
@@ -571,7 +571,7 @@ random_pitch_deviation = 0.1
 [node name="Timers" type="Node" parent="."]
 
 [node name="FuseTimer" type="Timer" parent="Timers"]
-wait_time = 0.6
+wait_time = 0.5
 one_shot = true
 
 [node name="Body" type="KinematicBody2D" parent="."]
@@ -688,6 +688,7 @@ anims/default = SubResource( 1 )
 anims/explosion = SubResource( 2 )
 
 [node name="graphics" type="Node2D" parent="Body/visuals"]
+visible = false
 __meta__ = {
 "_edit_lock_": true
 }
@@ -773,7 +774,7 @@ __meta__ = {
 }
 _body_path = NodePath("../..")
 collidable_groups = [ "enemy_poison_bomb_poison_hitbox" ]
-damage = 20
+damage = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Triggers/PoisonHitbox"]
 shape = SubResource( 6 )

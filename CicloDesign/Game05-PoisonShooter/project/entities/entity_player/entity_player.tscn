@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://entities/entity_player/entity_player.gd" type="Script" id=1]
 [ext_resource path="res://libs/gt_entity_mover_2d/gt_topdown_entity_mover_2d/gt_topdown_entity_mover_2d.gd" type="Script" id=2]
@@ -24,6 +24,7 @@
 [ext_resource path="res://assets/images/white-circle.png" type="Texture" id=22]
 [ext_resource path="res://libs/gt_juice_2d/gt_juice_2d.gd" type="Script" id=23]
 [ext_resource path="res://libs/gt_area_2d/gt_trigger_area_2d/gt_trigger_area_2d.gd" type="Script" id=24]
+[ext_resource path="res://entities/entity_player/assets/player-ammo-pickup.wav" type="AudioStream" id=25]
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 1 ), 0.0, -1.0, 0, 1, Vector2( 1, 0 ), -1.0, 0.0, 1, 0 ]
@@ -42,10 +43,10 @@ radius = 8.0
 
 [sub_resource type="CircleShape2D" id=6]
 
-[sub_resource type="CircleShape2D" id=12]
+[sub_resource type="CircleShape2D" id=7]
 radius = 15.0
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=8]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body/visuals/graphics:visible")
 tracks/0/interp = 1
@@ -125,7 +126,7 @@ tracks/5/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=9]
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body/visuals/graphics:visible")
@@ -194,7 +195,7 @@ tracks/4/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=10]
 length = 0.1
 tracks/0/type = "method"
 tracks/0/path = NodePath("Timers/InvincibilityTimer")
@@ -211,7 +212,7 @@ tracks/0/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=11]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body/visuals/graphics:visible")
@@ -238,7 +239,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=12]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body/visuals/graphics:visible")
@@ -280,6 +281,13 @@ action = "act_fire"
 
 [node name="SFX" type="Node" parent="."]
 
+[node name="ammo_pickup" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 25 )
+volume_db = -3.0
+bus = "Sound"
+script = ExtResource( 19 )
+random_pitch_deviation = 0.1
+
 [node name="hurt" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 20 )
 volume_db = -3.0
@@ -318,10 +326,9 @@ is_independent_entity = true
 
 [node name="Ammo" type="Node" parent="PoisonBombs"]
 script = ExtResource( 15 )
-initial_points = 2
+initial_points = 3
 
 [node name="Cooldown" type="Timer" parent="PoisonBombs"]
-wait_time = 0.6
 one_shot = true
 
 [node name="Widgets" type="Node2D" parent="."]
@@ -383,7 +390,7 @@ __meta__ = {
 
 [node name="move_trail" type="Line2D" parent="Body/visuals/graphics"]
 visible = false
-width = 24.0
+width = 20.0
 width_curve = SubResource( 3 )
 gradient = SubResource( 4 )
 script = ExtResource( 8 )
@@ -462,7 +469,7 @@ _body_path = NodePath("../..")
 collidable_groups = [ "entity_ammo_ammo_trigger" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Triggers/AmmoTrigger"]
-shape = SubResource( 12 )
+shape = SubResource( 7 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -471,7 +478,7 @@ __meta__ = {
 script = ExtResource( 2 )
 body_path = NodePath("..")
 movement_mode = 2
-max_move_speed = 160
+max_move_speed = 140
 move_acceleration_time = 0.15
 
 [node name="StateMachine" type="Node" parent="."]
@@ -539,18 +546,18 @@ can_move = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "idle_enter"
-anims/dead_enter = SubResource( 7 )
-anims/hurt_enter = SubResource( 8 )
-anims/hurt_exit = SubResource( 9 )
-anims/idle_enter = SubResource( 10 )
-anims/move_enter = SubResource( 11 )
+anims/dead_enter = SubResource( 8 )
+anims/hurt_enter = SubResource( 9 )
+anims/hurt_exit = SubResource( 10 )
+anims/idle_enter = SubResource( 11 )
+anims/move_enter = SubResource( 12 )
 
 [connection signal="took_damage" from="." to="StateMachine/Idle" method="_on_Player_took_damage"]
 [connection signal="took_damage" from="." to="StateMachine/Move" method="_on_Player_took_damage"]
 [connection signal="updated_move_direction" from="InputController" to="StateMachine/Hurt" method="_on_InputController_updated_move_direction"]
+[connection signal="updated_move_direction" from="InputController" to="StateMachine/Dead" method="_on_InputController_updated_move_direction"]
 [connection signal="updated_move_direction" from="InputController" to="StateMachine/Idle" method="_on_InputController_updated_move_direction"]
 [connection signal="updated_move_direction" from="InputController" to="StateMachine/Move" method="_on_InputController_updated_move_direction"]
-[connection signal="updated_move_direction" from="InputController" to="StateMachine/Dead" method="_on_InputController_updated_move_direction"]
 [connection signal="just_pressed" from="InputController/act_fire" to="StateMachine/Hurt" method="_on_fire_just_pressed"]
 [connection signal="just_pressed" from="InputController/act_fire" to="StateMachine/Idle" method="_on_fire_just_pressed"]
 [connection signal="just_pressed" from="InputController/act_fire" to="StateMachine/Move" method="_on_fire_just_pressed"]
@@ -562,10 +569,12 @@ anims/move_enter = SubResource( 11 )
 [connection signal="lived" from="Health" to="StateMachine/Idle/ToHurt" method="do_transition"]
 [connection signal="timeout" from="Timers/InvincibilityTimer" to="StateMachine/Hurt/ToIdle" method="do_transition"]
 [connection signal="bomb_caused_damage" from="PoisonBombs" to="." method="_on_PoisonBombs_bomb_caused_damage"]
-[connection signal="shot_bomb" from="PoisonBombs" to="Body/visuals/graphics/juice" method="simple_squash_stretch"]
+[connection signal="shot_bomb" from="PoisonBombs" to="." method="_on_PoisonBombs_shot_bomb"]
+[connection signal="shot_bomb" from="PoisonBombs" to="Body/visuals/graphics/juice" method="simple_squash_stretch" binds= [ 0.5, 0.15 ]]
 [connection signal="points_updated" from="PoisonBombs/Ammo" to="." method="_on_Ammo_points_updated"]
 [connection signal="took_damage" from="Body/Triggers/DamageHurtbox" to="." method="_on_DamageHurtbox_took_damage"]
 [connection signal="effect" from="Body/Triggers/AmmoTrigger" to="PoisonBombs/Ammo" method="gain_points" binds= [ 1 ]]
+[connection signal="effect" from="Body/Triggers/AmmoTrigger" to="SFX/ammo_pickup" method="play"]
 [connection signal="fire_just_pressed" from="StateMachine/Idle" to="PoisonBombs" method="shoot_bomb"]
 [connection signal="started_moving" from="StateMachine/Idle" to="StateMachine/Idle/ToMove" method="do_transition"]
 [connection signal="fire_just_pressed" from="StateMachine/Move" to="PoisonBombs" method="shoot_bomb"]

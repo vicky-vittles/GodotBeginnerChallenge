@@ -1,5 +1,6 @@
 extends "res://entities/__entity_topdown_player/__entity_topdown_player.gd"
 
+signal shot_bomb()
 signal bomb_caused_damage()
 signal ammo_updated(ammo)
 signal health_updated(health)
@@ -32,3 +33,6 @@ func _on_Health_health_updated(current):
 
 func _on_Ammo_points_updated(current):
 	emit_signal("ammo_updated", current)
+
+func _on_PoisonBombs_shot_bomb():
+	emit_signal("shot_bomb")
