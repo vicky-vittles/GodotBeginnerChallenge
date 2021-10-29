@@ -5,10 +5,12 @@ signal state_entered()
 signal state_exited()
 
 export (NodePath) var _fsm_path # State machine's path
-export (NodePath) var _animation_player_path # Main Animation Player path
+export (NodePath) var _enter_animation_player_path # Enter Animation Player path
+export (NodePath) var _exit_animation_player_path # Exit Animation Player path
 
 var fsm : Node # This state's GTStateMachine node
-var animation_player : AnimationPlayer # This state's AnimationPlayer node
+var enter_animation_player : AnimationPlayer # This state's enter AnimationPlayer node
+var exit_animation_player : AnimationPlayer # This state's exit AnimationPlayer node
 var entity : Node # The state machine's entity
 
 export (String) var anim_name_on_enter = "" # Name of the animation to play when entering this state
@@ -22,9 +24,11 @@ export (bool) var do_physics_process = true # Enable _physics_process callback
 
 func _ready():
 	fsm = get_node(_fsm_path)
-	animation_player = get_node(_animation_player_path)
+	enter_animation_player = get_node(_enter_animation_player_path)
+	exit_animation_player = get_node(_exit_animation_player_path)
 	assert(fsm != null, "Error initializing GTState, 'fsm' property is null")
-	assert(animation_player != null, "Error initializing GTState, 'animation_player' property is null")
+	assert(enter_animation_player != null, "Error initializing GTState, 'enter_animation_player' property is null")
+	assert(exit_animation_player != null, "Error initializing GTState, 'exit_animation_player' property is null")
 
 # Callback for when this state becomes the state machine's current state
 func enter(info: Dictionary = {}) -> void:

@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://libs/gt_audio_player/gt_audio_player.gd"
 }, {
+"base": "CollisionPolygon2D",
+"class": "GTCollisionPolygon2D",
+"language": "GDScript",
+"path": "res://libs/gt_collision_polygon_2d/gt_collision_polygon_2d.gd"
+}, {
 "base": "GTInputController",
 "class": "GTDeviceController",
 "language": "GDScript",
@@ -50,9 +55,19 @@ _global_script_classes=[ {
 "path": "res://libs/gt_entity_2d/__gt_entity_2d.gd"
 }, {
 "base": "Node",
+"class": "GTEntityMover2D",
+"language": "GDScript",
+"path": "res://libs/gt_entity_mover_2d/gt_entity_mover_2d.gd"
+}, {
+"base": "Node",
 "class": "GTFormula",
 "language": "GDScript",
 "path": "res://libs/gt_formula/gt_formula.gd"
+}, {
+"base": "GTEntityMover2D",
+"class": "GTGravityEntityMover2D",
+"language": "GDScript",
+"path": "res://libs/gt_entity_mover_2d/gt_gravity_entity_mover_2d/gt_gravity_entity_mover_2d.gd"
 }, {
 "base": "Area2D",
 "class": "GTGroupedArea2D",
@@ -89,6 +104,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://libs/gt_juice_2d/gt_juice_2d.gd"
 }, {
+"base": "Node",
+"class": "GTMenu",
+"language": "GDScript",
+"path": "res://libs/gt_menus/menus/__gt_menu.gd"
+}, {
 "base": "Label",
 "class": "GTPatternLabel",
 "language": "GDScript",
@@ -104,10 +124,25 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://libs/gt_random_point_zone_2d/gt_random_point_zone_2d.gd"
 }, {
+"base": "RayCast2D",
+"class": "GTRayCast2D",
+"language": "GDScript",
+"path": "res://libs/gt_raycast_2d/gt_raycast_2d.gd"
+}, {
+"base": "Control",
+"class": "GTScreen",
+"language": "GDScript",
+"path": "res://libs/gt_menus/screens/__gt_screen.gd"
+}, {
 "base": "Node",
 "class": "GTScreenShake2D",
 "language": "GDScript",
 "path": "res://libs/gt_screen_shake_2d/gt_screen_shake_2d.gd"
+}, {
+"base": "Node",
+"class": "GTScreenTransition",
+"language": "GDScript",
+"path": "res://libs/gt_menus/transitions/__gt_transition.gd"
 }, {
 "base": "Node",
 "class": "GTState",
@@ -123,6 +158,46 @@ _global_script_classes=[ {
 "class": "GTStateTransition",
 "language": "GDScript",
 "path": "res://libs/gt_state_machine/__gt_state_transition.gd"
+}, {
+"base": "Node",
+"class": "GTSteeringBehavior2D",
+"language": "GDScript",
+"path": "res://libs/gt_entity_mover_2d/gt_steering_entity_mover_2d/__gt_steering_behavior_2d.gd"
+}, {
+"base": "GTSteeringBehavior2D",
+"class": "GTSteeringBehaviorAbsoluteSeek2D",
+"language": "GDScript",
+"path": "res://libs/gt_entity_mover_2d/gt_steering_entity_mover_2d/behaviors/gt_steering_behavior_absolute_seek_2d.gd"
+}, {
+"base": "GTSteeringBehavior2D",
+"class": "GTSteeringBehaviorAvoidance2D",
+"language": "GDScript",
+"path": "res://libs/gt_entity_mover_2d/gt_steering_entity_mover_2d/behaviors/gt_steering_behavior_avoidance_2d.gd"
+}, {
+"base": "GTSteeringBehaviorSeek2D",
+"class": "GTSteeringBehaviorCohesion2D",
+"language": "GDScript",
+"path": "res://libs/gt_entity_mover_2d/gt_steering_entity_mover_2d/behaviors/gt_steering_behavior_cohesion_2d.gd"
+}, {
+"base": "GTSteeringBehavior2D",
+"class": "GTSteeringBehaviorSeek2D",
+"language": "GDScript",
+"path": "res://libs/gt_entity_mover_2d/gt_steering_entity_mover_2d/behaviors/gt_steering_behavior_seek_2d.gd"
+}, {
+"base": "GTSteeringBehavior2D",
+"class": "GTSteeringBehaviorSeparation2D",
+"language": "GDScript",
+"path": "res://libs/gt_entity_mover_2d/gt_steering_entity_mover_2d/behaviors/gt_steering_behavior_separation_2d.gd"
+}, {
+"base": "GTSteeringBehavior2D",
+"class": "GTSteeringBehaviorWander2D",
+"language": "GDScript",
+"path": "res://libs/gt_entity_mover_2d/gt_steering_entity_mover_2d/behaviors/gt_steering_behavior_wander_2d.gd"
+}, {
+"base": "GTEntityMover2D",
+"class": "GTSteeringEntityMover2D",
+"language": "GDScript",
+"path": "res://libs/gt_entity_mover_2d/gt_steering_entity_mover_2d/gt_steering_entity_mover_2d.gd"
 }, {
 "base": "Node",
 "class": "GTStopWatch",
@@ -143,6 +218,11 @@ _global_script_classes=[ {
 "class": "GTTimer",
 "language": "GDScript",
 "path": "res://libs/gt_timer/gt_timer.gd"
+}, {
+"base": "GTEntityMover2D",
+"class": "GTTopdownEntityMover2D",
+"language": "GDScript",
+"path": "res://libs/gt_entity_mover_2d/gt_topdown_entity_mover_2d/gt_topdown_entity_mover_2d.gd"
 }, {
 "base": "GTGroupedArea2D",
 "class": "GTTriggerArea2D",
@@ -171,9 +251,12 @@ _global_script_class_icons={
 "CubicBezierRect": "",
 "FlexGridContainer": "res://addons/color-palette/utilities/FlexGridContainerIcon.png",
 "GTAudioPlayer": "",
+"GTCollisionPolygon2D": "",
 "GTDeviceController": "res://libs/gt_input_controller/icons/gt_device_controller.svg",
 "GTEntity2D": "",
+"GTEntityMover2D": "",
 "GTFormula": "",
+"GTGravityEntityMover2D": "",
 "GTGroupedArea2D": "",
 "GTHealth": "",
 "GTHitbox2D": "",
@@ -181,17 +264,30 @@ _global_script_class_icons={
 "GTInputAction": "",
 "GTInputController": "res://libs/gt_input_controller/icons/gt_default_controller.svg",
 "GTJuice2D": "",
+"GTMenu": "",
 "GTPatternLabel": "",
 "GTPoints": "",
 "GTRandomPointZone2D": "",
+"GTRayCast2D": "",
+"GTScreen": "",
 "GTScreenShake2D": "",
+"GTScreenTransition": "res://libs/gt_menus/transitions/gt_transition.svg",
 "GTState": "",
 "GTStateMachine": "res://libs/gt_state_machine/icons/gt_state_machine.svg",
 "GTStateTransition": "",
+"GTSteeringBehavior2D": "",
+"GTSteeringBehaviorAbsoluteSeek2D": "",
+"GTSteeringBehaviorAvoidance2D": "",
+"GTSteeringBehaviorCohesion2D": "",
+"GTSteeringBehaviorSeek2D": "",
+"GTSteeringBehaviorSeparation2D": "",
+"GTSteeringBehaviorWander2D": "",
+"GTSteeringEntityMover2D": "",
 "GTStopWatch": "",
 "GTTeleporter2D": "",
 "GTTimeScale": "",
 "GTTimer": "",
+"GTTopdownEntityMover2D": "",
 "GTTriggerArea2D": "",
 "GTTween": "",
 "Palette": "",
@@ -224,10 +320,10 @@ gdscript/warnings/integer_division=false
 [display]
 
 window/size/width=256
-window/size/height=256
-window/size/test_width=512
-window/size/test_height=512
-window/stretch/mode="viewport"
+window/size/height=192
+window/size/test_width=1024
+window/size/test_height=768
+window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
 [editor_plugins]
@@ -254,21 +350,31 @@ sys_menu={
 act_move_left={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777231,"unicode":0,"echo":false,"script":null)
  ]
 }
 act_move_right={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777233,"unicode":0,"echo":false,"script":null)
  ]
 }
 act_move_up={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777232,"unicode":0,"echo":false,"script":null)
  ]
 }
 act_move_down={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777234,"unicode":0,"echo":false,"script":null)
+ ]
+}
+act_bomb={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":88,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":75,"unicode":0,"echo":false,"script":null)
  ]
 }
 
@@ -278,6 +384,7 @@ act_move_down={
 2d_physics/layer_3="bodies"
 2d_physics/layer_4="triggers"
 2d_physics/layer_5="hitboxes"
+2d_physics/layer_6="ethereal_bodies"
 
 [physics]
 
