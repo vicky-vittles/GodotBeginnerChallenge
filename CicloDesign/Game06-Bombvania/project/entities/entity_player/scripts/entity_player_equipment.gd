@@ -8,12 +8,14 @@ signal updated_power(total)
 export (int) var ammo = 1
 export (int) var power = 1
 export (float) var bomb_fuse_time = 2.0
+export (bool) var bomb_spike = false
 export (bool) var bomb_remote = false
 
 func get_bomb_info() -> Dictionary:
 	return {
 		"power": power,
 		"fuse_time": bomb_fuse_time,
+		"is_spike": bomb_spike,
 		"is_remote": bomb_remote}
 
 func gain_ammo():

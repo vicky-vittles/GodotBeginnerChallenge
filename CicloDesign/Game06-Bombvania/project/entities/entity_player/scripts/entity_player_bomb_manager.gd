@@ -22,15 +22,28 @@ func _ready():
 	assert(equipment != null, "Error initializing EntityPlayerBombManager: 'equipment' property is null")
 
 func place_bomb():
-	if current_ammo > 0 and cooldown.is_stopped():
+	if current_ammo > 0 and cooldown.is_stopped() and not player.bomb_presence_trigger.is_area_colliding:
 		var pos = Globals.snap_to_tile(body.global_position)
 		pos += Globals.TILE_SIZE*Vector2(0.5, 0.5)
 		var info = equipment.get_bomb_info()
 		info["global_position"] = pos
 		var bomb = spawner.spawn_with_info(info)
-		bomb.connect("exploded", self, "recover_ammo")
+		player.bombs.append(bomb)
+		bomb.connect("exploded", self, "_on_Bomb_exploded")
 		cooldown.start()
 		current_ammo -= 1
+
+func detonate_bomb():
+	if equipment.bomb_remote:
+		var bomb_to_detonate = player.bombs.pop_front()
+		if bomb_to_detonate:
+			bomb_to_detonate.explode()
+
+func _on_Bomb_exploded(bomb):
+	recover_ammo()
+	var index = player.bombs.find(bomb)
+	if index > -1:
+		player.bombs.remove(index)
 
 func recover_ammo():
 	current_ammo += 1

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://libs/gt_entity_2d/__gt_entity_2d.gd" type="Script" id=1]
+[ext_resource path="res://entities/entity_explosion/entity_explosion.gd" type="Script" id=1]
 [ext_resource path="res://libs/gt_grouped_area_2d/gt_trigger_area_2d/gt_hitbox_2d/gt_hitbox_2d.gd" type="Script" id=2]
 [ext_resource path="res://entities/entity_explosion/assets/explosion.png" type="Texture" id=3]
 
@@ -9,7 +9,8 @@ radius = 7.0
 
 [sub_resource type="Animation" id=2]
 resource_name = "explode"
-length = 0.5
+length = 0.3
+step = 0.05
 tracks/0/type = "method"
 tracks/0/path = NodePath(".")
 tracks/0/interp = 1
@@ -17,16 +18,57 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.5 ),
+"times": PoolRealArray( 0.3 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
 "method": "queue_free"
 } ]
 }
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "finish"
+} ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.05 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "animate"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Body/visuals/graphics:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [node name="Explosion" type="Node2D"]
 script = ExtResource( 1 )
+entity_type = 3
 
 [node name="Body" type="Area2D" parent="." groups=[
 "entity_explosion_damage_hitbox",
@@ -38,7 +80,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 _body_path = NodePath(".")
-collidable_groups = [ "entity_player_damage_hurtbox", "entity_enemy_damage_hurtbox" ]
+collidable_groups = [ "entity_player_damage_hurtbox", "entity_enemy_damage_hurtbox", "entity_bomb_damage_hurtbox" ]
 damage = 1
 
 [node name="visuals" type="Node2D" parent="Body"]

@@ -1,20 +1,43 @@
 extends GTEntity2D
 
-signal exploded()
+signal has_exploded()
+signal exploded(bomb)
 
-var power : int = 1 setget _set_power
+const ENTITY_PLAYER_BODY = "entity_player_body"
+const FULL_COLLISION_MASK = 162
+
+var power : int = 1
 var fuse_time : float = 2.0 setget _set_fuse_time
-var is_remote : bool = false setget _set_is_remote
+var is_spike : bool = false
+var is_remote : bool = false
 
+onready var body = $Body
+onready var fuse_timer = $Timers/FuseTimer
 onready var graphics_animation_player = $Body/visuals/graphics/AnimationPlayer
+onready var fuse_to_explode_transition = $StateMachine/Fuse/ToExplode
 
-func _set_power(_value):
-	power = _value
+var tilemap
+
+func fuse():
+	if not is_remote:
+		fuse_timer.start()
+		graphics_animation_player.play("fuse")
+
+func explode():
+	fuse_to_explode_transition.do_transition()
 
 func _set_fuse_time(_value):
 	fuse_time = _value
 	graphics_animation_player.playback_speed = 2.0 / fuse_time
 	get_node("Timers/FuseTimer").wait_time = fuse_time
 
-func _set_is_remote(_value):
-	is_remote = _value
+func _on_Explode_state_entered():
+	emit_signal("exploded", self)
+
+func _on_PlayerPresence_effect():
+	body.collision_mask = FULL_COLLISION_MASK
+
+func _on_EntityMover_collided(result):
+	var collider = result.collider
+	if collider.is_in_group(ENTITY_PLAYER_BODY):
+		pass

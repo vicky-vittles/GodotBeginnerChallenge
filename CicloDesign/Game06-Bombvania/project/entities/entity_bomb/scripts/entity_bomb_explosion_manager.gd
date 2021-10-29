@@ -17,6 +17,7 @@ func _ready():
 	assert(body != null, "Error initializing EntityBombExplosionManager: 'body' property is null")
 
 func explode():
+	body.global_position = Globals.snap_to_tile(body.global_position) + Globals.TILE_SIZE*Vector2(0.5, 0.5)
 	spawner.spawn_with_info({"global_position": body.global_position})
 	for dir in DIRECTIONS:
 		for power in range(1, entity.power+1):
@@ -24,3 +25,7 @@ func explode():
 			var info = {
 				"global_position": new_pos}
 			spawner.spawn_with_info(info)
+			
+			if not entity.is_spike:
+				if entity.tilemap.is_destructible_tile_in_pos(new_pos):
+					break

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://entities/entity_player/entity_player.gd" type="Script" id=1]
 [ext_resource path="res://libs/gt_entity_mover_2d/gt_topdown_entity_mover_2d/gt_topdown_entity_mover_2d.gd" type="Script" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://components/entity_spawner/entity_spawner.tscn" type="PackedScene" id=12]
 [ext_resource path="res://entities/entity_bomb/entity_bomb.tscn" type="PackedScene" id=13]
 [ext_resource path="res://libs/gt_input_controller/actions/__gt_input_action.gd" type="Script" id=14]
+[ext_resource path="res://libs/gt_grouped_area_2d/gt_trigger_area_2d/gt_trigger_area_2d.gd" type="Script" id=15]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 4.0
@@ -21,8 +22,10 @@ radius = 4.0
 [sub_resource type="CircleShape2D" id=2]
 radius = 4.0
 
-[sub_resource type="Animation" id=3]
-resource_name = "dead_enter"
+[sub_resource type="CircleShape2D" id=3]
+radius = 4.0
+
+[sub_resource type="Animation" id=4]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body/visuals/graphics:visible")
@@ -51,8 +54,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "hurt_enter"
+[sub_resource type="Animation" id=5]
 length = 2.0
 tracks/0/type = "method"
 tracks/0/path = NodePath("Timers/InvincibilityTimer")
@@ -95,21 +97,6 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=5]
-length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Body/visuals/graphics:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
 [sub_resource type="Animation" id=6]
 length = 0.1
 tracks/0/type = "value"
@@ -126,7 +113,21 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=7]
-resource_name = "hurt_exit"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/visuals/graphics:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=8]
 length = 0.1
 tracks/0/type = "method"
 tracks/0/path = NodePath("Body/Triggers/DamageHurtbox")
@@ -145,12 +146,17 @@ tracks/0/keys = {
 
 [node name="Player" type="Node2D"]
 script = ExtResource( 1 )
+entity_type = 1
 
 [node name="InputController" parent="." instance=ExtResource( 3 )]
 
 [node name="bomb" type="Node" parent="InputController"]
 script = ExtResource( 14 )
 action = "act_bomb"
+
+[node name="remote" type="Node" parent="InputController"]
+script = ExtResource( 14 )
+action = "act_remote"
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource( 9 )
@@ -159,6 +165,11 @@ initial_health = 6
 
 [node name="Equipment" type="Node" parent="."]
 script = ExtResource( 10 )
+ammo = 9
+power = 9
+bomb_fuse_time = 2.5
+bomb_spike = true
+bomb_remote = true
 
 [node name="BombManager" type="Node" parent="."]
 script = ExtResource( 11 )
@@ -172,7 +183,7 @@ _entity_template = ExtResource( 13 )
 is_independent_entity = true
 
 [node name="Cooldown" type="Timer" parent="BombManager"]
-wait_time = 0.5
+wait_time = 0.25
 one_shot = true
 
 [node name="Timers" type="Node" parent="."]
@@ -182,10 +193,10 @@ wait_time = 2.0
 one_shot = true
 
 [node name="Body" type="KinematicBody2D" parent="." groups=[
-"entity_player",
+"entity_player_body",
 ]]
-collision_layer = 4
-collision_mask = 2
+collision_layer = 32
+collision_mask = 130
 __meta__ = {
 "_edit_lock_": true
 }
@@ -241,6 +252,23 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="BombPresenceTrigger" type="Area2D" parent="Body/Triggers" groups=[
+"entity_player_presence_trigger",
+]]
+visible = false
+collision_layer = 8
+collision_mask = 8
+script = ExtResource( 15 )
+__meta__ = {
+"_edit_lock_": true
+}
+_body_path = NodePath("../..")
+collidable_groups = [ "entity_bomb_presence_trigger" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Triggers/BombPresenceTrigger"]
+position = Vector2( 0, -4 )
+shape = SubResource( 3 )
+
 [node name="EntityMover" type="Node" parent="Body"]
 script = ExtResource( 2 )
 body_path = NodePath("..")
@@ -261,6 +289,7 @@ _exit_animation_player_path = NodePath("../../Exit")
 anim_name_on_enter = "idle_enter"
 play_on_enter = true
 can_place_bombs = true
+can_detonate_bombs = true
 
 [node name="ToMove" type="Node" parent="StateMachine/Idle"]
 script = ExtResource( 6 )
@@ -282,6 +311,7 @@ _exit_animation_player_path = NodePath("../../Exit")
 anim_name_on_enter = "move_enter"
 play_on_enter = true
 can_place_bombs = true
+can_detonate_bombs = true
 
 [node name="ToIdle" type="Node" parent="StateMachine/Move"]
 script = ExtResource( 6 )
@@ -312,6 +342,7 @@ anim_name_on_exit = "hurt_exit"
 play_on_enter = true
 play_on_exit = true
 can_place_bombs = true
+can_detonate_bombs = true
 
 [node name="ToIdle" type="Node" parent="StateMachine/Hurt"]
 script = ExtResource( 6 )
@@ -327,31 +358,37 @@ play_on_enter = true
 can_move = false
 
 [node name="Enter" type="AnimationPlayer" parent="."]
-anims/dead_enter = SubResource( 3 )
-anims/hurt_enter = SubResource( 4 )
-anims/idle_enter = SubResource( 5 )
-anims/move_enter = SubResource( 6 )
+anims/dead_enter = SubResource( 4 )
+anims/hurt_enter = SubResource( 5 )
+anims/idle_enter = SubResource( 6 )
+anims/move_enter = SubResource( 7 )
 
 [node name="Exit" type="AnimationPlayer" parent="."]
-anims/hurt_exit = SubResource( 7 )
+anims/hurt_exit = SubResource( 8 )
 
-[connection signal="took_damage" from="." to="StateMachine/Idle" method="_on_Player_took_damage"]
 [connection signal="took_damage" from="." to="StateMachine/Move" method="_on_Player_took_damage"]
+[connection signal="took_damage" from="." to="StateMachine/Idle" method="_on_Player_took_damage"]
 [connection signal="updated_move_direction" from="InputController" to="StateMachine/Hurt" method="_on_InputController_updated_move_direction"]
-[connection signal="updated_move_direction" from="InputController" to="StateMachine/Idle" method="_on_InputController_updated_move_direction"]
 [connection signal="updated_move_direction" from="InputController" to="StateMachine/Move" method="_on_InputController_updated_move_direction"]
+[connection signal="updated_move_direction" from="InputController" to="StateMachine/Idle" method="_on_InputController_updated_move_direction"]
 [connection signal="just_pressed" from="InputController/bomb" to="StateMachine/Hurt" method="_on_bomb_just_pressed"]
-[connection signal="just_pressed" from="InputController/bomb" to="StateMachine/Idle" method="_on_bomb_just_pressed"]
 [connection signal="just_pressed" from="InputController/bomb" to="StateMachine/Move" method="_on_bomb_just_pressed"]
-[connection signal="died" from="Health" to="StateMachine/Idle/ToDead" method="do_transition"]
+[connection signal="just_pressed" from="InputController/bomb" to="StateMachine/Idle" method="_on_bomb_just_pressed"]
+[connection signal="just_pressed" from="InputController/remote" to="StateMachine/Hurt" method="_on_remote_just_pressed"]
+[connection signal="just_pressed" from="InputController/remote" to="StateMachine/Move" method="_on_remote_just_pressed"]
+[connection signal="just_pressed" from="InputController/remote" to="StateMachine/Idle" method="_on_remote_just_pressed"]
 [connection signal="died" from="Health" to="StateMachine/Move/ToDead" method="do_transition"]
-[connection signal="lived" from="Health" to="StateMachine/Move/ToHurt" method="do_transition"]
+[connection signal="died" from="Health" to="StateMachine/Idle/ToDead" method="do_transition"]
 [connection signal="lived" from="Health" to="StateMachine/Idle/ToHurt" method="do_transition"]
+[connection signal="lived" from="Health" to="StateMachine/Move/ToHurt" method="do_transition"]
 [connection signal="gained_ammo" from="Equipment" to="BombManager" method="recover_ammo"]
 [connection signal="timeout" from="Timers/InvincibilityTimer" to="StateMachine/Hurt/ToIdle" method="do_transition"]
 [connection signal="took_damage" from="Body/Triggers/DamageHurtbox" to="." method="_on_DamageHurtbox_took_damage"]
 [connection signal="bomb_just_pressed" from="StateMachine/Idle" to="BombManager" method="place_bomb"]
+[connection signal="remote_just_pressed" from="StateMachine/Idle" to="BombManager" method="detonate_bomb"]
 [connection signal="started_moving" from="StateMachine/Idle" to="StateMachine/Idle/ToMove" method="do_transition"]
 [connection signal="bomb_just_pressed" from="StateMachine/Move" to="BombManager" method="place_bomb"]
+[connection signal="remote_just_pressed" from="StateMachine/Move" to="BombManager" method="detonate_bomb"]
 [connection signal="stopped_moving" from="StateMachine/Move" to="StateMachine/Move/ToIdle" method="do_transition"]
 [connection signal="bomb_just_pressed" from="StateMachine/Hurt" to="BombManager" method="place_bomb"]
+[connection signal="remote_just_pressed" from="StateMachine/Hurt" to="BombManager" method="detonate_bomb"]
