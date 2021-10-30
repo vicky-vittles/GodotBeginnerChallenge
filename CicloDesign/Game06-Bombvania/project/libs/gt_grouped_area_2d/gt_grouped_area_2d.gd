@@ -6,6 +6,7 @@ signal grouped_area_exited(area)
 signal grouped_body_entered(body)
 signal grouped_body_exited(body)
 
+export (NodePath) var _entity_path # The path of this node's entity
 export (NodePath) var _body_path # The path of this node's physical body parent
 export (Array, String) var collidable_groups # Groups assigned to collide with this node
 export (Array, String) var excluded_groups # Groups assigned to be excluded from colliding with this node
@@ -15,10 +16,13 @@ var is_area_colliding : bool = false # Whether or not there is an area currently
 var is_body_colliding : bool = false # Whether or not there is a body currently colliding with this node
 var collider_area : Node2D # Area that is colliding with this node
 var collider_body : Node2D # Body that is colliding with this node
+var entity : Node # This node's entity
 var body : Node2D # This node's physical body parent
 
 func _ready():
+	entity = get_node(_entity_path)
 	body = get_node(_body_path)
+	assert(entity != null, "Error initializing GTArea2D, 'entity' property is null")
 	assert(body != null, "Error initializing GTArea2D, 'body' property is null")
 	connect("area_entered", self, "_on_area_entered")
 	connect("area_exited", self, "_on_area_exited")

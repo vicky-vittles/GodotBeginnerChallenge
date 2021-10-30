@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/original-bomb.png-e91ff28eec9e2c8a43e42e1285b8aedb.stex"
+path="res://.import/enemies.png-baaeffe0750c8442ad7621ed1d9cf781.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/entity_bomb/assets/original-bomb.png"
-dest_files=[ "res://.import/original-bomb.png-e91ff28eec9e2c8a43e42e1285b8aedb.stex" ]
+source_file="res://entities/entity_enemy/assets/enemies.png"
+dest_files=[ "res://.import/enemies.png-baaeffe0750c8442ad7621ed1d9cf781.stex" ]
 
 [params]
 

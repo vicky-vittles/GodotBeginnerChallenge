@@ -3,6 +3,7 @@ extends Node
 export (NodePath) var _entity_path
 export (NodePath) var _body_path
 
+const JOB_SPAWN_ENTITY_EXPLOSION = "job_spawn_entity_explosion"
 const DIRECTIONS = [Vector2.RIGHT, Vector2.DOWN, Vector2.LEFT, Vector2.UP]
 
 onready var spawner = $Spawner
@@ -24,6 +25,8 @@ func explode():
 			var new_pos = body.global_position + power*dir*Globals.TILE_SIZE
 			var info = {
 				"global_position": new_pos}
+			
+			#JobQueue.schedule(JOB_SPAWN_ENTITY_EXPLOSION, spawner, "spawn_with_info", [info])
 			spawner.spawn_with_info(info)
 			
 			if not entity.is_spike:

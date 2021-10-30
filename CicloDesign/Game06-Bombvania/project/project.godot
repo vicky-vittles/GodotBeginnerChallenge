@@ -306,6 +306,7 @@ Globals="*res://globals/globals.gd"
 Utils="*res://globals/utils.gd"
 Settings="*res://globals/settings/settings.gd"
 JobQueue="*res://globals/jobs/job_queue.gd"
+ObjectPool="*res://globals/object_pool/object_pool.gd"
 
 [debug]
 

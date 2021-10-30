@@ -13,11 +13,14 @@ enum MOVEMENT_MODE {
 export (float) var LENGTH_THRESHOLD = 4
 export (NodePath) var body_path
 export (MOVEMENT_MODE) var movement_mode = MOVEMENT_MODE.MOVE_AND_COLLIDE
+export (int) var max_velocity = 256
 export (Vector2) var floor_normal = Vector2.UP
 export (Vector2) var snap = Vector2.ZERO
 export (Vector2) var movement_mask = Vector2(1,1)
+export (float) var bounce_factor = 1.0
 export (bool) var frozen = false
 export (bool) var is_enabled = true
+export (bool) var bounce_on_collision = false
 export (bool) var debug_mode = false
 
 var forces = []
@@ -47,6 +50,8 @@ func _move(delta) -> void:
 		MOVEMENT_MODE.MOVE_AND_COLLIDE:
 			var collision = body.move_and_collide(velocity * movement_mask * delta)
 			if collision:
+				if bounce_on_collision:
+					velocity = bounce_factor*velocity.bounce(collision.normal)
 				_on_collision(collision)
 				emit_signal("has_collided")
 				emit_signal("collided", collision)

@@ -1,0 +1,120 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://entities/entity_pickup/entity_pickup.gd" type="Script" id=1]
+[ext_resource path="res://libs/gt_grouped_area_2d/gt_trigger_area_2d/gt_trigger_area_2d.gd" type="Script" id=2]
+[ext_resource path="res://assets/images/collectibles.png" type="Texture" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+
+[sub_resource type="Animation" id=2]
+resource_name = "plus_ammo"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("visuals/graphics/main:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 4 ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("visuals/graphics/main:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 5 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "remote_bomb"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("visuals/graphics/main:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 6 ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("visuals/graphics/main:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 7 ]
+}
+
+[node name="Pickup" type="Node2D"]
+script = ExtResource( 1 )
+entity_type = 6
+
+[node name="PickupTrigger" type="Area2D" parent="." groups=[
+"entity_pickup_pickup_trigger",
+]]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+_entity_path = NodePath("..")
+_body_path = NodePath(".")
+collidable_groups = [ "entity_player_pickup_trigger" ]
+
+[node name="visuals" type="Node2D" parent="PickupTrigger"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="graphics" type="Node2D" parent="PickupTrigger/visuals"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="main" type="Sprite" parent="PickupTrigger/visuals/graphics"]
+texture = ExtResource( 3 )
+hframes = 4
+vframes = 4
+frame = 4
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape" type="CollisionShape2D" parent="PickupTrigger"]
+visible = false
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PickupTrigger"]
+anims/plus_ammo = SubResource( 2 )
+anims/plus_fire = SubResource( 3 )
+anims/remote_bomb = SubResource( 4 )
+anims/spike_bomb = SubResource( 5 )
+
+[connection signal="effect" from="PickupTrigger" to="." method="_on_PickupTrigger_effect"]

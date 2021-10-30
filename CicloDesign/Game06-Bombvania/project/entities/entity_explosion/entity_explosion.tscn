@@ -1,14 +1,17 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://entities/entity_explosion/entity_explosion.gd" type="Script" id=1]
 [ext_resource path="res://libs/gt_grouped_area_2d/gt_trigger_area_2d/gt_hitbox_2d/gt_hitbox_2d.gd" type="Script" id=2]
 [ext_resource path="res://entities/entity_explosion/assets/explosion.png" type="Texture" id=3]
+[ext_resource path="res://libs/gt_state_machine/gt_state_machine.gd" type="Script" id=4]
+[ext_resource path="res://libs/gt_state_machine/__gt_state.gd" type="Script" id=5]
+[ext_resource path="res://libs/gt_state_machine/__gt_state_transition.gd" type="Script" id=6]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 7.0
 
 [sub_resource type="Animation" id=2]
-resource_name = "explode"
+resource_name = "active_enter"
 length = 0.3
 step = 0.05
 tracks/0/type = "method"
@@ -18,34 +21,6 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.3 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "queue_free"
-} ]
-}
-tracks/1/type = "method"
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0.3 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "finish"
-} ]
-}
-tracks/2/type = "method"
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
 "times": PoolRealArray( 0.05 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
@@ -53,17 +28,103 @@ tracks/2/keys = {
 "method": "animate"
 } ]
 }
-tracks/3/type = "value"
-tracks/3/path = NodePath("Body/visuals/graphics:visible")
+tracks/1/type = "value"
+tracks/1/path = NodePath("Body/visuals/graphics:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("Body")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "enable_all_shapes"
+} ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "finish"
+} ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath("Timer")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ -1 ],
+"method": "start"
+} ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "inactive_enter"
+length = 0.1
+tracks/0/type = "method"
+tracks/0/path = NodePath("Body")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "disable_all_shapes"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Body/visuals/graphics:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("Timer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "stop"
+} ]
 }
 
 [node name="Explosion" type="Node2D"]
@@ -79,6 +140,7 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
+_entity_path = NodePath("..")
 _body_path = NodePath(".")
 collidable_groups = [ "entity_player_damage_hurtbox", "entity_enemy_damage_hurtbox", "entity_bomb_damage_hurtbox" ]
 damage = 1
@@ -89,6 +151,7 @@ __meta__ = {
 }
 
 [node name="graphics" type="Node2D" parent="Body/visuals"]
+visible = false
 __meta__ = {
 "_edit_lock_": true
 }
@@ -106,6 +169,41 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 4 )
+_entity_path = NodePath("..")
+
+[node name="Active" type="Node" parent="StateMachine"]
+script = ExtResource( 5 )
+_fsm_path = NodePath("..")
+_enter_animation_player_path = NodePath("../../AnimationPlayer")
+_exit_animation_player_path = NodePath("../../AnimationPlayer")
+anim_name_on_enter = "active_enter"
+play_on_enter = true
+
+[node name="ToInactive" type="Node" parent="StateMachine/Active"]
+script = ExtResource( 6 )
+_end_state_path = NodePath("../../Inactive")
+
+[node name="Inactive" type="Node" parent="StateMachine"]
+script = ExtResource( 5 )
+_fsm_path = NodePath("..")
+_enter_animation_player_path = NodePath("../../AnimationPlayer")
+_exit_animation_player_path = NodePath("../../AnimationPlayer")
+anim_name_on_enter = "inactive_enter"
+play_on_enter = true
+
+[node name="ToActive" type="Node" parent="StateMachine/Inactive"]
+script = ExtResource( 6 )
+_end_state_path = NodePath("../../Active")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "explode"
-anims/explode = SubResource( 2 )
+anims/active_enter = SubResource( 2 )
+anims/inactive_enter = SubResource( 3 )
+
+[connection signal="timeout" from="Timer" to="StateMachine/Active/ToInactive" method="do_transition"]
+[connection signal="state_entered" from="StateMachine/Inactive" to="." method="_on_Inactive_state_entered"]
