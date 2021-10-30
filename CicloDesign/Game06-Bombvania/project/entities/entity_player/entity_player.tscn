@@ -16,6 +16,7 @@
 [ext_resource path="res://libs/gt_input_controller/actions/__gt_input_action.gd" type="Script" id=14]
 [ext_resource path="res://libs/gt_grouped_area_2d/gt_trigger_area_2d/gt_trigger_area_2d.gd" type="Script" id=15]
 [ext_resource path="res://libs/gt_points/gt_points.gd" type="Script" id=16]
+[ext_resource path="res://addons/Trail/trail_2d.gd" type="Script" id=17]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 4.0
@@ -29,10 +30,7 @@ radius = 4.0
 [sub_resource type="CircleShape2D" id=4]
 radius = 4.0
 
-[sub_resource type="CircleShape2D" id=5]
-radius = 4.0
-
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body/visuals/graphics:visible")
@@ -61,7 +59,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=6]
 length = 2.0
 tracks/0/type = "method"
 tracks/0/path = NodePath("Timers/InvincibilityTimer")
@@ -104,6 +102,21 @@ tracks/2/keys = {
 } ]
 }
 
+[sub_resource type="Animation" id=7]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/visuals/graphics:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
 [sub_resource type="Animation" id=8]
 length = 0.1
 tracks/0/type = "value"
@@ -120,21 +133,6 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=9]
-length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Body/visuals/graphics:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
-[sub_resource type="Animation" id=10]
 length = 0.1
 tracks/0/type = "method"
 tracks/0/path = NodePath("Body/Triggers/DamageHurtbox")
@@ -177,10 +175,9 @@ script = ExtResource( 16 )
 
 [node name="Equipment" type="Node" parent="Stats"]
 script = ExtResource( 10 )
-power = 2
 bomb_fuse_time = 2.5
 
-[node name="BombManager" type="Node" parent="."]
+[node name="BombManager" type="Node2D" parent="."]
 script = ExtResource( 11 )
 _player_path = NodePath("..")
 _body_path = NodePath("../Body")
@@ -192,7 +189,6 @@ _entity_template = ExtResource( 13 )
 is_independent_entity = true
 
 [node name="Cooldown" type="Timer" parent="BombManager"]
-wait_time = 0.25
 one_shot = true
 
 [node name="Timers" type="Node" parent="."]
@@ -216,7 +212,6 @@ __meta__ = {
 }
 
 [node name="graphics" type="Node2D" parent="Body/visuals"]
-visible = false
 __meta__ = {
 "_edit_lock_": true
 }
@@ -227,6 +222,21 @@ texture = ExtResource( 5 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="bomb_origin" type="Position2D" parent="Body"]
+position = Vector2( 0, -6 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="visited_points" type="Line2D" parent="Body/bomb_origin"]
+position = Vector2( 0, 6 )
+width = 0.0
+script = ExtResource( 17 )
+__meta__ = {
+"_edit_lock_": true
+}
+lifetime = 0.01
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Body"]
 visible = false
@@ -262,24 +272,6 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="BombPresenceTrigger" type="Area2D" parent="Body/Triggers" groups=[
-"entity_player_presence_trigger",
-]]
-visible = false
-collision_layer = 8
-collision_mask = 8
-script = ExtResource( 15 )
-__meta__ = {
-"_edit_lock_": true
-}
-_entity_path = NodePath("../../..")
-_body_path = NodePath("../..")
-collidable_groups = [ "entity_bomb_presence_trigger" ]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Triggers/BombPresenceTrigger"]
-position = Vector2( 0, -4 )
-shape = SubResource( 3 )
-
 [node name="CollectibleTrigger" type="Area2D" parent="Body/Triggers" groups=[
 "entity_player_collectible_trigger",
 ]]
@@ -296,7 +288,7 @@ collidable_groups = [ "entity_collectible_collectible_trigger" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Triggers/CollectibleTrigger"]
 position = Vector2( 0, -4 )
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -317,7 +309,7 @@ collidable_groups = [ "entity_pickup_pickup_trigger" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Triggers/PickupTrigger"]
 position = Vector2( 0, -4 )
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -326,7 +318,7 @@ __meta__ = {
 script = ExtResource( 2 )
 body_path = NodePath("..")
 movement_mode = 2
-max_velocity = 32
+max_velocity = 28
 move_acceleration_time = 0.05
 move_deceleration_time = 0.05
 
@@ -411,26 +403,26 @@ play_on_enter = true
 can_move = false
 
 [node name="Enter" type="AnimationPlayer" parent="."]
-anims/dead_enter = SubResource( 6 )
-anims/hurt_enter = SubResource( 7 )
-anims/idle_enter = SubResource( 8 )
-anims/move_enter = SubResource( 9 )
+anims/dead_enter = SubResource( 5 )
+anims/hurt_enter = SubResource( 6 )
+anims/idle_enter = SubResource( 7 )
+anims/move_enter = SubResource( 8 )
 
 [node name="Exit" type="AnimationPlayer" parent="."]
-anims/hurt_exit = SubResource( 10 )
+anims/hurt_exit = SubResource( 9 )
 
 [connection signal="collected_heart" from="." to="Stats/Health" method="gain_health" binds= [ 1 ]]
 [connection signal="collected_money" from="." to="Stats/Money" method="gain_points"]
 [connection signal="took_damage" from="." to="StateMachine/Move" method="_on_Player_took_damage"]
 [connection signal="took_damage" from="." to="StateMachine/Idle" method="_on_Player_took_damage"]
-[connection signal="updated_move_direction" from="InputController" to="StateMachine/Move" method="_on_InputController_updated_move_direction"]
 [connection signal="updated_move_direction" from="InputController" to="StateMachine/Hurt" method="_on_InputController_updated_move_direction"]
+[connection signal="updated_move_direction" from="InputController" to="StateMachine/Move" method="_on_InputController_updated_move_direction"]
 [connection signal="updated_move_direction" from="InputController" to="StateMachine/Idle" method="_on_InputController_updated_move_direction"]
-[connection signal="just_pressed" from="InputController/bomb" to="StateMachine/Move" method="_on_bomb_just_pressed"]
 [connection signal="just_pressed" from="InputController/bomb" to="StateMachine/Hurt" method="_on_bomb_just_pressed"]
+[connection signal="just_pressed" from="InputController/bomb" to="StateMachine/Move" method="_on_bomb_just_pressed"]
 [connection signal="just_pressed" from="InputController/bomb" to="StateMachine/Idle" method="_on_bomb_just_pressed"]
-[connection signal="just_pressed" from="InputController/remote" to="StateMachine/Move" method="_on_remote_just_pressed"]
 [connection signal="just_pressed" from="InputController/remote" to="StateMachine/Hurt" method="_on_remote_just_pressed"]
+[connection signal="just_pressed" from="InputController/remote" to="StateMachine/Move" method="_on_remote_just_pressed"]
 [connection signal="just_pressed" from="InputController/remote" to="StateMachine/Idle" method="_on_remote_just_pressed"]
 [connection signal="died" from="Stats/Health" to="StateMachine/Idle/ToDead" method="do_transition"]
 [connection signal="died" from="Stats/Health" to="StateMachine/Move/ToDead" method="do_transition"]

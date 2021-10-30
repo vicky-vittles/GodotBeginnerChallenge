@@ -1,8 +1,9 @@
-extends Node
+extends Node2D
 
 export (NodePath) var _player_path
 export (NodePath) var _body_path
 export (NodePath) var _equipment_path
+export (bool) var apply_cooldown = false
 var player
 var body
 var equipment
@@ -22,8 +23,14 @@ func _ready():
 	assert(equipment != null, "Error initializing EntityPlayerBombManager: 'equipment' property is null")
 
 func place_bomb():
-	if current_ammo > 0 and cooldown.is_stopped() and not player.bomb_presence_trigger.is_area_colliding:
-		var pos = Globals.snap_to_tile(body.global_position)
+	if apply_cooldown and not cooldown.is_stopped():
+		return
+	assert(player.world_bombs_manager, "Error utilizing EntityPlayerBombManager: 'world_bombs_manager' property from 'player' is null")
+	
+	var bomb_origin = player.bomb_origin.global_position
+	var has_bomb_in_current_pos = player.world_bombs_manager.has_bomb_in_pos(bomb_origin)
+	if current_ammo > 0 and not has_bomb_in_current_pos:
+		var pos = Globals.snap_to_tile(bomb_origin)
 		pos += Globals.TILE_SIZE*Vector2(0.5, 0.5)
 		var info = equipment.get_bomb_info()
 		info["global_position"] = pos

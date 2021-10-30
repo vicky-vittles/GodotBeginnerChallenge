@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://entities/entity_bomb/entity_bomb.gd" type="Script" id=1]
 [ext_resource path="res://entities/entity_bomb/assets/bomb.png" type="Texture" id=2]
@@ -10,7 +10,6 @@
 [ext_resource path="res://components/entity_spawner/entity_spawner.tscn" type="PackedScene" id=8]
 [ext_resource path="res://entities/entity_explosion/entity_explosion.tscn" type="PackedScene" id=9]
 [ext_resource path="res://libs/gt_grouped_area_2d/gt_trigger_area_2d/gt_hurtbox_2d/gt_hurtbox_2d.gd" type="Script" id=10]
-[ext_resource path="res://libs/gt_grouped_area_2d/gt_trigger_area_2d/gt_trigger_area_2d.gd" type="Script" id=11]
 
 [sub_resource type="Animation" id=1]
 resource_name = "default"
@@ -66,10 +65,7 @@ extents = Vector2( 4, 4 )
 [sub_resource type="CircleShape2D" id=5]
 radius = 7.0
 
-[sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 4, 4 )
-
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=6]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body/CollisionShape:disabled")
 tracks/0/interp = 1
@@ -142,7 +138,7 @@ tracks/4/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=7]
 length = 2.0
 step = 0.05
 tracks/0/type = "value"
@@ -186,7 +182,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=8]
 length = 0.1
 tracks/0/type = "method"
 tracks/0/path = NodePath("Timers/FuseTimer")
@@ -284,28 +280,6 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="PlayerPresence" type="Area2D" parent="Body/Triggers" groups=[
-"entity_bomb_presence_trigger",
-]]
-visible = false
-collision_layer = 8
-collision_mask = 8
-script = ExtResource( 11 )
-__meta__ = {
-"_edit_lock_": true
-}
-_entity_path = NodePath("../../..")
-_body_path = NodePath("../..")
-collidable_groups = [ "entity_player_presence_trigger" ]
-trigger_type = 2
-one_shot = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Triggers/PlayerPresence"]
-shape = SubResource( 6 )
-__meta__ = {
-"_edit_lock_": true
-}
-
 [node name="EntityMover" type="Node" parent="Body"]
 script = ExtResource( 3 )
 body_path = NodePath("..")
@@ -338,15 +312,14 @@ anim_name_on_enter = "explode_enter"
 play_on_enter = true
 
 [node name="Enter" type="AnimationPlayer" parent="."]
-anims/explode_enter = SubResource( 7 )
-anims/fuse_enter = SubResource( 8 )
+anims/explode_enter = SubResource( 6 )
+anims/fuse_enter = SubResource( 7 )
 
 [node name="Exit" type="AnimationPlayer" parent="."]
-anims/fuse_exit = SubResource( 9 )
+anims/fuse_exit = SubResource( 8 )
 
 [connection signal="timeout" from="Timers/FuseTimer" to="StateMachine/Fuse/ToExplode" method="do_transition"]
-[connection signal="effect" from="Body/Triggers/DamageHurtbox" to="Timers/FuseTimer" method="stop"]
 [connection signal="effect" from="Body/Triggers/DamageHurtbox" to="StateMachine/Fuse/ToExplode" method="do_transition"]
-[connection signal="effect" from="Body/Triggers/PlayerPresence" to="." method="_on_PlayerPresence_effect"]
+[connection signal="effect" from="Body/Triggers/DamageHurtbox" to="Timers/FuseTimer" method="stop"]
 [connection signal="collided" from="Body/EntityMover" to="." method="_on_EntityMover_collided"]
 [connection signal="state_entered" from="StateMachine/Explode" to="." method="_on_Explode_state_entered"]

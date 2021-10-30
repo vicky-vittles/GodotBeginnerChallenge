@@ -6,9 +6,16 @@ signal took_damage(damage)
 signal died()
 
 onready var health = $Stats/Health
-onready var bomb_presence_trigger = $Body/Triggers/BombPresenceTrigger
+onready var bomb_origin = $Body/bomb_origin
+onready var visited_points = $Body/bomb_origin/visited_points
 
 var bombs = []
+var world_bombs_manager
+
+func get_previous_point() -> Vector2:
+	if visited_points.points.size() > 0:
+		return visited_points.points[0]
+	return Vector2.ZERO
 
 func _on_DamageHurtbox_took_damage(damage):
 	emit_signal("took_damage", damage)

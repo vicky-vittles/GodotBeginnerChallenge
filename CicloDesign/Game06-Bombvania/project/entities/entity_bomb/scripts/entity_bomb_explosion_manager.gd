@@ -23,6 +23,8 @@ func explode():
 	for dir in DIRECTIONS:
 		for power in range(1, entity.power+1):
 			var new_pos = body.global_position + power*dir*Globals.TILE_SIZE
+			if entity.tilemap.is_wall_tile_in_pos(new_pos):
+				break
 			var info = {
 				"global_position": new_pos}
 			

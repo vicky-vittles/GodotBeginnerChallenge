@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://entities/entity_collectible/entity_collectible.gd" type="Script" id=1]
 [ext_resource path="res://libs/gt_grouped_area_2d/gt_trigger_area_2d/gt_trigger_area_2d.gd" type="Script" id=2]
 [ext_resource path="res://assets/images/collectibles.png" type="Texture" id=3]
-[ext_resource path="res://libs/gt_entity_mover_2d/gt_entity_mover_2d.gd" type="Script" id=4]
+[ext_resource path="res://libs/gt_entity_mover_2d/gt_topdown_entity_mover_2d/gt_topdown_entity_mover_2d.gd" type="Script" id=4]
+[ext_resource path="res://assets/images/shadows.png" type="Texture" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 8.0
@@ -15,7 +16,7 @@ radius = 9.0
 resource_name = "heart"
 length = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("visuals/graphics/main:frame")
+tracks/0/path = NodePath("visuals/graphics/position_pivot/main:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -55,7 +56,7 @@ tracks/2/keys = {
 resource_name = "money_coin"
 length = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("visuals/graphics/main:frame")
+tracks/0/path = NodePath("visuals/graphics/position_pivot/main:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -95,7 +96,7 @@ tracks/2/keys = {
 resource_name = "money_diamond"
 length = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("visuals/graphics/main:frame")
+tracks/0/path = NodePath("visuals/graphics/position_pivot/main:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -169,6 +170,7 @@ tracks/0/keys = {
 
 [node name="Collectible" type="Node2D"]
 script = ExtResource( 1 )
+entity_type = 5
 
 [node name="Body" type="KinematicBody2D" parent="."]
 collision_layer = 4
@@ -187,10 +189,26 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="main" type="Sprite" parent="Body/visuals/graphics"]
+[node name="shadow" type="Sprite" parent="Body/visuals/graphics"]
+texture = ExtResource( 5 )
+hframes = 3
+vframes = 3
+frame = 6
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="position_pivot" type="Node2D" parent="Body/visuals/graphics"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="main" type="Sprite" parent="Body/visuals/graphics/position_pivot"]
+position = Vector2( 0, -4 )
 texture = ExtResource( 3 )
 hframes = 4
 vframes = 4
+frame = 14
 __meta__ = {
 "_edit_lock_": true
 }
@@ -231,9 +249,9 @@ __meta__ = {
 [node name="EntityMover" type="Node" parent="Body"]
 script = ExtResource( 4 )
 body_path = NodePath("..")
-max_velocity = 48
-bounce_factor = 0.25
-bounce_on_collision = true
+movement_mode = 2
+max_velocity = 128
+move_deceleration_time = 1.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Body"]
 anims/heart = SubResource( 3 )
