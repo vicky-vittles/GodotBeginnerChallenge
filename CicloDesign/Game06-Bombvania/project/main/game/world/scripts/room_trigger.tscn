@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://main/game/world/scripts/room_trigger.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 7, 7 )
+
+[node name="RoomTrigger" type="Area2D" groups=[
+"room_trigger",
+]]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource( 1 )
+_body_path = NodePath(".")
+collidable_groups = [ "entity_player_presence_trigger" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[connection signal="effect" from="." to="." method="_on_RoomTrigger_effect"]

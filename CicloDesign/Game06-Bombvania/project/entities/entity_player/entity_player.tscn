@@ -360,6 +360,24 @@ collidable_groups = [ "entity_mechanism_presence_trigger" ]
 position = Vector2( 0, -4 )
 shape = SubResource( 6 )
 
+[node name="PresenceTrigger" type="Area2D" parent="Body/Triggers" groups=[
+"entity_player_presence_trigger",
+]]
+visible = false
+collision_layer = 8
+collision_mask = 8
+script = ExtResource( 15 )
+__meta__ = {
+"_edit_lock_": true
+}
+_entity_path = NodePath("../../..")
+_body_path = NodePath("../..")
+collidable_groups = [ "room_trigger" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Triggers/PresenceTrigger"]
+position = Vector2( 0, -4 )
+shape = SubResource( 6 )
+
 [node name="Raycasts" type="Node2D" parent="Body/Triggers"]
 __meta__ = {
 "_edit_lock_": true
@@ -504,23 +522,23 @@ anims/hurt_exit = SubResource( 11 )
 [connection signal="collected_money" from="." to="Stats/Money" method="gain_points"]
 [connection signal="took_damage" from="." to="StateMachine/Move" method="_on_Player_took_damage"]
 [connection signal="took_damage" from="." to="StateMachine/Idle" method="_on_Player_took_damage"]
-[connection signal="updated_move_direction" from="InputController" to="StateMachine/Move" method="_on_InputController_updated_move_direction"]
 [connection signal="updated_move_direction" from="InputController" to="StateMachine/Hurt" method="_on_InputController_updated_move_direction"]
+[connection signal="updated_move_direction" from="InputController" to="StateMachine/Move" method="_on_InputController_updated_move_direction"]
 [connection signal="updated_move_direction" from="InputController" to="StateMachine/Idle" method="_on_InputController_updated_move_direction"]
-[connection signal="just_pressed" from="InputController/bomb" to="StateMachine/Move" method="_on_bomb_just_pressed"]
 [connection signal="just_pressed" from="InputController/bomb" to="StateMachine/Hurt" method="_on_bomb_just_pressed"]
+[connection signal="just_pressed" from="InputController/bomb" to="StateMachine/Move" method="_on_bomb_just_pressed"]
 [connection signal="just_pressed" from="InputController/bomb" to="StateMachine/Idle" method="_on_bomb_just_pressed"]
-[connection signal="just_pressed" from="InputController/remote" to="StateMachine/Move" method="_on_remote_just_pressed"]
 [connection signal="just_pressed" from="InputController/remote" to="StateMachine/Hurt" method="_on_remote_just_pressed"]
+[connection signal="just_pressed" from="InputController/remote" to="StateMachine/Move" method="_on_remote_just_pressed"]
 [connection signal="just_pressed" from="InputController/remote" to="StateMachine/Idle" method="_on_remote_just_pressed"]
 [connection signal="died" from="Stats/Health" to="StateMachine/Move/ToDead" method="do_transition"]
 [connection signal="died" from="Stats/Health" to="StateMachine/Idle/ToDead" method="do_transition"]
-[connection signal="lived" from="Stats/Health" to="StateMachine/Move/ToHurt" method="do_transition"]
 [connection signal="lived" from="Stats/Health" to="StateMachine/Idle/ToHurt" method="do_transition"]
+[connection signal="lived" from="Stats/Health" to="StateMachine/Move/ToHurt" method="do_transition"]
 [connection signal="gained_ammo" from="Stats/Equipment" to="BombManager" method="recover_ammo"]
 [connection signal="timeout" from="Timers/InvincibilityTimer" to="StateMachine/Hurt/ToIdle" method="do_transition"]
-[connection signal="timeout" from="Timers/KickTimer" to="StateMachine/Move" method="_on_KickTimer_timeout"]
 [connection signal="timeout" from="Timers/KickTimer" to="StateMachine/Hurt" method="_on_KickTimer_timeout"]
+[connection signal="timeout" from="Timers/KickTimer" to="StateMachine/Move" method="_on_KickTimer_timeout"]
 [connection signal="took_damage" from="Body/Triggers/DamageHurtbox" to="." method="_on_DamageHurtbox_took_damage"]
 [connection signal="grouped_area_entered" from="Body/Triggers/CollectibleTrigger" to="." method="_on_CollectibleTrigger_grouped_area_entered"]
 [connection signal="grouped_area_entered" from="Body/Triggers/PickupTrigger" to="Stats/Equipment" method="_on_PickupTrigger_grouped_area_entered"]
