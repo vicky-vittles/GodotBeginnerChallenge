@@ -12,7 +12,7 @@ onready var visited_points = $Body/bomb_origin/visited_points
 onready var bomb_raycasts = $Body/Triggers/Raycasts/BombRaycast
 
 var bombs = []
-var world_bombs_manager
+var room_bombs_manager
 
 func get_previous_point() -> Vector2:
 	if visited_points.points.size() > 0:

@@ -25,10 +25,10 @@ func _ready():
 func place_bomb():
 	if apply_cooldown and not cooldown.is_stopped():
 		return
-	assert(player.world_bombs_manager, "Error utilizing EntityPlayerBombManager: 'world_bombs_manager' property from 'player' is null")
+	assert(player.room_bombs_manager, "Error utilizing EntityPlayerBombManager: 'room_bombs_manager' property from 'player' is null")
 	
 	var bomb_origin = player.bomb_origin.global_position
-	var has_bomb_in_current_pos = player.world_bombs_manager.has_bomb_in_pos(bomb_origin)
+	var has_bomb_in_current_pos = player.room_bombs_manager.has_bomb_in_pos(bomb_origin)
 	if current_ammo > 0 and not has_bomb_in_current_pos:
 		var pos = Globals.snap_to_tile(bomb_origin)
 		pos += Globals.TILE_SIZE*Vector2(0.5, 0.5)
