@@ -272,7 +272,12 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="tilemap" type="TileMap" parent="."]
+[node name="ysort" type="YSort" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="tilemap" type="TileMap" parent="ysort"]
 tile_set = SubResource( 8 )
 cell_size = Vector2( 16, 16 )
 collision_layer = 2
@@ -288,78 +293,76 @@ destructible_tiles = {
 }
 wall_tiles = [ 5, 6, 7, 8, 9, 10 ]
 
-[node name="SpriteSpawner" parent="tilemap" instance=ExtResource( 5 )]
+[node name="SpriteSpawner" parent="ysort/tilemap" instance=ExtResource( 5 )]
 _actor_path = NodePath("../../Entities")
 _entity_template = ExtResource( 6 )
 
-[node name="Tween" type="Tween" parent="tilemap"]
+[node name="Tween" type="Tween" parent="ysort/tilemap"]
 
-[node name="Entities" type="Node2D" parent="."]
+[node name="Entities" type="Node2D" parent="ysort"]
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Collectibles" type="Node2D" parent="Entities"]
+[node name="Collectibles" type="Node2D" parent="ysort/Entities"]
 script = ExtResource( 7 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Spawner" parent="Entities/Collectibles" instance=ExtResource( 5 )]
+[node name="Spawner" parent="ysort/Entities/Collectibles" instance=ExtResource( 5 )]
 _actor_path = NodePath("..")
 _entity_template = ExtResource( 8 )
 
-[node name="Collectible" parent="Entities/Collectibles" instance=ExtResource( 8 )]
-position = Vector2( 40, 56 )
-
-[node name="Pickups" type="Node2D" parent="Entities"]
+[node name="Pickups" type="Node2D" parent="ysort/Entities"]
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Pickup" parent="Entities/Pickups" instance=ExtResource( 10 )]
-position = Vector2( 56, 24 )
+[node name="Pickup" parent="ysort/Entities/Pickups" instance=ExtResource( 10 )]
+position = Vector2( 56, 32 )
 
-[node name="Pickup2" parent="Entities/Pickups" instance=ExtResource( 10 )]
-position = Vector2( 72, 24 )
+[node name="Pickup2" parent="ysort/Entities/Pickups" instance=ExtResource( 10 )]
+position = Vector2( 72, 32 )
 
-[node name="Pickup5" parent="Entities/Pickups" instance=ExtResource( 10 )]
-position = Vector2( 24, 24 )
+[node name="Pickup5" parent="ysort/Entities/Pickups" instance=ExtResource( 10 )]
+position = Vector2( 24, 32 )
 pickup_type = 2
 
-[node name="Pickup6" parent="Entities/Pickups" instance=ExtResource( 10 )]
-position = Vector2( 40, 24 )
+[node name="Pickup6" parent="ysort/Entities/Pickups" instance=ExtResource( 10 )]
+position = Vector2( 40, 32 )
 pickup_type = 2
 
-[node name="Pickup3" parent="Entities/Pickups" instance=ExtResource( 10 )]
-position = Vector2( 88, 24 )
+[node name="Pickup3" parent="ysort/Entities/Pickups" instance=ExtResource( 10 )]
+position = Vector2( 88, 32 )
 pickup_type = 3
 
-[node name="Pickup4" parent="Entities/Pickups" instance=ExtResource( 10 )]
-position = Vector2( 104, 24 )
+[node name="Pickup4" parent="ysort/Entities/Pickups" instance=ExtResource( 10 )]
+position = Vector2( 104, 32 )
 pickup_type = 4
 
-[node name="Explosions" type="Node2D" parent="Entities"]
+[node name="Explosions" type="Node2D" parent="ysort/Entities"]
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Bombs" type="Node2D" parent="Entities"]
+[node name="Bombs" type="Node2D" parent="ysort/Entities"]
 script = ExtResource( 9 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Enemies" type="Node2D" parent="Entities"]
+[node name="Enemies" type="Node2D" parent="ysort/Entities"]
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Enemy" parent="Entities/Enemies" instance=ExtResource( 11 )]
+[node name="Enemy" parent="ysort/Entities/Enemies" instance=ExtResource( 11 )]
 position = Vector2( 200, 48 )
-move_direction = Vector2( 0, 1 )
+enemy_type = 2
+move_direction = Vector2( 1, 0 )
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
+[node name="Player" parent="ysort" instance=ExtResource( 1 )]
 position = Vector2( 54.2823, 170.968 )
 
-[connection signal="destroyed_tile" from="tilemap" to="Entities/Collectibles" method="destroyed_tile"]
+[connection signal="destroyed_tile" from="ysort/tilemap" to="ysort/Entities/Collectibles" method="destroyed_tile"]

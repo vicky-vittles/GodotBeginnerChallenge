@@ -1,12 +1,13 @@
 extends Node2D
 
 const DESTRUCTIBLE_TILE_TABLE = {
-	Globals.COLLECTIBLE_TYPES.HEART: 0.15}
-const MAX_MONEY : int = 5
+	Globals.COLLECTIBLE_TYPES.HEART: 0.1}
+const MAX_MONEY : int = 3
 
 onready var spawner = $Spawner
 
 func destroyed_tile(pos):
+	yield(get_tree().create_timer(0.4), "timeout")
 	var rand_heart_chance = randf() < DESTRUCTIBLE_TILE_TABLE[Globals.COLLECTIBLE_TYPES.HEART]
 	var rand_money = randi() % (MAX_MONEY + 1)
 	var diamonds = floor(rand_money/Globals.MONEY_DIAMOND)

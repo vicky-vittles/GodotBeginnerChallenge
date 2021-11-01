@@ -1,11 +1,11 @@
 
 extends Node2D
 
-onready var tilemap = $tilemap
-onready var entities = $Entities
-onready var entities_bombs = $Entities/Bombs
-onready var entities_explosions = $Entities/Explosions
-onready var player = $Player
+onready var tilemap = $ysort/tilemap
+onready var entities = $ysort/Entities
+onready var entities_bombs = $ysort/Entities/Bombs
+onready var entities_explosions = $ysort/Entities/Explosions
+onready var player = $ysort/Player
 
 func _ready():
 	player.world_bombs_manager = entities_bombs

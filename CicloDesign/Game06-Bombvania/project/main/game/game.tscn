@@ -10,6 +10,7 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
+randomize_on_ready = true
 
 [node name="SystemController" parent="." instance=ExtResource( 3 )]
 

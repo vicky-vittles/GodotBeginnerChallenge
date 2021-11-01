@@ -96,6 +96,7 @@ __meta__ = {
 }
 
 [node name="main" type="Sprite" parent="PickupTrigger/visuals/graphics"]
+position = Vector2( 0, -8 )
 texture = ExtResource( 3 )
 hframes = 4
 vframes = 4
@@ -106,6 +107,7 @@ __meta__ = {
 
 [node name="CollisionShape" type="CollisionShape2D" parent="PickupTrigger"]
 visible = false
+position = Vector2( 0, -8 )
 shape = SubResource( 1 )
 __meta__ = {
 "_edit_lock_": true

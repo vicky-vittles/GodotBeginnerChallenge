@@ -49,6 +49,18 @@ tracks/1/keys = {
 "method": "set_health"
 } ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("../Timers/TurnaroundTimer:wait_time")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.5 ]
+}
 
 [sub_resource type="Animation" id=5]
 resource_name = "enemy_knight"
@@ -78,6 +90,18 @@ tracks/1/keys = {
 "args": [ 2 ],
 "method": "set_health"
 } ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../Timers/TurnaroundTimer:wait_time")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.33 ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -162,13 +186,12 @@ entity_type = 7
 one_shot = true
 
 [node name="TurnaroundTimer" type="Timer" parent="Timers"]
-wait_time = 0.5
 one_shot = true
 
-[node name="ChangeDirectionTimer" type="Timer" parent="Timers"]
-wait_time = 2.0
-one_shot = true
-autostart = true
+[node name="Brain" type="Node" parent="."]
+script = ExtResource( 5 )
+_entity_path = NodePath("..")
+_raycasts_path = NodePath("../Body/Triggers/Raycasts")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource( 2 )
@@ -188,6 +211,7 @@ __meta__ = {
 }
 
 [node name="graphics" type="Node2D" parent="Body/visuals"]
+visible = false
 __meta__ = {
 "_edit_lock_": true
 }
@@ -196,6 +220,7 @@ __meta__ = {
 position = Vector2( 0, -8 )
 texture = ExtResource( 10 )
 hframes = 2
+frame = 1
 __meta__ = {
 "_edit_lock_": true
 }
@@ -265,7 +290,7 @@ __meta__ = {
 [node name="right" type="RayCast2D" parent="Body/Triggers/Raycasts"]
 position = Vector2( 0, -8 )
 enabled = true
-cast_to = Vector2( 8, 0 )
+cast_to = Vector2( 10, 0 )
 collision_mask = 2
 __meta__ = {
 "_edit_lock_": true
@@ -274,7 +299,7 @@ __meta__ = {
 [node name="up" type="RayCast2D" parent="Body/Triggers/Raycasts"]
 position = Vector2( 0, -8 )
 enabled = true
-cast_to = Vector2( 0, -8 )
+cast_to = Vector2( 0, -10 )
 collision_mask = 2
 __meta__ = {
 "_edit_lock_": true
@@ -283,7 +308,7 @@ __meta__ = {
 [node name="left" type="RayCast2D" parent="Body/Triggers/Raycasts"]
 position = Vector2( 0, -8 )
 enabled = true
-cast_to = Vector2( -8, 0 )
+cast_to = Vector2( -10, 0 )
 collision_mask = 2
 __meta__ = {
 "_edit_lock_": true
@@ -292,7 +317,7 @@ __meta__ = {
 [node name="down" type="RayCast2D" parent="Body/Triggers/Raycasts"]
 position = Vector2( 0, -8 )
 enabled = true
-cast_to = Vector2( 0, 8 )
+cast_to = Vector2( 0, 10 )
 collision_mask = 2
 __meta__ = {
 "_edit_lock_": true
@@ -302,15 +327,12 @@ __meta__ = {
 script = ExtResource( 3 )
 body_path = NodePath("..")
 max_velocity = 48
+move_acceleration_time = 0.05
+move_deceleration_time = 0.05
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Body"]
 anims/enemy_blob = SubResource( 4 )
 anims/enemy_knight = SubResource( 5 )
-
-[node name="Brain" type="Node" parent="."]
-script = ExtResource( 5 )
-_entity_path = NodePath("..")
-_raycasts_path = NodePath("../Body/Triggers/Raycasts")
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 4 )
@@ -359,13 +381,10 @@ anims/hurt_enter = SubResource( 7 )
 anims/move_enter = SubResource( 8 )
 
 [connection signal="timeout" from="Timers/InvincibilityTimer" to="StateMachine/Hurt/ToMove" method="do_transition"]
-[connection signal="timeout" from="Timers/ChangeDirectionTimer" to="Brain" method="change_direction"]
+[connection signal="updated_move_direction" from="Brain" to="StateMachine/Dead" method="_on_Brain_updated_move_direction"]
+[connection signal="updated_move_direction" from="Brain" to="StateMachine/Hurt" method="_on_Brain_updated_move_direction"]
+[connection signal="updated_move_direction" from="Brain" to="StateMachine/Move" method="_on_Brain_updated_move_direction"]
 [connection signal="died" from="Health" to="StateMachine/Move/ToDead" method="do_transition"]
-[connection signal="health_lost" from="Health" to="Brain" method="_on_Health_health_lost"]
 [connection signal="lived" from="Health" to="StateMachine/Move/ToHurt" method="do_transition"]
 [connection signal="took_damage" from="Body/Triggers/DamageHurtbox" to="Health" method="lose_health"]
-[connection signal="collided" from="Body/EntityMover" to="Brain" method="_on_EntityMover_collided"]
-[connection signal="updated_move_direction" from="Brain" to="StateMachine/Move" method="_on_Brain_updated_move_direction"]
-[connection signal="updated_move_direction" from="Brain" to="StateMachine/Hurt" method="_on_Brain_updated_move_direction"]
-[connection signal="updated_move_direction" from="Brain" to="StateMachine/Dead" method="_on_Brain_updated_move_direction"]
 [connection signal="state_entered" from="StateMachine/Move" to="Brain" method="_on_Move_state_entered"]

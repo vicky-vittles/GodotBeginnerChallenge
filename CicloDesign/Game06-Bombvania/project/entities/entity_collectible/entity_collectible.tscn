@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://entities/entity_collectible/entity_collectible.gd" type="Script" id=1]
 [ext_resource path="res://libs/gt_grouped_area_2d/gt_trigger_area_2d/gt_trigger_area_2d.gd" type="Script" id=2]
@@ -6,17 +6,51 @@
 [ext_resource path="res://libs/gt_entity_mover_2d/gt_topdown_entity_mover_2d/gt_topdown_entity_mover_2d.gd" type="Script" id=4]
 [ext_resource path="res://assets/images/shadows.png" type="Texture" id=5]
 
-[sub_resource type="CircleShape2D" id=1]
-radius = 8.0
-
-[sub_resource type="CircleShape2D" id=2]
-radius = 9.0
-
-[sub_resource type="Animation" id=3]
-resource_name = "heart"
+[sub_resource type="Animation" id=1]
+resource_name = "default"
 length = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("visuals/graphics/position_pivot/main:frame")
+tracks/0/path = NodePath("position_pivot/horizontal_pivot:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "heart"
+length = 4.0
+loop = true
+step = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("position_pivot/horizontal_pivot:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2, 3, 4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -10, 0 ), Vector2( 0, 0 ), Vector2( 10, 0 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 3.0
+
+[sub_resource type="CircleShape2D" id=4]
+
+[sub_resource type="CircleShape2D" id=5]
+
+[sub_resource type="Animation" id=6]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("visuals/graphics/position_pivot/horizontal_pivot/main:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -64,11 +98,10 @@ tracks/3/keys = {
 "values": [ 0.05 ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "money_coin"
+[sub_resource type="Animation" id=7]
 length = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("visuals/graphics/position_pivot/main:frame")
+tracks/0/path = NodePath("visuals/graphics/position_pivot/horizontal_pivot/main:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -116,11 +149,10 @@ tracks/3/keys = {
 "values": [ 0.12 ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "money_diamond"
+[sub_resource type="Animation" id=8]
 length = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("visuals/graphics/position_pivot/main:frame")
+tracks/0/path = NodePath("visuals/graphics/position_pivot/horizontal_pivot/main:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -168,8 +200,7 @@ tracks/3/keys = {
 "values": [ 0.2 ]
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "collected"
+[sub_resource type="Animation" id=9]
 length = 0.1
 tracks/0/type = "method"
 tracks/0/path = NodePath(".")
@@ -186,9 +217,9 @@ tracks/0/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=7]
-resource_name = "spawned"
-length = 0.1
+[sub_resource type="Animation" id=10]
+length = 0.15
+step = 0.05
 tracks/0/type = "method"
 tracks/0/path = NodePath(".")
 tracks/0/interp = 1
@@ -203,14 +234,27 @@ tracks/0/keys = {
 "method": "init"
 } ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Body/visuals/graphics:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
 
 [node name="Collectible" type="Node2D"]
 script = ExtResource( 1 )
 entity_type = 5
+z_gravity = 0.05
 
 [node name="Body" type="KinematicBody2D" parent="."]
 collision_layer = 4
-collision_mask = 6
+collision_mask = 2
 __meta__ = {
 "_edit_lock_": true
 }
@@ -221,6 +265,7 @@ __meta__ = {
 }
 
 [node name="graphics" type="Node2D" parent="Body/visuals"]
+visible = false
 __meta__ = {
 "_edit_lock_": true
 }
@@ -239,19 +284,30 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="main" type="Sprite" parent="Body/visuals/graphics/position_pivot"]
-position = Vector2( 0, -4 )
-texture = ExtResource( 3 )
-hframes = 4
-vframes = 4
-frame = 14
+[node name="horizontal_pivot" type="Node2D" parent="Body/visuals/graphics/position_pivot"]
 __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="main" type="Sprite" parent="Body/visuals/graphics/position_pivot/horizontal_pivot"]
+position = Vector2( 0, -4 )
+texture = ExtResource( 3 )
+hframes = 4
+vframes = 4
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Body/visuals/graphics"]
+autoplay = "default"
+anims/default = SubResource( 1 )
+anims/heart = SubResource( 2 )
+
 [node name="CollisionShape" type="CollisionShape2D" parent="Body"]
 visible = false
-shape = SubResource( 1 )
+position = Vector2( 0, -4 )
+shape = SubResource( 3 )
+disabled = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -277,7 +333,29 @@ collidable_groups = [ "entity_player_collectible_trigger" ]
 one_shot = true
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Body/Triggers/CollectibleTrigger"]
-shape = SubResource( 2 )
+position = Vector2( 0, -4 )
+shape = SubResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PresenceTrigger" type="Area2D" parent="Body/Triggers" groups=[
+"entity_collectible_presence_trigger",
+]]
+visible = false
+collision_layer = 8
+collision_mask = 8
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+_entity_path = NodePath("../../..")
+_body_path = NodePath("../..")
+collidable_groups = [ "entity_player_presence_trigger" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Triggers/PresenceTrigger"]
+position = Vector2( 0, -4 )
+shape = SubResource( 5 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -287,16 +365,17 @@ script = ExtResource( 4 )
 body_path = NodePath("..")
 movement_mode = 2
 max_velocity = 128
+move_acceleration_time = 0.4
 move_deceleration_time = 1.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Body"]
-anims/heart = SubResource( 3 )
-anims/money_coin = SubResource( 4 )
-anims/money_diamond = SubResource( 5 )
+anims/heart = SubResource( 6 )
+anims/money_coin = SubResource( 7 )
+anims/money_diamond = SubResource( 8 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "spawned"
-anims/collected = SubResource( 6 )
-anims/spawned = SubResource( 7 )
+anims/collected = SubResource( 9 )
+anims/spawned = SubResource( 10 )
 
 [connection signal="effect" from="Body/Triggers/CollectibleTrigger" to="AnimationPlayer" method="play" binds= [ "collected" ]]

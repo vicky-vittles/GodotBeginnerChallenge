@@ -1,5 +1,6 @@
 extends GTEntity2D
 
+const VELOCITY_FACTOR = 0.5
 const RANDOM_GRAVITY_VARIATION = 0.4
 const STARTING_Z_POS = 32.0
 const ANIM_NAMES = {
@@ -13,10 +14,13 @@ const SHADOW_SPRITE_INDICES = {
 
 export (float) var z_gravity = 0.2
 
+onready var body = $Body
 onready var shadow_sprite = $Body/visuals/graphics/shadow
 onready var position_pivot = $Body/visuals/graphics/position_pivot
 onready var entity_mover = $Body/EntityMover
+onready var graphics_animation_player = $Body/visuals/graphics/AnimationPlayer
 onready var body_animation_player = $Body/AnimationPlayer
+onready var presence_trigger = $Body/Triggers/PresenceTrigger
 
 var collectible_type : int = Globals.COLLECTIBLE_TYPES.MONEY_COIN
 var z_pos : float
@@ -29,7 +33,7 @@ func init():
 	body_animation_player.play(ANIM_NAMES[collectible_type])
 	match collectible_type:
 		Globals.COLLECTIBLE_TYPES.MONEY_COIN, Globals.COLLECTIBLE_TYPES.MONEY_DIAMOND:
-			entity_mover.velocity = Utils.rand_direction()*entity_mover.max_velocity
+			entity_mover.velocity = Utils.rand_direction()*entity_mover.max_velocity*VELOCITY_FACTOR
 	is_initialized = true
 
 func _physics_process(delta):
@@ -52,3 +56,9 @@ func _physics_process(delta):
 	else: frame_offset = 2
 	shadow_sprite.frame = SHADOW_SPRITE_INDICES[collectible_type] + frame_offset
 	position_pivot.position = Vector2(0, -z_pos)
+	
+	if presence_trigger.is_area_colliding:
+		var dir = body.global_position.direction_to(presence_trigger.collider_area.body.global_position)
+		entity_mover.set_move_direction(dir)
+	else:
+		entity_mover.set_move_direction(Vector2.ZERO)

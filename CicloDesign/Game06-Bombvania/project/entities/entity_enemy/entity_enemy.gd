@@ -7,8 +7,8 @@ const ANIM_NAMES = {
 export (Globals.ENEMY_TYPES) var enemy_type = Globals.ENEMY_TYPES.BLOB
 export (Vector2) var move_direction
 
+onready var body = $Body
 onready var turnaround_timer = $Timers/TurnaroundTimer
-onready var change_direction_timer = $Timers/ChangeDirectionTimer
 onready var entity_mover = $Body/EntityMover
 onready var body_animation_player = $Body/AnimationPlayer
 onready var health = $Health
