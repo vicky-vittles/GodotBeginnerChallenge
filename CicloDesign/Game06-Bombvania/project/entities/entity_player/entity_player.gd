@@ -5,9 +5,11 @@ signal collected_money(amount)
 signal took_damage(damage)
 signal died()
 
+onready var kick_timer = $Timers/KickTimer
 onready var health = $Stats/Health
 onready var bomb_origin = $Body/bomb_origin
 onready var visited_points = $Body/bomb_origin/visited_points
+onready var bomb_raycasts = $Body/Triggers/Raycasts/BombRaycast
 
 var bombs = []
 var world_bombs_manager

@@ -10,6 +10,7 @@ export (int) var power = 1
 export (float) var bomb_fuse_time = 2.0
 export (bool) var bomb_spike = false
 export (bool) var bomb_remote = false
+export (bool) var bomb_kick = false
 
 func get_bomb_info() -> Dictionary:
 	return {

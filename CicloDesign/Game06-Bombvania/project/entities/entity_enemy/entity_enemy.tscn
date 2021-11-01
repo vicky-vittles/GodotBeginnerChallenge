@@ -188,6 +188,9 @@ one_shot = true
 [node name="TurnaroundTimer" type="Timer" parent="Timers"]
 one_shot = true
 
+[node name="RepeatTimer" type="Timer" parent="Timers"]
+one_shot = true
+
 [node name="Brain" type="Node" parent="."]
 script = ExtResource( 5 )
 _entity_path = NodePath("..")
@@ -291,7 +294,7 @@ __meta__ = {
 position = Vector2( 0, -8 )
 enabled = true
 cast_to = Vector2( 10, 0 )
-collision_mask = 2
+collision_mask = 194
 __meta__ = {
 "_edit_lock_": true
 }
@@ -300,7 +303,7 @@ __meta__ = {
 position = Vector2( 0, -8 )
 enabled = true
 cast_to = Vector2( 0, -10 )
-collision_mask = 2
+collision_mask = 194
 __meta__ = {
 "_edit_lock_": true
 }
@@ -309,7 +312,7 @@ __meta__ = {
 position = Vector2( 0, -8 )
 enabled = true
 cast_to = Vector2( -10, 0 )
-collision_mask = 2
+collision_mask = 194
 __meta__ = {
 "_edit_lock_": true
 }
@@ -318,7 +321,7 @@ __meta__ = {
 position = Vector2( 0, -8 )
 enabled = true
 cast_to = Vector2( 0, 10 )
-collision_mask = 2
+collision_mask = 194
 __meta__ = {
 "_edit_lock_": true
 }
@@ -381,9 +384,9 @@ anims/hurt_enter = SubResource( 7 )
 anims/move_enter = SubResource( 8 )
 
 [connection signal="timeout" from="Timers/InvincibilityTimer" to="StateMachine/Hurt/ToMove" method="do_transition"]
-[connection signal="updated_move_direction" from="Brain" to="StateMachine/Dead" method="_on_Brain_updated_move_direction"]
 [connection signal="updated_move_direction" from="Brain" to="StateMachine/Hurt" method="_on_Brain_updated_move_direction"]
 [connection signal="updated_move_direction" from="Brain" to="StateMachine/Move" method="_on_Brain_updated_move_direction"]
+[connection signal="updated_move_direction" from="Brain" to="StateMachine/Dead" method="_on_Brain_updated_move_direction"]
 [connection signal="died" from="Health" to="StateMachine/Move/ToDead" method="do_transition"]
 [connection signal="lived" from="Health" to="StateMachine/Move/ToHurt" method="do_transition"]
 [connection signal="took_damage" from="Body/Triggers/DamageHurtbox" to="Health" method="lose_health"]

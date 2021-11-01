@@ -358,8 +358,7 @@ __meta__ = {
 }
 
 [node name="Enemy" parent="ysort/Entities/Enemies" instance=ExtResource( 11 )]
-position = Vector2( 200, 48 )
-enemy_type = 2
+position = Vector2( 136, 48 )
 move_direction = Vector2( 1, 0 )
 
 [node name="Player" parent="ysort" instance=ExtResource( 1 )]

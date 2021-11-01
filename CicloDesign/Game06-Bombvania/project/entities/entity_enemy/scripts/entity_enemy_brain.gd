@@ -33,7 +33,7 @@ func _physics_process(delta):
 			Globals.ENEMY_TYPES.BLOB:
 				turnaround(direction)
 			Globals.ENEMY_TYPES.KNIGHT:
-				corner_turn(direction, collision_number)
+				random_direction_change(direction, collision_number)
 				turnaround(direction)
 	#entity.body.global_position = Globals.snap_to_tile(entity.body.global_position)
 
@@ -43,13 +43,13 @@ func turnaround(direction):
 		emit_signal("updated_move_direction", entity.move_direction)
 		entity.turnaround_timer.start()
 
-func corner_turn(direction, collision_number):
-	if collision_number == 0 and entity.turnaround_timer.is_stopped():
-		var new_offset = (cardinal_directions[direction][2] + 1+2*(randi()%2))%4
+func random_direction_change(direction, collision_number):
+	if collision_number == 0 and entity.repeat_timer.is_stopped():
+		var new_offset = (cardinal_directions[direction][2] + 1+(randi()%3))%4
 		var current_index = cardinal_directions.keys().find(entity.move_direction)
 		entity.move_direction = cardinal_directions.keys()[(current_index+new_offset)%4]
 		emit_signal("updated_move_direction", entity.move_direction)
-		entity.turnaround_timer.start()
+		entity.repeat_timer.start()
 
 func _on_Move_state_entered():
 	emit_signal("updated_move_direction", entity.move_direction)

@@ -33,8 +33,3 @@ func _set_fuse_time(_value):
 
 func _on_Explode_state_entered():
 	emit_signal("exploded", self)
-
-func _on_EntityMover_collided(result):
-	var collider = result.collider
-	if collider.is_in_group(ENTITY_PLAYER_BODY):
-		pass

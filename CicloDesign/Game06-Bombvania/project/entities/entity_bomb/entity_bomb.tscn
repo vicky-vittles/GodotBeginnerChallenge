@@ -321,5 +321,4 @@ anims/fuse_exit = SubResource( 8 )
 [connection signal="timeout" from="Timers/FuseTimer" to="StateMachine/Fuse/ToExplode" method="do_transition"]
 [connection signal="effect" from="Body/Triggers/DamageHurtbox" to="Timers/FuseTimer" method="stop"]
 [connection signal="effect" from="Body/Triggers/DamageHurtbox" to="StateMachine/Fuse/ToExplode" method="do_transition"]
-[connection signal="collided" from="Body/EntityMover" to="." method="_on_EntityMover_collided"]
 [connection signal="state_entered" from="StateMachine/Explode" to="." method="_on_Explode_state_entered"]

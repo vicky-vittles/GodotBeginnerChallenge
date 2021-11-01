@@ -9,6 +9,7 @@ export (Vector2) var move_direction
 
 onready var body = $Body
 onready var turnaround_timer = $Timers/TurnaroundTimer
+onready var repeat_timer = $Timers/RepeatTimer
 onready var entity_mover = $Body/EntityMover
 onready var body_animation_player = $Body/AnimationPlayer
 onready var health = $Health
