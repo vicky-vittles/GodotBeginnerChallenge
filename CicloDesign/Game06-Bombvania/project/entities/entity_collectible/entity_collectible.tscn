@@ -51,6 +51,18 @@ tracks/2/keys = {
 "update": 1,
 "values": [ true ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("..:z_gravity")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.05 ]
+}
 
 [sub_resource type="Animation" id=4]
 resource_name = "money_coin"
@@ -91,6 +103,18 @@ tracks/2/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("..:z_gravity")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.12 ]
+}
 
 [sub_resource type="Animation" id=5]
 resource_name = "money_diamond"
@@ -130,6 +154,18 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("..:z_gravity")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.2 ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -174,7 +210,7 @@ entity_type = 5
 
 [node name="Body" type="KinematicBody2D" parent="."]
 collision_layer = 4
-collision_mask = 2
+collision_mask = 6
 __meta__ = {
 "_edit_lock_": true
 }
