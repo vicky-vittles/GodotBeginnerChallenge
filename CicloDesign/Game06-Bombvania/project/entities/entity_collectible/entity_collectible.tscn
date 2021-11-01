@@ -351,7 +351,7 @@ __meta__ = {
 }
 _entity_path = NodePath("../../..")
 _body_path = NodePath("../..")
-collidable_groups = [ "entity_player_presence_trigger" ]
+collidable_groups = [ "entity_player_collectible_presence_trigger" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Triggers/PresenceTrigger"]
 position = Vector2( 0, -4 )

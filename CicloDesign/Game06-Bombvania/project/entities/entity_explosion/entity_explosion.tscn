@@ -142,7 +142,7 @@ __meta__ = {
 }
 _entity_path = NodePath("..")
 _body_path = NodePath(".")
-collidable_groups = [ "entity_player_damage_hurtbox", "entity_enemy_damage_hurtbox", "entity_bomb_damage_hurtbox" ]
+collidable_groups = [ "entity_player_damage_hurtbox", "entity_enemy_damage_hurtbox", "entity_bomb_damage_hurtbox", "entity_mechanism_damage_hurtbox" ]
 damage = 1
 
 [node name="visuals" type="Node2D" parent="Body"]

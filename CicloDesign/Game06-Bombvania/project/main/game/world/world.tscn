@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://entities/entity_player/entity_player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/images/tileset.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://main/game/world/scripts/world_bombs_manager.gd" type="Script" id=9]
 [ext_resource path="res://entities/entity_pickup/entity_pickup.tscn" type="PackedScene" id=10]
 [ext_resource path="res://entities/entity_enemy/entity_enemy.tscn" type="PackedScene" id=11]
+[ext_resource path="res://entities/entity_mechanism/entity_mechanism.tscn" type="PackedScene" id=12]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
@@ -314,37 +315,41 @@ __meta__ = {
 _actor_path = NodePath("..")
 _entity_template = ExtResource( 8 )
 
-[node name="Pickups" type="Node2D" parent="ysort/Entities"]
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Pickup" parent="ysort/Entities/Pickups" instance=ExtResource( 10 )]
-position = Vector2( 56, 32 )
-
-[node name="Pickup2" parent="ysort/Entities/Pickups" instance=ExtResource( 10 )]
-position = Vector2( 72, 32 )
-
-[node name="Pickup5" parent="ysort/Entities/Pickups" instance=ExtResource( 10 )]
-position = Vector2( 24, 32 )
-pickup_type = 2
-
-[node name="Pickup6" parent="ysort/Entities/Pickups" instance=ExtResource( 10 )]
-position = Vector2( 40, 32 )
-pickup_type = 2
-
-[node name="Pickup3" parent="ysort/Entities/Pickups" instance=ExtResource( 10 )]
-position = Vector2( 88, 32 )
-pickup_type = 3
-
-[node name="Pickup4" parent="ysort/Entities/Pickups" instance=ExtResource( 10 )]
-position = Vector2( 104, 32 )
-pickup_type = 4
-
 [node name="Explosions" type="Node2D" parent="ysort/Entities"]
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="Props" type="Node2D" parent="ysort/Entities"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Pickup" parent="ysort/Entities/Props" instance=ExtResource( 10 )]
+position = Vector2( 56, 32 )
+
+[node name="Pickup2" parent="ysort/Entities/Props" instance=ExtResource( 10 )]
+position = Vector2( 72, 32 )
+
+[node name="Pickup5" parent="ysort/Entities/Props" instance=ExtResource( 10 )]
+position = Vector2( 24, 32 )
+pickup_type = 2
+
+[node name="Pickup6" parent="ysort/Entities/Props" instance=ExtResource( 10 )]
+position = Vector2( 40, 32 )
+pickup_type = 2
+
+[node name="Pickup3" parent="ysort/Entities/Props" instance=ExtResource( 10 )]
+position = Vector2( 88, 32 )
+pickup_type = 3
+
+[node name="Pickup4" parent="ysort/Entities/Props" instance=ExtResource( 10 )]
+position = Vector2( 104, 32 )
+pickup_type = 4
+
+[node name="Mechanism" parent="ysort/Entities/Props" instance=ExtResource( 12 )]
+position = Vector2( 40, 136 )
+mechanism_type = 5
 
 [node name="Bombs" type="Node2D" parent="ysort/Entities"]
 script = ExtResource( 9 )

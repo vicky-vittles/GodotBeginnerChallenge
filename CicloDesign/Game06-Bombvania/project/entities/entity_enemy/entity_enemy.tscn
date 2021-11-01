@@ -228,6 +228,14 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="debug" type="Sprite" parent="Body/visuals"]
+position = Vector2( 0, -8 )
+texture = ExtResource( 10 )
+hframes = 2
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="CollisionShape" type="CollisionShape2D" parent="Body"]
 visible = false
 position = Vector2( 0, -8 )
