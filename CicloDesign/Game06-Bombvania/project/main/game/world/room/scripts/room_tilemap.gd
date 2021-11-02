@@ -2,7 +2,7 @@ extends TileMap
 
 const BLANK_TILE : int = 0
 const destructible_tiles = {1: 1}
-const wall_tiles = [5, 6, 7, 8, 9, 10]
+const wall_tiles = [5, 6, 7, 8, 9, 10, 13]
 
 export (NodePath) var _room_path
 export (NodePath) var _collectibles_path

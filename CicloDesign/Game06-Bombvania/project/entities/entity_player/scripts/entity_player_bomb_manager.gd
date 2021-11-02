@@ -54,3 +54,6 @@ func _on_Bomb_exploded(bomb):
 
 func recover_ammo():
 	current_ammo += 1
+
+func restore_ammo():
+	current_ammo = equipment.ammo

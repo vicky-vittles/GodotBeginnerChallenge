@@ -10,6 +10,14 @@ onready var bombs = $root/Bombs
 onready var explosions = $root/Explosions
 onready var entities = $root/Entities
 
+func unload_room():
+	for bomb in bombs.get_children():
+		bomb.queue_free()
+	for explosion in explosions.get_children():
+		explosion.queue_free()
+	for entity in entities.get_children():
+		entity.queue_free()
+
 func add_entity(entity):
 	if entity.entity_type == Globals.ENTITY_TYPES.ENTITY_BOMB:
 		bombs.add_child(entity)

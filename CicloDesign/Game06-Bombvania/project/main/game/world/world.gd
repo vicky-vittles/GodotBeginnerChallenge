@@ -28,6 +28,7 @@ func switch_rooms(new_room):
 	if not current_room.is_inside_tree():
 		$Rooms.add_child(current_room)
 	current_room.configure_player(player)
+	player.restore_ammo()
 	camera.limit_left = current_room.camera_limit_left
 	camera.limit_right = current_room.camera_limit_right
 	camera.limit_top = current_room.camera_limit_top
@@ -36,6 +37,7 @@ func switch_rooms(new_room):
 func unload_rooms():
 	for room in rooms:
 		if room.is_inside_tree() and room != current_room:
+			room.unload_room()
 			room.get_parent().remove_child(room)
 
 func add_entity(entity):

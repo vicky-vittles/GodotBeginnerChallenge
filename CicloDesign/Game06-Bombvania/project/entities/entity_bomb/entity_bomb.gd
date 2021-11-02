@@ -10,6 +10,7 @@ var power : int = 1
 var fuse_time : float = 2.0 setget _set_fuse_time
 var is_spike : bool = false
 var is_remote : bool = false
+var is_diamond : bool = false
 
 onready var body = $Body
 onready var fuse_timer = $Timers/FuseTimer
