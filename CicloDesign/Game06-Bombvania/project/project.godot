@@ -388,6 +388,7 @@ act_remote={
 [layer_names]
 
 2d_physics/layer_2="terrain"
+2d_physics/layer_3="bodies"
 2d_physics/layer_4="triggers"
 2d_physics/layer_5="hitboxes"
 2d_physics/layer_6="player"

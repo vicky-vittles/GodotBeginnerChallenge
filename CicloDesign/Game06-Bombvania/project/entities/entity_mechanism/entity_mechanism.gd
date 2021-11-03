@@ -27,6 +27,7 @@ onready var body_collision_shape = $Body/CollisionShape2D
 onready var body_animation_player = $Body/AnimationPlayer
 
 var is_active : bool = false
+var weights = []
 
 func _ready():
 	body_animation_player.play(ANIM_NAMES[mechanism_type])
@@ -49,20 +50,13 @@ func deactivate():
 	is_active = false
 	main_sprite.frame -= main_sprite.hframes
 	emit_signal("deactivated")
+	match mechanism_type:
+		Globals.MECHANISM_TYPES.IRON_DOOR:
+			body_collision_shape.set_deferred("disabled", false)
 
 func _on_Timer_timeout():
 	if mechanism_type == Globals.MECHANISM_TYPES.BUTTON:
 		deactivate()
-
-func _on_PlayerPresence_grouped_area_entered(area):
-	match mechanism_type:
-		Globals.MECHANISM_TYPES.NORMAL_DOOR, Globals.MECHANISM_TYPES.PRESSURE_PLATE:
-			activate()
-
-func _on_PlayerPresence_grouped_area_exited(area):
-	match mechanism_type:
-		Globals.MECHANISM_TYPES.PRESSURE_PLATE:
-			deactivate()
 
 func _on_DamageHurtbox_effect():
 	if cooldown_timer.is_stopped():
@@ -76,3 +70,21 @@ func _on_DamageHurtbox_effect():
 			Globals.MECHANISM_TYPES.BUTTON:
 				activate()
 				button_deactivate_timer.start()
+
+func _on_WeightPresence_grouped_area_entered(area):
+	match mechanism_type:
+		Globals.MECHANISM_TYPES.NORMAL_DOOR:
+			activate()
+		Globals.MECHANISM_TYPES.PRESSURE_PLATE:
+			if weights.empty():
+				activate()
+			if not weights.has(area):
+				weights.append(area)
+
+func _on_WeightPresence_grouped_area_exited(area):
+	match mechanism_type:
+		Globals.MECHANISM_TYPES.PRESSURE_PLATE:
+			if weights.has(area):
+				weights.remove(weights.find(area))
+			if weights.empty():
+				deactivate()

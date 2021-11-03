@@ -12,7 +12,7 @@ extents = Vector2( 8, 8 )
 extents = Vector2( 8, 8 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 12, 12 )
+extents = Vector2( 8, 8 )
 
 [sub_resource type="Animation" id=4]
 resource_name = "button"
@@ -236,6 +236,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [ 0 ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("WeightPresence/CollisionShape2D:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1.33, 1.33 ) ]
+}
 
 [sub_resource type="Animation" id=8]
 resource_name = "pressure_plate"
@@ -292,6 +304,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [ 4 ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("WeightPresence/CollisionShape2D:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.75, 0.75 ) ]
+}
 
 [node name="Mechanism" type="Node2D"]
 script = ExtResource( 1 )
@@ -322,7 +346,7 @@ __meta__ = {
 texture = ExtResource( 3 )
 hframes = 5
 vframes = 2
-frame = 4
+frame = 2
 __meta__ = {
 "_edit_lock_": true
 }
@@ -330,7 +354,6 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
 visible = false
 shape = SubResource( 1 )
-disabled = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -367,9 +390,11 @@ __meta__ = {
 }
 _entity_path = NodePath("../..")
 _body_path = NodePath("..")
-collidable_groups = [ "entity_player_mechanism_presence_trigger" ]
+collidable_groups = [ "entity_player_mechanism_presence_trigger", "entity_block_mechanism_presence_trigger" ]
+trigger_type = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/WeightPresence"]
+scale = Vector2( 1.33, 1.33 )
 shape = SubResource( 3 )
 __meta__ = {
 "_edit_lock_": true
@@ -384,5 +409,5 @@ anims/pressure_plate = SubResource( 8 )
 
 [connection signal="timeout" from="Timers/ButtonDeactivateTimer" to="." method="_on_Timer_timeout"]
 [connection signal="effect" from="Body/DamageHurtbox" to="." method="_on_DamageHurtbox_effect"]
-[connection signal="grouped_area_entered" from="Body/WeightPresence" to="." method="_on_PlayerPresence_grouped_area_entered"]
-[connection signal="grouped_area_exited" from="Body/WeightPresence" to="." method="_on_PlayerPresence_grouped_area_exited"]
+[connection signal="grouped_area_entered" from="Body/WeightPresence" to="." method="_on_WeightPresence_grouped_area_entered"]
+[connection signal="grouped_area_exited" from="Body/WeightPresence" to="." method="_on_WeightPresence_grouped_area_exited"]

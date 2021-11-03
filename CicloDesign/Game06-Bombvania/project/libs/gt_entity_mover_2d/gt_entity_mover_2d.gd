@@ -15,6 +15,11 @@ export (NodePath) var body_path
 export (MOVEMENT_MODE) var movement_mode = MOVEMENT_MODE.MOVE_AND_COLLIDE
 export (int) var max_velocity = 256
 export (Vector2) var floor_normal = Vector2.UP
+export (bool) var stop_on_slope = false
+export (int) var max_slides = 4
+export (float) var floor_max_angle = 0.785398
+export (bool) var infinite_inertia = true
+export (bool) var interact_with_rigid_bodies = false
 export (Vector2) var snap = Vector2.ZERO
 export (Vector2) var movement_mask = Vector2(1,1)
 export (float) var bounce_factor = 1.0
@@ -56,7 +61,12 @@ func _move(delta) -> void:
 				emit_signal("has_collided")
 				emit_signal("collided", collision)
 		MOVEMENT_MODE.MOVE_AND_SLIDE:
-			velocity = body.move_and_slide(velocity * movement_mask, floor_normal)
+			velocity = body.move_and_slide(velocity * movement_mask, floor_normal, stop_on_slope, max_slides, floor_max_angle, infinite_inertia)
+			if interact_with_rigid_bodies:
+				for index in body.get_slide_count():
+					var collision = body.get_slide_collision(index)
+					if collision.collider.is_in_group("pushable"):
+						collision.collider.push(-collision.normal)
 		MOVEMENT_MODE.MOVE_AND_SLIDE_WITH_SNAP:
 			velocity = body.move_and_slide_with_snap(velocity * movement_mask, snap, floor_normal)
 	emit_signal("updated_position", body.global_position)

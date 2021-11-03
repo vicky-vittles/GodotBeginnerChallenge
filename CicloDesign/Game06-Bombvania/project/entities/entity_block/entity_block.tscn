@@ -1,0 +1,74 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://entities/entity_block/entity_block.gd" type="Script" id=1]
+[ext_resource path="res://assets/images/tileset.png" type="Texture" id=2]
+[ext_resource path="res://entities/entity_block/entity_block_body.gd" type="Script" id=3]
+[ext_resource path="res://libs/gt_grouped_area_2d/gt_trigger_area_2d/gt_trigger_area_2d.gd" type="Script" id=4]
+
+[sub_resource type="PhysicsMaterial" id=1]
+rough = true
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 8, 8 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 5, 5 )
+
+[node name="Block" type="Node2D"]
+script = ExtResource( 1 )
+entity_type = 9
+
+[node name="Body" type="RigidBody2D" parent="." groups=[
+"pushable",
+]]
+collision_layer = 4
+collision_mask = 38
+mode = 2
+physics_material_override = SubResource( 1 )
+gravity_scale = 0.0
+linear_damp = 40.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="graphics" type="Node2D" parent="Body"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="main" type="Sprite" parent="Body/graphics"]
+texture = ExtResource( 2 )
+hframes = 9
+vframes = 8
+frame = 69
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
+visible = false
+shape = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="MechanismPresence" type="Area2D" parent="Body" groups=[
+"entity_block_mechanism_presence_trigger",
+]]
+visible = false
+collision_layer = 8
+collision_mask = 8
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+_entity_path = NodePath("../..")
+_body_path = NodePath("..")
+collidable_groups = [ "entity_mechanism_presence_trigger" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/MechanismPresence"]
+shape = SubResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}

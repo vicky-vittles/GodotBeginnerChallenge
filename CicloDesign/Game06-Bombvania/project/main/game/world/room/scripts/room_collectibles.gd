@@ -2,7 +2,7 @@ extends Node2D
 
 const DESTRUCTIBLE_TILE_TABLE = {
 	Globals.COLLECTIBLE_TYPES.HEART: 0.1}
-const MAX_MONEY : int = 3
+const MAX_MONEY : int = 5
 
 onready var spawner = $Spawner
 
