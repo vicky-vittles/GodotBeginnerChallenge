@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
+[ext_resource path="res://levels/room_009.tscn" type="PackedScene" id=1]
 [ext_resource path="res://levels/room_007.tscn" type="PackedScene" id=3]
 [ext_resource path="res://levels/room_005.tscn" type="PackedScene" id=4]
 [ext_resource path="res://levels/room_008.tscn" type="PackedScene" id=5]
@@ -73,5 +74,12 @@ room_triggers = {
 [node name="8" parent="." instance=ExtResource( 5 )]
 position = Vector2( 512, 384 )
 room_triggers = {
-"8_5_1": NodePath("../5")
+"8_5_1": NodePath("../5"),
+"8_9_1": NodePath("../9")
+}
+
+[node name="9" parent="." instance=ExtResource( 1 )]
+position = Vector2( 768, 768 )
+room_triggers = {
+"9_8_1": NodePath("../8")
 }
