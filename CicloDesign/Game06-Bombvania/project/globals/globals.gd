@@ -40,6 +40,7 @@ enum SPRITE_TYPES {
 	ROCK_ANIMATED = 1}
 
 const TILE_SIZE : float = 16.0
+const ROOM_SIZE : Vector2 = Vector2(256, 192)
 const MONEY_COIN : int = 1
 const MONEY_DIAMOND : int = 3
 

@@ -1,0 +1,77 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://levels/room_007.tscn" type="PackedScene" id=3]
+[ext_resource path="res://levels/room_005.tscn" type="PackedScene" id=4]
+[ext_resource path="res://levels/room_008.tscn" type="PackedScene" id=5]
+[ext_resource path="res://main/game/world/scripts/world_rooms.gd" type="Script" id=7]
+[ext_resource path="res://levels/room_001.tscn" type="PackedScene" id=8]
+[ext_resource path="res://levels/room_002.tscn" type="PackedScene" id=9]
+[ext_resource path="res://levels/room_003.tscn" type="PackedScene" id=10]
+[ext_resource path="res://levels/room_004.tscn" type="PackedScene" id=11]
+[ext_resource path="res://levels/room_006.tscn" type="PackedScene" id=12]
+
+[node name="Rooms" type="Node2D"]
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="1" parent="." instance=ExtResource( 8 )]
+position = Vector2( 256, 0 )
+room_triggers = {
+"1_2_1": NodePath("../2")
+}
+
+[node name="2" parent="." instance=ExtResource( 9 )]
+position = Vector2( 256, 192 )
+room_triggers = {
+"2_1_1": NodePath("../1"),
+"2_3_1": NodePath("../3")
+}
+
+[node name="3" parent="." instance=ExtResource( 10 )]
+position = Vector2( 0, 192 )
+room_triggers = {
+"3_2_1": NodePath("../2"),
+"3_4_1": NodePath("../4")
+}
+
+[node name="4" parent="." instance=ExtResource( 11 )]
+position = Vector2( 0, 384 )
+room_triggers = {
+"4_3_1": NodePath("../3"),
+"4_5_1": NodePath("../5"),
+"4_7_1": NodePath("../7")
+}
+
+[node name="5" parent="." instance=ExtResource( 4 )]
+position = Vector2( 256, 384 )
+room_triggers = {
+"5_4_1": NodePath("../4"),
+"5_6_1": NodePath("../6"),
+"5_6_2": NodePath("../6"),
+"5_8_1": NodePath("../8")
+}
+
+[node name="6" parent="." instance=ExtResource( 12 )]
+position = Vector2( 256, 576 )
+room_triggers = {
+"6_5_1": NodePath("../5"),
+"6_5_2": NodePath("../5"),
+"6_7_1": NodePath("../7"),
+"6_7_2": NodePath("../7")
+}
+
+[node name="7" parent="." instance=ExtResource( 3 )]
+position = Vector2( 0, 576 )
+room_triggers = {
+"7_4_1": NodePath("../4"),
+"7_6_1": NodePath("../6"),
+"7_6_2": NodePath("../6")
+}
+
+[node name="8" parent="." instance=ExtResource( 5 )]
+position = Vector2( 512, 384 )
+room_triggers = {
+"8_5_1": NodePath("../5")
+}
