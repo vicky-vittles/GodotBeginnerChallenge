@@ -10,7 +10,7 @@ script = ExtResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
-_initial_room = NodePath("Rooms/8")
+_initial_room = NodePath("Rooms/1")
 
 [node name="Rooms" parent="." instance=ExtResource( 1 )]
 
@@ -73,7 +73,7 @@ room_triggers = {
 }
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 912, 712 )
+position = Vector2( 296, 48 )
 
 [node name="Camera" type="Camera2D" parent="."]
 current = true

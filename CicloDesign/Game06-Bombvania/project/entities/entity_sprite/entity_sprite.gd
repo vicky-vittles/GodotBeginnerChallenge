@@ -1,7 +1,8 @@
 extends GTEntity2D
 
 const ANIM_NAMES = {
-	Globals.SPRITE_TYPES.ROCK_ANIMATED: "rock_animated"}
+	Globals.SPRITE_TYPES.ROCK_ANIMATED: "rock_animated",
+	Globals.SPRITE_TYPES.WOODEN_FENCE_ANIMATED: "wooden_fence_animated"}
 
 onready var animation_player = $AnimationPlayer
 

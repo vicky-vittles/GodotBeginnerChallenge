@@ -1,8 +1,20 @@
 extends TileMap
 
 const BLANK_TILE : int = 0
-const destructible_tiles = {1: 1}
-const wall_tiles = [5, 6, 7, 8, 9, 10, 13]
+const STR_SPRITE_ID = "sprite_id"
+const STR_GENERATES_MONEY = "generates_money"
+
+const wall_tiles = [5, 7, 8, 9, 10, 13]
+const destructible_tiles = {
+	1: {
+		STR_SPRITE_ID: 1,
+		STR_GENERATES_MONEY: true
+	},
+	6: {
+		STR_SPRITE_ID: 2,
+		STR_GENERATES_MONEY: false
+	}
+}
 
 export (NodePath) var _room_path
 export (NodePath) var _collectibles_path
@@ -38,10 +50,11 @@ func _check_explosion(explosion):
 		# Tell explosion that it destroyed a tile
 		explosion.destroyed_tile()
 		# Spawn an sprite entity to play the destroyed animation
-		var sprite = sprite_spawner.spawn_with_info({"global_position": world_pos, "sprite_type": destructible_tiles[tile_id]})
+		var sprite = sprite_spawner.spawn_with_info({"global_position": world_pos, "sprite_type": destructible_tiles[tile_id][STR_SPRITE_ID]})
 		sprite.play()
-		# Notify other components
-		collectibles.destroyed_tile(world_pos)
+		# Create collectibles
+		if destructible_tiles[tile_id][STR_GENERATES_MONEY]:
+			collectibles.destroyed_tile(world_pos)
 
 # Lookup for destructible tiles
 func is_destructible_tile_in_pos(pos: Vector2) -> bool:

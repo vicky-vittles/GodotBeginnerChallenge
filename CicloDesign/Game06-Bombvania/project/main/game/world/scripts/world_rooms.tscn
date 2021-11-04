@@ -79,7 +79,7 @@ room_triggers = {
 }
 
 [node name="9" parent="." instance=ExtResource( 1 )]
-position = Vector2( 768, 768 )
+position = Vector2( 1024, 576 )
 room_triggers = {
 "9_8_1": NodePath("../8")
 }
