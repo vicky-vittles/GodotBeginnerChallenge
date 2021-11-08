@@ -3,7 +3,7 @@ class_name GTTween
 
 signal updated_property(value)
 
-export (Resource) var curve
+export (Curve) var curve
 var _animating = [] # Current properties being animated
 var _objects_to_remove = []
 
@@ -16,9 +16,9 @@ func _process(delta):
 		_animating.remove(index)
 	_objects_to_remove.clear()
 
-func play(_object: Object, _property: String, _start, _end, duration: float, _curve = null):
+func play(_object: Object, _property: String, _start, _end, duration: float, _loop: bool = false, _curve = null):
 	var curve_to_use = _curve if _curve != null else curve
-	var new_property = GTTweenProperty.new(_object, _property, _start, _end, curve_to_use)
+	var new_property = GTTweenProperty.new(_object, _property, _start, _end, duration, _loop, curve_to_use)
 	_animating.append(new_property)
 	new_property.connect("finished", self, "_on_tween_property_finished")
 	interpolate_property(new_property, "current_t", 0.0, 1.0, duration, TRANS_LINEAR, EASE_IN)
@@ -26,6 +26,8 @@ func play(_object: Object, _property: String, _start, _end, duration: float, _cu
 
 func _on_tween_property_finished(_object):
 	_objects_to_remove.append(_object)
+	if _object.is_loop:
+		play(_object.object, _object.property, _object.start, _object.end, _object.duration, _object.is_loop, _object.curve)
 
 class GTTweenProperty:
 	signal finished(_object)
@@ -34,19 +36,23 @@ class GTTweenProperty:
 	var property : String
 	var start
 	var end
+	var duration : float
 	var curve
 	var current_t : float = 0.0 setget _set_current_t
 	var current_value setget _set_current_value
+	var is_loop : bool = false
 	var is_finished : bool = false
 	
-	func _init(_object: Object, _property: String, _start, _end, _curve):
+	func _init(_object: Object, _property: String, _start, _end, _duration, _loop, _curve):
 		object = _object
 		property = _property
 		start = _start
 		end = _end
+		duration = _duration
 		curve = _curve
 		current_t = 0.0
 		current_value = start
+		is_loop = _loop
 		is_finished = false
 	
 	func _set_current_t(_value):

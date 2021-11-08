@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://entities/entity_player/entity_player.gd" type="Script" id=1]
 [ext_resource path="res://libs/gt_entity_mover_2d/gt_topdown_entity_mover_2d/gt_topdown_entity_mover_2d.gd" type="Script" id=2]
@@ -17,12 +17,17 @@
 [ext_resource path="res://libs/gt_grouped_area_2d/gt_trigger_area_2d/gt_trigger_area_2d.gd" type="Script" id=15]
 [ext_resource path="res://libs/gt_points/gt_points.gd" type="Script" id=16]
 [ext_resource path="res://addons/Trail/trail_2d.gd" type="Script" id=17]
+[ext_resource path="res://assets/images/shadows.png" type="Texture" id=18]
+[ext_resource path="res://entities/entity_player/scripts/entity_player_animations.gd" type="Script" id=19]
 
-[sub_resource type="CircleShape2D" id=1]
-radius = 4.0
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 0 ), 0.0, 1.0, 0, 1, Vector2( 1, 1 ), 1.0, 0.0, 1, 0 ]
 
-[sub_resource type="CircleShape2D" id=2]
-radius = 4.0
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 0 ), 0.0, 1.9939, 0, 1, Vector2( 0.501529, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -2.00613, 0.0, 1, 0 ]
+
+[sub_resource type="OccluderPolygon2D" id=15]
+polygon = PoolVector2Array( -2, 0, -4, -2, -2, -4, 2, -4, 4, -2, 2, 0 )
 
 [sub_resource type="CircleShape2D" id=3]
 radius = 4.0
@@ -31,12 +36,18 @@ radius = 4.0
 radius = 4.0
 
 [sub_resource type="CircleShape2D" id=5]
-radius = 24.0
+radius = 4.0
 
 [sub_resource type="CircleShape2D" id=6]
+radius = 4.0
+
+[sub_resource type="CircleShape2D" id=7]
+radius = 24.0
+
+[sub_resource type="CircleShape2D" id=8]
 radius = 3.0
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=9]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body/visuals/graphics:visible")
@@ -65,7 +76,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=10]
 length = 2.0
 tracks/0/type = "method"
 tracks/0/path = NodePath("Timers/InvincibilityTimer")
@@ -108,37 +119,51 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=9]
-length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Body/visuals/graphics:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
-[sub_resource type="Animation" id=10]
-length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Body/visuals/graphics:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
 [sub_resource type="Animation" id=11]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/visuals/graphics:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=12]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/visuals/graphics:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("Animations")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "walk_bobbing_start"
+} ]
+}
+
+[sub_resource type="Animation" id=13]
 length = 0.1
 tracks/0/type = "method"
 tracks/0/path = NodePath("Body/Triggers/DamageHurtbox")
@@ -155,6 +180,23 @@ tracks/0/keys = {
 } ]
 }
 
+[sub_resource type="Animation" id=14]
+length = 0.1
+tracks/0/type = "method"
+tracks/0/path = NodePath("Animations")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "walk_bobbing_stop"
+} ]
+}
+
 [node name="Player" type="Node2D"]
 script = ExtResource( 1 )
 entity_type = 1
@@ -168,6 +210,12 @@ action = "act_bomb"
 [node name="remote" type="Node" parent="InputController"]
 script = ExtResource( 14 )
 action = "act_remote"
+
+[node name="Animations" type="Tween" parent="."]
+script = ExtResource( 19 )
+curve = SubResource( 1 )
+_entity_path = NodePath("..")
+walk_bobbing_start_curve = SubResource( 2 )
 
 [node name="Stats" type="Node" parent="."]
 
@@ -227,7 +275,28 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="main" type="Sprite" parent="Body/visuals/graphics"]
+[node name="shadow" type="Sprite" parent="Body/visuals/graphics"]
+position = Vector2( 0, -7 )
+texture = ExtResource( 18 )
+hframes = 3
+vframes = 4
+frame = 9
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="occluder" type="LightOccluder2D" parent="Body/visuals/graphics"]
+occluder = SubResource( 15 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="position_pivot" type="Node2D" parent="Body/visuals/graphics"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="main" type="Sprite" parent="Body/visuals/graphics/position_pivot"]
 position = Vector2( 0, -8 )
 texture = ExtResource( 5 )
 __meta__ = {
@@ -252,7 +321,7 @@ lifetime = 0.01
 [node name="CollisionShape" type="CollisionShape2D" parent="Body"]
 visible = false
 position = Vector2( 0, -4 )
-shape = SubResource( 1 )
+shape = SubResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -278,7 +347,7 @@ collidable_groups = [ "entity_enemy_damage_hitbox", "entity_explosion_damage_hit
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Body/Triggers/DamageHurtbox"]
 position = Vector2( 0, -4 )
-shape = SubResource( 2 )
+shape = SubResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -299,7 +368,7 @@ collidable_groups = [ "entity_collectible_collectible_trigger" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Triggers/CollectibleTrigger"]
 position = Vector2( 0, -4 )
-shape = SubResource( 3 )
+shape = SubResource( 5 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -320,7 +389,7 @@ collidable_groups = [ "entity_pickup_pickup_trigger" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Triggers/PickupTrigger"]
 position = Vector2( 0, -4 )
-shape = SubResource( 4 )
+shape = SubResource( 6 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -341,7 +410,7 @@ collidable_groups = [ "entity_collectible_presence_trigger" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Triggers/CollectiblePresence"]
 position = Vector2( 0, -4 )
-shape = SubResource( 5 )
+shape = SubResource( 7 )
 
 [node name="MechanismPresence" type="Area2D" parent="Body/Triggers" groups=[
 "entity_player_mechanism_presence_trigger",
@@ -359,7 +428,7 @@ collidable_groups = [ "entity_mechanism_presence_trigger" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Triggers/MechanismPresence"]
 position = Vector2( 0, -4 )
-shape = SubResource( 6 )
+shape = SubResource( 8 )
 
 [node name="PresenceTrigger" type="Area2D" parent="Body/Triggers" groups=[
 "entity_player_presence_trigger",
@@ -377,7 +446,7 @@ collidable_groups = [ "room_trigger" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Triggers/PresenceTrigger"]
 position = Vector2( 0, -4 )
-shape = SubResource( 6 )
+shape = SubResource( 8 )
 
 [node name="Raycasts" type="Node2D" parent="Body/Triggers"]
 __meta__ = {
@@ -464,7 +533,9 @@ _fsm_path = NodePath("..")
 _enter_animation_player_path = NodePath("../../Enter")
 _exit_animation_player_path = NodePath("../../Exit")
 anim_name_on_enter = "move_enter"
+anim_name_on_exit = "move_exit"
 play_on_enter = true
+play_on_exit = true
 can_place_bombs = true
 can_detonate_bombs = true
 
@@ -513,36 +584,37 @@ play_on_enter = true
 can_move = false
 
 [node name="Enter" type="AnimationPlayer" parent="."]
-anims/dead_enter = SubResource( 7 )
-anims/hurt_enter = SubResource( 8 )
-anims/idle_enter = SubResource( 9 )
-anims/move_enter = SubResource( 10 )
+anims/dead_enter = SubResource( 9 )
+anims/hurt_enter = SubResource( 10 )
+anims/idle_enter = SubResource( 11 )
+anims/move_enter = SubResource( 12 )
 
 [node name="Exit" type="AnimationPlayer" parent="."]
-anims/hurt_exit = SubResource( 11 )
+anims/hurt_exit = SubResource( 13 )
+anims/move_exit = SubResource( 14 )
 
 [connection signal="collected_heart" from="." to="Stats/Health" method="gain_health" binds= [ 1 ]]
 [connection signal="collected_money" from="." to="Stats/Money" method="gain_points"]
-[connection signal="took_damage" from="." to="StateMachine/Idle" method="_on_Player_took_damage"]
 [connection signal="took_damage" from="." to="StateMachine/Move" method="_on_Player_took_damage"]
-[connection signal="updated_move_direction" from="InputController" to="StateMachine/Hurt" method="_on_InputController_updated_move_direction"]
-[connection signal="updated_move_direction" from="InputController" to="StateMachine/Idle" method="_on_InputController_updated_move_direction"]
+[connection signal="took_damage" from="." to="StateMachine/Idle" method="_on_Player_took_damage"]
 [connection signal="updated_move_direction" from="InputController" to="StateMachine/Move" method="_on_InputController_updated_move_direction"]
-[connection signal="just_pressed" from="InputController/bomb" to="StateMachine/Hurt" method="_on_bomb_just_pressed"]
-[connection signal="just_pressed" from="InputController/bomb" to="StateMachine/Idle" method="_on_bomb_just_pressed"]
+[connection signal="updated_move_direction" from="InputController" to="StateMachine/Idle" method="_on_InputController_updated_move_direction"]
+[connection signal="updated_move_direction" from="InputController" to="StateMachine/Hurt" method="_on_InputController_updated_move_direction"]
 [connection signal="just_pressed" from="InputController/bomb" to="StateMachine/Move" method="_on_bomb_just_pressed"]
-[connection signal="just_pressed" from="InputController/remote" to="StateMachine/Hurt" method="_on_remote_just_pressed"]
-[connection signal="just_pressed" from="InputController/remote" to="StateMachine/Idle" method="_on_remote_just_pressed"]
+[connection signal="just_pressed" from="InputController/bomb" to="StateMachine/Idle" method="_on_bomb_just_pressed"]
+[connection signal="just_pressed" from="InputController/bomb" to="StateMachine/Hurt" method="_on_bomb_just_pressed"]
 [connection signal="just_pressed" from="InputController/remote" to="StateMachine/Move" method="_on_remote_just_pressed"]
-[connection signal="died" from="Stats/Health" to="StateMachine/Move/ToDead" method="do_transition"]
+[connection signal="just_pressed" from="InputController/remote" to="StateMachine/Idle" method="_on_remote_just_pressed"]
+[connection signal="just_pressed" from="InputController/remote" to="StateMachine/Hurt" method="_on_remote_just_pressed"]
 [connection signal="died" from="Stats/Health" to="StateMachine/Idle/ToDead" method="do_transition"]
-[connection signal="lived" from="Stats/Health" to="StateMachine/Idle/ToHurt" method="do_transition"]
+[connection signal="died" from="Stats/Health" to="StateMachine/Move/ToDead" method="do_transition"]
 [connection signal="lived" from="Stats/Health" to="StateMachine/Move/ToHurt" method="do_transition"]
+[connection signal="lived" from="Stats/Health" to="StateMachine/Idle/ToHurt" method="do_transition"]
 [connection signal="gained_ammo" from="Stats/Equipment" to="BombManager" method="recover_ammo"]
 [connection signal="updated_speed" from="Stats/Equipment" to="." method="_on_Equipment_updated_speed"]
 [connection signal="timeout" from="Timers/InvincibilityTimer" to="StateMachine/Hurt/ToIdle" method="do_transition"]
-[connection signal="timeout" from="Timers/KickTimer" to="StateMachine/Hurt" method="_on_KickTimer_timeout"]
 [connection signal="timeout" from="Timers/KickTimer" to="StateMachine/Move" method="_on_KickTimer_timeout"]
+[connection signal="timeout" from="Timers/KickTimer" to="StateMachine/Hurt" method="_on_KickTimer_timeout"]
 [connection signal="took_damage" from="Body/Triggers/DamageHurtbox" to="." method="_on_DamageHurtbox_took_damage"]
 [connection signal="grouped_area_entered" from="Body/Triggers/CollectibleTrigger" to="." method="_on_CollectibleTrigger_grouped_area_entered"]
 [connection signal="grouped_area_entered" from="Body/Triggers/PickupTrigger" to="Stats/Equipment" method="_on_PickupTrigger_grouped_area_entered"]

@@ -17,6 +17,7 @@ onready var bomb_manager = $BombManager
 onready var bomb_origin = $Body/bomb_origin
 onready var visited_points = $Body/bomb_origin/visited_points
 onready var bomb_raycasts = $Body/Triggers/Raycasts/BombRaycast
+onready var main_sprite_position_pivot = $Body/visuals/graphics/position_pivot
 
 var bombs = []
 var room_bombs_manager
