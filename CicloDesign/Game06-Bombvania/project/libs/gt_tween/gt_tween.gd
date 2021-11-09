@@ -3,12 +3,11 @@ class_name GTTween
 
 signal updated_property(value)
 
-export (Curve) var curve
+const CURVE_LINEAR = preload("res://libs/gt_tween/curves/gt_linear_curve.tres")
+
+export (Curve) var curve = CURVE_LINEAR
 var _animating = [] # Current properties being animated
 var _objects_to_remove = []
-
-func _ready():
-	assert(curve != null, "Error initializing GTTween: 'curve' property is null")
 
 func _process(delta):
 	for object in _objects_to_remove:

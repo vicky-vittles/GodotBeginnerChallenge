@@ -2,6 +2,8 @@ extends "res://entities/__entity_topdown_player/__entity_topdown_player.gd"
 
 signal collected_heart()
 signal collected_money(amount)
+signal updated_health(health)
+signal updated_current_ammo(ammo)
 signal took_damage(damage)
 signal died()
 
@@ -44,3 +46,9 @@ func _on_CollectibleTrigger_grouped_area_entered(area):
 
 func _on_Equipment_updated_speed(total):
 	entity_mover.max_velocity = SPEED_LEVELS[total]
+
+func _on_Health_health_updated(current):
+	emit_signal("updated_health", current)
+
+func _on_BombManager_updated_current_ammo(ammo):
+	emit_signal("updated_current_ammo", ammo)

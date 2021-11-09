@@ -1,5 +1,7 @@
 extends Node2D
 
+signal updated_current_ammo(ammo)
+
 export (NodePath) var _player_path
 export (NodePath) var _body_path
 export (NodePath) var _equipment_path
@@ -39,6 +41,7 @@ func place_bomb():
 		bomb.connect("exploded", self, "_on_Bomb_exploded")
 		cooldown.start()
 		current_ammo -= 1
+		emit_signal("updated_current_ammo", current_ammo)
 
 func detonate_bomb():
 	if equipment.bomb_remote:
@@ -54,6 +57,8 @@ func _on_Bomb_exploded(bomb):
 
 func recover_ammo():
 	current_ammo += 1
+	emit_signal("updated_current_ammo", current_ammo)
 
 func restore_ammo():
 	current_ammo = equipment.ammo
+	emit_signal("updated_current_ammo", current_ammo)

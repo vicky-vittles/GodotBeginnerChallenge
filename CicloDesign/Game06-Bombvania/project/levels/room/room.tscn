@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://levels/room/scripts/room_collectibles.gd" type="Script" id=1]
 [ext_resource path="res://levels/room/scripts/room_tilemap.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://levels/room/scripts/room_bombs.gd" type="Script" id=4]
 [ext_resource path="res://assets/images/tileset.tres" type="TileSet" id=5]
 [ext_resource path="res://components/entity_spawner/entity_spawner.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/images/barrier.tres" type="TileSet" id=7]
 [ext_resource path="res://entities/entity_sprite/entity_sprite.tscn" type="PackedScene" id=9]
 [ext_resource path="res://entities/entity_collectible/entity_collectible.tscn" type="PackedScene" id=11]
 
@@ -38,6 +39,17 @@ _actor_path = NodePath("../../Entities")
 _entity_template = ExtResource( 9 )
 
 [node name="Tween" type="Tween" parent="root/Background"]
+
+[node name="Barrier" type="TileMap" parent="root"]
+visible = false
+tile_set = ExtResource( 7 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 0
+collision_mask = 4
+format = 1
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Entities" type="Node2D" parent="root"]
 __meta__ = {
