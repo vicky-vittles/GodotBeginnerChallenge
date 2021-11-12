@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://components/weapon_component/component_weapon_resource.gd" type="Script" id=1]
+[ext_resource path="res://entities/entity_bullet/entity_bullet.tscn" type="PackedScene" id=2]
+
+[resource]
+script = ExtResource( 1 )
+weapon_type = 0
+projectile = ExtResource( 2 )
+cooldown_time = 0.2

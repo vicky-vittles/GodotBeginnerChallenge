@@ -1,0 +1,139 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://entities/__entity_topdown_player/__entity_topdown_player.gd" type="Script" id=1]
+[ext_resource path="res://libs/2d/gt_entity_mover_2d/gt_forces_entity_mover_2d/gt_topdown_entity_mover_2d/gt_topdown_entity_mover_2d.gd" type="Script" id=2]
+[ext_resource path="res://components/topdown_controller/topdown_controller.tscn" type="PackedScene" id=3]
+[ext_resource path="res://libs/utils/gt_state_machine/gt_state_machine.gd" type="Script" id=4]
+[ext_resource path="res://components/mouse_controller/mouse_controller.tscn" type="PackedScene" id=5]
+[ext_resource path="res://libs/utils/gt_state_machine/__gt_state_transition.gd" type="Script" id=6]
+[ext_resource path="res://entities/__entity_topdown_player/states/entity_topdown_base_state.gd" type="Script" id=7]
+[ext_resource path="res://libs/utils/gt_health/gt_health.gd" type="Script" id=8]
+[ext_resource path="res://libs/2d/gt_grouped_area_2d/gt_trigger_area_2d/gt_hurtbox_2d/gt_hurtbox_2d.gd" type="Script" id=9]
+[ext_resource path="res://components/weapon_component/weapon_component.tscn" type="PackedScene" id=10]
+[ext_resource path="res://libs/utils/gt_input_controller/__gt_input_action.gd" type="Script" id=11]
+
+[node name="TopdownPlayer" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="InputController" parent="." instance=ExtResource( 3 )]
+
+[node name="shoot" type="Node" parent="InputController"]
+script = ExtResource( 11 )
+action = "act_shoot"
+
+[node name="MouseController" parent="." instance=ExtResource( 5 )]
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="InvincibilityTimer" type="Timer" parent="Timers"]
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource( 8 )
+
+[node name="Body" type="KinematicBody2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="graphics" type="Node2D" parent="Body"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="rotation_pivot" type="Node2D" parent="Body/graphics"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Body"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Weapon" parent="Body" instance=ExtResource( 10 )]
+
+[node name="Triggers" type="Node2D" parent="Body"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="DamageHurtbox" type="Area2D" parent="Body/Triggers"]
+collision_layer = 16
+collision_mask = 16
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
+_entity_path = NodePath("../../..")
+_body_path = NodePath("../..")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Body/Triggers/DamageHurtbox"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="EntityMover" type="Node" parent="Body"]
+script = ExtResource( 2 )
+body_path = NodePath("..")
+movement_mode = 2
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 4 )
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource( 7 )
+_fsm_path = NodePath("..")
+_enter_animation_player_path = NodePath("../../Enter")
+_exit_animation_player_path = NodePath("../../Exit")
+
+[node name="ToMove" type="Node" parent="StateMachine/Idle"]
+script = ExtResource( 6 )
+_end_state_path = NodePath("../../Move")
+
+[node name="ToHurt" type="Node" parent="StateMachine/Idle"]
+script = ExtResource( 6 )
+_end_state_path = NodePath("../../Hurt")
+
+[node name="ToDead" type="Node" parent="StateMachine/Idle"]
+script = ExtResource( 6 )
+_end_state_path = NodePath("../../Dead")
+
+[node name="Move" type="Node" parent="StateMachine"]
+script = ExtResource( 7 )
+_fsm_path = NodePath("..")
+_enter_animation_player_path = NodePath("../../Enter")
+_exit_animation_player_path = NodePath("../../Exit")
+
+[node name="ToIdle" type="Node" parent="StateMachine/Move"]
+script = ExtResource( 6 )
+_end_state_path = NodePath("../../Idle")
+
+[node name="ToHurt" type="Node" parent="StateMachine/Move"]
+script = ExtResource( 6 )
+_end_state_path = NodePath("../../Hurt")
+
+[node name="ToDead" type="Node" parent="StateMachine/Move"]
+script = ExtResource( 6 )
+_end_state_path = NodePath("../../Dead")
+
+[node name="Hurt" type="Node" parent="StateMachine"]
+script = ExtResource( 7 )
+_fsm_path = NodePath("..")
+_enter_animation_player_path = NodePath("../../Enter")
+_exit_animation_player_path = NodePath("../../Exit")
+
+[node name="ToIdle" type="Node" parent="StateMachine/Hurt"]
+script = ExtResource( 6 )
+_end_state_path = NodePath("../../Idle")
+
+[node name="Dead" type="Node" parent="StateMachine"]
+script = ExtResource( 7 )
+_fsm_path = NodePath("..")
+_enter_animation_player_path = NodePath("../../Enter")
+_exit_animation_player_path = NodePath("../../Exit")
+
+[node name="Enter" type="AnimationPlayer" parent="."]
+
+[node name="Exit" type="AnimationPlayer" parent="."]
