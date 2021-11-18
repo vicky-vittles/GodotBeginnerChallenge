@@ -6,13 +6,14 @@
 [sub_resource type="CircleShape2D" id=1]
 
 [sub_resource type="CircleShape2D" id=2]
+radius = 25.0
 
 [sub_resource type="Animation" id=4]
 resource_name = "default"
 length = 0.1
 
 [sub_resource type="Animation" id=3]
-resource_name = "delete"
+resource_name = "destroy"
 length = 0.1
 tracks/0/type = "method"
 tracks/0/path = NodePath(".")
@@ -34,8 +35,8 @@ entity_type = 2
 move_speed = 1024
 
 [node name="Body" parent="." index="0"]
-collision_layer = 4
-collision_mask = 2
+collision_layer = 128
+collision_mask = 0
 
 [node name="main" type="Node2D" parent="Body/graphics" index="0"]
 script = ExtResource( 2 )
@@ -44,8 +45,9 @@ __meta__ = {
 }
 centered = true
 num_sides = 20
-size = 20.0
-polygon_color = Color( 0.827451, 0.682353, 0.129412, 1 )
+size = 12.0
+polygon_color = Color( 0.254902, 0.65098, 0.964706, 1 )
+border_size = 8.0
 
 [node name="CollisionShape" parent="Body" index="1"]
 visible = false
@@ -53,17 +55,21 @@ shape = SubResource( 1 )
 
 [node name="DamageHitbox" parent="Body" index="2"]
 visible = false
+collidable_groups = [ "entity_enemy_damage_hurtbox" ]
+damage = 1
 
 [node name="CollisionShape" parent="Body/DamageHitbox" index="0"]
 shape = SubResource( 2 )
 
 [node name="VisibilityNotifier" parent="Body" index="3"]
+visible = false
 position = Vector2( -1.90735e-06, 0 )
 scale = Vector2( 3.2, 3.2 )
 
 [node name="AnimationPlayer" parent="." index="1"]
 autoplay = "default"
 anims/default = SubResource( 4 )
-anims/delete = SubResource( 3 )
+anims/destroy = SubResource( 3 )
 
-[connection signal="screen_exited" from="Body/VisibilityNotifier" to="AnimationPlayer" method="play" binds= [ "delete" ]]
+[connection signal="effect" from="Body/DamageHitbox" to="AnimationPlayer" method="play" binds= [ "destroy" ]]
+[connection signal="screen_exited" from="Body/VisibilityNotifier" to="AnimationPlayer" method="play" binds= [ "destroy" ]]

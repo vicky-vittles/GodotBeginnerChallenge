@@ -2,6 +2,7 @@ extends GTState
 
 signal started_moving()
 signal stopped_moving()
+signal fired_shot()
 
 export (bool) var can_move = true
 export (bool) var can_shoot = true
@@ -23,9 +24,11 @@ func _on_shoot_just_pressed():
 		return
 	if not entity.weapon_fire_torrent and can_shoot:
 		entity.weapon.shoot(entity.aim_direction)
+		emit_signal("fired_shot")
 
 func _on_shoot_pressed():
 	if fsm.current_state != self:
 		return
 	if entity.weapon_fire_torrent and can_shoot:
 		entity.weapon.shoot(entity.aim_direction)
+		emit_signal("fired_shot")

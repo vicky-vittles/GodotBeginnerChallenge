@@ -1,0 +1,389 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://entities/entity_pickup/entity_pickup.gd" type="Script" id=1]
+[ext_resource path="res://libs/2d/gt_grouped_area_2d/gt_trigger_area_2d/gt_trigger_area_2d.gd" type="Script" id=2]
+[ext_resource path="res://addons/regular_polygon2d_node/RegularPolygon2D.gd" type="Script" id=3]
+
+[sub_resource type="CircleShape2D" id=7]
+radius = 20.0
+
+[sub_resource type="Animation" id=9]
+resource_name = "_RESET"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("graphics/strength:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("graphics/heart:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("graphics/speed:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("graphics/bullets:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("graphics/bullet_size:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("graphics/bullet_speed:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "plus_player_health"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("graphics/heart:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "plus_player_speed"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("graphics/speed:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "plus_player_strength"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("graphics/strength:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "plus_weapon_bullet_size"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("graphics/bullet_size:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "plus_weapon_bullet_speed"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("graphics/bullet_speed:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "plus_weapon_bullets"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("graphics/bullets:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "collected"
+length = 0.1
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+
+[node name="Pickup" type="Node2D"]
+script = ExtResource( 1 )
+entity_type = 3
+
+[node name="PresenceTrigger" type="Area2D" parent="." groups=["entity_pickup_presence_trigger"]]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+_entity_path = NodePath("..")
+_body_path = NodePath(".")
+collidable_groups = [ "entity_player_presence_trigger" ]
+
+[node name="graphics" type="Node2D" parent="PresenceTrigger"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="heart" type="Node2D" parent="PresenceTrigger/graphics"]
+visible = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="border" type="Polygon2D" parent="PresenceTrigger/graphics/heart"]
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( 0, 21, -18, 0, -18, -7, -8, -16, 0, -8, 8, -16, 18, -7, 18, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="main" type="Polygon2D" parent="PresenceTrigger/graphics/heart"]
+color = Color( 0.694118, 0.243137, 0.32549, 1 )
+polygon = PoolVector2Array( 0, 16, -14, 0, -14, -5, -8, -11, 0, -3, 8, -11, 14, -5, 14, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="strength" type="Node2D" parent="PresenceTrigger/graphics"]
+visible = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="main" type="Node2D" parent="PresenceTrigger/graphics/strength"]
+scale = Vector2( 1.25, 1.25 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+centered = true
+num_sides = 6
+size = 20.0
+polygon_color = Color( 0.937255, 0.490196, 0.341176, 1 )
+border_size = 14.0
+
+[node name="speed" type="Node2D" parent="PresenceTrigger/graphics"]
+visible = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="main" type="Node2D" parent="PresenceTrigger/graphics/speed"]
+scale = Vector2( 1.25, 1.25 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+centered = true
+size = 22.0
+polygon_color = Color( 1, 0.803922, 0.458824, 1 )
+border_size = 18.0
+
+[node name="bullets" type="Node2D" parent="PresenceTrigger/graphics"]
+visible = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="body" type="Node2D" parent="PresenceTrigger/graphics/bullets"]
+position = Vector2( -7, 3 )
+scale = Vector2( 0.5, 0.5 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+centered = true
+num_sides = 20
+size = 24.0
+polygon_color = Color( 0.145098, 0.443137, 0.47451, 1 )
+border_size = 12.0
+
+[node name="body2" type="Node2D" parent="PresenceTrigger/graphics/bullets"]
+position = Vector2( -3, -8 )
+scale = Vector2( 0.5, 0.5 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+centered = true
+num_sides = 20
+size = 24.0
+polygon_color = Color( 0.145098, 0.443137, 0.47451, 1 )
+border_size = 12.0
+
+[node name="body3" type="Node2D" parent="PresenceTrigger/graphics/bullets"]
+position = Vector2( 4, 7 )
+scale = Vector2( 0.5, 0.5 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+centered = true
+num_sides = 20
+size = 24.0
+polygon_color = Color( 0.145098, 0.443137, 0.47451, 1 )
+border_size = 12.0
+
+[node name="body4" type="Node2D" parent="PresenceTrigger/graphics/bullets"]
+position = Vector2( 8, -5 )
+scale = Vector2( 0.5, 0.5 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+centered = true
+num_sides = 20
+size = 24.0
+polygon_color = Color( 0.145098, 0.443137, 0.47451, 1 )
+border_size = 12.0
+
+[node name="bullet_size" type="Node2D" parent="PresenceTrigger/graphics"]
+visible = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="main" type="Node2D" parent="PresenceTrigger/graphics/bullet_size"]
+scale = Vector2( 1.25, 1.25 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+centered = true
+num_sides = 8
+size = 18.0
+polygon_color = Color( 0.364706, 0.152941, 0.364706, 1 )
+border_size = 16.0
+
+[node name="bullet_speed" type="Node2D" parent="PresenceTrigger/graphics"]
+visible = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="main" type="Node2D" parent="PresenceTrigger/graphics/bullet_speed"]
+scale = Vector2( 1.25, 1.25 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+centered = true
+size = 22.0
+polygon_color = Color( 0.654902, 0.941176, 0.439216, 1 )
+border_size = 18.0
+
+[node name="CollisionShape" type="CollisionShape2D" parent="PresenceTrigger"]
+visible = false
+shape = SubResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PickupType" type="AnimationPlayer" parent="."]
+root_node = NodePath("../PresenceTrigger")
+autoplay = "_RESET"
+anims/_RESET = SubResource( 9 )
+anims/plus_player_health = SubResource( 1 )
+anims/plus_player_speed = SubResource( 2 )
+anims/plus_player_strength = SubResource( 3 )
+anims/plus_weapon_bullet_size = SubResource( 4 )
+anims/plus_weapon_bullet_speed = SubResource( 5 )
+anims/plus_weapon_bullets = SubResource( 6 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/collected = SubResource( 8 )
+
+[connection signal="effect" from="PresenceTrigger" to="AnimationPlayer" method="play" binds= [ "collected" ]]

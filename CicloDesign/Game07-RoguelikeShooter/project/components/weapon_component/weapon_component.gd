@@ -2,11 +2,14 @@ extends Node2D
 
 export (Resource) var resource
 export (String) var projectile_group
+export (Array, String) var projectile_collidable_groups
 export (NodePath) var spawn_position_path
 export (int) var number_of_bullets = 1
+export (float) var bullet_fire_speed = 0.2
 export (float) var bullet_spacing = 15.0
 export (int) var bullet_size = 1
 export (int) var bullet_speed = 1
+var bullet_strength : int = 1
 
 onready var projectile_spawner = $ProjectileSpawner
 onready var cooldown_timer = $CooldownTimer
@@ -19,7 +22,7 @@ func _ready():
 	assert(resource is ComponentWeaponResource, "Error initializing WeaponComponent: 'resource' is not a ComponentWeaponResource")
 	assert(spawn_position, "Error initializing WeaponComponent: 'spawn_position' is null")
 	projectile_spawner._entity_template = resource.projectile
-	cooldown_timer.wait_time = resource.cooldown_time
+	cooldown_timer.wait_time = bullet_fire_speed
 
 func shoot(direction):
 	if cooldown_timer.is_stopped():
@@ -36,5 +39,19 @@ func spawn_bullet(direction, pos):
 	proj.set_bullet_size(bullet_size)
 	proj.set_bullet_speed(bullet_speed)
 	proj.shoot(direction)
-	proj.add_to_group(projectile_group)
+	proj.damage_hitbox.add_to_group(projectile_group)
+	proj.damage_hitbox.collidable_groups.append_array(projectile_collidable_groups)
+	proj.damage_hitbox.damage = Globals.BULLET_STRENGTH_LEVELS[bullet_strength]
 	cooldown_timer.start()
+
+func set_number_of_bullets(_value):
+	number_of_bullets = _value
+
+func set_bullet_strength(_value):
+	bullet_strength = _value
+
+func set_bullet_size(_value):
+	bullet_size = _value
+
+func set_bullet_speed(_value):
+	bullet_speed = _value

@@ -37,3 +37,8 @@ func rand_sign() -> int:
 
 func component_assert_message(component) -> String:
 	return "Error initializing Component '%s' (%s)" % [component.name, component]
+
+static func sort_by_size(a, b):
+	if a.size.x*a.size.y < b.size.x*b.size.y:
+		return true
+	return false

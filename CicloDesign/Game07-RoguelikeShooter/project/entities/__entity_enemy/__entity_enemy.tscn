@@ -1,0 +1,159 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://entities/__entity_enemy/__entity_enemy.gd" type="Script" id=1]
+[ext_resource path="res://libs/utils/gt_state_machine/__gt_state_transition.gd" type="Script" id=2]
+[ext_resource path="res://libs/2d/gt_entity_mover_2d/gt_steering_entity_mover_2d/gt_steering_entity_mover_2d.gd" type="Script" id=3]
+[ext_resource path="res://libs/2d/gt_grouped_area_2d/gt_trigger_area_2d/gt_hurtbox_2d/gt_hurtbox_2d.gd" type="Script" id=4]
+[ext_resource path="res://libs/utils/gt_health/gt_health.gd" type="Script" id=5]
+[ext_resource path="res://libs/utils/gt_state_machine/gt_state_machine.gd" type="Script" id=6]
+[ext_resource path="res://entities/__entity_enemy/scripts/entity_enemy_animations.gd" type="Script" id=7]
+[ext_resource path="res://entities/__entity_enemy/scripts/entity_enemy_base_state.gd" type="Script" id=8]
+
+[sub_resource type="Animation" id=1]
+resource_name = "_RESET"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/graphics/damage_flash:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Body/graphics:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Body/CollisionShape:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "f"
+
+[node name="Enemy" type="Node2D"]
+script = ExtResource( 1 )
+entity_type = 4
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="InvincibilityTimer" type="Timer" parent="Timers"]
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource( 5 )
+
+[node name="Animations" type="Node" parent="."]
+script = ExtResource( 7 )
+_entity_path = NodePath("..")
+
+[node name="Body" type="KinematicBody2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="graphics" type="Node2D" parent="Body"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="damage_flash" type="Node2D" parent="Body/graphics"]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Body"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Triggers" type="Node2D" parent="Body"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="DamageHurtbox" type="Area2D" parent="Body/Triggers"]
+collision_layer = 16
+collision_mask = 16
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+_entity_path = NodePath("../../..")
+_body_path = NodePath("../..")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Body/Triggers/DamageHurtbox"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="EntityMover" type="Node" parent="Body"]
+script = ExtResource( 3 )
+body_path = NodePath("..")
+movement_mode = 2
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 6 )
+_entity_path = NodePath("..")
+
+[node name="Move" type="Node" parent="StateMachine"]
+script = ExtResource( 8 )
+_fsm_path = NodePath("..")
+_enter_animation_player_path = NodePath("../../Enter")
+_exit_animation_player_path = NodePath("../../Exit")
+
+[node name="ToHurt" type="Node" parent="StateMachine/Move"]
+script = ExtResource( 2 )
+_end_state_path = NodePath("../../Hurt")
+
+[node name="ToDead" type="Node" parent="StateMachine/Move"]
+script = ExtResource( 2 )
+_end_state_path = NodePath("../../Dead")
+
+[node name="Hurt" type="Node" parent="StateMachine"]
+script = ExtResource( 8 )
+_fsm_path = NodePath("..")
+_enter_animation_player_path = NodePath("../../Enter")
+_exit_animation_player_path = NodePath("../../Exit")
+
+[node name="ToMove" type="Node" parent="StateMachine/Hurt"]
+script = ExtResource( 2 )
+_end_state_path = NodePath("../../Move")
+
+[node name="Dead" type="Node" parent="StateMachine"]
+script = ExtResource( 8 )
+_fsm_path = NodePath("..")
+_enter_animation_player_path = NodePath("../../Enter")
+_exit_animation_player_path = NodePath("../../Exit")
+can_move = false
+
+[node name="Enter" type="AnimationPlayer" parent="."]
+
+[node name="Exit" type="AnimationPlayer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "_RESET"
+anims/_RESET = SubResource( 1 )
+anims/f = SubResource( 2 )

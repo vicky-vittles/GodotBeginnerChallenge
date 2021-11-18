@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://entities/__entity_topdown_player/__entity_topdown_player.gd" type="Script" id=1]
 [ext_resource path="res://libs/2d/gt_entity_mover_2d/gt_forces_entity_mover_2d/gt_topdown_entity_mover_2d/gt_topdown_entity_mover_2d.gd" type="Script" id=2]
@@ -11,6 +11,9 @@
 [ext_resource path="res://libs/2d/gt_grouped_area_2d/gt_trigger_area_2d/gt_hurtbox_2d/gt_hurtbox_2d.gd" type="Script" id=9]
 [ext_resource path="res://components/weapon_component/weapon_component.tscn" type="PackedScene" id=10]
 [ext_resource path="res://libs/utils/gt_input_controller/__gt_input_action.gd" type="Script" id=11]
+[ext_resource path="res://libs/2d/gt_grouped_area_2d/gt_trigger_area_2d/gt_trigger_area_2d.gd" type="Script" id=12]
+[ext_resource path="res://components/look_ahead_camera/look_ahead_camera.tscn" type="PackedScene" id=13]
+[ext_resource path="res://libs/2d/gt_screen_shake_2d/gt_screen_shake_2d.gd" type="Script" id=14]
 
 [node name="TopdownPlayer" type="Node2D"]
 script = ExtResource( 1 )
@@ -37,6 +40,12 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="LookAheadCamera" parent="Body" instance=ExtResource( 13 )]
+
+[node name="ScreenShake" type="Node" parent="Body/LookAheadCamera/Camera" index="0"]
+script = ExtResource( 14 )
+_camera_path = NodePath("..")
+
 [node name="graphics" type="Node2D" parent="Body"]
 __meta__ = {
 "_edit_lock_": true
@@ -55,6 +64,21 @@ __meta__ = {
 [node name="Weapon" parent="Body" instance=ExtResource( 10 )]
 
 [node name="Triggers" type="Node2D" parent="Body"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PresenceTrigger" type="Area2D" parent="Body/Triggers"]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_lock_": true
+}
+_entity_path = NodePath("../../..")
+_body_path = NodePath("../..")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Body/Triggers/PresenceTrigger"]
 __meta__ = {
 "_edit_lock_": true
 }
@@ -137,3 +161,5 @@ _exit_animation_player_path = NodePath("../../Exit")
 [node name="Enter" type="AnimationPlayer" parent="."]
 
 [node name="Exit" type="AnimationPlayer" parent="."]
+
+[editable path="Body/LookAheadCamera"]

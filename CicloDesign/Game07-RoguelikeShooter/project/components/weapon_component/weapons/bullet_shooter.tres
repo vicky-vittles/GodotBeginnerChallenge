@@ -7,4 +7,3 @@
 script = ExtResource( 1 )
 weapon_type = 0
 projectile = ExtResource( 2 )
-cooldown_time = 0.2

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://entities/__entity_topdown_player/__entity_topdown_player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/regular_polygon2d_node/RegularPolygon2D.gd" type="Script" id=2]
@@ -10,10 +10,13 @@
 _data = [ Vector2( 0, 0 ), 0.0, 1.0, 0, 1, Vector2( 1, 1 ), 1.0, 0.0, 1, 0 ]
 
 [sub_resource type="Gradient" id=2]
-colors = PoolColorArray( 0.109804, 0.0784314, 0.0705882, 0, 0.827451, 0.682353, 0.129412, 1 )
+colors = PoolColorArray( 0.231373, 0.364706, 0.788235, 1, 0.231373, 0.364706, 0.788235, 1 )
 
 [sub_resource type="CircleShape2D" id=3]
 radius = 14.0
+
+[sub_resource type="CircleShape2D" id=7]
+radius = 30.0
 
 [sub_resource type="CircleShape2D" id=4]
 radius = 14.0
@@ -57,16 +60,43 @@ tracks/0/keys = {
 [node name="Player" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 entity_type = 1
+_camera_path = NodePath("Body/LookAheadCamera/Camera")
 
-[node name="sprite" type="Node2D" parent="MouseController/CanvasLayer/mouse_pos" index="0"]
-modulate = Color( 1, 1, 1, 0.713726 )
-script = ExtResource( 2 )
+[node name="MouseController" parent="." index="1"]
+_current_camera_path = NodePath("../Body/LookAheadCamera/Camera")
+
+[node name="sprite" type="Polygon2D" parent="MouseController/CanvasLayer/mouse_pos" index="0"]
+scale = Vector2( 0.5, 0.5 )
+polygon = PoolVector2Array( -8, -8, -8, -24, 8, -24, 8, -8, 24, -8, 24, 8, 8, 8, 8, 24, -8, 24, -8, 8, -24, 8, -24, -8 )
 __meta__ = {
 "_edit_lock_": true
 }
-centered = true
-size = 16.0
-polygon_color = Color( 0.831373, 0.788235, 0.764706, 1 )
+
+[node name="border" type="Polygon2D" parent="MouseController/CanvasLayer/mouse_pos" index="1"]
+scale = Vector2( 0.5, 0.5 )
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( -8, -20, -8, -24, -5, -24, 8, -24, 8, -8, 24, -8, 24, 8, 8, 8, 8, 24, -8, 24, -8, 8, -24, 8, -24, -8, -8, -8, -8, -20, -4, -20, -4, -4, -20, -4, -20, 4, -4, 4, -4, 20, 4, 20, 4, 4, 20, 4, 20, -4, 4, -4, 4, -20 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Health" parent="." index="3"]
+max_health = 3
+initial_health = 3
+
+[node name="Body" parent="." index="4"]
+collision_layer = 32
+collision_mask = 0
+
+[node name="LookAheadCamera" parent="Body" index="0"]
+screen_size = Vector2( 960, 540 )
+dead_zone = 50.0
+strength = 0.3
+
+[node name="Camera" parent="Body/LookAheadCamera" index="0"]
+current = true
+smoothing_enabled = true
+smoothing_speed = 30.0
 
 [node name="move_trail" type="Line2D" parent="Body/graphics" index="0"]
 width = 20.0
@@ -76,9 +106,12 @@ script = ExtResource( 5 )
 __meta__ = {
 "_edit_lock_": true
 }
-lifetime = 0.15
+lifetime = 0.12
 distance = 2.0
 segments = 40
+
+[node name="rotation_pivot" parent="Body/graphics" index="1"]
+z_index = 1
 
 [node name="bullet_spawn_pos" type="Position2D" parent="Body/graphics/rotation_pivot" index="0"]
 position = Vector2( 30, 0 )
@@ -86,17 +119,19 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="arrow" type="Node2D" parent="Body/graphics/rotation_pivot" index="1"]
-position = Vector2( 12, 0 )
-scale = Vector2( 1.25, 1 )
-script = ExtResource( 2 )
+[node name="cannon" type="Polygon2D" parent="Body/graphics/rotation_pivot" index="1"]
+color = Color( 0.231373, 0.364706, 0.788235, 1 )
+polygon = PoolVector2Array( 0, -7, 8, -7, 22, -4, 22, 4, 8, 7, 0, 7 )
 __meta__ = {
 "_edit_lock_": true
 }
-centered = true
-size = 20.0
-polygon_color = Color( 0.827451, 0.682353, 0.129412, 1 )
-polygon_rotation = 90.0
+
+[node name="cannon_border" type="Polygon2D" parent="Body/graphics/rotation_pivot" index="2"]
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( 0, -9, 8, -9, 24, -6, 24, 6, 8, 9, 0, 9, 0, -6, 1, -6, 1, 6, 8, 6, 21, 3, 21, -3, 8, -6, 0, -6 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="main" type="Node2D" parent="Body/graphics" index="2"]
 z_index = 1
@@ -106,30 +141,34 @@ __meta__ = {
 }
 centered = true
 num_sides = 4
-size = 32.0
-polygon_color = Color( 0.827451, 0.682353, 0.129412, 1 )
+size = 20.0
+polygon_color = Color( 0.231373, 0.364706, 0.788235, 1 )
+border_size = 12.0
 
-[node name="CollisionShape" parent="Body" index="1"]
+[node name="CollisionShape" parent="Body" index="2"]
 visible = false
 shape = SubResource( 3 )
 
-[node name="Weapon" parent="Body" index="2"]
+[node name="Weapon" parent="Body" index="3"]
 resource = ExtResource( 4 )
 projectile_group = "entity_bullet_player_damage_hitbox"
+projectile_collidable_groups = [ "entity_cage_damage_hurtbox" ]
 spawn_position_path = NodePath("../graphics/rotation_pivot/bullet_spawn_pos")
 
-[node name="DamageHurtbox" parent="Body/Triggers" index="0" groups=[
-"entity_player_damage_hurtbox",
-]]
+[node name="PresenceTrigger" parent="Body/Triggers" index="0" groups=["entity_player_presence_trigger"]]
+visible = false
+collidable_groups = [ "entity_pickup_presence_trigger" ]
+
+[node name="CollisionShape" parent="Body/Triggers/PresenceTrigger" index="0"]
+shape = SubResource( 7 )
+
+[node name="DamageHurtbox" parent="Body/Triggers" index="1" groups=["entity_player_damage_hurtbox"]]
 visible = false
 collidable_groups = [ "entity_projectile_enemy_damage_hitbox" ]
 excluded_groups = [ "entity_projectile_player_damage_hitbox" ]
 
 [node name="CollisionShape" parent="Body/Triggers/DamageHurtbox" index="0"]
 shape = SubResource( 4 )
-
-[node name="EntityMover" parent="Body" index="4"]
-movement_mode = 1
 
 [node name="StateMachine" parent="." index="5"]
 _entity_path = NodePath("..")
@@ -150,6 +189,7 @@ anims/hurt_enter = SubResource( 5 )
 [node name="Exit" parent="." index="7"]
 anims/hurt_exit = SubResource( 6 )
 
+[connection signal="fired_weapon" from="." to="Body/LookAheadCamera/Camera/ScreenShake" method="shake" binds= [ 2.0, 0.05, 0.025 ]]
 [connection signal="updated_move_direction" from="InputController" to="StateMachine/Idle" method="_on_InputController_updated_move_direction"]
 [connection signal="updated_move_direction" from="InputController" to="StateMachine/Move" method="_on_InputController_updated_move_direction"]
 [connection signal="just_pressed" from="InputController/shoot" to="StateMachine/Idle" method="_on_shoot_just_pressed"]
@@ -161,13 +201,20 @@ anims/hurt_exit = SubResource( 6 )
 [connection signal="pressed" from="InputController/shoot" to="StateMachine/Hurt" method="_on_shoot_pressed"]
 [connection signal="pressed" from="InputController/shoot" to="StateMachine/Dead" method="_on_shoot_pressed"]
 [connection signal="updated_global_position" from="MouseController" to="." method="_on_MouseController_updated_global_position"]
+[connection signal="updated_screen_position" from="MouseController" to="Body/LookAheadCamera" method="set_mouse_position"]
 [connection signal="timeout" from="Timers/InvincibilityTimer" to="StateMachine/Hurt/ToIdle" method="do_transition"]
 [connection signal="died" from="Health" to="StateMachine/Idle/ToDead" method="do_transition"]
 [connection signal="died" from="Health" to="StateMachine/Move/ToDead" method="do_transition"]
-[connection signal="lived" from="Health" to="StateMachine/Move/ToHurt" method="do_transition"]
 [connection signal="lived" from="Health" to="StateMachine/Idle/ToHurt" method="do_transition"]
+[connection signal="lived" from="Health" to="StateMachine/Move/ToHurt" method="do_transition"]
+[connection signal="grouped_area_entered" from="Body/Triggers/PresenceTrigger" to="." method="_on_PresenceTrigger_grouped_area_entered"]
 [connection signal="took_damage" from="Body/Triggers/DamageHurtbox" to="Health" method="lose_health"]
+[connection signal="fired_shot" from="StateMachine/Idle" to="." method="_on_fired_shot"]
 [connection signal="started_moving" from="StateMachine/Idle" to="StateMachine/Idle/ToMove" method="do_transition"]
+[connection signal="fired_shot" from="StateMachine/Move" to="." method="_on_fired_shot"]
 [connection signal="stopped_moving" from="StateMachine/Move" to="StateMachine/Move/ToIdle" method="do_transition"]
+[connection signal="fired_shot" from="StateMachine/Hurt" to="." method="_on_fired_shot"]
+[connection signal="fired_shot" from="StateMachine/Dead" to="." method="_on_fired_shot"]
 
 [editable path="MouseController"]
+[editable path="Body/LookAheadCamera"]

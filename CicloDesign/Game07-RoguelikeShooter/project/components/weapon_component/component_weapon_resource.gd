@@ -6,4 +6,3 @@ enum WEAPONS {
 
 export (WEAPONS) var weapon_type
 export (PackedScene) var projectile
-export (float) var cooldown_time

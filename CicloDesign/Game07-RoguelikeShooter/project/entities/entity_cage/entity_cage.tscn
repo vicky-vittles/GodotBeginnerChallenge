@@ -1,0 +1,250 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://entities/entity_cage/entity_cage.gd" type="Script" id=1]
+[ext_resource path="res://addons/regular_polygon2d_node/RegularPolygon2D.gd" type="Script" id=2]
+[ext_resource path="res://libs/2d/gt_grouped_area_2d/gt_trigger_area_2d/gt_hurtbox_2d/gt_hurtbox_2d.gd" type="Script" id=3]
+[ext_resource path="res://libs/utils/gt_health/gt_health.gd" type="Script" id=4]
+[ext_resource path="res://components/entity_spawner/entity_spawner.tscn" type="PackedScene" id=5]
+[ext_resource path="res://entities/__entity_enemy/entity_enemy_zombie.tscn" type="PackedScene" id=6]
+[ext_resource path="res://entities/entity_pickup/entity_pickup.tscn" type="PackedScene" id=7]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 22, 22 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 22, 22 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "_RESET"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/graphics/damage_flash:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Body/graphics:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Body/CollisionShape:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "dead_enter"
+length = 0.2
+tracks/0/type = "method"
+tracks/0/path = NodePath("Timers/SpawnTimer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "stop"
+} ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("Body/DamageHurtbox")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "disable_all_shapes"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Body/graphics:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "hurt_enter"
+length = 0.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/graphics/damage_flash:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("Body/DamageHurtbox")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "disable_all_shapes"
+}, {
+"args": [  ],
+"method": "enable_all_shapes"
+} ]
+}
+
+[node name="Cage" type="Node2D"]
+script = ExtResource( 1 )
+entity_type = 5
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="SpawnTimer" type="Timer" parent="Timers"]
+wait_time = 4.0
+autostart = true
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource( 4 )
+max_health = 10
+initial_health = 10
+
+[node name="EnemySpawner" parent="." instance=ExtResource( 5 )]
+_actor_path = NodePath("..")
+_entity_template = ExtResource( 6 )
+is_independent_entity = true
+
+[node name="PickupSpawner" parent="." instance=ExtResource( 5 )]
+_actor_path = NodePath("..")
+_entity_template = ExtResource( 7 )
+is_independent_entity = true
+
+[node name="Body" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 36
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="graphics" type="Node2D" parent="Body"]
+modulate = Color( 1, 1, 1, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="main" type="Node2D" parent="Body/graphics"]
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+centered = true
+num_sides = 4
+size = 40.0
+polygon_color = Color( 1, 0.803922, 0.458824, 1 )
+border_size = 24.0
+polygon_rotation = 45.0
+
+[node name="damage_flash" type="Node2D" parent="Body/graphics"]
+visible = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="white" type="Node2D" parent="Body/graphics/damage_flash"]
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+centered = true
+num_sides = 4
+polygon_color = Color( 1, 1, 1, 1 )
+polygon_rotation = 45.0
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Body"]
+visible = false
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="DamageHurtbox" type="Area2D" parent="Body" groups=["entity_cage_damage_hurtbox"]]
+visible = false
+collision_layer = 16
+collision_mask = 16
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+_entity_path = NodePath("../..")
+_body_path = NodePath("..")
+collidable_groups = [ "entity_bullet_player_damage_hitbox" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/DamageHurtbox"]
+shape = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "_RESET"
+anims/_RESET = SubResource( 3 )
+anims/dead_enter = SubResource( 6 )
+anims/hurt_enter = SubResource( 4 )
+
+[connection signal="timeout" from="Timers/SpawnTimer" to="." method="spawn"]
+[connection signal="died" from="Health" to="." method="_on_Health_died"]
+[connection signal="died" from="Health" to="AnimationPlayer" method="play" binds= [ "dead_enter" ]]
+[connection signal="lived" from="Health" to="AnimationPlayer" method="play" binds= [ "hurt_enter" ]]
+[connection signal="took_damage" from="Body/DamageHurtbox" to="Health" method="lose_health"]
