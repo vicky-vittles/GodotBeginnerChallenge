@@ -5,6 +5,7 @@ export (int) var move_speed = 256
 onready var body = $Body
 onready var damage_hitbox = $Body/DamageHitbox
 onready var entity_mover = $Body/EntityMover
+onready var animation_player = $AnimationPlayer
 
 var move_direction : Vector2
 var bullet_size : int = 1
@@ -21,3 +22,6 @@ func set_bullet_size(_size):
 func set_bullet_speed(_speed):
 	bullet_speed = _speed
 	move_speed = Globals.BULLET_SPEED_LEVELS[bullet_speed]
+
+func _on_EntityMover_has_collided():
+	animation_player.play("destroy")

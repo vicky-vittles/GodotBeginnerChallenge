@@ -4,6 +4,7 @@
 [ext_resource path="res://addons/regular_polygon2d_node/RegularPolygon2D.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
+radius = 6.0
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 25.0
@@ -73,3 +74,4 @@ anims/destroy = SubResource( 3 )
 
 [connection signal="effect" from="Body/DamageHitbox" to="AnimationPlayer" method="play" binds= [ "destroy" ]]
 [connection signal="screen_exited" from="Body/VisibilityNotifier" to="AnimationPlayer" method="play" binds= [ "destroy" ]]
+[connection signal="has_collided" from="Body/EntityMover" to="." method="_on_EntityMover_has_collided"]

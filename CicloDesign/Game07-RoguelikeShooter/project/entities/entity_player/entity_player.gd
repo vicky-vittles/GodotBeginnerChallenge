@@ -55,3 +55,5 @@ func _on_PresenceTrigger_grouped_area_entered(area):
 			weapon.set_bullet_size(weapon.bullet_size+1)
 		Globals.PICKUP_TYPES.PLUS_WEAPON_BULLET_SPEED:
 			weapon.set_bullet_speed(weapon.bullet_speed+1)
+		Globals.PICKUP_TYPES.PLUS_WEAPON_BULLET_FIRE_SPEED:
+			weapon.set_bullet_fire_speed(weapon.bullet_fire_speed+1)

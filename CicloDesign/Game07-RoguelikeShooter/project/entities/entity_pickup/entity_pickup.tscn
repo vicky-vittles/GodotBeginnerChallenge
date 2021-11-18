@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://entities/entity_pickup/entity_pickup.gd" type="Script" id=1]
 [ext_resource path="res://libs/2d/gt_grouped_area_2d/gt_trigger_area_2d/gt_trigger_area_2d.gd" type="Script" id=2]
@@ -82,6 +82,18 @@ tracks/5/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/6/type = "value"
+tracks/6/path = NodePath("graphics/bullet_fire_speed:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=1]
 resource_name = "plus_player_health"
@@ -120,6 +132,22 @@ resource_name = "plus_player_strength"
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("graphics/strength:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "plus_weapon_bullet_fire_speed"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("graphics/bullet_fire_speed:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -365,6 +393,24 @@ size = 22.0
 polygon_color = Color( 0.654902, 0.941176, 0.439216, 1 )
 border_size = 18.0
 
+[node name="bullet_fire_speed" type="Node2D" parent="PresenceTrigger/graphics"]
+visible = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="main" type="Node2D" parent="PresenceTrigger/graphics/bullet_fire_speed"]
+scale = Vector2( 1.25, 1.25 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+centered = true
+num_sides = 5
+size = 20.0
+polygon_color = Color( 0.45098, 0.937255, 0.968627, 1 )
+border_size = 14.0
+
 [node name="CollisionShape" type="CollisionShape2D" parent="PresenceTrigger"]
 visible = false
 shape = SubResource( 7 )
@@ -379,6 +425,7 @@ anims/_RESET = SubResource( 9 )
 anims/plus_player_health = SubResource( 1 )
 anims/plus_player_speed = SubResource( 2 )
 anims/plus_player_strength = SubResource( 3 )
+anims/plus_weapon_bullet_fire_speed = SubResource( 10 )
 anims/plus_weapon_bullet_size = SubResource( 4 )
 anims/plus_weapon_bullet_speed = SubResource( 5 )
 anims/plus_weapon_bullets = SubResource( 6 )

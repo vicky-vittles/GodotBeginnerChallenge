@@ -5,8 +5,8 @@ export (String) var projectile_group
 export (Array, String) var projectile_collidable_groups
 export (NodePath) var spawn_position_path
 export (int) var number_of_bullets = 1
-export (float) var bullet_fire_speed = 0.2
 export (float) var bullet_spacing = 15.0
+export (int) var bullet_fire_speed = 1
 export (int) var bullet_size = 1
 export (int) var bullet_speed = 1
 var bullet_strength : int = 1
@@ -22,7 +22,7 @@ func _ready():
 	assert(resource is ComponentWeaponResource, "Error initializing WeaponComponent: 'resource' is not a ComponentWeaponResource")
 	assert(spawn_position, "Error initializing WeaponComponent: 'spawn_position' is null")
 	projectile_spawner._entity_template = resource.projectile
-	cooldown_timer.wait_time = bullet_fire_speed
+	cooldown_timer.wait_time = Globals.BULLET_FIRE_SPEED_LEVELS[bullet_fire_speed]
 
 func shoot(direction):
 	if cooldown_timer.is_stopped():
@@ -55,3 +55,8 @@ func set_bullet_size(_value):
 
 func set_bullet_speed(_value):
 	bullet_speed = _value
+
+func set_bullet_fire_speed(_value):
+	bullet_fire_speed = _value
+	cooldown_timer.stop()
+	cooldown_timer.wait_time = Globals.BULLET_FIRE_SPEED_LEVELS[bullet_fire_speed]
