@@ -11,6 +11,7 @@ export (int) var player_health = 1
 onready var mouse_controller = $MouseController
 onready var health = $Health
 onready var rotation_pivot = $Body/graphics/rotation_pivot
+onready var camera_screen_shake = $Body/LookAheadCamera/Camera/ScreenShake
 
 func _ready():
 	if _camera_path:
@@ -25,6 +26,7 @@ func _on_MouseController_updated_global_position(pos):
 	rotation_pivot.look_at(pos)
 
 func _on_fired_shot():
+	camera_screen_shake.shake(2, 0.05, 0.025)
 	emit_signal("fired_weapon")
 
 func set_player_strength(_value):

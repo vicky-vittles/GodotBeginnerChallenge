@@ -42,6 +42,20 @@ tracks/0/keys = {
 "method": "start"
 } ]
 }
+tracks/1/type = "method"
+tracks/1/path = NodePath("Body/Triggers/DamageHurtbox")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "disable_all_shapes"
+} ]
+}
 
 [sub_resource type="Animation" id=6]
 resource_name = "hurt_exit"
@@ -58,6 +72,20 @@ tracks/0/keys = {
 "values": [ {
 "args": [  ],
 "method": "stop"
+} ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("Body/Triggers/DamageHurtbox")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "enable_all_shapes"
 } ]
 }
 
@@ -84,9 +112,13 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="InvincibilityTimer" parent="Timers" index="0"]
+one_shot = true
+
 [node name="Health" parent="." index="3"]
 max_health = 3
 initial_health = 3
+_debug_mode = true
 
 [node name="Body" parent="." index="4"]
 collision_layer = 32
@@ -158,6 +190,7 @@ resource = ExtResource( 4 )
 projectile_group = "entity_bullet_player_damage_hitbox"
 projectile_collidable_groups = [ "entity_cage_damage_hurtbox" ]
 spawn_position_path = NodePath("../graphics/rotation_pivot/bullet_spawn_pos")
+bullet_spacing = 10.0
 
 [node name="PresenceTrigger" parent="Body/Triggers" index="0" groups=["entity_player_presence_trigger"]]
 visible = false
@@ -168,7 +201,7 @@ shape = SubResource( 7 )
 
 [node name="DamageHurtbox" parent="Body/Triggers" index="1" groups=["entity_player_damage_hurtbox"]]
 visible = false
-collidable_groups = [ "entity_projectile_enemy_damage_hitbox" ]
+collidable_groups = [ "entity_enemy_damage_hitbox" ]
 excluded_groups = [ "entity_projectile_player_damage_hitbox" ]
 
 [node name="CollisionShape" parent="Body/Triggers/DamageHurtbox" index="0"]
@@ -211,9 +244,10 @@ anims/hurt_enter = SubResource( 5 )
 [node name="Exit" parent="." index="7"]
 anims/hurt_exit = SubResource( 6 )
 
-[connection signal="fired_weapon" from="." to="Body/LookAheadCamera/Camera/ScreenShake" method="shake" binds= [ 2.0, 0.05, 0.025 ]]
 [connection signal="updated_move_direction" from="InputController" to="StateMachine/Idle" method="_on_InputController_updated_move_direction"]
 [connection signal="updated_move_direction" from="InputController" to="StateMachine/Move" method="_on_InputController_updated_move_direction"]
+[connection signal="updated_move_direction" from="InputController" to="StateMachine/Hurt" method="_on_InputController_updated_move_direction"]
+[connection signal="updated_move_direction" from="InputController" to="StateMachine/Dead" method="_on_InputController_updated_move_direction"]
 [connection signal="just_pressed" from="InputController/shoot" to="StateMachine/Idle" method="_on_shoot_just_pressed"]
 [connection signal="just_pressed" from="InputController/shoot" to="StateMachine/Move" method="_on_shoot_just_pressed"]
 [connection signal="just_pressed" from="InputController/shoot" to="StateMachine/Hurt" method="_on_shoot_just_pressed"]
