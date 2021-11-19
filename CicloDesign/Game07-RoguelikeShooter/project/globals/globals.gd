@@ -2,11 +2,6 @@ extends Node
 
 const TILE_SIZE = 64
 
-const STRENGTH_COLORS = {
-	1: Color("ffcd75"),
-	2: Color("b13e53"),
-	3: Color("5d275d")}
-
 enum ENTITY_TYPES {
 	NULL = 0,
 	ENTITY_PLAYER = 1,
@@ -26,6 +21,11 @@ enum PICKUP_TYPES {
 	PLUS_WEAPON_BULLET_SPEED,
 	PLUS_WEAPON_BULLET_SIZE,
 	PLUS_WEAPON_BULLET_FIRE_SPEED}
+
+const STRENGTH_COLORS = {
+	1: Color("ffcd75"),
+	2: Color("b13e53"),
+	3: Color("5d275d")}
 
 const PLAYER_SPEED_LEVELS = {
 	1: 128,
@@ -82,11 +82,13 @@ const BULLET_SPEED_LEVELS = {
 	6: 960,
 	7: 1024}
 const BULLET_FIRE_SPEED_LEVELS = {
-	1: 0.5,
-	2: 0.4,
-	3: 0.3,
-	4: 0.2,
+	1: 0.3,
+	2: 0.25,
+	3: 0.2,
+	4: 0.15,
 	5: 0.1}
+
+const DUNGEON_MAX_LEVEL = 100
 
 func get_game():
 	if has_node("/root/Game"):

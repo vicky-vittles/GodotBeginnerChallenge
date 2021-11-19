@@ -1,17 +1,19 @@
 extends Node2D
 
+signal reached_end()
+
 export (Resource) var dungeon_resource
 
 onready var tilemap = $tilemap
+onready var end_trigger = $EndTrigger
 onready var cage_spawner = $CageSpawner
 
 var player
-
-func _ready():
-	assert(dungeon_resource, "Error initializing Dungeon: 'dungeon_resource' is null")
-	assert(dungeon_resource is DungeonResource, "Error initializing Dungeon: 'dungeon_resource' is not of type DungeonResource")
+var teleporter_pos
 
 func generate_dungeon():
+	assert(dungeon_resource, "Error initializing Dungeon: 'dungeon_resource' is null")
+	assert(dungeon_resource is DungeonResource, "Error initializing Dungeon: 'dungeon_resource' is not of type DungeonResource")
 	var center_pos = dungeon_resource.dungeon_size/2
 	var border = Rect2(Vector2.ZERO, dungeon_resource.dungeon_size)
 	var walker = WalkerAlgorithm.new(
@@ -73,3 +75,6 @@ func place_cages(rooms):
 		var rand_strength = RNGTools.pick_weighted(bag)
 		cage.strength = rand_strength
 		cage.player = player
+
+func _on_EndTrigger_effect():
+	emit_signal("reached_end")

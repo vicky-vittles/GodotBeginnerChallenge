@@ -1,0 +1,25 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://main/game/world/dungeon/dungeon_resource.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+dungeon_size = Vector2( 60, 32 )
+steps_taken = 400.0
+directions_lookup = {
+Vector2( -1, 0 ): 20,
+Vector2( 0, -1 ): 20,
+Vector2( 0, 1 ): 20,
+Vector2( 1, 0 ): 40
+}
+min_steps_since_turn = 9
+max_steps_since_turn = 10
+change_direction_chance = 0.1
+min_room_size = 5
+max_room_size = 7
+number_of_cages = 3
+enemy_strength_weights = {
+1: 1,
+2: 0,
+3: 0
+}
