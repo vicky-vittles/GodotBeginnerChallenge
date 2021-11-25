@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://libs/components/controllers/gt_system_controller/gt_system_controller.tscn" type="PackedScene" id=1]
+[ext_resource path="res://libs/main/game/game.gd" type="Script" id=2]
+[ext_resource path="res://libs/components/utils/gt_application_manager/gt_application_manager.tscn" type="PackedScene" id=3]
+[ext_resource path="res://libs/main/game/world/world.tscn" type="PackedScene" id=4]
+
+[node name="Game" type="Node2D"]
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="SystemController" parent="." instance=ExtResource( 1 )]
+
+[node name="ApplicationManager" parent="." instance=ExtResource( 3 )]
+
+[node name="World" parent="." instance=ExtResource( 4 )]
+
+[connection signal="just_pressed" from="SystemController/sys_exit" to="ApplicationManager" method="quit"]
+[connection signal="just_pressed" from="SystemController/sys_reload" to="ApplicationManager" method="reload"]
+
+[editable path="SystemController"]

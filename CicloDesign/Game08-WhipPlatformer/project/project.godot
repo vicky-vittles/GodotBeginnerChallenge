@@ -1,0 +1,451 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Reference",
+"class": "AnimaEasing",
+"language": "GDScript",
+"path": "res://addons/anima/core/easings.gd"
+}, {
+"base": "Node",
+"class": "AnimaNode",
+"language": "GDScript",
+"path": "res://addons/anima/core/node.gd"
+}, {
+"base": "Reference",
+"class": "AnimaNodesProperties",
+"language": "GDScript",
+"path": "res://addons/anima/utils/node_properties.gd"
+}, {
+"base": "Reference",
+"class": "AnimaStrings",
+"language": "GDScript",
+"path": "res://addons/anima/utils/strings.gd"
+}, {
+"base": "Tween",
+"class": "AnimaTween",
+"language": "GDScript",
+"path": "res://addons/anima/core/tween.gd"
+}, {
+"base": "Node",
+"class": "BehaviorTree",
+"language": "GDScript",
+"path": "res://libs/components/utils/behavior_tree/behavior_tree.gd"
+}, {
+"base": "BehaviorTreeLeaf",
+"class": "BehaviorTreeAction",
+"language": "GDScript",
+"path": "res://libs/components/utils/behavior_tree/leaves/action.gd"
+}, {
+"base": "BehaviorTreeNode",
+"class": "BehaviorTreeComposite",
+"language": "GDScript",
+"path": "res://libs/components/utils/behavior_tree/composites/composite.gd"
+}, {
+"base": "BehaviorTreeLeaf",
+"class": "BehaviorTreeCondition",
+"language": "GDScript",
+"path": "res://libs/components/utils/behavior_tree/leaves/condition.gd"
+}, {
+"base": "BehaviorTreeNode",
+"class": "BehaviorTreeDecorator",
+"language": "GDScript",
+"path": "res://libs/components/utils/behavior_tree/decorators/decorator.gd"
+}, {
+"base": "BehaviorTreeDecorator",
+"class": "BehaviorTreeFailer",
+"language": "GDScript",
+"path": "res://libs/components/utils/behavior_tree/decorators/failer.gd"
+}, {
+"base": "BehaviorTreeDecorator",
+"class": "BehaviorTreeInverter",
+"language": "GDScript",
+"path": "res://libs/components/utils/behavior_tree/decorators/inverter.gd"
+}, {
+"base": "BehaviorTreeNode",
+"class": "BehaviorTreeLeaf",
+"language": "GDScript",
+"path": "res://libs/components/utils/behavior_tree/leaves/leaf.gd"
+}, {
+"base": "BehaviorTreeDecorator",
+"class": "BehaviorTreeLimiter",
+"language": "GDScript",
+"path": "res://libs/components/utils/behavior_tree/decorators/limiter.gd"
+}, {
+"base": "BehaviorTree",
+"class": "BehaviorTreeNode",
+"language": "GDScript",
+"path": "res://libs/components/utils/behavior_tree/bt_node.gd"
+}, {
+"base": "BehaviorTree",
+"class": "BehaviorTreeRoot",
+"language": "GDScript",
+"path": "res://libs/components/utils/behavior_tree/bt_root.gd"
+}, {
+"base": "BehaviorTreeComposite",
+"class": "BehaviorTreeSelector",
+"language": "GDScript",
+"path": "res://libs/components/utils/behavior_tree/composites/selector.gd"
+}, {
+"base": "BehaviorTreeComposite",
+"class": "BehaviorTreeSequencer",
+"language": "GDScript",
+"path": "res://libs/components/utils/behavior_tree/composites/sequencer.gd"
+}, {
+"base": "BehaviorTreeDecorator",
+"class": "BehaviorTreeSucceeder",
+"language": "GDScript",
+"path": "res://libs/components/utils/behavior_tree/decorators/succeeder.gd"
+}, {
+"base": "BehaviorTreeDecorator",
+"class": "BehaviorTreeTimed",
+"language": "GDScript",
+"path": "res://libs/components/utils/behavior_tree/decorators/timed.gd"
+}, {
+"base": "ColorRect",
+"class": "ColorTile",
+"language": "GDScript",
+"path": "res://addons/color-palette/ColorTile.gd"
+}, {
+"base": "Node2D",
+"class": "Entity2D",
+"language": "GDScript",
+"path": "res://libs/entities/__entity_2d/__entity_2d.gd"
+}, {
+"base": "Container",
+"class": "FlexGridContainer",
+"language": "GDScript",
+"path": "res://addons/color-palette/utilities/FlexGridContainer.gd"
+}, {
+"base": "AudioStreamPlayer",
+"class": "GTAudioPlayer",
+"language": "GDScript",
+"path": "res://libs/nodes/utils/gt_audio_player/gt_audio_player.gd"
+}, {
+"base": "GTInputController",
+"class": "GTDeviceController",
+"language": "GDScript",
+"path": "res://libs/nodes/utils/gt_input_controller/gt_device_controller.gd"
+}, {
+"base": "Node",
+"class": "GTEntityMover2D",
+"language": "GDScript",
+"path": "res://libs/nodes/2d/gt_entity_mover_2d/gt_entity_mover_2d.gd"
+}, {
+"base": "Node",
+"class": "GTFormula",
+"language": "GDScript",
+"path": "res://libs/nodes/utils/gt_formula/gt_formula.gd"
+}, {
+"base": "Node",
+"class": "GTHealth",
+"language": "GDScript",
+"path": "res://libs/nodes/utils/gt_health/gt_health.gd"
+}, {
+"base": "Area2D",
+"class": "GTHitbox2D",
+"language": "GDScript",
+"path": "res://libs/nodes/2d/gt_hitbox_2d/gt_hitbox_2d.gd"
+}, {
+"base": "Area2D",
+"class": "GTHurtbox2D",
+"language": "GDScript",
+"path": "res://libs/nodes/2d/gt_hurtbox_2d/gt_hurtbox_2d.gd"
+}, {
+"base": "Node",
+"class": "GTInputAction",
+"language": "GDScript",
+"path": "res://libs/nodes/utils/gt_input_controller/__gt_input_action.gd"
+}, {
+"base": "Node",
+"class": "GTInputController",
+"language": "GDScript",
+"path": "res://libs/nodes/utils/gt_input_controller/__gt_input_controller.gd"
+}, {
+"base": "Node2D",
+"class": "GTJuice2D",
+"language": "GDScript",
+"path": "res://libs/nodes/2d/gt_juice_2d/gt_juice_2d.gd"
+}, {
+"base": "Label",
+"class": "GTPatternLabel",
+"language": "GDScript",
+"path": "res://libs/nodes/utils/gt_pattern_label/gt_pattern_label.gd"
+}, {
+"base": "Node",
+"class": "GTPoints",
+"language": "GDScript",
+"path": "res://libs/nodes/utils/gt_points/gt_points.gd"
+}, {
+"base": "Node2D",
+"class": "GTRandomPointZone2D",
+"language": "GDScript",
+"path": "res://libs/nodes/2d/gt_random_point_zone_2d/gt_random_point_zone_2d.gd"
+}, {
+"base": "RayCast2D",
+"class": "GTRayCast2D",
+"language": "GDScript",
+"path": "res://libs/nodes/2d/gt_raycast_2d/gt_raycast_2d.gd"
+}, {
+"base": "Node",
+"class": "GTScreenShake2D",
+"language": "GDScript",
+"path": "res://libs/nodes/2d/gt_screen_shake_2d/gt_screen_shake_2d.gd"
+}, {
+"base": "GTEntityMover2D",
+"class": "GTSidescrollerEntityMover2D",
+"language": "GDScript",
+"path": "res://libs/nodes/2d/gt_entity_mover_2d/gt_sidescroller_entity_mover_2d/gt_sidescroller_entity_mover_2d.gd"
+}, {
+"base": "Node",
+"class": "GTState",
+"language": "GDScript",
+"path": "res://libs/nodes/utils/gt_state_machine/__gt_state.gd"
+}, {
+"base": "Node",
+"class": "GTStateMachine",
+"language": "GDScript",
+"path": "res://libs/nodes/utils/gt_state_machine/gt_state_machine.gd"
+}, {
+"base": "Node",
+"class": "GTSteeringBehavior2D",
+"language": "GDScript",
+"path": "res://libs/nodes/2d/gt_entity_mover_2d/gt_steering_entity_mover_2d/__gt_steering_behavior_2d.gd"
+}, {
+"base": "GTSteeringBehavior2D",
+"class": "GTSteeringBehaviorAbsoluteSeek2D",
+"language": "GDScript",
+"path": "res://libs/nodes/2d/gt_entity_mover_2d/gt_steering_entity_mover_2d/behaviors/gt_steering_behavior_absolute_seek_2d.gd"
+}, {
+"base": "GTSteeringBehavior2D",
+"class": "GTSteeringBehaviorSeek2D",
+"language": "GDScript",
+"path": "res://libs/nodes/2d/gt_entity_mover_2d/gt_steering_entity_mover_2d/behaviors/gt_steering_behavior_seek_2d.gd"
+}, {
+"base": "GTSteeringBehavior2D",
+"class": "GTSteeringBehaviorWander2D",
+"language": "GDScript",
+"path": "res://libs/nodes/2d/gt_entity_mover_2d/gt_steering_entity_mover_2d/behaviors/gt_steering_behavior_wander_2d.gd"
+}, {
+"base": "GTEntityMover2D",
+"class": "GTSteeringEntityMover2D",
+"language": "GDScript",
+"path": "res://libs/nodes/2d/gt_entity_mover_2d/gt_steering_entity_mover_2d/gt_steering_entity_mover_2d.gd"
+}, {
+"base": "Area2D",
+"class": "GTTeleporter2D",
+"language": "GDScript",
+"path": "res://libs/nodes/2d/gt_teleporter_2d/gt_teleporter_2d.gd"
+}, {
+"base": "Node",
+"class": "GTTimeScale",
+"language": "GDScript",
+"path": "res://libs/nodes/utils/gt_time_scale/gt_time_scale.gd"
+}, {
+"base": "Area2D",
+"class": "GTTriggerArea2D",
+"language": "GDScript",
+"path": "res://libs/nodes/2d/gt_trigger_area_2d/gt_trigger_area_2d.gd"
+}, {
+"base": "Tween",
+"class": "GTTween",
+"language": "GDScript",
+"path": "res://libs/nodes/utils/gt_tween/gt_tween.gd"
+}, {
+"base": "Node",
+"class": "MouseController",
+"language": "GDScript",
+"path": "res://libs/components/controllers/gt_mouse_controller/gt_mouse_controller.gd"
+}, {
+"base": "Reference",
+"class": "Palette",
+"language": "GDScript",
+"path": "res://addons/color-palette/Palette.gd"
+}, {
+"base": "Reference",
+"class": "PaletteImporter",
+"language": "GDScript",
+"path": "res://addons/color-palette/PaletteImporter.gd"
+} ]
+_global_script_class_icons={
+"AnimaEasing": "",
+"AnimaNode": "",
+"AnimaNodesProperties": "",
+"AnimaStrings": "",
+"AnimaTween": "",
+"BehaviorTree": "",
+"BehaviorTreeAction": "res://libs/components/utils/behavior_tree/icons/bt_action.svg",
+"BehaviorTreeComposite": "res://libs/components/utils/behavior_tree/icons/bt_category_composite.svg",
+"BehaviorTreeCondition": "res://libs/components/utils/behavior_tree/icons/bt_condition.svg",
+"BehaviorTreeDecorator": "res://libs/components/utils/behavior_tree/icons/bt_category_decorator.svg",
+"BehaviorTreeFailer": "res://libs/components/utils/behavior_tree/icons/bt_fail.svg",
+"BehaviorTreeInverter": "res://libs/components/utils/behavior_tree/icons/bt_inverter.svg",
+"BehaviorTreeLeaf": "res://libs/components/utils/behavior_tree/icons/bt_action.svg",
+"BehaviorTreeLimiter": "res://libs/components/utils/behavior_tree/icons/bt_limiter.svg",
+"BehaviorTreeNode": "res://libs/components/utils/behavior_tree/icons/bt_action.svg",
+"BehaviorTreeRoot": "res://libs/components/utils/behavior_tree/icons/bt_tree.svg",
+"BehaviorTreeSelector": "res://libs/components/utils/behavior_tree/icons/bt_selector.svg",
+"BehaviorTreeSequencer": "res://libs/components/utils/behavior_tree/icons/bt_sequencer.svg",
+"BehaviorTreeSucceeder": "res://libs/components/utils/behavior_tree/icons/bt_succeed.svg",
+"BehaviorTreeTimed": "res://libs/components/utils/behavior_tree/icons/bt_category_decorator.svg",
+"ColorTile": "",
+"Entity2D": "",
+"FlexGridContainer": "res://addons/color-palette/utilities/FlexGridContainerIcon.png",
+"GTAudioPlayer": "",
+"GTDeviceController": "",
+"GTEntityMover2D": "res://libs/nodes/icons/move.svg",
+"GTFormula": "res://libs/nodes/icons/omega.svg",
+"GTHealth": "res://libs/nodes/icons/health.svg",
+"GTHitbox2D": "",
+"GTHurtbox2D": "",
+"GTInputAction": "",
+"GTInputController": "res://libs/nodes/icons/gamepad-white.svg",
+"GTJuice2D": "res://libs/nodes/icons/orange.svg",
+"GTPatternLabel": "",
+"GTPoints": "res://libs/nodes/icons/two-coins.svg",
+"GTRandomPointZone2D": "res://libs/nodes/icons/arena.svg",
+"GTRayCast2D": "",
+"GTScreenShake2D": "res://libs/nodes/icons/static.svg",
+"GTSidescrollerEntityMover2D": "",
+"GTState": "",
+"GTStateMachine": "res://libs/nodes/icons/vertical-graph.svg",
+"GTSteeringBehavior2D": "",
+"GTSteeringBehaviorAbsoluteSeek2D": "",
+"GTSteeringBehaviorSeek2D": "",
+"GTSteeringBehaviorWander2D": "",
+"GTSteeringEntityMover2D": "",
+"GTTeleporter2D": "",
+"GTTimeScale": "res://libs/nodes/icons/hourglass.svg",
+"GTTriggerArea2D": "",
+"GTTween": "",
+"MouseController": "res://libs/nodes/icons/gamepad-white.svg",
+"Palette": "",
+"PaletteImporter": ""
+}
+
+[application]
+
+config/name="Whip Platformer"
+run/main_scene="res://libs/main/game/game.tscn"
+config/icon="res://icon.png"
+
+[autoload]
+
+Globals="*res://libs/autoloads/globals.gd"
+Utils="*res://libs/autoloads/utils.gd"
+Settings="*res://libs/autoloads/settings/settings.gd"
+Anima="*res://addons/anima/core/anima.gd"
+
+[debug]
+
+gdscript/warnings/unassigned_variable=false
+gdscript/warnings/unused_variable=false
+gdscript/warnings/unused_argument=false
+gdscript/warnings/narrowing_conversion=false
+gdscript/warnings/unused_signal=false
+gdscript/warnings/return_value_discarded=false
+gdscript/warnings/integer_division=false
+
+[display]
+
+window/size/width=480
+window/size/height=270
+window/size/test_width=960
+window/size/test_height=540
+window/stretch/mode="2d"
+window/stretch/aspect="keep"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/Trail/plugin.cfg", "res://addons/anima/plugin.cfg", "res://addons/color-palette/plugin.cfg", "res://addons/regular_polygon2d_node/plugin.cfg" )
+
+[input]
+
+sys_exit={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777217,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+sys_reload={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":82,"unicode":0,"echo":false,"script":null)
+ ]
+}
+act_move_left={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":65,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777231,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+act_move_right={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":68,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777233,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+act_jump={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":90,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":32,"unicode":0,"echo":false,"script":null)
+ ]
+}
+act_attack={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":88,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":75,"unicode":0,"echo":false,"script":null)
+ ]
+}
+act_crouch={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":83,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777234,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+act_aim_left={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":65,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777231,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+act_aim_right={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":68,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777233,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+act_aim_up={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":87,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777232,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+act_aim_down={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":83,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777234,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+
+[layer_names]
+
+2d_physics/layer_2="terrain"
+2d_physics/layer_3="bodies"
+2d_physics/layer_4="triggers"
+2d_physics/layer_5="hitboxes"
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+environment/default_clear_color=Color( 0.196078, 0.196078, 0.196078, 1 )
+environment/default_environment="res://default_env.tres"
+quality/dynamic_fonts/use_oversampling=false

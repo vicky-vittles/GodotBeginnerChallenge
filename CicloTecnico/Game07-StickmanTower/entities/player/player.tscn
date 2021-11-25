@@ -206,9 +206,7 @@ graph_offset = Vector2( -164, 83 )
 radius = 5.0
 height = 25.0
 
-[node name="Player" type="KinematicBody2D" groups=[
-"player",
-]]
+[node name="Player" type="KinematicBody2D" groups=["player"]]
 collision_layer = 28
 collision_mask = 26
 script = ExtResource( 9 )
@@ -309,10 +307,10 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
-[connection signal="just_pressed" from="InputController/Jump" to="StateMachine/Run" method="_on_Jump_just_pressed"]
 [connection signal="just_pressed" from="InputController/Jump" to="StateMachine/Idle" method="_on_Jump_just_pressed"]
-[connection signal="just_pressed" from="InputController/Jump" to="StateMachine/Fall" method="_on_Jump_just_pressed"]
+[connection signal="just_pressed" from="InputController/Jump" to="StateMachine/Run" method="_on_Jump_just_pressed"]
 [connection signal="just_pressed" from="InputController/Jump" to="StateMachine/Jump" method="_on_Jump_just_pressed"]
+[connection signal="just_pressed" from="InputController/Jump" to="StateMachine/Fall" method="_on_Jump_just_pressed"]
 [connection signal="just_released" from="InputController/Jump" to="StateMachine/Jump" method="_on_Jump_just_released"]
 [connection signal="jumped" from="EntityMover" to="." method="decrease_jump"]
 [connection signal="jumped" from="EntityMover" to="Graphics/main" method="jump" binds= [ 0.3, 0.15 ]]
