@@ -14,14 +14,13 @@ func physics_process(delta):
 	movement()
 	
 	# Attack
-	if can_attack:
-		attack_cooldown -= delta
-		if attack_cooldown > 0 and get_attack_just_pressed():
-			perform_attack = true
-		if attack_cooldown <= 0:
-			if perform_attack:
-				fsm.change_state("air/attack")
-			perform_attack = get_attack_just_pressed()
+	attack_cooldown -= delta
+	if attack_cooldown > 0 and get_attack_just_pressed():
+		perform_attack = true
+	if attack_cooldown <= 0:
+		if perform_attack:
+			fsm.change_state("air/attack")
+		perform_attack = get_attack_just_pressed()
 	
 	if entity.entity_mover.velocity.y > 0:
 		fsm.change_state("air/fall")

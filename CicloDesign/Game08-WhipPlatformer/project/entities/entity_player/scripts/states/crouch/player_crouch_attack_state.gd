@@ -10,6 +10,11 @@ func exit():
 	entity.whip_sprite.visible = false
 	entity.attack_timer.stop()
 
+func physics_process(delta):
+	entity.entity_mover.set_move_direction(0)
+	if not entity.body.is_on_floor():
+		fsm.change_state("air")
+
 func _on_AttackTimer_timeout():
 	if fsm and fsm.current_state == self:
 		if get_move_direction() != 0:

@@ -6,7 +6,11 @@ var jump_timer : float = 0.0
 
 func physics_process(delta):
 	movement()
-	attack()
+	
+	# Attack
+	var attack_just_pressed = get_attack_just_pressed()
+	if attack_just_pressed:
+		fsm.change_state("air/attack")
 	
 	jump_timer -= delta
 	if get_jump_just_pressed():
