@@ -13,9 +13,9 @@ onready var animation_player = $AnimationPlayer
 var previous_move_direction : int = 1
 var aim_direction : Vector2 = Vector2.RIGHT
 
-func _on_InputController_updated_move_direction(direction):
-	if direction != 0:
-		previous_move_direction = direction
+func orient(dir):
+	if dir != 0:
+		previous_move_direction = dir
 	graphics.scale.x = previous_move_direction
 
 func _on_AimDirectionController_updated_air_direction(direction):

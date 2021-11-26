@@ -1,5 +1,9 @@
 extends "res://entities/entity_player/scripts/states/__player_base_state.gd"
 
+export (bool) var can_move = true
+
+var starting_move_direction : int
+
 func movement():
 	var move_direction = get_move_direction()
 	if move_direction != 0:

@@ -4,6 +4,10 @@ const STR_UP = "_up"
 const STR_DIAGONAL = "_diagonal"
 const STR_SIDE = "_side"
 
+export (bool) var can_turn_around = true
+
+var move_direction : int
+
 func enter(info: Dictionary = {}):
 	var anim_name = "ground_attack"
 	var dir = entity.aim_direction
@@ -13,6 +17,7 @@ func enter(info: Dictionary = {}):
 		anim_name += STR_UP
 	else:
 		anim_name += STR_SIDE
+	move_direction = sign(dir.x)
 	entity.visuals_animation_player.play(anim_name)
 	entity.attack_timer.start()
 
@@ -21,9 +26,13 @@ func exit():
 	entity.attack_timer.stop()
 
 func physics_process(delta):
+	if can_turn_around:
+		move_direction = get_move_direction()
 	entity.entity_mover.set_move_direction(0)
+	entity.orient(move_direction)
+	
 	if not entity.body.is_on_floor():
-		fsm.change_state("air")
+		fsm.change_state("air", {"starting_move_direction": move_direction})
 
 func _on_AttackTimer_timeout():
 	if fsm and fsm.current_state == self:

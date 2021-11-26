@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://entities/entity_player/entity_player.gd" type="Script" id=1]
 [ext_resource path="res://entities/entity_player/scripts/states/ground/player_ground_idle_state.gd" type="Script" id=2]
@@ -23,12 +23,13 @@
 [ext_resource path="res://entities/entity_player/scripts/states/crouch/player_crouch_walk_state.gd" type="Script" id=21]
 [ext_resource path="res://entities/entity_player/scripts/states/crouch/player_crouch_attack_state.gd" type="Script" id=22]
 [ext_resource path="res://entities/entity_player/scripts/states/crouch/player_crouch_idle_state.gd" type="Script" id=23]
+[ext_resource path="res://entities/entity_player/assets/player.png" type="Texture" id=24]
 
 [sub_resource type="Animation" id=8]
 resource_name = "RESET"
 length = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("whip:visible")
+tracks/0/path = NodePath("main:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -37,10 +38,10 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ false ]
+"values": [ 0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("whip:position")
+tracks/1/path = NodePath("whip:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -48,11 +49,11 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( -12, -16 ) ]
+"update": 1,
+"values": [ false ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("whip:flip_v")
+tracks/2/path = NodePath("whip:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -60,16 +61,28 @@ tracks/2/enabled = true
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
+"update": 0,
+"values": [ Vector2( -12, -16 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("whip:flip_h")
+tracks/3/path = NodePath("whip:flip_v")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("whip:flip_h")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
@@ -81,19 +94,19 @@ resource_name = "air_attack_diagonal_down"
 length = 0.3
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("whip:frame")
+tracks/0/path = NodePath("main:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 4 ]
+"values": [ 41, 42, 43, 3 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("whip:position")
+tracks/1/path = NodePath("whip:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -102,39 +115,51 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( -22, -16 ), Vector2( -10, -29 ), Vector2( 27, -2 ) ]
+"values": [ 0, 1, 4 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("whip:flip_v")
+tracks/2/path = NodePath("whip:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.2, 0.3 ),
+"times": PoolRealArray( 0, 0.1, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ false, true, false ]
+"values": [ Vector2( -22, -16 ), Vector2( -10, -29 ), Vector2( 27, -2 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("whip:flip_h")
+tracks/3/path = NodePath("whip:flip_v")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ false ]
+"values": [ false, true, false ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("whip:visible")
+tracks/4/path = NodePath("whip:flip_h")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("whip:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
 "times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
@@ -146,19 +171,19 @@ resource_name = "air_attack_diagonal_up"
 length = 0.3
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("whip:frame")
+tracks/0/path = NodePath("main:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 3, 4 ]
+"values": [ 18, 33, 34, 3 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("whip:position")
+tracks/1/path = NodePath("whip:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -167,22 +192,22 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( -21, -16 ), Vector2( -13, -16 ), Vector2( 26, -46 ) ]
+"values": [ 0, 3, 4 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("whip:flip_v")
+tracks/2/path = NodePath("whip:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ false ]
+"values": [ Vector2( -21, -16 ), Vector2( -13, -16 ), Vector2( 26, -46 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("whip:flip_h")
+tracks/3/path = NodePath("whip:flip_v")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -194,12 +219,24 @@ tracks/3/keys = {
 "values": [ false ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("whip:visible")
+tracks/4/path = NodePath("whip:flip_h")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("whip:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
 "times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
@@ -211,19 +248,19 @@ resource_name = "air_attack_down"
 length = 0.3
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("whip:frame")
+tracks/0/path = NodePath("main:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 5 ]
+"values": [ 41, 42, 44, 3 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("whip:position")
+tracks/1/path = NodePath("whip:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -232,22 +269,22 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( -22, -16 ), Vector2( -10, -29 ), Vector2( 6, 11 ) ]
+"values": [ 0, 1, 5 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("whip:flip_v")
+tracks/2/path = NodePath("whip:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.2, 0.3 ),
+"times": PoolRealArray( 0, 0.1, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ false, true, false ]
+"values": [ Vector2( -22, -16 ), Vector2( -10, -29 ), Vector2( 6, 11 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("whip:flip_h")
+tracks/3/path = NodePath("whip:flip_v")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -259,12 +296,24 @@ tracks/3/keys = {
 "values": [ false, true, false ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("whip:visible")
+tracks/4/path = NodePath("whip:flip_h")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("whip:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
 "times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
@@ -276,19 +325,19 @@ resource_name = "air_attack_side"
 length = 0.3
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("whip:frame")
+tracks/0/path = NodePath("main:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2 ]
+"values": [ 18, 19, 20, 3 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("whip:position")
+tracks/1/path = NodePath("whip:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -297,22 +346,22 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( -21, -16 ), Vector2( -17, -21 ), Vector2( 35, -17 ) ]
+"values": [ 0, 1, 2 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("whip:flip_v")
+tracks/2/path = NodePath("whip:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ false ]
+"values": [ Vector2( -21, -16 ), Vector2( -17, -21 ), Vector2( 35, -17 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("whip:flip_h")
+tracks/3/path = NodePath("whip:flip_v")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -324,12 +373,24 @@ tracks/3/keys = {
 "values": [ false ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("whip:visible")
+tracks/4/path = NodePath("whip:flip_h")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("whip:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
 "times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
@@ -341,19 +402,19 @@ resource_name = "air_attack_up"
 length = 0.3
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("whip:frame")
+tracks/0/path = NodePath("main:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 3, 5 ]
+"values": [ 18, 33, 35, 3 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("whip:position")
+tracks/1/path = NodePath("whip:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -362,22 +423,22 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( -21, -16 ), Vector2( -13, -16 ), Vector2( 2, -59 ) ]
+"values": [ 0, 3, 5 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("whip:flip_v")
+tracks/2/path = NodePath("whip:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ false ]
+"values": [ Vector2( -21, -16 ), Vector2( -13, -16 ), Vector2( 2, -59 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("whip:flip_h")
+tracks/3/path = NodePath("whip:flip_v")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -389,12 +450,24 @@ tracks/3/keys = {
 "values": [ false ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("whip:visible")
+tracks/4/path = NodePath("whip:flip_h")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("whip:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
 "times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
@@ -405,35 +478,71 @@ tracks/4/keys = {
 resource_name = "air_fall"
 length = 0.05
 step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("main:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 3 ]
+}
 
 [sub_resource type="Animation" id=7]
 resource_name = "air_jump"
 length = 0.2
 step = 0.06
+tracks/0/type = "value"
+tracks/0/path = NodePath("main:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.06 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 4, 3 ]
+}
 
 [sub_resource type="Animation" id=9]
 resource_name = "air_land"
 length = 0.35
 step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("main:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.05, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 4, 0 ]
+}
 
 [sub_resource type="Animation" id=29]
 resource_name = "crouch_attack_side"
 length = 0.3
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("whip:frame")
+tracks/0/path = NodePath("main:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2 ]
+"values": [ 21, 22, 23, 6 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("whip:position")
+tracks/1/path = NodePath("whip:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -442,15 +551,27 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( -21, -8 ), Vector2( -17, -13 ), Vector2( 35, -9 ) ]
+"values": [ 0, 1, 2 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("whip:visible")
+tracks/2/path = NodePath("whip:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( -21, -8 ), Vector2( -17, -13 ), Vector2( 35, -9 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("whip:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
 "times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
@@ -460,31 +581,55 @@ tracks/2/keys = {
 [sub_resource type="Animation" id=11]
 resource_name = "crouch_idle"
 length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("main:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 4 ]
+}
 
 [sub_resource type="Animation" id=12]
 resource_name = "crouch_walk"
 length = 0.6
 loop = true
 step = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath("main:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 5, 6, 5, 4, 5 ]
+}
 
 [sub_resource type="Animation" id=22]
 resource_name = "ground_attack_diagonal"
 length = 0.3
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("whip:frame")
+tracks/0/path = NodePath("main:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 3, 4 ]
+"values": [ 15, 30, 31, 0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("whip:position")
+tracks/1/path = NodePath("whip:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -493,15 +638,27 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( -21, -16 ), Vector2( -12, -16 ), Vector2( 27, -46 ) ]
+"values": [ 0, 3, 4 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("whip:visible")
+tracks/2/path = NodePath("whip:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( -21, -16 ), Vector2( -12, -16 ), Vector2( 27, -46 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("whip:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
 "times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
@@ -513,19 +670,19 @@ resource_name = "ground_attack_side"
 length = 0.3
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("whip:frame")
+tracks/0/path = NodePath("main:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2 ]
+"values": [ 15, 16, 17, 0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("whip:position")
+tracks/1/path = NodePath("whip:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -534,15 +691,27 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( -21, -16 ), Vector2( -17, -21 ), Vector2( 35, -17 ) ]
+"values": [ 0, 1, 2 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("whip:visible")
+tracks/2/path = NodePath("whip:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( -21, -16 ), Vector2( -17, -21 ), Vector2( 35, -17 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("whip:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
 "times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
@@ -554,19 +723,19 @@ resource_name = "ground_attack_up"
 length = 0.3
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("whip:frame")
+tracks/0/path = NodePath("main:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 3, 5 ]
+"values": [ 15, 30, 32, 0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("whip:position")
+tracks/1/path = NodePath("whip:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -575,15 +744,27 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( -21, -16 ), Vector2( -12, -16 ), Vector2( 3, -59 ) ]
+"values": [ 0, 3, 5 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("whip:visible")
+tracks/2/path = NodePath("whip:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( -21, -16 ), Vector2( -12, -16 ), Vector2( 3, -59 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("whip:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
 "times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
@@ -593,12 +774,36 @@ tracks/2/keys = {
 [sub_resource type="Animation" id=5]
 resource_name = "ground_idle"
 length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("main:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
 
 [sub_resource type="Animation" id=3]
 resource_name = "ground_walk"
 length = 0.6
 loop = true
 step = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath("main:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 1, 0, 1 ]
+}
 
 [sub_resource type="RectangleShape2D" id=30]
 extents = Vector2( 6, 12 )
@@ -643,78 +848,28 @@ tracks/2/keys = {
 "values": [ Vector2( 0, -16 ) ]
 }
 
-[sub_resource type="Animation" id=32]
-resource_name = "air_fall"
-length = 0.05
-tracks/0/type = "method"
-tracks/0/path = NodePath("Body/graphics/visuals/AnimationPlayer")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ "air_fall", -1, 1.0, false ],
-"method": "play"
-} ]
-}
-
-[sub_resource type="Animation" id=33]
-resource_name = "air_jump"
-length = 0.05
-tracks/0/type = "method"
-tracks/0/path = NodePath("Body/graphics/visuals/AnimationPlayer")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ "air_jump", -1, 1.0, false ],
-"method": "play"
-} ]
-}
-
 [sub_resource type="Animation" id=13]
 resource_name = "crouch_idle"
 length = 0.1
-tracks/0/type = "method"
-tracks/0/path = NodePath("Body/graphics/visuals/AnimationPlayer")
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/CollisionShape:shape")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ "crouch_idle", -1, 1.0, false ],
-"method": "play"
-} ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Body/CollisionShape:shape")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ ExtResource( 3 ) ]
 }
-tracks/2/type = "value"
-tracks/2/path = NodePath("Body/CollisionShape:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
+tracks/1/type = "value"
+tracks/1/path = NodePath("Body/CollisionShape:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
@@ -724,8 +879,8 @@ tracks/2/keys = {
 [sub_resource type="Animation" id=14]
 resource_name = "crouch_walk"
 length = 0.1
-tracks/0/type = "method"
-tracks/0/path = NodePath("Body/graphics/visuals/AnimationPlayer")
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/CollisionShape:shape")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -733,30 +888,16 @@ tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ "crouch_walk", -1, 1.0, false ],
-"method": "play"
-} ]
+"update": 1,
+"values": [ ExtResource( 3 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Body/CollisionShape:shape")
+tracks/1/path = NodePath("Body/CollisionShape:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 3 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Body/CollisionShape:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
@@ -766,8 +907,8 @@ tracks/2/keys = {
 [sub_resource type="Animation" id=6]
 resource_name = "ground_idle"
 length = 0.1
-tracks/0/type = "method"
-tracks/0/path = NodePath("Body/graphics/visuals/AnimationPlayer")
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/CollisionShape:shape")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -775,30 +916,16 @@ tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ "ground_idle", -1, 1.0, false ],
-"method": "play"
-} ]
+"update": 1,
+"values": [ ExtResource( 15 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Body/CollisionShape:shape")
+tracks/1/path = NodePath("Body/CollisionShape:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 15 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Body/CollisionShape:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
@@ -808,8 +935,8 @@ tracks/2/keys = {
 [sub_resource type="Animation" id=4]
 resource_name = "ground_walk"
 length = 0.1
-tracks/0/type = "method"
-tracks/0/path = NodePath("Body/graphics/visuals/AnimationPlayer")
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/CollisionShape:shape")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -817,30 +944,16 @@ tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ "ground_walk", -1, 1.0, false ],
-"method": "play"
-} ]
+"update": 1,
+"values": [ ExtResource( 15 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Body/CollisionShape:shape")
+tracks/1/path = NodePath("Body/CollisionShape:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 15 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Body/CollisionShape:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
@@ -889,7 +1002,7 @@ initial_health = 5
 [node name="Timers" type="Node" parent="."]
 
 [node name="AttackTimer" type="Timer" parent="Timers"]
-wait_time = 0.3
+wait_time = 0.32
 one_shot = true
 
 [node name="InvincibilityTimer" type="Timer" parent="Timers"]
@@ -912,16 +1025,11 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="outline" type="Polygon2D" parent="Body/graphics/visuals"]
-color = Color( 1, 0.309804, 0.411765, 1 )
-polygon = PoolVector2Array( -8, 0, -8, -30, 8, -30, 8, 0 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="sprite" type="Polygon2D" parent="Body/graphics/visuals"]
-color = Color( 1, 0.309804, 0.411765, 1 )
-polygon = PoolVector2Array( -6, -2, -6, -28, 6, -28, 6, -2 )
+[node name="main" type="Sprite" parent="Body/graphics/visuals"]
+position = Vector2( 0, -19 )
+texture = ExtResource( 24 )
+hframes = 15
+vframes = 3
 __meta__ = {
 "_edit_lock_": true
 }
@@ -1045,23 +1153,27 @@ script = ExtResource( 2 )
 
 [node name="walk" type="Node" parent="StateMachine/ground"]
 script = ExtResource( 7 )
-grounded_buffer_time = 0.1
+grounded_buffer_time = 0.07
 
 [node name="attack" type="Node" parent="StateMachine/ground"]
 script = ExtResource( 9 )
+can_turn_around = false
 
 [node name="air" type="Node" parent="StateMachine"]
 script = ExtResource( 11 )
 
 [node name="jump" type="Node" parent="StateMachine/air"]
 script = ExtResource( 18 )
+can_move = false
 
 [node name="fall" type="Node" parent="StateMachine/air"]
 script = ExtResource( 14 )
-jump_buffer_time = 0.08
+can_move = false
 
 [node name="attack" type="Node" parent="StateMachine/air"]
 script = ExtResource( 19 )
+can_move = false
+aim_direction_delay = 0.1
 
 [node name="crouch" type="Node" parent="StateMachine"]
 script = ExtResource( 20 )
@@ -1074,25 +1186,22 @@ script = ExtResource( 21 )
 
 [node name="attack" type="Node" parent="StateMachine/crouch"]
 script = ExtResource( 22 )
+can_turn_around = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "RESET"
 anims/RESET = SubResource( 15 )
-anims/air_fall = SubResource( 32 )
-anims/air_jump = SubResource( 33 )
 anims/crouch_idle = SubResource( 13 )
 anims/crouch_walk = SubResource( 14 )
 anims/ground_idle = SubResource( 6 )
 anims/ground_walk = SubResource( 4 )
 
-[connection signal="updated_move_direction" from="InputController" to="." method="_on_InputController_updated_move_direction"]
 [connection signal="updated_air_direction" from="AimDirectionController" to="." method="_on_AimDirectionController_updated_air_direction"]
 [connection signal="timeout" from="Timers/AttackTimer" to="StateMachine/ground/attack" method="_on_AttackTimer_timeout"]
 [connection signal="timeout" from="Timers/AttackTimer" to="StateMachine/air/attack" method="_on_AttackTimer_timeout"]
 [connection signal="timeout" from="Timers/AttackTimer" to="StateMachine/crouch/attack" method="_on_AttackTimer_timeout"]
 [connection signal="state_entered" from="StateMachine/ground/idle" to="AnimationPlayer" method="play" binds= [ "ground_idle" ]]
 [connection signal="state_entered" from="StateMachine/ground/walk" to="AnimationPlayer" method="play" binds= [ "ground_walk" ]]
-[connection signal="state_entered" from="StateMachine/air/fall" to="AnimationPlayer" method="play" binds= [ "air_fall" ]]
 [connection signal="state_entered" from="StateMachine/crouch/idle" to="AnimationPlayer" method="play" binds= [ "crouch_idle" ]]
 [connection signal="state_entered" from="StateMachine/crouch/walk" to="AnimationPlayer" method="play" binds= [ "crouch_walk" ]]
 

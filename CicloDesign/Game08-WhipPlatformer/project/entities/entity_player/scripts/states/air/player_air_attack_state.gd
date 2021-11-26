@@ -19,6 +19,10 @@ func _ready():
 	aim_direction_delay_timer.connect("timeout", self, "_on_Timer_timeout")
 
 func enter(info: Dictionary = {}):
+	if info.has("starting_move_direction"):
+		starting_move_direction = info["starting_move_direction"]
+	else:
+		starting_move_direction = get_move_direction()
 	var anim_name = decide_aim_direction(entity.aim_direction)
 	entity.visuals_animation_player.play(anim_name)
 	entity.attack_timer.start()
@@ -30,7 +34,12 @@ func exit():
 	aim_direction_delay_timer.stop()
 
 func physics_process(delta):
-	movement()
+	var move_direction = starting_move_direction
+	if can_move:
+		move_direction = get_move_direction()
+	entity.entity_mover.set_move_direction(move_direction)
+	entity.orient(move_direction)
+	
 	if entity.body.is_on_floor():
 		entity.entity_mover.land()
 		fsm.change_state("ground")
@@ -43,7 +52,7 @@ func _on_Timer_timeout():
 
 func _on_AttackTimer_timeout():
 	if fsm and fsm.current_state == self:
-		fsm.change_state("air/fall")
+		fsm.change_state("air/fall", {"starting_move_direction": starting_move_direction})
 
 func decide_aim_direction(dir) -> String:
 	var anim_name = "air_attack"

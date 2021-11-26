@@ -4,13 +4,24 @@ export (float) var jump_buffer_time = 0.05
 
 var jump_timer : float = 0.0
 
+func enter(info: Dictionary = {}):
+	if info.has("starting_move_direction"):
+		starting_move_direction = info["starting_move_direction"]
+	else:
+		starting_move_direction = get_move_direction()
+	entity.visuals_animation_player.play("air_fall")
+
 func physics_process(delta):
-	movement()
+	var move_direction = starting_move_direction
+	if can_move:
+		move_direction = get_move_direction()
+	entity.entity_mover.set_move_direction(move_direction)
+	entity.orient(move_direction)
 	
 	# Attack
 	var attack_just_pressed = get_attack_just_pressed()
 	if attack_just_pressed:
-		fsm.change_state("air/attack")
+		fsm.change_state("air/attack", {"starting_move_direction": starting_move_direction})
 	
 	jump_timer -= delta
 	if get_jump_just_pressed():
