@@ -8,12 +8,14 @@ func enter(info: Dictionary = {}):
 	entity.visuals_animation_player.play("ground_walk")
 
 func physics_process(delta):
+	# Movement
 	var move_direction = get_move_direction()
 	entity.entity_mover.set_move_direction(move_direction)
 	entity.orient(move_direction)
 	if move_direction == 0:
 		fsm.change_state("ground/idle")
 	
+	# Grounded timer
 	grounded_timer -= delta
 	if entity.body.is_on_floor():
 		grounded_timer = grounded_buffer_time

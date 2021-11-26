@@ -11,6 +11,7 @@ func physics_process(delta):
 	if move_direction == 0:
 		fsm.change_state("crouch/idle")
 	
+	# Transitions
 	if not entity.body.is_on_floor():
 		fsm.change_state("air", {"starting_move_direction": move_direction})
 	elif not get_crouch_pressed() and not get_head_raycasts_colliding():

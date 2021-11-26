@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://entities/entity_player/entity_player.gd" type="Script" id=1]
 [ext_resource path="res://entities/entity_player/scripts/states/ground/player_ground_idle_state.gd" type="Script" id=2]
@@ -24,6 +24,9 @@
 [ext_resource path="res://entities/entity_player/scripts/states/crouch/player_crouch_attack_state.gd" type="Script" id=22]
 [ext_resource path="res://entities/entity_player/scripts/states/crouch/player_crouch_idle_state.gd" type="Script" id=23]
 [ext_resource path="res://entities/entity_player/assets/player.png" type="Texture" id=24]
+[ext_resource path="res://entities/entity_player/scripts/states/air/player_air_swing_state.gd" type="Script" id=25]
+[ext_resource path="res://entities/entity_player/scripts/entity_player_pendulum_entity_mover.gd" type="Script" id=26]
+[ext_resource path="res://libs/nodes/2d/gt_trigger_area_2d/gt_trigger_area_2d.gd" type="Script" id=27]
 
 [sub_resource type="Animation" id=8]
 resource_name = "RESET"
@@ -805,6 +808,9 @@ tracks/0/keys = {
 "values": [ 1, 2, 1, 0, 1 ]
 }
 
+[sub_resource type="CircleShape2D" id=32]
+radius = 4.0
+
 [sub_resource type="RectangleShape2D" id=30]
 extents = Vector2( 6, 12 )
 
@@ -846,6 +852,30 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector2( 0, -16 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Body/EntityMover:is_enabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Body/PendulumEntityMover:is_enabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=13]
@@ -1111,6 +1141,20 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="whip_head_trigger" type="Area2D" parent="Body/Triggers"]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource( 27 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Body/Triggers/whip_head_trigger"]
+shape = SubResource( 32 )
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="Hurtbox" type="Area2D" parent="Body/Triggers"]
 visible = false
 collision_layer = 16
@@ -1138,6 +1182,11 @@ ground_snap = Vector2( 0, 16 )
 jump_height = 72
 jump_time = 0.4
 fall_time = 0.4
+
+[node name="PendulumEntityMover" type="Node" parent="Body"]
+script = ExtResource( 26 )
+body_path = NodePath("..")
+is_enabled = false
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 6 )
@@ -1172,8 +1221,11 @@ can_move = false
 
 [node name="attack" type="Node" parent="StateMachine/air"]
 script = ExtResource( 19 )
-can_move = false
 aim_direction_delay = 0.1
+can_move = false
+
+[node name="swing" type="Node" parent="StateMachine/air"]
+script = ExtResource( 25 )
 
 [node name="crouch" type="Node" parent="StateMachine"]
 script = ExtResource( 20 )

@@ -8,19 +8,24 @@ func enter(info: Dictionary = {}):
 	var anim_name = "crouch_attack_side"
 	var dir = entity.aim_direction
 	move_direction = sign(dir.x)
+	
 	entity.visuals_animation_player.play(anim_name)
 	entity.attack_timer.start()
+	entity.whip_head_trigger.enable_all_shapes()
 
 func exit():
 	entity.whip_sprite.visible = false
 	entity.attack_timer.stop()
+	entity.whip_head_trigger.disable_all_shapes()
 
 func physics_process(delta):
+	# Movement
 	if can_turn_around:
 		move_direction = get_move_direction()
 	entity.entity_mover.set_move_direction(0)
 	entity.orient(move_direction)
 	
+	# Transitions
 	if not entity.body.is_on_floor():
 		fsm.change_state("air")
 

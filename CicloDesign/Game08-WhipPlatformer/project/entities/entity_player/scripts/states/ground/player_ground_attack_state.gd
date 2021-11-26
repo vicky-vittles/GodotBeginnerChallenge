@@ -9,6 +9,7 @@ export (bool) var can_turn_around = true
 var move_direction : int
 
 func enter(info: Dictionary = {}):
+	# Decide on animation
 	var anim_name = "ground_attack"
 	var dir = entity.aim_direction
 	if (sign(dir.x) != 0 and sign(dir.y) < 0):
@@ -17,20 +18,25 @@ func enter(info: Dictionary = {}):
 		anim_name += STR_UP
 	else:
 		anim_name += STR_SIDE
+	
 	move_direction = sign(dir.x)
 	entity.visuals_animation_player.play(anim_name)
 	entity.attack_timer.start()
+	entity.whip_head_trigger.enable_all_shapes()
 
 func exit():
 	entity.whip_sprite.visible = false
 	entity.attack_timer.stop()
+	entity.whip_head_trigger.disable_all_shapes()
 
 func physics_process(delta):
+	# Movement
 	if can_turn_around:
 		move_direction = get_move_direction()
 	entity.entity_mover.set_move_direction(0)
 	entity.orient(move_direction)
 	
+	# Transitions
 	if not entity.body.is_on_floor():
 		fsm.change_state("air", {"starting_move_direction": move_direction})
 

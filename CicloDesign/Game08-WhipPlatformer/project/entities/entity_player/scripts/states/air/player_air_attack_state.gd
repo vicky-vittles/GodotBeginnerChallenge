@@ -7,8 +7,10 @@ const STR_DIAGONAL_DOWN = "_diagonal_down"
 const STR_DOWN = "_down"
 
 export (float) var aim_direction_delay = 0.2
+export (bool) var can_move = true
 
 var aim_direction_delay_timer : Timer
+var starting_move_direction : int
 
 func _ready():
 	aim_direction_delay_timer = Timer.new()
@@ -24,22 +26,27 @@ func enter(info: Dictionary = {}):
 	else:
 		starting_move_direction = get_move_direction()
 	var anim_name = decide_aim_direction(entity.aim_direction)
+	
 	entity.visuals_animation_player.play(anim_name)
 	entity.attack_timer.start()
+	entity.whip_head_trigger.enable_all_shapes()
 	aim_direction_delay_timer.start()
 
 func exit():
 	entity.whip_sprite.visible = false
 	entity.attack_timer.stop()
+	entity.whip_head_trigger.disable_all_shapes()
 	aim_direction_delay_timer.stop()
 
 func physics_process(delta):
+	# Movement
 	var move_direction = starting_move_direction
 	if can_move:
 		move_direction = get_move_direction()
 	entity.entity_mover.set_move_direction(move_direction)
 	entity.orient(move_direction)
 	
+	# Transitions
 	if entity.body.is_on_floor():
 		entity.entity_mover.land()
 		fsm.change_state("ground")

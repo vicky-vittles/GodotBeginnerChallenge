@@ -7,7 +7,9 @@ onready var graphics = $Body/graphics
 onready var whip_sprite = $Body/graphics/visuals/whip
 onready var visuals_animation_player = $Body/graphics/visuals/AnimationPlayer
 onready var entity_mover = $Body/EntityMover
+onready var pendulum_entity_mover = $Body/PendulumEntityMover
 onready var head_raycasts = $Body/Triggers/head_raycasts
+onready var whip_head_trigger = $Body/Triggers/whip_head_trigger
 onready var animation_player = $AnimationPlayer
 
 var previous_move_direction : int = 1
