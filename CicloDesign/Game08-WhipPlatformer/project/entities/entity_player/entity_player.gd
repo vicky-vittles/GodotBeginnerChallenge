@@ -5,7 +5,6 @@ onready var attack_timer = $Timers/AttackTimer
 onready var body = $Body
 onready var graphics = $Body/graphics
 onready var whip_sprite = $Body/graphics/visuals/whip
-onready var visuals_animation_player = $Body/graphics/visuals/AnimationPlayer
 onready var entity_mover = $Body/EntityMover
 onready var pendulum_entity_mover = $Body/PendulumEntityMover
 onready var head_raycasts = $Body/Triggers/head_raycasts

@@ -1,7 +1,7 @@
 extends "res://entities/entity_player/scripts/states/crouch/__player_crouch_base_state.gd"
 
 func enter(info: Dictionary = {}):
-	entity.visuals_animation_player.play("crouch_walk")
+	entity.animation_player.play("crouch_walk")
 
 func physics_process(delta):
 	# Movement

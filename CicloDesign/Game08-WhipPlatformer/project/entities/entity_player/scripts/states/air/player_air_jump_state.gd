@@ -11,7 +11,7 @@ func enter(info: Dictionary = {}):
 	entity.entity_mover.jump()
 	starting_move_direction = get_move_direction()
 	attack_cooldown = attack_cooldown_time
-	entity.visuals_animation_player.play("air_jump")
+	entity.animation_player.play("air_jump")
 
 func physics_process(delta):
 	# Movement

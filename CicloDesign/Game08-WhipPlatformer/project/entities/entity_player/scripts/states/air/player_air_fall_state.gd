@@ -11,7 +11,7 @@ func enter(info: Dictionary = {}):
 		starting_move_direction = info["starting_move_direction"]
 	else:
 		starting_move_direction = get_move_direction()
-	entity.visuals_animation_player.play("air_fall")
+	entity.animation_player.play("air_fall")
 
 func physics_process(delta):
 	# Movement

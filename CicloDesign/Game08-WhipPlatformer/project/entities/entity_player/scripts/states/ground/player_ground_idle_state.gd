@@ -1,7 +1,7 @@
 extends "res://entities/entity_player/scripts/states/ground/__player_ground_base_state.gd"
 
 func enter(info: Dictionary = {}):
-	entity.visuals_animation_player.play("ground_idle")
+	entity.animation_player.play("ground_idle")
 
 func physics_process(delta):
 	# Movement

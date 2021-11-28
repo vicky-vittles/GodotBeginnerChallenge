@@ -5,7 +5,7 @@ export (float) var grounded_buffer_time = 0.05
 var grounded_timer : float = 0.0
 
 func enter(info: Dictionary = {}):
-	entity.visuals_animation_player.play("ground_walk")
+	entity.animation_player.play("ground_walk")
 
 func physics_process(delta):
 	# Movement

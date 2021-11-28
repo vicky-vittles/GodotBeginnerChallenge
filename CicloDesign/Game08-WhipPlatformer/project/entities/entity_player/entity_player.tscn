@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://entities/entity_player/entity_player.gd" type="Script" id=1]
 [ext_resource path="res://entities/entity_player/scripts/states/ground/player_ground_idle_state.gd" type="Script" id=2]
@@ -26,7 +26,13 @@
 [ext_resource path="res://entities/entity_player/assets/player.png" type="Texture" id=24]
 [ext_resource path="res://entities/entity_player/scripts/states/air/player_air_swing_state.gd" type="Script" id=25]
 [ext_resource path="res://entities/entity_player/scripts/entity_player_pendulum_entity_mover.gd" type="Script" id=26]
-[ext_resource path="res://libs/nodes/2d/gt_trigger_area_2d/gt_trigger_area_2d.gd" type="Script" id=27]
+[ext_resource path="res://entities/entity_player/scripts/entity_player_whip_head_trigger.gd" type="Script" id=27]
+
+[sub_resource type="CircleShape2D" id=32]
+radius = 7.0
+
+[sub_resource type="RectangleShape2D" id=30]
+extents = Vector2( 6, 12 )
 
 [sub_resource type="Animation" id=8]
 resource_name = "RESET"
@@ -90,6 +96,18 @@ tracks/4/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("../../Triggers/whip_head_trigger:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -8 ) ]
 }
 
 [sub_resource type="Animation" id=26]
@@ -168,6 +186,18 @@ tracks/5/keys = {
 "update": 1,
 "values": [ true, false ]
 }
+tracks/6/type = "value"
+tracks/6/path = NodePath("../../Triggers/whip_head_trigger:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, -8 ), Vector2( 44, 11 ), Vector2( 0, -8 ) ]
+}
 
 [sub_resource type="Animation" id=24]
 resource_name = "air_attack_diagonal_up"
@@ -244,6 +274,18 @@ tracks/5/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("../../Triggers/whip_head_trigger:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, -8 ), Vector2( 42, -59 ), Vector2( 0, -8 ) ]
 }
 
 [sub_resource type="Animation" id=27]
@@ -322,6 +364,18 @@ tracks/5/keys = {
 "update": 1,
 "values": [ true, false ]
 }
+tracks/6/type = "value"
+tracks/6/path = NodePath("../../Triggers/whip_head_trigger:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, -8 ), Vector2( 4, 30 ), Vector2( 0, -8 ) ]
+}
 
 [sub_resource type="Animation" id=20]
 resource_name = "air_attack_side"
@@ -399,6 +453,18 @@ tracks/5/keys = {
 "update": 1,
 "values": [ true, false ]
 }
+tracks/6/type = "value"
+tracks/6/path = NodePath("../../Triggers/whip_head_trigger:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, -8 ), Vector2( 53, -20 ), Vector2( 0, -8 ) ]
+}
 
 [sub_resource type="Animation" id=25]
 resource_name = "air_attack_up"
@@ -475,6 +541,18 @@ tracks/5/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("../../Triggers/whip_head_trigger:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, -8 ), Vector2( 4, -78 ), Vector2( 0, -8 ) ]
 }
 
 [sub_resource type="Animation" id=31]
@@ -580,6 +658,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [ true, false ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("../../Triggers/whip_head_trigger:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, -8 ), Vector2( 54, -12 ), Vector2( 0, -8 ) ]
+}
 
 [sub_resource type="Animation" id=11]
 resource_name = "crouch_idle"
@@ -595,6 +685,30 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 4 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../../CollisionShape:shape")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 3 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../../CollisionShape:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -12 ) ]
 }
 
 [sub_resource type="Animation" id=12]
@@ -613,6 +727,30 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 5, 6, 5, 4, 5 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../../CollisionShape:shape")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 3 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../../CollisionShape:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -12 ) ]
 }
 
 [sub_resource type="Animation" id=22]
@@ -667,6 +805,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [ true, false ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("../../Triggers/whip_head_trigger:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, -8 ), Vector2( 43, -59 ), Vector2( 0, -8 ) ]
+}
 
 [sub_resource type="Animation" id=16]
 resource_name = "ground_attack_side"
@@ -719,6 +869,18 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../../Triggers/whip_head_trigger:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, -8 ), Vector2( 54, -20 ), Vector2( 0, -8 ) ]
 }
 
 [sub_resource type="Animation" id=23]
@@ -773,6 +935,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [ true, false ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("../../Triggers/whip_head_trigger:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, -8 ), Vector2( 5, -77 ), Vector2( 0, -8 ) ]
+}
 
 [sub_resource type="Animation" id=5]
 resource_name = "ground_idle"
@@ -788,6 +962,30 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../../CollisionShape:shape")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 15 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../../CollisionShape:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -16 ) ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -807,30 +1005,8 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 1, 2, 1, 0, 1 ]
 }
-
-[sub_resource type="CircleShape2D" id=32]
-radius = 4.0
-
-[sub_resource type="RectangleShape2D" id=30]
-extents = Vector2( 6, 12 )
-
-[sub_resource type="Animation" id=15]
-resource_name = "RESET"
-length = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("Body/EntityMover:movement_mask")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ) ]
-}
 tracks/1/type = "value"
-tracks/1/path = NodePath("Body/CollisionShape:shape")
+tracks/1/path = NodePath("../../CollisionShape:shape")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -842,148 +1018,12 @@ tracks/1/keys = {
 "values": [ ExtResource( 15 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Body/CollisionShape:position")
+tracks/2/path = NodePath("../../CollisionShape:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, -16 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Body/EntityMover:is_enabled")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Body/PendulumEntityMover:is_enabled")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-
-[sub_resource type="Animation" id=13]
-resource_name = "crouch_idle"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Body/CollisionShape:shape")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 3 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Body/CollisionShape:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, -12 ) ]
-}
-
-[sub_resource type="Animation" id=14]
-resource_name = "crouch_walk"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Body/CollisionShape:shape")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 3 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Body/CollisionShape:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, -12 ) ]
-}
-
-[sub_resource type="Animation" id=6]
-resource_name = "ground_idle"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Body/CollisionShape:shape")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 15 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Body/CollisionShape:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, -16 ) ]
-}
-
-[sub_resource type="Animation" id=4]
-resource_name = "ground_walk"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Body/CollisionShape:shape")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 15 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Body/CollisionShape:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
@@ -1072,29 +1112,10 @@ scale = Vector2( 1, -1 )
 texture = ExtResource( 12 )
 hframes = 3
 vframes = 2
+frame = 4
 __meta__ = {
 "_edit_lock_": true
 }
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Body/graphics/visuals"]
-autoplay = "RESET"
-anims/RESET = SubResource( 8 )
-anims/air_attack_diagonal_down = SubResource( 26 )
-anims/air_attack_diagonal_up = SubResource( 24 )
-anims/air_attack_down = SubResource( 27 )
-anims/air_attack_side = SubResource( 20 )
-anims/air_attack_up = SubResource( 25 )
-anims/air_fall = SubResource( 31 )
-anims/air_jump = SubResource( 7 )
-anims/air_land = SubResource( 9 )
-anims/crouch_attack_side = SubResource( 29 )
-anims/crouch_idle = SubResource( 11 )
-anims/crouch_walk = SubResource( 12 )
-anims/ground_attack_diagonal = SubResource( 22 )
-anims/ground_attack_side = SubResource( 16 )
-anims/ground_attack_up = SubResource( 23 )
-anims/ground_idle = SubResource( 5 )
-anims/ground_walk = SubResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Body"]
 visible = false
@@ -1142,12 +1163,11 @@ __meta__ = {
 }
 
 [node name="whip_head_trigger" type="Area2D" parent="Body/Triggers"]
+visible = false
+position = Vector2( 0, -8 )
 collision_layer = 8
 collision_mask = 8
 script = ExtResource( 27 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Body/Triggers/whip_head_trigger"]
 shape = SubResource( 32 )
@@ -1187,12 +1207,13 @@ fall_time = 0.4
 script = ExtResource( 26 )
 body_path = NodePath("..")
 is_enabled = false
+gravity = 32.0
+length = 60.0
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 6 )
 _entity_path = NodePath("..")
 starting_state = NodePath("ground")
-_debug_mode = true
 
 [node name="ground" type="Node" parent="StateMachine"]
 script = ExtResource( 8 )
@@ -1241,20 +1262,33 @@ script = ExtResource( 22 )
 can_turn_around = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Body/graphics/visuals")
 autoplay = "RESET"
-anims/RESET = SubResource( 15 )
-anims/crouch_idle = SubResource( 13 )
-anims/crouch_walk = SubResource( 14 )
-anims/ground_idle = SubResource( 6 )
-anims/ground_walk = SubResource( 4 )
+anims/RESET = SubResource( 8 )
+anims/air_attack_diagonal_down = SubResource( 26 )
+anims/air_attack_diagonal_up = SubResource( 24 )
+anims/air_attack_down = SubResource( 27 )
+anims/air_attack_side = SubResource( 20 )
+anims/air_attack_up = SubResource( 25 )
+anims/air_fall = SubResource( 31 )
+anims/air_jump = SubResource( 7 )
+anims/air_land = SubResource( 9 )
+anims/crouch_attack_side = SubResource( 29 )
+anims/crouch_idle = SubResource( 11 )
+anims/crouch_walk = SubResource( 12 )
+anims/ground_attack_diagonal = SubResource( 22 )
+anims/ground_attack_side = SubResource( 16 )
+anims/ground_attack_up = SubResource( 23 )
+anims/ground_idle = SubResource( 5 )
+anims/ground_walk = SubResource( 3 )
 
 [connection signal="updated_air_direction" from="AimDirectionController" to="." method="_on_AimDirectionController_updated_air_direction"]
 [connection signal="timeout" from="Timers/AttackTimer" to="StateMachine/ground/attack" method="_on_AttackTimer_timeout"]
 [connection signal="timeout" from="Timers/AttackTimer" to="StateMachine/air/attack" method="_on_AttackTimer_timeout"]
 [connection signal="timeout" from="Timers/AttackTimer" to="StateMachine/crouch/attack" method="_on_AttackTimer_timeout"]
-[connection signal="state_entered" from="StateMachine/ground/idle" to="AnimationPlayer" method="play" binds= [ "ground_idle" ]]
-[connection signal="state_entered" from="StateMachine/ground/walk" to="AnimationPlayer" method="play" binds= [ "ground_walk" ]]
-[connection signal="state_entered" from="StateMachine/crouch/idle" to="AnimationPlayer" method="play" binds= [ "crouch_idle" ]]
-[connection signal="state_entered" from="StateMachine/crouch/walk" to="AnimationPlayer" method="play" binds= [ "crouch_walk" ]]
+[connection signal="area_entered" from="Body/Triggers/whip_head_trigger" to="Body/Triggers/whip_head_trigger" method="_on_area_entered"]
+[connection signal="triggered_swing" from="Body/Triggers/whip_head_trigger" to="StateMachine/ground/attack" method="_on_whip_head_trigger_triggered_swing"]
+[connection signal="triggered_swing" from="Body/Triggers/whip_head_trigger" to="StateMachine/air/attack" method="_on_whip_head_trigger_triggered_swing"]
+[connection signal="triggered_swing" from="Body/Triggers/whip_head_trigger" to="StateMachine/crouch/attack" method="_on_whip_head_trigger_triggered_swing"]
 
 [editable path="InputController"]

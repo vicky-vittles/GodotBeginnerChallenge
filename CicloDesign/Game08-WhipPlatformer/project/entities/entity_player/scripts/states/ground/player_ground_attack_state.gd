@@ -20,7 +20,7 @@ func enter(info: Dictionary = {}):
 		anim_name += STR_SIDE
 	
 	move_direction = sign(dir.x)
-	entity.visuals_animation_player.play(anim_name)
+	entity.animation_player.play(anim_name)
 	entity.attack_timer.start()
 	entity.whip_head_trigger.enable_all_shapes()
 
@@ -46,3 +46,7 @@ func _on_AttackTimer_timeout():
 			fsm.change_state("ground/walk")
 		else:
 			fsm.change_state("ground/idle")
+
+func _on_whip_head_trigger_triggered_swing(point):
+	if fsm and fsm.current_state == self:
+		fsm.change_state("air", {"is_swinging": true, "swing_origin": point.global_position})

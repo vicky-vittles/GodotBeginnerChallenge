@@ -3,6 +3,7 @@ extends "res://entities/entity_player/scripts/states/air/__player_air_base_state
 func enter(info: Dictionary = {}):
 	entity.entity_mover.disable()
 	entity.pendulum_entity_mover.enable()
+	entity.pendulum_entity_mover.set_info(info["swing_origin"])
 
 func exit():
 	entity.entity_mover.enable()
