@@ -1,31 +1,40 @@
 extends GTEntityMover2D
 
-export (float) var gravity = 128.0
-export (float) var damping = 0.995
-export (float) var length = 64.0
-export (float) var max_angle = 60.0
+const ANGLE_OFFSET = deg2rad(90)
 
-var pivot_point : Vector2
-var angle : float
-var angular_vel : float
-var angular_acc : float
+export (float) var gravity = 256
+export (float) var damping = 0.980
+export (float) var swing_strength = 0.1
+export (float) var arm_length = 80
+export (float) var starting_angle = 45
+export (float) var max_angle = 75
+
+var pivot_pos : Vector2
+var angle : float = 0.0
+var angle_acc : float = 0.0
+var angle_vel : float = 0.0
+var move_direction : int
 
 func _movement(delta):
 	if frozen or not is_enabled:
 		return
+	var force = gravity * sin(angle-ANGLE_OFFSET)
+	angle_acc = -force
+	angle_vel += angle_acc*delta
+	angle += angle_vel*delta
+	angle_vel *= damping
+	angle_vel -= move_direction*swing_strength
 	
-	angular_acc = ((-gravity*delta) / length) * sin(angle)
-	angular_vel += angular_acc
-	angular_vel *= damping
-	angle += angular_vel
-	var new_pos = pivot_point + Vector2(length*sin(angle), length*cos(angle))
+	var new_pos = Vector2.ZERO
+	new_pos.x = -arm_length*sin(angle-ANGLE_OFFSET) + pivot_pos.x
+	new_pos.y = arm_length*cos(angle-ANGLE_OFFSET) + pivot_pos.y
 	
-	velocity = new_pos-body.global_position
-	._move(delta)
+	velocity = (new_pos-body.global_position)/delta
+	_move(delta)
 
-func set_info(start_pos: Vector2):
-	pivot_point = start_pos
-	length = Vector2.ZERO.distance_to(body.global_position - pivot_point)
-	angle = Vector2.ZERO.angle_to(body.global_position - pivot_point) - deg2rad(-90)
-	angular_vel = 0.0
-	angular_acc = 0.0
+func set_move_direction(dir: int) -> void:
+	move_direction = dir
+
+func set_info(_pivot: Vector2, dir: int):
+	pivot_pos = _pivot
+	angle = ANGLE_OFFSET+deg2rad(starting_angle)*sign(dir)

@@ -1208,7 +1208,6 @@ script = ExtResource( 26 )
 body_path = NodePath("..")
 is_enabled = false
 gravity = 32.0
-length = 60.0
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 6 )
