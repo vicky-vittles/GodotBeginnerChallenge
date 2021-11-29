@@ -17,6 +17,6 @@ func physics_process(delta):
 	elif get_attack_just_pressed():
 		fsm.change_state("ground/attack")
 	elif get_jump_just_pressed():
-		fsm.change_state("air", {"is_jumping": true, "starting_move_direction": move_direction})
+		fsm.change_state("air", {"is_jumping": true})
 	elif get_crouch_pressed():
 		fsm.change_state("crouch")

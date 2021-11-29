@@ -22,10 +22,10 @@ func physics_process(delta):
 	
 	# Transitions
 	if grounded_timer <= 0 and not entity.body.is_on_floor():
-		fsm.change_state("air", {"starting_move_direction": move_direction})
+		fsm.change_state("air")
 	elif get_attack_just_pressed():
 		fsm.change_state("ground/attack")
 	elif get_jump_just_pressed():
-		fsm.change_state("air", {"is_jumping": true, "starting_move_direction": move_direction})
+		fsm.change_state("air", {"is_jumping": true})
 	elif get_crouch_pressed():
 		fsm.change_state("crouch")

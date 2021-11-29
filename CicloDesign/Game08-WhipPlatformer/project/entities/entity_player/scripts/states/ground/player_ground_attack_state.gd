@@ -38,7 +38,7 @@ func physics_process(delta):
 	
 	# Transitions
 	if not entity.body.is_on_floor():
-		fsm.change_state("air", {"starting_move_direction": move_direction})
+		fsm.change_state("air")
 
 func _on_AttackTimer_timeout():
 	if fsm and fsm.current_state == self:

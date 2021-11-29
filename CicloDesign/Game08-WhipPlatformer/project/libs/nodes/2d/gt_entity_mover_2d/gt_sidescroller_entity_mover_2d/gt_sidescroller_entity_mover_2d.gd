@@ -9,6 +9,7 @@ signal landed()
 signal ran_out_of_jumps()
 
 export (int) var move_speed = 256
+export (int) var max_falling_speed = 1024
 export (Curve) var ground_velocity_curve = CURVE_LINEAR_EASE_IN
 export (float) var ground_acceleration_time = 0.1
 export (Curve) var ground_friction_curve = CURVE_LINEAR_EASE_OUT
@@ -45,6 +46,8 @@ func _movement(delta):
 		velocity.y += jump_gravity * delta
 	else:
 		velocity.y += fall_gravity * delta
+	if velocity.y > max_falling_speed:
+		velocity.y = max_falling_speed
 	
 	# Movement
 	var info

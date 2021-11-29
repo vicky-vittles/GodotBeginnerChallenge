@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://entities/entity_player/entity_player.gd" type="Script" id=1]
 [ext_resource path="res://entities/entity_player/scripts/states/ground/player_ground_idle_state.gd" type="Script" id=2]
@@ -27,6 +27,7 @@
 [ext_resource path="res://entities/entity_player/scripts/states/air/player_air_swing_state.gd" type="Script" id=25]
 [ext_resource path="res://entities/entity_player/scripts/entity_player_pendulum_entity_mover.gd" type="Script" id=26]
 [ext_resource path="res://entities/entity_player/scripts/entity_player_whip_head_trigger.gd" type="Script" id=27]
+[ext_resource path="res://entities/entity_player/scripts/states/air/player_rope_climb_state.gd" type="Script" id=28]
 
 [sub_resource type="CircleShape2D" id=32]
 radius = 7.0
@@ -1196,13 +1197,14 @@ script = ExtResource( 4 )
 body_path = NodePath("..")
 movement_mode = 3
 move_speed = 120
+max_falling_speed = 450
 ground_acceleration_time = 0.05
 ground_deceleration_time = 0.05
 ground_snap = Vector2( 0, 16 )
 jump_height = 80
 jump_time = 0.35
 fall_time = 0.4
-jump_damp = 0.3
+jump_damp = 0.2
 
 [node name="PendulumEntityMover" type="Node" parent="Body"]
 script = ExtResource( 26 )
@@ -1244,6 +1246,9 @@ aim_direction_delay = 0.1
 
 [node name="swing" type="Node" parent="StateMachine/air"]
 script = ExtResource( 25 )
+
+[node name="rope_climb" type="Node" parent="StateMachine/air"]
+script = ExtResource( 28 )
 
 [node name="crouch" type="Node" parent="StateMachine"]
 script = ExtResource( 20 )

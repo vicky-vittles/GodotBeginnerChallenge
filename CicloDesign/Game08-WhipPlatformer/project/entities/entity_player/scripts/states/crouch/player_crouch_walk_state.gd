@@ -13,7 +13,7 @@ func physics_process(delta):
 	
 	# Transitions
 	if not entity.body.is_on_floor():
-		fsm.change_state("air", {"starting_move_direction": move_direction})
+		fsm.change_state("air")
 	elif not get_crouch_pressed() and not get_head_raycasts_colliding():
 		fsm.change_state("ground")
 	elif get_attack_just_pressed():
