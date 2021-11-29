@@ -1,5 +1,8 @@
 extends Entity2D
 
+export (int) var walk_move_speed = 120
+export (int) var crouch_move_speed = 70
+
 onready var input_controller = $InputController
 onready var attack_timer = $Timers/AttackTimer
 onready var body = $Body

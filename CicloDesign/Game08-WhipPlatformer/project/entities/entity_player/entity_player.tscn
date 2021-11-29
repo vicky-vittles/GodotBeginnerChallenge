@@ -1199,10 +1199,10 @@ move_speed = 120
 ground_acceleration_time = 0.05
 ground_deceleration_time = 0.05
 ground_snap = Vector2( 0, 16 )
-jump_height = 72
-jump_time = 0.4
+jump_height = 80
+jump_time = 0.35
 fall_time = 0.4
-jump_damp = 0.2
+jump_damp = 0.3
 
 [node name="PendulumEntityMover" type="Node" parent="Body"]
 script = ExtResource( 26 )
@@ -1234,16 +1234,13 @@ script = ExtResource( 11 )
 
 [node name="jump" type="Node" parent="StateMachine/air"]
 script = ExtResource( 18 )
-can_move = false
 
 [node name="fall" type="Node" parent="StateMachine/air"]
 script = ExtResource( 14 )
-can_move = false
 
 [node name="attack" type="Node" parent="StateMachine/air"]
 script = ExtResource( 19 )
 aim_direction_delay = 0.1
-can_move = false
 
 [node name="swing" type="Node" parent="StateMachine/air"]
 script = ExtResource( 25 )

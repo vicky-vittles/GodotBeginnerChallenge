@@ -7,10 +7,8 @@ const STR_DIAGONAL_DOWN = "_diagonal_down"
 const STR_DOWN = "_down"
 
 export (float) var aim_direction_delay = 0.2
-export (bool) var can_move = true
 
 var aim_direction_delay_timer : Timer
-var starting_move_direction : int
 
 func _ready():
 	aim_direction_delay_timer = Timer.new()
@@ -21,12 +19,7 @@ func _ready():
 	aim_direction_delay_timer.connect("timeout", self, "_on_Timer_timeout")
 
 func enter(info: Dictionary = {}):
-	if info.has("starting_move_direction"):
-		starting_move_direction = info["starting_move_direction"]
-	else:
-		starting_move_direction = get_move_direction()
 	var anim_name = decide_aim_direction(entity.aim_direction)
-	
 	entity.animation_player.play(anim_name)
 	entity.attack_timer.start()
 	entity.whip_head_trigger.enable_all_shapes()
@@ -40,9 +33,7 @@ func exit():
 
 func physics_process(delta):
 	# Movement
-	var move_direction = starting_move_direction
-	if can_move:
-		move_direction = get_move_direction()
+	var move_direction = get_move_direction()
 	entity.entity_mover.set_move_direction(move_direction)
 	entity.orient(move_direction)
 	
@@ -59,7 +50,7 @@ func _on_Timer_timeout():
 
 func _on_AttackTimer_timeout():
 	if fsm and fsm.current_state == self:
-		fsm.change_state("air/fall", {"starting_move_direction": starting_move_direction})
+		fsm.change_state("air/fall")
 
 func _on_whip_head_trigger_triggered_swing(point):
 	if fsm and fsm.current_state == self:

@@ -108,6 +108,9 @@ func set_move_direction(dir: int) -> void:
 		move_direction_press_timer = 0.0
 	move_direction = dir
 
+func set_move_speed(_speed: int) -> void:
+	move_speed = _speed
+
 func restore_jumps() -> void: available_jumps = max_jumps
 func can_jump() -> bool: return available_jumps > 0
 func damp_jump() -> void: velocity.y *= jump_damp
