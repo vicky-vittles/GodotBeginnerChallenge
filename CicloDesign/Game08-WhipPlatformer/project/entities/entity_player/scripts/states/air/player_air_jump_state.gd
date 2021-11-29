@@ -5,7 +5,8 @@ export (bool) var can_move = true
 
 var attack_cooldown : float = 0.0
 var perform_attack : bool = false
-var starting_move_direction : int
+var damped_jump : bool = false # Flag to check if player already released jump button
+var starting_move_direction : int # Starting move direction when entering this jump
 
 func enter(info: Dictionary = {}):
 	entity.entity_mover.jump()
@@ -20,6 +21,9 @@ func physics_process(delta):
 		move_direction = get_move_direction()
 	entity.entity_mover.set_move_direction(move_direction)
 	entity.orient(move_direction)
+	
+	if not damped_jump and get_jump_just_released():
+		entity.entity_mover.damp_jump()
 	
 	# Attack
 	var performed_attack = false

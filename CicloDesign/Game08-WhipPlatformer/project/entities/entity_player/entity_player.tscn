@@ -1202,6 +1202,7 @@ ground_snap = Vector2( 0, 16 )
 jump_height = 72
 jump_time = 0.4
 fall_time = 0.4
+jump_damp = 0.2
 
 [node name="PendulumEntityMover" type="Node" parent="Body"]
 script = ExtResource( 26 )
