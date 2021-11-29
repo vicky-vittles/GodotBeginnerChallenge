@@ -28,6 +28,7 @@ func physics_process(delta):
 	# Movement
 	var move_direction = get_move_direction()
 	pendulum_mover.set_move_direction(move_direction)
+	entity.orient(move_direction)
 	
 	# Transitions
 	if get_jump_just_pressed():

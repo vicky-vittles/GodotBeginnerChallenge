@@ -11,6 +11,7 @@ onready var graphics = $Body/graphics
 onready var whip_sprite = $Body/graphics/visuals/whip
 onready var entity_mover = $Body/EntityMover
 onready var pendulum_entity_mover = $Body/PendulumEntityMover
+onready var triggers = $Body/Triggers
 onready var head_raycasts = $Body/Triggers/head_raycasts
 onready var whip_head_trigger = $Body/Triggers/whip_head_trigger
 onready var animation_player = $AnimationPlayer
@@ -22,6 +23,7 @@ func orient(dir):
 	if dir != 0:
 		previous_move_direction = dir
 	graphics.scale.x = previous_move_direction
+	triggers.scale.x = previous_move_direction
 
 func _on_AimDirectionController_updated_air_direction(direction):
 	aim_direction = direction

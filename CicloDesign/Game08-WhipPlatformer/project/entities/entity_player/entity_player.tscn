@@ -27,10 +27,9 @@
 [ext_resource path="res://entities/entity_player/scripts/states/air/player_air_swing_state.gd" type="Script" id=25]
 [ext_resource path="res://entities/entity_player/scripts/entity_player_pendulum_entity_mover.gd" type="Script" id=26]
 [ext_resource path="res://entities/entity_player/scripts/entity_player_whip_head_trigger.gd" type="Script" id=27]
-[ext_resource path="res://entities/entity_player/scripts/states/air/player_rope_climb_state.gd" type="Script" id=28]
+[ext_resource path="res://entities/entity_player/player_air_impulse_state.gd" type="Script" id=28]
 
 [sub_resource type="CircleShape2D" id=32]
-radius = 7.0
 
 [sub_resource type="RectangleShape2D" id=30]
 extents = Vector2( 6, 12 )
@@ -114,7 +113,7 @@ tracks/5/keys = {
 [sub_resource type="Animation" id=26]
 resource_name = "air_attack_diagonal_down"
 length = 0.3
-step = 0.05
+step = 0.075
 tracks/0/type = "value"
 tracks/0/path = NodePath("main:frame")
 tracks/0/interp = 1
@@ -122,7 +121,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"times": PoolRealArray( 0, 0.075, 0.15, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 41, 42, 43, 3 ]
@@ -134,7 +133,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
+"times": PoolRealArray( 0, 0.075, 0.15 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 4 ]
@@ -146,7 +145,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
+"times": PoolRealArray( 0, 0.075, 0.15 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ Vector2( -22, -16 ), Vector2( -10, -29 ), Vector2( 27, -2 ) ]
@@ -158,7 +157,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.2, 0.3 ),
+"times": PoolRealArray( 0, 0.15, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ false, true, false ]
@@ -194,7 +193,7 @@ tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0, 0.2, 0.3 ),
+"times": PoolRealArray( 0, 0.15, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ Vector2( 0, -8 ), Vector2( 44, 11 ), Vector2( 0, -8 ) ]
@@ -203,7 +202,7 @@ tracks/6/keys = {
 [sub_resource type="Animation" id=24]
 resource_name = "air_attack_diagonal_up"
 length = 0.3
-step = 0.05
+step = 0.075
 tracks/0/type = "value"
 tracks/0/path = NodePath("main:frame")
 tracks/0/interp = 1
@@ -211,7 +210,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"times": PoolRealArray( 0, 0.075, 0.15, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 18, 33, 34, 3 ]
@@ -223,7 +222,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
+"times": PoolRealArray( 0, 0.075, 0.15 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 3, 4 ]
@@ -235,7 +234,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
+"times": PoolRealArray( 0, 0.075, 0.15 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ Vector2( -21, -16 ), Vector2( -13, -16 ), Vector2( 26, -46 ) ]
@@ -283,7 +282,7 @@ tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0, 0.2, 0.3 ),
+"times": PoolRealArray( 0, 0.15, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ Vector2( 0, -8 ), Vector2( 42, -59 ), Vector2( 0, -8 ) ]
@@ -292,7 +291,7 @@ tracks/6/keys = {
 [sub_resource type="Animation" id=27]
 resource_name = "air_attack_down"
 length = 0.3
-step = 0.05
+step = 0.075
 tracks/0/type = "value"
 tracks/0/path = NodePath("main:frame")
 tracks/0/interp = 1
@@ -300,7 +299,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"times": PoolRealArray( 0, 0.075, 0.15, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 41, 42, 44, 3 ]
@@ -312,7 +311,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
+"times": PoolRealArray( 0, 0.075, 0.15 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 5 ]
@@ -324,7 +323,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
+"times": PoolRealArray( 0, 0.075, 0.15 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ Vector2( -22, -16 ), Vector2( -10, -29 ), Vector2( 6, 11 ) ]
@@ -336,7 +335,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.2, 0.3 ),
+"times": PoolRealArray( 0, 0.15, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ false, true, false ]
@@ -348,7 +347,7 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.2, 0.3 ),
+"times": PoolRealArray( 0, 0.15, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ false, true, false ]
@@ -372,7 +371,7 @@ tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0, 0.2, 0.3 ),
+"times": PoolRealArray( 0, 0.15, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ Vector2( 0, -8 ), Vector2( 4, 30 ), Vector2( 0, -8 ) ]
@@ -381,7 +380,7 @@ tracks/6/keys = {
 [sub_resource type="Animation" id=20]
 resource_name = "air_attack_side"
 length = 0.3
-step = 0.05
+step = 0.075
 tracks/0/type = "value"
 tracks/0/path = NodePath("main:frame")
 tracks/0/interp = 1
@@ -389,7 +388,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"times": PoolRealArray( 0, 0.075, 0.15, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 18, 19, 20, 3 ]
@@ -401,7 +400,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
+"times": PoolRealArray( 0, 0.075, 0.15 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2 ]
@@ -413,7 +412,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
+"times": PoolRealArray( 0, 0.075, 0.15 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ Vector2( -21, -16 ), Vector2( -17, -21 ), Vector2( 35, -17 ) ]
@@ -461,7 +460,7 @@ tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0, 0.2, 0.3 ),
+"times": PoolRealArray( 0, 0.15, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ Vector2( 0, -8 ), Vector2( 53, -20 ), Vector2( 0, -8 ) ]
@@ -470,7 +469,7 @@ tracks/6/keys = {
 [sub_resource type="Animation" id=25]
 resource_name = "air_attack_up"
 length = 0.3
-step = 0.05
+step = 0.075
 tracks/0/type = "value"
 tracks/0/path = NodePath("main:frame")
 tracks/0/interp = 1
@@ -478,7 +477,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"times": PoolRealArray( 0, 0.075, 0.15, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 18, 33, 35, 3 ]
@@ -490,7 +489,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
+"times": PoolRealArray( 0, 0.075, 0.15 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 3, 5 ]
@@ -502,7 +501,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
+"times": PoolRealArray( 0, 0.075, 0.15 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ Vector2( -21, -16 ), Vector2( -13, -16 ), Vector2( 2, -59 ) ]
@@ -550,7 +549,7 @@ tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0, 0.2, 0.3 ),
+"times": PoolRealArray( 0, 0.15, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ Vector2( 0, -8 ), Vector2( 4, -78 ), Vector2( 0, -8 ) ]
@@ -1164,7 +1163,6 @@ __meta__ = {
 }
 
 [node name="whip_head_trigger" type="Area2D" parent="Body/Triggers"]
-visible = false
 position = Vector2( 0, -8 )
 collision_layer = 8
 collision_mask = 8
@@ -1198,13 +1196,13 @@ body_path = NodePath("..")
 movement_mode = 3
 move_speed = 120
 max_falling_speed = 450
-ground_acceleration_time = 0.05
-ground_deceleration_time = 0.05
+ground_acceleration_time = 0.15
+ground_deceleration_time = 0.15
 ground_snap = Vector2( 0, 16 )
 jump_height = 80
 jump_time = 0.35
 fall_time = 0.4
-jump_damp = 0.2
+jump_damp = 0.5
 
 [node name="PendulumEntityMover" type="Node" parent="Body"]
 script = ExtResource( 26 )
@@ -1236,6 +1234,7 @@ script = ExtResource( 11 )
 
 [node name="jump" type="Node" parent="StateMachine/air"]
 script = ExtResource( 18 )
+hang_time = 0.15
 
 [node name="fall" type="Node" parent="StateMachine/air"]
 script = ExtResource( 14 )
@@ -1243,11 +1242,12 @@ script = ExtResource( 14 )
 [node name="attack" type="Node" parent="StateMachine/air"]
 script = ExtResource( 19 )
 aim_direction_delay = 0.1
+hang_time = 0.15
 
 [node name="swing" type="Node" parent="StateMachine/air"]
 script = ExtResource( 25 )
 
-[node name="rope_climb" type="Node" parent="StateMachine/air"]
+[node name="impulse" type="Node" parent="StateMachine/air"]
 script = ExtResource( 28 )
 
 [node name="crouch" type="Node" parent="StateMachine"]

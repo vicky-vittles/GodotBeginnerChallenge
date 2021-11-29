@@ -43,7 +43,7 @@ func physics_process(delta):
 		perform_attack = true
 	if attack_cooldown <= 0:
 		if perform_attack:
-			fsm.change_state("air/attack")
+			fsm.change_state("air/attack", {"started_hanging": started_hanging})
 			performed_attack = true
 		perform_attack = get_attack_just_pressed()
 	

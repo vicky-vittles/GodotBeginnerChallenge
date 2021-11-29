@@ -7,8 +7,11 @@ const STR_DIAGONAL_DOWN = "_diagonal_down"
 const STR_DOWN = "_down"
 
 export (float) var aim_direction_delay = 0.2
+export (float) var hang_time = 0.05
 
 var aim_direction_delay_timer : Timer
+var hang_timer : float = 0.0
+var started_hanging : bool = false # Flag to check if player starting falling and should start hanging instead
 
 func _ready():
 	aim_direction_delay_timer = Timer.new()
@@ -19,6 +22,12 @@ func _ready():
 	aim_direction_delay_timer.connect("timeout", self, "_on_Timer_timeout")
 
 func enter(info: Dictionary = {}):
+	if info.has("started_hanging"):
+		started_hanging = info["started_hanging"]
+	else:
+		started_hanging = false
+	hang_timer = hang_time
+	
 	var anim_name = decide_aim_direction(entity.aim_direction)
 	entity.animation_player.play(anim_name)
 	entity.attack_timer.start()
@@ -36,6 +45,12 @@ func physics_process(delta):
 	var move_direction = get_move_direction()
 	entity.entity_mover.set_move_direction(move_direction)
 	entity.orient(move_direction)
+	
+	# Hang time
+	if not started_hanging:
+		hang_timer -= delta
+		if hang_timer > 0.0:
+			entity.entity_mover.velocity.y = 0
 	
 	# Transitions
 	if entity.body.is_on_floor():
