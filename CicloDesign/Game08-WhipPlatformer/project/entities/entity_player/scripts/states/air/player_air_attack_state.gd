@@ -9,6 +9,8 @@ const STR_DOWN = "_down"
 export (float) var aim_direction_delay = 0.2
 export (float) var hang_time = 0.05
 
+var aim_direction
+
 var aim_direction_delay_timer : Timer
 var hang_timer : float = 0.0
 var started_hanging : bool = false # Flag to check if player starting falling and should start hanging instead
@@ -28,7 +30,8 @@ func enter(info: Dictionary = {}):
 		started_hanging = false
 	hang_timer = hang_time
 	
-	var anim_name = decide_aim_direction(entity.aim_direction)
+	aim_direction = entity.aim_direction
+	var anim_name = decide_aim_direction(aim_direction)
 	entity.animation_player.play(anim_name)
 	entity.attack_timer.start()
 	entity.whip_head_trigger.enable_all_shapes()
@@ -69,7 +72,7 @@ func _on_AttackTimer_timeout():
 
 func _on_whip_head_trigger_triggered_swing(point):
 	if fsm and fsm.current_state == self:
-		fsm.change_state("air/swing", {"swing_origin": point.global_position})
+		fsm.change_state("air/impulse", {"impulse_direction": aim_direction})
 
 func decide_aim_direction(dir) -> String:
 	var anim_name = "air_attack"

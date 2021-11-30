@@ -1,6 +1,6 @@
 extends "res://entities/entity_player/scripts/states/ground/__player_ground_base_state.gd"
 
-export (float) var grounded_buffer_time = 0.05
+export (float) var grounded_buffer_time = 0.05 # Max time allowed for jump buffering
 
 var grounded_timer : float = 0.0
 

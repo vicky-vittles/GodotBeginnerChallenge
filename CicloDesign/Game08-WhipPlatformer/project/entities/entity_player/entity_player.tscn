@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://entities/entity_player/entity_player.gd" type="Script" id=1]
 [ext_resource path="res://entities/entity_player/scripts/states/ground/player_ground_idle_state.gd" type="Script" id=2]
@@ -24,8 +24,7 @@
 [ext_resource path="res://entities/entity_player/scripts/states/crouch/player_crouch_attack_state.gd" type="Script" id=22]
 [ext_resource path="res://entities/entity_player/scripts/states/crouch/player_crouch_idle_state.gd" type="Script" id=23]
 [ext_resource path="res://entities/entity_player/assets/player.png" type="Texture" id=24]
-[ext_resource path="res://entities/entity_player/scripts/states/air/player_air_swing_state.gd" type="Script" id=25]
-[ext_resource path="res://entities/entity_player/scripts/entity_player_pendulum_entity_mover.gd" type="Script" id=26]
+[ext_resource path="res://libs/nodes/2d/gt_entity_mover_2d/gt_topdown_entity_mover_2d/gt_topdown_entity_mover_2d.gd" type="Script" id=26]
 [ext_resource path="res://entities/entity_player/scripts/entity_player_whip_head_trigger.gd" type="Script" id=27]
 [ext_resource path="res://entities/entity_player/player_air_impulse_state.gd" type="Script" id=28]
 
@@ -96,18 +95,6 @@ tracks/4/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("../../Triggers/whip_head_trigger:position")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, -8 ) ]
 }
 
 [sub_resource type="Animation" id=26]
@@ -987,6 +974,32 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Vector2( 0, -16 ) ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("../../Triggers/whip_head_trigger:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -8 ) ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath("../../Triggers/whip_head_trigger")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "disable_all_shapes"
+} ]
+}
 
 [sub_resource type="Animation" id=3]
 resource_name = "ground_walk"
@@ -1112,7 +1125,6 @@ scale = Vector2( 1, -1 )
 texture = ExtResource( 12 )
 hframes = 3
 vframes = 2
-frame = 4
 __meta__ = {
 "_edit_lock_": true
 }
@@ -1204,11 +1216,13 @@ jump_time = 0.35
 fall_time = 0.4
 jump_damp = 0.5
 
-[node name="PendulumEntityMover" type="Node" parent="Body"]
+[node name="ImpulseEntityMover" type="Node" parent="Body"]
 script = ExtResource( 26 )
 body_path = NodePath("..")
-is_enabled = false
-gravity = 32.0
+movement_mode = 2
+move_speed = 600
+acceleration_time = 0.075
+deceleration_time = 0.05
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 6 )
@@ -1243,9 +1257,6 @@ script = ExtResource( 14 )
 script = ExtResource( 19 )
 aim_direction_delay = 0.1
 hang_time = 0.15
-
-[node name="swing" type="Node" parent="StateMachine/air"]
-script = ExtResource( 25 )
 
 [node name="impulse" type="Node" parent="StateMachine/air"]
 script = ExtResource( 28 )
