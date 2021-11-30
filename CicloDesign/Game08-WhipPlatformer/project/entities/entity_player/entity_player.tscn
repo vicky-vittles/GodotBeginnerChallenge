@@ -1202,6 +1202,14 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Camera" type="Camera2D" parent="Body"]
+position = Vector2( 0, -16 )
+current = true
+smoothing_enabled = true
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="EntityMover" type="Node" parent="Body"]
 script = ExtResource( 4 )
 body_path = NodePath("..")
@@ -1228,6 +1236,7 @@ deceleration_time = 0.05
 script = ExtResource( 6 )
 _entity_path = NodePath("..")
 starting_state = NodePath("ground")
+_debug_mode = true
 
 [node name="ground" type="Node" parent="StateMachine"]
 script = ExtResource( 8 )
