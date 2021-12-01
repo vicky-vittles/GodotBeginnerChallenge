@@ -3,7 +3,7 @@
 [ext_resource path="res://entities/entity_player/entity_player.gd" type="Script" id=1]
 [ext_resource path="res://entities/entity_player/scripts/states/ground/player_ground_idle_state.gd" type="Script" id=2]
 [ext_resource path="res://entities/entity_player/assets/crouch_collision_shape.tres" type="Shape2D" id=3]
-[ext_resource path="res://libs/nodes/2d/gt_entity_mover_2d/gt_sidescroller_entity_mover_2d/gt_sidescroller_entity_mover_2d.gd" type="Script" id=4]
+[ext_resource path="res://entities/entity_player/scripts/entity_player_mover.gd" type="Script" id=4]
 [ext_resource path="res://libs/components/controllers/gt_platformer_controller/gt_platformer_controller.tscn" type="PackedScene" id=5]
 [ext_resource path="res://libs/nodes/utils/gt_state_machine/gt_state_machine.gd" type="Script" id=6]
 [ext_resource path="res://entities/entity_player/scripts/states/ground/player_ground_walk_state.gd" type="Script" id=7]
@@ -26,7 +26,7 @@
 [ext_resource path="res://entities/entity_player/assets/player.png" type="Texture" id=24]
 [ext_resource path="res://libs/nodes/2d/gt_entity_mover_2d/gt_topdown_entity_mover_2d/gt_topdown_entity_mover_2d.gd" type="Script" id=26]
 [ext_resource path="res://entities/entity_player/scripts/entity_player_whip_head_trigger.gd" type="Script" id=27]
-[ext_resource path="res://entities/entity_player/player_air_impulse_state.gd" type="Script" id=28]
+[ext_resource path="res://entities/entity_player/scripts/states/air/player_air_impulse_state.gd" type="Script" id=28]
 
 [sub_resource type="CircleShape2D" id=32]
 

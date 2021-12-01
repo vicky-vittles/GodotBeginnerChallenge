@@ -1,0 +1,166 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://entities/entity_enemy/__entity_enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://entities/entity_enemy/enemies/goblin/goblin_idle_state.gd" type="Script" id=2]
+[ext_resource path="res://entities/entity_enemy/enemies/goblin/goblin_walk_state.gd" type="Script" id=3]
+[ext_resource path="res://entities/entity_enemy/scripts/states/__enemy_jump_state.gd" type="Script" id=4]
+[ext_resource path="res://entities/entity_enemy/scripts/states/__enemy_fall_state.gd" type="Script" id=5]
+[ext_resource path="res://entities/entity_enemy/assets/zombie.png" type="Texture" id=6]
+[ext_resource path="res://entities/entity_enemy/enemies/goblin/enemy_goblin.gd" type="Script" id=7]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 7, 16 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 10, 18 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "_RESET"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/graphics/visuals/main:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "fall"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/graphics/visuals/main:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/graphics/visuals/main:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "jump"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/graphics/visuals/main:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "walk"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/graphics/visuals/main:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 1, 0 ]
+}
+
+[node name="Goblin" instance=ExtResource( 1 )]
+script = ExtResource( 7 )
+
+[node name="main" parent="Body/graphics/visuals" index="0"]
+position = Vector2( 0, -16 )
+scale = Vector2( -1, 1 )
+texture = ExtResource( 6 )
+hframes = 2
+frame = 1
+
+[node name="CollisionShape" parent="Body" index="1"]
+visible = false
+position = Vector2( 0, -16 )
+shape = SubResource( 1 )
+
+[node name="Hurtbox" parent="Body/Triggers" index="0"]
+visible = false
+
+[node name="CollisionShape" parent="Body/Triggers/Hurtbox" index="0"]
+position = Vector2( 0, -16 )
+shape = SubResource( 2 )
+
+[node name="ground_raycast_left" type="RayCast2D" parent="Body/Raycasts" index="0"]
+position = Vector2( -16, -16 )
+enabled = true
+cast_to = Vector2( 0, 32 )
+collision_mask = 2
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ground_raycast_right" type="RayCast2D" parent="Body/Raycasts" index="1"]
+position = Vector2( 16, -16 )
+enabled = true
+cast_to = Vector2( 0, 32 )
+collision_mask = 2
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="EntityMover" parent="Body" index="4"]
+move_speed = 100
+max_falling_speed = 450
+jump_height = 64
+jump_time = 0.25
+fall_time = 0.25
+
+[node name="idle" type="Node" parent="StateMachine" index="0"]
+script = ExtResource( 2 )
+
+[node name="walk" type="Node" parent="StateMachine" index="1"]
+script = ExtResource( 3 )
+
+[node name="DirectionChangeTimer" type="Timer" parent="StateMachine/walk" index="0"]
+wait_time = 0.5
+one_shot = true
+
+[node name="jump" type="Node" parent="StateMachine" index="2"]
+script = ExtResource( 4 )
+
+[node name="fall" type="Node" parent="StateMachine" index="3"]
+script = ExtResource( 5 )
+
+[node name="AnimationPlayer" parent="." index="4"]
+anims/_RESET = SubResource( 3 )
+anims/fall = SubResource( 7 )
+anims/idle = SubResource( 4 )
+anims/jump = SubResource( 6 )
+anims/walk = SubResource( 5 )

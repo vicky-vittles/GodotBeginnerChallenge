@@ -1,16 +1,20 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://entities/entity_player/entity_player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://libs/nodes/2d/gt_trigger_area_2d/gt_trigger_area_2d.gd" type="Script" id=2]
+[ext_resource path="res://entities/entity_enemy/enemies/goblin/enemy_goblin.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 352.5, 50.5 )
+extents = Vector2( 202, 50.5 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 38.625, 98.375 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 63.125, 278 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 193, 50.5 )
 
 [sub_resource type="RectangleShape2D" id=3]
 
@@ -37,7 +41,7 @@ __meta__ = {
 }
 
 [node name="1" type="CollisionShape2D" parent="terrain"]
-position = Vector2( 150, 274 )
+position = Vector2( 411, 274 )
 shape = SubResource( 1 )
 __meta__ = {
 "_edit_lock_": true
@@ -64,6 +68,20 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="5" type="CollisionShape2D" parent="terrain"]
+position = Vector2( -41, 274 )
+shape = SubResource( 5 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="6" type="CollisionShape2D" parent="terrain"]
+position = Vector2( 192, 376 )
+shape = SubResource( 5 )
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="swingable_point" type="Area2D" parent="." groups=["swingable"]]
 position = Vector2( 236, 92 )
 collision_layer = 8
@@ -78,3 +96,6 @@ __meta__ = {
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 59, 70 )
+
+[node name="Enemy" parent="." instance=ExtResource( 3 )]
+position = Vector2( 344, 224 )

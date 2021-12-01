@@ -4,17 +4,12 @@ class_name GTSidescrollerEntityMover2D
 const CURVE_LINEAR_EASE_IN = preload("res://libs/resources/curves/gt_linear_ease_in_curve.tres")
 const CURVE_LINEAR_EASE_OUT = preload("res://libs/resources/curves/gt_linear_ease_out_curve.tres")
 
-enum WALK_MODE {
-	USE_MOVE_DIRECTION = 1, # Uses move_direction, limiting it by move_speed
-	EXCEED_MOVE_DIRECTION = 2} # Uses the current velocity, damping it until move_speed
-
 signal jumped()
 signal landed()
 signal ran_out_of_jumps()
 
 export (int) var move_speed = 256
 export (int) var max_falling_speed = 1024
-export (WALK_MODE) var walk_mode = WALK_MODE.USE_MOVE_DIRECTION
 export (Curve) var ground_velocity_curve = CURVE_LINEAR_EASE_IN
 export (float) var ground_acceleration_time = 0.1
 export (Curve) var ground_friction_curve = CURVE_LINEAR_EASE_OUT
@@ -55,35 +50,15 @@ func _movement(delta):
 		velocity.y = max_falling_speed
 	
 	# Movement
-	var acc_info = get_acceleration_info()
-	var dec_info = get_deceleration_info()
-	var info = acc_info
+	var info = get_acceleration_info()
 	var move_sign = sign(move_direction)
 	if move_direction == 0:
-		info = dec_info
+		info = get_deceleration_info()
 		move_sign = sign(velocity.x)
 	
 	var t = clamp(move_direction_press_timer/info["time"], 0.0, 1.0)
 	var desired_velocity = move_speed * info["curve"].interpolate_baked(t)
-	if walk_mode == WALK_MODE.USE_MOVE_DIRECTION:
-		velocity.x = move_sign * desired_velocity
-		
-	elif walk_mode == WALK_MODE.EXCEED_MOVE_DIRECTION:
-		var acc = move_speed/acc_info["time"]
-		var dec = move_speed/dec_info["time"]
-		if move_direction != 0:
-			if abs(velocity.x) > move_speed:
-				if move_direction != sign(velocity.x):
-					velocity.x += move_direction*acc*delta
-			else:
-				velocity.x += move_direction*acc*delta
-				velocity.x = clamp(velocity.x, -move_speed, move_speed)
-		else:
-			velocity.x += sign(velocity.x)*dec*delta
-			if sign(velocity.x) >= 0:
-				velocity.x = clamp(velocity.x, 0, move_speed)
-			else:
-				velocity.x = clamp(velocity.x, -move_speed, 0)
+	velocity.x = move_sign * desired_velocity
 	
 	if velocity.length() < MOVEMENT_THRESHOLD:
 		velocity = Vector2.ZERO
@@ -136,9 +111,6 @@ func set_move_direction(dir: int) -> void:
 
 func set_move_speed(_speed: int) -> void:
 	move_speed = _speed
-
-func set_walk_mode(_mode: int) -> void:
-	walk_mode = _mode
 
 func restore_jumps() -> void: available_jumps = max_jumps
 func can_jump() -> bool: return available_jumps > 0

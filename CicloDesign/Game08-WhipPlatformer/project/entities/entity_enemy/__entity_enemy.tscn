@@ -1,0 +1,84 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://libs/nodes/utils/gt_state_machine/gt_state_machine.gd" type="Script" id=1]
+[ext_resource path="res://entities/entity_enemy/__entity_enemy.gd" type="Script" id=2]
+[ext_resource path="res://libs/nodes/2d/gt_entity_mover_2d/gt_sidescroller_entity_mover_2d/gt_sidescroller_entity_mover_2d.gd" type="Script" id=3]
+[ext_resource path="res://libs/nodes/2d/gt_hurtbox_2d/gt_hurtbox_2d.gd" type="Script" id=4]
+[ext_resource path="res://libs/nodes/utils/gt_health/gt_health.gd" type="Script" id=5]
+
+[node name="Enemy" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Stats" type="Node" parent="."]
+
+[node name="Health" type="Node" parent="Stats"]
+script = ExtResource( 5 )
+max_health = 5
+initial_health = 5
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="InvincibilityTimer" type="Timer" parent="Timers"]
+wait_time = 0.1
+one_shot = true
+
+[node name="Body" type="KinematicBody2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="graphics" type="Node2D" parent="Body"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="visuals" type="Node2D" parent="Body/graphics"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="main" type="Sprite" parent="Body/graphics/visuals"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Body"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Triggers" type="Node2D" parent="Body"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Hurtbox" type="Area2D" parent="Body/Triggers"]
+collision_layer = 16
+collision_mask = 16
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Body/Triggers/Hurtbox"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Raycasts" type="Node2D" parent="Body"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="EntityMover" type="Node" parent="Body"]
+script = ExtResource( 3 )
+body_path = NodePath("..")
+movement_mode = 3
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 1 )
+_entity_path = NodePath("..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

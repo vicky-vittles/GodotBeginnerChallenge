@@ -7,5 +7,6 @@ func _ready():
 	connect("area_entered", self, "_take_damage")
 
 func _take_damage(area):
-	var damage = area.damage
-	emit_signal("took_damage", damage)
+	if "damage" in area:
+		var damage = area.damage
+		emit_signal("took_damage", damage)
