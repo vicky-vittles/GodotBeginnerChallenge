@@ -41,7 +41,9 @@ func physics_process(delta):
 		fsm.change_state("air")
 
 func _on_AttackTimer_timeout():
-	if fsm and fsm.current_state == self:
+	if not fsm or not fsm.current_state:
+		return
+	if fsm.current_state == self:
 		if get_move_direction() != 0:
 			fsm.change_state("ground/walk")
 		else:

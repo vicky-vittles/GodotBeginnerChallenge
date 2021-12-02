@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://entities/entity_enemy/__entity_enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/entity_enemy/enemies/goblin/goblin_idle_state.gd" type="Script" id=2]
@@ -10,6 +10,9 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 16 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 5, 12 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 10, 18 )
@@ -110,7 +113,14 @@ visible = false
 position = Vector2( 0, -16 )
 shape = SubResource( 1 )
 
-[node name="Hurtbox" parent="Body/Triggers" index="0"]
+[node name="Hitbox" parent="Body/Triggers" index="0"]
+visible = false
+
+[node name="CollisionShape" parent="Body/Triggers/Hitbox" index="0"]
+position = Vector2( 0, -16 )
+shape = SubResource( 8 )
+
+[node name="Hurtbox" parent="Body/Triggers" index="1"]
 visible = false
 
 [node name="CollisionShape" parent="Body/Triggers/Hurtbox" index="0"]

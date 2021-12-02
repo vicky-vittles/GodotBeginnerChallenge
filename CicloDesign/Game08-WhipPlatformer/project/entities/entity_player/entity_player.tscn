@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://entities/entity_player/entity_player.gd" type="Script" id=1]
 [ext_resource path="res://entities/entity_player/scripts/states/ground/player_ground_idle_state.gd" type="Script" id=2]
@@ -24,9 +24,25 @@
 [ext_resource path="res://entities/entity_player/scripts/states/crouch/player_crouch_attack_state.gd" type="Script" id=22]
 [ext_resource path="res://entities/entity_player/scripts/states/crouch/player_crouch_idle_state.gd" type="Script" id=23]
 [ext_resource path="res://entities/entity_player/assets/player.png" type="Texture" id=24]
+[ext_resource path="res://entities/entity_player/scripts/states/ground/player_ground_hurt_state.gd" type="Script" id=25]
 [ext_resource path="res://libs/nodes/2d/gt_entity_mover_2d/gt_topdown_entity_mover_2d/gt_topdown_entity_mover_2d.gd" type="Script" id=26]
 [ext_resource path="res://entities/entity_player/scripts/entity_player_whip_head_trigger.gd" type="Script" id=27]
 [ext_resource path="res://entities/entity_player/scripts/states/air/player_air_impulse_state.gd" type="Script" id=28]
+
+[sub_resource type="Animation" id=33]
+resource_name = "blink"
+tracks/0/type = "value"
+tracks/0/path = NodePath("visuals:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true, false, true, false, true, false, true, false, true ]
+}
 
 [sub_resource type="CircleShape2D" id=32]
 
@@ -1129,6 +1145,9 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Body/graphics"]
+anims/blink = SubResource( 33 )
+
 [node name="CollisionShape" type="CollisionShape2D" parent="Body"]
 visible = false
 position = Vector2( 0, -16 )
@@ -1252,6 +1271,9 @@ grounded_buffer_time = 0.07
 script = ExtResource( 9 )
 can_turn_around = false
 
+[node name="hurt" type="Node" parent="StateMachine/ground"]
+script = ExtResource( 25 )
+
 [node name="air" type="Node" parent="StateMachine"]
 script = ExtResource( 11 )
 
@@ -1308,9 +1330,13 @@ anims/ground_walk = SubResource( 3 )
 [connection signal="timeout" from="Timers/AttackTimer" to="StateMachine/ground/attack" method="_on_AttackTimer_timeout"]
 [connection signal="timeout" from="Timers/AttackTimer" to="StateMachine/air/attack" method="_on_AttackTimer_timeout"]
 [connection signal="timeout" from="Timers/AttackTimer" to="StateMachine/crouch/attack" method="_on_AttackTimer_timeout"]
+[connection signal="timeout" from="Timers/InvincibilityTimer" to="StateMachine/ground/hurt" method="_on_InvincibilityTimer_timeout"]
 [connection signal="area_entered" from="Body/Triggers/whip_head_trigger" to="Body/Triggers/whip_head_trigger" method="_on_area_entered"]
 [connection signal="triggered_swing" from="Body/Triggers/whip_head_trigger" to="StateMachine/ground/attack" method="_on_whip_head_trigger_triggered_swing"]
 [connection signal="triggered_swing" from="Body/Triggers/whip_head_trigger" to="StateMachine/air/attack" method="_on_whip_head_trigger_triggered_swing"]
 [connection signal="triggered_swing" from="Body/Triggers/whip_head_trigger" to="StateMachine/crouch/attack" method="_on_whip_head_trigger_triggered_swing"]
+[connection signal="took_damage" from="Body/Triggers/Hurtbox" to="StateMachine/ground/idle" method="take_damage"]
+[connection signal="took_damage" from="Body/Triggers/Hurtbox" to="StateMachine/ground/walk" method="take_damage"]
+[connection signal="took_damage" from="Body/Triggers/Hurtbox" to="StateMachine/ground/attack" method="take_damage"]
 
 [editable path="InputController"]
