@@ -2210,140 +2210,23 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 0, 109 )
 [node name="15" parent="entities" index="14" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37, 0, 139 )
 
-[node name="16" parent="entities" index="15" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 139 )
-
-[node name="17" parent="entities" index="16" instance=ExtResource( 15 )]
+[node name="17" parent="entities" index="15" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 139 )
 
-[node name="18" parent="entities" index="17" instance=ExtResource( 15 )]
+[node name="18" parent="entities" index="16" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 0, 139 )
 
-[node name="19" parent="entities" index="18" instance=ExtResource( 15 )]
+[node name="19" parent="entities" index="17" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 199 )
 
-[node name="20" parent="entities" index="19" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 0, 183 )
-
-[node name="21" parent="entities" index="20" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 169 )
-
-[node name="22" parent="entities" index="21" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 4, 169 )
-
-[node name="23" parent="entities" index="22" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, 169 )
-
-[node name="24" parent="entities" index="23" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, 196 )
-
-[node name="25" parent="entities" index="24" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, 173 )
-
-[node name="26" parent="entities" index="25" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 58, 0, 164 )
-
-[node name="27" parent="entities" index="26" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 58, 0, 187 )
-
-[node name="28" parent="entities" index="27" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 206 )
-
-[node name="29" parent="entities" index="28" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 85, 0, 212 )
-
-[node name="30" parent="entities" index="29" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 90, 0, 206 )
-
-[node name="31" parent="entities" index="30" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 94, 0, 212 )
-
-[node name="32" parent="entities" index="31" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 98, 0, 206 )
-
-[node name="33" parent="entities" index="32" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 84, 0, 218 )
-
-[node name="34" parent="entities" index="33" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 94, 0, 218 )
-
-[node name="35" parent="entities" index="34" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 102, 0, 218 )
-
-[node name="36" parent="entities" index="35" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 101, 0, 164 )
-
-[node name="37" parent="entities" index="36" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 97, 0, 172 )
-
-[node name="38" parent="entities" index="37" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 101, 0, 180 )
-
-[node name="39" parent="entities" index="38" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 65, 14, 161 )
-
-[node name="40" parent="entities" index="39" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 65, 14, 165 )
-
-[node name="41" parent="entities" index="40" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 65, 14, 170 )
-
-[node name="42" parent="entities" index="41" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 65, 14, 175 )
-
-[node name="43" parent="entities" index="42" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 65, 14, 180 )
-
-[node name="44" parent="entities" index="43" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 65, 14, 185 )
-
-[node name="45" parent="entities" index="44" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 65, 14, 218 )
-
-[node name="46" parent="entities" index="45" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 65, 0, 218 )
-
-[node name="47" parent="entities" index="46" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 46, 0, 232 )
-
-[node name="48" parent="entities" index="47" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, 237 )
-
-[node name="49" parent="entities" index="48" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 12, 240 )
-
-[node name="50" parent="entities" index="49" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 10, 229 )
-
-[node name="51" parent="entities" index="50" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 240 )
-
-[node name="52" parent="entities" index="51" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 227 )
-
-[node name="53" parent="entities" index="52" instance=ExtResource( 15 )]
+[node name="53" parent="entities" index="18" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 18, 122 )
 
-[node name="54" parent="entities" index="53" instance=ExtResource( 15 )]
+[node name="54" parent="entities" index="19" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 18, 54 )
 
-[node name="55" parent="entities" index="54" instance=ExtResource( 15 )]
+[node name="55" parent="entities" index="20" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 18, 61 )
-
-[node name="56" parent="entities" index="55" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 18, 97 )
-
-[node name="57" parent="entities" index="56" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 34, 133 )
-
-[node name="58" parent="entities" index="57" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 18, 86 )
-
-[node name="59" parent="entities" index="58" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 0, 206 )
-
-[node name="60" parent="entities" index="59" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0728645, 34, 189.138 )
 
 [node name="invisible_wall" type="StaticBody" parent="objects" index="0"]
 collision_layer = 2

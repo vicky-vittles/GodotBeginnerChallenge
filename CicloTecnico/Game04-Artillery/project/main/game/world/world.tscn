@@ -293,10 +293,10 @@ script = ExtResource( 10 )
 __meta__ = {
 "_edit_lock_": true
 }
-[connection signal="player_died" from="." to="EnemySpawnManager/SpawnTimer" method="stop"]
 [connection signal="player_died" from="." to="OverlayMenu" method="emit_signal" binds= [ "player_died" ]]
-[connection signal="player_died" from="." to="Enemies" method="_on_World_player_died"]
+[connection signal="player_died" from="." to="EnemySpawnManager/SpawnTimer" method="stop"]
 [connection signal="player_died" from="." to="HUD/root/AnimationPlayer" method="play" binds= [ "darken" ]]
+[connection signal="player_died" from="." to="Enemies" method="_on_World_player_died"]
 [connection signal="ready" from="." to="EnemySpawnManager" method="initial_spawn"]
 [connection signal="update_game_over_info" from="." to="OverlayMenu" method="update_info"]
 [connection signal="update_kills" from="." to="HUD" method="_on_World_update_kills"]
@@ -305,9 +305,9 @@ __meta__ = {
 [connection signal="update_time_label" from="HUD" to="HUD/root/top/row/vbox/time_label" method="apply_text"]
 [connection signal="enemy_died" from="EnemySpawnManager" to="." method="_on_EnemySpawnManager_enemy_died"]
 [connection signal="timeout" from="EnemySpawnManager/SpawnTimer" to="EnemySpawnManager" method="spawn_enemy"]
-[connection signal="terrain_updated" from="Terrain" to="Enemies" method="_on_Level_terrain_updated"]
 [connection signal="terrain_updated" from="Terrain" to="." method="_on_Level_terrain_updated"]
 [connection signal="terrain_updated" from="Terrain" to="Players" method="_on_Level_terrain_updated"]
+[connection signal="terrain_updated" from="Terrain" to="Enemies" method="_on_Level_terrain_updated"]
 [connection signal="projectile_exploded" from="Projectiles" to="Terrain" method="_on_Projectiles_projectile_exploded"]
 [connection signal="projectile_exploded" from="Projectiles" to="." method="_on_Projectiles_projectile_exploded"]
 [connection signal="angle_updated" from="Players/1" to="HUD" method="_on_Player_angle_updated"]

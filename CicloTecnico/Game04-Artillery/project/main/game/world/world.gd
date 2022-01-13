@@ -17,6 +17,7 @@ onready var enemies = $Enemies
 onready var projectiles = $Projectiles
 
 var collision_map = []
+var collision_map_size : Vector2
 var current_player_turn : int = 0
 
 var kills : int = 0

@@ -11,7 +11,7 @@ func move(move_x, map):
 	return new_pos
 
 func find_ground(x: int, map: Array):
-	for y in map.size():
+	for y in map_size.y:
 		if get_map(x, y, map):
 			return y
 	return -1

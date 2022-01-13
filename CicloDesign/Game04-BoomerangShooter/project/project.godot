@@ -315,7 +315,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/Trail/plugin.cfg", "res://addons/color-palette/plugin.cfg", "res://addons/regular_polygon2d_node/plugin.cfg" )
+enabled=PoolStringArray(  )
 
 [input]
 
