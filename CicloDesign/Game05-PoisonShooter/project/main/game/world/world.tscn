@@ -308,8 +308,8 @@ margin_left = -475.0
 margin_top = -15.5
 margin_right = 475.0
 margin_bottom = 15.5
-custom_fonts/font = ExtResource( 20 )
 custom_colors/font_color = Color( 0.886275, 0.952941, 0.894118, 1 )
+custom_fonts/font = ExtResource( 20 )
 text = "Wave 1"
 align = 1
 script = ExtResource( 4 )
@@ -328,8 +328,8 @@ margin_left = -171.0
 margin_top = -42.5
 margin_right = 171.0
 margin_bottom = 42.5
-custom_fonts/font = ExtResource( 5 )
 custom_colors/font_color = Color( 0.886275, 0.952941, 0.894118, 1 )
+custom_fonts/font = ExtResource( 5 )
 text = "Game Over
 Press R to restart"
 align = 1
@@ -466,6 +466,7 @@ pause_mode = 2
 overlay_modulate = Color( 1, 1, 1, 0 )
 
 [node name="Terrain" type="StaticBody2D" parent="."]
+visible = false
 collision_layer = 2
 collision_mask = 36
 __meta__ = {

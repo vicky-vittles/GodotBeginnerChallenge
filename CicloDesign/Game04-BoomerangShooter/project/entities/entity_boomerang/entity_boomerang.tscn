@@ -68,9 +68,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="DamageHitbox" type="Area2D" parent="Body/Triggers" groups=[
-"entity_player_damage_hitbox",
-]]
+[node name="DamageHitbox" type="Area2D" parent="Body/Triggers" groups=["entity_player_damage_hitbox"]]
 collision_layer = 16
 collision_mask = 16
 script = ExtResource( 4 )
@@ -88,9 +86,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="CatchTrigger" type="Area2D" parent="Body/Triggers" groups=[
-"entity_boomerang_catch_trigger",
-]]
+[node name="CatchTrigger" type="Area2D" parent="Body/Triggers" groups=["entity_boomerang_catch_trigger"]]
 collision_layer = 8
 collision_mask = 8
 script = ExtResource( 6 )
@@ -139,6 +135,6 @@ one_shot = true
 [connection signal="effect" from="Body/Triggers/DamageHitbox" to="." method="_on_DamageHitbox_effect"]
 [connection signal="effect" from="Body/Triggers/CatchTrigger" to="." method="_on_CatchTrigger_effect"]
 [connection signal="timeout" from="TurnaroundTimer" to="." method="_on_TurnaroundTimer_timeout"]
+[connection signal="timeout" from="TurnaroundTimer" to="Body/Triggers/CatchTrigger" method="enable_all_shapes"]
 [connection signal="timeout" from="TurnaroundTimer" to="Body/EntityMover" method="disable"]
 [connection signal="timeout" from="TurnaroundTimer" to="Body/SteeringEntityMover" method="enable"]
-[connection signal="timeout" from="TurnaroundTimer" to="Body/Triggers/CatchTrigger" method="enable_all_shapes"]

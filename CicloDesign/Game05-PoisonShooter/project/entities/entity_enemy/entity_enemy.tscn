@@ -636,9 +636,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="DamageHitbox" type="Area2D" parent="Body/Triggers" groups=[
-"entity_enemy_damage_hitbox",
-]]
+[node name="DamageHitbox" type="Area2D" parent="Body/Triggers" groups=["entity_enemy_damage_hitbox"]]
 visible = false
 collision_layer = 16
 collision_mask = 16
@@ -656,9 +654,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="DamageHurtbox" type="Area2D" parent="Body/Triggers" groups=[
-"entity_enemy_damage_hurtbox",
-]]
+[node name="DamageHurtbox" type="Area2D" parent="Body/Triggers" groups=["entity_enemy_damage_hurtbox"]]
 visible = false
 collision_layer = 16
 collision_mask = 16
@@ -676,9 +672,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="PoisonExplosionHitbox" type="Area2D" parent="Body/Triggers" groups=[
-"entity_poison_bomb_poison_hitbox",
-]]
+[node name="PoisonExplosionHitbox" type="Area2D" parent="Body/Triggers" groups=["entity_poison_bomb_poison_hitbox"]]
 visible = false
 collision_layer = 16
 collision_mask = 16
@@ -693,9 +687,7 @@ disable_on_ready = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Triggers/PoisonExplosionHitbox"]
 shape = SubResource( 10 )
 
-[node name="PoisonHurtbox" type="Area2D" parent="Body/Triggers" groups=[
-"entity_enemy_poison_hurtbox",
-]]
+[node name="PoisonHurtbox" type="Area2D" parent="Body/Triggers" groups=["entity_enemy_poison_hurtbox"]]
 visible = false
 collision_layer = 16
 collision_mask = 16
@@ -713,9 +705,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="PresenceTrigger" type="Area2D" parent="Body/Triggers" groups=[
-"entity_enemy_presence_trigger",
-]]
+[node name="PresenceTrigger" type="Area2D" parent="Body/Triggers" groups=["entity_enemy_presence_trigger"]]
 visible = false
 collision_layer = 8
 collision_mask = 8
@@ -810,8 +800,8 @@ anims/move_enter = SubResource( 16 )
 [connection signal="timeout" from="Timers/InvincibilityTimer" to="StateMachine/Hurt/ToMove" method="do_transition"]
 [connection signal="timeout" from="Timers/CollisionEnableTimer" to="." method="_on_CollisionEnableTimer_timeout"]
 [connection signal="took_damage" from="Body/Triggers/DamageHurtbox" to="Health" method="lose_health"]
-[connection signal="effect" from="Body/Triggers/PoisonHurtbox" to="Timers/PoisonTimer" method="start"]
 [connection signal="effect" from="Body/Triggers/PoisonHurtbox" to="SFX/hurt_main" method="play"]
+[connection signal="effect" from="Body/Triggers/PoisonHurtbox" to="Timers/PoisonTimer" method="start"]
 [connection signal="grouped_area_entered" from="Body/Triggers/PoisonHurtbox" to="." method="_on_PoisonHurtbox_grouped_area_entered"]
 [connection signal="grouped_area_entered" from="Body/Triggers/PresenceTrigger" to="." method="_on_PresenceTrigger_grouped_area_entered"]
 [connection signal="grouped_area_exited" from="Body/Triggers/PresenceTrigger" to="." method="_on_PresenceTrigger_grouped_area_exited"]
